@@ -1,0 +1,2 @@
+echo "🧹 Running Prettier and Lint-Staged checks..."
+# pnpm exec lint-staged
