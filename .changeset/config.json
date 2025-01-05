@@ -2,7 +2,7 @@
   "$schema": "https://unpkg.com/@changesets/config@3.0.5/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "flexi-ui/flexi-ui.git" }
+    { "repo": "flexi-ui/flexi-ui" }
   ],
   "commit": true,
   "fixed": [],
