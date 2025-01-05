@@ -41,10 +41,11 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm changeset:version
+          run: xpx changeset status
+          version: npx changeset version
           title: "ci(changesets): :package: version packages"
           commit: "ci(changesets): version packages"
-          publish: pnpm changeset:release
+          publish: npx changeset publist
           setupGitUser: true
         env:
           CI: true
