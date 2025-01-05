@@ -23,7 +23,6 @@
     "dev": "pnpm --parallel --stream -r run dev",
     "changeset:empty": "npx changeset add --empty",
     "build": "pnpm --parallel --stream -r run build",
-    "build:filter": "pnpm --parallel --stream -r  --filter @flexi-ui/shared-utils --filter @flexi-ui/storage run build",
     "test": "jest --verbose --config ./jest.config.js"
   },
   "devDependencies": {
@@ -69,8 +68,6 @@
   },
   "pnpm": {
     "overrides": {
-      "react": "18.2.0",
-      "react-dom": "18.2.0",
       "@changesets/get-github-info": "0.6.0"
     }
   },
