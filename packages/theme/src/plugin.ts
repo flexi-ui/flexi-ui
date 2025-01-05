@@ -1,7 +1,7 @@
 /**
  * Based on tw-colors by L-Blondy
  * @see https://github.com/L-Blondy/tw-colors
- */
+ **/
 
 import Color from "color";
 import plugin from "tailwindcss/plugin.js";
