@@ -1,9 +1,9 @@
 {
   "name": "@flexi-ui/shared-utils",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A set of FlexiUI utilities",
   "type": "module",
-  "private": "false",
+  "private": false,
   "publishConfig": {
     "access": "public"
   },
@@ -24,9 +24,6 @@
   "sideEffects": false,
   "keywords": [
     "system"
-  ],
-  "files": [
-    "dist"
   ],
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",

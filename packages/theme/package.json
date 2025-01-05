@@ -31,9 +31,6 @@
     "components"
   ],
   "sideEffects": false,
-  "files": [
-    "./dist/*"
-  ],
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
   "types": "dist/index.d.ts",
