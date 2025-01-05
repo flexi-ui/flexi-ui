@@ -45,7 +45,7 @@ jobs:
           version: npx changeset version
           title: "ci(changesets): :package: version packages"
           commit: "ci(changesets): version packages"
-          publish: npx changeset publist
+          publish: npx changeset publish
           setupGitUser: true
         env:
           CI: true
