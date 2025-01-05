@@ -33,7 +33,6 @@ const resolveConfig = (
 ) => {
   const resolved: {
     variants: {name: string; definition: string[]}[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     utilities: Record<string, Record<string, any>>;
     colors: Record<
       string,
@@ -102,7 +101,6 @@ const resolveConfig = (
 
           return `hsl(var(${flexiuiColorVariable}) / var(${flexiuiOpacityVariable}, 1))`;
         };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         throw new Error(error);
       }
