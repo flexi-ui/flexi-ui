@@ -19,26 +19,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          version: "9.6.0"
-          node-version-file: ".nvmrc"
-          registry-url: "https://registry.npmjs.org"
-          cache: "pnpm"
-
-      - name: Setup Git User
-        shell: bash
-        run: |
-          git config --global user.email "muneebmughal3324@gmail.com"
-          git config --global user.name "Muneeb Mughal"
-
-      - name: Install dependencies
-        shell: bash
-        run: pnpm install
+      - name: Install
+        uses: ./.github/common-actions/install
 
       - name: Tests
         run: pnpm run test
@@ -46,7 +28,7 @@ jobs:
       - name: Build
         id: build
         continue-on-error: false
-        run: pnpm run build
+        run: cd packages/utilities/shared-utils && pnpm run build && cd ../../../ && pnpm run build
 
       - name: Create Release Pull Request or Publish to npm
         if: steps.build.outcome == 'success'
