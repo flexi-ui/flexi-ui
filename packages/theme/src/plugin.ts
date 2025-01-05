@@ -14,13 +14,13 @@ import {utilities} from "./utilities";
 import {flattenThemeObject} from "./utils/object";
 import {isBaseTheme} from "./utils/theme";
 
-import {ConfigTheme, ConfigThemes, DefaultThemeType, AwalUIPluginConfig} from "./types";
+import {ConfigTheme, ConfigThemes, DefaultThemeType, FlexiUIPluginConfig} from "./types";
 
 import {lightLayout, darkLayout, defaultLayout} from "./default-layout";
 import {baseStyles} from "./utils/classes";
 import {DEFAULT_TRANSITION_DURATION} from "./utilities/transition";
 
-const DEFAULT_PREFIX = "awal-ui";
+const DEFAULT_PREFIX = "flexi-ui";
 
 const parsedColorsCache: Record<string, number[]> = {};
 
@@ -82,25 +82,25 @@ const resolveConfig = (
         parsedColorsCache[colorValue] = parsedColor;
 
         const [h, s, l, defaultAlphaValue] = parsedColor;
-        const awaluiColorVariable = `--${prefix}-${colorName}`;
-        const awaluiOpacityVariable = `--${prefix}-${colorName}-opacity`;
+        const flexiuiColorVariable = `--${prefix}-${colorName}`;
+        const flexiuiOpacityVariable = `--${prefix}-${colorName}-opacity`;
 
-        resolved.utilities[cssSelector]![awaluiColorVariable] = `${h} ${s}% ${l}%`;
+        resolved.utilities[cssSelector]![flexiuiColorVariable] = `${h} ${s}% ${l}%`;
 
         if (typeof defaultAlphaValue === "number") {
-          resolved.utilities[cssSelector]![awaluiOpacityVariable] = defaultAlphaValue.toFixed(2);
+          resolved.utilities[cssSelector]![flexiuiOpacityVariable] = defaultAlphaValue.toFixed(2);
         }
 
         resolved.colors[colorName] = ({opacityVariable, opacityValue}) => {
           if (!isNaN(+opacityValue)) {
-            return `hsl(var(${awaluiColorVariable}) / ${opacityValue})`;
+            return `hsl(var(${flexiuiColorVariable}) / ${opacityValue})`;
           }
 
           if (opacityVariable) {
-            return `hsl(var(${awaluiColorVariable}) / var(${awaluiOpacityVariable}, var(${opacityVariable})))`;
+            return `hsl(var(${flexiuiColorVariable}) / var(${flexiuiOpacityVariable}, var(${opacityVariable})))`;
           }
 
-          return `hsl(var(${awaluiColorVariable}) / var(${awaluiOpacityVariable}, 1))`;
+          return `hsl(var(${flexiuiColorVariable}) / var(${flexiuiOpacityVariable}, 1))`;
         };
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
@@ -236,7 +236,7 @@ const corePlugin = (
   );
 };
 
-export const awalUI = (config: AwalUIPluginConfig = {}): ReturnType<typeof plugin> => {
+export const flexiUI = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plugin> => {
   const {
     themes: themeObject = {},
     defaultTheme = "light",

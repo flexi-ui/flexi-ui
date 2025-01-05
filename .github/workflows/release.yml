@@ -25,10 +25,10 @@ jobs:
       - name: Tests
         run: pnpm run test
 
-      # - name: Build
-      #   id: build
-      #   continue-on-error: false
-      #   run: pnpm run build
+      - name: Build
+        id: build
+        continue-on-error: false
+        run: pnpm run build
 
       - name: Create Release Pull Request or Publish to npm
         # if: steps.build.outcome == 'success'

@@ -1,4 +1,4 @@
-import { ThemeColors } from "./colors/types";
+import {ThemeColors} from "./colors/types";
 
 export type DefaultThemeType = "light" | "dark";
 
@@ -107,17 +107,17 @@ export type ConfigTheme = {
 export type ConfigThemes = Record<string, ConfigTheme>;
 
 /**
- * The AwalUI config.
- * @see https://awalui.org/docs/customization/customize-theme
+ * The FlexiUI config.
+ * @see https://flexiui.org/docs/customization/customize-theme
  */
-export type AwalUIPluginConfig = {
+export type FlexiUIPluginConfig = {
   /**
    * The prefix for the css variables.
-   * @default "awalui"
+   * @default "flexiui"
    */
   prefix?: string;
   /**
-   * If true, the common awalui colors (e.g. "blue", "green", "purple") will not be extended on the theme.
+   * If true, the common flexiui colors (e.g. "blue", "green", "purple") will not be extended on the theme.
    * @default false
    */
   addCommonColors?: boolean;
