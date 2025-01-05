@@ -23,6 +23,7 @@
     "dev": "pnpm --parallel --stream -r run dev",
     "changeset:empty": "npx changeset add --empty",
     "build": "pnpm --parallel --stream -r run build",
+    "build:filter": "pnpm --parallel --stream -r --filter @flexi-ui/theme --filter @flexi-ui/shared-utils --filter @flexi-ui/storage run build",
     "test": "jest --verbose --config ./jest.config.js"
   },
   "devDependencies": {

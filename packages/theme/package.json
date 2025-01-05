@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "The default theme for FlexiUI components",
   "type": "module",
+  "private": "false",
   "publishConfig": {
     "access": "public"
   },

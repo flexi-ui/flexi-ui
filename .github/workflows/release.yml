@@ -28,10 +28,10 @@ jobs:
       - name: Build
         id: build
         continue-on-error: false
-        run: pnpm run build
+        run: pnpm run build:filter
 
       - name: Create Release Pull Request or Publish to npm
-        # if: steps.build.outcome == 'success'
+        if: steps.build.outcome == 'success'
         id: changesets
         uses: changesets/action@v1
         with:

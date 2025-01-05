@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "A set of FlexiUI utilities",
   "type": "module",
+  "private": "false",
   "publishConfig": {
     "access": "public"
   },
