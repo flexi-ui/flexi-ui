@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.3.0
+
+### Minor Changes
+
+- [`fced562`](https://github.com/flexi-ui/flexi-ui/commit/fced562c65f17a5f94cdfeb64f5764e21c1db067) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix(theme):package json file
+
 ## 2.2.2
 
 ### Patch Changes
