@@ -32,7 +32,7 @@
   ],
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist/*"
   ],
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
