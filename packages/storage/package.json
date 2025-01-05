@@ -27,9 +27,6 @@
     "local-storage",
     "memory-storage"
   ],
-  "files": [
-    "dist"
-  ],
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
   "types": "dist/src/main.d.ts",
