@@ -1,0 +1,13 @@
+{
+  "name": "flexi-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "",
+  "main": "index.js",
+  "private": "true",
+  "keywords": [],
+  "author": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
