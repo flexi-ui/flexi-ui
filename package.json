@@ -21,6 +21,7 @@
     "changeset:release": "npx changeset publish",
     "changeset:beta": "changeset pre enter beta",
     "dev": "pnpm --parallel --stream -r run dev",
+    "changeset:empty": "npx changeset add --empty",
     "build": "pnpm --parallel --stream -r run build",
     "test": "jest --verbose --config ./jest.config.js"
   },
