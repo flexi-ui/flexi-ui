@@ -1,14 +1,16 @@
 {
   "remove": ["devDependencies"],
   "replace": {
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
+    "main": "./dist/lib.umd.cjs",
+    "module": "./dist/lib.js",
     "types": "dist/index.d.ts",
     "exports": {
       ".": {
+        "node": "./dist/lib.js",
         "types": "./dist/index.d.ts",
-        "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
+        "import": "./dist/lib.js",
+        "require": "./dist/lib.umd.cjs",
+        "default": "./dist/lib.js"
       },
       "./package.json": "./package.json"
     }

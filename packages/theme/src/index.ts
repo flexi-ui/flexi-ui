@@ -7,4 +7,3 @@ export * from "./default-layout";
 
 export {tv} from "./utils/tv";
 export type {VariantProps, TV} from "tailwind-variants";
-console.log("first");
