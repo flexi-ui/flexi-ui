@@ -1,7 +1,7 @@
 {
-  "name": "@flexi-ui/storage",
-  "private": false,
-  "version": "2.0.0",
+  "name": "@flexi-ui/shared-utils",
+  "version": "1.0.0",
+  "description": "A set of FlexiUI utilities",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -20,23 +20,20 @@
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
   "license": "MIT",
+  "sideEffects": false,
   "keywords": [
-    "storage",
-    "typescript",
-    "file-storage",
-    "local-storage",
-    "memory-storage"
+    "system"
   ],
   "files": [
     "dist"
   ],
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
-  "types": "dist/src/main.d.ts",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "node": "./dist/lib.umd.cjs",
-      "types": "./dist/src/main.d.ts",
+      "node": "./dist/lib.js",
+      "types": "./dist/index.d.ts",
       "import": "./dist/lib.js",
       "require": "./dist/lib.umd.cjs",
       "default": "./dist/lib.js"
@@ -44,12 +41,17 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "dev": "pnpm run build --watch"
+    "dev": "pnpm build --watch",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "typescript": "catalog:",
+    "clean-package": "2.2.0",
+    "react": "catalog:",
+    "@types/react": "catalog:",
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:"
-  }
+  },
+  "clean-package": "../../../clean-package.config.json"
 }
