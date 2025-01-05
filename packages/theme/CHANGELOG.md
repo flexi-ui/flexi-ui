@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 1.1.2
+
+### Patch Changes
+
+- [`5db6486`](https://github.com/flexi-ui/flexi-ui/commit/5db64860f250b907b1b9d2ce62462d33b73afa8c) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:packages json and clean package configrations
+
 ## 1.1.1
 
 ### Patch Changes
