@@ -41,7 +41,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          run: xpx changeset status
+          run: npx changeset status
           version: npx changeset version
           title: "ci(changesets): :package: version packages"
           commit: "ci(changesets): version packages"
