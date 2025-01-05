@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.2.0
+
+### Minor Changes
+
+- [`f7548e2`](https://github.com/flexi-ui/flexi-ui/commit/f7548e20c2db726d01f0ba51e7cecde7b440b381) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix themeing issue
+
 ## 2.1.0
 
 ### Minor Changes
