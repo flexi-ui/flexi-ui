@@ -1,0 +1,49 @@
+{
+  "name": "@flexi-ui/storage",
+  "private": false,
+  "version": "1.0.9",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "storage",
+    "typescript",
+    "file-storage",
+    "local-storage",
+    "memory-storage"
+  ],
+  "main": "./dist/lib.umd.cjs",
+  "module": "./dist/lib.js",
+  "types": "dist/src/main.d.ts",
+  "exports": {
+    ".": {
+      "node": "./dist/lib.umd.cjs",
+      "types": "./dist/src/main.d.ts",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.umd.cjs",
+      "default": "./dist/lib.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "pnpm run build --watch"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  }
+}

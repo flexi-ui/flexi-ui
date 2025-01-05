@@ -1,6 +1,7 @@
 # Ignore build output directories
 dist/
-
+build
+scripts
 # Ignore node modules
 node_modules/
 
@@ -32,3 +33,4 @@ package-lock.json
 
 # Ignore other generated files
 coverage/
+.changeset
