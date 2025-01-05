@@ -1,5 +1,11 @@
 # @flexi-ui/storage
 
+## 2.1.1
+
+### Patch Changes
+
+- [`c11a45c`](https://github.com/flexi-ui/flexi-ui/commit/c11a45c186adf9ff3003ed24ff385ee426b682f1) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:storage package json file
+
 ## 2.1.0
 
 ### Minor Changes
