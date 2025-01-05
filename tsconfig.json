@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "types": ["node"],
+    "declaration": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    /* Bundler mode */
+    "noEmit": true,
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+
+    /* Linting */
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["packages"],
+  "exclude": ["**/node_modules", "**/dist", "**/coverage"]
+}

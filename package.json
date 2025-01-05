@@ -6,8 +6,52 @@
   "main": "index.js",
   "private": "true",
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .ts,.js",
+    "changeset:add": "npx changeset add",
+    "changeset:version": "npx changeset version",
+    "changeset:release": "npx changeset publish",
+    "changeset:beta": "changeset pre enter beta",
+    "dev": "pnpm --parallel --stream -r run dev",
+    "dev:filter": "pnpm --parallel --stream -r --filter @awalui/theme --filter dashboard run dev",
+    "test": "pnpm --parallel --stream -r run test",
+    "build": "pnpm --parallel --stream -r run build"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.11",
+    "@changesets/get-github-info": "^0.6.0",
+    "@changesets/get-release-plan": "^4.0.6",
+    "@changesets/types": "^6.0.0",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "@changesets/get-github-info": "0.6.0"
+    }
+  },
+  "engines": {
+    "node": ">=20.x",
+    "pnpm": ">=9.x"
+  },
+  "packageManager": "pnpm@9.6.0"
 }
