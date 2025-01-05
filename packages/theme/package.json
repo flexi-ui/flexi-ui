@@ -30,6 +30,9 @@
     "classNames",
     "components"
   ],
+  "files": [
+    "dist/*"
+  ],
   "sideEffects": false,
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
