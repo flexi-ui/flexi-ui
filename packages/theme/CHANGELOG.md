@@ -1,5 +1,14 @@
 # @flexi-ui/theme
 
+## 1.1.1
+
+### Patch Changes
+
+- [`c14d119`](https://github.com/flexi-ui/flexi-ui/commit/c14d1193c05c42d4c05b8d18e46d91ca485e6c6c) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:package json file
+
+- Updated dependencies [[`c14d119`](https://github.com/flexi-ui/flexi-ui/commit/c14d1193c05c42d4c05b8d18e46d91ca485e6c6c)]:
+  - @flexi-ui/shared-utils@1.0.1
+
 ## 1.1.0
 
 ### Minor Changes
