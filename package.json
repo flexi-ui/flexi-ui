@@ -61,6 +61,10 @@
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.19.0"
   },
+  "lint-staged": {
+    "**/*.{js,jsx,tx,tsx}": "eslint --fix",
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "pnpm": {
     "overrides": {
       "react": "18.2.0",
