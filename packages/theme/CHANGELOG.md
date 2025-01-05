@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.2.1
+
+### Patch Changes
+
+- [`9c9bb30`](https://github.com/flexi-ui/flexi-ui/commit/9c9bb30aa7667a90dbbda906e67300ec0e98afe7) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix: plugin
+
 ## 2.2.0
 
 ### Minor Changes
