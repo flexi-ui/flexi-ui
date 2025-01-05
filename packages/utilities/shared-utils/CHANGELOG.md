@@ -1,5 +1,11 @@
 # @flexi-ui/shared-utils
 
+## 2.1.0
+
+### Minor Changes
+
+- [`7b88f04`](https://github.com/flexi-ui/flexi-ui/commit/7b88f044e7d717e2333b2c22ac07325e4e864d84) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:docs
+
 ## 2.0.0
 
 ### Major Changes
