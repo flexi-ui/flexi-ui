@@ -1,0 +1,4 @@
+BRANCH_NAME=$(git branch --show-current)
+if ! grep -qE '^(fixup|squash)!' "$1"; then
+  echo "[$BRANCH_NAME] $(cat $1)" > $1
+fi

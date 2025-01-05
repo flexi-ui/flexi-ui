@@ -20,7 +20,6 @@
     "changeset:release": "npx changeset publish",
     "changeset:beta": "changeset pre enter beta",
     "dev": "pnpm --parallel --stream -r run dev",
-    "dev:filter": "pnpm --parallel --stream -r --filter @awalui/theme --filter dashboard run dev",
     "test": "pnpm --parallel --stream -r run test",
     "build": "pnpm --parallel --stream -r run build"
   },
