@@ -1,4 +1,4 @@
-# @awalui-org/system
+# @flexi-ui/system
 
 A Quick description of the component
 
@@ -7,18 +7,18 @@ A Quick description of the component
 ## Installation
 
 ```sh
-yarn add @awalui-org/system
+yarn add @flexi-ui/system
 # or
-npm i @awalui-org/system
+npm i @flexi-ui/system
 ```
 
 ## Contribution
 
 Yes please! See the
-[contributing guidelines](https://github.com/awalui-org/awalui/blob/master/CONTRIBUTING.md)
+[contributing guidelines](https://github.com/flexi-ui/awalui/blob/master/CONTRIBUTING.md)
 for details.
 
 ## License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/awalui-org/awalui/blob/master/LICENSE).
+[MIT license](https://github.com/flexi-ui/awalui/blob/master/LICENSE).

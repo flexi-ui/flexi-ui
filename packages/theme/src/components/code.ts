@@ -1,7 +1,7 @@
-import type { VariantProps } from "tailwind-variants";
+import type {VariantProps} from "tailwind-variants";
 
-import { tv } from "../utils/tv";
-import { colorVariants } from "../utils";
+import {tv} from "../utils/tv";
+import {colorVariants} from "../utils";
 
 /**
  * Code wrapper **Tailwind Variants** component
@@ -10,19 +10,11 @@ import { colorVariants } from "../utils";
  *
  * @example
  * <code className={classNames)}>
- *   npm install @awalui-org/react
+ *   npm install @flexi-ui/react
  * </code>
  */
 const code = tv({
-  base: [
-    "px-2",
-    "py-1",
-    "h-fit",
-    "font-mono",
-    "font-normal",
-    "inline-block",
-    "whitespace-nowrap",
-  ],
+  base: ["px-2", "py-1", "h-fit", "font-mono", "font-normal", "inline-block", "whitespace-nowrap"],
   variants: {
     color: {
       default: colorVariants.flat.default,
@@ -54,4 +46,4 @@ const code = tv({
 
 export type CodeVariantProps = VariantProps<typeof code>;
 
-export { code };
+export {code};
