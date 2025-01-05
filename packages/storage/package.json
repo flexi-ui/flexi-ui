@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
+  "files": [
+    "dist/*"
+  ],
   "license": "MIT",
   "keywords": [
     "storage",
