@@ -6,5 +6,4 @@ fi
 
 echo "Running pre-push validations..."
 pnpm exec changeset status
-pnpm run test
-pnpm run build
+
