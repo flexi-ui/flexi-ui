@@ -1,5 +1,11 @@
 # @flexi-ui/storage
 
+## 1.0.2
+
+### Patch Changes
+
+- [`f843ebd`](https://github.com/flexi-ui/flexi-ui/commit/f843ebdf49e8226935603bc5fbafa9a6980f1629) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - refactor(storage):export single instance
+
 ## 1.0.1
 
 ### Patch Changes
