@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "vite": "catalog:",
+    "@types/react": "catalog:",
     "react": "catalog:",
     "vite-plugin-dts": "catalog:"
   }

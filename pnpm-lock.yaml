@@ -550,6 +550,9 @@ importers:
 
   packages/utilities/shared-icons:
     devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.0.5
       react:
         specifier: 'catalog:'
         version: 19.0.0
