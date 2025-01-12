@@ -1,6 +1,6 @@
 import * as fs from 'node:fs'
 
-export class FileStorage {
+class FileStorage {
   private filePath: string
 
   constructor(filePath = './theme-storage.json') {
@@ -40,3 +40,5 @@ export class FileStorage {
     this.writeFile({})
   }
 }
+
+export const fileStorage = new FileStorage()

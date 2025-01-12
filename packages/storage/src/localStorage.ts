@@ -1,6 +1,6 @@
 const DEFAULT_CACHE_TIME = 60 * 60 * 24 * 7
 
-export class LocalStorage {
+class LocalStorage {
   private storage: globalThis.Storage
   private prefixKey?: string
 
@@ -49,3 +49,5 @@ export class LocalStorage {
     this.storage.clear()
   }
 }
+
+export const storage = new LocalStorage()
