@@ -30,11 +30,11 @@
   ],
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/main.d.ts",
   "exports": {
     ".": {
       "node": "./dist/lib.js",
-      "types": "./dist/index.d.ts",
+      "types": "./dist/main.d.ts",
       "import": "./dist/lib.js",
       "require": "./dist/lib.umd.cjs",
       "default": "./dist/lib.js"
@@ -42,17 +42,13 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "dev": "pnpm build --watch",
-    "typecheck": "tsc --noEmit",
-    "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "dev:watch": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "clean-package": "2.2.0",
     "react": "catalog:",
     "@types/react": "catalog:",
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:"
-  },
-  "clean-package": "../../../clean-package.config.json"
+  }
 }

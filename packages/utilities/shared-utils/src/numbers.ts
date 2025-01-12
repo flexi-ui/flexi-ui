@@ -5,9 +5,9 @@
  * @returns number[]
  */
 export function range(start: number, end: number) {
-  const length = end - start + 1;
+  const length = end - start + 1
 
-  return Array.from({ length }, (_, index) => index + start);
+  return Array.from({ length }, (_, index) => index + start)
 }
 
 /**
@@ -19,7 +19,7 @@ export function range(start: number, end: number) {
  * @returns The clamped value.
  */
 export function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
+  return Math.min(Math.max(value, min), max)
 }
 
 /**
@@ -29,5 +29,5 @@ export function clamp(value: number, min: number, max: number) {
  * @returns The clamped value.
  */
 export function clampPercentage(value: number, max: number = 100) {
-  return Math.min(Math.max(value, 0), max);
+  return Math.min(Math.max(value, 0), max)
 }

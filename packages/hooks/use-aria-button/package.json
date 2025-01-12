@@ -1,0 +1,63 @@
+{
+  "name": "@flexi-ui/use-aria-button",
+  "version": "0.0.0",
+  "description": "Internal hook to handle button a11y and events, this is based on react-aria button hook but without the onClick warning",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "use-aria-button"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "main": "./dist/lib.umd.cjs",
+  "module": "./dist/lib.js",
+  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "node": "./dist/lib.umd.cjs",
+      "types": "./dist/main.d.ts",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.umd.cjs",
+      "default": "./dist/lib.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev:watch": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "dependencies": {
+    "@flexi-ui/shared-utils": "workspace:*",
+    "@react-aria/focus": "3.19.0",
+    "@react-aria/interactions": "3.22.5",
+    "@react-aria/utils": "3.26.0",
+    "@react-types/button": "3.10.1",
+    "@react-types/shared": "3.26.0"
+  },
+  "devDependencies": {
+    "vite": "catalog:",
+    "react": "catalog:",
+    "@types/react": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  }
+}

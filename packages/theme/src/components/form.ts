@@ -1,6 +1,6 @@
-import type { VariantProps } from "tailwind-variants";
+import type { VariantProps } from 'tailwind-variants'
 
-import { tv } from "../utils/tv";
+import { tv } from '../utils/tv'
 
 /**
  * Card **Tailwind Variants** component
@@ -15,9 +15,9 @@ import { tv } from "../utils/tv";
  * ```
  */
 const form = tv({
-  base: "flex flex-col gap-2 items-start",
-});
+  base: 'flex flex-col gap-2 items-start',
+})
 
-export type FormVariantProps = VariantProps<typeof form>;
+export type FormVariantProps = VariantProps<typeof form>
 
-export { form };
+export { form }

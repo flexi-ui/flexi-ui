@@ -4,6 +4,7 @@
   "description": "The default theme for FlexiUI components",
   "type": "module",
   "private": false,
+  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
@@ -33,14 +34,13 @@
   "files": [
     "dist/*"
   ],
-  "sideEffects": false,
   "main": "./dist/lib.umd.cjs",
   "module": "./dist/lib.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/main.d.ts",
   "exports": {
     ".": {
       "node": "./dist/lib.js",
-      "types": "./dist/index.d.ts",
+      "types": "./dist/main.d.ts",
       "import": "./dist/lib.js",
       "require": "./dist/lib.umd.cjs",
       "default": "./dist/lib.js"
@@ -48,10 +48,8 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "dev": "pnpm build --watch",
-    "typecheck": "tsc --noEmit",
-    "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "dev:watch": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",
@@ -69,7 +67,6 @@
   "devDependencies": {
     "@types/color": "^4.2.0",
     "@types/flat": "^5.0.5",
-    "clean-package": "2.2.0",
     "tailwindcss": "^3.4.17",
     "typescript": "catalog:",
     "vite": "catalog:",

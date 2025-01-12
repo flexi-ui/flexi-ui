@@ -1,16 +1,16 @@
-import {ThemeColors} from "./colors/types";
+import { ThemeColors } from './colors/types'
 
-export type DefaultThemeType = "light" | "dark";
+export type DefaultThemeType = 'light' | 'dark'
 
 export type BaseThemeUnit = {
-  small?: string;
-  medium?: string;
-  large?: string;
-};
+  small?: string
+  medium?: string
+  large?: string
+}
 
 export type FontThemeUnit = BaseThemeUnit & {
-  tiny?: string;
-};
+  tiny?: string
+}
 
 export interface LayoutTheme {
   /**
@@ -25,7 +25,7 @@ export interface LayoutTheme {
    *    DEFAULT: "1rem",
    * }
    */
-  fontSize?: FontThemeUnit;
+  fontSize?: FontThemeUnit
   /**
    * The default line height applied across the components.
    *
@@ -38,7 +38,7 @@ export interface LayoutTheme {
    *    DEFAULT: "1.5rem",
    * }
    */
-  lineHeight?: FontThemeUnit;
+  lineHeight?: FontThemeUnit
   /**
    * The default radius applied across the components.
    * we recommend to use `rem` units.
@@ -50,7 +50,7 @@ export interface LayoutTheme {
    *   large: "0.75rem",
    * }
    */
-  radius?: BaseThemeUnit;
+  radius?: BaseThemeUnit
   /**
    * A number between 0 and 1 that is applied as opacity-[value] when the component is disabled.
    *
@@ -58,7 +58,7 @@ export interface LayoutTheme {
    *
    * @default .5
    */
-  disabledOpacity?: string | number;
+  disabledOpacity?: string | number
   /**
    * A number between 0 and 1 that is applied as opacity-[value] when the component is hovered.
    *
@@ -66,14 +66,14 @@ export interface LayoutTheme {
    *
    * @default .8
    */
-  hoverOpacity?: string | number;
+  hoverOpacity?: string | number
   /**
    * The default height applied to the divider component.
    * we recommend to use `px` units.
    *
    * @default 1px
    */
-  dividerWeight?: string;
+  dividerWeight?: string
   /**
    * The border width applied across the components.
    * @default
@@ -84,7 +84,7 @@ export interface LayoutTheme {
    * }
    *
    */
-  borderWidth?: BaseThemeUnit;
+  borderWidth?: BaseThemeUnit
   /**
    * The box shadow applied across the components.
    *
@@ -95,16 +95,16 @@ export interface LayoutTheme {
    *   large: 0px 0px 30px 0px rgb(0 0 0 / 0.03), 0px 30px 60px 0px rgb(0 0 0 / 0.12),
    * }
    */
-  boxShadow?: BaseThemeUnit;
+  boxShadow?: BaseThemeUnit
 }
 
 export type ConfigTheme = {
-  extend?: "light" | "dark";
-  layout?: LayoutTheme;
-  colors?: Partial<ThemeColors>;
-};
+  extend?: 'light' | 'dark'
+  layout?: LayoutTheme
+  colors?: Partial<ThemeColors>
+}
 
-export type ConfigThemes = Record<string, ConfigTheme>;
+export type ConfigThemes = Record<string, ConfigTheme>
 
 /**
  * The FlexiUI config.
@@ -115,28 +115,28 @@ export type FlexiUIPluginConfig = {
    * The prefix for the css variables.
    * @default "flexiui"
    */
-  prefix?: string;
+  prefix?: string
   /**
    * If true, the common flexiui colors (e.g. "blue", "green", "purple") will not be extended on the theme.
    * @default false
    */
-  addCommonColors?: boolean;
+  addCommonColors?: boolean
   /**
    * Common layout definitions. These definitions are applied to all themes.
    */
-  layout?: LayoutTheme;
+  layout?: LayoutTheme
   /**
    * The theme definitions.
    */
-  themes?: ConfigThemes;
+  themes?: ConfigThemes
   /**
    * The default theme to use.
    * @default "light"
    */
-  defaultTheme?: DefaultThemeType;
+  defaultTheme?: DefaultThemeType
   /**
    * The default theme to extend.
    * @default "light"
    */
-  defaultExtendTheme?: DefaultThemeType;
-};
+  defaultExtendTheme?: DefaultThemeType
+}

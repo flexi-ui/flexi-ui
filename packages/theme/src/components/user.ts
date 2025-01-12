@@ -1,5 +1,5 @@
-import { tv } from "../utils/tv";
-import { dataFocusVisibleClasses } from "../utils";
+import { tv } from '../utils/tv'
+import { dataFocusVisibleClasses } from '../utils'
 
 /**
  * User wrapper **Tailwind Variants** component
@@ -18,16 +18,16 @@ import { dataFocusVisibleClasses } from "../utils";
 const user = tv({
   slots: {
     base: [
-      "inline-flex items-center justify-center gap-2 rounded-small outline-none",
+      'inline-flex items-center justify-center gap-2 rounded-small outline-none',
       // focus ring
       ...dataFocusVisibleClasses,
     ],
-    wrapper: "inline-flex flex-col items-start",
-    name: "text-small text-inherit",
-    description: "text-tiny text-foreground-400",
+    wrapper: 'inline-flex flex-col items-start',
+    name: 'text-small text-inherit',
+    description: 'text-tiny text-foreground-400',
   },
-});
+})
 
-export type UserSlots = keyof ReturnType<typeof user>;
+export type UserSlots = keyof ReturnType<typeof user>
 
-export { user };
+export { user }

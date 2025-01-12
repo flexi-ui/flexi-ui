@@ -3,47 +3,47 @@
 function toVal(mix: any) {
   var k,
     y,
-    str = "";
+    str = ''
 
-  if (typeof mix === "string" || typeof mix === "number") {
-    str += mix;
-  } else if (typeof mix === "object") {
+  if (typeof mix === 'string' || typeof mix === 'number') {
+    str += mix
+  } else if (typeof mix === 'object') {
     if (Array.isArray(mix)) {
       for (k = 0; k < mix.length; k++) {
         if (mix[k]) {
           if ((y = toVal(mix[k]))) {
-            str && (str += " ");
-            str += y;
+            str && (str += ' ')
+            str += y
           }
         }
       }
     } else {
       for (k in mix) {
         if (mix[k]) {
-          str && (str += " ");
-          str += k;
+          str && (str += ' ')
+          str += k
         }
       }
     }
   }
 
-  return str;
+  return str
 }
 
 export function clsx(...args: any[]) {
   var i = 0,
     tmp,
     x,
-    str = "";
+    str = ''
 
   while (i < args.length) {
     if ((tmp = args[i++])) {
       if ((x = toVal(tmp))) {
-        str && (str += " ");
-        str += x;
+        str && (str += ' ')
+        str += x
       }
     }
   }
 
-  return str;
+  return str
 }

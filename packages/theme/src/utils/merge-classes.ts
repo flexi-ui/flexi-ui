@@ -1,6 +1,6 @@
-import type {SlotsToClasses} from "./types";
+import type { SlotsToClasses } from './types'
 
-import {clsx} from "@flexi-ui/shared-utils";
+import { clsx } from '@flexi-ui/shared-utils'
 
 /**
  * Merges two sets of class names for each slot in a component.
@@ -12,9 +12,9 @@ export const mergeClasses = <T extends SlotsToClasses<string>, P extends SlotsTo
   itemClasses?: T,
   itemPropsClasses?: P,
 ): T => {
-  if (!itemClasses && !itemPropsClasses) return {} as T;
+  if (!itemClasses && !itemPropsClasses) return {} as T
 
-  const keys = new Set([...Object.keys(itemClasses || {}), ...Object.keys(itemPropsClasses || {})]);
+  const keys = new Set([...Object.keys(itemClasses || {}), ...Object.keys(itemPropsClasses || {})])
 
   return Array.from(keys).reduce(
     (acc, key) => ({
@@ -22,5 +22,5 @@ export const mergeClasses = <T extends SlotsToClasses<string>, P extends SlotsTo
       [key]: clsx(itemClasses?.[key], itemPropsClasses?.[key]),
     }),
     {} as T,
-  );
-};
+  )
+}

@@ -1,0 +1,68 @@
+{
+  "name": "@flexi-ui/spinner",
+  "version": "0.0.0",
+  "description": "Loaders express an unspecified wait time or display the length of a process.",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "loading",
+    "spinner",
+    "progress"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "main": "./dist/lib.umd.cjs",
+  "module": "./dist/lib.js",
+  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "node": "./dist/lib.umd.cjs",
+      "types": "./dist/main.d.ts",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.umd.cjs",
+      "default": "./dist/lib.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev:watch": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@flexi-ui/theme": ">=1.0.0",
+    "react": "catlog:",
+    "react-dom": "catlog:"
+  },
+  "dependencies": {
+    "@flexi-ui/react-utils": "workspace:*",
+    "@flexi-ui/shared-utils": "workspace:*",
+    "@flexi-ui/system-rsc": "workspace:*"
+  },
+  "devDependencies": {
+    "@flexi-ui/theme": "workspace:*",
+    "@storybook/react": "^8.4.7",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  }
+}

@@ -30,6 +30,7 @@ package-lock.json
 *.jpeg
 *.gif
 *.svg
+*.md
 
 # Ignore other generated files
 coverage/

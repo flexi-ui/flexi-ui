@@ -5,5 +5,5 @@
     "rootDir": "./",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src", "src/**/*.d.ts"]
+  "include": ["src", "main.ts"]
 }

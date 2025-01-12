@@ -1,7 +1,7 @@
-import type {VariantProps} from "tailwind-variants";
+import type { VariantProps } from 'tailwind-variants'
 
-import {tv} from "../utils/tv";
-import {colorVariants} from "../utils";
+import { tv } from '../utils/tv'
+import { colorVariants } from '../utils'
 
 /**
  * Code wrapper **Tailwind Variants** component
@@ -14,7 +14,7 @@ import {colorVariants} from "../utils";
  * </code>
  */
 const code = tv({
-  base: ["px-2", "py-1", "h-fit", "font-mono", "font-normal", "inline-block", "whitespace-nowrap"],
+  base: ['px-2', 'py-1', 'h-fit', 'font-mono', 'font-normal', 'inline-block', 'whitespace-nowrap'],
   variants: {
     color: {
       default: colorVariants.flat.default,
@@ -25,25 +25,25 @@ const code = tv({
       danger: colorVariants.flat.danger,
     },
     size: {
-      sm: "text-small",
-      md: "text-medium",
-      lg: "text-large",
+      sm: 'text-small',
+      md: 'text-medium',
+      lg: 'text-large',
     },
     radius: {
-      none: "rounded-none",
-      sm: "rounded-small",
-      md: "rounded-medium",
-      lg: "rounded-large",
-      full: "rounded-full",
+      none: 'rounded-none',
+      sm: 'rounded-small',
+      md: 'rounded-medium',
+      lg: 'rounded-large',
+      full: 'rounded-full',
     },
   },
   defaultVariants: {
-    color: "default",
-    size: "sm",
-    radius: "sm",
+    color: 'default',
+    size: 'sm',
+    radius: 'sm',
   },
-});
+})
 
-export type CodeVariantProps = VariantProps<typeof code>;
+export type CodeVariantProps = VariantProps<typeof code>
 
-export {code};
+export { code }

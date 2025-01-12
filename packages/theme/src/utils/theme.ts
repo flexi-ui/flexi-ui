@@ -4,5 +4,4 @@
  * @param theme string
  * @returns "light" | "dark
  */
-export const isBaseTheme = (theme: string) =>
-  theme === "light" || theme === "dark";
+export const isBaseTheme = (theme: string) => theme === 'light' || theme === 'dark'

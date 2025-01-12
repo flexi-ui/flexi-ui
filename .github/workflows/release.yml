@@ -3,8 +3,8 @@ name: Release
 on:
   push:
     paths:
-      - ".changeset/**"
-      - "packages/**"
+      - '.changeset/**'
+      - 'packages/**'
     branches:
       - main
 
@@ -34,7 +34,7 @@ jobs:
       - name: Build
         id: build
         continue-on-error: false
-        run: cd packages/utilities/shared-utils && pnpm run build && cd ../../../ && pnpm run build
+        run: pnpm run build
 
       - name: Create Release Pull Request or Publish to npm
         if: steps.build.outcome == 'success'
@@ -43,8 +43,8 @@ jobs:
         with:
           run: npx changeset status
           version: npx changeset version
-          title: "ci(changesets): :package: version packages"
-          commit: "ci(changesets): version packages"
+          title: 'ci(changesets): :package: version packages'
+          commit: 'ci(changesets): version packages'
           publish: npx changeset publish
           setupGitUser: true
         env:

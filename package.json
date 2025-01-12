@@ -20,9 +20,11 @@
     "changeset:version": "npx changeset version",
     "changeset:release": "npx changeset publish",
     "changeset:beta": "changeset pre enter beta",
-    "dev": "pnpm --parallel --stream -r run dev",
     "changeset:empty": "npx changeset add --empty",
-    "build": "pnpm --parallel --stream -r run build",
+    "dev": "npx nx run-many --target=dev --all",
+    "build": "npx nx run-many --target=build --all",
+    "dev:pnpm": "pnpm --parallel --stream -r run dev",
+    "build:pnpm": "pnpm --parallel --stream -r run build",
     "test": "jest --verbose --config ./jest.config.js"
   },
   "devDependencies": {
@@ -47,7 +49,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "catalog:",
+    "@types/jest": "^29.5.14",
     "@types/node": "catalog:",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
@@ -57,14 +59,17 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-watch-typeahead": "^2.2.2",
     "lint-staged": "^15.3.0",
+    "nx": "^20.3.1",
     "prettier": "^3.4.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.19.0"
+    "typescript-eslint": "^8.19.0",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
   },
   "lint-staged": {
     "**/*.{js,jsx,tx,tsx}": "eslint --fix",
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --write ."
   },
   "pnpm": {
     "overrides": {

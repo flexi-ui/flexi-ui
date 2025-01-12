@@ -1,7 +1,7 @@
-import type { VariantProps } from "tailwind-variants";
+import type { VariantProps } from 'tailwind-variants'
 
-import { tv } from "../utils/tv";
-import { colorVariants, dataFocusVisibleClasses } from "../utils";
+import { tv } from '../utils/tv'
+import { colorVariants, dataFocusVisibleClasses } from '../utils'
 
 /**
  * Pagination wrapper **Tailwind Variants** component
@@ -21,58 +21,39 @@ import { colorVariants, dataFocusVisibleClasses } from "../utils";
  */
 const pagination = tv({
   slots: {
-    base: ["p-2.5", "-m-2.5", "overflow-x-scroll", "scrollbar-hide"],
-    wrapper: [
-      "flex",
-      "flex-nowrap",
-      "h-fit",
-      "max-w-fit",
-      "relative",
-      "gap-1",
-      "items-center",
-      "overflow-visible",
-    ],
-    item: ["tap-highlight-transparent", "select-none", "touch-none"],
-    prev: "",
-    next: "",
+    base: ['p-2.5', '-m-2.5', 'overflow-x-scroll', 'scrollbar-hide'],
+    wrapper: ['flex', 'flex-nowrap', 'h-fit', 'max-w-fit', 'relative', 'gap-1', 'items-center', 'overflow-visible'],
+    item: ['tap-highlight-transparent', 'select-none', 'touch-none'],
+    prev: '',
+    next: '',
     cursor: [
-      "absolute",
-      "flex",
-      "overflow-visible",
-      "items-center",
-      "justify-center",
-      "origin-center",
-      "left-0",
-      "select-none",
-      "touch-none",
-      "pointer-events-none",
-      "z-20",
+      'absolute',
+      'flex',
+      'overflow-visible',
+      'items-center',
+      'justify-center',
+      'origin-center',
+      'left-0',
+      'select-none',
+      'touch-none',
+      'pointer-events-none',
+      'z-20',
     ],
-    forwardIcon: [
-      "hidden",
-      "group-hover:block",
-      "group-data-[focus-visible=true]:block",
-      "data-[before=true]:rotate-180",
-    ],
-    ellipsis: "group-hover:hidden group-data-[focus-visible=true]:hidden",
-    chevronNext: "rotate-180",
+    forwardIcon: ['hidden', 'group-hover:block', 'group-data-[focus-visible=true]:block', 'data-[before=true]:rotate-180'],
+    ellipsis: 'group-hover:hidden group-data-[focus-visible=true]:hidden',
+    chevronNext: 'rotate-180',
   },
   variants: {
     variant: {
       bordered: {
-        item: [
-          "border-medium",
-          "border-default",
-          "bg-transparent",
-          "data-[hover=true]:bg-default-100",
-        ],
+        item: ['border-medium', 'border-default', 'bg-transparent', 'data-[hover=true]:bg-default-100'],
       },
       light: {
-        item: "bg-transparent",
+        item: 'bg-transparent',
       },
       flat: {},
       faded: {
-        item: ["border-medium", "border-default"],
+        item: ['border-medium', 'border-default'],
       },
     },
     color: {
@@ -109,20 +90,20 @@ const pagination = tv({
     },
     isCompact: {
       true: {
-        wrapper: "gap-0 shadow-sm",
+        wrapper: 'gap-0 shadow-sm',
         item: [
-          "shadow-none",
-          "first-of-type:rounded-e-none",
-          "last-of-type:rounded-s-none",
-          "[&:not(:first-of-type):not(:last-of-type)]:rounded-none",
+          'shadow-none',
+          'first-of-type:rounded-e-none',
+          'last-of-type:rounded-s-none',
+          '[&:not(:first-of-type):not(:last-of-type)]:rounded-none',
         ],
-        prev: "!rounded-e-none",
-        next: "!rounded-s-none",
+        prev: '!rounded-e-none',
+        next: '!rounded-s-none',
       },
     },
     isDisabled: {
       true: {
-        base: "opacity-disabled pointer-events-none",
+        base: 'opacity-disabled pointer-events-none',
       },
     },
     showShadow: {
@@ -130,34 +111,31 @@ const pagination = tv({
     },
     disableCursorAnimation: {
       true: {
-        cursor: "hidden",
+        cursor: 'hidden',
       },
     },
     disableAnimation: {
       true: {
-        item: "transition-none",
-        cursor: "transition-none",
+        item: 'transition-none',
+        cursor: 'transition-none',
       },
       false: {
-        item: [
-          "data-[pressed=true]:scale-[0.97]",
-          "transition-transform-background",
-        ],
+        item: ['data-[pressed=true]:scale-[0.97]', 'transition-transform-background'],
         cursor: [
-          "data-[moving=true]:transition-transform",
-          "!data-[moving=true]:duration-300",
+          'data-[moving=true]:transition-transform',
+          '!data-[moving=true]:duration-300',
           // this hides the cursor and only shows it once it has been moved to its initial position
-          "opacity-0",
-          "data-[moving]:opacity-100",
+          'opacity-0',
+          'data-[moving]:opacity-100',
         ],
       },
     },
   },
   defaultVariants: {
-    variant: "flat",
-    color: "primary",
-    size: "md",
-    radius: "md",
+    variant: 'flat',
+    color: 'primary',
+    size: 'md',
+    radius: 'md',
     isCompact: false,
     isDisabled: false,
     showShadow: false,
@@ -167,52 +145,52 @@ const pagination = tv({
     // showShadow / color
     {
       showShadow: true,
-      color: "default",
+      color: 'default',
       class: {
-        cursor: [colorVariants.shadow.default, "shadow-md"],
+        cursor: [colorVariants.shadow.default, 'shadow-md'],
       },
     },
     {
       showShadow: true,
-      color: "primary",
+      color: 'primary',
       class: {
-        cursor: [colorVariants.shadow.primary, "shadow-md"],
+        cursor: [colorVariants.shadow.primary, 'shadow-md'],
       },
     },
     {
       showShadow: true,
-      color: "secondary",
+      color: 'secondary',
       class: {
-        cursor: [colorVariants.shadow.secondary, "shadow-md"],
+        cursor: [colorVariants.shadow.secondary, 'shadow-md'],
       },
     },
     {
       showShadow: true,
-      color: "success",
+      color: 'success',
       class: {
-        cursor: [colorVariants.shadow.success, "shadow-md"],
+        cursor: [colorVariants.shadow.success, 'shadow-md'],
       },
     },
     {
       showShadow: true,
-      color: "warning",
+      color: 'warning',
       class: {
-        cursor: [colorVariants.shadow.warning, "shadow-md"],
+        cursor: [colorVariants.shadow.warning, 'shadow-md'],
       },
     },
     {
       showShadow: true,
-      color: "danger",
+      color: 'danger',
       class: {
-        cursor: [colorVariants.shadow.danger, "shadow-md"],
+        cursor: [colorVariants.shadow.danger, 'shadow-md'],
       },
     },
     // isCompact / bordered
     {
       isCompact: true,
-      variant: "bordered",
+      variant: 'bordered',
       class: {
-        item: "[&:not(:first-of-type)]:ms-[calc(theme(borderWidth.2)*-1)]",
+        item: '[&:not(:first-of-type)]:ms-[calc(theme(borderWidth.2)*-1)]',
       },
     },
     /**
@@ -224,235 +202,202 @@ const pagination = tv({
     // disableCursorAnimation / color
     {
       disableCursorAnimation: true,
-      color: "default",
+      color: 'default',
       class: {
         item: [
-          "data-[active=true]:bg-default-400",
-          "data-[active=true]:border-default-400",
-          "data-[active=true]:text-default-foreground",
+          'data-[active=true]:bg-default-400',
+          'data-[active=true]:border-default-400',
+          'data-[active=true]:text-default-foreground',
         ],
       },
     },
     {
       disableCursorAnimation: true,
-      color: "primary",
+      color: 'primary',
       class: {
         item: [
-          "data-[active=true]:bg-primary",
-          "data-[active=true]:border-primary",
-          "data-[active=true]:text-primary-foreground",
+          'data-[active=true]:bg-primary',
+          'data-[active=true]:border-primary',
+          'data-[active=true]:text-primary-foreground',
         ],
       },
     },
     {
       disableCursorAnimation: true,
-      color: "secondary",
+      color: 'secondary',
       class: {
         item: [
-          "data-[active=true]:bg-secondary",
-          "data-[active=true]:border-secondary",
-          "data-[active=true]:text-secondary-foreground",
+          'data-[active=true]:bg-secondary',
+          'data-[active=true]:border-secondary',
+          'data-[active=true]:text-secondary-foreground',
         ],
       },
     },
     {
       disableCursorAnimation: true,
-      color: "success",
+      color: 'success',
       class: {
         item: [
-          "data-[active=true]:bg-success",
-          "data-[active=true]:border-success",
-          "data-[active=true]:text-success-foreground",
+          'data-[active=true]:bg-success',
+          'data-[active=true]:border-success',
+          'data-[active=true]:text-success-foreground',
         ],
       },
     },
     {
       disableCursorAnimation: true,
-      color: "warning",
+      color: 'warning',
       class: {
         item: [
-          "data-[active=true]:bg-warning",
-          "data-[active=true]:border-warning",
-          "data-[active=true]:text-warning-foreground",
+          'data-[active=true]:bg-warning',
+          'data-[active=true]:border-warning',
+          'data-[active=true]:text-warning-foreground',
         ],
       },
     },
     {
       disableCursorAnimation: true,
-      color: "danger",
+      color: 'danger',
       class: {
-        item: [
-          "data-[active=true]:bg-danger",
-          "data-[active=true]:border-danger",
-          "data-[active=true]:text-danger-foreground",
-        ],
+        item: ['data-[active=true]:bg-danger', 'data-[active=true]:border-danger', 'data-[active=true]:text-danger-foreground'],
       },
     },
     // shadow / color
     {
       disableCursorAnimation: true,
       showShadow: true,
-      color: "default",
+      color: 'default',
       class: {
-        item: [
-          "data-[active=true]:shadow-md",
-          "data-[active=true]:shadow-default/50",
-        ],
+        item: ['data-[active=true]:shadow-md', 'data-[active=true]:shadow-default/50'],
       },
     },
     {
       disableCursorAnimation: true,
       showShadow: true,
-      color: "primary",
+      color: 'primary',
       class: {
-        item: [
-          "data-[active=true]:shadow-md",
-          "data-[active=true]:shadow-primary/40",
-        ],
+        item: ['data-[active=true]:shadow-md', 'data-[active=true]:shadow-primary/40'],
       },
     },
     {
       disableCursorAnimation: true,
       showShadow: true,
-      color: "secondary",
+      color: 'secondary',
       class: {
-        item: [
-          "data-[active=true]:shadow-md",
-          "data-[active=true]:shadow-secondary/40",
-        ],
+        item: ['data-[active=true]:shadow-md', 'data-[active=true]:shadow-secondary/40'],
       },
     },
     {
       disableCursorAnimation: true,
       showShadow: true,
-      color: "success",
+      color: 'success',
       class: {
-        item: [
-          "data-[active=true]:shadow-md",
-          "data-[active=true]:shadow-success/40",
-        ],
+        item: ['data-[active=true]:shadow-md', 'data-[active=true]:shadow-success/40'],
       },
     },
     {
       disableCursorAnimation: true,
       showShadow: true,
-      color: "warning",
+      color: 'warning',
       class: {
-        item: [
-          "data-[active=true]:shadow-md",
-          "data-[active=true]:shadow-warning/40",
-        ],
+        item: ['data-[active=true]:shadow-md', 'data-[active=true]:shadow-warning/40'],
       },
     },
     {
       disableCursorAnimation: true,
       showShadow: true,
-      color: "danger",
+      color: 'danger',
       class: {
-        item: [
-          "data-[active=true]:shadow-md",
-          "data-[active=true]:shadow-danger/40",
-        ],
+        item: ['data-[active=true]:shadow-md', 'data-[active=true]:shadow-danger/40'],
       },
     },
   ],
   compoundSlots: [
     // without variant
     {
-      slots: ["item", "prev", "next"],
+      slots: ['item', 'prev', 'next'],
       class: [
-        "flex",
-        "flex-wrap",
-        "truncate",
-        "box-border",
-        "outline-none",
-        "items-center",
-        "justify-center",
-        "text-default-foreground",
+        'flex',
+        'flex-wrap',
+        'truncate',
+        'box-border',
+        'outline-none',
+        'items-center',
+        'justify-center',
+        'text-default-foreground',
         // focus ring
         ...dataFocusVisibleClasses,
         // disabled
-        "data-[disabled=true]:text-default-300",
-        "data-[disabled=true]:pointer-events-none",
+        'data-[disabled=true]:text-default-300',
+        'data-[disabled=true]:pointer-events-none',
       ],
     },
     {
-      slots: ["item", "prev", "next"],
-      variant: ["flat", "bordered", "faded"],
-      class: ["shadow-sm"],
+      slots: ['item', 'prev', 'next'],
+      variant: ['flat', 'bordered', 'faded'],
+      class: ['shadow-sm'],
     },
     {
-      slots: ["item", "prev", "next"],
-      variant: "flat",
-      class: [
-        "bg-default-100",
-        "[&[data-hover=true]:not([data-active=true])]:bg-default-200",
-        "active:bg-default-300",
-      ],
+      slots: ['item', 'prev', 'next'],
+      variant: 'flat',
+      class: ['bg-default-100', '[&[data-hover=true]:not([data-active=true])]:bg-default-200', 'active:bg-default-300'],
     },
     {
-      slots: ["item", "prev", "next"],
-      variant: "faded",
-      class: [
-        "bg-default-50",
-        "[&[data-hover=true]:not([data-active=true])]:bg-default-100",
-        "active:bg-default-200",
-      ],
+      slots: ['item', 'prev', 'next'],
+      variant: 'faded',
+      class: ['bg-default-50', '[&[data-hover=true]:not([data-active=true])]:bg-default-100', 'active:bg-default-200'],
     },
     {
-      slots: ["item", "prev", "next"],
-      variant: "light",
-      class: [
-        "[&[data-hover=true]:not([data-active=true])]:bg-default-100",
-        "active:bg-default-200",
-      ],
+      slots: ['item', 'prev', 'next'],
+      variant: 'light',
+      class: ['[&[data-hover=true]:not([data-active=true])]:bg-default-100', 'active:bg-default-200'],
     },
     // size
     {
-      slots: ["item", "cursor", "prev", "next"],
-      size: "sm",
-      class: "min-w-8 w-8 h-8 text-tiny",
+      slots: ['item', 'cursor', 'prev', 'next'],
+      size: 'sm',
+      class: 'min-w-8 w-8 h-8 text-tiny',
     },
     {
-      slots: ["item", "cursor", "prev", "next"],
-      size: "md",
-      class: "min-w-9 w-9 h-9 text-small",
+      slots: ['item', 'cursor', 'prev', 'next'],
+      size: 'md',
+      class: 'min-w-9 w-9 h-9 text-small',
     },
     {
-      slots: ["item", "cursor", "prev", "next"],
-      size: "lg",
-      class: "min-w-10 w-10 h-10 text-medium",
+      slots: ['item', 'cursor', 'prev', 'next'],
+      size: 'lg',
+      class: 'min-w-10 w-10 h-10 text-medium',
     },
     // radius
     {
-      slots: ["wrapper", "item", "cursor", "prev", "next"],
-      radius: "none",
-      class: "rounded-none",
+      slots: ['wrapper', 'item', 'cursor', 'prev', 'next'],
+      radius: 'none',
+      class: 'rounded-none',
     },
     {
-      slots: ["wrapper", "item", "cursor", "prev", "next"],
-      radius: "sm",
-      class: "rounded-small",
+      slots: ['wrapper', 'item', 'cursor', 'prev', 'next'],
+      radius: 'sm',
+      class: 'rounded-small',
     },
     {
-      slots: ["wrapper", "item", "cursor", "prev", "next"],
-      radius: "md",
-      class: "rounded-medium",
+      slots: ['wrapper', 'item', 'cursor', 'prev', 'next'],
+      radius: 'md',
+      class: 'rounded-medium',
     },
     {
-      slots: ["wrapper", "item", "cursor", "prev", "next"],
-      radius: "lg",
-      class: "rounded-large",
+      slots: ['wrapper', 'item', 'cursor', 'prev', 'next'],
+      radius: 'lg',
+      class: 'rounded-large',
     },
     {
-      slots: ["wrapper", "item", "cursor", "prev", "next"],
-      radius: "full",
-      class: "rounded-full",
+      slots: ['wrapper', 'item', 'cursor', 'prev', 'next'],
+      radius: 'full',
+      class: 'rounded-full',
     },
   ],
-});
+})
 
-export type PaginationVariantProps = VariantProps<typeof pagination>;
-export type PaginationSlots = keyof ReturnType<typeof pagination>;
+export type PaginationVariantProps = VariantProps<typeof pagination>
+export type PaginationSlots = keyof ReturnType<typeof pagination>
 
-export { pagination };
+export { pagination }

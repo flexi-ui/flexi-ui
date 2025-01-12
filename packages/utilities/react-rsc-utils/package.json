@@ -1,0 +1,60 @@
+{
+  "name": "@flexi-ui/react-rsc-utils",
+  "version": "0.0.0",
+  "description": "A set of utilities for react compatible with RSC",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "react-rsc-utils"
+  ],
+  "files": [
+    "dist/*",
+    "children.d.ts",
+    "children.js",
+    "filter-dom-props.d.ts",
+    "filter-dom-props.js"
+  ],
+  "main": "./dist/lib.umd.cjs",
+  "module": "./dist/lib.js",
+  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "node": "./dist/lib.umd.cjs",
+      "types": "./dist/main.d.ts",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.umd.cjs",
+      "default": "./dist/lib.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev:watch": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@react-types/shared": "catalog:",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  }
+}

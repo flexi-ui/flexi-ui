@@ -1,7 +1,7 @@
-import type { VariantProps } from "tailwind-variants";
+import type { VariantProps } from 'tailwind-variants'
 
-import { tv } from "../utils/tv";
-import { colorVariants } from "../utils";
+import { tv } from '../utils/tv'
+import { colorVariants } from '../utils'
 
 /**
  * Badge wrapper **Tailwind Variants** component
@@ -16,26 +16,26 @@ import { colorVariants } from "../utils";
  */
 const badge = tv({
   slots: {
-    base: ["relative", "inline-flex", "shrink-0"],
+    base: ['relative', 'inline-flex', 'shrink-0'],
     badge: [
-      "flex",
-      "z-10",
-      "flex-wrap",
-      "absolute",
-      "box-border",
-      "rounded-full",
-      "whitespace-nowrap",
-      "place-content-center",
-      "origin-center",
-      "items-center",
-      "text-inherit",
-      "select-none",
-      "font-regular",
-      "scale-100",
-      "opacity-100",
-      "subpixel-antialiased",
-      "data-[invisible=true]:scale-0",
-      "data-[invisible=true]:opacity-0",
+      'flex',
+      'z-10',
+      'flex-wrap',
+      'absolute',
+      'box-border',
+      'rounded-full',
+      'whitespace-nowrap',
+      'place-content-center',
+      'origin-center',
+      'items-center',
+      'text-inherit',
+      'select-none',
+      'font-regular',
+      'scale-100',
+      'opacity-100',
+      'subpixel-antialiased',
+      'data-[invisible=true]:scale-0',
+      'data-[invisible=true]:opacity-0',
     ],
   },
   variants: {
@@ -43,7 +43,7 @@ const badge = tv({
       solid: {},
       flat: {},
       faded: {
-        badge: "border-medium",
+        badge: 'border-medium',
       },
       shadow: {},
     },
@@ -57,20 +57,20 @@ const badge = tv({
     },
     size: {
       sm: {
-        badge: "px-1 text-tiny",
+        badge: 'px-1 text-tiny',
       },
       md: {
-        badge: "px-1 text-small",
+        badge: 'px-1 text-small',
       },
       lg: {
-        badge: "px-1 text-small",
+        badge: 'px-1 text-small',
       },
     },
     placement: {
-      "top-right": {},
-      "top-left": {},
-      "bottom-right": {},
-      "bottom-left": {},
+      'top-right': {},
+      'top-left': {},
+      'bottom-right': {},
+      'bottom-left': {},
     },
     shape: {
       circle: {},
@@ -81,7 +81,7 @@ const badge = tv({
     },
     isOneChar: {
       true: {
-        badge: "px-0",
+        badge: 'px-0',
       },
     },
     isDot: {
@@ -89,199 +89,199 @@ const badge = tv({
     },
     disableAnimation: {
       true: {
-        badge: "transition-none",
+        badge: 'transition-none',
       },
       false: {
-        badge: "transition-transform-opacity !ease-soft-spring !duration-300",
+        badge: 'transition-transform-opacity !ease-soft-spring !duration-300',
       },
     },
     showOutline: {
       true: {
-        badge: "border-2 border-background",
+        badge: 'border-2 border-background',
       },
       false: {
-        badge: "border-transparent border-0",
+        badge: 'border-transparent border-0',
       },
     },
   },
   defaultVariants: {
-    variant: "solid",
-    color: "default",
-    size: "md",
-    shape: "rectangle",
-    placement: "top-right",
+    variant: 'solid',
+    color: 'default',
+    size: 'md',
+    shape: 'rectangle',
+    placement: 'top-right',
     showOutline: true,
     isInvisible: false,
   },
   compoundVariants: [
     // solid / color
     {
-      variant: "solid",
-      color: "default",
+      variant: 'solid',
+      color: 'default',
       class: {
         badge: colorVariants.solid.default,
       },
     },
     {
-      variant: "solid",
-      color: "primary",
+      variant: 'solid',
+      color: 'primary',
       class: {
         badge: colorVariants.solid.primary,
       },
     },
     {
-      variant: "solid",
-      color: "secondary",
+      variant: 'solid',
+      color: 'secondary',
       class: {
         badge: colorVariants.solid.secondary,
       },
     },
     {
-      variant: "solid",
-      color: "success",
+      variant: 'solid',
+      color: 'success',
       class: {
         badge: colorVariants.solid.success,
       },
     },
     {
-      variant: "solid",
-      color: "warning",
+      variant: 'solid',
+      color: 'warning',
       class: {
         badge: colorVariants.solid.warning,
       },
     },
     {
-      variant: "solid",
-      color: "danger",
+      variant: 'solid',
+      color: 'danger',
       class: {
         badge: colorVariants.solid.danger,
       },
     },
     // shadow / color
     {
-      variant: "shadow",
-      color: "default",
+      variant: 'shadow',
+      color: 'default',
       class: {
         badge: colorVariants.shadow.default,
       },
     },
     {
-      variant: "shadow",
-      color: "primary",
+      variant: 'shadow',
+      color: 'primary',
       class: {
         badge: colorVariants.shadow.primary,
       },
     },
     {
-      variant: "shadow",
-      color: "secondary",
+      variant: 'shadow',
+      color: 'secondary',
       class: {
         badge: colorVariants.shadow.secondary,
       },
     },
     {
-      variant: "shadow",
-      color: "success",
+      variant: 'shadow',
+      color: 'success',
       class: {
         badge: colorVariants.shadow.success,
       },
     },
     {
-      variant: "shadow",
-      color: "warning",
+      variant: 'shadow',
+      color: 'warning',
       class: {
         badge: colorVariants.shadow.warning,
       },
     },
     {
-      variant: "shadow",
-      color: "danger",
+      variant: 'shadow',
+      color: 'danger',
       class: {
         badge: colorVariants.shadow.danger,
       },
     },
     // flat / color
     {
-      variant: "flat",
-      color: "default",
+      variant: 'flat',
+      color: 'default',
       class: {
         badge: colorVariants.flat.default,
       },
     },
     {
-      variant: "flat",
-      color: "primary",
+      variant: 'flat',
+      color: 'primary',
       class: {
         badge: colorVariants.flat.primary,
       },
     },
     {
-      variant: "flat",
-      color: "secondary",
+      variant: 'flat',
+      color: 'secondary',
       class: {
         badge: colorVariants.flat.secondary,
       },
     },
     {
-      variant: "flat",
-      color: "success",
+      variant: 'flat',
+      color: 'success',
       class: {
         badge: colorVariants.flat.success,
       },
     },
     {
-      variant: "flat",
-      color: "warning",
+      variant: 'flat',
+      color: 'warning',
       class: {
         badge: colorVariants.flat.warning,
       },
     },
     {
-      variant: "flat",
-      color: "danger",
+      variant: 'flat',
+      color: 'danger',
       class: {
         badge: colorVariants.flat.danger,
       },
     },
     // faded / color
     {
-      variant: "faded",
-      color: "default",
+      variant: 'faded',
+      color: 'default',
       class: {
         badge: colorVariants.faded.default,
       },
     },
     {
-      variant: "faded",
-      color: "primary",
+      variant: 'faded',
+      color: 'primary',
       class: {
         badge: colorVariants.faded.primary,
       },
     },
     {
-      variant: "faded",
-      color: "secondary",
+      variant: 'faded',
+      color: 'secondary',
       class: {
         badge: colorVariants.faded.secondary,
       },
     },
     {
-      variant: "faded",
-      color: "success",
+      variant: 'faded',
+      color: 'success',
       class: {
         badge: colorVariants.faded.success,
       },
     },
     {
-      variant: "faded",
-      color: "warning",
+      variant: 'faded',
+      color: 'warning',
       class: {
         badge: colorVariants.faded.warning,
       },
     },
     {
-      variant: "faded",
-      color: "danger",
+      variant: 'faded',
+      color: 'danger',
       class: {
         badge: colorVariants.faded.danger,
       },
@@ -289,109 +289,109 @@ const badge = tv({
     // isOneChar / size
     {
       isOneChar: true,
-      size: "sm",
+      size: 'sm',
       class: {
-        badge: "w-4 h-4 min-w-4 min-h-4",
+        badge: 'w-4 h-4 min-w-4 min-h-4',
       },
     },
     {
       isOneChar: true,
-      size: "md",
+      size: 'md',
       class: {
-        badge: "w-5 h-5 min-w-5 min-h-5",
+        badge: 'w-5 h-5 min-w-5 min-h-5',
       },
     },
     {
       isOneChar: true,
-      size: "lg",
+      size: 'lg',
       class: {
-        badge: "w-6 h-6 min-w-6 min-h-6",
+        badge: 'w-6 h-6 min-w-6 min-h-6',
       },
     },
     // isDot / size
     {
       isDot: true,
-      size: "sm",
+      size: 'sm',
       class: {
-        badge: "w-3 h-3 min-w-3 min-h-3",
+        badge: 'w-3 h-3 min-w-3 min-h-3',
       },
     },
     {
       isDot: true,
-      size: "md",
+      size: 'md',
       class: {
-        badge: "w-3.5 h-3.5 min-w-3.5 min-h-3.5",
+        badge: 'w-3.5 h-3.5 min-w-3.5 min-h-3.5',
       },
     },
     {
       isDot: true,
-      size: "lg",
+      size: 'lg',
       class: {
-        badge: "w-4 h-4 min-w-4 min-h-4",
+        badge: 'w-4 h-4 min-w-4 min-h-4',
       },
     },
     // placement / rectangle
     {
-      placement: "top-right",
-      shape: "rectangle",
+      placement: 'top-right',
+      shape: 'rectangle',
       class: {
-        badge: "top-[5%] right-[5%] translate-x-1/2 -translate-y-1/2",
+        badge: 'top-[5%] right-[5%] translate-x-1/2 -translate-y-1/2',
       },
     },
     {
-      placement: "top-left",
-      shape: "rectangle",
+      placement: 'top-left',
+      shape: 'rectangle',
       class: {
-        badge: "top-[5%] left-[5%] -translate-x-1/2 -translate-y-1/2",
+        badge: 'top-[5%] left-[5%] -translate-x-1/2 -translate-y-1/2',
       },
     },
     {
-      placement: "bottom-right",
-      shape: "rectangle",
+      placement: 'bottom-right',
+      shape: 'rectangle',
       class: {
-        badge: "bottom-[5%] right-[5%] translate-x-1/2 translate-y-1/2",
+        badge: 'bottom-[5%] right-[5%] translate-x-1/2 translate-y-1/2',
       },
     },
     {
-      placement: "bottom-left",
-      shape: "rectangle",
+      placement: 'bottom-left',
+      shape: 'rectangle',
       class: {
-        badge: "bottom-[5%] left-[5%] -translate-x-1/2 translate-y-1/2",
+        badge: 'bottom-[5%] left-[5%] -translate-x-1/2 translate-y-1/2',
       },
     },
     // placement / circle
     {
-      placement: "top-right",
-      shape: "circle",
+      placement: 'top-right',
+      shape: 'circle',
       class: {
-        badge: "top-[10%] right-[10%] translate-x-1/2 -translate-y-1/2",
+        badge: 'top-[10%] right-[10%] translate-x-1/2 -translate-y-1/2',
       },
     },
     {
-      placement: "top-left",
-      shape: "circle",
+      placement: 'top-left',
+      shape: 'circle',
       class: {
-        badge: "top-[10%] left-[10%] -translate-x-1/2 -translate-y-1/2",
+        badge: 'top-[10%] left-[10%] -translate-x-1/2 -translate-y-1/2',
       },
     },
     {
-      placement: "bottom-right",
-      shape: "circle",
+      placement: 'bottom-right',
+      shape: 'circle',
       class: {
-        badge: "bottom-[10%] right-[10%] translate-x-1/2 translate-y-1/2",
+        badge: 'bottom-[10%] right-[10%] translate-x-1/2 translate-y-1/2',
       },
     },
     {
-      placement: "bottom-left",
-      shape: "circle",
+      placement: 'bottom-left',
+      shape: 'circle',
       class: {
-        badge: "bottom-[10%] left-[10%] -translate-x-1/2 translate-y-1/2",
+        badge: 'bottom-[10%] left-[10%] -translate-x-1/2 translate-y-1/2',
       },
     },
   ],
-});
+})
 
-export type BadgeVariantProps = VariantProps<typeof badge>;
-export type BadgeSlots = keyof ReturnType<typeof badge>;
+export type BadgeVariantProps = VariantProps<typeof badge>
+export type BadgeSlots = keyof ReturnType<typeof badge>
 
-export { badge };
+export { badge }

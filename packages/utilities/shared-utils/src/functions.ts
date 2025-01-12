@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react'
 
-type Args<T extends Function> = T extends (...args: infer R) => any ? R : never;
+type Args<T extends Function> = T extends (...args: infer R) => any ? R : never
 
-type AnyFunction<T = any> = (...args: T[]) => any;
+type AnyFunction<T = any> = (...args: T[]) => any
 
 type Extractable =
   | {
-      [key: string]: any;
+      [key: string]: any
     }
-  | undefined;
+  | undefined
 
-type Iteratee<T> = ((value: T) => any) | keyof T;
+type Iteratee<T> = ((value: T) => any) | keyof T
 
 /**
  * Capitalizes the first character of a string and converts the rest of the string to lowercase.
@@ -23,8 +23,8 @@ type Iteratee<T> = ((value: T) => any) | keyof T;
  * capitalize(''); // returns ''
  */
 export const capitalize = (s: string) => {
-  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : "";
-};
+  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : ''
+}
 
 /**
  * Creates a function that invokes each provided function with the same argument, until
@@ -41,16 +41,14 @@ export const capitalize = (s: string) => {
  * const allHandlers = callAllHandlers(handler1, handler2);
  * allHandlers({ type: 'click' });
  */
-export function callAllHandlers<T extends (event: any) => void>(
-  ...fns: (T | undefined)[]
-) {
+export function callAllHandlers<T extends (event: any) => void>(...fns: (T | undefined)[]) {
   return function func(event: Args<T>[0]) {
     fns.some((fn) => {
-      fn?.(event);
+      fn?.(event)
 
-      return event?.defaultPrevented;
-    });
-  };
+      return event?.defaultPrevented
+    })
+  }
 }
 
 /**
@@ -70,9 +68,9 @@ export function callAllHandlers<T extends (event: any) => void>(
 export function callAll<T extends AnyFunction>(...fns: (T | undefined)[]) {
   return function mergedFn(arg: Args<T>[0]) {
     fns.forEach((fn) => {
-      fn?.(arg);
-    });
-  };
+      fn?.(arg)
+    })
+  }
 }
 
 /**
@@ -90,19 +88,20 @@ export function callAll<T extends AnyFunction>(...fns: (T | undefined)[]) {
  * extractProperty('name', 'Unknown', { name: 'Alice' }, { name: 'Bob' }); // returns 'Alice'
  * extractProperty('age', 18, { name: 'Alice' }); // returns 18
  */
-export function extractProperty<
-  K extends keyof Extractable,
-  D extends keyof Extractable,
->(key: K | string, defaultValue: D | string | boolean, ...objs: Extractable[]) {
-  let result = defaultValue;
+export function extractProperty<K extends keyof Extractable, D extends keyof Extractable>(
+  key: K | string,
+  defaultValue: D | string | boolean,
+  ...objs: Extractable[]
+) {
+  let result = defaultValue
 
   for (const obj of objs) {
     if (obj && key in obj && !!obj[key]) {
-      result = obj[key];
+      result = obj[key]
     }
   }
 
-  return result as Extractable[K] | D | string | boolean;
+  return result as Extractable[K] | D | string | boolean
 }
 
 /**
@@ -115,7 +114,7 @@ export function extractProperty<
  * getUniqueID('btn'); // returns 'btn-123456'
  */
 export function getUniqueID(prefix: string) {
-  return `${prefix}-${Math.floor(Math.random() * 1000000)}`;
+  return `${prefix}-${Math.floor(Math.random() * 1000000)}`
 }
 
 /**
@@ -129,12 +128,12 @@ export function getUniqueID(prefix: string) {
  */
 export function removeEvents(input: { [key: string]: any }) {
   for (const key in input) {
-    if (key.startsWith("on")) {
-      delete input[key];
+    if (key.startsWith('on')) {
+      delete input[key]
     }
   }
 
-  return input;
+  return input
 }
 
 /**
@@ -150,14 +149,14 @@ export function removeEvents(input: { [key: string]: any }) {
  * objectToDeps(undefined); // returns ""
  */
 export function objectToDeps(obj: Extractable) {
-  if (!obj || typeof obj !== "object") {
-    return "";
+  if (!obj || typeof obj !== 'object') {
+    return ''
   }
 
   try {
-    return JSON.stringify(obj);
+    return JSON.stringify(obj)
   } catch (e) {
-    return "";
+    return ''
   }
 }
 
@@ -178,24 +177,21 @@ export function objectToDeps(obj: Extractable) {
  * save(); // Will log 'Saved!' after 300ms, subsequent calls within 300ms will reset the timer.
  */
 
-export function debounce<F extends (...args: any[]) => void>(
-  func: F,
-  waitMilliseconds: number = 0,
-) {
-  let timeout: ReturnType<typeof setTimeout> | undefined;
+export function debounce<F extends (...args: any[]) => void>(func: F, waitMilliseconds: number = 0) {
+  let timeout: ReturnType<typeof setTimeout> | undefined
 
   return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
     const later = () => {
-      timeout = undefined;
-      func.apply(this, args);
-    };
-
-    if (timeout !== undefined) {
-      clearTimeout(timeout);
+      timeout = undefined
+      func.apply(this, args)
     }
 
-    timeout = setTimeout(later, waitMilliseconds);
-  };
+    if (timeout !== undefined) {
+      clearTimeout(timeout)
+    }
+
+    timeout = setTimeout(later, waitMilliseconds)
+  }
 }
 
 /**
@@ -213,13 +209,11 @@ export function debounce<F extends (...args: any[]) => void>(
  * uniqBy([{ id: 1 }, { id: 2 }, { id: 1 }], 'id'); // returns [{ id: 1 }, { id: 2 }]
  */
 export function uniqBy<T>(arr: T[], iteratee: any) {
-  if (typeof iteratee === "string") {
-    iteratee = (item: T) => item[iteratee as keyof T];
+  if (typeof iteratee === 'string') {
+    iteratee = (item: T) => item[iteratee as keyof T]
   }
 
-  return arr.filter(
-    (x, i, self) => i === self.findIndex((y) => iteratee(x) === iteratee(y)),
-  );
+  return arr.filter((x, i, self) => i === self.findIndex((y) => iteratee(x) === iteratee(y)))
 }
 
 /**
@@ -236,18 +230,15 @@ export function uniqBy<T>(arr: T[], iteratee: any) {
  * @example
  * omit({ a: 1, b: '2', c: 3 }, ['a', 'c']); // returns { b: '2' }
  */
-export const omit = <Obj, Keys extends keyof Obj>(
-  obj: Obj,
-  keys: Keys[],
-): Omit<Obj, Keys> => {
-  const res = Object.assign({}, obj);
+export const omit = <Obj, Keys extends keyof Obj>(obj: Obj, keys: Keys[]): Omit<Obj, Keys> => {
+  const res = Object.assign({}, obj)
 
   keys.forEach((key) => {
-    delete res[key];
-  });
+    delete res[key]
+  })
 
-  return res;
-};
+  return res
+}
 
 /**
  * Converts a string to kebab-case.
@@ -260,8 +251,8 @@ export const omit = <Obj, Keys extends keyof Obj>(
  * kebabCase('fooBar'); // returns 'foo-bar'
  */
 export const kebabCase = (s: string) => {
-  return s.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
-};
+  return s.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
 
 /**
  * Creates an object with keys transformed using provided `iteratee` function, which takes each value and the corresponding key.
@@ -274,14 +265,9 @@ export const kebabCase = (s: string) => {
  * @example
  * mapKeys({ a: 1, b: 2 }, (value, key) => key + value); // returns { a1: 1, b2: 2 }
  */
-export const mapKeys = (
-  obj: Record<string, any>,
-  iteratee: (value: any, key: string) => any,
-): Record<string, any> => {
-  return Object.fromEntries(
-    Object.entries(obj).map(([key, value]) => [iteratee(value, key), value]),
-  );
-};
+export const mapKeys = (obj: Record<string, any>, iteratee: (value: any, key: string) => any): Record<string, any> => {
+  return Object.fromEntries(Object.entries(obj).map(([key, value]) => [iteratee(value, key), value]))
+}
 
 /**
  * Retrieves the value at a given path of a provided object safely. If the path does not exist,
@@ -306,27 +292,21 @@ export const mapKeys = (
  * // Using default value for non-existent path
  * get(obj, 'a.b[1].c', 'not found'); // returns 'not found'
  */
-export const get = (
-  object: Record<string, any>,
-  path: string | (string | number)[],
-  defaultValue?: any,
-): any => {
-  const keys = Array.isArray(path)
-    ? path
-    : path.replace(/\[(\d+)\]/g, ".$1").split(".");
+export const get = (object: Record<string, any>, path: string | (string | number)[], defaultValue?: any): any => {
+  const keys = Array.isArray(path) ? path : path.replace(/\[(\d+)\]/g, '.$1').split('.')
 
-  let res: any = object;
+  let res: any = object
 
   for (const key of keys) {
-    res = res?.[key];
+    res = res?.[key]
 
     if (res === undefined) {
-      return defaultValue;
+      return defaultValue
     }
   }
 
-  return res;
-};
+  return res
+}
 
 /**
  * Computes the list of values that are the intersection of all provided arrays,
@@ -349,62 +329,54 @@ export const get = (
  * // Using a property name as an iteratee
  * intersectionBy([{ x: 1 }, { x: 2 }], [{ x: 1 }], 'x'); // returns [{ x: 1 }]
  */
-export const intersectionBy = <T>(
-  ...args: [...arrays: T[][], iteratee: Iteratee<T>]
-): T[] => {
+export const intersectionBy = <T>(...args: [...arrays: T[][], iteratee: Iteratee<T>]): T[] => {
   if (args.length < 2) {
-    throw new Error(
-      "intersectionBy requires at least two arrays and an iteratee",
-    );
+    throw new Error('intersectionBy requires at least two arrays and an iteratee')
   }
 
-  const iteratee = args[args.length - 1];
-  const arrays = args.slice(0, -1) as T[][];
+  const iteratee = args[args.length - 1]
+  const arrays = args.slice(0, -1) as T[][]
 
   if (arrays.length === 0) {
-    return [];
+    return []
   }
 
   const getIterateeValue = (item: T): unknown => {
-    if (typeof iteratee === "function") {
-      return (iteratee as (value: T) => any)(item);
-    } else if (typeof iteratee === "string") {
-      return (item as any)[iteratee];
+    if (typeof iteratee === 'function') {
+      return (iteratee as (value: T) => any)(item)
+    } else if (typeof iteratee === 'string') {
+      return (item as any)[iteratee]
     } else {
-      throw new Error(
-        "Iteratee must be a function or a string key of the array elements",
-      );
-    }
-  };
-
-  const [first, ...rest] = arrays;
-  const transformedFirst = first.map((item) => getIterateeValue(item));
-
-  const transformedSets: Set<unknown>[] = rest.map(
-    (array) => new Set(array.map((item) => getIterateeValue(item))),
-  );
-
-  const res: T[] = [];
-  const seen = new Set<unknown>();
-
-  for (let i = 0; i < first.length; i++) {
-    const item = first[i];
-    const transformed = transformedFirst[i];
-
-    if (seen.has(transformed)) {
-      continue;
-    }
-
-    const existsInAll = transformedSets.every((set) => set.has(transformed));
-
-    if (existsInAll) {
-      res.push(item);
-      seen.add(transformed);
+      throw new Error('Iteratee must be a function or a string key of the array elements')
     }
   }
 
-  return res;
-};
+  const [first, ...rest] = arrays
+  const transformedFirst = first.map((item) => getIterateeValue(item))
+
+  const transformedSets: Set<unknown>[] = rest.map((array) => new Set(array.map((item) => getIterateeValue(item))))
+
+  const res: T[] = []
+  const seen = new Set<unknown>()
+
+  for (let i = 0; i < first.length; i++) {
+    const item = first[i]
+    const transformed = transformedFirst[i]
+
+    if (seen.has(transformed)) {
+      continue
+    }
+
+    const existsInAll = transformedSets.every((set) => set.has(transformed))
+
+    if (existsInAll) {
+      res.push(item)
+      seen.add(transformed)
+    }
+  }
+
+  return res
+}
 
 /**
  * Checks if the current React version is 19.x.x
@@ -412,8 +384,8 @@ export const intersectionBy = <T>(
  * @returns {boolean} - Returns `true` if the React major version is 19, otherwise returns `false`.
  */
 export const isReact19 = (): boolean => {
-  return React.version.split(".")[0] === "19";
-};
+  return React.version.split('.')[0] === '19'
+}
 
 /**
  * Returns an appropriate value for the `inert` attribute based on the React version.
@@ -430,5 +402,5 @@ export const isReact19 = (): boolean => {
  * @see {@link https://github.com/facebook/react/issues/17157} for more details on the behavior in older React versions.
  */
 export const getInertValue = (v: boolean): boolean | string | undefined => {
-  return isReact19() ? v : v ? "" : undefined;
-};
+  return isReact19() ? v : v ? '' : undefined
+}

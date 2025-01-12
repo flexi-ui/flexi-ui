@@ -1,0 +1,70 @@
+{
+  "name": "@flexi-ui/system",
+  "version": "0.0.0",
+  "description": "FlexiUI system primitives",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "system"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "main": "./dist/lib.umd.cjs",
+  "module": "./dist/lib.js",
+  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "node": "./dist/lib.umd.cjs",
+      "types": "./dist/main.d.ts",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.umd.cjs",
+      "default": "./dist/lib.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev:watch": "pnpm build --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "framer-motion": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "framer-motion": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "dependencies": {
+    "vite": "catalog:",
+    "@types/react": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "@react-types/shared": "catalog:",
+    "@internationalized/date": "3.6.0",
+    "@flexi-ui/react-utils": "workspace:*",
+    "@react-aria/i18n": "3.12.4",
+    "@flexi-ui/system-rsc": "workspace:*",
+    "@react-aria/overlays": "3.24.0",
+    "@react-aria/utils": "3.26.0",
+    "@react-stately/utils": "3.10.5",
+    "@react-types/datepicker": "3.9.0"
+  }
+}

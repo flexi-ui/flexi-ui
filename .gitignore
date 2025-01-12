@@ -67,6 +67,7 @@ logs
 *.sql
 *.sqlite
 *.sqlite3
+.nx
 uploads
 
 ##############################

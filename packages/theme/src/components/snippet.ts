@@ -1,7 +1,7 @@
-import type { VariantProps } from "tailwind-variants";
+import type { VariantProps } from 'tailwind-variants'
 
-import { tv } from "../utils/tv";
-import { colorVariants } from "../utils";
+import { tv } from '../utils/tv'
+import { colorVariants } from '../utils'
 
 /**
  * Snippet wrapper **Tailwind Variants** component
@@ -23,31 +23,24 @@ import { colorVariants } from "../utils";
  */
 const snippet = tv({
   slots: {
-    base: "inline-flex items-center justify-between h-fit rounded-large gap-2",
-    pre: "bg-transparent text-inherit font-mono font-normal inline-block whitespace-nowrap",
-    content: "flex flex-col",
-    symbol: "select-none",
-    copyButton: [
-      "group",
-      "relative",
-      "z-10",
-      "text-large",
-      "text-inherit",
-      "data-[hover=true]:bg-transparent",
-    ],
+    base: 'inline-flex items-center justify-between h-fit rounded-large gap-2',
+    pre: 'bg-transparent text-inherit font-mono font-normal inline-block whitespace-nowrap',
+    content: 'flex flex-col',
+    symbol: 'select-none',
+    copyButton: ['group', 'relative', 'z-10', 'text-large', 'text-inherit', 'data-[hover=true]:bg-transparent'],
     copyIcon: [
-      "absolute text-inherit opacity-100 scale-100 group-data-[copied=true]:opacity-0 group-data-[copied=true]:scale-50",
+      'absolute text-inherit opacity-100 scale-100 group-data-[copied=true]:opacity-0 group-data-[copied=true]:scale-50',
     ],
     checkIcon: [
-      "absolute text-inherit opacity-0 scale-50 group-data-[copied=true]:opacity-100 group-data-[copied=true]:scale-100",
+      'absolute text-inherit opacity-0 scale-50 group-data-[copied=true]:opacity-100 group-data-[copied=true]:scale-100',
     ],
   },
   variants: {
     variant: {
-      flat: "",
-      solid: "",
-      bordered: "border-medium bg-transparent",
-      shadow: "",
+      flat: '',
+      solid: '',
+      bordered: 'border-medium bg-transparent',
+      shadow: '',
     },
     color: {
       default: {},
@@ -59,268 +52,268 @@ const snippet = tv({
     },
     size: {
       sm: {
-        base: "px-1.5 py-0.5 text-tiny rounded-small",
+        base: 'px-1.5 py-0.5 text-tiny rounded-small',
       },
       md: {
-        base: "px-3 py-1.5 text-small rounded-medium",
+        base: 'px-3 py-1.5 text-small rounded-medium',
       },
       lg: {
-        base: "px-4 py-2 text-medium rounded-large",
+        base: 'px-4 py-2 text-medium rounded-large',
       },
     },
     radius: {
       none: {
-        base: "rounded-none",
+        base: 'rounded-none',
       },
       sm: {
-        base: "rounded-small",
+        base: 'rounded-small',
       },
       md: {
-        base: "rounded-medium",
+        base: 'rounded-medium',
       },
       lg: {
-        base: "rounded-large",
+        base: 'rounded-large',
       },
     },
     fullWidth: {
       true: {
-        base: "w-full",
+        base: 'w-full',
       },
     },
     disableAnimation: {
       true: {},
       false: {
-        copyIcon: "transition-transform-opacity",
-        checkIcon: "transition-transform-opacity",
+        copyIcon: 'transition-transform-opacity',
+        checkIcon: 'transition-transform-opacity',
       },
     },
   },
   defaultVariants: {
-    color: "default",
-    variant: "flat",
-    size: "md",
+    color: 'default',
+    variant: 'flat',
+    size: 'md',
     fullWidth: false,
   },
   compoundVariants: [
     // solid - shadow / color
     {
-      variant: ["solid", "shadow"],
-      color: "default",
+      variant: ['solid', 'shadow'],
+      color: 'default',
       class: {
-        copyButton: "data-[focus-visible]:outline-default-foreground",
+        copyButton: 'data-[focus-visible]:outline-default-foreground',
       },
     },
     {
-      variant: ["solid", "shadow"],
-      color: "primary",
+      variant: ['solid', 'shadow'],
+      color: 'primary',
       class: {
-        copyButton: "data-[focus-visible]:outline-primary-foreground",
+        copyButton: 'data-[focus-visible]:outline-primary-foreground',
       },
     },
     {
-      variant: ["solid", "shadow"],
-      color: "secondary",
+      variant: ['solid', 'shadow'],
+      color: 'secondary',
       class: {
-        copyButton: "data-[focus-visible]:outline-secondary-foreground",
+        copyButton: 'data-[focus-visible]:outline-secondary-foreground',
       },
     },
     {
-      variant: ["solid", "shadow"],
-      color: "success",
+      variant: ['solid', 'shadow'],
+      color: 'success',
       class: {
-        copyButton: "data-[focus-visible]:outline-success-foreground",
+        copyButton: 'data-[focus-visible]:outline-success-foreground',
       },
     },
     {
-      variant: ["solid", "shadow"],
-      color: "warning",
+      variant: ['solid', 'shadow'],
+      color: 'warning',
       class: {
-        copyButton: "data-[focus-visible]:outline-warning-foreground",
+        copyButton: 'data-[focus-visible]:outline-warning-foreground',
       },
     },
     {
-      variant: ["solid", "shadow"],
-      color: "danger",
+      variant: ['solid', 'shadow'],
+      color: 'danger',
       class: {
-        copyButton: "data-[focus-visible]:outline-danger-foreground",
+        copyButton: 'data-[focus-visible]:outline-danger-foreground',
       },
     },
     // flat / color
     {
-      variant: "flat",
-      color: "default",
+      variant: 'flat',
+      color: 'default',
       class: {
         base: colorVariants.flat.default,
       },
     },
     {
-      variant: "flat",
-      color: "primary",
+      variant: 'flat',
+      color: 'primary',
       class: {
         base: colorVariants.flat.primary,
       },
     },
     {
-      variant: "flat",
-      color: "secondary",
+      variant: 'flat',
+      color: 'secondary',
       class: {
         base: colorVariants.flat.secondary,
       },
     },
     {
-      variant: "flat",
-      color: "success",
+      variant: 'flat',
+      color: 'success',
       class: {
         base: colorVariants.flat.success,
       },
     },
     {
-      variant: "flat",
-      color: "warning",
+      variant: 'flat',
+      color: 'warning',
       class: {
         base: colorVariants.flat.warning,
       },
     },
     {
-      variant: "flat",
-      color: "danger",
+      variant: 'flat',
+      color: 'danger',
       class: {
         base: colorVariants.flat.danger,
       },
     },
     // solid / color
     {
-      variant: "solid",
-      color: "default",
+      variant: 'solid',
+      color: 'default',
       class: {
         base: colorVariants.solid.default,
       },
     },
     {
-      variant: "solid",
-      color: "primary",
+      variant: 'solid',
+      color: 'primary',
       class: {
         base: colorVariants.solid.primary,
       },
     },
     {
-      variant: "solid",
-      color: "secondary",
+      variant: 'solid',
+      color: 'secondary',
       class: {
         base: colorVariants.solid.secondary,
       },
     },
     {
-      variant: "solid",
-      color: "success",
+      variant: 'solid',
+      color: 'success',
       class: {
         base: colorVariants.solid.success,
       },
     },
     {
-      variant: "solid",
-      color: "warning",
+      variant: 'solid',
+      color: 'warning',
       class: {
         base: colorVariants.solid.warning,
       },
     },
     {
-      variant: "solid",
-      color: "danger",
+      variant: 'solid',
+      color: 'danger',
       class: {
         base: colorVariants.solid.danger,
       },
     },
     // shadow / color
     {
-      variant: "shadow",
-      color: "default",
+      variant: 'shadow',
+      color: 'default',
       class: {
         base: colorVariants.shadow.default,
       },
     },
     {
-      variant: "shadow",
-      color: "primary",
+      variant: 'shadow',
+      color: 'primary',
       class: {
         base: colorVariants.shadow.primary,
       },
     },
     {
-      variant: "shadow",
-      color: "secondary",
+      variant: 'shadow',
+      color: 'secondary',
       class: {
         base: colorVariants.shadow.secondary,
       },
     },
     {
-      variant: "shadow",
-      color: "success",
+      variant: 'shadow',
+      color: 'success',
       class: {
         base: colorVariants.shadow.success,
       },
     },
     {
-      variant: "shadow",
-      color: "warning",
+      variant: 'shadow',
+      color: 'warning',
       class: {
         base: colorVariants.shadow.warning,
       },
     },
     {
-      variant: "shadow",
-      color: "danger",
+      variant: 'shadow',
+      color: 'danger',
       class: {
         base: colorVariants.shadow.danger,
       },
     },
     // bordered / color
     {
-      variant: "bordered",
-      color: "default",
+      variant: 'bordered',
+      color: 'default',
       class: {
         base: colorVariants.bordered.default,
       },
     },
     {
-      variant: "bordered",
-      color: "primary",
+      variant: 'bordered',
+      color: 'primary',
       class: {
         base: colorVariants.bordered.primary,
       },
     },
     {
-      variant: "bordered",
-      color: "secondary",
+      variant: 'bordered',
+      color: 'secondary',
       class: {
         base: colorVariants.bordered.secondary,
       },
     },
     {
-      variant: "bordered",
-      color: "success",
+      variant: 'bordered',
+      color: 'success',
       class: {
         base: colorVariants.bordered.success,
       },
     },
     {
-      variant: "bordered",
-      color: "warning",
+      variant: 'bordered',
+      color: 'warning',
       class: {
         base: colorVariants.bordered.warning,
       },
     },
     {
-      variant: "bordered",
-      color: "danger",
+      variant: 'bordered',
+      color: 'danger',
       class: {
         base: colorVariants.bordered.danger,
       },
     },
   ],
-});
+})
 
-export type SnippetVariantProps = VariantProps<typeof snippet>;
-export type SnippetSlots = keyof ReturnType<typeof snippet>;
+export type SnippetVariantProps = VariantProps<typeof snippet>
+export type SnippetSlots = keyof ReturnType<typeof snippet>
 
-export { snippet };
+export { snippet }

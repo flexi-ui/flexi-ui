@@ -6,19 +6,15 @@ catalog:
   # Dependencies
   react: ^19.0.0
   react-dom: ^19.0.0
+  framer-motion: '11.17.0'
 
   # Dev Dependencies
   typescript: ~5.7.2
-  "@types/react": ^19.0.2
-  "@types/react-dom": ^19.0.2
-  "@types/node": ^22.10.2
-
-  # Test Dependencies
-  jest: ^29.7.0
-  ts-jest: ^29.2.5
-  "@types/jest": ^29.5.14
+  '@types/react': ^19.0.2
+  '@types/react-dom': ^19.0.2
+  '@types/node': ^22.10.2
+  '@react-types/shared': '3.26.0'
 
   # Build Dependencies
   vite: ^6.0.5
   vite-plugin-dts: ^4.4.0
-  "@vitejs/plugin-react": ^4.3.4

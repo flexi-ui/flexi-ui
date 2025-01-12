@@ -1,4 +1,4 @@
-import { tv } from "../utils/tv";
+import { tv } from '../utils/tv'
 
 /**
  * Drip wrapper **Tailwind Variants** component
@@ -9,13 +9,7 @@ import { tv } from "../utils/tv";
  * <span ref={dripRef} className={classNames())} />
  */
 const drip = tv({
-  base: [
-    "absolute",
-    "will-change-transform",
-    "bg-current",
-    "rounded-full",
-    "animate-drip-expand",
-  ],
-});
+  base: ['absolute', 'will-change-transform', 'bg-current', 'rounded-full', 'animate-drip-expand'],
+})
 
-export { drip };
+export { drip }

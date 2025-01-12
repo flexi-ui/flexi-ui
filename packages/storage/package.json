@@ -3,6 +3,7 @@
   "private": false,
   "version": "1.0.1",
   "type": "module",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
@@ -22,7 +23,6 @@
   "files": [
     "dist/*"
   ],
-  "license": "MIT",
   "keywords": [
     "storage",
     "typescript",
