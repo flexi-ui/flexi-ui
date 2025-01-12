@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/system",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "FlexiUI system primitives",
   "type": "module",
   "license": "MIT",

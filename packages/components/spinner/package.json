@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/spinner",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Loaders express an unspecified wait time or display the length of a process.",
   "type": "module",
   "license": "MIT",
