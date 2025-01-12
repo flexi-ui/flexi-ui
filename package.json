@@ -67,10 +67,6 @@
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:"
   },
-  "lint-staged": {
-    "**/*.{js,jsx,tx,tsx}": "eslint --fix",
-    "**/*": "prettier --write ."
-  },
   "pnpm": {
     "overrides": {
       "@changesets/get-github-info": "0.6.0"
