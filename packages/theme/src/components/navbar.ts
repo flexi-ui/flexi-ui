@@ -48,7 +48,15 @@ import { dataFocusVisibleClasses } from '../utils'
  */
 const navbar = tv({
   slots: {
-    base: ['flex', 'z-40', 'w-full', 'h-auto', 'items-center', 'justify-center', 'data-[menu-open=true]:border-none'],
+    base: [
+      'flex',
+      'z-40',
+      'w-full',
+      'h-auto',
+      'items-center',
+      'justify-center',
+      'data-[menu-open=true]:border-none',
+    ],
     wrapper: [
       'z-40',
       'flex',
@@ -214,7 +222,12 @@ const navbar = tv({
         menu: 'bg-background',
       },
       true: {
-        base: ['backdrop-blur-lg', 'data-[menu-open=true]:backdrop-blur-xl', 'backdrop-saturate-150', 'bg-background/70'],
+        base: [
+          'backdrop-blur-lg',
+          'data-[menu-open=true]:backdrop-blur-xl',
+          'backdrop-saturate-150',
+          'bg-background/70',
+        ],
         menu: ['backdrop-blur-xl', 'backdrop-saturate-150', 'bg-background/70'],
       },
     },

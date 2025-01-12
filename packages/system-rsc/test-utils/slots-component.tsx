@@ -50,7 +50,16 @@ const card = tv({
       'overflow-y-auto',
       'subpixel-antialiased',
     ],
-    footer: ['p-3', 'h-auto', 'flex', 'w-full', 'items-center', 'overflow-hidden', 'color-inherit', 'subpixel-antialiased'],
+    footer: [
+      'p-3',
+      'h-auto',
+      'flex',
+      'w-full',
+      'items-center',
+      'overflow-hidden',
+      'color-inherit',
+      'subpixel-antialiased',
+    ],
   },
   variants: {
     shadow: {
@@ -104,7 +113,12 @@ const card = tv({
     },
     isBlurred: {
       true: {
-        base: ['bg-background/80', 'dark:bg-background/20', 'backdrop-blur-md', 'backdrop-saturate-150'],
+        base: [
+          'bg-background/80',
+          'dark:bg-background/20',
+          'backdrop-blur-md',
+          'backdrop-saturate-150',
+        ],
       },
     },
     isFooterBlurred: {
@@ -166,7 +180,12 @@ export const Card = forwardRef<'div', CardProps>((originalProps, ref) => {
   const domRef = useDOMRef(ref)
 
   return (
-    <div ref={domRef} className={styles.base({ class: baseStyles })} data-testid="base" {...filterDOMProps(otherProps)}>
+    <div
+      ref={domRef}
+      className={styles.base({ class: baseStyles })}
+      data-testid="base"
+      {...filterDOMProps(otherProps)}
+    >
       <div className={styles.header({ class: classNames?.header })} data-testid="header">
         {header}
       </div>

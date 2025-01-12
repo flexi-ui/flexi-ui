@@ -18,7 +18,19 @@ export const InfoIcon = (props: IconSvgProps) => (
       strokeLinejoin="round"
       strokeWidth="1.5"
     />
-    <path d="M12 8V13" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-    <path d="M11.9945 16H12.0035" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+    <path
+      d="M12 8V13"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M11.9945 16H12.0035"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
   </svg>
 )

@@ -15,7 +15,17 @@ export type {
   SharedSelection,
 } from './types'
 
-export { forwardRef, toIterator, mapPropsVariants, mapPropsVariantsWithCommon, isFlexiUIEl } from './utils'
+export {
+  forwardRef,
+  toIterator,
+  mapPropsVariants,
+  mapPropsVariantsWithCommon,
+  isFlexiUIEl,
+} from './utils'
 
 export { extendVariants } from './extend-variants'
-export type { ExtendVariantProps, ExtendVariantWithSlotsProps, ExtendVariants } from './extend-variants'
+export type {
+  ExtendVariantProps,
+  ExtendVariantWithSlotsProps,
+  ExtendVariants,
+} from './extend-variants'

@@ -13,7 +13,15 @@ const menu = tv({
   slots: {
     base: 'w-full relative flex flex-col gap-1 p-1 overflow-hidden',
     list: 'w-full flex flex-col gap-0.5 outline-none',
-    emptyContent: ['h-10', 'px-2', 'py-1.5', 'w-full', 'h-full', 'text-foreground-400', 'text-start'],
+    emptyContent: [
+      'h-10',
+      'px-2',
+      'py-1.5',
+      'w-full',
+      'h-full',
+      'text-foreground-400',
+      'text-start',
+    ],
   },
 })
 
@@ -404,7 +412,10 @@ const menuItem = tv({
       variant: 'faded',
       color: 'default',
       class: {
-        base: ['data-[hover=true]:text-default-foreground', 'data-[selectable=true]:focus:text-default-foreground'],
+        base: [
+          'data-[hover=true]:text-default-foreground',
+          'data-[selectable=true]:focus:text-default-foreground',
+        ],
       },
     },
     {
@@ -447,7 +458,10 @@ const menuItem = tv({
       variant: 'light',
       color: 'default',
       class: {
-        base: ['data-[hover=true]:text-default-500', 'data-[selectable=true]:focus:text-default-500'],
+        base: [
+          'data-[hover=true]:text-default-500',
+          'data-[selectable=true]:focus:text-default-500',
+        ],
       },
     },
     {

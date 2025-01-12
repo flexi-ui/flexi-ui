@@ -118,7 +118,9 @@ export function createFocusableRef<T extends HTMLElement = HTMLElement>(
   }
 }
 
-export function useDOMRef<T extends HTMLElement = HTMLElement>(ref?: RefObject<T | null> | Ref<T | null>) {
+export function useDOMRef<T extends HTMLElement = HTMLElement>(
+  ref?: RefObject<T | null> | Ref<T | null>,
+) {
   const domRef = useRef<T>(null)
 
   useImperativeHandle(ref, () => domRef.current as T)
@@ -132,7 +134,10 @@ export function useFocusableRef<T extends HTMLElement = HTMLElement>(
 ): RefObject<T> {
   const domRef = useRef<T>(null)
 
-  useImperativeHandle(ref, () => createFocusableRef(domRef as RefObject<T>, focusableRef) as FocusableRefValue<T, T>)
+  useImperativeHandle(
+    ref,
+    () => createFocusableRef(domRef as RefObject<T>, focusableRef) as FocusableRefValue<T, T>,
+  )
 
   return domRef as RefObject<T>
 }

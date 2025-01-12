@@ -27,7 +27,14 @@ const snippet = tv({
     pre: 'bg-transparent text-inherit font-mono font-normal inline-block whitespace-nowrap',
     content: 'flex flex-col',
     symbol: 'select-none',
-    copyButton: ['group', 'relative', 'z-10', 'text-large', 'text-inherit', 'data-[hover=true]:bg-transparent'],
+    copyButton: [
+      'group',
+      'relative',
+      'z-10',
+      'text-large',
+      'text-inherit',
+      'data-[hover=true]:bg-transparent',
+    ],
     copyIcon: [
       'absolute text-inherit opacity-100 scale-100 group-data-[copied=true]:opacity-0 group-data-[copied=true]:scale-50',
     ],

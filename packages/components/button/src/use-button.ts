@@ -61,7 +61,9 @@ interface Props extends HTMLFlexiUIProps<'button'> {
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export type UseButtonProps = Props & Omit<AriaButtonProps, keyof ButtonVariantProps> & Omit<ButtonVariantProps, 'isInGroup'>
+export type UseButtonProps = Props &
+  Omit<AriaButtonProps, keyof ButtonVariantProps> &
+  Omit<ButtonVariantProps, 'isInGroup'>
 
 export function useButton(props: UseButtonProps) {
   const groupContext = useButtonGroupContext()
@@ -120,7 +122,18 @@ export function useButton(props: UseButtonProps) {
         isIconOnly,
         className,
       }),
-    [size, color, variant, radius, fullWidth, isDisabled, isInGroup, isIconOnly, disableAnimation, className],
+    [
+      size,
+      color,
+      variant,
+      radius,
+      fullWidth,
+      isDisabled,
+      isInGroup,
+      isIconOnly,
+      disableAnimation,
+      className,
+    ],
   )
 
   const { onPress: onRipplePressHandler, onClear: onClearRipple, ripples } = useRipple()
@@ -202,7 +215,10 @@ export function useButton(props: UseButtonProps) {
     return buttonSpinnerSizeMap[size]
   }, [size])
 
-  const getRippleProps = useCallback<() => RippleProps>(() => ({ ripples, onClear: onClearRipple }), [ripples, onClearRipple])
+  const getRippleProps = useCallback<() => RippleProps>(
+    () => ({ ripples, onClear: onClearRipple }),
+    [ripples, onClearRipple],
+  )
 
   return {
     Component,

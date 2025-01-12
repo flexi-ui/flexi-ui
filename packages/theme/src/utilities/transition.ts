@@ -10,7 +10,8 @@ export default {
     'transition-duration': DEFAULT_TRANSITION_DURATION,
   },
   '.transition-colors-opacity': {
-    'transition-property': 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity',
+    'transition-property':
+      'color, background-color, border-color, text-decoration-color, fill, stroke, opacity',
     'transition-timing-function': 'ease',
     'transition-duration': DEFAULT_TRANSITION_DURATION,
   },
@@ -45,7 +46,8 @@ export default {
     'transition-duration': DEFAULT_TRANSITION_DURATION,
   },
   '.transition-transform-colors': {
-    'transition-property': 'transform, color, background, background-color, border-color, text-decoration-color, fill, stroke',
+    'transition-property':
+      'transform, color, background, background-color, border-color, text-decoration-color, fill, stroke',
     'transition-timing-function': 'ease',
     'transition-duration': DEFAULT_TRANSITION_DURATION,
   },

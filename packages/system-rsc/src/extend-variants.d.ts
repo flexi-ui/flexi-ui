@@ -34,7 +34,11 @@ type VariantValue<V, SV> = {
   [K in keyof V | keyof SV]?:
     | (K extends keyof V ? StringToBoolean<keyof V[K]> : never)
     | (K extends keyof V ? StringToBoolean<keyof V[K]>[] : never)
-    | (K extends keyof SV ? (ValidateSubtype<SV[K], object> extends 'true' ? keyof OmitUndefined<SV[K]> : never) : never)
+    | (K extends keyof SV
+        ? ValidateSubtype<SV[K], object> extends 'true'
+          ? keyof OmitUndefined<SV[K]>
+          : never
+        : never)
 }
 
 type DefaultVariants<V, SV> = VariantValue<V, SV>

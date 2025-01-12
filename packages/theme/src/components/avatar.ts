@@ -42,7 +42,15 @@ const avatar = tv({
     ],
     fallback: [...translateCenterClasses, 'flex', 'items-center', 'justify-center'],
     name: [...translateCenterClasses, 'font-normal', 'text-center', 'text-inherit'],
-    icon: [...translateCenterClasses, 'flex', 'items-center', 'justify-center', 'text-inherit', 'w-full', 'h-full'],
+    icon: [
+      ...translateCenterClasses,
+      'flex',
+      'items-center',
+      'justify-center',
+      'text-inherit',
+      'w-full',
+      'h-full',
+    ],
   },
   variants: {
     size: {

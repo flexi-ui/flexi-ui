@@ -117,13 +117,16 @@ const dateInput = tv({
         segment: 'focus:bg-secondary-400/50 data-[editable=true]:focus:text-secondary',
       },
       success: {
-        segment: 'focus:bg-success-400/50 dark:focus:bg-success-400/20 data-[editable=true]:focus:text-success',
+        segment:
+          'focus:bg-success-400/50 dark:focus:bg-success-400/20 data-[editable=true]:focus:text-success',
       },
       warning: {
-        segment: 'focus:bg-warning-400/50 dark:focus:bg-warning-400/20 data-[editable=true]:focus:text-warning',
+        segment:
+          'focus:bg-warning-400/50 dark:focus:bg-warning-400/20 data-[editable=true]:focus:text-warning',
       },
       danger: {
-        segment: 'focus:bg-danger-400/50 dark:focus:bg-danger-400/20 data-[editable=true]:focus:text-danger',
+        segment:
+          'focus:bg-danger-400/50 dark:focus:bg-danger-400/20 data-[editable=true]:focus:text-danger',
       },
     },
     size: {
@@ -197,7 +200,13 @@ const dateInput = tv({
         inputWrapper: 'transition-none',
       },
       false: {
-        label: ['!ease-out', '!duration-200', 'will-change-auto', 'motion-reduce:transition-none', 'transition-[color,opacity]'],
+        label: [
+          '!ease-out',
+          '!duration-200',
+          'will-change-auto',
+          'motion-reduce:transition-none',
+          'transition-[color,opacity]',
+        ],
         inputWrapper: 'transition-background motion-reduce:transition-none !duration-150',
         segment: 'transition-colors motion-reduce:transition-none',
       },
@@ -263,7 +272,8 @@ const dateInput = tv({
       class: {
         innerWrapper: 'text-danger',
         inputWrapper: ['bg-danger-50', 'hover:bg-danger-100', 'focus-within:bg-danger-50'],
-        segment: 'text-danger-300 data-[editable=true]:data-[placeholder=true]:text-danger-300 data-[editable=true]:text-danger',
+        segment:
+          'text-danger-300 data-[editable=true]:data-[placeholder=true]:text-danger-300 data-[editable=true]:text-danger',
         label: 'text-danger',
       },
     },

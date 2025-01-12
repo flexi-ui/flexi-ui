@@ -22,7 +22,16 @@ import { colorVariants, dataFocusVisibleClasses } from '../utils'
 const pagination = tv({
   slots: {
     base: ['p-2.5', '-m-2.5', 'overflow-x-scroll', 'scrollbar-hide'],
-    wrapper: ['flex', 'flex-nowrap', 'h-fit', 'max-w-fit', 'relative', 'gap-1', 'items-center', 'overflow-visible'],
+    wrapper: [
+      'flex',
+      'flex-nowrap',
+      'h-fit',
+      'max-w-fit',
+      'relative',
+      'gap-1',
+      'items-center',
+      'overflow-visible',
+    ],
     item: ['tap-highlight-transparent', 'select-none', 'touch-none'],
     prev: '',
     next: '',
@@ -39,14 +48,24 @@ const pagination = tv({
       'pointer-events-none',
       'z-20',
     ],
-    forwardIcon: ['hidden', 'group-hover:block', 'group-data-[focus-visible=true]:block', 'data-[before=true]:rotate-180'],
+    forwardIcon: [
+      'hidden',
+      'group-hover:block',
+      'group-data-[focus-visible=true]:block',
+      'data-[before=true]:rotate-180',
+    ],
     ellipsis: 'group-hover:hidden group-data-[focus-visible=true]:hidden',
     chevronNext: 'rotate-180',
   },
   variants: {
     variant: {
       bordered: {
-        item: ['border-medium', 'border-default', 'bg-transparent', 'data-[hover=true]:bg-default-100'],
+        item: [
+          'border-medium',
+          'border-default',
+          'bg-transparent',
+          'data-[hover=true]:bg-default-100',
+        ],
       },
       light: {
         item: 'bg-transparent',
@@ -259,7 +278,11 @@ const pagination = tv({
       disableCursorAnimation: true,
       color: 'danger',
       class: {
-        item: ['data-[active=true]:bg-danger', 'data-[active=true]:border-danger', 'data-[active=true]:text-danger-foreground'],
+        item: [
+          'data-[active=true]:bg-danger',
+          'data-[active=true]:border-danger',
+          'data-[active=true]:text-danger-foreground',
+        ],
       },
     },
     // shadow / color
@@ -340,17 +363,28 @@ const pagination = tv({
     {
       slots: ['item', 'prev', 'next'],
       variant: 'flat',
-      class: ['bg-default-100', '[&[data-hover=true]:not([data-active=true])]:bg-default-200', 'active:bg-default-300'],
+      class: [
+        'bg-default-100',
+        '[&[data-hover=true]:not([data-active=true])]:bg-default-200',
+        'active:bg-default-300',
+      ],
     },
     {
       slots: ['item', 'prev', 'next'],
       variant: 'faded',
-      class: ['bg-default-50', '[&[data-hover=true]:not([data-active=true])]:bg-default-100', 'active:bg-default-200'],
+      class: [
+        'bg-default-50',
+        '[&[data-hover=true]:not([data-active=true])]:bg-default-100',
+        'active:bg-default-200',
+      ],
     },
     {
       slots: ['item', 'prev', 'next'],
       variant: 'light',
-      class: ['[&[data-hover=true]:not([data-active=true])]:bg-default-100', 'active:bg-default-200'],
+      class: [
+        '[&[data-hover=true]:not([data-active=true])]:bg-default-100',
+        'active:bg-default-200',
+      ],
     },
     // size
     {

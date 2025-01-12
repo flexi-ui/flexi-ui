@@ -45,7 +45,8 @@ const calendar = tv({
       'data-[unavailable=true]:line-through',
       ...dataFocusVisibleClasses,
     ],
-    pickerWrapper: 'absolute inset-x-0 top-0 flex w-full h-[var(--picker-height)] justify-center opacity-0 pointer-events-none',
+    pickerWrapper:
+      'absolute inset-x-0 top-0 flex w-full h-[var(--picker-height)] justify-center opacity-0 pointer-events-none',
     pickerMonthList: 'items-start',
     pickerYearList: 'items-center',
     pickerHighlight:

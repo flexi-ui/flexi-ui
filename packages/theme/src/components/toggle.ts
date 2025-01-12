@@ -64,22 +64,40 @@ const toggle = tv({
   variants: {
     color: {
       default: {
-        wrapper: ['group-data-[selected=true]:bg-default-400', 'group-data-[selected=true]:text-default-foreground'],
+        wrapper: [
+          'group-data-[selected=true]:bg-default-400',
+          'group-data-[selected=true]:text-default-foreground',
+        ],
       },
       primary: {
-        wrapper: ['group-data-[selected=true]:bg-primary', 'group-data-[selected=true]:text-primary-foreground'],
+        wrapper: [
+          'group-data-[selected=true]:bg-primary',
+          'group-data-[selected=true]:text-primary-foreground',
+        ],
       },
       secondary: {
-        wrapper: ['group-data-[selected=true]:bg-secondary', 'group-data-[selected=true]:text-secondary-foreground'],
+        wrapper: [
+          'group-data-[selected=true]:bg-secondary',
+          'group-data-[selected=true]:text-secondary-foreground',
+        ],
       },
       success: {
-        wrapper: ['group-data-[selected=true]:bg-success', 'group-data-[selected=true]:text-success-foreground'],
+        wrapper: [
+          'group-data-[selected=true]:bg-success',
+          'group-data-[selected=true]:text-success-foreground',
+        ],
       },
       warning: {
-        wrapper: ['group-data-[selected=true]:bg-warning', 'group-data-[selected=true]:text-warning-foreground'],
+        wrapper: [
+          'group-data-[selected=true]:bg-warning',
+          'group-data-[selected=true]:text-warning-foreground',
+        ],
       },
       danger: {
-        wrapper: ['group-data-[selected=true]:bg-danger', 'data-[selected=true]:text-danger-foreground'],
+        wrapper: [
+          'group-data-[selected=true]:bg-danger',
+          'data-[selected=true]:text-danger-foreground',
+        ],
       },
     },
     size: {

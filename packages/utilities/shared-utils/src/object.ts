@@ -73,7 +73,12 @@ export const getKeyValue = (obj: any, key: Key) => {
  * @param path - the string path
  * @param fallback  - the fallback value
  */
-export const getProp = (obj: Record<string, any>, path: string | number, fallback?: any, index?: number) => {
+export const getProp = (
+  obj: Record<string, any>,
+  path: string | number,
+  fallback?: any,
+  index?: number,
+) => {
   const key = typeof path === 'string' ? path.split('.') : [path]
 
   for (index = 0; index < key.length; index += 1) {

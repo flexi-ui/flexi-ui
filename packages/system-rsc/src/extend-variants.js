@@ -22,7 +22,15 @@ function getSlots(variants) {
     : {}
 }
 
-function getClassNamesWithProps({ props = {}, variants, slots, defaultVariants, compoundVariants, hasSlots, opts }) {
+function getClassNamesWithProps({
+  props = {},
+  variants,
+  slots,
+  defaultVariants,
+  compoundVariants,
+  hasSlots,
+  opts,
+}) {
   const keys = []
 
   if (defaultVariants && typeof defaultVariants === 'object') {

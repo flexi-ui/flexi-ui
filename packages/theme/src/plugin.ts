@@ -26,11 +26,24 @@ const parsedColorsCache: Record<string, number[]> = {}
 
 // @internal
 
-const resolveConfig = (themes: ConfigThemes = {}, defaultTheme: DefaultThemeType, prefix: string) => {
+const resolveConfig = (
+  themes: ConfigThemes = {},
+  defaultTheme: DefaultThemeType,
+  prefix: string,
+) => {
   const resolved: {
     variants: { name: string; definition: string[] }[]
     utilities: Record<string, Record<string, any>>
-    colors: Record<string, ({ opacityValue, opacityVariable }: { opacityValue: string; opacityVariable: string }) => string>
+    colors: Record<
+      string,
+      ({
+        opacityValue,
+        opacityVariable,
+      }: {
+        opacityValue: string
+        opacityVariable: string
+      }) => string
+    >
   } = {
     variants: [],
     utilities: {},
@@ -68,7 +81,8 @@ const resolveConfig = (themes: ConfigThemes = {}, defaultTheme: DefaultThemeType
       if (!colorValue) return
 
       try {
-        const parsedColor = parsedColorsCache[colorValue] || Color(colorValue).hsl().round(2).array()
+        const parsedColor =
+          parsedColorsCache[colorValue] || Color(colorValue).hsl().round(2).array()
 
         parsedColorsCache[colorValue] = parsedColor
 
@@ -115,7 +129,9 @@ const resolveConfig = (themes: ConfigThemes = {}, defaultTheme: DefaultThemeType
         }
       } else {
         const formattedValue =
-          layoutVariablePrefix.includes('opacity') && typeof value === 'number' ? value.toString().replace(/^0\./, '.') : value
+          layoutVariablePrefix.includes('opacity') && typeof value === 'number'
+            ? value.toString().replace(/^0\./, '.')
+            : value
 
         resolved.utilities[cssSelector]![layoutVariablePrefix] = formattedValue
       }
@@ -125,7 +141,12 @@ const resolveConfig = (themes: ConfigThemes = {}, defaultTheme: DefaultThemeType
   return resolved
 }
 
-const corePlugin = (themes: ConfigThemes = {}, defaultTheme: DefaultThemeType, prefix: string, addCommonColors: boolean) => {
+const corePlugin = (
+  themes: ConfigThemes = {},
+  defaultTheme: DefaultThemeType,
+  prefix: string,
+  addCommonColors: boolean,
+) => {
   const resolved = resolveConfig(themes, defaultTheme, prefix)
 
   const createStripeGradient = (stripeColor: string, backgroundColor: string) =>
@@ -232,7 +253,10 @@ export const flexiUI = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plu
   const userLightColors = themeObject?.light?.colors || {}
   const userDarkColors = themeObject?.dark?.colors || {}
 
-  const defaultLayoutObj = userLayout && typeof userLayout === 'object' ? deepMerge(defaultLayout, userLayout) : defaultLayout
+  const defaultLayoutObj =
+    userLayout && typeof userLayout === 'object'
+      ? deepMerge(defaultLayout, userLayout)
+      : defaultLayout
 
   const baseLayouts = {
     light: {
@@ -254,7 +278,10 @@ export const flexiUI = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plu
       otherThemes[themeName].colors = deepMerge(semanticColors[baseTheme], colors)
     }
     if (layout && typeof layout === 'object') {
-      otherThemes[themeName].layout = deepMerge(extend ? baseLayouts[extend] : defaultLayoutObj, layout)
+      otherThemes[themeName].layout = deepMerge(
+        extend ? baseLayouts[extend] : defaultLayoutObj,
+        layout,
+      )
     }
   })
 

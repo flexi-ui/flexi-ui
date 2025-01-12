@@ -30,11 +30,10 @@ export type OmitCommonProps<Target, OmitAdditionalProps extends keyof any = neve
   'transition' | 'as' | 'color' | OmitAdditionalProps
 >
 
-export type RightJoinProps<SourceProps extends object = {}, OverrideProps extends object = {}> = OmitCommonProps<
-  SourceProps,
-  keyof OverrideProps
-> &
-  OverrideProps
+export type RightJoinProps<
+  SourceProps extends object = {},
+  OverrideProps extends object = {},
+> = OmitCommonProps<SourceProps, keyof OverrideProps> & OverrideProps
 
 export type MergeWithAs<
   ComponentProps extends object,

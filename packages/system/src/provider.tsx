@@ -10,7 +10,9 @@ import { MotionConfig, MotionGlobalConfig } from 'framer-motion'
 
 import { ProviderContext } from './provider-context'
 
-export interface FlexiUIProviderProps extends Omit<ModalProviderProps, 'children'>, ProviderContextProps {
+export interface FlexiUIProviderProps
+  extends Omit<ModalProviderProps, 'children'>,
+    ProviderContextProps {
   children: React.ReactNode
   /**
    * Controls whether `framer-motion` animations are skipped within the application.
@@ -84,7 +86,14 @@ export const FlexiUIProvider: React.FC<FlexiUIProviderProps> = ({
       disableRipple,
       validationBehavior,
     }
-  }, [createCalendar, defaultDates?.maxDate, defaultDates?.minDate, disableAnimation, disableRipple, validationBehavior])
+  }, [
+    createCalendar,
+    defaultDates?.maxDate,
+    defaultDates?.minDate,
+    disableAnimation,
+    disableRipple,
+    validationBehavior,
+  ])
 
   return (
     <ProviderContext value={context}>

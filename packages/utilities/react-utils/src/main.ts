@@ -24,4 +24,11 @@ export {
 
 export { getCSSStyleVal, getRealShape } from './dimensions'
 
-export { DOMPropNames, DOMEventNames, getValidChildren, pickChildren, renderFn, filterDOMProps } from '@flexi-ui/react-rsc-utils'
+export {
+  DOMPropNames,
+  DOMEventNames,
+  getValidChildren,
+  pickChildren,
+  renderFn,
+  filterDOMProps,
+} from '@flexi-ui/react-rsc-utils'

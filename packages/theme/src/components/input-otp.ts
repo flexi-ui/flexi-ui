@@ -7,7 +7,14 @@ const inputOtp = tv({
   slots: {
     base: ['relative', 'flex', 'flex-col', 'w-fit'],
     wrapper: ['group', 'flex items-center', 'has-[:disabled]:opacity-60'],
-    input: ['absolute', 'inset-0', 'border-none', 'outline-none', 'bg-transparent', 'text-transparent'],
+    input: [
+      'absolute',
+      'inset-0',
+      'border-none',
+      'outline-none',
+      'bg-transparent',
+      'text-transparent',
+    ],
     segmentWrapper: ['inline-flex', 'gap-x-1', 'py-2'],
     segment: [
       'h-10',
@@ -214,7 +221,12 @@ const inputOtp = tv({
       variant: 'faded',
       color: 'primary',
       class: {
-        segment: ['bg-primary-100', 'text-primary', 'border-primary-200', 'data-[active=true]:border-primary'],
+        segment: [
+          'bg-primary-100',
+          'text-primary',
+          'border-primary-200',
+          'data-[active=true]:border-primary',
+        ],
         caret: ['bg-primary'],
         passwordChar: ['bg-primary'],
       },
@@ -223,7 +235,12 @@ const inputOtp = tv({
       variant: 'faded',
       color: 'secondary',
       class: {
-        segment: ['bg-secondary-100', 'text-secondary', 'border-secondary-200', 'data-[active=true]:border-secondary'],
+        segment: [
+          'bg-secondary-100',
+          'text-secondary',
+          'border-secondary-200',
+          'data-[active=true]:border-secondary',
+        ],
         caret: ['bg-secondary'],
         passwordChar: ['bg-secondary'],
       },
@@ -232,7 +249,12 @@ const inputOtp = tv({
       variant: 'faded',
       color: 'success',
       class: {
-        segment: ['bg-success-100', 'text-success', 'border-success-200', 'data-[active=true]:border-success'],
+        segment: [
+          'bg-success-100',
+          'text-success',
+          'border-success-200',
+          'data-[active=true]:border-success',
+        ],
         caret: ['bg-success'],
         passwordChar: ['bg-success'],
       },
@@ -241,7 +263,12 @@ const inputOtp = tv({
       variant: 'faded',
       color: 'warning',
       class: {
-        segment: ['bg-warning-100', 'text-warning', 'border-warning-200', 'data-[active=true]:border-warning'],
+        segment: [
+          'bg-warning-100',
+          'text-warning',
+          'border-warning-200',
+          'data-[active=true]:border-warning',
+        ],
         caret: ['bg-warning'],
         passwordChar: ['bg-warning'],
       },
@@ -250,7 +277,12 @@ const inputOtp = tv({
       variant: 'faded',
       color: 'danger',
       class: {
-        segment: ['bg-danger-100', 'text-danger', 'border-danger-200', 'data-[active=true]:border-danger'],
+        segment: [
+          'bg-danger-100',
+          'text-danger',
+          'border-danger-200',
+          'data-[active=true]:border-danger',
+        ],
         caret: ['bg-danger'],
         passwordChar: ['bg-danger'],
       },
@@ -260,7 +292,8 @@ const inputOtp = tv({
       variant: 'bordered',
       color: 'default',
       class: {
-        segment: 'data-[has-value=true]:text-default-foreground data-[active=true]:border-foreground',
+        segment:
+          'data-[has-value=true]:text-default-foreground data-[active=true]:border-foreground',
       },
     },
     {
@@ -375,7 +408,12 @@ const inputOtp = tv({
       variant: 'faded',
       isInvalid: true,
       class: {
-        segment: ['bg-danger-50', 'text-danger', 'border-danger-200', 'data-[active=true]:border-danger-400'],
+        segment: [
+          'bg-danger-50',
+          'text-danger',
+          'border-danger-200',
+          'data-[active=true]:border-danger-400',
+        ],
         caret: ['bg-danger'],
       },
     },

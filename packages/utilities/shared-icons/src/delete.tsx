@@ -32,7 +32,19 @@ export const DeleteIcon = (props: IconSvgProps) => (
       strokeLinejoin="round"
       strokeWidth={1.5}
     />
-    <path d="M8.60834 13.75H11.3833" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
-    <path d="M7.91669 10.4167H12.0834" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+    <path
+      d="M8.60834 13.75H11.3833"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+    />
+    <path
+      d="M7.91669 10.4167H12.0834"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+    />
   </svg>
 )

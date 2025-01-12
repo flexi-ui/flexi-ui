@@ -19,8 +19,10 @@ const select = tv({
       'pointer-events-none',
     ],
     mainWrapper: 'w-full flex flex-col',
-    trigger: 'relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-sm outline-none tap-highlight-transparent',
-    innerWrapper: 'inline-flex h-full w-[calc(100%_-_theme(spacing.6))] min-h-4 items-center gap-1.5 box-border',
+    trigger:
+      'relative px-3 gap-3 w-full inline-flex flex-row items-center shadow-sm outline-none tap-highlight-transparent',
+    innerWrapper:
+      'inline-flex h-full w-[calc(100%_-_theme(spacing.6))] min-h-4 items-center gap-1.5 box-border',
     selectorIcon: 'absolute end-3 w-4 h-4',
     spinner: 'absolute end-3',
     value: ['text-foreground-500', 'font-normal', 'w-full', 'text-start'],
@@ -34,7 +36,11 @@ const select = tv({
   variants: {
     variant: {
       flat: {
-        trigger: ['bg-default-100', 'data-[hover=true]:bg-default-50', 'group-data-[focus=true]:bg-default-50'],
+        trigger: [
+          'bg-default-100',
+          'data-[hover=true]:bg-default-50',
+          'group-data-[focus=true]:bg-default-50',
+        ],
       },
       faded: {
         trigger: [
@@ -223,7 +229,12 @@ const select = tv({
       variant: 'flat',
       color: 'primary',
       class: {
-        trigger: ['bg-primary-100', 'text-primary', 'data-[hover=true]:bg-primary-50', 'group-data-[focus=true]:bg-primary-50'],
+        trigger: [
+          'bg-primary-100',
+          'text-primary',
+          'data-[hover=true]:bg-primary-50',
+          'group-data-[focus=true]:bg-primary-50',
+        ],
         value: 'text-primary',
         label: 'text-primary',
       },
@@ -292,7 +303,8 @@ const select = tv({
       variant: 'faded',
       color: 'primary',
       class: {
-        trigger: 'data-[hover=true]:border-primary data-[focus=true]:border-primary data-[open=true]:border-primary',
+        trigger:
+          'data-[hover=true]:border-primary data-[focus=true]:border-primary data-[open=true]:border-primary',
         label: 'text-primary',
       },
     },
@@ -300,7 +312,8 @@ const select = tv({
       variant: 'faded',
       color: 'secondary',
       class: {
-        trigger: 'data-[hover=true]:border-secondary data-[focus=true]:border-secondary data-[open=true]:border-secondary',
+        trigger:
+          'data-[hover=true]:border-secondary data-[focus=true]:border-secondary data-[open=true]:border-secondary',
         label: 'text-secondary',
       },
     },
@@ -308,7 +321,8 @@ const select = tv({
       variant: 'faded',
       color: 'success',
       class: {
-        trigger: 'data-[hover=true]:border-success data-[focus=true]:border-success data-[open=true]:border-success',
+        trigger:
+          'data-[hover=true]:border-success data-[focus=true]:border-success data-[open=true]:border-success',
         label: 'text-success',
       },
     },
@@ -316,7 +330,8 @@ const select = tv({
       variant: 'faded',
       color: 'warning',
       class: {
-        trigger: 'data-[hover=true]:border-warning data-[focus=true]:border-warning data-[open=true]:border-warning',
+        trigger:
+          'data-[hover=true]:border-warning data-[focus=true]:border-warning data-[open=true]:border-warning',
         label: 'text-warning',
       },
     },
@@ -324,7 +339,8 @@ const select = tv({
       variant: 'faded',
       color: 'danger',
       class: {
-        trigger: 'data-[hover=true]:border-danger data-[focus=true]:border-danger data-[open=true]:border-danger',
+        trigger:
+          'data-[hover=true]:border-danger data-[focus=true]:border-danger data-[open=true]:border-danger',
         label: 'text-danger',
       },
     },
@@ -486,7 +502,11 @@ const select = tv({
       isInvalid: true,
       variant: 'flat',
       class: {
-        trigger: ['bg-danger-50', 'data-[hover=true]:bg-danger-100', 'group-data-[focus=true]:bg-danger-50'],
+        trigger: [
+          'bg-danger-50',
+          'data-[hover=true]:bg-danger-100',
+          'group-data-[focus=true]:bg-danger-50',
+        ],
       },
     },
     {
@@ -563,7 +583,9 @@ const select = tv({
       isMultiline: false,
       size: 'md',
       class: {
-        label: ['group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]'],
+        label: [
+          'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px)]',
+        ],
         innerWrapper: 'group-data-[has-label=true]:pt-4',
       },
     },
@@ -572,7 +594,10 @@ const select = tv({
       isMultiline: false,
       size: 'lg',
       class: {
-        label: ['text-medium', 'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]'],
+        label: [
+          'text-medium',
+          'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_8px)]',
+        ],
         innerWrapper: 'group-data-[has-label=true]:pt-5',
       },
     },
@@ -583,7 +608,9 @@ const select = tv({
       isMultiline: false,
       size: 'sm',
       class: {
-        label: ['group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]'],
+        label: [
+          'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.tiny)/2_-_8px_-_theme(borderWidth.medium))]',
+        ],
       },
     },
     {
@@ -592,7 +619,9 @@ const select = tv({
       isMultiline: false,
       size: 'md',
       class: {
-        label: ['group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]'],
+        label: [
+          'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_6px_-_theme(borderWidth.medium))]',
+        ],
       },
     },
     {
@@ -623,7 +652,9 @@ const select = tv({
       isMultiline: false,
       size: 'md',
       class: {
-        label: ['group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]'],
+        label: [
+          'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_3.5px)]',
+        ],
       },
     },
     {
@@ -632,7 +663,10 @@ const select = tv({
       isMultiline: false,
       size: 'lg',
       class: {
-        label: ['text-medium', 'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]'],
+        label: [
+          'text-medium',
+          'group-data-[filled=true]:-translate-y-[calc(50%_+_theme(fontSize.small)/2_-_4px)]',
+        ],
       },
     },
     // outside & size
@@ -641,7 +675,11 @@ const select = tv({
       size: 'sm',
       isMultiline: false,
       class: {
-        label: ['start-2', 'text-tiny', 'group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]'],
+        label: [
+          'start-2',
+          'text-tiny',
+          'group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.tiny)/2_+_16px)]',
+        ],
         base: 'data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_8px)]',
       },
     },
@@ -650,7 +688,11 @@ const select = tv({
       isMultiline: false,
       size: 'md',
       class: {
-        label: ['start-3', 'text-small', 'group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]'],
+        label: [
+          'start-3',
+          'text-small',
+          'group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_20px)]',
+        ],
         base: 'data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_10px)]',
       },
     },
@@ -659,7 +701,11 @@ const select = tv({
       isMultiline: false,
       size: 'lg',
       class: {
-        label: ['start-3', 'text-medium', 'group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]'],
+        label: [
+          'start-3',
+          'text-medium',
+          'group-data-[filled=true]:-translate-y-[calc(100%_+_theme(fontSize.small)/2_+_24px)]',
+        ],
         base: 'data-[has-label=true]:mt-[calc(theme(fontSize.small)_+_12px)]',
       },
     },

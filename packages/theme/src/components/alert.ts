@@ -144,7 +144,11 @@ const alert = tv({
       variant: ['flat', 'faded'],
       color: 'default',
       class: {
-        base: [colorVariants.flat.default, 'bg-default-100 dark:bg-default-50/50', 'text-default-foreground'],
+        base: [
+          colorVariants.flat.default,
+          'bg-default-100 dark:bg-default-50/50',
+          'text-default-foreground',
+        ],
         description: 'text-default-600',
         closeButton: 'text-default-400',
         iconWrapper: 'bg-default-50 dark:bg-default-100 border-default-200',

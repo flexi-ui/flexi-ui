@@ -18,9 +18,27 @@ export const MonitorMobileIcon = (props: IconSvgProps) => (
       strokeLinejoin="round"
       strokeWidth="1.5"
     />
-    <path d="M10 21.4699V16.95" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-    <path d="M2 12.95H10" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-    <path d="M6.73999 21.47H9.99999" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+    <path
+      d="M10 21.4699V16.95"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M2 12.95H10"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M6.73999 21.47H9.99999"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
     <path
       d="M22 12.8V18.51C22 20.88 21.41 21.47 19.04 21.47H15.49C13.12 21.47 12.53 20.88 12.53 18.51V12.8C12.53 10.43 13.12 9.83997 15.49 9.83997H19.04C21.41 9.83997 22 10.43 22 12.8Z"
       stroke="currentColor"
@@ -28,6 +46,12 @@ export const MonitorMobileIcon = (props: IconSvgProps) => (
       strokeLinejoin="round"
       strokeWidth="1.5"
     />
-    <path d="M17.2445 18.25H17.2535" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+    <path
+      d="M17.2445 18.25H17.2535"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
   </svg>
 )

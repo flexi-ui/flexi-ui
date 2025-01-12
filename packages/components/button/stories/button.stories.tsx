@@ -78,7 +78,12 @@ const StateTemplate = (args: ButtonProps) => {
   }
 
   return (
-    <Button {...args} aria-label={isOpen ? 'Close' : 'Open'} aria-pressed={isOpen} onClick={handlePress}>
+    <Button
+      {...args}
+      aria-label={isOpen ? 'Close' : 'Open'}
+      aria-pressed={isOpen}
+      onClick={handlePress}
+    >
       {isOpen ? 'Close' : 'Open'}
     </Button>
   )

@@ -13,7 +13,12 @@ interface IconProps extends IconSvgProps {
 export const Sun: React.FC<IconProps> = ({ fill, filled, size, height, width, ...props }) => {
   if (filled) {
     return (
-      <svg height={size || height || 24} viewBox="0 0 512 512" width={size || width || 24} {...props}>
+      <svg
+        height={size || height || 24}
+        viewBox="0 0 512 512"
+        width={size || width || 24}
+        {...props}
+      >
         <path
           d="M256 118a22 22 0 01-22-22V48a22 22 0 0144 0v48a22 22 0 01-22 22zM256 486a22 22 0 01-22-22v-48a22 22 0 0144 0v48a22 22 0 01-22 22zM369.14 164.86a22 22 0 01-15.56-37.55l33.94-33.94a22 22 0 0131.11 31.11l-33.94 33.94a21.93 21.93 0 01-15.55 6.44zM108.92 425.08a22 22 0 01-15.55-37.56l33.94-33.94a22 22 0 1131.11 31.11l-33.94 33.94a21.94 21.94 0 01-15.56 6.45zM464 278h-48a22 22 0 010-44h48a22 22 0 010 44zM96 278H48a22 22 0 010-44h48a22 22 0 010 44zM403.08 425.08a21.94 21.94 0 01-15.56-6.45l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.55 37.56zM142.86 164.86a21.89 21.89 0 01-15.55-6.44l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.56 37.55zM256 358a102 102 0 11102-102 102.12 102.12 0 01-102 102z"
           fill={fill}
@@ -32,7 +37,16 @@ export const Sun: React.FC<IconProps> = ({ fill, filled, size, height, width, ..
         strokeMiterlimit={10}
         strokeWidth={32}
       />
-      <circle cx={256} cy={256} fill="none" r={80} stroke={fill} strokeLinecap="round" strokeMiterlimit={10} strokeWidth={32} />
+      <circle
+        cx={256}
+        cy={256}
+        fill="none"
+        r={80}
+        stroke={fill}
+        strokeLinecap="round"
+        strokeMiterlimit={10}
+        strokeWidth={32}
+      />
     </svg>
   )
 }
@@ -51,7 +65,12 @@ export const Mail: React.FC<IconProps> = ({ fill, size, height, width, ...props 
 export const Moon: React.FC<IconProps> = ({ fill, filled, size, height, width, ...props }) => {
   if (filled) {
     return (
-      <svg height={size || height || 24} viewBox="0 0 512 512" width={size || width || 24} {...props}>
+      <svg
+        height={size || height || 24}
+        viewBox="0 0 512 512"
+        width={size || width || 24}
+        {...props}
+      >
         <path
           d="M152.62 126.77c0-33 4.85-66.35 17.23-94.77C87.54 67.83 32 151.89 32 247.38 32 375.85 136.15 480 264.62 480c95.49 0 179.55-55.54 215.38-137.85-28.42 12.38-61.8 17.23-94.77 17.23-128.47 0-232.61-104.14-232.61-232.61z"
           fill={fill}
@@ -210,7 +229,14 @@ export const User: React.FC<IconProps> = ({ fill, size, height, width, ...props 
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g fill="none" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1.5}>
+      <g
+        fill="none"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit={10}
+        strokeWidth={1.5}
+      >
         <path
           d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z"
           data-name="Stroke 1"
@@ -271,7 +297,14 @@ export const Activity: React.FC<IconProps> = ({ fill, size, height, width, ...pr
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g fill="none" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1.5}>
+      <g
+        fill="none"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit={10}
+        strokeWidth={1.5}
+      >
         <path d="M6.918 14.854l2.993-3.889 3.414 2.68 2.929-3.78" />
         <path d="M19.668 2.35a1.922 1.922 0 11-1.922 1.922 1.921 1.921 0 011.922-1.922z" />
         <path d="M20.756 9.269a20.809 20.809 0 01.194 3.034c0 6.938-2.312 9.25-9.25 9.25s-9.25-2.312-9.25-9.25 2.313-9.25 9.25-9.25a20.931 20.931 0 012.983.187" />
@@ -306,7 +339,14 @@ export const Minus: React.FC<IconProps> = ({ fill, size, height, width, ...props
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M6 12h12" fill="none" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+      <path
+        d="M6 12h12"
+        fill="none"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
     </svg>
   )
 }
@@ -408,8 +448,20 @@ export const Delete: React.FC<IconProps> = ({ fill, size, height, width, ...prop
         strokeLinejoin="round"
         strokeWidth={1.5}
       />
-      <path d="M8.60834 13.75H11.3833" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
-      <path d="M7.91669 10.4167H12.0834" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+      <path
+        d="M8.60834 13.75H11.3833"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+      <path
+        d="M7.91669 10.4167H12.0834"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
     </svg>
   )
 }
@@ -464,8 +516,22 @@ export const NewFile: React.FC<IconProps> = ({ fill, size, height, width, ...pro
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M8 2V5" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1.5} />
-      <path d="M16 2V5" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1.5} />
+      <path
+        d="M8 2V5"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit={10}
+        strokeWidth={1.5}
+      />
+      <path
+        d="M16 2V5"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit={10}
+        strokeWidth={1.5}
+      />
       <path
         d="M21 8.5V13.63C20.11 12.92 18.98 12.5 17.75 12.5C16.52 12.5 15.37 12.93 14.47 13.66C13.26 14.61 12.5 16.1 12.5 17.75C12.5 18.73 12.78 19.67 13.26 20.45C13.63 21.06 14.11 21.59 14.68 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
         stroke={fill}
@@ -474,8 +540,22 @@ export const NewFile: React.FC<IconProps> = ({ fill, size, height, width, ...pro
         strokeMiterlimit={10}
         strokeWidth={1.5}
       />
-      <path d="M7 11H13" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1.5} />
-      <path d="M7 16H9.62" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1.5} />
+      <path
+        d="M7 11H13"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit={10}
+        strokeWidth={1.5}
+      />
+      <path
+        d="M7 16H9.62"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit={10}
+        strokeWidth={1.5}
+      />
       <path
         d="M23 17.75C23 18.73 22.72 19.67 22.24 20.45C21.96 20.93 21.61 21.35 21.2 21.69C20.28 22.51 19.08 23 17.75 23C16.6 23 15.54 22.63 14.68 22C14.11 21.59 13.63 21.06 13.26 20.45C12.78 19.67 12.5 18.73 12.5 17.75C12.5 16.1 13.26 14.61 14.47 13.66C15.37 12.93 16.52 12.5 17.75 12.5C18.98 12.5 20.11 12.92 21 13.63C22.22 14.59 23 16.08 23 17.75Z"
         stroke={fill}
@@ -568,7 +648,13 @@ export const EditDocumentBulk: React.FC<IconProps> = ({ fill, size, height, widt
   )
 }
 
-export const DeleteDocumentBulk: React.FC<IconProps> = ({ fill, size, height, width, ...props }) => {
+export const DeleteDocumentBulk: React.FC<IconProps> = ({
+  fill,
+  size,
+  height,
+  width,
+  ...props
+}) => {
   return (
     <svg
       fill="none"
@@ -597,7 +683,13 @@ export const DeleteDocumentBulk: React.FC<IconProps> = ({ fill, size, height, wi
   )
 }
 
-export const CartIcon: React.FC<IconProps> = ({ fill = 'currentColor', size, height, width, ...props }) => {
+export const CartIcon: React.FC<IconProps> = ({
+  fill = 'currentColor',
+  size,
+  height,
+  width,
+  ...props
+}) => {
   return (
     <svg
       fill="none"
@@ -627,7 +719,13 @@ export const CartIcon: React.FC<IconProps> = ({ fill = 'currentColor', size, hei
   )
 }
 
-export const Flash: React.FC<IconProps> = ({ fill = 'currentColor', size, height, width, ...props }) => {
+export const Flash: React.FC<IconProps> = ({
+  fill = 'currentColor',
+  size,
+  height,
+  width,
+  ...props
+}) => {
   return (
     <svg
       fill="none"
@@ -649,7 +747,13 @@ export const Flash: React.FC<IconProps> = ({ fill = 'currentColor', size, height
   )
 }
 
-export const Server: React.FC<IconProps> = ({ fill = 'currentColor', size, height, width, ...props }) => {
+export const Server: React.FC<IconProps> = ({
+  fill = 'currentColor',
+  size,
+  height,
+  width,
+  ...props
+}) => {
   return (
     <svg
       fill="none"
@@ -670,7 +774,13 @@ export const Server: React.FC<IconProps> = ({ fill = 'currentColor', size, heigh
   )
 }
 
-export const TagUser: React.FC<IconProps> = ({ fill = 'currentColor', size, height, width, ...props }) => {
+export const TagUser: React.FC<IconProps> = ({
+  fill = 'currentColor',
+  size,
+  height,
+  width,
+  ...props
+}) => {
   return (
     <svg
       fill="none"
@@ -699,7 +809,13 @@ export const TagUser: React.FC<IconProps> = ({ fill = 'currentColor', size, heig
   )
 }
 
-export const Scale: React.FC<IconProps> = ({ fill = 'currentColor', size, height, width, ...props }) => {
+export const Scale: React.FC<IconProps> = ({
+  fill = 'currentColor',
+  size,
+  height,
+  width,
+  ...props
+}) => {
   return (
     <svg
       fill="none"
@@ -716,7 +832,13 @@ export const Scale: React.FC<IconProps> = ({ fill = 'currentColor', size, height
         strokeLinejoin="round"
         strokeWidth={1.5}
       />
-      <path d="M18 10V6h-4M6 14v4h4" stroke={fill} strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} />
+      <path
+        d="M18 10V6h-4M6 14v4h4"
+        stroke={fill}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
     </svg>
   )
 }

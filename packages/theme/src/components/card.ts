@@ -60,7 +60,16 @@ const card = tv({
       'overflow-y-auto',
       'subpixel-antialiased',
     ],
-    footer: ['p-3', 'h-auto', 'flex', 'w-full', 'items-center', 'overflow-hidden', 'color-inherit', 'subpixel-antialiased'],
+    footer: [
+      'p-3',
+      'h-auto',
+      'flex',
+      'w-full',
+      'items-center',
+      'overflow-hidden',
+      'color-inherit',
+      'subpixel-antialiased',
+    ],
   },
   variants: {
     shadow: {
@@ -114,7 +123,12 @@ const card = tv({
     },
     isBlurred: {
       true: {
-        base: ['bg-background/80', 'dark:bg-background/20', 'backdrop-blur-md', 'backdrop-saturate-150'],
+        base: [
+          'bg-background/80',
+          'dark:bg-background/20',
+          'backdrop-blur-md',
+          'backdrop-saturate-150',
+        ],
       },
     },
     isFooterBlurred: {

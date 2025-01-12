@@ -3,7 +3,12 @@ import type { ReactRef } from '@flexi-ui/react-utils'
 import type { ButtonGroupVariantProps } from '@flexi-ui/theme'
 
 import { buttonGroup } from '@flexi-ui/theme'
-import { HTMLFlexiUIProps, PropGetter, mapPropsVariants, useProviderContext } from '@flexi-ui/system'
+import {
+  HTMLFlexiUIProps,
+  PropGetter,
+  mapPropsVariants,
+  useProviderContext,
+} from '@flexi-ui/system'
 import { useDOMRef } from '@flexi-ui/react-utils'
 import { useMemo, useCallback } from 'react'
 import { objectToDeps } from '@flexi-ui/shared-utils'
@@ -32,7 +37,12 @@ export type ContextType = {
 }
 
 export type UseButtonGroupProps = Props &
-  Partial<Pick<ButtonProps, 'size' | 'color' | 'radius' | 'variant' | 'isIconOnly' | 'disableAnimation' | 'disableRipple'>>
+  Partial<
+    Pick<
+      ButtonProps,
+      'size' | 'color' | 'radius' | 'variant' | 'isIconOnly' | 'disableAnimation' | 'disableRipple'
+    >
+  >
 
 export function useButtonGroup(originalProps: UseButtonGroupProps) {
   const globalContext = useProviderContext()
@@ -79,7 +89,17 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
       disableRipple,
       fullWidth: !!originalProps?.fullWidth,
     }),
-    [size, color, variant, radius, isDisabled, isIconOnly, disableAnimation, disableRipple, originalProps?.fullWidth],
+    [
+      size,
+      color,
+      variant,
+      radius,
+      isDisabled,
+      isIconOnly,
+      disableAnimation,
+      disableRipple,
+      originalProps?.fullWidth,
+    ],
   )
 
   const getButtonGroupProps: PropGetter = useCallback(

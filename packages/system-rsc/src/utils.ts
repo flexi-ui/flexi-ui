@@ -3,7 +3,11 @@ import type { As, RightJoinProps, PropsOf, InternalForwardRefRenderFunction } fr
 import * as React from 'react'
 import { forwardRef as baseForwardRef } from 'react'
 
-export function forwardRef<Component extends As, Props extends object, OmitKeys extends keyof any = never>(
+export function forwardRef<
+  Component extends As,
+  Props extends object,
+  OmitKeys extends keyof any = never,
+>(
   component: React.ForwardRefRenderFunction<
     any,
     RightJoinProps<PropsOf<Component>, Props> & {
@@ -12,7 +16,11 @@ export function forwardRef<Component extends As, Props extends object, OmitKeys 
   >,
 ) {
   // return baseForwardRef(component) as InternalForwardRefRenderFunction<Component, Props, OmitKeys>;
-  return baseForwardRef(component as any) as InternalForwardRefRenderFunction<Component, Props, OmitKeys>
+  return baseForwardRef(component as any) as InternalForwardRefRenderFunction<
+    Component,
+    Props,
+    OmitKeys
+  >
 }
 
 export const toIterator = (obj: any) => {
@@ -68,16 +76,26 @@ export const mapPropsVariants = <T extends Record<string, any>, K extends keyof 
   }
 }
 
-export const mapPropsVariantsWithCommon = <P extends Record<any, any>, VK extends keyof P, CK extends keyof P = never>(
+export const mapPropsVariantsWithCommon = <
+  P extends Record<any, any>,
+  VK extends keyof P,
+  CK extends keyof P = never,
+>(
   originalProps: P,
   variantKeys: VK[],
   commonKeys?: CK[],
 ) => {
   const props = Object.keys(originalProps)
     .filter((key) => !variantKeys.includes(key as VK) || commonKeys?.includes(key as CK))
-    .reduce((acc, key) => ({ ...acc, [key]: originalProps[key as keyof P] }), {}) as Omit<P, Exclude<VK, CK>>
+    .reduce((acc, key) => ({ ...acc, [key]: originalProps[key as keyof P] }), {}) as Omit<
+    P,
+    Exclude<VK, CK>
+  >
 
-  const variants = variantKeys.reduce((acc, key) => ({ ...acc, [key]: originalProps[key] }), {}) as Pick<P, VK>
+  const variants = variantKeys.reduce(
+    (acc, key) => ({ ...acc, [key]: originalProps[key] }),
+    {},
+  ) as Pick<P, VK>
 
   return [props, variants] as const
 }
