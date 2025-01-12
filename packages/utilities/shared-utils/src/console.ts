@@ -3,7 +3,7 @@ const warningStack: { [key: string]: boolean } = {}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function warn(message: string, component?: string, ...args: any[]) {
   const tag = component ? ` [${component}]` : ' '
-  const log = `[Next UI]${tag}: ${message}`
+  const log = `[Flexi UI]${tag}: ${message}`
 
   if (typeof console === 'undefined') return
   if (warningStack[log]) return

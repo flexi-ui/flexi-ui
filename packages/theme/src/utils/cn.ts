@@ -6,7 +6,7 @@ import { extendTailwindMerge } from 'tailwind-merge'
 import { twMergeConfig } from './tw-merge-config'
 
 /**
- * We need to extend the tailwind merge to include AwalUI's custom classes.
+ * We need to extend the tailwind merge to include FlexiUI's custom classes.
  *
  * So we can use classes like `text-small` or `text-default-500` and override them.
  */
