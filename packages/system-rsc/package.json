@@ -46,7 +46,7 @@
   },
   "peerDependencies": {
     "@flexi-ui/theme": ">=1.0.0",
-    "peer-react": "catalog:"
+    "react": ">=18 || >=19.0.0-rc.0"
   },
   "devDependencies": {
     "@flexi-ui/react-utils": "workspace:*",

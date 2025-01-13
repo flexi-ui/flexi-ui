@@ -48,7 +48,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "peer-react": "catalog:"
+    "react": ">=18 || >=19.0.0-rc.0"
   },
   "devDependencies": {
     "@react-types/shared": "catalog:",

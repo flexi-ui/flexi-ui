@@ -45,8 +45,8 @@
   },
   "peerDependencies": {
     "framer-motion": ">=11.17.0",
-    "peer-react": "catalog:",
-    "peer-react-dom": "catalog:"
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0"
   },
   "devDependencies": {
     "framer-motion": "catalog:",

@@ -44,7 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "peer-react": "catalog:"
+    "react": ">=18 || >=19.0.0-rc.0"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",

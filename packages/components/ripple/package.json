@@ -44,8 +44,8 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "peer-react": "catalog:",
-    "peer-react-dom": "catalog:",
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": "catalog:",
     "@flexi-ui/theme": ">=1.0.0",
     "@flexi-ui/system": ">=1.0.1"
