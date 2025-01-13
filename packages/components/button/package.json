@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/button",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Buttons allow users to perform actions and choose with a single tap.",
   "type": "module",
   "license": "MIT",
@@ -44,7 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@flexi-ui/system": ">=1.0.1",
+    "@flexi-ui/system": ">=1.0.2",
     "@flexi-ui/theme": ">=1.0.0",
     "framer-motion": "catalog:",
     "react": ">=18 || >=19.0.0-rc.0",

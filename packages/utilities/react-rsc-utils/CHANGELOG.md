@@ -1,5 +1,11 @@
 # @flexi-ui/react-rsc-utils
 
+## 1.0.1
+
+### Patch Changes
+
+- [`6681f57`](https://github.com/flexi-ui/flexi-ui/commit/6681f5752c33c44fb13f2a1445f66b460093a670) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:peer deps
+
 ## 1.0.0
 
 ### Major Changes

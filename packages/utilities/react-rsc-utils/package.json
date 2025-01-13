@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/react-rsc-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set of utilities for react compatible with RSC",
   "type": "module",
   "license": "MIT",
