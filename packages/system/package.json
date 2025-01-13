@@ -44,9 +44,9 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "framer-motion": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:"
+    "framer-motion": ">=11.17.0",
+    "react": ">=19",
+    "react-dom": ">=19"
   },
   "devDependencies": {
     "framer-motion": "catalog:",

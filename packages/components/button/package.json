@@ -46,9 +46,9 @@
   "peerDependencies": {
     "@flexi-ui/system": ">=1.0.0",
     "@flexi-ui/theme": ">=1.0.0",
-    "framer-motion": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:"
+    "framer-motion": ">=11.17.0",
+    "react": ">=19",
+    "react-dom": ">=19"
   },
   "dependencies": {
     "@flexi-ui/react-utils": "workspace:*",
