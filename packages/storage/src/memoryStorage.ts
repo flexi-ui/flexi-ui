@@ -1,4 +1,4 @@
-class MemoryStorage {
+export class MemoryStorage {
   private store: Map<string, string>
 
   constructor() {
@@ -21,5 +21,3 @@ class MemoryStorage {
     this.store.clear()
   }
 }
-
-export const memoryStorage = new MemoryStorage()

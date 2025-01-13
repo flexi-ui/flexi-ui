@@ -1,3 +1,3 @@
-export { fileStorage } from '@/fileStorage'
-export { storage } from '@/localStorage'
-export { memoryStorage } from '@/memoryStorage'
+export { FileStorage } from '@/fileStorage'
+export { LocalStorage } from '@/localStorage'
+export { MemoryStorage } from '@/memoryStorage'
