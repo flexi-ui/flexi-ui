@@ -1,5 +1,15 @@
 # @flexi-ui/button
 
+## 1.0.1
+
+### Patch Changes
+
+- [`deaadb5`](https://github.com/flexi-ui/flexi-ui/commit/deaadb5c28827299f013d5aa3f34ebfdfbf86baf) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix(system,button):fix bugs
+
+- Updated dependencies [[`deaadb5`](https://github.com/flexi-ui/flexi-ui/commit/deaadb5c28827299f013d5aa3f34ebfdfbf86baf)]:
+  - @flexi-ui/system@1.0.1
+  - @flexi-ui/ripple@1.0.0
+
 ## 1.0.0
 
 ### Major Changes

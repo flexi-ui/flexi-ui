@@ -48,7 +48,7 @@
     "react-dom": "catalog:",
     "framer-motion": "catalog:",
     "@flexi-ui/theme": ">=1.0.0",
-    "@flexi-ui/system": ">=1.0.0"
+    "@flexi-ui/system": ">=1.0.1"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",
