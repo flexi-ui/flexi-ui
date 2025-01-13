@@ -12,6 +12,10 @@ export function createViteConfig() {
   const packageJsonPath = path.resolve(process.cwd(), 'package.json')
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
+  const hasReact = ['react', 'react-dom', 'framer-motion'].some(
+    (dep) => packageJson.dependencies?.[dep] || packageJson.peerDependencies?.[dep],
+  )
+
   return defineConfig({
     plugins: [
       dts({
@@ -36,11 +40,19 @@ export function createViteConfig() {
       },
       sourcemap: true,
       rollupOptions: {
+        external: hasReact ? ['react', 'react-dom', 'framer-motion'] : [],
         input: {
           main: resolve(process.cwd(), 'src/main.ts'),
         },
         output: {
           dir: 'dist',
+          globals: hasReact
+            ? {
+                react: 'React',
+                'react-dom': 'ReactDOM',
+                'framer-motion': 'FramerMotion',
+              }
+            : undefined,
         },
       },
     },

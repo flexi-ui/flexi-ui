@@ -34,21 +34,12 @@
   "files": [
     "dist/*"
   ],
-  "main": "./dist/lib.umd.cjs",
-  "module": "./dist/lib.js",
-  "types": "dist/main.d.ts",
-  "exports": {
-    ".": {
-      "node": "./dist/lib.js",
-      "types": "./dist/main.d.ts",
-      "import": "./dist/lib.js",
-      "require": "./dist/lib.umd.cjs",
-      "default": "./dist/lib.js"
-    }
-  },
+  "main": "./src/main.ts",
   "scripts": {
     "build": "tsc && vite build",
     "dev:watch": "pnpm build --watch",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -64,7 +55,9 @@
   "peerDependencies": {
     "tailwindcss": ">=3.4.0"
   },
+  "clean-package": "../../clean-package.config.json",
   "devDependencies": {
+    "clean-package": "2.2.0",
     "@types/color": "^4.2.0",
     "@types/flat": "^5.0.5",
     "tailwindcss": "^3.4.17",

@@ -8,9 +8,6 @@ catalog:
   react-dom: ^19.0.0
   framer-motion: '11.17.0'
 
-  peer-react: '>=18 || >=19.0.0-rc.0'
-  peer-react-dom: '>=18 || >=19.0.0-rc.0'
-
   # Dev Dependencies
   typescript: ~5.7.2
   '@types/react': ^19.0.2
