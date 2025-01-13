@@ -1,5 +1,20 @@
 # @flexi-ui/button
 
+## 1.0.3
+
+### Patch Changes
+
+- [`5542a1b`](https://github.com/flexi-ui/flexi-ui/commit/5542a1b194188817ac0bd3a937ae7f1edb9704ee) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:peer dependencies
+
+- Updated dependencies [[`5542a1b`](https://github.com/flexi-ui/flexi-ui/commit/5542a1b194188817ac0bd3a937ae7f1edb9704ee)]:
+  - @flexi-ui/shared-utils@1.0.2
+  - @flexi-ui/use-aria-button@1.0.2
+  - @flexi-ui/react-utils@1.0.2
+  - @flexi-ui/spinner@1.0.2
+  - @flexi-ui/ripple@1.0.2
+  - @flexi-ui/system@1.0.3
+  - @flexi-ui/theme@1.1.3
+
 ## 1.0.2
 
 ### Patch Changes
