@@ -47,8 +47,8 @@
   },
   "peerDependencies": {
     "@flexi-ui/theme": ">=1.0.0",
-    "react": "catlog:",
-    "react-dom": "catlog:"
+    "peer-react": "catlog:",
+    "peer-react-dom": "catlog:"
   },
   "dependencies": {
     "@flexi-ui/react-utils": "workspace:*",

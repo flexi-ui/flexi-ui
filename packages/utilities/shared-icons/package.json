@@ -45,7 +45,7 @@
     "build:fast": "tsup src"
   },
   "peerDependencies": {
-    "react": "catalog:"
+    "peer-react": "catalog:"
   },
   "devDependencies": {
     "vite": "catalog:",
