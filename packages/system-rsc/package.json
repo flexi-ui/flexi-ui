@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/system-rsc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "FlexiUI system primitives compatibles with RSC imports",
   "sideEffects": false,
   "type": "module",
