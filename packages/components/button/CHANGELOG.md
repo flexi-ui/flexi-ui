@@ -1,5 +1,16 @@
 # @flexi-ui/button
 
+## 1.0.4
+
+### Patch Changes
+
+- [`ae2dda6`](https://github.com/flexi-ui/flexi-ui/commit/ae2dda6ad4ac8385a788bb9a2a6ae9943b6db0f2) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix(peer-deps):fix peer dependencies issue
+
+- Updated dependencies [[`ae2dda6`](https://github.com/flexi-ui/flexi-ui/commit/ae2dda6ad4ac8385a788bb9a2a6ae9943b6db0f2)]:
+  - @flexi-ui/spinner@1.0.3
+  - @flexi-ui/ripple@1.0.3
+  - @flexi-ui/system@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes
