@@ -35,7 +35,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "framer-motion": "catalog:"
+    "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1"
   },
   "clean-package": "../../../clean-package.config.json",
   "devDependencies": {
