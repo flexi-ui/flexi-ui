@@ -92,8 +92,9 @@ const button = tv({
   defaultVariants: {
     size: 'md',
     variant: 'solid',
-    color: 'default',
-    fullWidth: false,
+    color: 'primary',
+    radius: 'sm',
+    fullWidth: true,
     isDisabled: false,
     isInGroup: false,
   },

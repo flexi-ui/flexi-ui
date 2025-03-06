@@ -53,6 +53,7 @@ interface Props extends HTMLFlexiUIProps<'button'> {
    * @default false
    */
   isLoading?: boolean
+
   /**
    * The native button click event handler.
    * use `onPress` instead.
@@ -82,9 +83,9 @@ export function useButton(props: UseButtonProps) {
     isLoading = false,
     disableRipple: disableRippleProp = false,
     fullWidth = groupContext?.fullWidth ?? false,
-    radius = groupContext?.radius,
+    radius = groupContext?.radius ?? 'sm',
     size = groupContext?.size ?? 'md',
-    color = groupContext?.color ?? 'default',
+    color = groupContext?.color ?? 'primary',
     variant = groupContext?.variant ?? 'solid',
     disableAnimation = groupContext?.disableAnimation ?? globalContext?.disableAnimation ?? false,
     isDisabled: isDisabledProp = groupContext?.isDisabled ?? false,
