@@ -1,5 +1,16 @@
 # @flexi-ui/button
 
+## 1.0.5
+
+### Patch Changes
+
+- [`c1b34a9`](https://github.com/flexi-ui/flexi-ui/commit/c1b34a900e0bb975d121c609856ded42e8b7b1e6) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:props and color issue
+
+- Updated dependencies [[`c1b34a9`](https://github.com/flexi-ui/flexi-ui/commit/c1b34a900e0bb975d121c609856ded42e8b7b1e6)]:
+  - @flexi-ui/theme@1.1.4
+  - @flexi-ui/ripple@1.0.3
+  - @flexi-ui/spinner@1.0.3
+
 ## 1.0.4
 
 ### Patch Changes

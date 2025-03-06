@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 1.1.4
+
+### Patch Changes
+
+- [`c1b34a9`](https://github.com/flexi-ui/flexi-ui/commit/c1b34a900e0bb975d121c609856ded42e8b7b1e6) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:props and color issue
+
 ## 1.1.3
 
 ### Patch Changes
