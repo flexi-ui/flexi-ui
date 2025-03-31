@@ -1,5 +1,15 @@
 # @flexi-ui/ripple
 
+## 2.0.0
+
+### Patch Changes
+
+- [`395e107`](https://github.com/flexi-ui/flexi-ui/commit/395e107be9d3d223e45e4e2234730c8289aafcf7) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix(rippe):ripple component className
+
+- Updated dependencies [[`6b6c674`](https://github.com/flexi-ui/flexi-ui/commit/6b6c674b92b716004f94f71f705c60d36dff492b)]:
+  - @flexi-ui/theme@2.0.0
+  - @flexi-ui/system@1.0.5
+
 ## 1.0.3
 
 ### Patch Changes

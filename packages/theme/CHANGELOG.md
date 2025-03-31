@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.0.0
+
+### Major Changes
+
+- [`6b6c674`](https://github.com/flexi-ui/flexi-ui/commit/6b6c674b92b716004f94f71f705c60d36dff492b) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - feat(theme):add support for tailwind v4
+
 ## 1.1.4
 
 ### Patch Changes
