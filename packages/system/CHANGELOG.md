@@ -1,5 +1,12 @@
 # @flexi-ui/system
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flexi-ui/system-rsc@2.0.0
+
 ## 1.0.4
 
 ### Patch Changes
