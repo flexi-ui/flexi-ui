@@ -4,6 +4,7 @@
  **/
 
 import Color from 'color'
+// @ts-ignore
 import plugin from 'tailwindcss/plugin.js'
 import deepMerge from 'deepmerge'
 import { omit, kebabCase, mapKeys } from '@flexi-ui/shared-utils'
@@ -25,7 +26,6 @@ const DEFAULT_PREFIX = 'flexi-ui'
 const parsedColorsCache: Record<string, number[]> = {}
 
 // @internal
-
 const resolveConfig = (
   themes: ConfigThemes = {},
   defaultTheme: DefaultThemeType,
@@ -34,29 +34,31 @@ const resolveConfig = (
   const resolved: {
     variants: { name: string; definition: string[] }[]
     utilities: Record<string, Record<string, any>>
-    colors: Record<
-      string,
-      ({
-        opacityValue,
-        opacityVariable,
-      }: {
-        opacityValue: string
-        opacityVariable: string
-      }) => string
-    >
+    colors: Record<string, string>
+    baseStyles: Record<string, Record<string, any>>
   } = {
     variants: [],
     utilities: {},
     colors: {},
+    baseStyles: {},
   }
 
   for (const [themeName, { extend, layout, colors }] of Object.entries(themes)) {
-    let cssSelector = `.${themeName},[data-theme="${themeName}"]`
+    let cssSelector = `.${themeName}`
     const scheme = themeName === 'light' || themeName === 'dark' ? themeName : extend
+    let baseSelector = ''
 
+    // if the theme is the default theme, add the selector to the root element
     if (themeName === defaultTheme) {
-      cssSelector = `:root,${cssSelector}`
+      baseSelector = `:root, [data-theme=${themeName}]`
     }
+
+    baseSelector &&
+      (resolved.baseStyles[baseSelector] = scheme
+        ? {
+            'color-scheme': scheme,
+          }
+        : {})
 
     resolved.utilities[cssSelector] = scheme
       ? {
@@ -64,10 +66,12 @@ const resolveConfig = (
         }
       : {}
 
+    // flatten color definitions
     const flatColors = flattenThemeObject(colors) as Record<string, string>
 
     const flatLayout = layout ? mapKeys(layout, (_, key) => kebabCase(key)) : {}
 
+    // resolved.variants
     resolved.variants.push({
       name: themeName,
       definition: [`&.${themeName}`, `&[data-theme='${themeName}']`],
@@ -76,7 +80,6 @@ const resolveConfig = (
     /**
      * Colors
      */
-
     for (const [colorName, colorValue] of Object.entries(flatColors)) {
       if (!colorValue) return
 
@@ -88,34 +91,24 @@ const resolveConfig = (
 
         const [h, s, l, defaultAlphaValue] = parsedColor
         const flexiuiColorVariable = `--${prefix}-${colorName}`
-        const flexiuiOpacityVariable = `--${prefix}-${colorName}-opacity`
 
+        // set the css variable in "@layer utilities"
         resolved.utilities[cssSelector]![flexiuiColorVariable] = `${h} ${s}% ${l}%`
-
-        if (typeof defaultAlphaValue === 'number') {
-          resolved.utilities[cssSelector]![flexiuiOpacityVariable] = defaultAlphaValue.toFixed(2)
-        }
-
-        resolved.colors[colorName] = ({ opacityVariable, opacityValue }) => {
-          if (!isNaN(+opacityValue)) {
-            return `hsl(var(${flexiuiColorVariable}) / ${opacityValue})`
-          }
-
-          if (opacityVariable) {
-            return `hsl(var(${flexiuiColorVariable}) / var(${flexiuiOpacityVariable}, var(${opacityVariable})))`
-          }
-
-          return `hsl(var(${flexiuiColorVariable}) / var(${flexiuiOpacityVariable}, 1))`
-        }
+        baseSelector &&
+          (resolved.baseStyles[baseSelector]![flexiuiColorVariable] = `${h} ${s}% ${l}%`)
+        // set the dynamic color in tailwind config theme.colors
+        resolved.colors[colorName] = `hsl(var(${flexiuiColorVariable}) / ${
+          defaultAlphaValue ?? '<alpha-value>'
+        })`
       } catch (error: any) {
-        throw new Error(error)
+        // eslint-disable-next-line no-console
+        console.log('error', error?.message)
       }
     }
 
     /**
      * Layout
      */
-
     for (const [key, value] of Object.entries(flatLayout)) {
       if (!value) return
 
@@ -126,14 +119,17 @@ const resolveConfig = (
           const nestedLayoutVariable = `${layoutVariablePrefix}-${nestedKey}`
 
           resolved.utilities[cssSelector]![nestedLayoutVariable] = nestedValue
+          baseSelector && (resolved.baseStyles[baseSelector]![nestedLayoutVariable] = nestedValue)
         }
       } else {
+        // Handle opacity values and other singular layout values
         const formattedValue =
           layoutVariablePrefix.includes('opacity') && typeof value === 'number'
             ? value.toString().replace(/^0\./, '.')
             : value
 
         resolved.utilities[cssSelector]![layoutVariablePrefix] = formattedValue
+        baseSelector && (resolved.baseStyles[baseSelector]![layoutVariablePrefix] = formattedValue)
       }
     }
   }
@@ -154,22 +150,28 @@ const corePlugin = (
 
   return plugin(
     ({ addBase, addUtilities, addVariant }) => {
+      // add base classNames
       addBase({
         [':root, [data-theme]']: {
           ...baseStyles(prefix),
         },
       })
 
-      addUtilities({ ...resolved?.utilities, ...utilities })
+      // add the base styles to "@layer base"
+      addBase({ ...resolved?.baseStyles })
 
+      // add the css variables to "@layer utilities"
+      addUtilities({ ...resolved?.utilities, ...utilities })
+      // add the theme as variant e.g. "[theme-name]:text-2xl"
       resolved?.variants.forEach((variant) => {
         addVariant(variant.name, variant.definition)
       })
     },
-
+    // extend the colors config
     {
       theme: {
         extend: {
+          // @ts-ignore
           colors: {
             ...(addCommonColors ? commonColors : {}),
             ...resolved?.colors,
@@ -183,12 +185,6 @@ const corePlugin = (
           },
           width: {
             divider: `var(--${prefix}-divider-weight)`,
-          },
-          fontSize: {
-            tiny: [`var(--${prefix}-font-size-tiny)`, `var(--${prefix}-line-height-tiny)`],
-            small: [`var(--${prefix}-font-size-small)`, `var(--${prefix}-line-height-small)`],
-            medium: [`var(--${prefix}-font-size-medium)`, `var(--${prefix}-line-height-medium)`],
-            large: [`var(--${prefix}-font-size-large)`, `var(--${prefix}-line-height-large)`],
           },
           borderRadius: {
             small: `var(--${prefix}-radius-small)`,
@@ -240,7 +236,7 @@ const corePlugin = (
   )
 }
 
-export const flexiUI = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plugin> => {
+export const flexiui = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plugin> => {
   const {
     themes: themeObject = {},
     defaultTheme = 'light',
@@ -269,7 +265,8 @@ export const flexiUI = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plu
     },
   }
 
-  const otherThemes = omit(themeObject, ['light', 'dark']) || {}
+  // get other themes from the config different from light and dark
+  let otherThemes = omit(themeObject, ['light', 'dark']) || {}
 
   Object.entries(otherThemes).forEach(([themeName, { extend, colors, layout }]) => {
     const baseTheme = extend && isBaseTheme(extend) ? extend : defaultExtendTheme

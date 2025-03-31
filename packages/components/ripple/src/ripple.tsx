@@ -29,7 +29,7 @@ const Ripple: FC<RippleProps> = (props) => {
             <AnimatePresence mode="popLayout">
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
-                className="FlexiUI-ripple"
+                className="flexi-ui-ripple"
                 exit={{ opacity: 0 }}
                 initial={{ transform: 'scale(0)', opacity: 0.35 }}
                 style={{
