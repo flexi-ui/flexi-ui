@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.0.1
+
+### Patch Changes
+
+- [`42ad1a6`](https://github.com/flexi-ui/flexi-ui/commit/42ad1a68a5606e3aa33a1c428934e83f6ac49853) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix:bump theme and ripple package version
+
 ## 2.0.0
 
 ### Major Changes

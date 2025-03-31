@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/theme",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The default theme for FlexiUI components",
   "type": "module",
   "private": false,

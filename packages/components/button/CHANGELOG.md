@@ -1,5 +1,14 @@
 # @flexi-ui/button
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`42ad1a6`](https://github.com/flexi-ui/flexi-ui/commit/42ad1a68a5606e3aa33a1c428934e83f6ac49853)]:
+  - @flexi-ui/ripple@2.0.1
+  - @flexi-ui/theme@2.0.1
+  - @flexi-ui/spinner@2.0.0
+
 ## 2.0.0
 
 ### Patch Changes
