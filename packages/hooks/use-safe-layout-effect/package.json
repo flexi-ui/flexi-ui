@@ -1,7 +1,7 @@
 {
-  "name": "@flexi-ui/form",
-  "version": "1.0.0",
-  "description": "A simple implementation to display a form animation when the source component is clicked",
+  "name": "@flexi-ui/use-safe-layout-effect",
+  "version": "1.0.2",
+  "description": "Internal hook to handle layout effects",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
@@ -21,7 +21,7 @@
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
   "keywords": [
-    "form"
+    "use-safe-layout-effect"
   ],
   "files": [
     "dist/*"
@@ -35,29 +35,13 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@flexi-ui/system": ">=1.0.5",
-    "@flexi-ui/theme": ">=2.0.2",
-    "react": ">=18",
-    "react-dom": ">=18"
-  },
-  "dependencies": {
-    "@flexi-ui/react-utils": "workspace:*",
-    "@flexi-ui/shared-utils": "workspace:*",
-    "@flexi-ui/system": "workspace:*",
-    "@flexi-ui/theme": "workspace:*",
-    "@react-aria/utils": "3.28.1",
-    "@react-types/shared": "3.28.0",
-    "@react-stately/form": "3.1.2",
-    "@react-types/form": "3.7.10"
+    "react": ">=18 || >=19.0.0-rc.0"
   },
   "devDependencies": {
-    "@flexi-ui/button": "workspace:*",
     "clean-package": "2.2.0",
-    "react": "18.3.0",
-    "react-dom": "18.3.0",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
+    "react": "catalog:",
     "vite": "catalog:",
+    "@types/react": "catalog:",
     "vite-plugin-dts": "catalog:"
   },
   "clean-package": "../../../clean-package.config.json"
