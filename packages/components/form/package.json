@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple implementation to display a form animation when the source component is clicked",
   "type": "module",
   "license": "MIT",
