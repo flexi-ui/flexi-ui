@@ -60,14 +60,14 @@ export const absoluteFullClasses = ['absolute', 'inset-0']
  * It includes classes for different variants like default, primary, secondary, etc.
  */
 export const collapseAdjacentVariantBorders = {
-  default: ['[&+.border-medium.border-default]:ms-[calc(var(--heroui-border-width-medium)*-1)]'],
-  primary: ['[&+.border-medium.border-primary]:ms-[calc(var(--heroui-border-width-medium)*-1)]'],
+  default: ['[&+.border-medium.border-default]:ms-[calc(var(--flexi-ui-border-width-medium)*-1)]'],
+  primary: ['[&+.border-medium.border-primary]:ms-[calc(var(--flexi-ui-border-width-medium)*-1)]'],
   secondary: [
-    '[&+.border-medium.border-secondary]:ms-[calc(var(--heroui-border-width-medium)*-1)]',
+    '[&+.border-medium.border-secondary]:ms-[calc(var(--flexi-ui-border-width-medium)*-1)]',
   ],
-  success: ['[&+.border-medium.border-success]:ms-[calc(var(--heroui-border-width-medium)*-1)]'],
-  warning: ['[&+.border-medium.border-warning]:ms-[calc(var(--heroui-border-width-medium)*-1)]'],
-  danger: ['[&+.border-medium.border-danger]:ms-[calc(var(--heroui-border-width-medium)*-1)]'],
+  success: ['[&+.border-medium.border-success]:ms-[calc(var(--flexi-ui-border-width-medium)*-1)]'],
+  warning: ['[&+.border-medium.border-warning]:ms-[calc(var(--flexi-ui-border-width-medium)*-1)]'],
+  danger: ['[&+.border-medium.border-danger]:ms-[calc(var(--flexi-ui-border-width-medium)*-1)]'],
 }
 
 export const hiddenInputClasses = [
