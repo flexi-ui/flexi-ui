@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "declaration": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["dom", "esnext"],
     "types": ["@testing-library/jest-dom", "node"],
 
     /* Bundler mode */

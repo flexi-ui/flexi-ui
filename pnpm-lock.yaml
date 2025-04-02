@@ -178,7 +178,7 @@ importers:
         version: link:../../hooks/use-aria-button
       '@react-aria/button':
         specifier: 3.11.0
-        version: 3.11.0(react@19.0.0)
+        version: 3.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/focus':
         specifier: 3.19.0
         version: 3.19.0(react@19.0.0)
@@ -225,6 +225,58 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.0.0(react@19.0.0)
+      vite:
+        specifier: 'catalog:'
+        version: 6.0.7(@types/node@22.10.5)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0)
+      vite-plugin-dts:
+        specifier: 'catalog:'
+        version: 4.5.0(@types/node@22.10.5)(rollup@4.30.1)(typescript@5.7.3)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0))
+
+  packages/components/form:
+    dependencies:
+      '@flexi-ui/react-utils':
+        specifier: workspace:*
+        version: link:../../utilities/react-utils
+      '@flexi-ui/shared-utils':
+        specifier: workspace:*
+        version: link:../../utilities/shared-utils
+      '@flexi-ui/system':
+        specifier: workspace:*
+        version: link:../../system
+      '@flexi-ui/theme':
+        specifier: workspace:*
+        version: link:../../theme
+      '@react-aria/utils':
+        specifier: 3.28.1
+        version: 3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      '@react-stately/form':
+        specifier: 3.1.2
+        version: 3.1.2(react@18.3.0)
+      '@react-types/form':
+        specifier: 3.7.10
+        version: 3.7.10(react@18.3.0)
+      '@react-types/shared':
+        specifier: 3.28.0
+        version: 3.28.0(react@18.3.0)
+    devDependencies:
+      '@flexi-ui/button':
+        specifier: workspace:*
+        version: link:../button
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.0.6
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.0.3(@types/react@19.0.6)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 18.3.0
+        version: 18.3.0
+      react-dom:
+        specifier: 18.3.0
+        version: 18.3.0(react@18.3.0)
       vite:
         specifier: 'catalog:'
         version: 6.0.7(@types/node@22.10.5)(jiti@2.4.2)(tsx@4.19.2)(yaml@2.7.0)
@@ -383,7 +435,7 @@ importers:
         version: 3.6.0
       '@react-aria/i18n':
         specifier: 3.12.4
-        version: 3.12.4(react@19.0.0)
+        version: 3.12.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/overlays':
         specifier: 3.24.0
         version: 3.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2014,8 +2066,22 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
+  '@react-aria/utils@3.28.1':
+    resolution: {integrity: sha512-mnHFF4YOVu9BRFQ1SZSKfPhg3z+lBRYoW5mLcYTQihbKhz48+I1sqRkP7ahMITr8ANH3nb34YaMME4XWmK2Mgg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
   '@react-aria/visually-hidden@3.8.18':
     resolution: {integrity: sha512-l/0igp+uub/salP35SsNWq5mGmg3G5F5QMS1gDZ8p28n7CgjvzyiGhJbbca7Oxvaw1HRFzVl9ev+89I7moNnFQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  '@react-stately/flags@3.1.0':
+    resolution: {integrity: sha512-KSHOCxTFpBtxhIRcKwsD1YDTaNxFtCYuAUb0KEihc16QwqZViq4hasgPBs2gYm7fHRbw7WYzWKf6ZSo/+YsFlg==}
+
+  '@react-stately/form@3.1.2':
+    resolution: {integrity: sha512-sKgkV+rxeqM1lf0dCq2wWzdYa5Z0wz/MB3yxjodffy8D43PjFvUOMWpgw/752QHPGCd1XIxA3hE58Dw9FFValg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -2054,6 +2120,11 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
+  '@react-types/form@3.7.10':
+    resolution: {integrity: sha512-PPn1OH/QlQLPaoFqp9EMVSlNk41aiNLwPaMyRhzYvFBGLmtbuX+7JCcH2DgV1peq3KAuUKRDdI2M1iVdHYwMPw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
   '@react-types/overlays@3.8.11':
     resolution: {integrity: sha512-aw7T0rwVI3EuyG5AOaEIk8j7dZJQ9m34XAztXJVZ/W2+4pDDkLDbJ/EAPnuo2xGYRGhowuNDn4tDju01eHYi+w==}
     peerDependencies:
@@ -2061,6 +2132,11 @@ packages:
 
   '@react-types/shared@3.26.0':
     resolution: {integrity: sha512-6FuPqvhmjjlpEDLTiYx29IJCbCNWPlsyO+ZUmCUXzhUv2ttShOXfw8CmeHWHftT/b2KweAWuzqSlfeXPR76jpw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  '@react-types/shared@3.28.0':
+    resolution: {integrity: sha512-9oMEYIDc3sk0G5rysnYvdNrkSg7B04yTKl50HHSZVbokeHpnU0yRmsDaWb9B/5RprcKj8XszEk5guBO8Sa/Q+Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -4420,6 +4496,11 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  react-dom@18.3.0:
+    resolution: {integrity: sha512-zaKdLBftQJnvb7FtDIpZtsAIb2MZU087RM8bRDZU8LVCCFYjPTsDZJNFUWPcVz3HFSN1n/caxi0ca4B/aaVQGQ==}
+    peerDependencies:
+      react: ^18.3.0
+
   react-dom@19.0.0:
     resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
@@ -4433,6 +4514,10 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  react@18.3.0:
+    resolution: {integrity: sha512-RPutkJftSAldDibyrjuku7q11d3oy6wKOyPe5K1HA/HwwrXcEqBdHsLypkC2FFYjP7bPUa6gbzSBhw4sY2JcDg==}
+    engines: {node: '>=0.10.0'}
 
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
@@ -4553,6 +4638,9 @@ packages:
   saxes@6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
     engines: {node: '>=v12.22.7'}
+
+  scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
   scheduler@0.25.0:
     resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
@@ -6751,17 +6839,19 @@ snapshots:
   '@nx/nx-win32-x64-msvc@20.3.1':
     optional: true
 
-  '@react-aria/button@3.11.0(react@19.0.0)':
+  '@react-aria/button@3.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-aria/focus': 3.19.0(react@19.0.0)
       '@react-aria/interactions': 3.22.5(react@19.0.0)
-      '@react-aria/toolbar': 3.0.0-beta.11(react@19.0.0)
+      '@react-aria/toolbar': 3.0.0-beta.11(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/utils': 3.26.0(react@19.0.0)
       '@react-stately/toggle': 3.8.0(react@19.0.0)
       '@react-types/button': 3.10.1(react@19.0.0)
       '@react-types/shared': 3.26.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
+    transitivePeerDependencies:
+      - react-dom
 
   '@react-aria/focus@3.19.0(react@19.0.0)':
     dependencies:
@@ -6772,17 +6862,19 @@ snapshots:
       clsx: 2.1.1
       react: 19.0.0
 
-  '@react-aria/i18n@3.12.4(react@19.0.0)':
+  '@react-aria/i18n@3.12.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@internationalized/date': 3.6.0
       '@internationalized/message': 3.1.6
       '@internationalized/number': 3.6.0
       '@internationalized/string': 3.2.5
       '@react-aria/ssr': 3.9.7(react@19.0.0)
-      '@react-aria/utils': 3.26.0(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-aria/utils': 3.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
+    transitivePeerDependencies:
+      - react-dom
 
   '@react-aria/interactions@3.22.5(react@19.0.0)':
     dependencies:
@@ -6795,32 +6887,39 @@ snapshots:
   '@react-aria/overlays@3.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-aria/focus': 3.19.0(react@19.0.0)
-      '@react-aria/i18n': 3.12.4(react@19.0.0)
+      '@react-aria/i18n': 3.12.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/interactions': 3.22.5(react@19.0.0)
       '@react-aria/ssr': 3.9.7(react@19.0.0)
-      '@react-aria/utils': 3.26.0(react@19.0.0)
-      '@react-aria/visually-hidden': 3.8.18(react@19.0.0)
+      '@react-aria/utils': 3.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-aria/visually-hidden': 3.8.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-stately/overlays': 3.6.12(react@19.0.0)
       '@react-types/button': 3.10.1(react@19.0.0)
       '@react-types/overlays': 3.8.11(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
+
+  '@react-aria/ssr@3.9.7(react@18.3.0)':
+    dependencies:
+      '@swc/helpers': 0.5.15
+      react: 18.3.0
 
   '@react-aria/ssr@3.9.7(react@19.0.0)':
     dependencies:
       '@swc/helpers': 0.5.15
       react: 19.0.0
 
-  '@react-aria/toolbar@3.0.0-beta.11(react@19.0.0)':
+  '@react-aria/toolbar@3.0.0-beta.11(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-aria/focus': 3.19.0(react@19.0.0)
-      '@react-aria/i18n': 3.12.4(react@19.0.0)
-      '@react-aria/utils': 3.26.0(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-aria/i18n': 3.12.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-aria/utils': 3.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
+    transitivePeerDependencies:
+      - react-dom
 
   '@react-aria/utils@3.26.0(react@19.0.0)':
     dependencies:
@@ -6831,13 +6930,47 @@ snapshots:
       clsx: 2.1.1
       react: 19.0.0
 
-  '@react-aria/visually-hidden@3.8.18(react@19.0.0)':
+  '@react-aria/utils@3.28.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
+    dependencies:
+      '@react-aria/ssr': 3.9.7(react@18.3.0)
+      '@react-stately/flags': 3.1.0
+      '@react-stately/utils': 3.10.5(react@18.3.0)
+      '@react-types/shared': 3.28.0(react@18.3.0)
+      '@swc/helpers': 0.5.15
+      clsx: 2.1.1
+      react: 18.3.0
+      react-dom: 18.3.0(react@18.3.0)
+
+  '@react-aria/utils@3.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@react-aria/ssr': 3.9.7(react@19.0.0)
+      '@react-stately/flags': 3.1.0
+      '@react-stately/utils': 3.10.5(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
+      '@swc/helpers': 0.5.15
+      clsx: 2.1.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+
+  '@react-aria/visually-hidden@3.8.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-aria/interactions': 3.22.5(react@19.0.0)
-      '@react-aria/utils': 3.26.0(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-aria/utils': 3.28.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
+    transitivePeerDependencies:
+      - react-dom
+
+  '@react-stately/flags@3.1.0':
+    dependencies:
+      '@swc/helpers': 0.5.15
+
+  '@react-stately/form@3.1.2(react@18.3.0)':
+    dependencies:
+      '@react-types/shared': 3.28.0(react@18.3.0)
+      '@swc/helpers': 0.5.15
+      react: 18.3.0
 
   '@react-stately/overlays@3.6.12(react@19.0.0)':
     dependencies:
@@ -6850,9 +6983,14 @@ snapshots:
     dependencies:
       '@react-stately/utils': 3.10.5(react@19.0.0)
       '@react-types/checkbox': 3.9.0(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
+
+  '@react-stately/utils@3.10.5(react@18.3.0)':
+    dependencies:
+      '@swc/helpers': 0.5.15
+      react: 18.3.0
 
   '@react-stately/utils@3.10.5(react@19.0.0)':
     dependencies:
@@ -6867,12 +7005,12 @@ snapshots:
   '@react-types/calendar@3.5.0(react@19.0.0)':
     dependencies:
       '@internationalized/date': 3.6.0
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       react: 19.0.0
 
   '@react-types/checkbox@3.9.0(react@19.0.0)':
     dependencies:
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       react: 19.0.0
 
   '@react-types/datepicker@3.9.0(react@19.0.0)':
@@ -6880,15 +7018,28 @@ snapshots:
       '@internationalized/date': 3.6.0
       '@react-types/calendar': 3.5.0(react@19.0.0)
       '@react-types/overlays': 3.8.11(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       react: 19.0.0
+
+  '@react-types/form@3.7.10(react@18.3.0)':
+    dependencies:
+      '@react-types/shared': 3.28.0(react@18.3.0)
+      react: 18.3.0
 
   '@react-types/overlays@3.8.11(react@19.0.0)':
     dependencies:
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       react: 19.0.0
 
   '@react-types/shared@3.26.0(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
+
+  '@react-types/shared@3.28.0(react@18.3.0)':
+    dependencies:
+      react: 18.3.0
+
+  '@react-types/shared@3.28.0(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -9488,6 +9639,12 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  react-dom@18.3.0(react@18.3.0):
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.3.0
+      scheduler: 0.23.2
+
   react-dom@19.0.0(react@19.0.0):
     dependencies:
       react: 19.0.0
@@ -9498,6 +9655,10 @@ snapshots:
   react-is@17.0.2: {}
 
   react-is@18.3.1: {}
+
+  react@18.3.0:
+    dependencies:
+      loose-envify: 1.4.0
 
   react@19.0.0: {}
 
@@ -9639,6 +9800,10 @@ snapshots:
   saxes@6.0.0:
     dependencies:
       xmlchars: 2.2.0
+
+  scheduler@0.23.2:
+    dependencies:
+      loose-envify: 1.4.0
 
   scheduler@0.25.0: {}
 
