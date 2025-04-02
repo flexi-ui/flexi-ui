@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.0.2
+
+### Patch Changes
+
+- [`bc4a52f`](https://github.com/flexi-ui/flexi-ui/commit/bc4a52f494c235fee4c32da1b95fdf6e94e84e8b) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix(theme):fix utility classes
+
 ## 2.0.1
 
 ### Patch Changes
