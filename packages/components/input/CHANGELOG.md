@@ -1,5 +1,15 @@
 # @flexi-ui/input
 
+## 1.0.1
+
+### Patch Changes
+
+- [`3a88afa`](https://github.com/flexi-ui/flexi-ui/commit/3a88afa8b842798e2f6bee3871b3d119414a4364) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix(form input):fix version issue
+
+- Updated dependencies [[`3a88afa`](https://github.com/flexi-ui/flexi-ui/commit/3a88afa8b842798e2f6bee3871b3d119414a4364), [`ab07742`](https://github.com/flexi-ui/flexi-ui/commit/ab07742c2d050bdea18d1f8c440e09171de451fb)]:
+  - @flexi-ui/form@1.0.3
+  - @flexi-ui/use-safe-layout-effect@0.0.1
+
 ## 1.0.0
 
 ### Major Changes

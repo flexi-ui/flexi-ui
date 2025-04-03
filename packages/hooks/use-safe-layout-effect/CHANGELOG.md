@@ -1,5 +1,11 @@
 # @flexi-ui/use-safe-layout-effect
 
+## 0.0.1
+
+### Patch Changes
+
+- [`ab07742`](https://github.com/flexi-ui/flexi-ui/commit/ab07742c2d050bdea18d1f8c440e09171de451fb) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix(hook):version
+
 ## 2.0.0
 
 ### Major Changes
