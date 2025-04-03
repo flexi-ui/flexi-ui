@@ -35,7 +35,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@flexi-ui/system": ">=1.0.5",
+    "@flexi-ui/system": ">=1.0.6",
     "@flexi-ui/theme": ">=2.0.2",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",

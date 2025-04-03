@@ -1,5 +1,12 @@
 # @flexi-ui/form
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`a21673e`](https://github.com/flexi-ui/flexi-ui/commit/a21673e7e5d4973342dd72db605004d058278bef)]:
+  - @flexi-ui/system@1.0.6
+
 ## 1.0.1
 
 ### Patch Changes

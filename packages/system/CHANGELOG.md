@@ -1,5 +1,11 @@
 # @flexi-ui/system
 
+## 1.0.6
+
+### Patch Changes
+
+- [#36](https://github.com/flexi-ui/flexi-ui/pull/36) [`a21673e`](https://github.com/flexi-ui/flexi-ui/commit/a21673e7e5d4973342dd72db605004d058278bef) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix(system):add a hook to handle inout label placement
+
 ## 1.0.5
 
 ### Patch Changes
