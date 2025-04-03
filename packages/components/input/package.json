@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/input",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The input component is designed for capturing user input within a text field.",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@flexi-ui/system": ">=1.0.5",
+    "@flexi-ui/system": ">=1.0.6",
     "@flexi-ui/theme": ">=2.0.2"
   },
   "dependencies": {
