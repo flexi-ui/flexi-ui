@@ -1,5 +1,11 @@
 # @flexi-ui/form
 
+## 1.0.3
+
+### Patch Changes
+
+- [`3a88afa`](https://github.com/flexi-ui/flexi-ui/commit/3a88afa8b842798e2f6bee3871b3d119414a4364) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix(form input):fix version issue
+
 ## 1.0.2
 
 ### Patch Changes

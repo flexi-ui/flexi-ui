@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-safe-layout-effect",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Internal hook to handle layout effects",
   "type": "module",
   "license": "MIT",
