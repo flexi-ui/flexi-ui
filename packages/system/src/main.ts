@@ -33,3 +33,5 @@ export type { ProviderContextProps } from './provider-context'
 
 export { FlexiUIProvider } from './provider'
 export { ProviderContext, useProviderContext } from './provider-context'
+
+export { useLabelPlacement } from './use-label-placement'
