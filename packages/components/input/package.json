@@ -1,0 +1,71 @@
+{
+  "name": "@flexi-ui/input",
+  "version": "0.0.0",
+  "description": "The input component is designed for capturing user input within a text field.",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "input"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "main": "./src/main.ts",
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev:watch": "pnpm build --watch",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0",
+    "@flexi-ui/system": ">=1.0.5",
+    "@flexi-ui/theme": ">=2.0.2"
+  },
+  "dependencies": {
+    "@flexi-ui/form": "workspace:*",
+    "@flexi-ui/react-utils": "workspace:*",
+    "@flexi-ui/shared-icons": "workspace:*",
+    "@flexi-ui/shared-utils": "workspace:*",
+    "@flexi-ui/use-safe-layout-effect": "workspace:*",
+    "@react-aria/focus": "3.20.1",
+    "@react-aria/interactions": "3.24.1",
+    "@react-aria/textfield": "3.17.1",
+    "@react-aria/utils": "3.28.1",
+    "@react-stately/utils": "3.10.5",
+    "@react-types/shared": "3.28.0",
+    "@react-types/textfield": "3.12.0",
+    "react-textarea-autosize": "^8.5.3"
+  },
+  "devDependencies": {
+    "@flexi-ui/system": "workspace:*",
+    "@flexi-ui/theme": "workspace:*",
+    "clean-package": "2.2.0",
+    "react": "18.3.0",
+    "react-dom": "18.3.0",
+    "react-hook-form": "^7.51.3",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  },
+  "clean-package": "../../../clean-package.config.json"
+}
