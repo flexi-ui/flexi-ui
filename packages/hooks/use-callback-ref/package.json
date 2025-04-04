@@ -1,0 +1,51 @@
+{
+  "name": "@flexi-ui/use-callback-ref",
+  "version": "0.0.0",
+  "description": "Internal hook to handle layout effects",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneebmughal3324@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "homepage": "https://github.com/awalsolution",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "use-callback-ref"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "main": "./src/main.ts",
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev:watch": "pnpm build --watch",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@flexi-ui/use-safe-layout-effect": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0"
+  },
+  "devDependencies": {
+    "clean-package": "2.2.0",
+    "react": "catalog:",
+    "vite": "catalog:",
+    "@types/react": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  },
+  "clean-package": "../../../clean-package.config.json"
+}
