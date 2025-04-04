@@ -1,2 +1,7 @@
+echo "🔄 Updateding the versions"
+huskyDir=$(dirname -- "$0")
+. "$huskyDir/_/husky.sh"
+
+. "$huskyDir/scripts/update-dep"
 echo "🔄 Installing dependencies..."
 pnpm install
