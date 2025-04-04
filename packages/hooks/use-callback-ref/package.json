@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-callback-ref",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Internal hook to handle layout effects",
   "type": "module",
   "license": "MIT",
