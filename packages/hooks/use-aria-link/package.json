@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-aria-link",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Internal hook to handle link a11y and events, this is based on react-aria link hook but without the onClick warning",
   "type": "module",
   "license": "MIT",
