@@ -1,3 +1,4 @@
+// mock image loading
 type Status = 'loaded' | 'error'
 
 const originalImage = window.Image
