@@ -1,5 +1,13 @@
 # @flexi-ui/system
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flexi-ui/system-rsc@2.0.0
+  - @flexi-ui/react-utils@1.0.3
+
 ## 1.0.6
 
 ### Patch Changes
