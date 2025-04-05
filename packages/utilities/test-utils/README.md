@@ -1,4 +1,4 @@
-# @flexi-ui/shared-utils
+# @flexi-ui/test-utils
 
 A Quick description of the component
 
@@ -7,7 +7,7 @@ A Quick description of the component
 ## Installation
 
 ```sh
-yarn add @flexi-ui/shared-utils
+yarn add @flexi-ui/test-utils
 # or
-npm i @flexi-ui/shared-utils
+npm i @flexi-ui/test-utils
 ```

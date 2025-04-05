@@ -1,7 +1,7 @@
 {
-  "name": "@flexi-ui/shared-utils",
-  "version": "1.0.2",
-  "description": "A set of FlexiUI utilities",
+  "name": "@flexi-ui/test-utils",
+  "version": "0.0.0",
+  "description": "A set of utilities for react testing",
   "type": "module",
   "private": false,
   "publishConfig": {
@@ -23,7 +23,7 @@
   "license": "MIT",
   "sideEffects": false,
   "keywords": [
-    "shared-utils"
+    "test-utils"
   ],
   "files": [
     "dist/*"
@@ -38,10 +38,8 @@
   },
   "clean-package": "../../../clean-package.config.json",
   "devDependencies": {
-    "clean-package": "2.2.0",
-    "react": "catalog:",
-    "@types/react": "catalog:",
     "vite": "catalog:",
+    "clean-package": "2.2.0",
     "vite-plugin-dts": "catalog:"
   }
 }
