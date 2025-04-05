@@ -32,3 +32,5 @@ export {
   renderFn,
   filterDOMProps,
 } from '@flexi-ui/react-rsc-utils'
+
+export { useIsHydrated } from './use-is-hydrated'
