@@ -1,5 +1,13 @@
 # @flexi-ui/spinner
 
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`7737e4e`](https://github.com/flexi-ui/flexi-ui/commit/7737e4ef22e3dacf2950663b9270dc2bac36000c)]:
+  - @flexi-ui/react-utils@1.0.4
+  - @flexi-ui/system-rsc@2.0.0
+
 ## 2.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @flexi-ui/react-utils
 
+## 1.0.4
+
+### Patch Changes
+
+- [#49](https://github.com/flexi-ui/flexi-ui/pull/49) [`7737e4e`](https://github.com/flexi-ui/flexi-ui/commit/7737e4ef22e3dacf2950663b9270dc2bac36000c) Thanks [@it-umerzahoor](https://github.com/it-umerzahoor)! - fix(react-utils):handle hydration
+
 ## 1.0.3
 
 ### Patch Changes

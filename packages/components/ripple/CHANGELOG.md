@@ -1,5 +1,13 @@
 # @flexi-ui/ripple
 
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`7737e4e`](https://github.com/flexi-ui/flexi-ui/commit/7737e4ef22e3dacf2950663b9270dc2bac36000c)]:
+  - @flexi-ui/react-utils@1.0.4
+  - @flexi-ui/system@1.0.8
+
 ## 2.0.2
 
 ### Patch Changes
