@@ -1,5 +1,11 @@
 # @flexi-ui/shared-utils
 
+## 1.0.3
+
+### Patch Changes
+
+- [#45](https://github.com/flexi-ui/flexi-ui/pull/45) [`ed20567`](https://github.com/flexi-ui/flexi-ui/commit/ed2056717f394ae3ac302f44026bebe7b4fe14aa) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix(utils):readme file
+
 ## 1.0.2
 
 ### Patch Changes
