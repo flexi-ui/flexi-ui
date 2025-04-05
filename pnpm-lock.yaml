@@ -597,6 +597,34 @@ importers:
         specifier: 'catalog:'
         version: 4.5.3(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.1))
 
+  packages/hooks/use-image:
+    dependencies:
+      '@flexi-ui/react-utils':
+        specifier: workspace:*
+        version: link:../../utilities/react-utils
+      '@flexi-ui/use-safe-layout-effect':
+        specifier: workspace:*
+        version: link:../use-safe-layout-effect
+    devDependencies:
+      '@flexi-ui/test-utils':
+        specifier: workspace:*
+        version: link:../../utilities/test-utils
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.0
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.1.0
+      vite:
+        specifier: 'catalog:'
+        version: 6.2.5(@types/node@22.14.0)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.1)
+      vite-plugin-dts:
+        specifier: 'catalog:'
+        version: 4.5.3(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.1))
+
   packages/hooks/use-safe-layout-effect:
     devDependencies:
       '@types/react':
