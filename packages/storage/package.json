@@ -44,7 +44,8 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "dev": "pnpm run build --watch"
+    "dev": "pnpm run build --watch",
+    "clean":"rm -rf node_modules dist"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",

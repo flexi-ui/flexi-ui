@@ -22,6 +22,7 @@
     "changeset:beta": "changeset pre enter beta",
     "changeset:empty": "npx changeset add --empty",
     "dev": "npx nx run-many --target=dev --all",
+    "clean": "npx nx run-many --target=clean --all && rm -rf node_modules .nx pnpm-lock.yaml",
     "build": "npx nx run-many --target=build --all",
     "dev:pnpm": "pnpm --parallel --stream -r run dev",
     "build:pnpm": "pnpm --parallel --stream -r run build",

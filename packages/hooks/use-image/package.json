@@ -32,7 +32,8 @@
     "dev:watch": "pnpm build --watch",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "clean":"rm -rf node_modules dist"
   },
   "dependencies": {
     "@flexi-ui/use-safe-layout-effect": "workspace:*",
