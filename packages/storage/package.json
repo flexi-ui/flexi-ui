@@ -1,7 +1,7 @@
 {
   "name": "@flexi-ui/storage",
-  "private": false,
   "version": "1.0.3",
+  "description": "This package is to manage the local, file, and memory storage",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
@@ -20,9 +20,6 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
-  "files": [
-    "dist/*"
-  ],
   "keywords": [
     "storage",
     "typescript",
@@ -30,27 +27,21 @@
     "local-storage",
     "memory-storage"
   ],
-  "main": "./dist/lib.umd.cjs",
-  "module": "./dist/lib.js",
-  "types": "dist/src/main.d.ts",
-  "exports": {
-    ".": {
-      "node": "./dist/lib.umd.cjs",
-      "types": "./dist/src/main.d.ts",
-      "import": "./dist/lib.js",
-      "require": "./dist/lib.umd.cjs",
-      "default": "./dist/lib.js"
-    }
-  },
+  "main": "./src/main.ts",
   "scripts": {
     "build": "tsc && vite build",
-    "dev": "pnpm run build --watch",
-    "clean":"rm -rf node_modules dist"
+    "dev:watch": "pnpm build --watch",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf node_modules dist"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
+    "clean-package": "2.2.0",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:"
-  }
+  },
+  "clean-package": "../../clean-package.config.json"
 }
