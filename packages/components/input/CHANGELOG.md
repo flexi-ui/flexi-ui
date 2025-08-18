@@ -1,5 +1,13 @@
 # @flexi-ui/input
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`a02339c`](https://github.com/flexi-ui/flexi-ui/commit/a02339cc12a559662d7e2e40ddf8671169d6b03d)]:
+  - @flexi-ui/theme@2.1.1
+  - @flexi-ui/form@2.0.1
+
 ## 2.0.0
 
 ### Minor Changes

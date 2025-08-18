@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.1.1
+
+### Patch Changes
+
+- [`a02339c`](https://github.com/flexi-ui/flexi-ui/commit/a02339cc12a559662d7e2e40ddf8671169d6b03d) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - Bump theme to fix failed publish
+
 ## 2.1.0
 
 ### Minor Changes
