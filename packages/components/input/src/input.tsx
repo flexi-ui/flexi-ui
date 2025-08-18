@@ -2,7 +2,7 @@ import { CloseFilledIcon } from '@flexi-ui/shared-icons'
 import { useMemo } from 'react'
 import { forwardRef } from '@flexi-ui/system'
 
-import { UseInputProps, useInput } from './use-input'
+import { type UseInputProps, useInput } from './use-input'
 
 export interface InputProps extends Omit<UseInputProps, 'isMultiline'> {}
 
@@ -17,6 +17,7 @@ const Input = forwardRef<'input', InputProps>((props, ref) => {
     labelPlacement,
     hasHelper,
     isOutsideLeft,
+    isOutsideTop,
     shouldLabelBeOutside,
     errorMessage,
     isInvalid,
@@ -82,7 +83,7 @@ const Input = forwardRef<'input', InputProps>((props, ref) => {
       return (
         <div {...getMainWrapperProps()}>
           <div {...getInputWrapperProps()}>
-            {!isOutsideLeft ? labelContent : null}
+            {!isOutsideLeft && !isOutsideTop ? labelContent : null}
             {innerWrapper}
           </div>
           {helperWrapper}
@@ -115,7 +116,7 @@ const Input = forwardRef<'input', InputProps>((props, ref) => {
 
   return (
     <Component {...getBaseProps()}>
-      {isOutsideLeft ? labelContent : null}
+      {isOutsideLeft || isOutsideTop ? labelContent : null}
       {mainWrapper}
     </Component>
   )
