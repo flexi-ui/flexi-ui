@@ -1,5 +1,12 @@
 # @flexi-ui/system-rsc
 
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`8f9e9f0`](https://github.com/flexi-ui/flexi-ui/commit/8f9e9f04303781c4b652c598eaef102ffd55d034)]:
+  - @flexi-ui/theme@2.1.0
+
 ## 2.0.0
 
 ### Patch Changes

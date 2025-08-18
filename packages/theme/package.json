@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/theme",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "The default theme for FlexiUI components",
   "type": "module",
   "private": false,
@@ -41,7 +41,7 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
-    "clean":"rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",

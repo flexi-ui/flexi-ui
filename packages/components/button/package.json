@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/button",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Buttons allow users to perform actions and choose with a single tap.",
   "type": "module",
   "license": "MIT",
@@ -33,11 +33,11 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
-    "clean":"rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist"
   },
   "peerDependencies": {
-    "@flexi-ui/system": ">=1.0.8",
-    "@flexi-ui/theme": ">=2.0.3",
+    "@flexi-ui/system": ">=1.1.0",
+    "@flexi-ui/theme": ">=2.1.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"

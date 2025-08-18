@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/avatar",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.",
   "type": "module",
   "license": "MIT",
@@ -33,13 +33,13 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
-    "clean":"rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@flexi-ui/theme": ">=2.0.3",
-    "@flexi-ui/system": ">=1.0.8"
+    "@flexi-ui/theme": ">=2.1.0",
+    "@flexi-ui/system": ">=1.1.0"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",
