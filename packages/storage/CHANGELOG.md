@@ -1,5 +1,11 @@
 # @flexi-ui/storage
 
+## 1.1.0
+
+### Minor Changes
+
+- [#58](https://github.com/flexi-ui/flexi-ui/pull/58) [`77f13a6`](https://github.com/flexi-ui/flexi-ui/commit/77f13a60dd4b2e89e81394d38bb25c019bed0eed) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:storage package
+
 ## 1.0.3
 
 ### Patch Changes
