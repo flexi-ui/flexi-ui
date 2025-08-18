@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/storage",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "This package is to manage the local, file, and memory storage",
   "type": "module",
   "license": "MIT",
