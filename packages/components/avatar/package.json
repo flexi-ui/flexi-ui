@@ -55,6 +55,7 @@
     "@flexi-ui/shared-icons": "workspace:*",
     "@flexi-ui/test-utils": "workspace:*",
     "@storybook/react": "^8.4.7",
+    "clean-package": "2.2.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "@types/react": "catalog:",
