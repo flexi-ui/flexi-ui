@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/ripple",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "A simple implementation to display a ripple animation when the source component is clicked",
   "type": "module",
   "license": "MIT",
@@ -33,14 +33,14 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
-    "clean":"rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
     "framer-motion": ">=11.5.6 || >=12.0.0-alpha.1",
-    "@flexi-ui/theme": ">=2.0.3",
-    "@flexi-ui/system": ">=1.0.8"
+    "@flexi-ui/theme": ">=2.1.0",
+    "@flexi-ui/system": ">=1.1.0"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",

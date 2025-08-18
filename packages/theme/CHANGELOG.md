@@ -1,5 +1,11 @@
 # @flexi-ui/theme
 
+## 2.1.0
+
+### Minor Changes
+
+- [#53](https://github.com/flexi-ui/flexi-ui/pull/53) [`8f9e9f0`](https://github.com/flexi-ui/flexi-ui/commit/8f9e9f04303781c4b652c598eaef102ffd55d034) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix:input component and classes
+
 ## 2.0.3
 
 ### Patch Changes
