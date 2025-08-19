@@ -1,0 +1,125 @@
+/* @import './prism.css';
+@import './ads.css'; */
+
+@import './nprogress.css';
+@import 'tailwindcss';
+
+@plugin './flexiUI.ts';
+@plugin '@tailwindcss/typography';
+
+@source '../node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* 
+    Default button style missing pointer cursor property  
+    Issue: https://github.com/tailwindlabs/tailwindcss/issues/15773
+  */
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  /*
+    Make sure disabled buttons don't get the pointer cursor.
+  */
+  :disabled {
+    cursor: default;
+  }
+}
+
+@utility step {
+  counter-increment: step;
+
+  &:before {
+    @apply absolute w-7 h-7 border-1 border-default-200 bg-default-100 rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
+    @apply ml-[-41px];
+    content: counter(step);
+  }
+}
+
+html {
+  font-size: 16px;
+  padding: 0px !important;
+  overflow-x: hidden;
+  scroll-padding-top: 64px;
+}
+
+body {
+  min-height: 100vh;
+}
+
+pre details[open] > summary > span:first-child::before {
+  transform: rotate(90deg);
+}
+
+pre details[open] > summary span.custom-folder {
+  display: none;
+}
+
+pre details:not([open]) > summary span.ellipsis-token::after {
+  content: '...';
+}
+
+pre details:not([open]) > summary span.copy-token {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+pre details[open] > summary span.copy-token {
+  display: none;
+}
+
+pre details:not([open]) {
+  display: inline;
+}
+
+pre details:not([open]) > summary span.empty-token {
+  display: none;
+}
+
+pre details:not([open]) + div.token-line {
+  display: none;
+}
+
+pre summary {
+  display: inline;
+  position: relative;
+  list-style: none;
+}
+
+pre summary > span:first-child::before {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  height: 21px;
+  margin-left: -16px;
+  margin-top: 1px;
+  content: '▶';
+  font-size: 12px;
+  font-style: normal;
+  transition: transform 100ms;
+  color: #999;
+}
