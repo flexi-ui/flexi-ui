@@ -5,10 +5,11 @@ import type { Metadata, Viewport } from 'next'
 import { clsx } from '@flexi-ui/shared-utils'
 
 import { Providers } from '@/app/providers'
-
-import manifest from '@/config/routes.json'
 import { siteConfig } from '@/config/site'
 import { fonts } from '@/config/fonts'
+import { Topbar } from '@/components/Topbar'
+import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: {
@@ -78,7 +79,10 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className="relative flex flex-col" id="app-container">
+            <Topbar />
+            <Navbar />
             {children}
+            <Footer />
           </div>
         </Providers>
       </body>
