@@ -2,12 +2,12 @@
 # OS X
 ##############################
 
-.AppleDouble
-.LSOverride
-Icon
-.Spotlight-V100
-.Trashes
 ._*
+Icon
+.Trashes
+.LSOverride
+.AppleDouble
+.Spotlight-V100
 
 ##############################
 # Linux
@@ -20,55 +20,55 @@ Icon
 ##############################
 
 
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
 *.cab
 *.msi
 *.msm
 *.msp
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
 ##############################
 # Packages
 ##############################
 
+*.o
 *.7z
+*.gz
+*.so
 *.csv
 *.dat
 *.dmg
-*.gz
 *.iso
 *.jar
 *.rar
 *.tar
 *.zip
 *.com
-*.class
 *.dll
 *.exe
-*.o
-*.seed
-*.so
 *.swo
 *.swp
 *.swn
 *.swm
 *.out
 *.pid
+*.seed
+*.class
 
 ##############################
 # Logs, databases, storage
 ##############################
 
+.nx
 .tmp
 logs
 *.log
 *.sql
+uploads/*
 *.sqlite
 *.sqlite3
-.nx
-uploads
 
 ##############################
 # Misc.
@@ -77,42 +77,49 @@ uploads
 *#
 ssl
 .idea
+*.pem
+.DS_Store
 nbproject
-public/uploads/*
-!public/uploads/.gitkeep
 .tsbuildinfo
 .eslintcache
+public/uploads/*
+!public/uploads/.gitkeep
 
 ##############################
 # Node.js
 ##############################
 
-lib-cov
-lcov.info
-pids
-logs
-results
-node_modules
-.node_history
 .env
 .env.*
+logs
+pids
+results
+lib-cov
+lcov.info
+node_modules
+.node_history
 !.env.example
 
 ##############################
-# Package managers
+# Package managers & debug
 ##############################
 
+.pnp.*
 .yarn/*
 yarn.lock
+!.yarn/sdks
 !.yarn/cache
-!.yarn/unplugged
+!.yarn/plugins
 !.yarn/patches
 !.yarn/releases
-!.yarn/sdks
 !.yarn/versions
-.pnp.*
-yarn-error.log
+!.yarn/unplugged
+
 yarn.lock
+npm-debug.log*
+yarn-error.log
+yarn-debug.log*
+.pnpm-debug.log*
 package-lock.json
 
 ##############################
@@ -133,18 +140,31 @@ config/tunnel.pid
 
 dist
 build
-tsconfig.app.tsbuildinfo
-tsconfig.node.tsbuildinfo
+*.tsbuildinfo
 
 ##############################
 # Editor directories and files
 ##############################
 
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 *.sw?
+*.sln
+*.suo
+.idea
+*.ntvs*
+.vscode/*
+*.njsproj
+!.vscode/extensions.json
+
+##############################
+# next.js
+##############################
+
+out/
+.next/
+next-env.d.ts
+
+##############################
+# vercel
+##############################
+
+.vercel
