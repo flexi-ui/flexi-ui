@@ -1,23 +1,36 @@
 module.exports = {
-  testEnvironment: "jsdom",
-  collectCoverageFrom: ["packages/**/*.{ts,tsx}"],
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  modulePathIgnorePatterns: ["<rootDir>/examples", "<rootDir>/tooling/cra-template*"],
+  testEnvironment: 'jsdom',
+  collectCoverageFrom: [
+    'packages/**/*.{ts,tsx}',
+    '!packages/**/dist/**',
+    '!packages/**/*.stories.{ts,tsx}',
+    '!packages/**/*.test.{ts,tsx}',
+  ],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  modulePathIgnorePatterns: ['<rootDir>/examples', '<rootDir>/.*/dist'],
   transform: {
-    "^.+\\.(t|j)sx?$": [
-      "@swc/jest",
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
       {
         jsc: {
           transform: {
             react: {
-              runtime: "automatic",
+              runtime: 'automatic',
             },
           },
         },
       },
     ],
   },
-  transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
-  setupFilesAfterEnv: ["@testing-library/jest-dom", "./scripts/setup-test.ts"],
-  watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  setupFilesAfterEnv: ['@testing-library/jest-dom', './scripts/setup-test.ts'],
+  watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70,
+    },
+  },
 };

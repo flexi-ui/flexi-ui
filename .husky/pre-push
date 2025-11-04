@@ -4,6 +4,25 @@ if [ "$CI" = "true" ]; then
   exit 0
 fi
 
-echo "Running pre-push validations..."
+echo "🧹 Cleaning node_modules and pnpm-lock.yaml..."
+rm -rf node_modules pnpm-lock.yaml
+
+echo "📦 Reinstalling dependencies to ensure lock file is up-to-date..."
+pnpm install --frozen-lockfile=false
+
+echo "✅ Checking if pnpm-lock.yaml was updated..."
+if ! git diff --exit-code pnpm-lock.yaml > /dev/null 2>&1; then
+  echo "⚠️  pnpm-lock.yaml was updated! Please review and commit the changes:"
+  echo ""
+  git diff --stat pnpm-lock.yaml
+  echo ""
+  echo "Run the following commands:"
+  echo "  git add pnpm-lock.yaml"
+  echo "  git commit -m 'chore: update pnpm-lock.yaml'"
+  echo ""
+  exit 1
+fi
+
+echo "🔍 Running pre-push validations..."
 pnpm exec changeset status
 

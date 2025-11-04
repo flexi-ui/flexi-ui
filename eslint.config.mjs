@@ -5,12 +5,20 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
-  { languageOptions: { globals: globals.browser } },
+  { files: ['**/*.{js,mjs,cjs,ts,tsx}'] },
+  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['node_modules', 'dist', 'public'],
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/coverage/**',
+      '**/.nx/**',
+      '**/.turbo/**',
+      '**/public/**',
+      '**/.next/**',
+    ],
   },
   eslintConfigPrettier,
 ]

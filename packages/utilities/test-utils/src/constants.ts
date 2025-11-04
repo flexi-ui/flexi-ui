@@ -1,5 +1,3 @@
-import { pointerKey } from '@testing-library/user-event/system/pointer/shared'
-
 /**
  * Object containing key codes for various keyboard keys.
  */
@@ -16,7 +14,16 @@ export const keyCodes = {
   ArrowDown: 40,
 }
 
-export const pointerMap: pointerKey[] = [
+export interface PointerKey {
+  name: string
+  pointerType: 'mouse' | 'touch' | 'pen'
+  button?: 'primary' | 'secondary' | 'auxiliary'
+  height?: number
+  width?: number
+  pressure?: number
+}
+
+export const pointerMap: PointerKey[] = [
   {
     name: 'MouseLeft',
     pointerType: 'mouse',
@@ -30,4 +37,4 @@ export const pointerMap: pointerKey[] = [
   { name: 'TouchA', pointerType: 'touch', height: 1, width: 1 },
   { name: 'TouchB', pointerType: 'touch' },
   { name: 'TouchC', pointerType: 'touch' },
-] as unknown as pointerKey[]
+]

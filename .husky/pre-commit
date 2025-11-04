@@ -1,4 +1,3 @@
-echo "🧹 Running Build, Test, Prettier, and Lint-Staged checks..."
-# pnpm exec lint-staged
-pnpm run build
-# pnpm run test
+#!/bin/sh
+echo "🧹 Running lint-staged checks..."
+pnpm exec lint-staged

@@ -9,7 +9,7 @@
   },
   "author": {
     "name": "Muneeb Mughal",
-    "email": "muneebmughal3324@gmail.com",
+    "email": "muneeb.it.dev@gmail.com",
     "url": "https://github.com/Muneeb-Mughal-Dev"
   },
   "homepage": "https://github.com/awalsolution",
@@ -37,7 +37,7 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
-    "clean":"rm -rf node_modules dist"
+    "clean": "rm -rf node_modules dist"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

@@ -1,6 +1,4 @@
-echo "🔄 Updating the versions"
+#!/bin/sh
+echo "🔄 Checking for dependency updates..."
 
 . "$(dirname "$0")/scripts/update-dep"
-
-echo "📦 Installing dependencies..."
-pnpm install
