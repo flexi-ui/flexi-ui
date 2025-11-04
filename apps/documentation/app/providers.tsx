@@ -12,7 +12,7 @@ export interface ProvidersProps {
 export const Providers = ({ children, themeProps }: ProvidersProps) => {
   const router = useRouter()
   return (
-    <FlexiUIProvider navigate={router.push} >
+    <FlexiUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
     </FlexiUIProvider>
   )

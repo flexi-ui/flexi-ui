@@ -4,7 +4,7 @@
     "module": "esnext",
     "declaration": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "lib": ["dom", "esnext"],
     "types": ["@testing-library/jest-dom", "node"],
 
@@ -28,6 +28,6 @@
     "allowSyntheticDefaultImports": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["packages"],
-  "exclude": ["**/node_modules", "**/dist", "**/coverage"]
+  "include": ["packages/**/*"],
+  "exclude": ["**/node_modules", "**/dist", "**/coverage", "**/.turbo"]
 }
