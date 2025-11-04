@@ -38,7 +38,7 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@flexi-ui/theme": ">=2.1.1",
+    "@flexi-ui/theme": ">=2.1.2",
     "@flexi-ui/system": ">=1.1.0"
   },
   "dependencies": {

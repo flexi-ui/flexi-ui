@@ -1,5 +1,11 @@
 # @flexi-ui/test-utils
 
+## 1.0.1
+
+### Patch Changes
+
+- [#61](https://github.com/flexi-ui/flexi-ui/pull/61) [`a7bb526`](https://github.com/flexi-ui/flexi-ui/commit/a7bb526b066a39a37ada72711697a1a152548678) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix test utils
+
 ## 1.0.0
 
 ### Major Changes
