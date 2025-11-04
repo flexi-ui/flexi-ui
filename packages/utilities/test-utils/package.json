@@ -38,7 +38,11 @@
     "clean": "rm -rf node_modules dist"
   },
   "clean-package": "../../../clean-package.config.json",
+  "dependencies": {
+    "@testing-library/user-event": "^14.5.2"
+  },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "vite": "catalog:",
     "clean-package": "2.2.0",
     "vite-plugin-dts": "catalog:"

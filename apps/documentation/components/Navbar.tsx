@@ -4,9 +4,7 @@ import type { FC } from 'react'
 import NextLink from 'next/link'
 import { Logo } from '@/components/Logo'
 
-export interface NavbarProps {}
-
-export const Navbar: FC<NavbarProps> = () => {
+export const Navbar: FC = () => {
   return (
     <nav className="flex z-40 w-full items-center justify-center data-[menu-open=true]:border-none sticky top-0 inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-white/[.90] dark:bg-black/[.65] h-16">
       <header className="z-40 flex px-6 gap-4 w-full flex-row relative flex-nowrap items-center justify-between h-[var(--navbar-height)] max-w-8xl">
