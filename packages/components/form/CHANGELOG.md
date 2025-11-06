@@ -1,5 +1,11 @@
 # @flexi-ui/form
 
+## 2.0.3
+
+### Patch Changes
+
+- [#63](https://github.com/flexi-ui/flexi-ui/pull/63) [`979104d`](https://github.com/flexi-ui/flexi-ui/commit/979104d9cf5041e3ef5d3a03c63119a4a3db9efc) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - fix: retry publish after 409 conflict
+
 ## 2.0.2
 
 ### Patch Changes
