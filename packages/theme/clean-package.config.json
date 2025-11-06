@@ -1,0 +1,28 @@
+{
+  "indent": 2,
+  "remove": ["scripts", "devDependencies", "clean-package"],
+  "replace": {
+    "main": "./dist/lib.js",
+    "module": "./dist/lib.js",
+    "types": "./dist/main.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/lib.js",
+        "require": "./dist/lib.umd.cjs",
+        "types": "./dist/main.d.ts"
+      },
+      "./components": {
+        "import": "./dist/components.js",
+        "types": "./dist/components/index.d.ts"
+      },
+      "./utils": {
+        "import": "./dist/utils.js",
+        "types": "./dist/utils/index.d.ts"
+      },
+      "./colors": {
+        "import": "./dist/colors.js",
+        "types": "./dist/colors/index.d.ts"
+      }
+    }
+  }
+}

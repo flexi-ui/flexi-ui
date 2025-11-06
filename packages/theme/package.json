@@ -46,7 +46,6 @@
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",
     "clsx": "^2.1.1",
-    "color": "^4.2.3",
     "color2k": "^2.0.2",
     "deepmerge": "4.3.1",
     "flat": "^6.0.1",
@@ -56,10 +55,9 @@
   "peerDependencies": {
     "tailwindcss": ">=4.0.0"
   },
-  "clean-package": "../../clean-package.config.json",
+  "clean-package": "./clean-package.config.json",
   "devDependencies": {
     "clean-package": "2.2.0",
-    "@types/color": "^4.2.0",
     "@types/flat": "^5.0.5",
     "tailwindcss": "^4.0.17",
     "typescript": "catalog:",

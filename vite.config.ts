@@ -16,6 +16,26 @@ export function createViteConfig() {
     (dep) => packageJson.dependencies?.[dep] || packageJson.peerDependencies?.[dep],
   )
 
+  // Collect all dependencies and peerDependencies to externalize
+  const allDependencies = [
+    ...Object.keys(packageJson.dependencies || {}),
+    ...Object.keys(packageJson.peerDependencies || {}),
+  ]
+
+  // Filter out workspace:* dependencies as they should be bundled
+  const externalDeps = allDependencies.filter((dep) => {
+    const depValue =
+      packageJson.dependencies?.[dep] || packageJson.peerDependencies?.[dep]
+    return !depValue?.startsWith('workspace:')
+  })
+
+  // Add specific externals for deep imports
+  const external = [
+    ...externalDeps,
+    /^tailwindcss\/.*/,
+    /^@flexi-ui\/.*/,
+  ]
+
   return defineConfig({
     plugins: [
       dts({
@@ -39,20 +59,32 @@ export function createViteConfig() {
         fileName: 'lib',
       },
       sourcemap: true,
+      minify: 'esbuild',
       rollupOptions: {
-        external: hasReact ? ['react', 'react-dom', 'framer-motion'] : [],
+        external,
         input: {
           main: resolve(process.cwd(), 'src/main.ts'),
         },
         output: {
           dir: 'dist',
-          globals: hasReact
-            ? {
-                react: 'React',
-                'react-dom': 'ReactDOM',
-                'framer-motion': 'FramerMotion',
-              }
-            : undefined,
+          globals: {
+            ...(hasReact
+              ? {
+                  react: 'React',
+                  'react-dom': 'ReactDOM',
+                  'framer-motion': 'FramerMotion',
+                }
+              : {}),
+            // Common externals
+            'tailwindcss/plugin.js': 'plugin',
+            tailwindcss: 'tailwindcss',
+            color2k: 'color2k',
+            deepmerge: 'deepmerge',
+            clsx: 'clsx',
+            flat: 'flat',
+            'tailwind-merge': 'tailwindMerge',
+            'tailwind-variants': 'tailwindVariants',
+          },
         },
       },
     },
