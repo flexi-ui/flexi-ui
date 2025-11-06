@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Based on tw-colors by L-Blondy
  * @see https://github.com/L-Blondy/tw-colors
  **/
 
-import Color from 'color'
-// @ts-ignore
+import { parseToHsla } from 'color2k'
 import plugin from 'tailwindcss/plugin.js'
 import deepMerge from 'deepmerge'
 import { omit, kebabCase, mapKeys } from '@flexi-ui/shared-utils'
@@ -44,7 +44,7 @@ const resolveConfig = (
   }
 
   for (const [themeName, { extend, layout, colors }] of Object.entries(themes)) {
-    let cssSelector = `.${themeName}`
+    const cssSelector = `.${themeName}`
     const scheme = themeName === 'light' || themeName === 'dark' ? themeName : extend
     let baseSelector = ''
 
@@ -53,12 +53,13 @@ const resolveConfig = (
       baseSelector = `:root, [data-theme=${themeName}]`
     }
 
-    baseSelector &&
-      (resolved.baseStyles[baseSelector] = scheme
+    if (baseSelector) {
+      resolved.baseStyles[baseSelector] = scheme
         ? {
             'color-scheme': scheme,
           }
-        : {})
+        : {}
+    }
 
     resolved.utilities[cssSelector] = scheme
       ? {
@@ -84,24 +85,32 @@ const resolveConfig = (
       if (!colorValue) return
 
       try {
-        const parsedColor =
-          parsedColorsCache[colorValue] || Color(colorValue).hsl().round(2).array()
+        if (!parsedColorsCache[colorValue]) {
+          const [h, s, l, a] = parseToHsla(colorValue)
+          // Convert to 0-360, 0-100%, 0-100% format and round to 2 decimals
+          parsedColorsCache[colorValue] = [
+            Math.round(h),
+            Math.round(s * 100),
+            Math.round(l * 100),
+            a,
+          ]
+        }
 
-        parsedColorsCache[colorValue] = parsedColor
-
-        const [h, s, l, defaultAlphaValue] = parsedColor
+        const [h, s, l, defaultAlphaValue] = parsedColorsCache[colorValue]
         const flexiuiColorVariable = `--${prefix}-${colorName}`
 
         // set the css variable in "@layer utilities"
         resolved.utilities[cssSelector]![flexiuiColorVariable] = `${h} ${s}% ${l}%`
-        baseSelector &&
-          (resolved.baseStyles[baseSelector]![flexiuiColorVariable] = `${h} ${s}% ${l}%`)
+        if (baseSelector) {
+          resolved.baseStyles[baseSelector]![flexiuiColorVariable] = `${h} ${s}% ${l}%`
+        }
         // set the dynamic color in tailwind config theme.colors
         resolved.colors[colorName] = `hsl(var(${flexiuiColorVariable}) / ${
-          defaultAlphaValue ?? '<alpha-value>'
+          defaultAlphaValue !== undefined && defaultAlphaValue < 1
+            ? defaultAlphaValue
+            : '<alpha-value>'
         })`
       } catch (error: any) {
-        // eslint-disable-next-line no-console
         console.log('error', error?.message)
       }
     }
@@ -119,7 +128,9 @@ const resolveConfig = (
           const nestedLayoutVariable = `${layoutVariablePrefix}-${nestedKey}`
 
           resolved.utilities[cssSelector]![nestedLayoutVariable] = nestedValue
-          baseSelector && (resolved.baseStyles[baseSelector]![nestedLayoutVariable] = nestedValue)
+          if (baseSelector) {
+            resolved.baseStyles[baseSelector]![nestedLayoutVariable] = nestedValue
+          }
         }
       } else {
         // Handle opacity values and other singular layout values
@@ -129,7 +140,9 @@ const resolveConfig = (
             : value
 
         resolved.utilities[cssSelector]![layoutVariablePrefix] = formattedValue
-        baseSelector && (resolved.baseStyles[baseSelector]![layoutVariablePrefix] = formattedValue)
+        if (baseSelector) {
+          resolved.baseStyles[baseSelector]![layoutVariablePrefix] = formattedValue
+        }
       }
     }
   }
@@ -171,7 +184,6 @@ const corePlugin = (
     {
       theme: {
         extend: {
-          // @ts-ignore
           colors: {
             ...(addCommonColors ? commonColors : {}),
             ...resolved?.colors,
@@ -266,7 +278,7 @@ export const flexiui = (config: FlexiUIPluginConfig = {}): ReturnType<typeof plu
   }
 
   // get other themes from the config different from light and dark
-  let otherThemes = omit(themeObject, ['light', 'dark']) || {}
+  const otherThemes = omit(themeObject, ['light', 'dark']) || {}
 
   Object.entries(otherThemes).forEach(([themeName, { extend, colors, layout }]) => {
     const baseTheme = extend && isBaseTheme(extend) ? extend : defaultExtendTheme
