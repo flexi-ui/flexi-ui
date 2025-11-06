@@ -1,5 +1,22 @@
 # @flexi-ui/theme
 
+## 2.2.0
+
+### Minor Changes
+
+- [#65](https://github.com/flexi-ui/flexi-ui/pull/65) [`fb7da6c`](https://github.com/flexi-ui/flexi-ui/commit/fb7da6cf21efc4849252021b5dcf0cdfe74b6511) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - feat: optimize bundle size and replace color library
+  - Replace heavy `color` library with lightweight `color2k` (47% smaller bundle)
+  - Externalize dependencies for better tree-shaking
+  - Fix ESLint no-unused-expressions warnings
+  - Bundle size reduced from 492KB → 260KB (88KB → 38KB gzipped)
+
+- [#65](https://github.com/flexi-ui/flexi-ui/pull/65) [`fb7da6c`](https://github.com/flexi-ui/flexi-ui/commit/fb7da6cf21efc4849252021b5dcf0cdfe74b6511) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - feat: add code splitting and package exports for better tree-shaking
+  - Split theme into multiple entry points (main, components, utils, colors)
+  - Main bundle reduced from 260KB → 12KB (88% reduction!)
+  - Component themes now lazy-loaded only when imported
+  - Added package.json exports for granular imports
+  - Users can now import specific parts: `@flexi-ui/theme/components`, `@flexi-ui/theme/utils`, etc.
+
 ## 2.1.2
 
 ### Patch Changes
