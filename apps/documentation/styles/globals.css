@@ -60,10 +60,44 @@ html {
   padding: 0px !important;
   overflow-x: hidden;
   scroll-padding-top: 64px;
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+}
+
+/* Command Palette Styles */
+[cmdk-root] {
+  width: 100%;
+}
+
+[cmdk-input] {
+  outline: none;
+}
+
+[cmdk-item] {
+  cursor: pointer;
+  user-select: none;
+}
+
+[cmdk-item][data-selected='true'] {
+  background-color: hsl(var(--color-default-100));
+}
+
+[cmdk-group-heading] {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--color-foreground-500));
+  padding: 0.5rem 0.5rem 0.25rem;
+}
+
+/* Smooth animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
 }
 
 pre details[open] > summary > span:first-child::before {
