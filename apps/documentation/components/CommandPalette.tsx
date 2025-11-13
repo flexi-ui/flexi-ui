@@ -35,15 +35,6 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
     [onClose],
   )
 
-  // Flatten all routes for search
-  const allRoutes = routes.flatMap((section) =>
-    section.routes.map((route) => ({
-      ...route,
-      section: section.title,
-      href: route.path?.replace('.mdx', '') || '#',
-    })),
-  )
-
   if (!isOpen) return null
 
   return (
