@@ -7,7 +7,7 @@ import { Check, Copy } from 'lucide-react'
 
 export const InstallBanner = () => {
   const [copied, setCopied] = useState(false)
-  const installCommand = 'npm install @flexi-ui/react'
+  const installCommand = 'npm install @flexi-ui/theme @flexi-ui/system'
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(installCommand)
