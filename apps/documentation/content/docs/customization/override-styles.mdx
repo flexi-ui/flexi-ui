@@ -1,0 +1,207 @@
+---
+title: "Override Styles"
+description: "Learn how to override component styles in FlexiUI."
+---
+
+# Override Styles
+
+FlexiUI provides multiple ways to override and customize component styles.
+
+## Using className
+
+The simplest way to override styles is using the `className` prop:
+
+```tsx
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Custom Button
+</Button>
+```
+
+## Component Slots
+
+Use the `classNames` prop to target specific parts of a component:
+
+```tsx
+<Button
+  classNames={{
+    base: 'h-12',
+    content: 'text-lg font-bold'
+  }}
+>
+  Customized Button
+</Button>
+```
+
+### Available Slots
+
+Different components have different slots. Common slots include:
+
+- `base` - The root element
+- `content` - The main content
+- `wrapper` - Wrapper elements
+- `label` - Label text
+- `icon` - Icon elements
+
+Example with Input:
+
+```tsx
+<Input
+  classNames={{
+    base: 'max-w-md',
+    input: 'text-lg',
+    label: 'font-semibold',
+    inputWrapper: 'border-2'
+  }}
+/>
+```
+
+## CSS Variables
+
+Override FlexiUI's CSS variables:
+
+```css
+/* global.css */
+:root {
+  --flexi-primary: #0070f3;
+  --flexi-radius-medium: 1rem;
+}
+
+.dark {
+  --flexi-primary: #0af;
+}
+```
+
+## Tailwind Config
+
+Extend FlexiUI's theme in your Tailwind configuration:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#0070f3',
+          dark: '#0051cc'
+        }
+      }
+    }
+  }
+}
+```
+
+## Custom Variants
+
+Create custom variants using tailwind-variants:
+
+```tsx
+import { tv } from 'tailwind-variants'
+import { Button } from '@flexi-ui/button'
+
+const customButton = tv({
+  base: 'font-bold',
+  variants: {
+    size: {
+      xl: 'text-xl px-8 py-4'
+    },
+    color: {
+      gradient: 'bg-gradient-to-r from-purple-500 to-pink-500'
+    }
+  }
+})
+
+function MyButton() {
+  return (
+    <Button className={customButton({ size: 'xl', color: 'gradient' })}>
+      Custom Variant
+    </Button>
+  )
+}
+```
+
+## Inline Styles
+
+Use inline styles when needed:
+
+```tsx
+<Button style={{ backgroundColor: '#0070f3', color: 'white' }}>
+  Inline Styled Button
+</Button>
+```
+
+## CSS Modules
+
+Use CSS Modules for scoped styles:
+
+```css
+/* Button.module.css */
+.customButton {
+  background: linear-gradient(to right, #0070f3, #7928ca);
+  border-radius: 1rem;
+}
+```
+
+```tsx
+import styles from './Button.module.css'
+import { Button } from '@flexi-ui/button'
+
+function MyButton() {
+  return (
+    <Button className={styles.customButton}>
+      Styled Button
+    </Button>
+  )
+}
+```
+
+## Styled Components
+
+Use with styled-components or Emotion:
+
+```tsx
+import styled from 'styled-components'
+import { Button } from '@flexi-ui/button'
+
+const StyledButton = styled(Button)`
+  background: linear-gradient(to right, #0070f3, #7928ca);
+  border-radius: 1rem;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`
+```
+
+## Important Flag
+
+Use `!important` when necessary (not recommended):
+
+```tsx
+<Button className="!bg-purple-500 !text-white">
+  Force Override
+</Button>
+```
+
+## Global Styles
+
+Override component styles globally:
+
+```css
+/* global.css */
+[data-component="button"] {
+  border-radius: 1rem;
+}
+
+[data-component="button"][data-variant="solid"] {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+```
+
+## Best Practices
+
+1. **Use className for simple overrides** - Quick and straightforward
+2. **Use classNames for complex components** - Better organization
+3. **Prefer CSS variables for theming** - Easier maintenance
+4. **Avoid !important** - Makes styles harder to override later
+5. **Keep specificity low** - Makes future changes easier

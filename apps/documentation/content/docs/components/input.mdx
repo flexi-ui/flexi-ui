@@ -1,0 +1,207 @@
+---
+title: "Input"
+description: "Capture user text input with the Input component."
+---
+
+# Input
+
+The Input component allows users to enter text data in forms and interfaces.
+
+## Import
+
+```tsx
+import { Input } from '@flexi-ui/input'
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Input label="Email" placeholder="Enter your email" />
+```
+
+### With Description
+
+```tsx
+<Input
+  label="Email"
+  description="We'll never share your email."
+  placeholder="Enter your email"
+/>
+```
+
+### Required
+
+```tsx
+<Input
+  label="Email"
+  placeholder="Enter your email"
+  isRequired
+/>
+```
+
+### Disabled
+
+```tsx
+<Input
+  label="Email"
+  placeholder="Enter your email"
+  isDisabled
+/>
+```
+
+## API
+
+### Input Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | `string` | - | Label text |
+| placeholder | `string` | - | Placeholder text |
+| description | `string` | - | Description text below input |
+| errorMessage | `string` | - | Error message to display |
+| value | `string` | - | Controlled value |
+| defaultValue | `string` | - | Default value |
+| type | `string` | `text` | Input type (text, email, password, etc.) |
+| size | `sm \| md \| lg` | `md` | Size of the input |
+| radius | `none \| sm \| md \| lg \| full` | `md` | Border radius |
+| variant | `flat \| bordered \| faded \| underlined` | `flat` | Input variant |
+| color | `default \| primary \| secondary \| success \| warning \| error` | `default` | Color theme |
+| isRequired | `boolean` | `false` | Whether the input is required |
+| isReadOnly | `boolean` | `false` | Whether the input is read-only |
+| isDisabled | `boolean` | `false` | Whether the input is disabled |
+| isInvalid | `boolean` | `false` | Whether the input is invalid |
+| startContent | `ReactNode` | - | Content to display at the start |
+| endContent | `ReactNode` | - | Content to display at the end |
+| classNames | `object` | - | Custom classes for slots |
+| onChange | `(e: ChangeEvent) => void` | - | Change event handler |
+
+### Slots
+
+- **base** - The main wrapper
+- **label** - The label element
+- **inputWrapper** - The input wrapper
+- **input** - The input element
+- **description** - The description text
+- **errorMessage** - The error message text
+
+## Examples
+
+### Types
+
+```tsx
+<Input type="text" label="Text" />
+<Input type="email" label="Email" />
+<Input type="password" label="Password" />
+<Input type="number" label="Number" />
+<Input type="url" label="URL" />
+```
+
+### Variants
+
+```tsx
+<Input variant="flat" label="Flat" />
+<Input variant="bordered" label="Bordered" />
+<Input variant="faded" label="Faded" />
+<Input variant="underlined" label="Underlined" />
+```
+
+### Sizes
+
+```tsx
+<Input size="sm" label="Small" />
+<Input size="md" label="Medium" />
+<Input size="lg" label="Large" />
+```
+
+### With Icons
+
+```tsx
+import { Mail, Lock } from 'lucide-react'
+
+<Input
+  label="Email"
+  startContent={<Mail className="w-4 h-4" />}
+/>
+
+<Input
+  type="password"
+  label="Password"
+  startContent={<Lock className="w-4 h-4" />}
+/>
+```
+
+### With Validation
+
+```tsx
+import { useState } from 'react'
+
+function ValidatedInput() {
+  const [value, setValue] = useState('')
+  const isInvalid = value.length > 0 && !value.includes('@')
+
+  return (
+    <Input
+      label="Email"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      isInvalid={isInvalid}
+      errorMessage={isInvalid && 'Please enter a valid email'}
+    />
+  )
+}
+```
+
+### Password Input
+
+```tsx
+import { useState } from 'react'
+import { Eye, EyeOff } from 'lucide-react'
+
+function PasswordInput() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  return (
+    <Input
+      label="Password"
+      type={isVisible ? 'text' : 'password'}
+      endContent={
+        <button
+          type="button"
+          onClick={() => setIsVisible(!isVisible)}
+        >
+          {isVisible ? <EyeOff /> : <Eye />}
+        </button>
+      }
+    />
+  )
+}
+```
+
+### Controlled Input
+
+```tsx
+import { useState } from 'react'
+
+function ControlledInput() {
+  const [value, setValue] = useState('')
+
+  return (
+    <Input
+      label="Name"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  )
+}
+```
+
+## Accessibility
+
+- Inputs use semantic HTML with proper ARIA attributes
+- Labels are automatically associated with inputs
+- Error messages are announced to screen readers
+- Supports keyboard navigation
+- Required fields are properly marked
+- Disabled state is properly communicated

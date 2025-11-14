@@ -1,0 +1,135 @@
+---
+title: "Vite"
+description: "Learn how to use FlexiUI with Vite."
+---
+
+# Vite
+
+FlexiUI integrates seamlessly with Vite for blazing-fast development.
+
+## Create a New Project
+
+Create a new Vite + React project:
+
+```bash
+pnpm create vite my-app --template react-ts
+cd my-app
+```
+
+## Installation
+
+Install FlexiUI and its peer dependencies:
+
+```bash
+pnpm add @flexi-ui/react
+pnpm add -D tailwindcss postcss autoprefixer
+```
+
+## Setup Tailwind CSS
+
+### 1. Initialize Tailwind
+
+```bash
+npx tailwindcss init -p
+```
+
+### 2. Configure Tailwind
+
+Update `tailwind.config.js`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
+  ],
+  plugins: [require('@flexi-ui/tailwind-plugin')]
+}
+```
+
+### 3. Add Tailwind Directives
+
+Create or update `src/index.css`:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## Setup FlexiUI Provider
+
+Update `src/main.tsx`:
+
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { FlexiUIProvider } from '@flexi-ui/react'
+import App from './App'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <FlexiUIProvider>
+      <App />
+    </FlexiUIProvider>
+  </React.StrictMode>
+)
+```
+
+## Using Components
+
+Import and use FlexiUI components in your app:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { Input } from '@flexi-ui/input'
+
+function App() {
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-4">FlexiUI + Vite</h1>
+      <div className="space-y-4">
+        <Input label="Email" type="email" />
+        <Button>Submit</Button>
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+## Development
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+## Build for Production
+
+Build your app for production:
+
+```bash
+pnpm build
+```
+
+## Vite Configuration
+
+Optimize your Vite configuration for FlexiUI:
+
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  optimizeDeps: {
+    include: ['@flexi-ui/react']
+  }
+})
+```

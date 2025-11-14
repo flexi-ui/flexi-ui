@@ -1,0 +1,168 @@
+---
+title: "Customize Theme"
+description: "Learn how to customize the FlexiUI theme for your brand."
+---
+
+# Customize Theme
+
+Customize FlexiUI to match your brand identity and design requirements.
+
+## Quick Start
+
+The fastest way to customize FlexiUI is through the provider:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+const customTheme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca'
+  }
+}
+
+function App() {
+  return (
+    <FlexiUIProvider theme={customTheme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Full Theme Customization
+
+Create a complete custom theme:
+
+```ts
+import type { Theme } from '@flexi-ui/react'
+
+const myTheme: Theme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca',
+    success: '#0cce6b',
+    warning: '#ffc107',
+    error: '#f31260',
+    background: {
+      light: '#ffffff',
+      dark: '#000000'
+    },
+    foreground: {
+      light: '#11181c',
+      dark: '#ecedee'
+    }
+  },
+  typography: {
+    fontFamily: {
+      sans: 'Inter, system-ui, sans-serif',
+      mono: 'Fira Code, monospace'
+    },
+    fontSize: {
+      tiny: '0.75rem',
+      small: '0.875rem',
+      medium: '1rem',
+      large: '1.125rem'
+    }
+  },
+  borderRadius: {
+    small: '0.5rem',
+    medium: '0.75rem',
+    large: '1rem'
+  },
+  spacing: {
+    unit: 4
+  }
+}
+```
+
+## Component-Level Customization
+
+Customize individual components using the `classNames` prop:
+
+```tsx
+<Button
+  classNames={{
+    base: 'font-bold',
+    content: 'text-lg'
+  }}
+>
+  Custom Button
+</Button>
+```
+
+## Using CSS Variables
+
+FlexiUI uses CSS variables for theming. Override them in your CSS:
+
+```css
+:root {
+  --flexi-primary: #0070f3;
+  --flexi-secondary: #7928ca;
+  --flexi-radius-medium: 0.75rem;
+}
+```
+
+## Extend Tailwind Config
+
+Extend FlexiUI's theme in your Tailwind configuration:
+
+```js
+// tailwind.config.js
+const { flexiUIPlugin } = require('@flexi-ui/tailwind-plugin')
+
+module.exports = {
+  plugins: [
+    flexiUIPlugin({
+      themes: {
+        light: {
+          colors: {
+            primary: '#0070f3',
+            secondary: '#7928ca'
+          }
+        },
+        dark: {
+          colors: {
+            primary: '#0af',
+            secondary: '#a855f7'
+          }
+        }
+      }
+    })
+  ]
+}
+```
+
+## Multiple Themes
+
+Support multiple themes in your application:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+const themes = {
+  blue: {
+    colors: { primary: '#0070f3' }
+  },
+  purple: {
+    colors: { primary: '#7928ca' }
+  }
+}
+
+function App() {
+  const [currentTheme, setCurrentTheme] = useState('blue')
+
+  return (
+    <FlexiUIProvider theme={themes[currentTheme]}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Best Practices
+
+1. **Use semantic colors** - Define colors by their purpose, not their value
+2. **Maintain contrast** - Ensure text is readable in both light and dark modes
+3. **Test thoroughly** - Verify your theme works across all components
+4. **Document changes** - Keep track of customizations for team members

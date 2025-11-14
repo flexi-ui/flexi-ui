@@ -1,0 +1,100 @@
+---
+title: "Forms"
+description: "Learn how to build accessible forms with FlexiUI components."
+---
+
+# Forms
+
+FlexiUI provides form components built on React Aria, ensuring accessibility and proper form handling out of the box.
+
+## Basic Form
+
+Create a simple form using FlexiUI components:
+
+```tsx
+import { Form } from '@flexi-ui/form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+function ContactForm() {
+  return (
+    <Form onSubmit={(e) => {
+      e.preventDefault()
+      // Handle form submission
+    }}>
+      <Input
+        label="Name"
+        name="name"
+        isRequired
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+      />
+      <Button type="submit">
+        Submit
+      </Button>
+    </Form>
+  )
+}
+```
+
+## Form Validation
+
+FlexiUI components support native HTML5 validation and custom validation:
+
+```tsx
+<Input
+  label="Email"
+  type="email"
+  isRequired
+  errorMessage="Please enter a valid email"
+/>
+```
+
+## Controlled Forms
+
+Use controlled inputs with state:
+
+```tsx
+import { useState } from 'react'
+import { Input } from '@flexi-ui/input'
+
+function ControlledForm() {
+  const [value, setValue] = useState('')
+
+  return (
+    <Input
+      label="Username"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  )
+}
+```
+
+## Form Libraries
+
+FlexiUI works with popular form libraries like React Hook Form and Formik:
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+function HookFormExample() {
+  const { register, handleSubmit } = useForm()
+
+  return (
+    <form onSubmit={handleSubmit(data => console.log(data))}>
+      <Input
+        label="Name"
+        {...register('name', { required: true })}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
+  )
+}
+```

@@ -1,0 +1,243 @@
+---
+title: "Custom Variants"
+description: "Create custom component variants in FlexiUI."
+---
+
+# Custom Variants
+
+FlexiUI uses tailwind-variants under the hood, allowing you to create powerful custom variants.
+
+## What are Variants?
+
+Variants are different styles of a component. For example, a Button can have color variants (primary, secondary) and size variants (small, medium, large).
+
+## Creating Custom Variants
+
+### Basic Variant
+
+Create a custom variant using tailwind-variants:
+
+```tsx
+import { tv } from 'tailwind-variants'
+
+const button = tv({
+  base: 'font-semibold rounded-lg transition-colors',
+  variants: {
+    color: {
+      primary: 'bg-blue-500 text-white hover:bg-blue-600',
+      secondary: 'bg-purple-500 text-white hover:bg-purple-600',
+      danger: 'bg-red-500 text-white hover:bg-red-600'
+    },
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      md: 'text-base px-4 py-2',
+      lg: 'text-lg px-6 py-3'
+    }
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'md'
+  }
+})
+
+// Usage
+<button className={button({ color: 'secondary', size: 'lg' })}>
+  Custom Button
+</button>
+```
+
+## Extending FlexiUI Components
+
+Extend existing FlexiUI components with custom variants:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { tv } from 'tailwind-variants'
+
+const customButton = tv({
+  extend: Button.classNames, // Extend existing styles
+  variants: {
+    gradient: {
+      purple: 'bg-gradient-to-r from-purple-500 to-pink-500',
+      blue: 'bg-gradient-to-r from-blue-500 to-cyan-500'
+    }
+  }
+})
+
+function GradientButton({ gradient, ...props }) {
+  return (
+    <Button
+      {...props}
+      className={customButton({ gradient })}
+    />
+  )
+}
+```
+
+## Compound Variants
+
+Create variants that depend on multiple conditions:
+
+```tsx
+const button = tv({
+  base: 'rounded-lg',
+  variants: {
+    color: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500'
+    },
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      lg: 'text-lg px-6 py-3'
+    },
+    outlined: {
+      true: 'bg-transparent border-2'
+    }
+  },
+  compoundVariants: [
+    {
+      color: 'primary',
+      outlined: true,
+      class: 'border-blue-500 text-blue-500 hover:bg-blue-50'
+    },
+    {
+      color: 'secondary',
+      outlined: true,
+      class: 'border-purple-500 text-purple-500 hover:bg-purple-50'
+    }
+  ]
+})
+```
+
+## Slots
+
+Create multi-part components with slots:
+
+```tsx
+const card = tv({
+  slots: {
+    base: 'rounded-lg shadow-lg',
+    header: 'p-4 border-b',
+    body: 'p-4',
+    footer: 'p-4 border-t bg-gray-50'
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'bg-white',
+        header: 'bg-gray-100'
+      },
+      dark: {
+        base: 'bg-gray-900 text-white',
+        header: 'bg-gray-800',
+        footer: 'bg-gray-800'
+      }
+    }
+  }
+})
+
+const { base, header, body, footer } = card({ variant: 'dark' })
+
+<div className={base()}>
+  <div className={header()}>Header</div>
+  <div className={body()}>Body</div>
+  <div className={footer()}>Footer</div>
+</div>
+```
+
+## Responsive Variants
+
+Create responsive variants:
+
+```tsx
+const button = tv({
+  base: 'rounded-lg',
+  variants: {
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      md: 'text-base px-4 py-2',
+      lg: 'text-lg px-6 py-3'
+    }
+  }
+})
+
+// Usage with responsive sizes
+<button className={button({
+  size: {
+    initial: 'sm',
+    md: 'md',
+    lg: 'lg'
+  }
+})}>
+  Responsive Button
+</button>
+```
+
+## Boolean Variants
+
+Create boolean variants for on/off states:
+
+```tsx
+const button = tv({
+  base: 'rounded-lg px-4 py-2',
+  variants: {
+    isDisabled: {
+      true: 'opacity-50 cursor-not-allowed',
+      false: 'cursor-pointer'
+    },
+    isLoading: {
+      true: 'opacity-70 cursor-wait'
+    },
+    isIconOnly: {
+      true: 'p-2 aspect-square'
+    }
+  }
+})
+
+<button className={button({ isDisabled: true })}>
+  Disabled Button
+</button>
+```
+
+## Type-Safe Variants
+
+Use TypeScript for type-safe variants:
+
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+const button = tv({
+  variants: {
+    color: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500'
+    },
+    size: {
+      sm: 'text-sm',
+      lg: 'text-lg'
+    }
+  }
+})
+
+type ButtonVariants = VariantProps<typeof button>
+
+interface ButtonProps extends ButtonVariants {
+  children: React.ReactNode
+}
+
+function CustomButton({ color, size, children }: ButtonProps) {
+  return (
+    <button className={button({ color, size })}>
+      {children}
+    </button>
+  )
+}
+```
+
+## Best Practices
+
+1. **Keep variants focused** - Each variant should control one aspect
+2. **Use compound variants** - For complex interactions between variants
+3. **Provide defaults** - Make components work without props
+4. **Type your variants** - Use TypeScript for better DX
+5. **Document variants** - Help other developers understand options

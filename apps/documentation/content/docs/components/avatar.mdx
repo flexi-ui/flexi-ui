@@ -1,0 +1,115 @@
+---
+title: "Avatar"
+description: "Display user profile pictures and initials with the Avatar component."
+---
+
+# Avatar
+
+The Avatar component displays user profile pictures, icons, or initials in a circular or rounded container.
+
+## Import
+
+```tsx
+import { Avatar } from '@flexi-ui/avatar'
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+```
+
+### With Initials
+
+When no image is provided, the Avatar displays initials:
+
+```tsx
+<Avatar name="John Doe" />
+```
+
+### Sizes
+
+Avatar comes in multiple sizes:
+
+```tsx
+<Avatar src="..." size="sm" />
+<Avatar src="..." size="md" />
+<Avatar src="..." size="lg" />
+```
+
+## API
+
+### Avatar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| src | `string` | - | The image source URL |
+| alt | `string` | - | Alternative text for the image |
+| name | `string` | - | Name to generate initials from |
+| size | `sm \| md \| lg` | `md` | Size of the avatar |
+| radius | `none \| sm \| md \| lg \| full` | `full` | Border radius |
+| color | `default \| primary \| secondary \| success \| warning \| error` | `default` | Color theme |
+| isBordered | `boolean` | `false` | Whether to show a border |
+| isDisabled | `boolean` | `false` | Whether the avatar is disabled |
+| showFallback | `boolean` | `true` | Show fallback when image fails to load |
+| fallback | `ReactNode` | - | Custom fallback content |
+| classNames | `object` | - | Custom classes for slots |
+
+### Slots
+
+- **base** - The main avatar wrapper
+- **img** - The image element
+- **fallback** - The fallback content (initials or icon)
+- **icon** - The fallback icon
+
+## Examples
+
+### Bordered Avatar
+
+```tsx
+<Avatar
+  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+  isBordered
+  color="primary"
+/>
+```
+
+### Avatar Group
+
+Display multiple avatars together:
+
+```tsx
+<div className="flex -space-x-2">
+  <Avatar src="https://i.pravatar.cc/150?u=1" />
+  <Avatar src="https://i.pravatar.cc/150?u=2" />
+  <Avatar src="https://i.pravatar.cc/150?u=3" />
+  <Avatar name="+5" />
+</div>
+```
+
+### Custom Fallback
+
+```tsx
+import { User } from 'lucide-react'
+
+<Avatar
+  showFallback
+  fallback={<User className="w-6 h-6" />}
+/>
+```
+
+### Different Shapes
+
+```tsx
+<Avatar src="..." radius="sm" />
+<Avatar src="..." radius="md" />
+<Avatar src="..." radius="full" />
+```
+
+## Accessibility
+
+- The Avatar component uses semantic HTML with proper alt text
+- When using initials, they are announced by screen readers
+- Supports keyboard navigation when interactive

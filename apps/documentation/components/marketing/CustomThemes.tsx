@@ -82,7 +82,7 @@ export const CustomThemes = () => {
               <span className="text-foreground-600">with ease</span>
             </h2>
             <p className="text-lg text-foreground-600">
-              FlexiUI's powerful theming system is built on Tailwind CSS, making it easy to
+              FlexiUI&apos;s powerful theming system is built on Tailwind CSS, making it easy to
               customize colors, spacing, and component styles to match your brand.
             </p>
             <ul className="space-y-3 text-foreground-600">

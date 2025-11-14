@@ -1,0 +1,225 @@
+---
+title: "Form"
+description: "Build accessible forms with the Form component."
+---
+
+# Form
+
+The Form component provides a wrapper for building accessible, validated forms with FlexiUI.
+
+## Import
+
+```tsx
+import { Form } from '@flexi-ui/form'
+```
+
+## Usage
+
+### Basic Form
+
+```tsx
+<Form onSubmit={(e) => {
+  e.preventDefault()
+  // Handle submission
+}}>
+  <Input label="Name" name="name" isRequired />
+  <Input label="Email" name="email" type="email" isRequired />
+  <Button type="submit">Submit</Button>
+</Form>
+```
+
+### With Validation
+
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+function ContactForm() {
+  const [errors, setErrors] = useState({})
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+
+    // Validation logic
+    const newErrors = {}
+    if (!formData.get('name')) {
+      newErrors.name = 'Name is required'
+    }
+    if (!formData.get('email')) {
+      newErrors.email = 'Email is required'
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
+    // Submit form
+    console.log('Form submitted', Object.fromEntries(formData))
+  }
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input
+        label="Name"
+        name="name"
+        isRequired
+        isInvalid={!!errors.name}
+        errorMessage={errors.name}
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+        isInvalid={!!errors.email}
+        errorMessage={errors.email}
+      />
+      <Button type="submit">Submit</Button>
+    </Form>
+  )
+}
+```
+
+## API
+
+### Form Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| onSubmit | `(e: FormEvent) => void` | - | Form submission handler |
+| validationBehavior | `native \| aria` | `aria` | Validation behavior type |
+| validationErrors | `object` | - | Server-side validation errors |
+| className | `string` | - | Additional CSS classes |
+| children | `ReactNode` | - | Form content |
+
+## Examples
+
+### Controlled Form
+
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+function ControlledForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  })
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Form data:', formData)
+  }
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input
+        label="Name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <Button type="submit">Submit</Button>
+    </Form>
+  )
+}
+```
+
+### With React Hook Form
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+function HookForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Input
+        label="Name"
+        {...register('name', { required: 'Name is required' })}
+        isInvalid={!!errors.name}
+        errorMessage={errors.name?.message}
+      />
+      <Input
+        label="Email"
+        type="email"
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'Invalid email address'
+          }
+        })}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
+      />
+      <Button type="submit">Submit</Button>
+    </Form>
+  )
+}
+```
+
+### Multi-Step Form
+
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+function MultiStepForm() {
+  const [step, setStep] = useState(1)
+  const [formData, setFormData] = useState({})
+
+  const handleNext = (data) => {
+    setFormData({ ...formData, ...data })
+    setStep(step + 1)
+  }
+
+  return (
+    <>
+      {step === 1 && (
+        <Form onSubmit={handleNext}>
+          <Input label="Name" name="name" isRequired />
+          <Button type="submit">Next</Button>
+        </Form>
+      )}
+      {step === 2 && (
+        <Form onSubmit={handleNext}>
+          <Input label="Email" name="email" type="email" isRequired />
+          <Button type="button" onClick={() => setStep(1)}>Back</Button>
+          <Button type="submit">Submit</Button>
+        </Form>
+      )}
+    </>
+  )
+}
+```
+
+## Accessibility
+
+- Forms use semantic HTML with proper ARIA attributes
+- Labels are automatically associated with inputs
+- Validation errors are announced to screen readers
+- Supports keyboard navigation
+- Required fields are properly marked

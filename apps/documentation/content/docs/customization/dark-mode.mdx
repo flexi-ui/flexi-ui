@@ -1,0 +1,200 @@
+---
+title: "Dark Mode"
+description: "Implement dark mode in your FlexiUI application."
+---
+
+# Dark Mode
+
+FlexiUI provides built-in support for dark mode with automatic theme switching.
+
+## Setup
+
+Dark mode works out of the box with the FlexiUIProvider:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+function App() {
+  return (
+    <FlexiUIProvider>
+      {/* Your app automatically supports dark mode */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Using next-themes
+
+For Next.js applications, integrate with `next-themes`:
+
+### Installation
+
+```bash
+pnpm add next-themes
+```
+
+### Setup
+
+Wrap your app with ThemeProvider:
+
+```tsx
+'use client'
+
+import { ThemeProvider } from 'next-themes'
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system">
+      <FlexiUIProvider>
+        {children}
+      </FlexiUIProvider>
+    </ThemeProvider>
+  )
+}
+```
+
+## Theme Switcher
+
+Create a theme switcher component:
+
+```tsx
+'use client'
+
+import { useTheme } from 'next-themes'
+import { Button } from '@flexi-ui/button'
+import { Moon, Sun } from 'lucide-react'
+
+export function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme()
+
+  return (
+    <Button
+      isIconOnly
+      variant="light"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    >
+      {theme === 'dark' ? <Sun /> : <Moon />}
+    </Button>
+  )
+}
+```
+
+## Dark Mode Colors
+
+Customize colors for dark mode:
+
+```tsx
+const theme = {
+  colors: {
+    background: {
+      light: '#ffffff',
+      dark: '#000000'
+    },
+    foreground: {
+      light: '#000000',
+      dark: '#ffffff'
+    },
+    content1: {
+      light: '#ffffff',
+      dark: '#18181b'
+    }
+  }
+}
+```
+
+## Using Tailwind Dark Mode
+
+Apply dark mode styles with Tailwind:
+
+```tsx
+<div className="bg-white dark:bg-black text-black dark:text-white">
+  Content that adapts to theme
+</div>
+```
+
+## System Preference
+
+Respect user's system preference:
+
+```tsx
+<ThemeProvider attribute="class" defaultTheme="system">
+  <FlexiUIProvider>
+    {children}
+  </FlexiUIProvider>
+</ThemeProvider>
+```
+
+## Force Dark Mode
+
+Force dark mode for specific components:
+
+```tsx
+<div className="dark">
+  <Button>Always dark</Button>
+</div>
+```
+
+## Storage
+
+Theme preference is automatically saved to localStorage:
+
+```tsx
+<ThemeProvider
+  attribute="class"
+  defaultTheme="system"
+  storageKey="flexi-ui-theme"
+>
+  {children}
+</ThemeProvider>
+```
+
+## SSR Considerations
+
+Prevent flash of wrong theme on initial load:
+
+```tsx
+import { ThemeProvider } from 'next-themes'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <FlexiUIProvider>
+        {children}
+      </FlexiUIProvider>
+    </ThemeProvider>
+  )
+}
+```
+
+## Dropdown Theme Selector
+
+Create a dropdown for multiple themes:
+
+```tsx
+'use client'
+
+import { useTheme } from 'next-themes'
+import { Select, SelectItem } from '@flexi-ui/select'
+
+export function ThemeSelector() {
+  const { theme, setTheme } = useTheme()
+
+  return (
+    <Select
+      label="Theme"
+      selectedKeys={[theme || 'system']}
+      onSelectionChange={(keys) => setTheme(Array.from(keys)[0] as string)}
+    >
+      <SelectItem key="light">Light</SelectItem>
+      <SelectItem key="dark">Dark</SelectItem>
+      <SelectItem key="system">System</SelectItem>
+    </Select>
+  )
+}
+```

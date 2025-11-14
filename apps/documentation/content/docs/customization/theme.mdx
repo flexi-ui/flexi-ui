@@ -1,0 +1,149 @@
+---
+title: "Theme"
+description: "Learn how to customize the FlexiUI theme."
+---
+
+# Theme
+
+FlexiUI provides a powerful theming system built on top of Tailwind CSS, allowing you to customize every aspect of your UI.
+
+## Default Theme
+
+FlexiUI comes with a carefully crafted default theme that works out of the box:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+function App() {
+  return (
+    <FlexiUIProvider>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Theme Configuration
+
+Customize the theme by passing a `theme` prop to the provider:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+const customTheme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca'
+  }
+}
+
+function App() {
+  return (
+    <FlexiUIProvider theme={customTheme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Available Theme Options
+
+### Colors
+
+Customize the color palette:
+
+```ts
+{
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca',
+    success: '#0cce6b',
+    warning: '#ffc107',
+    error: '#f31260'
+  }
+}
+```
+
+### Typography
+
+Customize fonts and text styles:
+
+```ts
+{
+  typography: {
+    fontFamily: {
+      sans: 'Inter, system-ui, sans-serif',
+      mono: 'Fira Code, monospace'
+    }
+  }
+}
+```
+
+### Border Radius
+
+Customize border radius values:
+
+```ts
+{
+  borderRadius: {
+    small: '0.25rem',
+    medium: '0.5rem',
+    large: '1rem'
+  }
+}
+```
+
+### Spacing
+
+Customize spacing scale:
+
+```ts
+{
+  spacing: {
+    unit: 4 // base unit in pixels
+  }
+}
+```
+
+## Dark Mode
+
+FlexiUI supports dark mode out of the box. Configure dark mode colors:
+
+```ts
+{
+  colors: {
+    background: {
+      light: '#ffffff',
+      dark: '#000000'
+    },
+    foreground: {
+      light: '#000000',
+      dark: '#ffffff'
+    }
+  }
+}
+```
+
+## Accessing Theme Values
+
+Access theme values in your components:
+
+```tsx
+import { useTheme } from '@flexi-ui/react'
+
+function MyComponent() {
+  const { theme } = useTheme()
+
+  return (
+    <div style={{ color: theme.colors.primary }}>
+      Themed content
+    </div>
+  )
+}
+```
+
+## Next Steps
+
+- [Customize theme](/docs/customization/customize-theme)
+- [Create a custom theme](/docs/customization/create-theme)
+- [Dark mode](/docs/customization/dark-mode)

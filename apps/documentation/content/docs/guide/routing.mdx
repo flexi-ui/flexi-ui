@@ -1,0 +1,64 @@
+---
+title: "Routing"
+description: "Learn how to use FlexiUI with client-side routing libraries."
+---
+
+# Routing
+
+FlexiUI works seamlessly with all popular React routing solutions, including Next.js App Router, React Router, and Remix.
+
+## Next.js App Router
+
+FlexiUI components are fully compatible with Next.js 13+ App Router:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { Link } from '@flexi-ui/link'
+
+export default function Page() {
+  return (
+    <div>
+      <Link href="/about">About</Link>
+      <Button>Click me</Button>
+    </div>
+  )
+}
+```
+
+## React Router
+
+Use FlexiUI components with React Router:
+
+```tsx
+import { Link as RouterLink } from 'react-router-dom'
+import { Button } from '@flexi-ui/button'
+
+function App() {
+  return (
+    <Button as={RouterLink} to="/dashboard">
+      Go to Dashboard
+    </Button>
+  )
+}
+```
+
+## Remix
+
+FlexiUI integrates smoothly with Remix:
+
+```tsx
+import { Link as RemixLink } from '@remix-run/react'
+import { Button } from '@flexi-ui/button'
+
+export default function Index() {
+  return (
+    <Button as={RemixLink} to="/profile">
+      View Profile
+    </Button>
+  )
+}
+```
+
+## Client-Side Navigation
+
+All FlexiUI components support the `as` prop, allowing you to use them with any routing library while maintaining their styling and behavior.

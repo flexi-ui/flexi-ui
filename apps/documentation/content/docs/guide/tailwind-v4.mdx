@@ -1,0 +1,81 @@
+---
+title: "Tailwind CSS v4"
+description: "Migrate your FlexiUI project to Tailwind CSS v4."
+---
+
+# Tailwind CSS v4
+
+FlexiUI is built to work seamlessly with Tailwind CSS v4, leveraging the latest features and improvements.
+
+## What's New in v4
+
+Tailwind CSS v4 introduces several improvements:
+
+- **Lightning-fast engine** - Rebuilt from the ground up in Rust
+- **Unified toolchain** - Single package for all features
+- **CSS-first configuration** - Configure using CSS variables
+- **Improved IntelliSense** - Better autocomplete and suggestions
+
+## Migration Guide
+
+### Update Dependencies
+
+Update your `package.json`:
+
+```json
+{
+  "dependencies": {
+    "tailwindcss": "^4.0.0"
+  }
+}
+```
+
+### Configuration
+
+Tailwind v4 uses CSS-first configuration. Update your `tailwind.config.ts`:
+
+```ts
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
+  ],
+  theme: {
+    extend: {}
+  }
+}
+
+export default config
+```
+
+### CSS Variables
+
+Use CSS variables for theming:
+
+```css
+@theme {
+  --color-primary: #0070f3;
+  --color-secondary: #7928ca;
+}
+```
+
+## FlexiUI Compatibility
+
+FlexiUI is fully compatible with Tailwind CSS v4. All components work without any changes required.
+
+## Performance Benefits
+
+Tailwind CSS v4 offers significant performance improvements:
+
+- **10x faster** builds compared to v3
+- **Smaller bundle sizes** with automatic tree-shaking
+- **Better DX** with instant feedback in development
+
+## Resources
+
+- [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
+- [Migration Guide](https://tailwindcss.com/docs/upgrade-guide)
+- [FlexiUI Examples](https://github.com/flexi-ui/flexi-ui/tree/main/examples)

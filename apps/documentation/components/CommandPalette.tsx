@@ -4,7 +4,9 @@ import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Command } from 'cmdk'
 import { Search, FileText, Component, Book } from 'lucide-react'
-import { routes } from '@/config/routes.json'
+import manifest from '@/config/routes.json'
+
+const routes = manifest.routes
 
 interface CommandPaletteProps {
   isOpen: boolean
@@ -71,7 +73,7 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
                   return (
                     <Command.Item
                       key={route.key}
-                      value={`${section.title} ${route.title} ${route.keywords || ''}`}
+                      value={`${section.title} ${route.title} ${'keywords' in route ? route.keywords : ''}`}
                       onSelect={() =>
                         handleSelect(() => {
                           router.push(href)
@@ -81,10 +83,12 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
                     >
                       <Icon className="mr-2 h-4 w-4" />
                       <span>{route.title}</span>
-                      {route.updated && (
+                      {'updated' in route && route.updated && (
                         <span className="ml-auto text-xs text-primary">Updated</span>
                       )}
-                      {route.newPost && <span className="ml-auto text-xs text-success">New</span>}
+                      {'newPost' in route && route.newPost && (
+                        <span className="ml-auto text-xs text-success">New</span>
+                      )}
                     </Command.Item>
                   )
                 })}

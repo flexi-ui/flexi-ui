@@ -1,0 +1,158 @@
+---
+title: "Link"
+description: "Navigate between pages with the Link component."
+---
+
+# Link
+
+The Link component provides accessible navigation with support for external links and routing libraries.
+
+## Import
+
+```tsx
+import { Link } from '@flexi-ui/link'
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Link href="/about">About</Link>
+```
+
+### External Link
+
+```tsx
+<Link href="https://flexiui.com" isExternal>
+  Visit FlexiUI
+</Link>
+```
+
+### With Icon
+
+```tsx
+import { ExternalLink } from 'lucide-react'
+
+<Link href="https://flexiui.com" isExternal showAnchorIcon>
+  Visit FlexiUI
+</Link>
+```
+
+## API
+
+### Link Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| href | `string` | - | URL to navigate to |
+| isExternal | `boolean` | `false` | Whether link opens in new tab |
+| showAnchorIcon | `boolean` | `false` | Show external link icon |
+| isDisabled | `boolean` | `false` | Whether the link is disabled |
+| isBlock | `boolean` | `false` | Make link display as block |
+| size | `sm \| md \| lg` | `md` | Size of the link |
+| color | `foreground \| primary \| secondary \| success \| warning \| error` | `primary` | Color theme |
+| underline | `none \| hover \| always \| active \| focus` | `none` | When to show underline |
+| as | `ElementType` | `a` | Component to render as |
+| className | `string` | - | Additional CSS classes |
+| children | `ReactNode` | - | Link content |
+
+## Examples
+
+### Colors
+
+```tsx
+<Link href="#" color="foreground">Foreground</Link>
+<Link href="#" color="primary">Primary</Link>
+<Link href="#" color="secondary">Secondary</Link>
+<Link href="#" color="success">Success</Link>
+<Link href="#" color="warning">Warning</Link>
+<Link href="#" color="error">Error</Link>
+```
+
+### Sizes
+
+```tsx
+<Link href="#" size="sm">Small</Link>
+<Link href="#" size="md">Medium</Link>
+<Link href="#" size="lg">Large</Link>
+```
+
+### Underline
+
+```tsx
+<Link href="#" underline="none">No underline</Link>
+<Link href="#" underline="hover">Underline on hover</Link>
+<Link href="#" underline="always">Always underlined</Link>
+<Link href="#" underline="active">Underline when active</Link>
+<Link href="#" underline="focus">Underline on focus</Link>
+```
+
+### Block Link
+
+```tsx
+<Link href="#" isBlock>
+  This link takes up the full width
+</Link>
+```
+
+### Disabled Link
+
+```tsx
+<Link href="#" isDisabled>
+  Disabled link
+</Link>
+```
+
+### With Next.js
+
+```tsx
+import NextLink from 'next/link'
+import { Link } from '@flexi-ui/link'
+
+<Link as={NextLink} href="/about">
+  About
+</Link>
+```
+
+### With React Router
+
+```tsx
+import { Link as RouterLink } from 'react-router-dom'
+import { Link } from '@flexi-ui/link'
+
+<Link as={RouterLink} to="/about">
+  About
+</Link>
+```
+
+### With Remix
+
+```tsx
+import { Link as RemixLink } from '@remix-run/react'
+import { Link } from '@flexi-ui/link'
+
+<Link as={RemixLink} to="/about">
+  About
+</Link>
+```
+
+### Custom Styling
+
+```tsx
+<Link
+  href="#"
+  className="font-bold uppercase"
+>
+  Custom Link
+</Link>
+```
+
+## Accessibility
+
+- Links use semantic HTML with proper ARIA attributes
+- External links include `rel="noopener noreferrer"` for security
+- Disabled links have `aria-disabled` attribute
+- Supports keyboard navigation
+- Screen readers announce link purpose and destination
+- Focus states are clearly visible

@@ -1,0 +1,231 @@
+---
+title: "Create Theme"
+description: "Learn how to create a custom theme from scratch."
+---
+
+# Create Theme
+
+Build a custom theme from scratch to perfectly match your brand.
+
+## Theme Structure
+
+A FlexiUI theme consists of several key parts:
+
+```ts
+interface Theme {
+  colors: ColorTheme
+  typography: Typography
+  borderRadius: BorderRadius
+  spacing: Spacing
+}
+```
+
+## Step-by-Step Guide
+
+### 1. Define Your Colors
+
+Start by defining your color palette:
+
+```ts
+const colors = {
+  // Brand colors
+  primary: '#0070f3',
+  secondary: '#7928ca',
+
+  // Status colors
+  success: '#0cce6b',
+  warning: '#ffc107',
+  error: '#f31260',
+
+  // Background colors
+  background: {
+    light: '#ffffff',
+    dark: '#000000'
+  },
+
+  // Text colors
+  foreground: {
+    light: '#11181c',
+    dark: '#ecedee'
+  },
+
+  // Content layers
+  content1: {
+    light: '#ffffff',
+    dark: '#18181b'
+  },
+  content2: {
+    light: '#f4f4f5',
+    dark: '#27272a'
+  }
+}
+```
+
+### 2. Configure Typography
+
+Define your typography scale:
+
+```ts
+const typography = {
+  fontFamily: {
+    sans: 'Inter, system-ui, sans-serif',
+    mono: 'Fira Code, Consolas, monospace'
+  },
+  fontSize: {
+    tiny: '0.75rem',    // 12px
+    small: '0.875rem',  // 14px
+    medium: '1rem',     // 16px
+    large: '1.125rem',  // 18px
+    xlarge: '1.25rem'   // 20px
+  },
+  fontWeight: {
+    normal: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700'
+  },
+  lineHeight: {
+    tight: '1.25',
+    normal: '1.5',
+    relaxed: '1.75'
+  }
+}
+```
+
+### 3. Set Border Radius
+
+Define border radius values:
+
+```ts
+const borderRadius = {
+  none: '0',
+  small: '0.5rem',   // 8px
+  medium: '0.75rem', // 12px
+  large: '1rem',     // 16px
+  full: '9999px'
+}
+```
+
+### 4. Configure Spacing
+
+Set up your spacing scale:
+
+```ts
+const spacing = {
+  unit: 4, // Base unit in pixels
+  scale: {
+    0: '0',
+    1: '0.25rem',  // 4px
+    2: '0.5rem',   // 8px
+    3: '0.75rem',  // 12px
+    4: '1rem',     // 16px
+    5: '1.25rem',  // 20px
+    6: '1.5rem',   // 24px
+    8: '2rem',     // 32px
+    10: '2.5rem',  // 40px
+    12: '3rem',    // 48px
+    16: '4rem'     // 64px
+  }
+}
+```
+
+### 5. Combine Into Theme
+
+Combine all parts into a complete theme:
+
+```ts
+import type { Theme } from '@flexi-ui/react'
+
+export const myCustomTheme: Theme = {
+  colors,
+  typography,
+  borderRadius,
+  spacing
+}
+```
+
+### 6. Apply Your Theme
+
+Use your custom theme in your app:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+import { myCustomTheme } from './theme'
+
+function App() {
+  return (
+    <FlexiUIProvider theme={myCustomTheme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Example: Purple Theme
+
+Here's a complete purple-themed example:
+
+```ts
+export const purpleTheme: Theme = {
+  colors: {
+    primary: '#a855f7',
+    secondary: '#ec4899',
+    success: '#10b981',
+    warning: '#f59e0b',
+    error: '#ef4444',
+    background: {
+      light: '#faf5ff',
+      dark: '#1e1b4b'
+    },
+    foreground: {
+      light: '#1e1b4b',
+      dark: '#f5f3ff'
+    }
+  },
+  typography: {
+    fontFamily: {
+      sans: 'Poppins, system-ui, sans-serif',
+      mono: 'JetBrains Mono, monospace'
+    }
+  },
+  borderRadius: {
+    small: '0.75rem',
+    medium: '1rem',
+    large: '1.5rem'
+  },
+  spacing: {
+    unit: 4
+  }
+}
+```
+
+## TypeScript Support
+
+FlexiUI provides full TypeScript support for themes. Use the `Theme` type for autocomplete and type checking:
+
+```ts
+import type { Theme } from '@flexi-ui/react'
+
+const myTheme: Theme = {
+  // TypeScript will validate your theme structure
+}
+```
+
+## Testing Your Theme
+
+Test your theme across all components:
+
+```tsx
+import { Button, Input, Card } from '@flexi-ui/react'
+
+function ThemePreview() {
+  return (
+    <div className="space-y-4">
+      <Button color="primary">Primary Button</Button>
+      <Button color="secondary">Secondary Button</Button>
+      <Input label="Test Input" />
+      <Card>Test Card</Card>
+    </div>
+  )
+}
+```

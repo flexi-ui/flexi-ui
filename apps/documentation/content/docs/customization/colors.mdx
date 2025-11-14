@@ -1,0 +1,149 @@
+---
+title: "Colors"
+description: "Customize colors in FlexiUI."
+---
+
+# Colors
+
+FlexiUI provides a comprehensive color system based on semantic color tokens.
+
+## Semantic Colors
+
+FlexiUI uses semantic color names for consistent theming:
+
+### Primary Colors
+
+```tsx
+<Button color="primary">Primary</Button>
+<Button color="secondary">Secondary</Button>
+```
+
+### Status Colors
+
+```tsx
+<Button color="success">Success</Button>
+<Button color="warning">Warning</Button>
+<Button color="error">Error</Button>
+```
+
+### Neutral Colors
+
+```tsx
+<Button color="default">Default</Button>
+```
+
+## Color Palette
+
+The default color palette includes:
+
+- **primary**: Main brand color
+- **secondary**: Secondary brand color
+- **success**: Success states (#0cce6b)
+- **warning**: Warning states (#ffc107)
+- **error**: Error states (#f31260)
+- **default**: Neutral color
+
+## Customizing Colors
+
+### Via Provider
+
+Customize colors through the FlexiUIProvider:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+const theme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca',
+    success: '#0cce6b',
+    warning: '#ffc107',
+    error: '#f31260'
+  }
+}
+
+function App() {
+  return (
+    <FlexiUIProvider theme={theme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+### Via Tailwind Config
+
+Extend colors in your Tailwind configuration:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#0070f3',
+        secondary: '#7928ca'
+      }
+    }
+  }
+}
+```
+
+## Color Shades
+
+Each semantic color has light and dark variants:
+
+```tsx
+<div className="bg-primary">Primary</div>
+<div className="bg-primary/50">Primary 50%</div>
+<div className="bg-primary/20">Primary 20%</div>
+```
+
+## Background and Foreground
+
+FlexiUI uses content layers for backgrounds:
+
+```tsx
+<div className="bg-content1">Content 1</div>
+<div className="bg-content2">Content 2</div>
+<div className="bg-content3">Content 3</div>
+```
+
+## Text Colors
+
+Use foreground colors for text:
+
+```tsx
+<p className="text-foreground">Default text</p>
+<p className="text-foreground-500">Muted text</p>
+<p className="text-primary">Primary text</p>
+```
+
+## Border Colors
+
+Apply colors to borders:
+
+```tsx
+<div className="border border-divider">Divider border</div>
+<div className="border border-primary">Primary border</div>
+```
+
+## Opacity
+
+Control color opacity:
+
+```tsx
+<div className="bg-primary/10">10% opacity</div>
+<div className="bg-primary/50">50% opacity</div>
+<div className="bg-primary/90">90% opacity</div>
+```
+
+## Dark Mode
+
+Colors automatically adjust for dark mode:
+
+```tsx
+<div className="bg-background text-foreground">
+  Adapts to light/dark mode
+</div>
+```

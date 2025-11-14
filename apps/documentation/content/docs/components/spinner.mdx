@@ -1,0 +1,173 @@
+---
+title: "Spinner"
+description: "Show loading states with the Spinner component."
+---
+
+# Spinner
+
+The Spinner component displays a loading indicator to show that content is being loaded or processed.
+
+## Import
+
+```tsx
+import { Spinner } from '@flexi-ui/spinner'
+```
+
+## Usage
+
+### Basic
+
+```tsx
+<Spinner />
+```
+
+### With Label
+
+```tsx
+<Spinner label="Loading..." />
+```
+
+### Sizes
+
+```tsx
+<Spinner size="sm" />
+<Spinner size="md" />
+<Spinner size="lg" />
+```
+
+## API
+
+### Spinner Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| size | `sm \| md \| lg` | `md` | Size of the spinner |
+| color | `current \| white \| default \| primary \| secondary \| success \| warning \| error` | `primary` | Color theme |
+| label | `string` | - | Label text to display |
+| labelColor | `foreground \| primary \| secondary \| success \| warning \| error` | `foreground` | Label color |
+| className | `string` | - | Additional CSS classes |
+| classNames | `object` | - | Custom classes for slots |
+
+### Slots
+
+- **base** - The main wrapper
+- **wrapper** - The spinner wrapper
+- **circle1** - First circle
+- **circle2** - Second circle
+- **label** - The label element
+
+## Examples
+
+### Colors
+
+```tsx
+<Spinner color="default" />
+<Spinner color="primary" />
+<Spinner color="secondary" />
+<Spinner color="success" />
+<Spinner color="warning" />
+<Spinner color="error" />
+<Spinner color="white" />
+<Spinner color="current" />
+```
+
+### Sizes
+
+```tsx
+<Spinner size="sm" label="Small" />
+<Spinner size="md" label="Medium" />
+<Spinner size="lg" label="Large" />
+```
+
+### With Different Label Colors
+
+```tsx
+<Spinner
+  label="Loading..."
+  color="primary"
+  labelColor="primary"
+/>
+```
+
+### In a Button
+
+```tsx
+import { Button } from '@flexi-ui/button'
+
+<Button disabled>
+  <Spinner size="sm" color="current" />
+  Loading...
+</Button>
+```
+
+### Full Page Loading
+
+```tsx
+<div className="flex items-center justify-center min-h-screen">
+  <Spinner size="lg" label="Loading application..." />
+</div>
+```
+
+### Inline Loading
+
+```tsx
+<div className="flex items-center gap-2">
+  <Spinner size="sm" />
+  <span>Loading data...</span>
+</div>
+```
+
+### Card Loading State
+
+```tsx
+import { Card, CardBody } from '@flexi-ui/card'
+
+<Card>
+  <CardBody className="flex items-center justify-center py-12">
+    <Spinner label="Loading content..." />
+  </CardBody>
+</Card>
+```
+
+### Conditional Loading
+
+```tsx
+import { useState, useEffect } from 'react'
+
+function DataLoader() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => setIsLoading(false), 2000)
+  }, [])
+
+  if (isLoading) {
+    return <Spinner label="Loading data..." />
+  }
+
+  return <div>Data loaded!</div>
+}
+```
+
+### Custom Styling
+
+```tsx
+<Spinner
+  classNames={{
+    base: 'gap-4',
+    circle1: 'border-4',
+    circle2: 'border-4',
+    label: 'text-lg font-bold'
+  }}
+  label="Custom Spinner"
+/>
+```
+
+## Accessibility
+
+- Spinners include `role="status"` for screen readers
+- Loading state is announced to assistive technologies
+- Labels are properly associated with the spinner
+- Uses `aria-label` when no visible label is present
+- Can be used with `aria-live` regions for dynamic content

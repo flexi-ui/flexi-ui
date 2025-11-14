@@ -1,0 +1,101 @@
+---
+title: "Installation"
+description: "Learn how to install FlexiUI in your project."
+---
+
+# Installation
+
+Get started with FlexiUI by installing it in your React project.
+
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+- Node.js 18.x or higher
+- React 18 or React 19
+- Tailwind CSS 4.x
+
+## Install FlexiUI
+
+Install FlexiUI and its dependencies using your preferred package manager:
+
+### npm
+
+```bash
+npm install @flexi-ui/react @flexi-ui/theme
+```
+
+### pnpm
+
+```bash
+pnpm add @flexi-ui/react @flexi-ui/theme
+```
+
+### yarn
+
+```bash
+yarn add @flexi-ui/react @flexi-ui/theme
+```
+
+## Tailwind CSS Setup
+
+FlexiUI is built on top of Tailwind CSS. Add the FlexiUI plugin to your Tailwind configuration:
+
+### tailwind.config.js
+
+```javascript
+import { flexiui } from '@flexi-ui/theme'
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [flexiui()],
+}
+```
+
+## Provider Setup
+
+Wrap your application with the FlexiUIProvider:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+export default function App({ Component, pageProps }) {
+  return (
+    <FlexiUIProvider>
+      <Component {...pageProps} />
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Using Components
+
+Now you can import and use FlexiUI components in your application:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+
+export default function Home() {
+  return (
+    <div>
+      <Button color="primary">
+        Click me
+      </Button>
+    </div>
+  )
+}
+```
+
+## Next Steps
+
+- [Learn about routing integration](/docs/guide/routing)
+- [Customize your theme](/docs/customization/theme)
+- [Explore components](/docs/components/button)
