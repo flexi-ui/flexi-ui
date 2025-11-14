@@ -50,11 +50,6 @@ async function redirect() {
       permanent: true,
     },
     {
-      source: "/",
-      destination: "/docs/guide/introduction",
-      permanent: false,
-    },
-    {
       source: "/guide",
       destination: "/docs/guide/introduction",
       permanent: true,
