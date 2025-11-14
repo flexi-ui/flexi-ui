@@ -4,9 +4,27 @@ import { useState } from 'react'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ChevronDown, ChevronRight } from 'lucide-react'
-import { routes } from '@/config/routes.json'
 
-export const Sidebar = () => {
+interface Route {
+  key: string
+  title: string
+  path?: string
+  updated?: boolean
+  newPost?: boolean
+}
+
+interface Section {
+  key: string
+  title: string
+  defaultOpen?: boolean
+  routes: Route[]
+}
+
+interface SidebarProps {
+  routes: Section[]
+}
+
+export const Sidebar = ({ routes }: SidebarProps) => {
   const pathname = usePathname()
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
     // Auto-open sections that contain the current route
