@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "lint": "next lint",
-    "build": "next build",
+    "build": "contentlayer2 build && next build",
     "start": "next start",
-    "dev": "next dev --turbopack",
+    "dev": "rimraf .contentlayer && concurrently \"contentlayer2 dev\" \"next dev --turbopack\"",
     "clean": "rm -rf node_modules build .next"
   },
   "dependencies": {
@@ -51,8 +51,10 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "concurrently": "^9.1.2",
     "eslint": "^9.33.0",
     "eslint-config-next": "catalog:",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^4.1.12",
     "typescript": "catalog:"
   }
