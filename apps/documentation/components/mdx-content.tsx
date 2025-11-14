@@ -2,8 +2,10 @@
 
 import { useMDXComponent } from 'next-contentlayer2/hooks'
 import { CodeBlock } from '@/components/CodeBlock'
+import { MDXComponents } from '@/components/mdx-components'
 
 const components = {
+  ...MDXComponents,
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
     // Extract code from children
     const code = (children as { props?: { children?: string } })?.props?.children || ''

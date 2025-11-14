@@ -15,50 +15,69 @@ import { Button } from '@flexi-ui/button'
 
 ## Usage
 
-```tsx
-<Button color="primary">
+<Sandbox code={`<Button color="primary">
   Click me
-</Button>
-```
+</Button>`}>
+  <Button color="primary">
+    Click me
+  </Button>
+</Sandbox>
 
 ## Variants
 
 Buttons come in different variants to suit different use cases:
 
-```tsx
-<div className="flex flex-wrap gap-4">
+<Sandbox code={`<div className="flex flex-wrap gap-4">
   <Button variant="solid" color="primary">Solid</Button>
   <Button variant="bordered" color="primary">Bordered</Button>
   <Button variant="light" color="primary">Light</Button>
   <Button variant="flat" color="primary">Flat</Button>
   <Button variant="ghost" color="primary">Ghost</Button>
-</div>
-```
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Button variant="solid" color="primary">Solid</Button>
+    <Button variant="bordered" color="primary">Bordered</Button>
+    <Button variant="light" color="primary">Light</Button>
+    <Button variant="flat" color="primary">Flat</Button>
+    <Button variant="ghost" color="primary">Ghost</Button>
+  </div>
+</Sandbox>
 
 ## Colors
 
 Choose from various color schemes:
 
-```tsx
-<div className="flex flex-wrap gap-4">
+<Sandbox code={`<div className="flex flex-wrap gap-4">
   <Button color="default">Default</Button>
   <Button color="primary">Primary</Button>
   <Button color="secondary">Secondary</Button>
   <Button color="success">Success</Button>
   <Button color="warning">Warning</Button>
   <Button color="danger">Danger</Button>
-</div>
-```
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Button color="default">Default</Button>
+    <Button color="primary">Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="success">Success</Button>
+    <Button color="warning">Warning</Button>
+    <Button color="danger">Danger</Button>
+  </div>
+</Sandbox>
 
 ## Sizes
 
-```tsx
-<div className="flex flex-wrap items-center gap-4">
+<Sandbox code={`<div className="flex flex-wrap items-center gap-4">
   <Button size="sm" color="primary">Small</Button>
   <Button size="md" color="primary">Medium</Button>
   <Button size="lg" color="primary">Large</Button>
-</div>
-```
+</div>`}>
+  <div className="flex flex-wrap items-center gap-4">
+    <Button size="sm" color="primary">Small</Button>
+    <Button size="md" color="primary">Medium</Button>
+    <Button size="lg" color="primary">Large</Button>
+  </div>
+</Sandbox>
 
 ## API Reference
 

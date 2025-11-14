@@ -115,7 +115,7 @@ export default async function DocPage({ params }: DocPageProps) {
       </div>
       {headings && headings.length > 0 && (
         <div className="hidden z-10 xl:flex xl:col-span-2 mt-8 pl-0">
-          <div className="sticky top-20">
+          <div className="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto">
             <DocsToc headings={headings} />
           </div>
         </div>
