@@ -1,25 +1,206 @@
 ---
 title: "Routing"
-description: "Learn how to use FlexiUI with client-side routing libraries."
+description: "Complete guide to integrating FlexiUI with popular React routing libraries and frameworks."
 ---
 
 # Routing
 
-FlexiUI works seamlessly with all popular React routing solutions, including Next.js App Router, React Router, and Remix.
+FlexiUI works seamlessly with all popular React routing solutions. This guide covers integration patterns for Next.js, React Router, Remix, and other routing libraries.
 
-## Next.js App Router
+## Core Concepts
 
-FlexiUI components are fully compatible with Next.js 13+ App Router:
+FlexiUI components support flexible routing through:
+
+- **Polymorphic `as` prop** - Render components as different elements
+- **Framework-agnostic design** - Works with any routing library
+- **Native link components** - Built-in Link component with routing support
+- **Programmatic navigation** - Support for imperative routing
+
+## Next.js
+
+### App Router (Next.js 13+)
+
+FlexiUI components work out of the box with Next.js App Router.
+
+#### Using the Link Component
+
+The FlexiUI Link component automatically uses Next.js's `next/link` when available:
+
+```tsx
+import { Link } from '@flexi-ui/link'
+
+export default function Navigation() {
+  return (
+    <nav className="flex gap-4">
+      <Link href="/">Home</Link>
+      <Link href="/about">About</Link>
+      <Link href="/blog">Blog</Link>
+    </nav>
+  )
+}
+```
+
+#### Using Button as Link
+
+Convert buttons to links using the `href` prop:
 
 ```tsx
 import { Button } from '@flexi-ui/button'
+
+export default function CTASection() {
+  return (
+    <div className="flex gap-4">
+      <Button href="/get-started" color="primary">
+        Get Started
+      </Button>
+      <Button href="/docs" variant="bordered">
+        Read Docs
+      </Button>
+    </div>
+  )
+}
+```
+
+#### External Links
+
+External links automatically open in a new tab:
+
+```tsx
 import { Link } from '@flexi-ui/link'
+
+export default function Footer() {
+  return (
+    <footer>
+      <Link href="https://github.com/flexi-ui" isExternal>
+        GitHub
+      </Link>
+      <Link href="https://twitter.com/flexiui" isExternal>
+        Twitter
+      </Link>
+    </footer>
+  )
+}
+```
+
+#### Active Link Styling
+
+Style links based on active state using Next.js's `usePathname`:
+
+```tsx
+'use client'
+
+import { Link } from '@flexi-ui/link'
+import { usePathname } from 'next/navigation'
+
+export default function NavBar() {
+  const pathname = usePathname()
+
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
+  ]
+
+  return (
+    <nav className="flex gap-4">
+      {links.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          color={pathname === link.href ? 'primary' : 'foreground'}
+          underline={pathname === link.href ? 'always' : 'hover'}
+        >
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  )
+}
+```
+
+#### Programmatic Navigation
+
+Use Next.js router for programmatic navigation:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/button'
+import { useRouter } from 'next/navigation'
+
+export default function LoginForm() {
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    // Perform login logic
+    await login()
+    // Navigate to dashboard
+    router.push('/dashboard')
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Form fields */}
+      <Button type="submit" color="primary">
+        Login
+      </Button>
+    </form>
+  )
+}
+```
+
+#### Dynamic Routes
+
+Navigate to dynamic routes with parameters:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+
+export default function ProductCard({ productId }: { productId: string }) {
+  return (
+    <Button href={`/products/${productId}`} variant="bordered">
+      View Product
+    </Button>
+  )
+}
+```
+
+#### Prefetching
+
+Next.js automatically prefetches links. Control this behavior:
+
+```tsx
+import { Link } from '@flexi-ui/link'
+
+export default function Navigation() {
+  return (
+    <>
+      {/* Prefetch on hover (default) */}
+      <Link href="/dashboard">Dashboard</Link>
+
+      {/* Disable prefetching */}
+      <Link href="/heavy-page" prefetch={false}>
+        Heavy Page
+      </Link>
+    </>
+  )
+}
+```
+
+### Pages Router (Next.js 12 and below)
+
+For Pages Router, use the same patterns:
+
+```tsx
+import { Link } from '@flexi-ui/link'
+import { Button } from '@flexi-ui/button'
 
 export default function Page() {
   return (
     <div>
-      <Link href="/about">About</Link>
-      <Button>Click me</Button>
+      <Link href="/about">About Us</Link>
+      <Button href="/contact">Contact</Button>
     </div>
   )
 }
@@ -27,38 +208,607 @@ export default function Page() {
 
 ## React Router
 
-Use FlexiUI components with React Router:
+### Basic Integration
+
+Use FlexiUI components with React Router v6:
+
+#### Link Component
+
+Use the `as` prop to integrate with React Router's Link:
+
+```tsx
+import { Link as RouterLink } from 'react-router-dom'
+import { Link } from '@flexi-ui/link'
+
+export default function Navigation() {
+  return (
+    <nav className="flex gap-4">
+      <Link as={RouterLink} to="/">
+        Home
+      </Link>
+      <Link as={RouterLink} to="/about">
+        About
+      </Link>
+      <Link as={RouterLink} to="/contact">
+        Contact
+      </Link>
+    </nav>
+  )
+}
+```
+
+#### Button as Link
+
+Convert buttons to router links:
 
 ```tsx
 import { Link as RouterLink } from 'react-router-dom'
 import { Button } from '@flexi-ui/button'
 
-function App() {
+export default function CTAButtons() {
   return (
-    <Button as={RouterLink} to="/dashboard">
-      Go to Dashboard
+    <div className="flex gap-4">
+      <Button as={RouterLink} to="/signup" color="primary">
+        Sign Up
+      </Button>
+      <Button as={RouterLink} to="/login" variant="bordered">
+        Login
+      </Button>
+    </div>
+  )
+}
+```
+
+#### Active Link Styling
+
+Use React Router's `useLocation` to style active links:
+
+```tsx
+import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { Link } from '@flexi-ui/link'
+
+export default function NavBar() {
+  const location = useLocation()
+
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/services', label: 'Services' },
+  ]
+
+  return (
+    <nav className="flex gap-4">
+      {links.map((link) => (
+        <Link
+          key={link.to}
+          as={RouterLink}
+          to={link.to}
+          color={location.pathname === link.to ? 'primary' : 'foreground'}
+          underline={location.pathname === link.to ? 'always' : 'hover'}
+        >
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  )
+}
+```
+
+#### NavLink Integration
+
+Use React Router's NavLink for automatic active styling:
+
+```tsx
+import { NavLink } from 'react-router-dom'
+import { Link } from '@flexi-ui/link'
+
+export default function SideNav() {
+  return (
+    <nav className="flex flex-col gap-2">
+      <Link
+        as={NavLink}
+        to="/dashboard"
+        className={({ isActive }) =>
+          isActive ? 'text-primary font-semibold' : 'text-foreground'
+        }
+      >
+        Dashboard
+      </Link>
+      <Link
+        as={NavLink}
+        to="/settings"
+        className={({ isActive }) =>
+          isActive ? 'text-primary font-semibold' : 'text-foreground'
+        }
+      >
+        Settings
+      </Link>
+    </nav>
+  )
+}
+```
+
+#### Programmatic Navigation
+
+Use React Router's `useNavigate`:
+
+```tsx
+import { useNavigate } from 'react-router-dom'
+import { Button } from '@flexi-ui/button'
+
+export default function CheckoutForm() {
+  const navigate = useNavigate()
+
+  const handleCheckout = async () => {
+    const success = await processPayment()
+    if (success) {
+      navigate('/order-confirmation')
+    }
+  }
+
+  return (
+    <Button onPress={handleCheckout} color="primary">
+      Complete Purchase
     </Button>
+  )
+}
+```
+
+#### Route Parameters
+
+Access route parameters with `useParams`:
+
+```tsx
+import { useParams, Link as RouterLink } from 'react-router-dom'
+import { Button } from '@flexi-ui/button'
+
+export default function UserProfile() {
+  const { userId } = useParams()
+
+  return (
+    <div>
+      <h1>User Profile: {userId}</h1>
+      <Button as={RouterLink} to={`/users/${userId}/edit`}>
+        Edit Profile
+      </Button>
+    </div>
   )
 }
 ```
 
 ## Remix
 
-FlexiUI integrates smoothly with Remix:
+### Basic Integration
+
+FlexiUI integrates seamlessly with Remix's routing:
+
+#### Using Remix Link
 
 ```tsx
 import { Link as RemixLink } from '@remix-run/react'
+import { Link } from '@flexi-ui/link'
 import { Button } from '@flexi-ui/button'
 
-export default function Index() {
+export default function Navigation() {
   return (
-    <Button as={RemixLink} to="/profile">
-      View Profile
+    <nav className="flex gap-4">
+      <Link as={RemixLink} to="/">
+        Home
+      </Link>
+      <Link as={RemixLink} to="/about">
+        About
+      </Link>
+      <Button as={RemixLink} to="/contact">
+        Contact
+      </Button>
+    </nav>
+  )
+}
+```
+
+#### Prefetching
+
+Use Remix's prefetch feature:
+
+```tsx
+import { Link as RemixLink } from '@remix-run/react'
+import { Link } from '@flexi-ui/link'
+
+export default function Navigation() {
+  return (
+    <nav>
+      {/* Prefetch on hover */}
+      <Link as={RemixLink} to="/dashboard" prefetch="intent">
+        Dashboard
+      </Link>
+
+      {/* Prefetch immediately */}
+      <Link as={RemixLink} to="/profile" prefetch="render">
+        Profile
+      </Link>
+    </nav>
+  )
+}
+```
+
+#### Active Link Styling
+
+Use `useLocation` from Remix:
+
+```tsx
+import { Link as RemixLink, useLocation } from '@remix-run/react'
+import { Link } from '@flexi-ui/link'
+
+export default function SideBar() {
+  const location = useLocation()
+
+  const isActive = (path: string) => location.pathname === path
+
+  return (
+    <aside className="flex flex-col gap-2">
+      <Link
+        as={RemixLink}
+        to="/dashboard"
+        color={isActive('/dashboard') ? 'primary' : 'foreground'}
+      >
+        Dashboard
+      </Link>
+      <Link
+        as={RemixLink}
+        to="/analytics"
+        color={isActive('/analytics') ? 'primary' : 'foreground'}
+      >
+        Analytics
+      </Link>
+    </aside>
+  )
+}
+```
+
+#### Form Navigation
+
+Use Remix's Form component with FlexiUI:
+
+```tsx
+import { Form } from '@remix-run/react'
+import { Button } from '@flexi-ui/button'
+import { Input } from '@flexi-ui/input'
+
+export default function SearchForm() {
+  return (
+    <Form method="get" action="/search" className="flex gap-2">
+      <Input name="q" placeholder="Search..." />
+      <Button type="submit" color="primary">
+        Search
+      </Button>
+    </Form>
+  )
+}
+```
+
+## Tanstack Router
+
+### Integration with Tanstack Router
+
+FlexiUI works with Tanstack Router:
+
+```tsx
+import { Link as TanstackLink } from '@tanstack/react-router'
+import { Link } from '@flexi-ui/link'
+import { Button } from '@flexi-ui/button'
+
+export default function Navigation() {
+  return (
+    <nav className="flex gap-4">
+      <Link as={TanstackLink} to="/">
+        Home
+      </Link>
+      <Button as={TanstackLink} to="/dashboard">
+        Dashboard
+      </Button>
+    </nav>
+  )
+}
+```
+
+## Common Patterns
+
+### Navigation Menu
+
+Create a reusable navigation menu:
+
+```tsx
+'use client'
+
+import { Link } from '@flexi-ui/link'
+import { usePathname } from 'next/navigation' // or your router's hook
+
+interface NavItem {
+  label: string
+  href: string
+}
+
+const navItems: NavItem[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+]
+
+export default function Navigation() {
+  const pathname = usePathname()
+
+  return (
+    <nav className="flex gap-6">
+      {navItems.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          color={pathname === item.href ? 'primary' : 'foreground'}
+          className={pathname === item.href ? 'font-semibold' : ''}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </nav>
+  )
+}
+```
+
+### Breadcrumbs
+
+Build breadcrumb navigation:
+
+```tsx
+import { Link } from '@flexi-ui/link'
+
+interface BreadcrumbItem {
+  label: string
+  href: string
+}
+
+interface BreadcrumbsProps {
+  items: BreadcrumbItem[]
+}
+
+export function Breadcrumbs({ items }: BreadcrumbsProps) {
+  return (
+    <nav className="flex items-center gap-2 text-sm">
+      {items.map((item, index) => (
+        <div key={item.href} className="flex items-center gap-2">
+          {index > 0 && <span className="text-default-400">/</span>}
+          {index === items.length - 1 ? (
+            <span className="text-foreground">{item.label}</span>
+          ) : (
+            <Link href={item.href} color="foreground">
+              {item.label}
+            </Link>
+          )}
+        </div>
+      ))}
+    </nav>
+  )
+}
+
+// Usage
+export default function ProductPage() {
+  return (
+    <div>
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Products', href: '/products' },
+          { label: 'Laptop', href: '/products/laptop' },
+        ]}
+      />
+    </div>
+  )
+}
+```
+
+### Tab Navigation
+
+Create tab-based navigation:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/button'
+import { usePathname, useRouter } from 'next/navigation'
+
+interface Tab {
+  label: string
+  path: string
+}
+
+const tabs: Tab[] = [
+  { label: 'Overview', path: '/dashboard' },
+  { label: 'Analytics', path: '/dashboard/analytics' },
+  { label: 'Settings', path: '/dashboard/settings' },
+]
+
+export function TabNavigation() {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  return (
+    <div className="flex gap-2 border-b border-divider">
+      {tabs.map((tab) => (
+        <Button
+          key={tab.path}
+          variant={pathname === tab.path ? 'light' : 'flat'}
+          color={pathname === tab.path ? 'primary' : 'default'}
+          onPress={() => router.push(tab.path)}
+          className="rounded-b-none"
+        >
+          {tab.label}
+        </Button>
+      ))}
+    </div>
+  )
+}
+```
+
+### Protected Routes
+
+Implement route protection:
+
+```tsx
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { Spinner } from '@flexi-ui/spinner'
+
+interface ProtectedRouteProps {
+  children: React.ReactNode
+}
+
+export function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const router = useRouter()
+  const { user, loading } = useAuth() // Your auth hook
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login')
+    }
+  }, [user, loading, router])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Spinner size="lg" />
+      </div>
+    )
+  }
+
+  if (!user) {
+    return null
+  }
+
+  return <>{children}</>
+}
+```
+
+### Back Button
+
+Create a back navigation button:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/button'
+import { useRouter } from 'next/navigation'
+import { ArrowLeft } from 'lucide-react'
+
+export function BackButton() {
+  const router = useRouter()
+
+  return (
+    <Button
+      variant="light"
+      onPress={() => router.back()}
+      startContent={<ArrowLeft className="w-4 h-4" />}
+    >
+      Back
     </Button>
   )
 }
 ```
 
-## Client-Side Navigation
+## Best Practices
 
-All FlexiUI components support the `as` prop, allowing you to use them with any routing library while maintaining their styling and behavior.
+### 1. Use Native Framework Components
+
+When possible, use your framework's native link component with FlexiUI's `as` prop for optimal performance.
+
+### 2. Prefetch Strategic Routes
+
+Enable prefetching for frequently accessed routes to improve perceived performance:
+
+```tsx
+<Link href="/dashboard" prefetch>
+  Dashboard
+</Link>
+```
+
+### 3. Handle External Links
+
+Always use `isExternal` or `target="_blank"` for external links:
+
+```tsx
+<Link href="https://external.com" isExternal>
+  External Site
+</Link>
+```
+
+### 4. Accessibility
+
+Ensure navigation is keyboard accessible and has proper ARIA labels:
+
+```tsx
+<nav aria-label="Main navigation">
+  <Link href="/">Home</Link>
+  <Link href="/about">About</Link>
+</nav>
+```
+
+### 5. Loading States
+
+Show loading indicators during navigation:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/button'
+import { useState } from 'react'
+
+export function NavigationButton() {
+  const [loading, setLoading] = useState(false)
+
+  return (
+    <Button
+      href="/slow-page"
+      isLoading={loading}
+      onPress={() => setLoading(true)}
+    >
+      Load Page
+    </Button>
+  )
+}
+```
+
+## Troubleshooting
+
+### Links Not Working
+
+**Problem:** Links render but don't navigate.
+
+**Solution:** Ensure you're using the correct prop name for your router:
+- Next.js: `href`
+- React Router: `to`
+- Remix: `to`
+
+### Active State Not Updating
+
+**Problem:** Active link styling doesn't update on navigation.
+
+**Solution:** Make sure your component is a client component:
+
+```tsx
+'use client' // Add this for Next.js App Router
+
+import { usePathname } from 'next/navigation'
+```
+
+### Prefetching Not Working
+
+**Problem:** Links don't prefetch as expected.
+
+**Solution:** Check that your framework's prefetching is enabled and the link is visible in the viewport.
+
+## Next Steps
+
+- **[Forms Guide](/docs/guide/forms)** - Learn about form handling and validation
+- **[Link Component](/docs/components/link)** - Explore Link component API
+- **[Button Component](/docs/components/button)** - Learn about Button navigation features
