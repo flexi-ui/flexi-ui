@@ -1,117 +1,978 @@
 ---
 title: "Layout"
-description: "Customize the layout system in FlexiUI."
+description: "Complete guide to layout systems, grid, flexbox, and spacing in FlexiUI."
 ---
 
 # Layout
 
-FlexiUI provides flexible layout utilities built on Tailwind CSS to help you create responsive designs.
+FlexiUI provides a comprehensive layout system built on Tailwind CSS, offering powerful utilities for creating responsive, flexible designs. This guide covers everything from basic layouts to advanced patterns.
+
+## Overview
+
+The FlexiUI layout system includes:
+
+- **Grid System** - CSS Grid for complex layouts
+- **Flexbox** - Flexible box layouts
+- **Spacing** - Consistent spacing scale
+- **Container** - Responsive containers
+- **Stack** - Vertical and horizontal stacks
+- **Responsive Design** - Mobile-first breakpoints
 
 ## Container
 
-Use container utilities for responsive layouts:
+### Basic Container
+
+Use containers to center content with responsive padding:
 
 ```tsx
 <div className="container mx-auto px-4">
-  {/* Your content */}
+  {/* Content is centered with padding */}
+</div>
+```
+
+### Container Sizes
+
+Control maximum width with size utilities:
+
+```tsx
+{/* Full width container */}
+<div className="container mx-auto">
+  Full width
+</div>
+
+{/* Max width containers */}
+<div className="max-w-screen-sm mx-auto px-4">
+  Small (640px)
+</div>
+
+<div className="max-w-screen-md mx-auto px-4">
+  Medium (768px)
+</div>
+
+<div className="max-w-screen-lg mx-auto px-4">
+  Large (1024px)
+</div>
+
+<div className="max-w-screen-xl mx-auto px-4">
+  Extra Large (1280px)
+</div>
+
+<div className="max-w-screen-2xl mx-auto px-4">
+  2X Large (1536px)
+</div>
+```
+
+### Custom Max Width
+
+Use arbitrary values for custom widths:
+
+```tsx
+<div className="max-w-7xl mx-auto px-4">
+  {/* 80rem max width */}
+</div>
+
+<div className="max-w-[1200px] mx-auto px-4">
+  {/* Custom 1200px max width */}
 </div>
 ```
 
 ## Grid System
 
-Create grid layouts with Tailwind's grid utilities:
+### Basic Grid
+
+Create responsive grid layouts:
 
 ```tsx
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <div>Column 1</div>
-  <div>Column 2</div>
-  <div>Column 3</div>
+  <div className="bg-content2 p-4 rounded">Column 1</div>
+  <div className="bg-content2 p-4 rounded">Column 2</div>
+  <div className="bg-content2 p-4 rounded">Column 3</div>
+</div>
+```
+
+### Grid with Different Column Counts
+
+```tsx
+{/* 4 columns */}
+<div className="grid grid-cols-4 gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+</div>
+
+{/* 6 columns */}
+<div className="grid grid-cols-6 gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
+</div>
+
+{/* 12 columns (Bootstrap-style) */}
+<div className="grid grid-cols-12 gap-4">
+  <div className="col-span-6">Half width</div>
+  <div className="col-span-6">Half width</div>
+</div>
+```
+
+### Responsive Grid
+
+Different columns at different breakpoints:
+
+```tsx
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+  <div>Item 5</div>
+  <div>Item 6</div>
+</div>
+```
+
+### Column Spanning
+
+Items can span multiple columns:
+
+```tsx
+<div className="grid grid-cols-3 gap-4">
+  <div className="col-span-2 bg-primary text-primary-foreground p-4">
+    Spans 2 columns
+  </div>
+  <div className="bg-secondary text-secondary-foreground p-4">
+    1 column
+  </div>
+  <div className="bg-success text-success-foreground p-4">
+    1 column
+  </div>
+  <div className="col-span-2 bg-warning text-warning-foreground p-4">
+    Spans 2 columns
+  </div>
+</div>
+```
+
+### Grid Template Areas
+
+Create named grid areas:
+
+```tsx
+<div className="grid gap-4" style={{
+  gridTemplateAreas: `
+    "header header header"
+    "sidebar main main"
+    "footer footer footer"
+  `,
+  gridTemplateColumns: '200px 1fr 1fr',
+}}>
+  <div style={{ gridArea: 'header' }} className="bg-primary text-primary-foreground p-4">
+    Header
+  </div>
+  <div style={{ gridArea: 'sidebar' }} className="bg-secondary text-secondary-foreground p-4">
+    Sidebar
+  </div>
+  <div style={{ gridArea: 'main' }} className="bg-content2 p-4">
+    Main Content
+  </div>
+  <div style={{ gridArea: 'footer' }} className="bg-default p-4">
+    Footer
+  </div>
+</div>
+```
+
+### Auto-Fill and Auto-Fit
+
+Responsive grids without breakpoints:
+
+```tsx
+{/* Auto-fill: fills the row with as many items as possible */}
+<div className="grid gap-4" style={{
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))'
+}}>
+  <div className="bg-content2 p-4">Item 1</div>
+  <div className="bg-content2 p-4">Item 2</div>
+  <div className="bg-content2 p-4">Item 3</div>
+  <div className="bg-content2 p-4">Item 4</div>
+</div>
+
+{/* Auto-fit: stretches items to fill available space */}
+<div className="grid gap-4" style={{
+  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))'
+}}>
+  <div className="bg-content2 p-4">Item 1</div>
+  <div className="bg-content2 p-4">Item 2</div>
 </div>
 ```
 
 ## Flexbox Layouts
 
-Use flexbox for flexible layouts:
+### Basic Flex
+
+Create flexible layouts:
 
 ```tsx
-<div className="flex items-center justify-between">
-  <div>Left</div>
-  <div>Right</div>
+<div className="flex gap-4">
+  <div className="bg-primary text-primary-foreground p-4">Item 1</div>
+  <div className="bg-secondary text-secondary-foreground p-4">Item 2</div>
+  <div className="bg-success text-success-foreground p-4">Item 3</div>
+</div>
+```
+
+### Flex Direction
+
+Control the direction of flex items:
+
+```tsx
+{/* Row (default) */}
+<div className="flex flex-row gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+
+{/* Column */}
+<div className="flex flex-col gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+
+{/* Row reverse */}
+<div className="flex flex-row-reverse gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+
+{/* Column reverse */}
+<div className="flex flex-col-reverse gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+```
+
+### Justify Content
+
+Align items along the main axis:
+
+```tsx
+{/* Start */}
+<div className="flex justify-start gap-4">
+  <div>1</div>
+  <div>2</div>
+</div>
+
+{/* Center */}
+<div className="flex justify-center gap-4">
+  <div>1</div>
+  <div>2</div>
+</div>
+
+{/* End */}
+<div className="flex justify-end gap-4">
+  <div>1</div>
+  <div>2</div>
+</div>
+
+{/* Space between */}
+<div className="flex justify-between">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+
+{/* Space around */}
+<div className="flex justify-around">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+
+{/* Space evenly */}
+<div className="flex justify-evenly">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+```
+
+### Align Items
+
+Align items along the cross axis:
+
+```tsx
+{/* Stretch (default) */}
+<div className="flex items-stretch h-32">
+  <div className="bg-primary">1</div>
+  <div className="bg-secondary">2</div>
+</div>
+
+{/* Start */}
+<div className="flex items-start h-32">
+  <div className="bg-primary p-4">1</div>
+  <div className="bg-secondary p-4">2</div>
+</div>
+
+{/* Center */}
+<div className="flex items-center h-32">
+  <div className="bg-primary p-4">1</div>
+  <div className="bg-secondary p-4">2</div>
+</div>
+
+{/* End */}
+<div className="flex items-end h-32">
+  <div className="bg-primary p-4">1</div>
+  <div className="bg-secondary p-4">2</div>
+</div>
+
+{/* Baseline */}
+<div className="flex items-baseline h-32">
+  <div className="bg-primary text-4xl p-4">1</div>
+  <div className="bg-secondary text-sm p-4">2</div>
+</div>
+```
+
+### Flex Wrap
+
+Control wrapping behavior:
+
+```tsx
+{/* Wrap */}
+<div className="flex flex-wrap gap-4">
+  <div className="w-40 bg-content2 p-4">1</div>
+  <div className="w-40 bg-content2 p-4">2</div>
+  <div className="w-40 bg-content2 p-4">3</div>
+  <div className="w-40 bg-content2 p-4">4</div>
+</div>
+
+{/* Wrap reverse */}
+<div className="flex flex-wrap-reverse gap-4">
+  <div className="w-40 bg-content2 p-4">1</div>
+  <div className="w-40 bg-content2 p-4">2</div>
+  <div className="w-40 bg-content2 p-4">3</div>
+  <div className="w-40 bg-content2 p-4">4</div>
+</div>
+
+{/* No wrap */}
+<div className="flex flex-nowrap gap-4 overflow-x-auto">
+  <div className="w-40 flex-shrink-0 bg-content2 p-4">1</div>
+  <div className="w-40 flex-shrink-0 bg-content2 p-4">2</div>
+  <div className="w-40 flex-shrink-0 bg-content2 p-4">3</div>
+</div>
+```
+
+### Flex Grow and Shrink
+
+Control how items grow and shrink:
+
+```tsx
+{/* Grow */}
+<div className="flex gap-4">
+  <div className="flex-1 bg-primary text-primary-foreground p-4">
+    Grows to fill space
+  </div>
+  <div className="bg-secondary text-secondary-foreground p-4">
+    Fixed width
+  </div>
+</div>
+
+{/* Different grow values */}
+<div className="flex gap-4">
+  <div className="flex-1 bg-primary text-primary-foreground p-4">
+    flex-1
+  </div>
+  <div className="flex-2 bg-secondary text-secondary-foreground p-4">
+    flex-2 (grows twice as much)
+  </div>
+</div>
+
+{/* Shrink */}
+<div className="flex gap-4">
+  <div className="flex-shrink-0 w-64 bg-primary text-primary-foreground p-4">
+    Won't shrink
+  </div>
+  <div className="flex-shrink bg-secondary text-secondary-foreground p-4">
+    Will shrink
+  </div>
 </div>
 ```
 
 ## Spacing
 
-FlexiUI uses Tailwind's spacing scale:
+### Padding
+
+Add internal spacing:
 
 ```tsx
-<div className="p-4">Padding</div>
-<div className="m-4">Margin</div>
+{/* All sides */}
+<div className="p-4">Padding all sides</div>
+
+{/* Specific sides */}
+<div className="pt-4">Padding top</div>
+<div className="pr-4">Padding right</div>
+<div className="pb-4">Padding bottom</div>
+<div className="pl-4">Padding left</div>
+
+{/* Horizontal and vertical */}
+<div className="px-4">Padding horizontal</div>
+<div className="py-4">Padding vertical</div>
+
+{/* Different sizes */}
+<div className="p-0">No padding</div>
+<div className="p-1">0.25rem</div>
+<div className="p-2">0.5rem</div>
+<div className="p-4">1rem</div>
+<div className="p-8">2rem</div>
+<div className="p-16">4rem</div>
+```
+
+### Margin
+
+Add external spacing:
+
+```tsx
+{/* All sides */}
+<div className="m-4">Margin all sides</div>
+
+{/* Specific sides */}
+<div className="mt-4">Margin top</div>
+<div className="mr-4">Margin right</div>
+<div className="mb-4">Margin bottom</div>
+<div className="ml-4">Margin left</div>
+
+{/* Horizontal and vertical */}
+<div className="mx-4">Margin horizontal</div>
+<div className="my-4">Margin vertical</div>
+
+{/* Auto margins for centering */}
+<div className="mx-auto">Centered horizontally</div>
+
+{/* Negative margins */}
+<div className="-mt-4">Negative margin top</div>
+```
+
+### Gap
+
+Space between flex/grid items:
+
+```tsx
+{/* Flex gap */}
+<div className="flex gap-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+
+{/* Grid gap */}
+<div className="grid grid-cols-3 gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+
+{/* Different horizontal and vertical gaps */}
+<div className="grid grid-cols-2 gap-x-4 gap-y-8">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+</div>
+
+{/* Gap sizes */}
+<div className="flex gap-0">No gap</div>
+<div className="flex gap-1">0.25rem</div>
+<div className="flex gap-2">0.5rem</div>
+<div className="flex gap-4">1rem</div>
+<div className="flex gap-8">2rem</div>
+```
+
+### Space Between
+
+Legacy spacing utility:
+
+```tsx
+{/* Vertical spacing */}
 <div className="space-y-4">
   <div>Item 1</div>
   <div>Item 2</div>
+  <div>Item 3</div>
 </div>
-```
 
-## Responsive Design
-
-Use responsive breakpoints:
-
-```tsx
-<div className="w-full md:w-1/2 lg:w-1/3">
-  Responsive width
-</div>
-```
-
-## Max Width
-
-Control maximum width:
-
-```tsx
-<div className="max-w-7xl mx-auto">
-  {/* Content */}
-</div>
-```
-
-## Aspect Ratio
-
-Maintain aspect ratios:
-
-```tsx
-<div className="aspect-video">
-  <img src="image.jpg" alt="16:9 aspect ratio" />
-</div>
-```
-
-## Stack Layout
-
-Create vertical stacks with consistent spacing:
-
-```tsx
-<div className="space-y-4">
+{/* Horizontal spacing */}
+<div className="flex space-x-4">
   <div>Item 1</div>
   <div>Item 2</div>
   <div>Item 3</div>
 </div>
 ```
 
-## Center Content
+## Common Layout Patterns
 
-Center content horizontally and vertically:
+### Hero Section
+
+Full-width hero with centered content:
 
 ```tsx
+<section className="relative h-screen flex items-center justify-center bg-gradient-to-r from-primary to-secondary">
+  <div className="container mx-auto px-4 text-center">
+    <h1 className="text-5xl font-bold text-white mb-4">
+      Welcome to FlexiUI
+    </h1>
+    <p className="text-xl text-white/90 mb-8">
+      Build beautiful UIs faster
+    </p>
+    <Button size="lg" color="primary">
+      Get Started
+    </Button>
+  </div>
+</section>
+```
+
+### Card Grid
+
+Responsive card layout:
+
+```tsx
+<div className="container mx-auto px-4 py-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {cards.map((card) => (
+      <div key={card.id} className="bg-content1 rounded-lg p-6 shadow-md">
+        <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+        <p className="text-default-500">{card.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
+```
+
+### Sidebar Layout
+
+Fixed sidebar with scrollable main content:
+
+```tsx
+<div className="flex h-screen">
+  {/* Sidebar */}
+  <aside className="w-64 bg-content2 p-6 overflow-y-auto">
+    <nav className="space-y-2">
+      <a href="#" className="block p-2 rounded hover:bg-default">
+        Dashboard
+      </a>
+      <a href="#" className="block p-2 rounded hover:bg-default">
+        Settings
+      </a>
+    </nav>
+  </aside>
+
+  {/* Main content */}
+  <main className="flex-1 overflow-y-auto p-8">
+    <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+    {/* Content */}
+  </main>
+</div>
+```
+
+### Navbar
+
+Responsive navigation bar:
+
+```tsx
+<nav className="bg-content1 shadow-md">
+  <div className="container mx-auto px-4">
+    <div className="flex items-center justify-between h-16">
+      {/* Logo */}
+      <div className="flex items-center">
+        <span className="text-xl font-bold">FlexiUI</span>
+      </div>
+
+      {/* Navigation links */}
+      <div className="hidden md:flex items-center space-x-4">
+        <a href="#" className="hover:text-primary">Home</a>
+        <a href="#" className="hover:text-primary">About</a>
+        <a href="#" className="hover:text-primary">Contact</a>
+      </div>
+
+      {/* Mobile menu button */}
+      <button className="md:hidden">
+        <MenuIcon />
+      </button>
+    </div>
+  </div>
+</nav>
+```
+
+### Split Layout
+
+Two-column split layout:
+
+```tsx
+<div className="min-h-screen flex">
+  {/* Left side */}
+  <div className="hidden lg:flex lg:w-1/2 bg-primary items-center justify-center p-12">
+    <div className="max-w-md text-primary-foreground">
+      <h2 className="text-4xl font-bold mb-4">Welcome Back</h2>
+      <p className="text-lg">Sign in to continue to your account</p>
+    </div>
+  </div>
+
+  {/* Right side */}
+  <div className="flex-1 flex items-center justify-center p-8">
+    <div className="w-full max-w-md">
+      {/* Login form */}
+    </div>
+  </div>
+</div>
+```
+
+### Dashboard Layout
+
+Dashboard with header, sidebar, and main content:
+
+```tsx
+<div className="flex h-screen bg-background">
+  {/* Sidebar */}
+  <aside className="w-64 bg-content1 border-r border-divider">
+    <div className="p-6">
+      <h2 className="text-xl font-bold">Dashboard</h2>
+    </div>
+    <nav className="px-4 space-y-2">
+      {/* Navigation items */}
+    </nav>
+  </aside>
+
+  {/* Main area */}
+  <div className="flex-1 flex flex-col overflow-hidden">
+    {/* Header */}
+    <header className="h-16 bg-content1 border-b border-divider flex items-center px-6">
+      <h1 className="text-xl font-semibold">Overview</h1>
+    </header>
+
+    {/* Content */}
+    <main className="flex-1 overflow-y-auto p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Dashboard cards */}
+      </div>
+    </main>
+  </div>
+</div>
+```
+
+### Sticky Header
+
+Header that sticks to the top:
+
+```tsx
+<div>
+  {/* Sticky header */}
+  <header className="sticky top-0 z-50 bg-content1 shadow-md">
+    <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <span className="text-xl font-bold">FlexiUI</span>
+      <nav className="space-x-4">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+      </nav>
+    </div>
+  </header>
+
+  {/* Page content */}
+  <main className="container mx-auto px-4 py-8">
+    {/* Content */}
+  </main>
+</div>
+```
+
+### Footer
+
+Responsive footer layout:
+
+```tsx
+<footer className="bg-content2 border-t border-divider">
+  <div className="container mx-auto px-4 py-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Company */}
+      <div>
+        <h3 className="font-bold mb-4">Company</h3>
+        <ul className="space-y-2 text-default-500">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      {/* Product */}
+      <div>
+        <h3 className="font-bold mb-4">Product</h3>
+        <ul className="space-y-2 text-default-500">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Documentation</a></li>
+        </ul>
+      </div>
+
+      {/* Resources */}
+      <div>
+        <h3 className="font-bold mb-4">Resources</h3>
+        <ul className="space-y-2 text-default-500">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+
+      {/* Legal */}
+      <div>
+        <h3 className="font-bold mb-4">Legal</h3>
+        <ul className="space-y-2 text-default-500">
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">License</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="mt-12 pt-8 border-t border-divider text-center text-default-500">
+      <p>&copy; 2024 FlexiUI. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+```
+
+## Responsive Design
+
+### Breakpoints
+
+FlexiUI uses Tailwind's default breakpoints:
+
+| Breakpoint | Min Width | CSS |
+|------------|-----------|-----|
+| `sm` | 640px | `@media (min-width: 640px)` |
+| `md` | 768px | `@media (min-width: 768px)` |
+| `lg` | 1024px | `@media (min-width: 1024px)` |
+| `xl` | 1280px | `@media (min-width: 1280px)` |
+| `2xl` | 1536px | `@media (min-width: 1536px)` |
+
+### Mobile-First Approach
+
+Start with mobile and scale up:
+
+```tsx
+<div className="
+  w-full          /* Mobile: full width */
+  sm:w-1/2        /* Small screens: half width */
+  md:w-1/3        /* Medium screens: third width */
+  lg:w-1/4        /* Large screens: quarter width */
+">
+  Responsive width
+</div>
+```
+
+### Hide/Show at Breakpoints
+
+Control visibility at different sizes:
+
+```tsx
+{/* Hide on mobile, show on desktop */}
+<div className="hidden md:block">
+  Desktop only content
+</div>
+
+{/* Show on mobile, hide on desktop */}
+<div className="block md:hidden">
+  Mobile only content
+</div>
+
+{/* Show only on tablets */}
+<div className="hidden md:block lg:hidden">
+  Tablet only content
+</div>
+```
+
+## Aspect Ratios
+
+### Common Aspect Ratios
+
+Maintain aspect ratios for media:
+
+```tsx
+{/* 16:9 (video) */}
+<div className="aspect-video bg-content2">
+  <img src="video-thumbnail.jpg" className="w-full h-full object-cover" />
+</div>
+
+{/* 4:3 */}
+<div className="aspect-4/3 bg-content2">
+  <img src="image.jpg" className="w-full h-full object-cover" />
+</div>
+
+{/* Square (1:1) */}
+<div className="aspect-square bg-content2">
+  <img src="profile.jpg" className="w-full h-full object-cover" />
+</div>
+
+{/* Custom aspect ratio */}
+<div className="aspect-[21/9] bg-content2">
+  Ultra-wide content
+</div>
+```
+
+## Z-Index and Stacking
+
+Control element stacking order:
+
+```tsx
+{/* Predefined z-index values */}
+<div className="relative">
+  <div className="z-0">Behind</div>
+  <div className="z-10">Above</div>
+  <div className="z-20">Higher</div>
+  <div className="z-30">Even higher</div>
+  <div className="z-40">Top</div>
+  <div className="z-50">Highest</div>
+</div>
+
+{/* Common use case: modals and overlays */}
+<div className="fixed inset-0 z-50 bg-overlay">
+  <div className="fixed inset-0 flex items-center justify-center">
+    <div className="bg-content1 rounded-lg p-6 z-50">
+      Modal content
+    </div>
+  </div>
+</div>
+```
+
+## Best Practices
+
+### 1. Use Semantic Spacing
+
+Stick to the spacing scale:
+
+```tsx
+{/* Good - uses spacing scale */}
+<div className="p-4 mb-8">
+
+{/* Avoid - arbitrary values */}
+<div className="p-[17px] mb-[33px]">
+```
+
+### 2. Mobile-First Design
+
+Start with mobile, then add breakpoints:
+
+```tsx
+{/* Good - mobile first */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+{/* Avoid - desktop first */}
+<div className="grid grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
+```
+
+### 3. Use Flexbox for Simple Layouts
+
+Flexbox is simpler for one-dimensional layouts:
+
+```tsx
+{/* Good - simple flex layout */}
+<div className="flex items-center justify-between">
+
+{/* Overkill - grid for simple layout */}
+<div className="grid grid-cols-2">
+```
+
+### 4. Use Grid for Complex Layouts
+
+Grid excels at two-dimensional layouts:
+
+```tsx
+{/* Good - complex grid layout */}
+<div className="grid grid-cols-12 gap-4">
+  <div className="col-span-8">Main</div>
+  <div className="col-span-4">Sidebar</div>
+</div>
+```
+
+### 5. Consistent Container Usage
+
+Use containers consistently:
+
+```tsx
+{/* Good - consistent containers */}
+<section className="container mx-auto px-4">
+  <div className="max-w-4xl mx-auto">
+    {/* Content */}
+  </div>
+</section>
+```
+
+## Troubleshooting
+
+### Content Overflowing
+
+**Problem:** Content overflowing its container.
+
+**Solution:** Add overflow utilities:
+
+```tsx
+{/* Hidden overflow */}
+<div className="overflow-hidden">
+
+{/* Scrollable overflow */}
+<div className="overflow-auto">
+
+{/* Horizontal scroll only */}
+<div className="overflow-x-auto overflow-y-hidden">
+```
+
+### Flex Items Not Wrapping
+
+**Problem:** Flex items not wrapping to new line.
+
+**Solution:** Add flex-wrap:
+
+```tsx
+<div className="flex flex-wrap gap-4">
+  {/* Items will wrap */}
+</div>
+```
+
+### Grid Not Responsive
+
+**Problem:** Grid not changing at breakpoints.
+
+**Solution:** Ensure responsive classes are correct:
+
+```tsx
+{/* Correct */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+{/* Incorrect - missing breakpoint prefix */}
+<div className="grid grid-cols-1 grid-cols-2 grid-cols-3">
+```
+
+### Centering Not Working
+
+**Problem:** Content not centering properly.
+
+**Solution:** Use appropriate centering method:
+
+```tsx
+{/* Horizontal center with flex */}
+<div className="flex justify-center">
+
+{/* Horizontal center with margin */}
+<div className="mx-auto max-w-4xl">
+
+{/* Both horizontal and vertical */}
 <div className="flex items-center justify-center min-h-screen">
-  <div>Centered content</div>
-</div>
 ```
 
-## Sidebar Layout
+## Next Steps
 
-Create sidebar layouts:
+Now that you understand layouts, explore:
 
-```tsx
-<div className="flex">
-  <aside className="w-64">Sidebar</aside>
-  <main className="flex-1">Main content</main>
-</div>
-```
+- **[Theme](/docs/customization/theme)** - Customize spacing and breakpoints
+- **[Components](/docs/components/button)** - Build with FlexiUI components
+- **[Tailwind v4](/docs/guide/tailwind-v4)** - Learn about Tailwind CSS v4
+- **[Responsive Design](https://tailwindcss.com/docs/responsive-design)** - Tailwind responsive utilities
+
