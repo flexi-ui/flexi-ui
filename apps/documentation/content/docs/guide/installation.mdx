@@ -1,23 +1,32 @@
 ---
 title: "Installation"
-description: "Learn how to install FlexiUI in your project."
+description: "Complete guide to installing and setting up FlexiUI in your React project."
 ---
 
 # Installation
 
-Get started with FlexiUI by installing it in your React project.
+Get started with FlexiUI by installing it in your React project. This guide covers automatic setup, manual configuration, and troubleshooting.
 
 ## Prerequisites
 
-Before you begin, make sure you have the following installed:
+Before you begin, ensure you have the following installed:
 
-- Node.js 18.x or higher
-- React 18 or React 19
-- Tailwind CSS 4.x
+- **Node.js** 18.x or higher
+- **React** 18 or React 19
+- **Tailwind CSS** 4.x
 
-## Install FlexiUI
+### Check Your Environment
 
-Install FlexiUI and its dependencies using your preferred package manager:
+Verify your setup with these commands:
+
+```bash
+node --version  # Should be 18.x or higher
+npm --version   # Should be 8.x or higher
+```
+
+## Quick Installation
+
+The fastest way to get started is by installing the core packages:
 
 ### npm
 
@@ -37,11 +46,106 @@ pnpm add @flexi-ui/theme @flexi-ui/system
 yarn add @flexi-ui/theme @flexi-ui/system
 ```
 
-## Tailwind CSS Setup
+### bun
 
-FlexiUI is built on top of Tailwind CSS. Add the FlexiUI plugin to your Tailwind configuration:
+```bash
+bun add @flexi-ui/theme @flexi-ui/system
+```
 
-### tailwind.config.js
+## Framework-Specific Setup
+
+### Next.js (App Router)
+
+For Next.js 13+ with App Router:
+
+1. **Install dependencies:**
+
+```bash
+npm install @flexi-ui/theme @flexi-ui/system
+```
+
+2. **Configure Tailwind CSS** (`tailwind.config.ts`):
+
+```typescript
+import type { Config } from 'tailwindcss'
+import { flexiui } from '@flexi-ui/theme'
+
+const config: Config = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  plugins: [flexiui()],
+}
+
+export default config
+```
+
+3. **Add Provider** (`app/providers.tsx`):
+
+```tsx
+'use client'
+
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return <FlexiUIProvider>{children}</FlexiUIProvider>
+}
+```
+
+4. **Wrap your app** (`app/layout.tsx`):
+
+```tsx
+import { Providers } from './providers'
+import './globals.css'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  )
+}
+```
+
+### Next.js (Pages Router)
+
+For Next.js with Pages Router:
+
+1. **Install dependencies** (same as above)
+
+2. **Configure Tailwind CSS** (same as above)
+
+3. **Add Provider** (`pages/_app.tsx`):
+
+```tsx
+import type { AppProps } from 'next/app'
+import { FlexiUIProvider } from '@flexi-ui/system'
+import '@/styles/globals.css'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <FlexiUIProvider>
+      <Component {...pageProps} />
+    </FlexiUIProvider>
+  )
+}
+```
+
+### Vite + React
+
+For Vite projects:
+
+1. **Install dependencies:**
+
+```bash
+npm install @flexi-ui/theme @flexi-ui/system
+```
+
+2. **Configure Tailwind CSS** (`tailwind.config.js`):
 
 ```javascript
 import { flexiui } from '@flexi-ui/theme'
@@ -49,8 +153,112 @@ import { flexiui } from '@flexi-ui/theme'
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  plugins: [flexiui()],
+}
+```
+
+3. **Add Provider** (`src/main.tsx`):
+
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { FlexiUIProvider } from '@flexi-ui/system'
+import App from './App'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <FlexiUIProvider>
+      <App />
+    </FlexiUIProvider>
+  </React.StrictMode>,
+)
+```
+
+### Remix
+
+For Remix projects:
+
+1. **Install dependencies** (same as above)
+
+2. **Configure Tailwind CSS** (`tailwind.config.js`):
+
+```javascript
+import { flexiui } from '@flexi-ui/theme'
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  plugins: [flexiui()],
+}
+```
+
+3. **Add Provider** (`app/root.tsx`):
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/system'
+import styles from './tailwind.css?url'
+
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <FlexiUIProvider>
+          <Outlet />
+        </FlexiUIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+## Manual Setup
+
+If you prefer to set up FlexiUI manually or need more control:
+
+### Step 1: Install Tailwind CSS
+
+If you haven't already installed Tailwind CSS:
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### Step 2: Install FlexiUI Packages
+
+```bash
+npm install @flexi-ui/theme @flexi-ui/system
+```
+
+### Step 3: Configure Tailwind CSS
+
+Update your `tailwind.config.js`:
+
+```javascript
+import { flexiui } from '@flexi-ui/theme'
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -60,42 +268,327 @@ export default {
 }
 ```
 
-## Provider Setup
+**Important:** Make sure to include the FlexiUI theme path in your `content` array so Tailwind can detect and generate the necessary styles.
 
-Wrap your application with the FlexiUIProvider:
+### Step 4: Import CSS
+
+Add Tailwind directives to your CSS file (e.g., `globals.css`):
+
+```css
+@import 'tailwindcss';
+```
+
+Or if using Tailwind CSS v3 syntax:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Step 5: Add Provider
+
+Wrap your app with `FlexiUIProvider`:
 
 ```tsx
 import { FlexiUIProvider } from '@flexi-ui/system'
 
-export default function App({ Component, pageProps }) {
+function App() {
   return (
     <FlexiUIProvider>
-      <Component {...pageProps} />
+      {/* Your app content */}
     </FlexiUIProvider>
   )
 }
 ```
 
-## Using Components
+## Installing Individual Components
 
-Now you can import and use FlexiUI components in your application:
+FlexiUI uses a modular architecture. Install only the components you need:
+
+```bash
+# Install specific components
+npm install @flexi-ui/button @flexi-ui/input @flexi-ui/spinner
+```
+
+Then import and use them:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { Input } from '@flexi-ui/input'
+import { Spinner } from '@flexi-ui/spinner'
+
+function MyComponent() {
+  return (
+    <div>
+      <Button color="primary">Click me</Button>
+      <Input label="Email" />
+      <Spinner />
+    </div>
+  )
+}
+```
+
+## TypeScript Configuration
+
+FlexiUI is built with TypeScript. For the best experience, ensure your `tsconfig.json` is properly configured:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
+```
+
+## CSS Variables
+
+FlexiUI uses CSS variables for theming. These are automatically injected when you use the FlexiUI plugin. You can customize them in your theme configuration.
+
+## Verify Installation
+
+Test that FlexiUI is working correctly:
 
 ```tsx
 import { Button } from '@flexi-ui/button'
 
-export default function Home() {
+export default function TestPage() {
   return (
-    <div>
-      <Button color="primary">
-        Click me
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">FlexiUI Test</h1>
+      <Button color="primary" onPress={() => alert('FlexiUI is working!')}>
+        Click Me
       </Button>
     </div>
   )
 }
 ```
 
+If the button renders with proper styling, you're all set!
+
+## Troubleshooting
+
+### Styles Not Applying
+
+**Problem:** Components render but have no styles.
+
+**Solutions:**
+
+1. **Check Tailwind content path:**
+
+```javascript
+// Make sure this path is included
+content: [
+  './node_modules/@flexi-ui/theme/dist/**/*.{js,ts,jsx,tsx}',
+]
+```
+
+2. **Verify CSS import:**
+
+Make sure you're importing your CSS file in your app:
+
+```tsx
+import './globals.css' // or your CSS file
+```
+
+3. **Check Tailwind directives:**
+
+Ensure your CSS file has Tailwind directives:
+
+```css
+@import 'tailwindcss';
+```
+
+4. **Clear build cache:**
+
+```bash
+# For Next.js
+rm -rf .next
+
+# For Vite
+rm -rf dist node_modules/.vite
+```
+
+### Module Not Found Errors
+
+**Problem:** `Cannot find module '@flexi-ui/theme'` or similar errors.
+
+**Solutions:**
+
+1. **Reinstall dependencies:**
+
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+2. **Check package installation:**
+
+```bash
+npm list @flexi-ui/theme @flexi-ui/system
+```
+
+3. **Verify imports:**
+
+Make sure you're importing from the correct package:
+
+```tsx
+// Correct
+import { flexiui } from '@flexi-ui/theme'
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+// Incorrect
+import { flexiui } from '@flexi-ui/react'  // This package doesn't exist
+```
+
+### TypeScript Errors
+
+**Problem:** Type errors or missing type definitions.
+
+**Solutions:**
+
+1. **Update TypeScript:**
+
+```bash
+npm install -D typescript@latest
+```
+
+2. **Check tsconfig.json:**
+
+Ensure `moduleResolution` is set to `"bundler"` or `"node"`:
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler"
+  }
+}
+```
+
+3. **Restart TypeScript server:**
+
+In VS Code: `Cmd/Ctrl + Shift + P` → "TypeScript: Restart TS Server"
+
+### Provider Issues
+
+**Problem:** Components don't work or context is undefined.
+
+**Solution:**
+
+Make sure `FlexiUIProvider` wraps your entire app:
+
+```tsx
+// Correct - Provider at the root
+function App() {
+  return (
+    <FlexiUIProvider>
+      <YourApp />
+    </FlexiUIProvider>
+  )
+}
+
+// Incorrect - Provider inside component
+function SomeComponent() {
+  return (
+    <FlexiUIProvider>
+      <Button>Click</Button>
+    </FlexiUIProvider>
+  )
+}
+```
+
+### Build Errors
+
+**Problem:** Build fails with PostCSS or Tailwind errors.
+
+**Solutions:**
+
+1. **Update dependencies:**
+
+```bash
+npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+```
+
+2. **Check PostCSS config:**
+
+Ensure you have a `postcss.config.js`:
+
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+3. **Clear build cache and rebuild:**
+
+```bash
+rm -rf .next dist node_modules/.vite
+npm run build
+```
+
+### SSR Issues (Next.js/Remix)
+
+**Problem:** Hydration errors or styles not working on server-side.
+
+**Solutions:**
+
+1. **Use client directive for interactive components:**
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/button'
+```
+
+2. **Ensure Provider is properly placed:**
+
+For Next.js App Router, create a separate `providers.tsx` file marked with `'use client'`.
+
+3. **Check CSS imports:**
+
+Make sure global CSS is imported in the root layout, not in client components.
+
+## Common Issues
+
+### Dark Mode Not Working
+
+See the [Dark Mode guide](/docs/customization/dark-mode) for setup instructions.
+
+### Custom Theme Not Applied
+
+See the [Theme Customization guide](/docs/customization/customize-theme) for configuration details.
+
+### Performance Issues
+
+- Use tree-shaking by importing individual components
+- Avoid importing from `@flexi-ui/react` (if it exists), use specific packages
+- Consider code-splitting for large applications
+
+## Getting Help
+
+If you're still experiencing issues:
+
+1. **Check the documentation** - Most common issues are covered in our guides
+2. **Search GitHub Issues** - Someone may have encountered the same problem
+3. **Ask for help** - Open a [GitHub Discussion](https://github.com/flexi-ui/flexi-ui/discussions)
+4. **Report bugs** - Create an [issue](https://github.com/flexi-ui/flexi-ui/issues) if you found a bug
+
 ## Next Steps
 
-- [Learn about routing integration](/docs/guide/routing)
-- [Customize your theme](/docs/customization/theme)
-- [Explore components](/docs/components/button)
+Now that FlexiUI is installed, explore:
+
+- **[Components](/docs/components/button)** - Browse all available components
+- **[Theme Customization](/docs/customization/theme)** - Customize colors, spacing, and more
+- **[Dark Mode](/docs/customization/dark-mode)** - Add dark mode support
+- **[Framework Guides](/docs/frameworks/nextjs)** - Framework-specific tips and examples
