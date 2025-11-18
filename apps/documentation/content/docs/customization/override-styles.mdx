@@ -198,10 +198,1001 @@ Override component styles globally:
 }
 ```
 
+## Managing Specificity
+
+### Understanding CSS Specificity
+
+CSS specificity determines which styles are applied when multiple rules target the same element:
+
+```css
+/* Specificity: 0-0-1 (1 element) */
+button {
+  background: red;
+}
+
+/* Specificity: 0-1-0 (1 class) */
+.button {
+  background: blue;
+}
+
+/* Specificity: 0-1-1 (1 class + 1 element) */
+button.button {
+  background: green;
+}
+
+/* Specificity: 1-0-0 (1 ID) */
+#myButton {
+  background: yellow;
+}
+```
+
+### Strategies for Managing Specificity
+
+**1. Use Utility Classes**
+
+Leverage Tailwind's utility classes:
+
+```tsx
+// ✅ Good - low specificity, easy to override
+<Button className="bg-primary hover:bg-primary-600">
+  Button
+</Button>
+
+// ❌ Avoid - high specificity
+<Button id="myButton" className="custom-button-style">
+  Button
+</Button>
+```
+
+**2. Use Component Slots**
+
+Target specific parts without increasing specificity:
+
+```tsx
+<Button
+  classNames={{
+    base: 'rounded-lg',
+    content: 'font-semibold',
+  }}
+>
+  Button
+</Button>
+```
+
+**3. Layer Your Styles**
+
+Use CSS cascade layers for better control:
+
+```css
+/* globals.css */
+@layer base {
+  button {
+    /* Base styles */
+  }
+}
+
+@layer components {
+  .btn {
+    /* Component styles */
+  }
+}
+
+@layer utilities {
+  .btn-custom {
+    /* Utility styles - highest priority */
+  }
+}
+```
+
+## Advanced Override Patterns
+
+### Conditional Overrides
+
+Apply styles based on conditions:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/react'
+import { useState } from 'react'
+
+export function ConditionalButton() {
+  const [isActive, setIsActive] = useState(false)
+
+  return (
+    <Button
+      className={`
+        ${isActive ? 'bg-green-500' : 'bg-blue-500'}
+        ${isActive ? 'ring-2 ring-green-300' : ''}
+      `}
+      onClick={() => setIsActive(!isActive)}
+    >
+      {isActive ? 'Active' : 'Inactive'}
+    </Button>
+  )
+}
+```
+
+### Data Attribute Overrides
+
+Use data attributes for state-based styling:
+
+```tsx
+<Button
+  data-state={isActive ? 'active' : 'inactive'}
+  className="
+    data-[state=active]:bg-green-500
+    data-[state=inactive]:bg-gray-500
+  "
+>
+  Button
+</Button>
+```
+
+```css
+/* Or in CSS */
+[data-state='active'] {
+  background: green;
+  transform: scale(1.05);
+}
+
+[data-state='inactive'] {
+  background: gray;
+  opacity: 0.7;
+}
+```
+
+### Responsive Overrides
+
+Override styles at different breakpoints:
+
+```tsx
+<Button
+  className="
+    text-sm md:text-base lg:text-lg
+    px-2 md:px-4 lg:px-6
+    rounded md:rounded-lg lg:rounded-xl
+  "
+>
+  Responsive Button
+</Button>
+```
+
+### Pseudo-Class Overrides
+
+Customize hover, focus, and other states:
+
+```tsx
+<Button
+  className="
+    hover:scale-105
+    focus:ring-4 focus:ring-primary/20
+    active:scale-95
+    disabled:opacity-50 disabled:cursor-not-allowed
+  "
+>
+  Interactive Button
+</Button>
+```
+
+## Component-Specific Examples
+
+### Button Overrides
+
+Comprehensive button customization:
+
+```tsx
+import { Button } from '@flexi-ui/react'
+
+function CustomButtons() {
+  return (
+    <div className="space-y-4">
+      {/* Simple override */}
+      <Button className="bg-gradient-to-r from-purple-500 to-pink-500">
+        Gradient Button
+      </Button>
+
+      {/* Complex override */}
+      <Button
+        classNames={{
+          base: 'h-14 px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all',
+          content: 'text-lg font-bold tracking-wide',
+        }}
+      >
+        Complex Button
+      </Button>
+
+      {/* With icon override */}
+      <Button
+        startContent={<Icon />}
+        classNames={{
+          base: 'gap-3',
+          content: 'flex-row-reverse',
+        }}
+      >
+        Icon Right
+      </Button>
+    </div>
+  )
+}
+```
+
+### Input Overrides
+
+Customize input components:
+
+```tsx
+import { Input } from '@flexi-ui/react'
+
+function CustomInputs() {
+  return (
+    <div className="space-y-4">
+      {/* Basic override */}
+      <Input
+        label="Email"
+        className="max-w-md"
+        classNames={{
+          input: 'text-lg',
+          label: 'text-primary font-semibold',
+        }}
+      />
+
+      {/* Advanced override */}
+      <Input
+        label="Search"
+        classNames={{
+          base: 'max-w-lg',
+          mainWrapper: 'h-full',
+          inputWrapper: [
+            'h-14',
+            'border-2',
+            'border-content3',
+            'hover:border-primary',
+            'focus-within:border-primary',
+            'focus-within:ring-4',
+            'focus-within:ring-primary/20',
+            'transition-all',
+          ].join(' '),
+          input: 'text-base',
+          label: 'text-sm font-medium',
+        }}
+      />
+    </div>
+  )
+}
+```
+
+### Card Overrides
+
+Style card components:
+
+```tsx
+import { Card } from '@flexi-ui/react'
+
+function CustomCards() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Glass morphism card */}
+      <Card
+        className="bg-white/10 backdrop-blur-lg border border-white/20"
+        classNames={{
+          header: 'pb-0 pt-4 px-4',
+          body: 'py-4',
+          footer: 'pt-0 pb-4 px-4',
+        }}
+      >
+        <Card.Header>Glass Card</Card.Header>
+        <Card.Body>Glass morphism effect</Card.Body>
+      </Card>
+
+      {/* Bordered card with hover effect */}
+      <Card
+        classNames={{
+          base: [
+            'border-2',
+            'border-primary/20',
+            'hover:border-primary',
+            'hover:shadow-lg',
+            'hover:scale-[1.02]',
+            'transition-all',
+            'duration-300',
+          ].join(' '),
+        }}
+      >
+        <Card.Header>Hover Card</Card.Header>
+        <Card.Body>Hover to see effect</Card.Body>
+      </Card>
+    </div>
+  )
+}
+```
+
+### Modal Overrides
+
+Customize modal appearance:
+
+```tsx
+import { Modal } from '@flexi-ui/react'
+
+function CustomModal() {
+  return (
+    <Modal
+      classNames={{
+        base: 'max-w-4xl',
+        backdrop: 'bg-black/80 backdrop-blur-sm',
+        header: 'border-b border-content3',
+        body: 'py-6',
+        footer: 'border-t border-content3',
+        closeButton: 'hover:bg-danger/20 hover:text-danger',
+      }}
+    >
+      <Modal.Header>Custom Modal</Modal.Header>
+      <Modal.Body>Content</Modal.Body>
+      <Modal.Footer>Actions</Modal.Footer>
+    </Modal>
+  )
+}
+```
+
+## Animation and Transition Overrides
+
+### Custom Animations
+
+Add custom animations to components:
+
+```css
+/* globals.css */
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s ease-in-out infinite;
+}
+```
+
+```tsx
+<Button className="animate-pulse-scale">
+  Pulsing Button
+</Button>
+
+<Card className="animate-slide-in">
+  Sliding Card
+</Card>
+```
+
+### Transition Overrides
+
+Customize transitions:
+
+```tsx
+<Button
+  className="
+    transition-all
+    duration-300
+    ease-in-out
+    hover:scale-110
+    hover:rotate-3
+  "
+>
+  Animated Button
+</Button>
+```
+
+### Transform Overrides
+
+Apply custom transforms:
+
+```tsx
+<Card
+  className="
+    transform
+    hover:translate-y-[-8px]
+    hover:shadow-2xl
+    transition-transform
+    duration-300
+  "
+>
+  Lift on Hover
+</Card>
+```
+
+## Combining Multiple Strategies
+
+### Layered Approach
+
+Combine different override methods:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/react'
+import { tv } from 'tailwind-variants'
+import styles from './Button.module.css'
+
+// 1. Tailwind variants
+const buttonVariants = tv({
+  base: 'font-semibold',
+  variants: {
+    intent: {
+      primary: 'bg-blue-500 text-white',
+      danger: 'bg-red-500 text-white',
+    },
+    size: {
+      sm: 'text-sm px-3 py-1',
+      lg: 'text-lg px-6 py-3',
+    },
+  },
+})
+
+export function LayeredButton({ intent, size }) {
+  return (
+    <Button
+      // 2. CSS Modules
+      className={`${styles.customButton} ${buttonVariants({ intent, size })}`}
+      // 3. Component slots
+      classNames={{
+        base: 'shadow-lg hover:shadow-xl',
+        content: 'font-bold',
+      }}
+      // 4. Inline styles (for dynamic values)
+      style={{
+        '--custom-color': '#ff00ff',
+      } as React.CSSProperties}
+    >
+      Layered Button
+    </Button>
+  )
+}
+```
+
+### Priority System
+
+Establish a clear priority for overrides:
+
+```tsx
+// 1. Default theme (lowest priority)
+// 2. Component variants
+// 3. className prop
+// 4. classNames prop
+// 5. Inline styles (highest priority)
+
+<Button
+  // Component variant
+  color="primary"
+  size="lg"
+  // className - overrides variants
+  className="bg-purple-500"
+  // classNames - overrides className
+  classNames={{
+    base: 'bg-green-500',
+  }}
+  // style - overrides everything
+  style={{ backgroundColor: 'red' }}
+>
+  Priority Button
+</Button>
+```
+
+## Performance Considerations
+
+### Minimize Re-renders
+
+Use memoization for expensive class computations:
+
+```tsx
+'use client'
+
+import { useMemo } from 'react'
+import { Button } from '@flexi-ui/react'
+
+export function OptimizedButton({ variant, size, isActive }) {
+  const className = useMemo(() => {
+    const classes = ['base-class']
+
+    if (variant === 'primary') classes.push('bg-primary')
+    if (size === 'lg') classes.push('text-lg px-6 py-3')
+    if (isActive) classes.push('ring-2 ring-primary')
+
+    return classes.join(' ')
+  }, [variant, size, isActive])
+
+  return <Button className={className}>Optimized</Button>
+}
+```
+
+### CSS-in-JS Performance
+
+Optimize styled-components usage:
+
+```tsx
+import styled from 'styled-components'
+import { Button } from '@flexi-ui/react'
+
+// ✅ Good - defined outside component
+const StyledButton = styled(Button)`
+  background: linear-gradient(to right, #0070f3, #7928ca);
+`
+
+export function MyComponent() {
+  return <StyledButton>Styled</StyledButton>
+}
+
+// ❌ Avoid - recreated on every render
+export function BadComponent() {
+  const StyledButton = styled(Button)`
+    background: linear-gradient(to right, #0070f3, #7928ca);
+  `
+
+  return <StyledButton>Styled</StyledButton>
+}
+```
+
+### Bundle Size Optimization
+
+Minimize CSS bundle size:
+
+```tsx
+// ✅ Good - use Tailwind utilities
+<Button className="bg-primary hover:bg-primary-600">
+  Optimized
+</Button>
+
+// ❌ Avoid - inline styles increase bundle
+<Button style={{ backgroundColor: '#0070f3' }}>
+  Not Optimized
+</Button>
+```
+
+## Testing Style Overrides
+
+### Visual Regression Testing
+
+Test style overrides with Playwright:
+
+```tsx
+// __tests__/button-overrides.spec.ts
+import { test, expect } from '@playwright/test'
+
+test.describe('Button Style Overrides', () => {
+  test('applies custom className', async ({ page }) => {
+    await page.goto('/buttons')
+
+    const button = page.locator('.custom-button')
+    await expect(button).toHaveCSS('background-color', 'rgb(128, 0, 128)')
+  })
+
+  test('respects classNames slots', async ({ page }) => {
+    await page.goto('/buttons')
+
+    const button = page.locator('.slotted-button')
+    await expect(button).toHaveScreenshot('slotted-button.png')
+  })
+})
+```
+
+### Unit Testing
+
+Test className composition:
+
+```tsx
+// __tests__/button.test.tsx
+import { render } from '@testing-library/react'
+import { Button } from '@/components/Button'
+
+describe('Button Overrides', () => {
+  it('applies className override', () => {
+    const { container } = render(
+      <Button className="custom-class">Test</Button>
+    )
+
+    const button = container.querySelector('button')
+    expect(button).toHaveClass('custom-class')
+  })
+
+  it('merges classNames with defaults', () => {
+    const { container } = render(
+      <Button classNames={{ base: 'custom-base' }}>Test</Button>
+    )
+
+    const button = container.querySelector('button')
+    expect(button).toHaveClass('custom-base')
+  })
+})
+```
+
 ## Best Practices
 
-1. **Use className for simple overrides** - Quick and straightforward
-2. **Use classNames for complex components** - Better organization
-3. **Prefer CSS variables for theming** - Easier maintenance
-4. **Avoid !important** - Makes styles harder to override later
-5. **Keep specificity low** - Makes future changes easier
+### 1. Use className for Simple Overrides
+
+Quick and straightforward:
+
+```tsx
+// ✅ Good - simple, readable
+<Button className="bg-purple-500 hover:bg-purple-600">
+  Button
+</Button>
+
+// ❌ Avoid - overcomplicated
+<Button
+  classNames={{
+    base: 'bg-purple-500 hover:bg-purple-600',
+  }}
+>
+  Button
+</Button>
+```
+
+### 2. Use classNames for Complex Components
+
+Better organization for multi-part components:
+
+```tsx
+// ✅ Good - organized by part
+<Input
+  classNames={{
+    base: 'max-w-md',
+    input: 'text-lg',
+    label: 'font-semibold',
+    inputWrapper: 'border-2',
+  }}
+/>
+
+// ❌ Avoid - everything in one class
+<Input className="[&>input]:text-lg [&>label]:font-semibold" />
+```
+
+### 3. Prefer CSS Variables for Theming
+
+Easier maintenance and dynamic updates:
+
+```tsx
+// ✅ Good - uses CSS variables
+<div
+  style={{
+    '--primary-color': userColor,
+  } as React.CSSProperties}
+  className="bg-[var(--primary-color)]"
+>
+  Content
+</div>
+
+// ❌ Avoid - inline styles
+<div style={{ backgroundColor: userColor }}>
+  Content
+</div>
+```
+
+### 4. Avoid !important
+
+Makes styles harder to override:
+
+```tsx
+// ✅ Good - natural specificity
+<Button className="bg-primary">
+  Button
+</Button>
+
+// ❌ Avoid - hard to override
+<Button className="!bg-primary">
+  Button
+</Button>
+```
+
+### 5. Keep Specificity Low
+
+Makes future changes easier:
+
+```css
+/* ✅ Good - low specificity */
+.button {
+  background: blue;
+}
+
+/* ❌ Avoid - high specificity */
+div.container > section.content > button.button {
+  background: blue;
+}
+```
+
+### 6. Use Semantic Class Names
+
+Describe purpose, not appearance:
+
+```tsx
+// ✅ Good - semantic
+<Button className="action-button">Submit</Button>
+
+// ❌ Avoid - presentational
+<Button className="blue-rounded-large">Submit</Button>
+```
+
+### 7. Document Custom Styles
+
+Help others understand your overrides:
+
+```tsx
+/**
+ * Custom button with gradient background
+ * Used for primary CTAs on landing pages
+ */
+const gradientButton = tv({
+  base: 'bg-gradient-to-r from-purple-500 to-pink-500',
+})
+```
+
+### 8. Test Across Themes
+
+Verify overrides work in all themes:
+
+```tsx
+describe('Button in all themes', () => {
+  it('works in light mode', () => {
+    render(<Button className="custom" />, { theme: 'light' })
+  })
+
+  it('works in dark mode', () => {
+    render(<Button className="custom" />, { theme: 'dark' })
+  })
+})
+```
+
+## Troubleshooting
+
+### Styles Not Applying
+
+**Problem:** Custom styles aren't showing up.
+
+**Solutions:**
+
+```tsx
+// ✅ Check specificity
+<Button className="bg-purple-500"> // May not work
+<Button className="!bg-purple-500"> // Forces override
+
+// ✅ Use classNames for components
+<Button
+  classNames={{
+    base: 'bg-purple-500', // Direct override
+  }}
+/>
+
+// ✅ Verify Tailwind config
+// tailwind.config.ts
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    // Make sure all paths are included
+  ],
+}
+```
+
+### Conflicting Styles
+
+**Problem:** Multiple styles conflict.
+
+**Solutions:**
+
+```tsx
+// ✅ Use specificity correctly
+// Instead of
+<Button className="bg-blue-500 bg-red-500"> // Red wins
+
+// Do this
+<Button className={condition ? 'bg-blue-500' : 'bg-red-500'}>
+
+// ✅ Or use data attributes
+<Button
+  data-state={state}
+  className="
+    data-[state=active]:bg-blue-500
+    data-[state=inactive]:bg-red-500
+  "
+/>
+```
+
+### CSS Modules Not Working
+
+**Problem:** CSS Module styles don't apply.
+
+**Solutions:**
+
+```tsx
+// ✅ Check import
+import styles from './Button.module.css' // Correct
+import styles from './Button.css' // Wrong
+
+// ✅ Use composition
+import { Button } from '@flexi-ui/react'
+import styles from './Button.module.css'
+
+<Button className={styles.custom}>
+  Button
+</Button>
+```
+
+### Tailwind Classes Not Generated
+
+**Problem:** Custom Tailwind classes missing.
+
+**Solutions:**
+
+```typescript
+// ✅ Use safelist for dynamic classes
+// tailwind.config.ts
+export default {
+  safelist: [
+    'bg-purple-500',
+    'bg-pink-500',
+    {
+      pattern: /bg-(red|green|blue)-(400|500|600)/,
+    },
+  ],
+}
+
+// ✅ Or use complete class names
+const className = isActive
+  ? 'bg-purple-500' // Complete class
+  : 'bg-gray-500'
+
+// ❌ Avoid - won't be detected
+const color = 'purple'
+const className = `bg-${color}-500` // Won't work
+```
+
+## Complete Examples
+
+### Custom Button System
+
+```tsx
+// components/CustomButton.tsx
+import { Button, ButtonProps } from '@flexi-ui/react'
+import { tv, type VariantProps } from 'tailwind-variants'
+
+const button = tv({
+  base: [
+    'font-semibold',
+    'transition-all',
+    'duration-200',
+  ].join(' '),
+  variants: {
+    intent: {
+      primary: 'bg-blue-500 text-white hover:bg-blue-600',
+      success: 'bg-green-500 text-white hover:bg-green-600',
+      danger: 'bg-red-500 text-white hover:bg-red-600',
+      ghost: 'bg-transparent hover:bg-gray-100',
+    },
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      md: 'text-base px-4 py-2',
+      lg: 'text-lg px-6 py-3',
+    },
+    rounded: {
+      none: 'rounded-none',
+      sm: 'rounded',
+      md: 'rounded-lg',
+      lg: 'rounded-xl',
+      full: 'rounded-full',
+    },
+  },
+  compoundVariants: [
+    {
+      intent: 'ghost',
+      size: 'lg',
+      class: 'hover:bg-gray-200',
+    },
+  ],
+  defaultVariants: {
+    intent: 'primary',
+    size: 'md',
+    rounded: 'md',
+  },
+})
+
+type CustomButtonProps = ButtonProps &
+  VariantProps<typeof button>
+
+export function CustomButton({
+  intent,
+  size,
+  rounded,
+  className,
+  ...props
+}: CustomButtonProps) {
+  return (
+    <Button
+      className={button({ intent, size, rounded, className })}
+      {...props}
+    />
+  )
+}
+```
+
+### Custom Card System
+
+```tsx
+// components/CustomCard.tsx
+import { Card, CardProps } from '@flexi-ui/react'
+import { tv } from 'tailwind-variants'
+
+const card = tv({
+  slots: {
+    base: 'transition-all duration-300',
+    header: 'pb-0 pt-4 px-4',
+    body: 'py-4 px-4',
+    footer: 'pt-0 pb-4 px-4',
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'bg-content1 border border-content3',
+      },
+      bordered: {
+        base: 'border-2 border-primary/20 hover:border-primary',
+      },
+      shadow: {
+        base: 'shadow-lg hover:shadow-xl',
+      },
+      glass: {
+        base: 'bg-white/10 backdrop-blur-lg border border-white/20',
+      },
+    },
+    hoverable: {
+      true: {
+        base: 'hover:scale-[1.02] cursor-pointer',
+      },
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
+export function CustomCard({ variant, hoverable, ...props }: CardProps & {
+  variant?: 'default' | 'bordered' | 'shadow' | 'glass'
+  hoverable?: boolean
+}) {
+  const { base, header, body, footer } = card({ variant, hoverable })
+
+  return (
+    <Card
+      classNames={{
+        base: base(),
+        header: header(),
+        body: body(),
+        footer: footer(),
+      }}
+      {...props}
+    />
+  )
+}
+```
+
+## Next Steps
+
+Learn more about customization:
+
+- **[Customize Theme](/docs/customization/customize-theme)** - Extend existing themes
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes
+- **[Custom Variants](/docs/customization/custom-variants)** - Create component variants
+- **[Colors](/docs/customization/colors)** - Master color systems
