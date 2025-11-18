@@ -1,11 +1,11 @@
 ---
 title: "Avatar"
-description: "Display user profile pictures and initials with the Avatar component."
+description: "Display user profile pictures, initials, and custom content with the Avatar component."
 ---
 
 # Avatar
 
-The Avatar component displays user profile pictures, icons, or initials in a circular or rounded container.
+The Avatar component displays user profile pictures, icons, or initials in a circular or rounded container. It's commonly used to represent users in your application with support for fallbacks, various sizes, colors, and interactive states.
 
 ## Import
 
@@ -15,101 +15,1563 @@ import { Avatar } from '@flexi-ui/avatar'
 
 ## Usage
 
-### Basic
+### Basic Avatar with Image
 
-```tsx
-<Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-```
+Display a user avatar with a profile image:
 
-### With Initials
+<Sandbox code={`<Avatar
+  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+  alt="User profile"
+/>`}>
+  <Avatar
+    src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+    alt="User profile"
+  />
+</Sandbox>
 
-When no image is provided, the Avatar displays initials:
+### Avatar with Initials (Fallback)
 
-```tsx
-<Avatar name="John Doe" />
-```
+When no image is provided, the Avatar displays initials extracted from the name:
 
-### Sizes
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar name="John Doe" />
+  <Avatar name="Sarah Williams" />
+  <Avatar name="Mike Johnson" />
+  <Avatar name="Emily Davis" />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar name="John Doe" />
+    <Avatar name="Sarah Williams" />
+    <Avatar name="Mike Johnson" />
+    <Avatar name="Emily Davis" />
+  </div>
+</Sandbox>
 
-Avatar comes in multiple sizes:
+## Sizes
 
-```tsx
-<Avatar src="..." size="sm" />
-<Avatar src="..." size="md" />
-<Avatar src="..." size="lg" />
-```
+Avatar comes in multiple sizes to fit different use cases:
 
-## API
+<Sandbox code={`<div className="flex flex-wrap items-end gap-4">
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=1"
+      size="sm"
+      alt="Small avatar"
+    />
+    <span className="text-xs text-gray-600">Small</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=2"
+      size="md"
+      alt="Medium avatar"
+    />
+    <span className="text-xs text-gray-600">Medium</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=3"
+      size="lg"
+      alt="Large avatar"
+    />
+    <span className="text-xs text-gray-600">Large</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=4"
+      size="xl"
+      alt="Extra large avatar"
+    />
+    <span className="text-xs text-gray-600">Extra Large</span>
+  </div>
+</div>`}>
+  <div className="flex flex-wrap items-end gap-4">
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=1"
+        size="sm"
+        alt="Small avatar"
+      />
+      <span className="text-xs text-gray-600">Small</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=2"
+        size="md"
+        alt="Medium avatar"
+      />
+      <span className="text-xs text-gray-600">Medium</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=3"
+        size="lg"
+        alt="Large avatar"
+      />
+      <span className="text-xs text-gray-600">Large</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=4"
+        size="xl"
+        alt="Extra large avatar"
+      />
+      <span className="text-xs text-gray-600">Extra Large</span>
+    </div>
+  </div>
+</Sandbox>
+
+### Size with Initials
+
+<Sandbox code={`<div className="flex flex-wrap items-end gap-4">
+  <Avatar name="Alex Kim" size="sm" />
+  <Avatar name="Sam Wilson" size="md" />
+  <Avatar name="Jordan Lee" size="lg" />
+  <Avatar name="Taylor Brown" size="xl" />
+</div>`}>
+  <div className="flex flex-wrap items-end gap-4">
+    <Avatar name="Alex Kim" size="sm" />
+    <Avatar name="Sam Wilson" size="md" />
+    <Avatar name="Jordan Lee" size="lg" />
+    <Avatar name="Taylor Brown" size="xl" />
+  </div>
+</Sandbox>
+
+## Shapes and Radius
+
+Control the border radius to create different shapes:
+
+<Sandbox code={`<div className="flex flex-wrap items-center gap-4">
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=shape1"
+      radius="sm"
+    />
+    <span className="text-xs text-gray-600">Small Radius</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=shape2"
+      radius="md"
+    />
+    <span className="text-xs text-gray-600">Medium Radius</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=shape3"
+      radius="lg"
+    />
+    <span className="text-xs text-gray-600">Large Radius</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=shape4"
+      radius="full"
+    />
+    <span className="text-xs text-gray-600">Full (Circle)</span>
+  </div>
+</div>`}>
+  <div className="flex flex-wrap items-center gap-4">
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=shape1"
+        radius="sm"
+      />
+      <span className="text-xs text-gray-600">Small Radius</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=shape2"
+        radius="md"
+      />
+      <span className="text-xs text-gray-600">Medium Radius</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=shape3"
+        radius="lg"
+      />
+      <span className="text-xs text-gray-600">Large Radius</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=shape4"
+        radius="full"
+      />
+      <span className="text-xs text-gray-600">Full (Circle)</span>
+    </div>
+  </div>
+</Sandbox>
+
+### Square Avatars
+
+<Sandbox code={`<div className="flex flex-wrap items-center gap-4">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=square1"
+    radius="none"
+  />
+  <Avatar
+    name="Square Avatar"
+    radius="none"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=square2"
+    radius="none"
+    size="lg"
+  />
+</div>`}>
+  <div className="flex flex-wrap items-center gap-4">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=square1"
+      radius="none"
+    />
+    <Avatar
+      name="Square Avatar"
+      radius="none"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=square2"
+      radius="none"
+      size="lg"
+    />
+  </div>
+</Sandbox>
+
+## Colors
+
+Avatar supports multiple color variants for the fallback background:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <div className="flex flex-col items-center gap-2">
+    <Avatar name="Default" color="default" />
+    <span className="text-xs text-gray-600">Default</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar name="Primary" color="primary" />
+    <span className="text-xs text-gray-600">Primary</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar name="Secondary" color="secondary" />
+    <span className="text-xs text-gray-600">Secondary</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar name="Success" color="success" />
+    <span className="text-xs text-gray-600">Success</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar name="Warning" color="warning" />
+    <span className="text-xs text-gray-600">Warning</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Avatar name="Danger" color="danger" />
+    <span className="text-xs text-gray-600">Danger</span>
+  </div>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <div className="flex flex-col items-center gap-2">
+      <Avatar name="Default" color="default" />
+      <span className="text-xs text-gray-600">Default</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar name="Primary" color="primary" />
+      <span className="text-xs text-gray-600">Primary</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar name="Secondary" color="secondary" />
+      <span className="text-xs text-gray-600">Secondary</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar name="Success" color="success" />
+      <span className="text-xs text-gray-600">Success</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar name="Warning" color="warning" />
+      <span className="text-xs text-gray-600">Warning</span>
+    </div>
+    <div className="flex flex-col items-center gap-2">
+      <Avatar name="Danger" color="danger" />
+      <span className="text-xs text-gray-600">Danger</span>
+    </div>
+  </div>
+</Sandbox>
+
+### Colors with Different Sizes
+
+<Sandbox code={`<div className="flex flex-wrap gap-6">
+  <Avatar name="SM" color="primary" size="sm" />
+  <Avatar name="MD" color="secondary" size="md" />
+  <Avatar name="LG" color="success" size="lg" />
+  <Avatar name="XL" color="danger" size="xl" />
+</div>`}>
+  <div className="flex flex-wrap gap-6">
+    <Avatar name="SM" color="primary" size="sm" />
+    <Avatar name="MD" color="secondary" size="md" />
+    <Avatar name="LG" color="success" size="lg" />
+    <Avatar name="XL" color="danger" size="xl" />
+  </div>
+</Sandbox>
+
+## Bordered Avatars
+
+Add borders to make avatars stand out:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=border1"
+    isBordered
+    color="default"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=border2"
+    isBordered
+    color="primary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=border3"
+    isBordered
+    color="secondary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=border4"
+    isBordered
+    color="success"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=border5"
+    isBordered
+    color="warning"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=border6"
+    isBordered
+    color="danger"
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=border1"
+      isBordered
+      color="default"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=border2"
+      isBordered
+      color="primary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=border3"
+      isBordered
+      color="secondary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=border4"
+      isBordered
+      color="success"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=border5"
+      isBordered
+      color="warning"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=border6"
+      isBordered
+      color="danger"
+    />
+  </div>
+</Sandbox>
+
+### Bordered with Initials
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar name="Alice Brown" isBordered color="primary" />
+  <Avatar name="Bob Smith" isBordered color="secondary" />
+  <Avatar name="Carol White" isBordered color="success" size="lg" />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar name="Alice Brown" isBordered color="primary" />
+    <Avatar name="Bob Smith" isBordered color="secondary" />
+    <Avatar name="Carol White" isBordered color="success" size="lg" />
+  </div>
+</Sandbox>
+
+## Disabled State
+
+Disabled avatars have reduced opacity and cannot be interacted with:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=disabled1"
+    isDisabled
+  />
+  <Avatar
+    name="Disabled User"
+    isDisabled
+    color="primary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=disabled2"
+    isBordered
+    color="secondary"
+    isDisabled
+  />
+  <Avatar
+    name="No Access"
+    isDisabled
+    color="danger"
+    size="lg"
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=disabled1"
+      isDisabled
+    />
+    <Avatar
+      name="Disabled User"
+      isDisabled
+      color="primary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=disabled2"
+      isBordered
+      color="secondary"
+      isDisabled
+    />
+    <Avatar
+      name="No Access"
+      isDisabled
+      color="danger"
+      size="lg"
+    />
+  </div>
+</Sandbox>
+
+## Avatar Groups
+
+Display multiple avatars together in an overlapping group:
+
+<Sandbox code={`<div className="flex -space-x-4">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=group1"
+    isBordered
+    color="primary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=group2"
+    isBordered
+    color="secondary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=group3"
+    isBordered
+    color="success"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=group4"
+    isBordered
+    color="warning"
+  />
+  <Avatar
+    name="+5"
+    isBordered
+    color="default"
+  />
+</div>`}>
+  <div className="flex -space-x-4">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=group1"
+      isBordered
+      color="primary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=group2"
+      isBordered
+      color="secondary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=group3"
+      isBordered
+      color="success"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=group4"
+      isBordered
+      color="warning"
+    />
+    <Avatar
+      name="+5"
+      isBordered
+      color="default"
+    />
+  </div>
+</Sandbox>
+
+### Small Avatar Group
+
+<Sandbox code={`<div className="flex -space-x-2">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=small1"
+    size="sm"
+    isBordered
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=small2"
+    size="sm"
+    isBordered
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=small3"
+    size="sm"
+    isBordered
+  />
+  <Avatar
+    name="+10"
+    size="sm"
+    isBordered
+    color="primary"
+  />
+</div>`}>
+  <div className="flex -space-x-2">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=small1"
+      size="sm"
+      isBordered
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=small2"
+      size="sm"
+      isBordered
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=small3"
+      size="sm"
+      isBordered
+    />
+    <Avatar
+      name="+10"
+      size="sm"
+      isBordered
+      color="primary"
+    />
+  </div>
+</Sandbox>
+
+### Large Avatar Group
+
+<Sandbox code={`<div className="flex -space-x-6">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=large1"
+    size="lg"
+    isBordered
+    color="primary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=large2"
+    size="lg"
+    isBordered
+    color="secondary"
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=large3"
+    size="lg"
+    isBordered
+    color="success"
+  />
+</div>`}>
+  <div className="flex -space-x-6">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=large1"
+      size="lg"
+      isBordered
+      color="primary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=large2"
+      size="lg"
+      isBordered
+      color="secondary"
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=large3"
+      size="lg"
+      isBordered
+      color="success"
+    />
+  </div>
+</Sandbox>
+
+## Custom Fallback Content
+
+Provide custom fallback content when no image is available:
+
+<Sandbox code={`import { User, Camera, Shield } from 'lucide-react'
+
+<div className="flex flex-wrap gap-4">
+  <Avatar
+    showFallback
+    fallback={<User className="w-6 h-6" />}
+    color="primary"
+  />
+  <Avatar
+    showFallback
+    fallback={<Camera className="w-6 h-6" />}
+    color="secondary"
+    size="lg"
+  />
+  <Avatar
+    showFallback
+    fallback={<Shield className="w-6 h-6" />}
+    color="success"
+    isBordered
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar
+      showFallback
+      fallback={<User className="w-6 h-6" />}
+      color="primary"
+    />
+    <Avatar
+      showFallback
+      fallback={<Camera className="w-6 h-6" />}
+      color="secondary"
+      size="lg"
+    />
+    <Avatar
+      showFallback
+      fallback={<Shield className="w-6 h-6" />}
+      color="success"
+      isBordered
+    />
+  </div>
+</Sandbox>
+
+### Custom Fallback with Text
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar
+    showFallback
+    fallback={<span className="text-xs font-semibold">AI</span>}
+    color="primary"
+  />
+  <Avatar
+    showFallback
+    fallback={<span className="text-sm font-bold">?</span>}
+    color="warning"
+    size="lg"
+  />
+  <Avatar
+    showFallback
+    fallback={<span className="text-xs">👤</span>}
+    color="secondary"
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar
+      showFallback
+      fallback={<span className="text-xs font-semibold">AI</span>}
+      color="primary"
+    />
+    <Avatar
+      showFallback
+      fallback={<span className="text-sm font-bold">?</span>}
+      color="warning"
+      size="lg"
+    />
+    <Avatar
+      showFallback
+      fallback={<span className="text-xs">👤</span>}
+      color="secondary"
+    />
+  </div>
+</Sandbox>
+
+## Status Indicators
+
+Add status badges to show user availability:
+
+<Sandbox code={`<div className="flex flex-wrap gap-6">
+  <div className="relative">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=status1"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white"></span>
+  </div>
+  <div className="relative">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=status2"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-yellow-500 ring-2 ring-white"></span>
+  </div>
+  <div className="relative">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=status3"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-red-500 ring-2 ring-white"></span>
+  </div>
+  <div className="relative">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=status4"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-gray-400 ring-2 ring-white"></span>
+  </div>
+</div>`}>
+  <div className="flex flex-wrap gap-6">
+    <div className="relative">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=status1"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white"></span>
+    </div>
+    <div className="relative">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=status2"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-yellow-500 ring-2 ring-white"></span>
+    </div>
+    <div className="relative">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=status3"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-red-500 ring-2 ring-white"></span>
+    </div>
+    <div className="relative">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=status4"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 block h-3.5 w-3.5 rounded-full bg-gray-400 ring-2 ring-white"></span>
+    </div>
+  </div>
+</Sandbox>
+
+### Status with Icons
+
+<Sandbox code={`import { Check, Clock, Moon } from 'lucide-react'
+
+<div className="flex flex-wrap gap-6">
+  <div className="relative">
+    <Avatar
+      name="Online User"
+      color="primary"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 ring-2 ring-white">
+      <Check className="h-2.5 w-2.5 text-white" />
+    </span>
+  </div>
+  <div className="relative">
+    <Avatar
+      name="Away User"
+      color="warning"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-yellow-500 ring-2 ring-white">
+      <Clock className="h-2.5 w-2.5 text-white" />
+    </span>
+  </div>
+  <div className="relative">
+    <Avatar
+      name="DND User"
+      color="danger"
+      size="lg"
+    />
+    <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-purple-500 ring-2 ring-white">
+      <Moon className="h-2.5 w-2.5 text-white" />
+    </span>
+  </div>
+</div>`}>
+  <div className="flex flex-wrap gap-6">
+    <div className="relative">
+      <Avatar
+        name="Online User"
+        color="primary"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 ring-2 ring-white">
+        <Check className="h-2.5 w-2.5 text-white" />
+      </span>
+    </div>
+    <div className="relative">
+      <Avatar
+        name="Away User"
+        color="warning"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-yellow-500 ring-2 ring-white">
+        <Clock className="h-2.5 w-2.5 text-white" />
+      </span>
+    </div>
+    <div className="relative">
+      <Avatar
+        name="DND User"
+        color="danger"
+        size="lg"
+      />
+      <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-purple-500 ring-2 ring-white">
+        <Moon className="h-2.5 w-2.5 text-white" />
+      </span>
+    </div>
+  </div>
+</Sandbox>
+
+## Clickable Avatars
+
+Make avatars interactive by wrapping them in buttons or links:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <button
+    className="transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full"
+    onClick={() => alert('Avatar clicked!')}
+  >
+    <Avatar
+      src="https://i.pravatar.cc/150?u=click1"
+      alt="Click me"
+    />
+  </button>
+  <button
+    className="transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 rounded-full"
+    onClick={() => alert('Profile clicked!')}
+  >
+    <Avatar
+      name="Jane Doe"
+      color="secondary"
+      size="lg"
+    />
+  </button>
+  <button
+    className="transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-success focus:ring-offset-2 rounded-full"
+  >
+    <Avatar
+      src="https://i.pravatar.cc/150?u=click2"
+      isBordered
+      color="success"
+    />
+  </button>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <button
+      className="transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full"
+      onClick={() => alert('Avatar clicked!')}
+    >
+      <Avatar
+        src="https://i.pravatar.cc/150?u=click1"
+        alt="Click me"
+      />
+    </button>
+    <button
+      className="transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 rounded-full"
+      onClick={() => alert('Profile clicked!')}
+    >
+      <Avatar
+        name="Jane Doe"
+        color="secondary"
+        size="lg"
+      />
+    </button>
+    <button
+      className="transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-success focus:ring-offset-2 rounded-full"
+    >
+      <Avatar
+        src="https://i.pravatar.cc/150?u=click2"
+        isBordered
+        color="success"
+      />
+    </button>
+  </div>
+</Sandbox>
+
+### Avatar as Link
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <a
+    href="#profile"
+    className="inline-block transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full"
+  >
+    <Avatar
+      src="https://i.pravatar.cc/150?u=link1"
+      alt="View profile"
+    />
+  </a>
+  <a
+    href="#settings"
+    className="inline-block transition-transform hover:scale-110"
+  >
+    <Avatar
+      name="Settings"
+      color="warning"
+      size="lg"
+    />
+  </a>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <a
+      href="#profile"
+      className="inline-block transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full"
+    >
+      <Avatar
+        src="https://i.pravatar.cc/150?u=link1"
+        alt="View profile"
+      />
+    </a>
+    <a
+      href="#settings"
+      className="inline-block transition-transform hover:scale-110"
+    >
+      <Avatar
+        name="Settings"
+        color="warning"
+        size="lg"
+      />
+    </a>
+  </div>
+</Sandbox>
+
+## Custom Styling
+
+Customize the Avatar appearance using the `classNames` prop:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=custom1"
+    classNames={{
+      base: "ring-4 ring-purple-500 ring-offset-2",
+    }}
+  />
+  <Avatar
+    name="Custom"
+    color="primary"
+    classNames={{
+      base: "shadow-lg",
+      fallback: "font-bold text-lg",
+    }}
+  />
+  <Avatar
+    src="https://i.pravatar.cc/150?u=custom2"
+    size="lg"
+    classNames={{
+      base: "ring-4 ring-gradient-to-r from-pink-500 to-yellow-500",
+      img: "object-top",
+    }}
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=custom1"
+      classNames={{
+        base: "ring-4 ring-purple-500 ring-offset-2",
+      }}
+    />
+    <Avatar
+      name="Custom"
+      color="primary"
+      classNames={{
+        base: "shadow-lg",
+        fallback: "font-bold text-lg",
+      }}
+    />
+    <Avatar
+      src="https://i.pravatar.cc/150?u=custom2"
+      size="lg"
+      classNames={{
+        base: "ring-4 ring-gradient-to-r from-pink-500 to-yellow-500",
+        img: "object-top",
+      }}
+    />
+  </div>
+</Sandbox>
+
+### Gradient Backgrounds
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Avatar
+    name="GB"
+    classNames={{
+      base: "bg-gradient-to-br from-purple-500 to-pink-500",
+      fallback: "text-white font-bold",
+    }}
+  />
+  <Avatar
+    name="GR"
+    size="lg"
+    classNames={{
+      base: "bg-gradient-to-br from-blue-500 to-cyan-500",
+      fallback: "text-white font-bold",
+    }}
+  />
+  <Avatar
+    name="GB"
+    classNames={{
+      base: "bg-gradient-to-br from-orange-500 to-red-500",
+      fallback: "text-white font-bold",
+    }}
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Avatar
+      name="GB"
+      classNames={{
+        base: "bg-gradient-to-br from-purple-500 to-pink-500",
+        fallback: "text-white font-bold",
+      }}
+    />
+    <Avatar
+      name="GR"
+      size="lg"
+      classNames={{
+        base: "bg-gradient-to-br from-blue-500 to-cyan-500",
+        fallback: "text-white font-bold",
+      }}
+    />
+    <Avatar
+      name="GB"
+      classNames={{
+        base: "bg-gradient-to-br from-orange-500 to-red-500",
+        fallback: "text-white font-bold",
+      }}
+    />
+  </div>
+</Sandbox>
+
+## Real-World Examples
+
+### User Profile Header
+
+<Sandbox code={`<div className="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm border">
+  <Avatar
+    src="https://i.pravatar.cc/150?u=profile"
+    size="xl"
+    isBordered
+    color="primary"
+  />
+  <div className="flex flex-col">
+    <h3 className="text-xl font-semibold text-gray-900">Alexandra Martinez</h3>
+    <p className="text-sm text-gray-500">Product Designer</p>
+    <p className="text-xs text-gray-400 mt-1">alexandra.m@company.com</p>
+  </div>
+</div>`}>
+  <div className="flex items-center gap-4 p-6 bg-white rounded-lg shadow-sm border">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=profile"
+      size="xl"
+      isBordered
+      color="primary"
+    />
+    <div className="flex flex-col">
+      <h3 className="text-xl font-semibold text-gray-900">Alexandra Martinez</h3>
+      <p className="text-sm text-gray-500">Product Designer</p>
+      <p className="text-xs text-gray-400 mt-1">alexandra.m@company.com</p>
+    </div>
+  </div>
+</Sandbox>
+
+### Comment Section
+
+<Sandbox code={`<div className="space-y-4">
+  <div className="flex gap-3">
+    <Avatar
+      src="https://i.pravatar.cc/150?u=comment1"
+      size="md"
+    />
+    <div className="flex-1 bg-gray-50 rounded-lg p-3">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="font-semibold text-sm">John Smith</span>
+        <span className="text-xs text-gray-500">2 hours ago</span>
+      </div>
+      <p className="text-sm text-gray-700">This looks great! I really like the design direction we're taking here.</p>
+    </div>
+  </div>
+  <div className="flex gap-3">
+    <Avatar
+      name="Sarah Connor"
+      color="secondary"
+      size="md"
+    />
+    <div className="flex-1 bg-gray-50 rounded-lg p-3">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="font-semibold text-sm">Sarah Connor</span>
+        <span className="text-xs text-gray-500">1 hour ago</span>
+      </div>
+      <p className="text-sm text-gray-700">Agreed! Can we iterate on the color scheme a bit more?</p>
+    </div>
+  </div>
+</div>`}>
+  <div className="space-y-4">
+    <div className="flex gap-3">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=comment1"
+        size="md"
+      />
+      <div className="flex-1 bg-gray-50 rounded-lg p-3">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="font-semibold text-sm">John Smith</span>
+          <span className="text-xs text-gray-500">2 hours ago</span>
+        </div>
+        <p className="text-sm text-gray-700">This looks great! I really like the design direction we're taking here.</p>
+      </div>
+    </div>
+    <div className="flex gap-3">
+      <Avatar
+        name="Sarah Connor"
+        color="secondary"
+        size="md"
+      />
+      <div className="flex-1 bg-gray-50 rounded-lg p-3">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="font-semibold text-sm">Sarah Connor</span>
+          <span className="text-xs text-gray-500">1 hour ago</span>
+        </div>
+        <p className="text-sm text-gray-700">Agreed! Can we iterate on the color scheme a bit more?</p>
+      </div>
+    </div>
+  </div>
+</Sandbox>
+
+### Team Members List
+
+<Sandbox code={`<div className="bg-white rounded-lg shadow-sm border p-6">
+  <h3 className="text-lg font-semibold mb-4">Team Members</h3>
+  <div className="space-y-3">
+    <div className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded-lg transition-colors">
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <Avatar
+            src="https://i.pravatar.cc/150?u=team1"
+            size="md"
+          />
+          <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
+        </div>
+        <div>
+          <p className="font-medium text-sm">Emily Johnson</p>
+          <p className="text-xs text-gray-500">Team Lead</p>
+        </div>
+      </div>
+      <span className="text-xs text-gray-400">Online</span>
+    </div>
+    <div className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded-lg transition-colors">
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <Avatar
+            name="Michael Chen"
+            color="primary"
+            size="md"
+          />
+          <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-yellow-500 ring-2 ring-white"></span>
+        </div>
+        <div>
+          <p className="font-medium text-sm">Michael Chen</p>
+          <p className="text-xs text-gray-500">Developer</p>
+        </div>
+      </div>
+      <span className="text-xs text-gray-400">Away</span>
+    </div>
+    <div className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded-lg transition-colors">
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <Avatar
+            src="https://i.pravatar.cc/150?u=team3"
+            size="md"
+          />
+          <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-gray-400 ring-2 ring-white"></span>
+        </div>
+        <div>
+          <p className="font-medium text-sm">Lisa Anderson</p>
+          <p className="text-xs text-gray-500">Designer</p>
+        </div>
+      </div>
+      <span className="text-xs text-gray-400">Offline</span>
+    </div>
+  </div>
+</div>`}>
+  <div className="bg-white rounded-lg shadow-sm border p-6">
+    <h3 className="text-lg font-semibold mb-4">Team Members</h3>
+    <div className="space-y-3">
+      <div className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded-lg transition-colors">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Avatar
+              src="https://i.pravatar.cc/150?u=team1"
+              size="md"
+            />
+            <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
+          </div>
+          <div>
+            <p className="font-medium text-sm">Emily Johnson</p>
+            <p className="text-xs text-gray-500">Team Lead</p>
+          </div>
+        </div>
+        <span className="text-xs text-gray-400">Online</span>
+      </div>
+      <div className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded-lg transition-colors">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Avatar
+              name="Michael Chen"
+              color="primary"
+              size="md"
+            />
+            <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-yellow-500 ring-2 ring-white"></span>
+          </div>
+          <div>
+            <p className="font-medium text-sm">Michael Chen</p>
+            <p className="text-xs text-gray-500">Developer</p>
+          </div>
+        </div>
+        <span className="text-xs text-gray-400">Away</span>
+      </div>
+      <div className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded-lg transition-colors">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Avatar
+              src="https://i.pravatar.cc/150?u=team3"
+              size="md"
+            />
+            <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-gray-400 ring-2 ring-white"></span>
+          </div>
+          <div>
+            <p className="font-medium text-sm">Lisa Anderson</p>
+            <p className="text-xs text-gray-500">Designer</p>
+          </div>
+        </div>
+        <span className="text-xs text-gray-400">Offline</span>
+      </div>
+    </div>
+  </div>
+</Sandbox>
+
+## API Reference
 
 ### Avatar Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| src | `string` | - | The image source URL |
-| alt | `string` | - | Alternative text for the image |
-| name | `string` | - | Name to generate initials from |
-| size | `sm \| md \| lg` | `md` | Size of the avatar |
-| radius | `none \| sm \| md \| lg \| full` | `full` | Border radius |
-| color | `default \| primary \| secondary \| success \| warning \| error` | `default` | Color theme |
-| isBordered | `boolean` | `false` | Whether to show a border |
-| isDisabled | `boolean` | `false` | Whether the avatar is disabled |
-| showFallback | `boolean` | `true` | Show fallback when image fails to load |
-| fallback | `ReactNode` | - | Custom fallback content |
-| classNames | `object` | - | Custom classes for slots |
+| `src` | `string` | - | The image source URL for the avatar |
+| `alt` | `string` | - | Alternative text for the image (important for accessibility) |
+| `name` | `string` | - | Name to generate initials from when no image is provided |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size of the avatar component |
+| `radius` | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"` | Border radius of the avatar (full creates a circle) |
+| `color` | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Color theme for the fallback background |
+| `isBordered` | `boolean` | `false` | Whether to show a border around the avatar |
+| `isDisabled` | `boolean` | `false` | Whether the avatar is in a disabled state (reduced opacity) |
+| `showFallback` | `boolean` | `true` | Whether to show fallback content when image fails to load |
+| `fallback` | `ReactNode` | - | Custom fallback content (icon, text, or component) |
+| `classNames` | `AvatarClassNames` | - | Custom classes for component slots |
+| `className` | `string` | - | Additional CSS class for the base element |
+| `style` | `CSSProperties` | - | Inline styles for the base element |
+
+### AvatarClassNames
+
+The `classNames` prop accepts an object with the following keys:
+
+| Key | Description |
+|-----|-------------|
+| `base` | Classes for the main avatar wrapper element |
+| `img` | Classes for the image element |
+| `fallback` | Classes for the fallback content container |
+| `icon` | Classes for the fallback icon |
 
 ### Slots
 
-- **base** - The main avatar wrapper
-- **img** - The image element
-- **fallback** - The fallback content (initials or icon)
-- **icon** - The fallback icon
+The Avatar component is composed of the following slots:
 
-## Examples
-
-### Bordered Avatar
-
-```tsx
-<Avatar
-  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-  isBordered
-  color="primary"
-/>
-```
-
-### Avatar Group
-
-Display multiple avatars together:
-
-```tsx
-<div className="flex -space-x-2">
-  <Avatar src="https://i.pravatar.cc/150?u=1" />
-  <Avatar src="https://i.pravatar.cc/150?u=2" />
-  <Avatar src="https://i.pravatar.cc/150?u=3" />
-  <Avatar name="+5" />
-</div>
-```
-
-### Custom Fallback
-
-```tsx
-import { User } from 'lucide-react'
-
-<Avatar
-  showFallback
-  fallback={<User className="w-6 h-6" />}
-/>
-```
-
-### Different Shapes
-
-```tsx
-<Avatar src="..." radius="sm" />
-<Avatar src="..." radius="md" />
-<Avatar src="..." radius="full" />
-```
+- **base** - The main avatar wrapper that contains all elements
+- **img** - The image element that displays the user's photo
+- **fallback** - The fallback content container (displays initials or custom content)
+- **icon** - The default fallback icon when no other fallback is provided
 
 ## Accessibility
 
-- The Avatar component uses semantic HTML with proper alt text
-- When using initials, they are announced by screen readers
-- Supports keyboard navigation when interactive
+The Avatar component follows accessibility best practices:
+
+### ARIA Attributes
+
+- Images include proper `alt` text for screen readers
+- When using initials, they are properly announced by screen readers
+- Disabled state is communicated through reduced opacity
+
+### Keyboard Navigation
+
+- When wrapped in interactive elements (buttons/links), avatars support full keyboard navigation
+- Focus indicators are visible and meet WCAG contrast requirements
+- Tab order is logical and predictable
+
+### Screen Reader Support
+
+- Image avatars use the `alt` prop for meaningful descriptions
+- Initial-based avatars are announced with the user's name
+- Status indicators should include `aria-label` for screen reader users
+
+### Color Contrast
+
+- Text initials maintain sufficient contrast against all background colors
+- Border colors meet WCAG AA standards
+- Disabled states maintain minimum contrast requirements
+
+### Best Practices
+
+1. **Always provide alt text** for image avatars to describe the person or content
+2. **Use meaningful names** when generating initials for better screen reader experience
+3. **Include status labels** when using status indicators for non-visual users
+4. **Ensure interactive avatars** have visible focus states
+5. **Test with keyboard navigation** to ensure all functionality is accessible
+
+## Best Practices
+
+### 1. Use Appropriate Sizes
+
+Choose avatar sizes based on context:
+- **sm**: Use in compact lists, tables, or inline mentions
+- **md**: Default size for most use cases like comments and sidebars
+- **lg**: Use in user profiles, headers, or prominent displays
+- **xl**: Reserved for profile pages or hero sections
+
+### 2. Provide Meaningful Alt Text
+
+Always include descriptive alt text for images:
+
+```tsx
+// Good
+<Avatar src="user.jpg" alt="John Doe, Software Engineer" />
+
+// Avoid
+<Avatar src="user.jpg" alt="avatar" />
+```
+
+### 3. Handle Missing Images Gracefully
+
+Always have a fallback strategy:
+- Use the `name` prop to generate initials
+- Provide a custom fallback icon
+- Enable `showFallback` to handle loading errors
+
+### 4. Use Colors Consistently
+
+Maintain color consistency across your application:
+- Use `primary` for the current user or main subjects
+- Use `default` for general users
+- Reserve `danger` for deleted or blocked users
+- Use colors semantically, not decoratively
+
+### 5. Group Related Avatars
+
+When showing multiple users:
+- Use negative margins for overlapping groups
+- Include borders to separate overlapping avatars
+- Add a "+N" avatar to indicate additional users
+- Limit visible avatars to 3-5 before showing count
+
+### 6. Add Status Indicators Thoughtfully
+
+When showing user status:
+- Position indicators consistently (usually bottom-right)
+- Use standard colors (green=online, yellow=away, gray=offline)
+- Include ring borders to separate from avatar
+- Provide accessible labels for status states
+
+### 7. Make Interactive Avatars Clear
+
+If avatars are clickable:
+- Wrap in semantic elements (`<button>` or `<a>`)
+- Add hover states to indicate interactivity
+- Ensure focus states are visible
+- Use appropriate cursor styles
+
+### 8. Optimize Images
+
+For best performance:
+- Use appropriately sized images (avoid loading 4K images for small avatars)
+- Implement lazy loading for avatar lists
+- Consider using image CDNs with automatic optimization
+- Use modern formats like WebP with fallbacks
+
+### 9. Consider Loading States
+
+Handle loading gracefully:
+- Show skeleton loaders while images load
+- Use the `showFallback` prop to handle errors
+- Don't flash between loading and loaded states
+
+### 10. Respect Privacy
+
+Be mindful of user privacy:
+- Allow users to opt for initials instead of photos
+- Don't require profile pictures
+- Provide default fallbacks that don't identify users
+- Consider data protection regulations (GDPR, etc.)
+
+## Troubleshooting
+
+### Image Not Displaying
+
+**Problem**: The avatar shows initials instead of the image.
+
+**Solutions**:
+1. Verify the image URL is correct and accessible
+2. Check CORS settings if loading from external domains
+3. Ensure the image format is supported (JPG, PNG, WebP, GIF)
+4. Check browser console for loading errors
+5. Verify the image isn't blocked by ad blockers or privacy extensions
+
+```tsx
+// Add error handling
+<Avatar
+  src="https://example.com/avatar.jpg"
+  name="John Doe"  // Fallback to initials
+  showFallback={true}
+/>
+```
+
+### Initials Not Showing Correctly
+
+**Problem**: Initials are missing or showing unexpected characters.
+
+**Solutions**:
+1. Ensure the `name` prop contains at least one word
+2. Check for special characters in names
+3. Verify the name isn't empty or undefined
+4. Use proper capitalization in names
+
+```tsx
+// Correct usage
+<Avatar name="John Doe" />  // Shows "JD"
+<Avatar name="John" />      // Shows "J"
+
+// Handle edge cases
+<Avatar name={userName || "Guest User"} />
+```
+
+### Avatar Groups Overlapping Incorrectly
+
+**Problem**: Avatars in groups don't overlap properly or have gaps.
+
+**Solutions**:
+1. Use negative margin classes (`-space-x-2`, `-space-x-4`, `-space-x-6`)
+2. Adjust spacing based on avatar size
+3. Ensure all avatars in group have the same size
+4. Add `isBordered` to create visual separation
+
+```tsx
+// Correct grouping
+<div className="flex -space-x-4">
+  <Avatar src="..." size="md" isBordered />
+  <Avatar src="..." size="md" isBordered />
+  <Avatar src="..." size="md" isBordered />
+</div>
+```
+
+### Status Indicator Position Issues
+
+**Problem**: Status indicators are not positioned correctly.
+
+**Solutions**:
+1. Wrap avatar in a `relative` positioned container
+2. Use `absolute` positioning for the indicator
+3. Adjust position based on avatar size
+4. Ensure proper z-index stacking
+
+```tsx
+// Correct status indicator
+<div className="relative">
+  <Avatar src="..." size="lg" />
+  <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-green-500 ring-2 ring-white" />
+</div>
+```
+
+### Blurry or Low-Quality Images
+
+**Problem**: Avatar images appear blurry or pixelated.
+
+**Solutions**:
+1. Use higher resolution source images (at least 150x150px)
+2. Ensure image dimensions match the display size
+3. Check if CSS is scaling images incorrectly
+4. Use 2x or 3x images for retina displays
+5. Avoid using SVGs for photo avatars (unless intentional)
+
+```tsx
+// Use appropriate image sizes
+<Avatar src="avatar-150.jpg" size="sm" />   // 32x32px display
+<Avatar src="avatar-300.jpg" size="md" />   // 40x40px display
+<Avatar src="avatar-600.jpg" size="xl" />   // 80x80px display
+```
+
+### Custom Styling Not Applied
+
+**Problem**: Custom classes or styles aren't taking effect.
+
+**Solutions**:
+1. Use the `classNames` prop for slot-specific styling
+2. Check CSS specificity conflicts
+3. Verify Tailwind classes are not being purged
+4. Use `!important` as a last resort
+5. Ensure custom CSS is loaded after component styles
+
+```tsx
+// Correct custom styling
+<Avatar
+  src="..."
+  classNames={{
+    base: "ring-4 ring-purple-500",
+    img: "object-cover object-top"
+  }}
+/>
+```
+
+## Related Components
+
+- **Badge** - Add notification counts or labels to avatars
+- **Button** - Make avatars interactive with button wrappers
+- **Dropdown** - Combine with dropdowns for user menus
+- **Tooltip** - Show additional user information on hover
+- **Card** - Display avatars within user profile cards
+
+## Examples in Other Contexts
+
+### With Dropdown Menu
+
+```tsx
+<Dropdown>
+  <DropdownTrigger>
+    <button>
+      <Avatar src="user.jpg" isBordered color="primary" />
+    </button>
+  </DropdownTrigger>
+  <DropdownMenu>
+    <DropdownItem>Profile</DropdownItem>
+    <DropdownItem>Settings</DropdownItem>
+    <DropdownItem>Logout</DropdownItem>
+  </DropdownMenu>
+</Dropdown>
+```
+
+### With Badge Notification
+
+```tsx
+<div className="relative">
+  <Avatar src="user.jpg" />
+  <Badge content="5" color="danger" placement="top-right" />
+</div>
+```
+
+### In Table Cells
+
+```tsx
+<Table>
+  <TableRow>
+    <TableCell>
+      <div className="flex items-center gap-2">
+        <Avatar src="user1.jpg" size="sm" />
+        <span>John Doe</span>
+      </div>
+    </TableCell>
+  </TableRow>
+</Table>
+```

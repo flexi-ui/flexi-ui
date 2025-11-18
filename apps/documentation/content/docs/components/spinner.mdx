@@ -5,7 +5,7 @@ description: "Show loading states with the Spinner component."
 
 # Spinner
 
-The Spinner component displays a loading indicator to show that content is being loaded or processed.
+The Spinner component displays a loading indicator to show that content is being loaded or processed. It provides visual feedback to users during asynchronous operations, preventing confusion and improving perceived performance.
 
 ## Import
 
@@ -15,159 +15,1621 @@ import { Spinner } from '@flexi-ui/spinner'
 
 ## Usage
 
-### Basic
+A basic spinner with default settings:
 
-```tsx
-<Spinner />
-```
+<Sandbox code={`<Spinner />`}>
+  <Spinner />
+</Sandbox>
 
-### With Label
+## Sizes
 
-```tsx
-<Spinner label="Loading..." />
-```
+Spinners come in three sizes to fit different contexts:
 
-### Sizes
+<Sandbox code={`<div className="flex flex-wrap items-end gap-8">
+  <Spinner size="sm" />
+  <Spinner size="md" />
+  <Spinner size="lg" />
+</div>`}>
+  <div className="flex flex-wrap items-end gap-8">
+    <Spinner size="sm" />
+    <Spinner size="md" />
+    <Spinner size="lg" />
+  </div>
+</Sandbox>
 
-```tsx
-<Spinner size="sm" />
-<Spinner size="md" />
-<Spinner size="lg" />
-```
+### Sizes with Labels
 
-## API
+<Sandbox code={`<div className="flex flex-wrap items-end gap-8">
+  <Spinner size="sm" label="Small" />
+  <Spinner size="md" label="Medium" />
+  <Spinner size="lg" label="Large" />
+</div>`}>
+  <div className="flex flex-wrap items-end gap-8">
+    <Spinner size="sm" label="Small" />
+    <Spinner size="md" label="Medium" />
+    <Spinner size="lg" label="Large" />
+  </div>
+</Sandbox>
+
+## Colors
+
+Choose from various color schemes to match your design:
+
+<Sandbox code={`<div className="flex flex-wrap items-end gap-6">
+  <Spinner color="default" label="Default" />
+  <Spinner color="primary" label="Primary" />
+  <Spinner color="secondary" label="Secondary" />
+  <Spinner color="success" label="Success" />
+  <Spinner color="warning" label="Warning" />
+  <Spinner color="error" label="Error" />
+</div>`}>
+  <div className="flex flex-wrap items-end gap-6">
+    <Spinner color="default" label="Default" />
+    <Spinner color="primary" label="Primary" />
+    <Spinner color="secondary" label="Secondary" />
+    <Spinner color="success" label="Success" />
+    <Spinner color="warning" label="Warning" />
+    <Spinner color="error" label="Error" />
+  </div>
+</Sandbox>
+
+### Special Colors
+
+The `white` and `current` colors adapt to their context:
+
+<Sandbox code={`<div className="flex flex-wrap gap-6">
+  <div className="bg-gray-900 p-6 rounded-lg">
+    <Spinner color="white" label="White" />
+  </div>
+  <div className="text-purple-600 p-6 border-2 border-purple-200 rounded-lg">
+    <Spinner color="current" label="Current Color" />
+  </div>
+</div>`}>
+  <div className="flex flex-wrap gap-6">
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <Spinner color="white" label="White" />
+    </div>
+    <div className="text-purple-600 p-6 border-2 border-purple-200 rounded-lg">
+      <Spinner color="current" label="Current Color" />
+    </div>
+  </div>
+</Sandbox>
+
+## Labels
+
+Add descriptive text to provide context:
+
+<Sandbox code={`<div className="flex flex-col gap-6">
+  <Spinner label="Loading..." />
+  <Spinner label="Processing your request..." />
+  <Spinner label="Fetching data..." />
+</div>`}>
+  <div className="flex flex-col gap-6">
+    <Spinner label="Loading..." />
+    <Spinner label="Processing your request..." />
+    <Spinner label="Fetching data..." />
+  </div>
+</Sandbox>
+
+### Label Colors
+
+Customize the label color independently from the spinner:
+
+<Sandbox code={`<div className="flex flex-wrap items-end gap-6">
+  <Spinner
+    label="Foreground"
+    color="primary"
+    labelColor="foreground"
+  />
+  <Spinner
+    label="Primary"
+    color="primary"
+    labelColor="primary"
+  />
+  <Spinner
+    label="Secondary"
+    color="secondary"
+    labelColor="secondary"
+  />
+  <Spinner
+    label="Success"
+    color="success"
+    labelColor="success"
+  />
+  <Spinner
+    label="Warning"
+    color="warning"
+    labelColor="warning"
+  />
+  <Spinner
+    label="Error"
+    color="error"
+    labelColor="error"
+  />
+</div>`}>
+  <div className="flex flex-wrap items-end gap-6">
+    <Spinner
+      label="Foreground"
+      color="primary"
+      labelColor="foreground"
+    />
+    <Spinner
+      label="Primary"
+      color="primary"
+      labelColor="primary"
+    />
+    <Spinner
+      label="Secondary"
+      color="secondary"
+      labelColor="secondary"
+    />
+    <Spinner
+      label="Success"
+      color="success"
+      labelColor="success"
+    />
+    <Spinner
+      label="Warning"
+      color="warning"
+      labelColor="warning"
+    />
+    <Spinner
+      label="Error"
+      color="error"
+      labelColor="error"
+    />
+  </div>
+</Sandbox>
+
+## Integration Examples
+
+### In Buttons
+
+Use spinners to indicate loading states in buttons:
+
+<Sandbox code={`import { Button } from '@flexi-ui/button'
+
+<div className="flex flex-wrap gap-4">
+  <Button color="primary" disabled>
+    <Spinner size="sm" color="current" className="mr-2" />
+    Loading...
+  </Button>
+  <Button color="secondary" disabled>
+    <Spinner size="sm" color="current" className="mr-2" />
+    Processing...
+  </Button>
+  <Button color="success" disabled>
+    <Spinner size="sm" color="current" className="mr-2" />
+    Submitting...
+  </Button>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Button color="primary" disabled>
+      <Spinner size="sm" color="current" className="mr-2" />
+      Loading...
+    </Button>
+    <Button color="secondary" disabled>
+      <Spinner size="sm" color="current" className="mr-2" />
+      Processing...
+    </Button>
+    <Button color="success" disabled>
+      <Spinner size="sm" color="current" className="mr-2" />
+      Submitting...
+    </Button>
+  </div>
+</Sandbox>
+
+### In Cards
+
+Center spinners in card components for loading states:
+
+<Sandbox code={`import { Card, CardBody } from '@flexi-ui/card'
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <Card>
+    <CardBody className="flex items-center justify-center py-12">
+      <Spinner label="Loading content..." />
+    </CardBody>
+  </Card>
+  <Card>
+    <CardBody className="flex items-center justify-center py-12">
+      <Spinner
+        size="lg"
+        color="secondary"
+        label="Fetching data..."
+      />
+    </CardBody>
+  </Card>
+</div>`}>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <Card>
+      <CardBody className="flex items-center justify-center py-12">
+        <Spinner label="Loading content..." />
+      </CardBody>
+    </Card>
+    <Card>
+      <CardBody className="flex items-center justify-center py-12">
+        <Spinner
+          size="lg"
+          color="secondary"
+          label="Fetching data..."
+        />
+      </CardBody>
+    </Card>
+  </div>
+</Sandbox>
+
+### Inline Loading
+
+Display spinners inline with text:
+
+<Sandbox code={`<div className="flex flex-col gap-4">
+  <div className="flex items-center gap-2">
+    <Spinner size="sm" />
+    <span className="text-sm">Loading data...</span>
+  </div>
+  <div className="flex items-center gap-2">
+    <Spinner size="sm" color="success" />
+    <span className="text-sm">Syncing files...</span>
+  </div>
+  <div className="flex items-center gap-2">
+    <Spinner size="sm" color="warning" />
+    <span className="text-sm">Processing transaction...</span>
+  </div>
+</div>`}>
+  <div className="flex flex-col gap-4">
+    <div className="flex items-center gap-2">
+      <Spinner size="sm" />
+      <span className="text-sm">Loading data...</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Spinner size="sm" color="success" />
+      <span className="text-sm">Syncing files...</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <Spinner size="sm" color="warning" />
+      <span className="text-sm">Processing transaction...</span>
+    </div>
+  </div>
+</Sandbox>
+
+### Full Page Loading
+
+Create full-page loading overlays:
+
+<Sandbox code={`<div className="relative w-full h-64 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+  <div className="absolute inset-0 flex items-center justify-center">
+    <Spinner size="lg" label="Loading application..." />
+  </div>
+</div>`}>
+  <div className="relative w-full h-64 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+    <div className="absolute inset-0 flex items-center justify-center">
+      <Spinner size="lg" label="Loading application..." />
+    </div>
+  </div>
+</Sandbox>
+
+### In Input Fields
+
+Show loading states next to form inputs:
+
+<Sandbox code={`<div className="flex flex-col gap-4 max-w-md">
+  <div className="flex items-center gap-2">
+    <input
+      type="text"
+      placeholder="Username"
+      className="flex-1 px-3 py-2 border rounded-md"
+      disabled
+    />
+    <Spinner size="sm" color="primary" />
+  </div>
+  <div className="flex items-center gap-2">
+    <input
+      type="email"
+      placeholder="Email"
+      className="flex-1 px-3 py-2 border rounded-md"
+      disabled
+    />
+    <Spinner size="sm" color="success" />
+  </div>
+</div>`}>
+  <div className="flex flex-col gap-4 max-w-md">
+    <div className="flex items-center gap-2">
+      <input
+        type="text"
+        placeholder="Username"
+        className="flex-1 px-3 py-2 border rounded-md"
+        disabled
+      />
+      <Spinner size="sm" color="primary" />
+    </div>
+    <div className="flex items-center gap-2">
+      <input
+        type="email"
+        placeholder="Email"
+        className="flex-1 px-3 py-2 border rounded-md"
+        disabled
+      />
+      <Spinner size="sm" color="success" />
+    </div>
+  </div>
+</Sandbox>
+
+### In Lists
+
+Indicate loading for list items:
+
+<Sandbox code={`<div className="border rounded-lg divide-y max-w-md">
+  <div className="p-4 flex items-center justify-between">
+    <span>User Profile</span>
+    <Spinner size="sm" />
+  </div>
+  <div className="p-4 flex items-center justify-between">
+    <span>Settings</span>
+    <Spinner size="sm" color="secondary" />
+  </div>
+  <div className="p-4 flex items-center justify-between">
+    <span>Notifications</span>
+    <Spinner size="sm" color="success" />
+  </div>
+</div>`}>
+  <div className="border rounded-lg divide-y max-w-md">
+    <div className="p-4 flex items-center justify-between">
+      <span>User Profile</span>
+      <Spinner size="sm" />
+    </div>
+    <div className="p-4 flex items-center justify-between">
+      <span>Settings</span>
+      <Spinner size="sm" color="secondary" />
+    </div>
+    <div className="p-4 flex items-center justify-between">
+      <span>Notifications</span>
+      <Spinner size="sm" color="success" />
+    </div>
+  </div>
+</Sandbox>
+
+## Custom Styling
+
+### Using className
+
+Add custom classes to the spinner:
+
+<Sandbox code={`<div className="flex flex-wrap gap-6">
+  <Spinner
+    className="opacity-50"
+    label="50% Opacity"
+  />
+  <Spinner
+    className="scale-150"
+    label="Scaled"
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-6">
+    <Spinner
+      className="opacity-50"
+      label="50% Opacity"
+    />
+    <Spinner
+      className="scale-150"
+      label="Scaled"
+    />
+  </div>
+</Sandbox>
+
+### Using classNames
+
+Customize individual slots:
+
+<Sandbox code={`<div className="flex flex-wrap gap-6">
+  <Spinner
+    classNames={{
+      base: 'gap-4',
+      circle1: 'border-4',
+      circle2: 'border-4',
+      label: 'text-lg font-bold'
+    }}
+    label="Custom Spinner"
+  />
+  <Spinner
+    classNames={{
+      wrapper: 'w-16 h-16',
+      circle1: 'border-[3px]',
+      circle2: 'border-[3px]',
+      label: 'text-sm italic text-gray-500'
+    }}
+    label="Large Custom"
+  />
+</div>`}>
+  <div className="flex flex-wrap gap-6">
+    <Spinner
+      classNames={{
+        base: 'gap-4',
+        circle1: 'border-4',
+        circle2: 'border-4',
+        label: 'text-lg font-bold'
+      }}
+      label="Custom Spinner"
+    />
+    <Spinner
+      classNames={{
+        wrapper: 'w-16 h-16',
+        circle1: 'border-[3px]',
+        circle2: 'border-[3px]',
+        label: 'text-sm italic text-gray-500'
+      }}
+      label="Large Custom"
+    />
+  </div>
+</Sandbox>
+
+### Colored Backgrounds
+
+Spinners on different colored backgrounds:
+
+<Sandbox code={`<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div className="bg-blue-500 p-8 rounded-lg flex items-center justify-center">
+    <Spinner color="white" label="On Blue" labelColor="white" />
+  </div>
+  <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-8 rounded-lg flex items-center justify-center">
+    <Spinner color="white" label="On Gradient" labelColor="white" />
+  </div>
+  <div className="bg-gray-900 p-8 rounded-lg flex items-center justify-center">
+    <Spinner color="white" label="On Dark" labelColor="white" />
+  </div>
+</div>`}>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="bg-blue-500 p-8 rounded-lg flex items-center justify-center">
+      <Spinner color="white" label="On Blue" />
+    </div>
+    <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-8 rounded-lg flex items-center justify-center">
+      <Spinner color="white" label="On Gradient" />
+    </div>
+    <div className="bg-gray-900 p-8 rounded-lg flex items-center justify-center">
+      <Spinner color="white" label="On Dark" />
+    </div>
+  </div>
+</Sandbox>
+
+## Conditional Loading
+
+### Basic Toggle
+
+Toggle between loading and loaded states:
+
+<Sandbox code={`import { useState } from 'react'
+import { Button } from '@flexi-ui/button'
+
+function LoadingExample() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleLoad = () => {
+    setIsLoading(true)
+    setTimeout(() => setIsLoading(false), 2000)
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      {isLoading ? (
+        <Spinner label="Loading..." />
+      ) : (
+        <div className="text-green-600 font-medium">Content loaded!</div>
+      )}
+      <Button onClick={handleLoad} disabled={isLoading}>
+        {isLoading ? 'Loading...' : 'Load Data'}
+      </Button>
+    </div>
+  )
+}
+
+<LoadingExample />`}>
+  {() => {
+    const [isLoading, setIsLoading] = React.useState(false)
+
+    const handleLoad = () => {
+      setIsLoading(true)
+      setTimeout(() => setIsLoading(false), 2000)
+    }
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        {isLoading ? (
+          <Spinner label="Loading..." />
+        ) : (
+          <div className="text-green-600 font-medium">Content loaded!</div>
+        )}
+        <Button onClick={handleLoad} disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Load Data'}
+        </Button>
+      </div>
+    )
+  }}
+</Sandbox>
+
+### With Error Handling
+
+Handle loading, success, and error states:
+
+<Sandbox code={`import { useState } from 'react'
+import { Button } from '@flexi-ui/button'
+
+function LoadingWithError() {
+  const [status, setStatus] = useState('idle') // idle, loading, success, error
+
+  const handleLoad = () => {
+    setStatus('loading')
+    // Simulate random success/failure
+    setTimeout(() => {
+      setStatus(Math.random() > 0.5 ? 'success' : 'error')
+    }, 1500)
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      {status === 'loading' && (
+        <Spinner label="Loading data..." />
+      )}
+      {status === 'success' && (
+        <div className="text-green-600 font-medium">✓ Success!</div>
+      )}
+      {status === 'error' && (
+        <div className="text-red-600 font-medium">✗ Error occurred</div>
+      )}
+      {status === 'idle' && (
+        <div className="text-gray-500">Click to load</div>
+      )}
+      <Button
+        onClick={handleLoad}
+        disabled={status === 'loading'}
+        color={status === 'error' ? 'danger' : 'primary'}
+      >
+        {status === 'loading' ? 'Loading...' : status === 'error' ? 'Retry' : 'Load Data'}
+      </Button>
+    </div>
+  )
+}
+
+<LoadingWithError />`}>
+  {() => {
+    const [status, setStatus] = React.useState('idle')
+
+    const handleLoad = () => {
+      setStatus('loading')
+      setTimeout(() => {
+        setStatus(Math.random() > 0.5 ? 'success' : 'error')
+      }, 1500)
+    }
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        {status === 'loading' && (
+          <Spinner label="Loading data..." />
+        )}
+        {status === 'success' && (
+          <div className="text-green-600 font-medium">✓ Success!</div>
+        )}
+        {status === 'error' && (
+          <div className="text-red-600 font-medium">✗ Error occurred</div>
+        )}
+        {status === 'idle' && (
+          <div className="text-gray-500">Click to load</div>
+        )}
+        <Button
+          onClick={handleLoad}
+          disabled={status === 'loading'}
+          color={status === 'error' ? 'danger' : 'primary'}
+        >
+          {status === 'loading' ? 'Loading...' : status === 'error' ? 'Retry' : 'Load Data'}
+        </Button>
+      </div>
+    )
+  }}
+</Sandbox>
+
+### Progress Indicator
+
+Combine spinner with progress text:
+
+<Sandbox code={`import { useState, useEffect } from 'react'
+import { Button } from '@flexi-ui/button'
+
+function ProgressExample() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval)
+            setIsLoading(false)
+            return 0
+          }
+          return prev + 10
+        })
+      }, 200)
+      return () => clearInterval(interval)
+    }
+  }, [isLoading])
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      {isLoading && (
+        <div className="flex flex-col items-center gap-2">
+          <Spinner color="success" />
+          <div className="text-sm text-gray-600">{progress}% complete</div>
+        </div>
+      )}
+      <Button
+        onClick={() => setIsLoading(true)}
+        disabled={isLoading}
+        color="success"
+      >
+        {isLoading ? 'Processing...' : 'Start Process'}
+      </Button>
+    </div>
+  )
+}
+
+<ProgressExample />`}>
+  {() => {
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [progress, setProgress] = React.useState(0)
+
+    React.useEffect(() => {
+      if (isLoading) {
+        const interval = setInterval(() => {
+          setProgress(prev => {
+            if (prev >= 100) {
+              clearInterval(interval)
+              setIsLoading(false)
+              return 0
+            }
+            return prev + 10
+          })
+        }, 200)
+        return () => clearInterval(interval)
+      }
+    }, [isLoading])
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        {isLoading && (
+          <div className="flex flex-col items-center gap-2">
+            <Spinner color="success" />
+            <div className="text-sm text-gray-600">{progress}% complete</div>
+          </div>
+        )}
+        <Button
+          onClick={() => setIsLoading(true)}
+          disabled={isLoading}
+          color="success"
+        >
+          {isLoading ? 'Processing...' : 'Start Process'}
+        </Button>
+      </div>
+    )
+  }}
+</Sandbox>
+
+## Real-World Examples
+
+### Form Submission
+
+A realistic form submission with loading state:
+
+<Sandbox code={`import { useState } from 'react'
+import { Button } from '@flexi-ui/button'
+import { Card, CardHeader, CardBody } from '@flexi-ui/card'
+
+function FormSubmission() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setSubmitted(true)
+      setTimeout(() => setSubmitted(false), 3000)
+    }, 2000)
+  }
+
+  return (
+    <Card className="max-w-md">
+      <CardHeader>
+        <h3 className="text-lg font-semibold">Contact Form</h3>
+      </CardHeader>
+      <CardBody>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <input
+              type="text"
+              className="w-full px-3 py-2 border rounded-md"
+              disabled={isSubmitting}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              className="w-full px-3 py-2 border rounded-md"
+              disabled={isSubmitting}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Message</label>
+            <textarea
+              className="w-full px-3 py-2 border rounded-md"
+              rows={3}
+              disabled={isSubmitting}
+              required
+            />
+          </div>
+          {submitted && (
+            <div className="text-green-600 text-sm font-medium">
+              ✓ Form submitted successfully!
+            </div>
+          )}
+          <Button
+            type="submit"
+            color="primary"
+            className="w-full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Spinner size="sm" color="current" className="mr-2" />
+                Submitting...
+              </>
+            ) : (
+              'Submit'
+            )}
+          </Button>
+        </form>
+      </CardBody>
+    </Card>
+  )
+}
+
+<FormSubmission />`}>
+  {() => {
+    const [isSubmitting, setIsSubmitting] = React.useState(false)
+    const [submitted, setSubmitted] = React.useState(false)
+
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      setIsSubmitting(true)
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setSubmitted(true)
+        setTimeout(() => setSubmitted(false), 3000)
+      }, 2000)
+    }
+
+    return (
+      <Card className="max-w-md">
+        <CardHeader>
+          <h3 className="text-lg font-semibold">Contact Form</h3>
+        </CardHeader>
+        <CardBody>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Name</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border rounded-md"
+                disabled={isSubmitting}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Email</label>
+              <input
+                type="email"
+                className="w-full px-3 py-2 border rounded-md"
+                disabled={isSubmitting}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Message</label>
+              <textarea
+                className="w-full px-3 py-2 border rounded-md"
+                rows={3}
+                disabled={isSubmitting}
+                required
+              />
+            </div>
+            {submitted && (
+              <div className="text-green-600 text-sm font-medium">
+                ✓ Form submitted successfully!
+              </div>
+            )}
+            <Button
+              type="submit"
+              color="primary"
+              className="w-full"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Spinner size="sm" color="current" className="mr-2" />
+                  Submitting...
+                </>
+              ) : (
+                'Submit'
+              )}
+            </Button>
+          </form>
+        </CardBody>
+      </Card>
+    )
+  }}
+</Sandbox>
+
+### Data Table Loading
+
+Show loading state in a data table:
+
+<Sandbox code={`import { useState } from 'react'
+import { Button } from '@flexi-ui/button'
+
+function DataTable() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState([])
+
+  const loadData = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setData([
+        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'Active' },
+        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'Active' },
+        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'Inactive' }
+      ])
+      setIsLoading(false)
+    }, 1500)
+  }
+
+  React.useEffect(() => {
+    loadData()
+  }, [])
+
+  return (
+    <div className="border rounded-lg overflow-hidden">
+      <div className="bg-gray-50 px-4 py-3 border-b flex justify-between items-center">
+        <h3 className="font-semibold">Users</h3>
+        <Button size="sm" onClick={loadData} disabled={isLoading}>
+          Refresh
+        </Button>
+      </div>
+      {isLoading ? (
+        <div className="flex items-center justify-center py-12">
+          <Spinner label="Loading users..." />
+        </div>
+      ) : (
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b">
+            <tr>
+              <th className="px-4 py-2 text-left text-sm font-medium">Name</th>
+              <th className="px-4 py-2 text-left text-sm font-medium">Email</th>
+              <th className="px-4 py-2 text-left text-sm font-medium">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {data.map(row => (
+              <tr key={row.id}>
+                <td className="px-4 py-3 text-sm">{row.name}</td>
+                <td className="px-4 py-3 text-sm">{row.email}</td>
+                <td className="px-4 py-3 text-sm">
+                  <span className={\`px-2 py-1 rounded-full text-xs \${
+                    row.status === 'Active'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-gray-100 text-gray-700'
+                  }\`}>
+                    {row.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  )
+}
+
+<DataTable />`}>
+  {() => {
+    const [isLoading, setIsLoading] = React.useState(true)
+    const [data, setData] = React.useState([])
+
+    const loadData = () => {
+      setIsLoading(true)
+      setTimeout(() => {
+        setData([
+          { id: 1, name: 'John Doe', email: 'john@example.com', status: 'Active' },
+          { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'Active' },
+          { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'Inactive' }
+        ])
+        setIsLoading(false)
+      }, 1500)
+    }
+
+    React.useEffect(() => {
+      loadData()
+    }, [])
+
+    return (
+      <div className="border rounded-lg overflow-hidden">
+        <div className="bg-gray-50 px-4 py-3 border-b flex justify-between items-center">
+          <h3 className="font-semibold">Users</h3>
+          <Button size="sm" onClick={loadData} disabled={isLoading}>
+            Refresh
+          </Button>
+        </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Spinner label="Loading users..." />
+          </div>
+        ) : (
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b">
+              <tr>
+                <th className="px-4 py-2 text-left text-sm font-medium">Name</th>
+                <th className="px-4 py-2 text-left text-sm font-medium">Email</th>
+                <th className="px-4 py-2 text-left text-sm font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y">
+              {data.map(row => (
+                <tr key={row.id}>
+                  <td className="px-4 py-3 text-sm">{row.name}</td>
+                  <td className="px-4 py-3 text-sm">{row.email}</td>
+                  <td className="px-4 py-3 text-sm">
+                    <span className={`px-2 py-1 rounded-full text-xs ${
+                      row.status === 'Active'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-100 text-gray-700'
+                    }`}>
+                      {row.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    )
+  }}
+</Sandbox>
+
+### Infinite Scroll
+
+Implement infinite scroll with loading indicator:
+
+<Sandbox code={`import { useState, useEffect, useRef } from 'react'
+import { Card, CardBody } from '@flexi-ui/card'
+
+function InfiniteScroll() {
+  const [items, setItems] = useState(Array.from({ length: 5 }, (_, i) => i + 1))
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const observerTarget = useRef(null)
+
+  const loadMore = () => {
+    if (isLoading || !hasMore) return
+
+    setIsLoading(true)
+    setTimeout(() => {
+      setItems(prev => {
+        const newItems = [...prev, ...Array.from({ length: 5 }, (_, i) => prev.length + i + 1)]
+        if (newItems.length >= 20) {
+          setHasMore(false)
+        }
+        return newItems
+      })
+      setIsLoading(false)
+    }, 1000)
+  }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && hasMore && !isLoading) {
+          loadMore()
+        }
+      },
+      { threshold: 1 }
+    )
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isLoading, hasMore])
+
+  return (
+    <div className="max-w-md">
+      <div className="border rounded-lg overflow-hidden">
+        <div className="bg-gray-50 px-4 py-3 border-b">
+          <h3 className="font-semibold">Feed</h3>
+        </div>
+        <div className="max-h-96 overflow-y-auto">
+          <div className="divide-y">
+            {items.map(item => (
+              <div key={item} className="p-4">
+                <div className="font-medium">Item {item}</div>
+                <div className="text-sm text-gray-500">Content for item {item}</div>
+              </div>
+            ))}
+          </div>
+          {isLoading && (
+            <div className="flex justify-center py-4">
+              <Spinner label="Loading more..." />
+            </div>
+          )}
+          {!hasMore && (
+            <div className="text-center py-4 text-sm text-gray-500">
+              No more items to load
+            </div>
+          )}
+          <div ref={observerTarget} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<InfiniteScroll />`}>
+  {() => {
+    const [items, setItems] = React.useState(Array.from({ length: 5 }, (_, i) => i + 1))
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [hasMore, setHasMore] = React.useState(true)
+    const observerTarget = React.useRef(null)
+
+    const loadMore = () => {
+      if (isLoading || !hasMore) return
+
+      setIsLoading(true)
+      setTimeout(() => {
+        setItems(prev => {
+          const newItems = [...prev, ...Array.from({ length: 5 }, (_, i) => prev.length + i + 1)]
+          if (newItems.length >= 20) {
+            setHasMore(false)
+          }
+          return newItems
+        })
+        setIsLoading(false)
+      }, 1000)
+    }
+
+    React.useEffect(() => {
+      const observer = new IntersectionObserver(
+        entries => {
+          if (entries[0].isIntersecting && hasMore && !isLoading) {
+            loadMore()
+          }
+        },
+        { threshold: 1 }
+      )
+
+      if (observerTarget.current) {
+        observer.observe(observerTarget.current)
+      }
+
+      return () => observer.disconnect()
+    }, [isLoading, hasMore])
+
+    return (
+      <div className="max-w-md">
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-50 px-4 py-3 border-b">
+            <h3 className="font-semibold">Feed</h3>
+          </div>
+          <div className="max-h-96 overflow-y-auto">
+            <div className="divide-y">
+              {items.map(item => (
+                <div key={item} className="p-4">
+                  <div className="font-medium">Item {item}</div>
+                  <div className="text-sm text-gray-500">Content for item {item}</div>
+                </div>
+              ))}
+            </div>
+            {isLoading && (
+              <div className="flex justify-center py-4">
+                <Spinner label="Loading more..." />
+              </div>
+            )}
+            {!hasMore && (
+              <div className="text-center py-4 text-sm text-gray-500">
+                No more items to load
+              </div>
+            )}
+            <div ref={observerTarget} />
+          </div>
+        </div>
+      </div>
+    )
+  }}
+</Sandbox>
+
+## API Reference
 
 ### Spinner Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| size | `sm \| md \| lg` | `md` | Size of the spinner |
-| color | `current \| white \| default \| primary \| secondary \| success \| warning \| error` | `primary` | Color theme |
-| label | `string` | - | Label text to display |
-| labelColor | `foreground \| primary \| secondary \| success \| warning \| error` | `foreground` | Label color |
-| className | `string` | - | Additional CSS classes |
-| classNames | `object` | - | Custom classes for slots |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | The size of the spinner |
+| `color` | `'current' \| 'white' \| 'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error'` | `'primary'` | The color theme of the spinner |
+| `label` | `string` | - | Optional label text to display below the spinner |
+| `labelColor` | `'foreground' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error'` | `'foreground'` | The color of the label text |
+| `className` | `string` | - | Additional CSS classes for the base element |
+| `classNames` | `SpinnerSlots` | - | Custom classes for individual slots |
 
-### Slots
+### SpinnerSlots
 
-- **base** - The main wrapper
-- **wrapper** - The spinner wrapper
-- **circle1** - First circle
-- **circle2** - Second circle
-- **label** - The label element
+The `classNames` prop accepts an object with the following keys:
 
-## Examples
+| Slot | Description |
+|------|-------------|
+| `base` | The main wrapper element that contains the spinner and label |
+| `wrapper` | The container for the spinning circles |
+| `circle1` | The first (outer) circle of the spinner animation |
+| `circle2` | The second (inner) circle of the spinner animation |
+| `label` | The label text element |
 
-### Colors
+### Size Reference
 
-```tsx
-<Spinner color="default" />
-<Spinner color="primary" />
-<Spinner color="secondary" />
-<Spinner color="success" />
-<Spinner color="warning" />
-<Spinner color="error" />
-<Spinner color="white" />
-<Spinner color="current" />
-```
+| Size | Spinner Dimensions | Best Use Case |
+|------|-------------------|---------------|
+| `sm` | 16x16px | Inline with text, buttons, small UI elements |
+| `md` | 32x32px | Default size, cards, forms, moderate spaces |
+| `lg` | 48x48px | Full page loading, large containers, prominent feedback |
 
-### Sizes
+### Color Reference
 
-```tsx
-<Spinner size="sm" label="Small" />
-<Spinner size="md" label="Medium" />
-<Spinner size="lg" label="Large" />
-```
-
-### With Different Label Colors
-
-```tsx
-<Spinner
-  label="Loading..."
-  color="primary"
-  labelColor="primary"
-/>
-```
-
-### In a Button
-
-```tsx
-import { Button } from '@flexi-ui/button'
-
-<Button disabled>
-  <Spinner size="sm" color="current" />
-  Loading...
-</Button>
-```
-
-### Full Page Loading
-
-```tsx
-<div className="flex items-center justify-center min-h-screen">
-  <Spinner size="lg" label="Loading application..." />
-</div>
-```
-
-### Inline Loading
-
-```tsx
-<div className="flex items-center gap-2">
-  <Spinner size="sm" />
-  <span>Loading data...</span>
-</div>
-```
-
-### Card Loading State
-
-```tsx
-import { Card, CardBody } from '@flexi-ui/card'
-
-<Card>
-  <CardBody className="flex items-center justify-center py-12">
-    <Spinner label="Loading content..." />
-  </CardBody>
-</Card>
-```
-
-### Conditional Loading
-
-```tsx
-import { useState, useEffect } from 'react'
-
-function DataLoader() {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Simulate data loading
-    setTimeout(() => setIsLoading(false), 2000)
-  }, [])
-
-  if (isLoading) {
-    return <Spinner label="Loading data..." />
-  }
-
-  return <div>Data loaded!</div>
-}
-```
-
-### Custom Styling
-
-```tsx
-<Spinner
-  classNames={{
-    base: 'gap-4',
-    circle1: 'border-4',
-    circle2: 'border-4',
-    label: 'text-lg font-bold'
-  }}
-  label="Custom Spinner"
-/>
-```
+| Color | Usage |
+|-------|-------|
+| `default` | Neutral loading states, general purpose |
+| `primary` | Main actions, important loading states |
+| `secondary` | Secondary actions, alternative loading states |
+| `success` | Successful operations, data syncing |
+| `warning` | Warning states, caution needed |
+| `error` | Error recovery, retry operations |
+| `white` | Dark backgrounds, colored containers |
+| `current` | Inherit parent text color, buttons, inline elements |
 
 ## Accessibility
 
-- Spinners include `role="status"` for screen readers
-- Loading state is announced to assistive technologies
-- Labels are properly associated with the spinner
-- Uses `aria-label` when no visible label is present
-- Can be used with `aria-live` regions for dynamic content
+The Spinner component is built with accessibility in mind:
+
+### ARIA Attributes
+
+The component includes proper ARIA attributes:
+
+<Sandbox code={`<div className="space-y-4">
+  <div>
+    <h4 className="text-sm font-medium mb-2">Default ARIA (role="status")</h4>
+    <Spinner label="Loading..." />
+  </div>
+  <div>
+    <h4 className="text-sm font-medium mb-2">With aria-label (no visible label)</h4>
+    <Spinner aria-label="Loading user profile" />
+  </div>
+</div>`}>
+  <div className="space-y-4">
+    <div>
+      <h4 className="text-sm font-medium mb-2">Default ARIA (role="status")</h4>
+      <Spinner label="Loading..." />
+    </div>
+    <div>
+      <h4 className="text-sm font-medium mb-2">With aria-label (no visible label)</h4>
+      <Spinner aria-label="Loading user profile" />
+    </div>
+  </div>
+</Sandbox>
+
+### Screen Reader Announcements
+
+Use with live regions for dynamic updates:
+
+```tsx
+<div aria-live="polite" aria-atomic="true">
+  {isLoading && <Spinner label="Loading your data..." />}
+</div>
+```
+
+### Focus Management
+
+During loading states, manage focus appropriately:
+
+```tsx
+import { useEffect, useRef } from 'react'
+
+function LoadingComponent() {
+  const [isLoading, setIsLoading] = useState(true)
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    if (!isLoading && contentRef.current) {
+      // Focus first interactive element after loading
+      contentRef.current.focus()
+    }
+  }, [isLoading])
+
+  if (isLoading) {
+    return <Spinner label="Loading content..." />
+  }
+
+  return (
+    <div ref={contentRef} tabIndex={-1}>
+      {/* Your content */}
+    </div>
+  )
+}
+```
+
+### Best Practices for Accessibility
+
+1. **Always provide context**: Use either a visible `label` or `aria-label` to describe what's loading
+2. **Use appropriate live regions**: Wrap spinners in `aria-live` regions for dynamic content
+3. **Disable interactions**: Disable buttons and form elements during loading states
+4. **Announce completion**: Inform users when loading completes using screen reader announcements
+5. **Avoid spinner-only content**: Don't show just a spinner without any context
+6. **Manage focus**: Return focus to appropriate elements after loading completes
+
+## Best Practices
+
+### 1. Provide Clear Context
+
+Always indicate what is being loaded:
+
+```tsx
+// Good - Clear context
+<Spinner label="Loading your profile..." />
+<Spinner label="Saving changes..." />
+<Spinner label="Processing payment..." />
+
+// Bad - No context
+<Spinner />
+```
+
+### 2. Use Appropriate Sizes
+
+Match spinner size to the context:
+
+```tsx
+// Good - Size matches context
+<Button disabled>
+  <Spinner size="sm" color="current" /> {/* Small for buttons */}
+  Saving...
+</Button>
+
+<div className="min-h-screen flex items-center justify-center">
+  <Spinner size="lg" label="Loading application..." /> {/* Large for pages */}
+</div>
+
+// Bad - Wrong size
+<Button disabled>
+  <Spinner size="lg" /> {/* Too large for button */}
+  Save
+</Button>
+```
+
+### 3. Match Colors Contextually
+
+Use colors that match the action or state:
+
+```tsx
+// Good - Contextual colors
+<Spinner color="success" label="Syncing data..." />
+<Spinner color="warning" label="Processing..." />
+<Spinner color="error" label="Retrying..." />
+
+// Good - Current color in buttons
+<Button color="primary" disabled>
+  <Spinner size="sm" color="current" />
+  Submit
+</Button>
+```
+
+### 4. Handle Loading States Properly
+
+Disable interactions during loading:
+
+```tsx
+// Good - Disabled state
+<Button disabled={isLoading}>
+  {isLoading ? (
+    <>
+      <Spinner size="sm" color="current" />
+      Loading...
+    </>
+  ) : (
+    'Submit'
+  )}
+</Button>
+
+<input disabled={isLoading} />
+
+// Bad - Interactive during loading
+<Button onClick={handleSubmit}>
+  {isLoading && <Spinner size="sm" />}
+  Submit
+</Button>
+```
+
+### 5. Provide Timeout Fallbacks
+
+Handle cases where loading takes too long:
+
+```tsx
+const [isLoading, setIsLoading] = useState(true)
+const [timedOut, setTimedOut] = useState(false)
+
+useEffect(() => {
+  const timeout = setTimeout(() => {
+    if (isLoading) {
+      setTimedOut(true)
+    }
+  }, 10000) // 10 second timeout
+
+  return () => clearTimeout(timeout)
+}, [isLoading])
+
+return (
+  <>
+    {isLoading && !timedOut && <Spinner label="Loading..." />}
+    {timedOut && (
+      <div>
+        <p>This is taking longer than expected...</p>
+        <Button onClick={retry}>Retry</Button>
+      </div>
+    )}
+  </>
+)
+```
+
+### 6. Use Skeleton Screens for Better UX
+
+For content-heavy pages, consider skeleton screens instead of spinners:
+
+```tsx
+// Good - Skeleton for content areas
+{isLoading ? (
+  <div className="space-y-4">
+    <div className="h-4 bg-gray-200 rounded animate-pulse" />
+    <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4" />
+  </div>
+) : (
+  <Content />
+)}
+
+// Spinner for actions
+<Button disabled={isSubmitting}>
+  {isSubmitting && <Spinner size="sm" color="current" />}
+  Submit
+</Button>
+```
+
+### 7. Avoid Nested Loading States
+
+Don't show multiple spinners for the same action:
+
+```tsx
+// Bad - Multiple spinners
+<div>
+  <Spinner label="Loading..." />
+  <Card>
+    <CardBody>
+      <Spinner label="Loading content..." />
+    </CardBody>
+  </Card>
+</div>
+
+// Good - Single spinner at appropriate level
+<div>
+  <Spinner label="Loading..." />
+</div>
+```
+
+## Troubleshooting
+
+### Spinner Not Visible
+
+If your spinner isn't showing:
+
+**Problem**: Spinner is rendered but not visible on the page.
+
+**Solutions**:
+
+1. Check if parent container has sufficient height:
+```tsx
+// Bad
+<div className="h-0">
+  <Spinner />
+</div>
+
+// Good
+<div className="min-h-[100px] flex items-center justify-center">
+  <Spinner />
+</div>
+```
+
+2. Ensure spinner color contrasts with background:
+```tsx
+// Bad - primary spinner on blue background
+<div className="bg-blue-500">
+  <Spinner color="primary" />
+</div>
+
+// Good
+<div className="bg-blue-500">
+  <Spinner color="white" />
+</div>
+```
+
+3. Check z-index if spinner is behind other elements:
+```tsx
+<div className="relative">
+  <Spinner className="z-50" />
+</div>
+```
+
+### Animation Not Smooth
+
+If the spinner animation is choppy or stuttering:
+
+**Problem**: Performance issues causing animation jank.
+
+**Solutions**:
+
+1. Reduce simultaneous animations on the page
+2. Check for heavy JavaScript operations blocking the main thread
+3. Use CSS `will-change` for optimization:
+```tsx
+<Spinner
+  classNames={{
+    wrapper: 'will-change-transform'
+  }}
+/>
+```
+
+### Label Text Cut Off
+
+If label text is truncated or cut off:
+
+**Problem**: Container width is too narrow for the label.
+
+**Solutions**:
+
+1. Ensure parent container has sufficient width:
+```tsx
+// Bad
+<div className="w-20">
+  <Spinner label="Loading your profile data..." />
+</div>
+
+// Good
+<div className="min-w-[200px]">
+  <Spinner label="Loading your profile data..." />
+</div>
+```
+
+2. Use shorter, more concise labels:
+```tsx
+// Better
+<Spinner label="Loading..." />
+```
+
+3. Use custom classNames to adjust label styling:
+```tsx
+<Spinner
+  label="Loading your profile data..."
+  classNames={{
+    label: 'text-xs max-w-[150px] truncate'
+  }}
+/>
+```
+
+### Spinner in Button Misaligned
+
+If spinner doesn't align properly with button text:
+
+**Problem**: Vertical alignment issues in flex containers.
+
+**Solutions**:
+
+```tsx
+// Bad
+<Button>
+  <Spinner size="sm" />
+  Text
+</Button>
+
+// Good - Add proper spacing and alignment
+<Button className="flex items-center gap-2">
+  <Spinner size="sm" color="current" />
+  <span>Loading...</span>
+</Button>
+```
+
+### Accessibility Warnings
+
+If you're getting accessibility warnings:
+
+**Problem**: Missing ARIA labels or improper usage.
+
+**Solutions**:
+
+1. Always provide context:
+```tsx
+// Bad
+<Spinner />
+
+// Good
+<Spinner label="Loading data" />
+// or
+<Spinner aria-label="Loading user profile" />
+```
+
+2. Use proper live regions:
+```tsx
+<div aria-live="polite">
+  {isLoading && <Spinner label="Loading..." />}
+</div>
+```
+
+### Multiple Spinners Causing Performance Issues
+
+If multiple spinners are slowing down your page:
+
+**Problem**: Too many simultaneous animations.
+
+**Solutions**:
+
+1. Show spinner at higher level instead of individual items:
+```tsx
+// Bad - Spinner for each item
+{items.map(item => (
+  <div key={item.id}>
+    {item.isLoading && <Spinner />}
+    {item.content}
+  </div>
+))}
+
+// Good - Single spinner for all items
+{isLoading ? (
+  <Spinner label="Loading items..." />
+) : (
+  items.map(item => <div key={item.id}>{item.content}</div>)
+)}
+```
+
+2. Use loading states more strategically
+3. Consider skeleton screens for better performance
+
+## Related Components
+
+- **[Button](/docs/components/button)** - Use spinners in loading buttons
+- **[Card](/docs/components/card)** - Display spinners in card loading states
+- **[Modal](/docs/components/modal)** - Show spinners in modal dialogs during operations
+- **[Progress](/docs/components/progress)** - For determinate loading states with percentage
+- **[Skeleton](/docs/components/skeleton)** - Alternative loading indicator for content areas
+
+## Examples
+
+For more examples and use cases, check out:
+
+- **[Forms Guide](/docs/guides/forms)** - Using spinners in form submissions
+- **[Data Fetching](/docs/guides/data-fetching)** - Loading states for API calls
+- **[Patterns](/docs/patterns/loading-states)** - Comprehensive loading state patterns

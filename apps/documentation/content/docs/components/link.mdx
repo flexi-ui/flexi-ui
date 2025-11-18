@@ -1,11 +1,11 @@
 ---
 title: "Link"
-description: "Navigate between pages with the Link component."
+description: "Navigate between pages with accessible, customizable links."
 ---
 
 # Link
 
-The Link component provides accessible navigation with support for external links and routing libraries.
+The Link component provides accessible navigation with support for external links, custom styling, and seamless integration with popular routing libraries like Next.js, React Router, and Remix.
 
 ## Import
 
@@ -15,144 +15,1685 @@ import { Link } from '@flexi-ui/link'
 
 ## Usage
 
-### Basic
+### Basic Link
 
-```tsx
-<Link href="/about">About</Link>
-```
+A simple link to navigate between pages:
 
-### External Link
+<Sandbox code={`<Link href="/about">
+  About Us
+</Link>`}>
+  <Link href="/about">
+    About Us
+  </Link>
+</Sandbox>
 
-```tsx
-<Link href="https://flexiui.com" isExternal>
-  Visit FlexiUI
-</Link>
-```
+### Multiple Links
 
-### With Icon
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Link href="/home">Home</Link>
+  <Link href="/products">Products</Link>
+  <Link href="/contact">Contact</Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="/home">Home</Link>
+    <Link href="/products">Products</Link>
+    <Link href="/contact">Contact</Link>
+  </div>
+</Sandbox>
 
-```tsx
-import { ExternalLink } from 'lucide-react'
+## Colors
 
-<Link href="https://flexiui.com" isExternal showAnchorIcon>
-  Visit FlexiUI
-</Link>
-```
+Choose from various color schemes to match your design:
 
-## API
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Link href="#" color="foreground">Foreground</Link>
+  <Link href="#" color="primary">Primary</Link>
+  <Link href="#" color="secondary">Secondary</Link>
+  <Link href="#" color="success">Success</Link>
+  <Link href="#" color="warning">Warning</Link>
+  <Link href="#" color="error">Error</Link>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Link href="#" color="foreground">Foreground</Link>
+    <Link href="#" color="primary">Primary</Link>
+    <Link href="#" color="secondary">Secondary</Link>
+    <Link href="#" color="success">Success</Link>
+    <Link href="#" color="warning">Warning</Link>
+    <Link href="#" color="error">Error</Link>
+  </div>
+</Sandbox>
+
+### Color in Context
+
+<Sandbox code={`<div className="flex flex-col gap-4 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+  <p className="text-sm text-gray-600 dark:text-gray-400">
+    Visit our <Link href="#" color="primary">documentation</Link> to learn more.
+  </p>
+  <p className="text-sm text-gray-600 dark:text-gray-400">
+    Check the <Link href="#" color="success">latest updates</Link> for new features.
+  </p>
+  <p className="text-sm text-gray-600 dark:text-gray-400">
+    <Link href="#" color="error">Report an issue</Link> if you encounter problems.
+  </p>
+</div>`}>
+  <div className="flex flex-col gap-4 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+    <p className="text-sm text-gray-600 dark:text-gray-400">
+      Visit our <Link href="#" color="primary">documentation</Link> to learn more.
+    </p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">
+      Check the <Link href="#" color="success">latest updates</Link> for new features.
+    </p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">
+      <Link href="#" color="error">Report an issue</Link> if you encounter problems.
+    </p>
+  </div>
+</Sandbox>
+
+## Sizes
+
+Links come in three sizes to fit different contexts:
+
+<Sandbox code={`<div className="flex flex-wrap items-center gap-4">
+  <Link href="#" size="sm">Small Link</Link>
+  <Link href="#" size="md">Medium Link</Link>
+  <Link href="#" size="lg">Large Link</Link>
+</div>`}>
+  <div className="flex flex-wrap items-center gap-4">
+    <Link href="#" size="sm">Small Link</Link>
+    <Link href="#" size="md">Medium Link</Link>
+    <Link href="#" size="lg">Large Link</Link>
+  </div>
+</Sandbox>
+
+### Sizes with Colors
+
+<Sandbox code={`<div className="flex flex-col gap-4">
+  <div className="flex items-center gap-4">
+    <Link href="#" size="sm" color="primary">Small Primary</Link>
+    <Link href="#" size="md" color="primary">Medium Primary</Link>
+    <Link href="#" size="lg" color="primary">Large Primary</Link>
+  </div>
+  <div className="flex items-center gap-4">
+    <Link href="#" size="sm" color="secondary">Small Secondary</Link>
+    <Link href="#" size="md" color="secondary">Medium Secondary</Link>
+    <Link href="#" size="lg" color="secondary">Large Secondary</Link>
+  </div>
+</div>`}>
+  <div className="flex flex-col gap-4">
+    <div className="flex items-center gap-4">
+      <Link href="#" size="sm" color="primary">Small Primary</Link>
+      <Link href="#" size="md" color="primary">Medium Primary</Link>
+      <Link href="#" size="lg" color="primary">Large Primary</Link>
+    </div>
+    <div className="flex items-center gap-4">
+      <Link href="#" size="sm" color="secondary">Small Secondary</Link>
+      <Link href="#" size="md" color="secondary">Medium Secondary</Link>
+      <Link href="#" size="lg" color="secondary">Large Secondary</Link>
+    </div>
+  </div>
+</Sandbox>
+
+## Underline Variants
+
+Control when the underline appears with different underline variants:
+
+<Sandbox code={`<div className="flex flex-col gap-4">
+  <Link href="#" underline="none">No underline</Link>
+  <Link href="#" underline="hover">Underline on hover</Link>
+  <Link href="#" underline="always">Always underlined</Link>
+  <Link href="#" underline="active">Underline when active</Link>
+  <Link href="#" underline="focus">Underline on focus</Link>
+</div>`}>
+  <div className="flex flex-col gap-4">
+    <Link href="#" underline="none">No underline</Link>
+    <Link href="#" underline="hover">Underline on hover</Link>
+    <Link href="#" underline="always">Always underlined</Link>
+    <Link href="#" underline="active">Underline when active</Link>
+    <Link href="#" underline="focus">Underline on focus</Link>
+  </div>
+</Sandbox>
+
+### Underline with Colors
+
+<Sandbox code={`<div className="flex flex-col gap-4">
+  <Link href="#" color="primary" underline="hover">
+    Primary with hover underline
+  </Link>
+  <Link href="#" color="secondary" underline="always">
+    Secondary always underlined
+  </Link>
+  <Link href="#" color="success" underline="focus">
+    Success with focus underline
+  </Link>
+  <Link href="#" color="error" underline="active">
+    Error with active underline
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-4">
+    <Link href="#" color="primary" underline="hover">
+      Primary with hover underline
+    </Link>
+    <Link href="#" color="secondary" underline="always">
+      Secondary always underlined
+    </Link>
+    <Link href="#" color="success" underline="focus">
+      Success with focus underline
+    </Link>
+    <Link href="#" color="error" underline="active">
+      Error with active underline
+    </Link>
+  </div>
+</Sandbox>
+
+## External Links
+
+Links to external websites can be marked with the `isExternal` prop:
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Link href="https://github.com" isExternal>
+    Visit GitHub
+  </Link>
+  <Link href="https://flexiui.com" isExternal>
+    Visit FlexiUI
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="https://github.com" isExternal>
+      Visit GitHub
+    </Link>
+    <Link href="https://flexiui.com" isExternal>
+      Visit FlexiUI
+    </Link>
+  </div>
+</Sandbox>
+
+### External Links with Icon
+
+Display an external link icon to indicate the link opens in a new tab:
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Link href="https://github.com" isExternal showAnchorIcon>
+    Visit GitHub
+  </Link>
+  <Link href="https://flexiui.com" isExternal showAnchorIcon color="primary">
+    Visit FlexiUI
+  </Link>
+  <Link href="https://reactjs.org" isExternal showAnchorIcon color="secondary">
+    React Documentation
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="https://github.com" isExternal showAnchorIcon>
+      Visit GitHub
+    </Link>
+    <Link href="https://flexiui.com" isExternal showAnchorIcon color="primary">
+      Visit FlexiUI
+    </Link>
+    <Link href="https://reactjs.org" isExternal showAnchorIcon color="secondary">
+      React Documentation
+    </Link>
+  </div>
+</Sandbox>
+
+### External Links in Text
+
+<Sandbox code={`<div className="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+  <p className="text-sm text-gray-700 dark:text-gray-300">
+    FlexiUI is built with React and TypeScript. Check out the{' '}
+    <Link href="https://reactjs.org" isExternal showAnchorIcon color="primary">
+      React documentation
+    </Link>{' '}
+    and{' '}
+    <Link href="https://www.typescriptlang.org" isExternal showAnchorIcon color="primary">
+      TypeScript documentation
+    </Link>{' '}
+    for more information.
+  </p>
+</div>`}>
+  <div className="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+    <p className="text-sm text-gray-700 dark:text-gray-300">
+      FlexiUI is built with React and TypeScript. Check out the{' '}
+      <Link href="https://reactjs.org" isExternal showAnchorIcon color="primary">
+        React documentation
+      </Link>{' '}
+      and{' '}
+      <Link href="https://www.typescriptlang.org" isExternal showAnchorIcon color="primary">
+        TypeScript documentation
+      </Link>{' '}
+      for more information.
+    </p>
+  </div>
+</Sandbox>
+
+## Block Links
+
+Make links display as block elements to take up full width:
+
+<Sandbox code={`<div className="flex flex-col gap-3 max-w-md">
+  <Link href="#" isBlock color="primary">
+    This is a block link
+  </Link>
+  <Link href="#" isBlock color="secondary">
+    Another block link
+  </Link>
+  <Link href="#" isBlock color="success" underline="hover">
+    Block link with hover underline
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3 max-w-md">
+    <Link href="#" isBlock color="primary">
+      This is a block link
+    </Link>
+    <Link href="#" isBlock color="secondary">
+      Another block link
+    </Link>
+    <Link href="#" isBlock color="success" underline="hover">
+      Block link with hover underline
+    </Link>
+  </div>
+</Sandbox>
+
+### Block Links in Cards
+
+<Sandbox code={`<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+    <h3 className="font-semibold mb-2">Documentation</h3>
+    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      Learn how to use FlexiUI
+    </p>
+    <Link href="/docs" isBlock color="primary" underline="hover">
+      Read the docs →
+    </Link>
+  </div>
+  <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+    <h3 className="font-semibold mb-2">Examples</h3>
+    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      Explore example projects
+    </p>
+    <Link href="/examples" isBlock color="primary" underline="hover">
+      View examples →
+    </Link>
+  </div>
+  <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+    <h3 className="font-semibold mb-2">Community</h3>
+    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      Join our community
+    </p>
+    <Link href="/community" isBlock color="primary" underline="hover">
+      Get involved →
+    </Link>
+  </div>
+</div>`}>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+      <h3 className="font-semibold mb-2">Documentation</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        Learn how to use FlexiUI
+      </p>
+      <Link href="/docs" isBlock color="primary" underline="hover">
+        Read the docs →
+      </Link>
+    </div>
+    <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+      <h3 className="font-semibold mb-2">Examples</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        Explore example projects
+      </p>
+      <Link href="/examples" isBlock color="primary" underline="hover">
+        View examples →
+      </Link>
+    </div>
+    <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+      <h3 className="font-semibold mb-2">Community</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        Join our community
+      </p>
+      <Link href="/community" isBlock color="primary" underline="hover">
+        Get involved →
+      </Link>
+    </div>
+  </div>
+</Sandbox>
+
+## Disabled State
+
+Prevent link interaction with the `isDisabled` prop:
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Link href="#" isDisabled>
+    Disabled link
+  </Link>
+  <Link href="#" color="primary" isDisabled>
+    Disabled primary link
+  </Link>
+  <Link href="#" color="secondary" isDisabled underline="always">
+    Disabled with underline
+  </Link>
+  <Link href="#" color="success" isDisabled showAnchorIcon>
+    Disabled external link
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="#" isDisabled>
+      Disabled link
+    </Link>
+    <Link href="#" color="primary" isDisabled>
+      Disabled primary link
+    </Link>
+    <Link href="#" color="secondary" isDisabled underline="always">
+      Disabled with underline
+    </Link>
+    <Link href="#" color="success" isDisabled showAnchorIcon>
+      Disabled external link
+    </Link>
+  </div>
+</Sandbox>
+
+### Disabled State Comparison
+
+<Sandbox code={`<div className="grid grid-cols-2 gap-6">
+  <div>
+    <h4 className="text-sm font-semibold mb-3">Enabled</h4>
+    <div className="flex flex-col gap-2">
+      <Link href="#" color="primary">Primary Link</Link>
+      <Link href="#" color="secondary">Secondary Link</Link>
+      <Link href="#" color="success">Success Link</Link>
+    </div>
+  </div>
+  <div>
+    <h4 className="text-sm font-semibold mb-3">Disabled</h4>
+    <div className="flex flex-col gap-2">
+      <Link href="#" color="primary" isDisabled>Primary Link</Link>
+      <Link href="#" color="secondary" isDisabled>Secondary Link</Link>
+      <Link href="#" color="success" isDisabled>Success Link</Link>
+    </div>
+  </div>
+</div>`}>
+  <div className="grid grid-cols-2 gap-6">
+    <div>
+      <h4 className="text-sm font-semibold mb-3">Enabled</h4>
+      <div className="flex flex-col gap-2">
+        <Link href="#" color="primary">Primary Link</Link>
+        <Link href="#" color="secondary">Secondary Link</Link>
+        <Link href="#" color="success">Success Link</Link>
+      </div>
+    </div>
+    <div>
+      <h4 className="text-sm font-semibold mb-3">Disabled</h4>
+      <div className="flex flex-col gap-2">
+        <Link href="#" color="primary" isDisabled>Primary Link</Link>
+        <Link href="#" color="secondary" isDisabled>Secondary Link</Link>
+        <Link href="#" color="success" isDisabled>Success Link</Link>
+      </div>
+    </div>
+  </div>
+</Sandbox>
+
+## Framework Integration
+
+The Link component works seamlessly with popular routing libraries.
+
+### Next.js Integration
+
+Use the Link component with Next.js routing:
+
+<Sandbox code={`import NextLink from 'next/link'
+import { Link } from '@flexi-ui/link'
+
+function Navigation() {
+  return (
+    <nav className="flex gap-6">
+      <Link as={NextLink} href="/">
+        Home
+      </Link>
+      <Link as={NextLink} href="/about">
+        About
+      </Link>
+      <Link as={NextLink} href="/products">
+        Products
+      </Link>
+      <Link as={NextLink} href="/contact">
+        Contact
+      </Link>
+    </nav>
+  )
+}`}>
+  <nav className="flex gap-6">
+    <Link href="/">Home</Link>
+    <Link href="/about">About</Link>
+    <Link href="/products">Products</Link>
+    <Link href="/contact">Contact</Link>
+  </nav>
+</Sandbox>
+
+### Next.js with Styling
+
+<Sandbox code={`import NextLink from 'next/link'
+import { Link } from '@flexi-ui/link'
+
+function StyledNavigation() {
+  return (
+    <nav className="flex gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+      <Link as={NextLink} href="/" color="primary" underline="hover">
+        Home
+      </Link>
+      <Link as={NextLink} href="/about" color="primary" underline="hover">
+        About
+      </Link>
+      <Link as={NextLink} href="/products" color="primary" underline="hover">
+        Products
+      </Link>
+      <Link as={NextLink} href="/contact" color="primary" underline="hover">
+        Contact
+      </Link>
+    </nav>
+  )
+}`}>
+  <nav className="flex gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+    <Link href="/" color="primary" underline="hover">
+      Home
+    </Link>
+    <Link href="/about" color="primary" underline="hover">
+      About
+    </Link>
+    <Link href="/products" color="primary" underline="hover">
+      Products
+    </Link>
+    <Link href="/contact" color="primary" underline="hover">
+      Contact
+    </Link>
+  </nav>
+</Sandbox>
+
+### React Router Integration
+
+Use with React Router's Link component:
+
+<Sandbox code={`import { Link as RouterLink } from 'react-router-dom'
+import { Link } from '@flexi-ui/link'
+
+function AppNavigation() {
+  return (
+    <nav className="flex flex-col gap-3">
+      <Link as={RouterLink} to="/" color="primary">
+        Dashboard
+      </Link>
+      <Link as={RouterLink} to="/settings" color="primary">
+        Settings
+      </Link>
+      <Link as={RouterLink} to="/profile" color="primary">
+        Profile
+      </Link>
+    </nav>
+  )
+}`}>
+  <nav className="flex flex-col gap-3">
+    <Link href="/" color="primary">
+      Dashboard
+    </Link>
+    <Link href="/settings" color="primary">
+      Settings
+    </Link>
+    <Link href="/profile" color="primary">
+      Profile
+    </Link>
+  </nav>
+</Sandbox>
+
+### Remix Integration
+
+Use with Remix's Link component:
+
+<Sandbox code={`import { Link as RemixLink } from '@remix-run/react'
+import { Link } from '@flexi-ui/link'
+
+function RemixNavigation() {
+  return (
+    <nav className="flex gap-4 items-center">
+      <Link as={RemixLink} to="/" color="foreground" underline="hover">
+        Home
+      </Link>
+      <Link as={RemixLink} to="/blog" color="foreground" underline="hover">
+        Blog
+      </Link>
+      <Link as={RemixLink} to="/about" color="foreground" underline="hover">
+        About
+      </Link>
+    </nav>
+  )
+}`}>
+  <nav className="flex gap-4 items-center">
+    <Link href="/" color="foreground" underline="hover">
+      Home
+    </Link>
+    <Link href="/blog" color="foreground" underline="hover">
+      Blog
+    </Link>
+    <Link href="/about" color="foreground" underline="hover">
+      About
+    </Link>
+  </nav>
+</Sandbox>
+
+## Custom Styling
+
+Customize links with additional CSS classes:
+
+<Sandbox code={`<div className="flex flex-col gap-4">
+  <Link href="#" className="font-bold uppercase">
+    Bold Uppercase Link
+  </Link>
+  <Link href="#" className="italic text-lg" color="primary">
+    Italic Large Link
+  </Link>
+  <Link
+    href="#"
+    className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg"
+  >
+    Gradient Background Link
+  </Link>
+  <Link
+    href="#"
+    className="font-mono text-sm px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-600"
+    color="foreground"
+  >
+    Code Style Link
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-4">
+    <Link href="#" className="font-bold uppercase">
+      Bold Uppercase Link
+    </Link>
+    <Link href="#" className="italic text-lg" color="primary">
+      Italic Large Link
+    </Link>
+    <Link
+      href="#"
+      className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg"
+    >
+      Gradient Background Link
+    </Link>
+    <Link
+      href="#"
+      className="font-mono text-sm px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-600"
+      color="foreground"
+    >
+      Code Style Link
+    </Link>
+  </div>
+</Sandbox>
+
+### Custom Icons
+
+Add custom icons to your links:
+
+<Sandbox code={`import { ArrowRight, Download, ExternalLink, Home } from 'lucide-react'
+
+<div className="flex flex-col gap-3">
+  <Link href="#" color="primary" className="inline-flex items-center gap-2">
+    <Home size={16} />
+    Go to Homepage
+  </Link>
+  <Link href="#" color="secondary" className="inline-flex items-center gap-2">
+    Continue Reading
+    <ArrowRight size={16} />
+  </Link>
+  <Link href="#" color="success" className="inline-flex items-center gap-2">
+    <Download size={16} />
+    Download File
+  </Link>
+  <Link href="#" color="primary" className="inline-flex items-center gap-2">
+    Open in New Tab
+    <ExternalLink size={16} />
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="#" color="primary" className="inline-flex items-center gap-2">
+      <span>🏠</span>
+      Go to Homepage
+    </Link>
+    <Link href="#" color="secondary" className="inline-flex items-center gap-2">
+      Continue Reading
+      <span>→</span>
+    </Link>
+    <Link href="#" color="success" className="inline-flex items-center gap-2">
+      <span>⬇</span>
+      Download File
+    </Link>
+    <Link href="#" color="primary" className="inline-flex items-center gap-2">
+      Open in New Tab
+      <span>↗</span>
+    </Link>
+  </div>
+</Sandbox>
+
+## Real-World Examples
+
+### Navigation Menu
+
+A complete navigation menu with links:
+
+<Sandbox code={`<nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center h-16">
+      <div className="flex items-center gap-8">
+        <span className="text-xl font-bold">FlexiUI</span>
+        <div className="hidden md:flex gap-6">
+          <Link href="/" color="foreground" underline="hover">
+            Home
+          </Link>
+          <Link href="/docs" color="foreground" underline="hover">
+            Documentation
+          </Link>
+          <Link href="/components" color="foreground" underline="hover">
+            Components
+          </Link>
+          <Link href="/examples" color="foreground" underline="hover">
+            Examples
+          </Link>
+        </div>
+      </div>
+      <div className="flex items-center gap-4">
+        <Link
+          href="https://github.com/flexiui/flexi-ui"
+          isExternal
+          showAnchorIcon
+          color="foreground"
+        >
+          GitHub
+        </Link>
+      </div>
+    </div>
+  </div>
+</nav>`}>
+  <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between items-center h-16">
+        <div className="flex items-center gap-8">
+          <span className="text-xl font-bold">FlexiUI</span>
+          <div className="hidden md:flex gap-6">
+            <Link href="/" color="foreground" underline="hover">
+              Home
+            </Link>
+            <Link href="/docs" color="foreground" underline="hover">
+              Documentation
+            </Link>
+            <Link href="/components" color="foreground" underline="hover">
+              Components
+            </Link>
+            <Link href="/examples" color="foreground" underline="hover">
+              Examples
+            </Link>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <Link
+            href="https://github.com/flexiui/flexi-ui"
+            isExternal
+            showAnchorIcon
+            color="foreground"
+          >
+            GitHub
+          </Link>
+        </div>
+      </div>
+    </div>
+  </nav>
+</Sandbox>
+
+### Breadcrumbs
+
+Create breadcrumb navigation with links:
+
+<Sandbox code={`<nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm">
+  <Link href="/" color="foreground" size="sm">
+    Home
+  </Link>
+  <span className="text-gray-400">/</span>
+  <Link href="/docs" color="foreground" size="sm">
+    Documentation
+  </Link>
+  <span className="text-gray-400">/</span>
+  <Link href="/docs/components" color="foreground" size="sm">
+    Components
+  </Link>
+  <span className="text-gray-400">/</span>
+  <span className="text-gray-600 dark:text-gray-400">Link</span>
+</nav>`}>
+  <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm">
+    <Link href="/" color="foreground" size="sm">
+      Home
+    </Link>
+    <span className="text-gray-400">/</span>
+    <Link href="/docs" color="foreground" size="sm">
+      Documentation
+    </Link>
+    <span className="text-gray-400">/</span>
+    <Link href="/docs/components" color="foreground" size="sm">
+      Components
+    </Link>
+    <span className="text-gray-400">/</span>
+    <span className="text-gray-600 dark:text-gray-400">Link</span>
+  </nav>
+</Sandbox>
+
+### Footer Links
+
+A comprehensive footer with organized links:
+
+<Sandbox code={`<footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 className="font-semibold mb-4">Product</h3>
+        <div className="flex flex-col gap-2">
+          <Link href="/features" color="foreground" size="sm">Features</Link>
+          <Link href="/pricing" color="foreground" size="sm">Pricing</Link>
+          <Link href="/updates" color="foreground" size="sm">Updates</Link>
+        </div>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-4">Resources</h3>
+        <div className="flex flex-col gap-2">
+          <Link href="/docs" color="foreground" size="sm">Documentation</Link>
+          <Link href="/guides" color="foreground" size="sm">Guides</Link>
+          <Link href="/api" color="foreground" size="sm">API Reference</Link>
+        </div>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-4">Company</h3>
+        <div className="flex flex-col gap-2">
+          <Link href="/about" color="foreground" size="sm">About</Link>
+          <Link href="/blog" color="foreground" size="sm">Blog</Link>
+          <Link href="/careers" color="foreground" size="sm">Careers</Link>
+        </div>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-4">Connect</h3>
+        <div className="flex flex-col gap-2">
+          <Link href="https://github.com" isExternal showAnchorIcon color="foreground" size="sm">
+            GitHub
+          </Link>
+          <Link href="https://twitter.com" isExternal showAnchorIcon color="foreground" size="sm">
+            Twitter
+          </Link>
+          <Link href="https://discord.com" isExternal showAnchorIcon color="foreground" size="sm">
+            Discord
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>`}>
+  <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 className="font-semibold mb-4">Product</h3>
+          <div className="flex flex-col gap-2">
+            <Link href="/features" color="foreground" size="sm">Features</Link>
+            <Link href="/pricing" color="foreground" size="sm">Pricing</Link>
+            <Link href="/updates" color="foreground" size="sm">Updates</Link>
+          </div>
+        </div>
+        <div>
+          <h3 className="font-semibold mb-4">Resources</h3>
+          <div className="flex flex-col gap-2">
+            <Link href="/docs" color="foreground" size="sm">Documentation</Link>
+            <Link href="/guides" color="foreground" size="sm">Guides</Link>
+            <Link href="/api" color="foreground" size="sm">API Reference</Link>
+          </div>
+        </div>
+        <div>
+          <h3 className="font-semibold mb-4">Company</h3>
+          <div className="flex flex-col gap-2">
+            <Link href="/about" color="foreground" size="sm">About</Link>
+            <Link href="/blog" color="foreground" size="sm">Blog</Link>
+            <Link href="/careers" color="foreground" size="sm">Careers</Link>
+          </div>
+        </div>
+        <div>
+          <h3 className="font-semibold mb-4">Connect</h3>
+          <div className="flex flex-col gap-2">
+            <Link href="https://github.com" isExternal showAnchorIcon color="foreground" size="sm">
+              GitHub
+            </Link>
+            <Link href="https://twitter.com" isExternal showAnchorIcon color="foreground" size="sm">
+              Twitter
+            </Link>
+            <Link href="https://discord.com" isExternal showAnchorIcon color="foreground" size="sm">
+              Discord
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Sandbox>
+
+### Card with Links
+
+Cards featuring multiple links:
+
+<Sandbox code={`<div className="max-w-sm p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+  <h2 className="text-xl font-bold mb-2">Getting Started</h2>
+  <p className="text-gray-600 dark:text-gray-400 mb-4">
+    Everything you need to start building with FlexiUI.
+  </p>
+  <div className="space-y-3">
+    <Link
+      href="/docs/installation"
+      isBlock
+      color="primary"
+      underline="hover"
+      className="inline-flex items-center gap-2"
+    >
+      Installation Guide
+      <span>→</span>
+    </Link>
+    <Link
+      href="/docs/quickstart"
+      isBlock
+      color="primary"
+      underline="hover"
+      className="inline-flex items-center gap-2"
+    >
+      Quick Start
+      <span>→</span>
+    </Link>
+    <Link
+      href="/examples"
+      isBlock
+      color="primary"
+      underline="hover"
+      className="inline-flex items-center gap-2"
+    >
+      View Examples
+      <span>→</span>
+    </Link>
+  </div>
+</div>`}>
+  <div className="max-w-sm p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+    <h2 className="text-xl font-bold mb-2">Getting Started</h2>
+    <p className="text-gray-600 dark:text-gray-400 mb-4">
+      Everything you need to start building with FlexiUI.
+    </p>
+    <div className="space-y-3">
+      <Link
+        href="/docs/installation"
+        isBlock
+        color="primary"
+        underline="hover"
+        className="inline-flex items-center gap-2"
+      >
+        Installation Guide
+        <span>→</span>
+      </Link>
+      <Link
+        href="/docs/quickstart"
+        isBlock
+        color="primary"
+        underline="hover"
+        className="inline-flex items-center gap-2"
+      >
+        Quick Start
+        <span>→</span>
+      </Link>
+      <Link
+        href="/examples"
+        isBlock
+        color="primary"
+        underline="hover"
+        className="inline-flex items-center gap-2"
+      >
+        View Examples
+        <span>→</span>
+      </Link>
+    </div>
+  </div>
+</Sandbox>
+
+### Sidebar Navigation
+
+A sidebar menu with active state indication:
+
+<Sandbox code={`<aside className="w-64 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 p-6">
+  <nav className="space-y-1">
+    <Link
+      href="/dashboard"
+      isBlock
+      color="primary"
+      className="px-3 py-2 rounded-md bg-primary-50 dark:bg-primary-900/20"
+    >
+      Dashboard
+    </Link>
+    <Link
+      href="/projects"
+      isBlock
+      color="foreground"
+      className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    >
+      Projects
+    </Link>
+    <Link
+      href="/tasks"
+      isBlock
+      color="foreground"
+      className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    >
+      Tasks
+    </Link>
+    <Link
+      href="/team"
+      isBlock
+      color="foreground"
+      className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    >
+      Team
+    </Link>
+    <Link
+      href="/settings"
+      isBlock
+      color="foreground"
+      className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    >
+      Settings
+    </Link>
+  </nav>
+</aside>`}>
+  <aside className="w-64 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 p-6">
+    <nav className="space-y-1">
+      <Link
+        href="/dashboard"
+        isBlock
+        color="primary"
+        className="px-3 py-2 rounded-md bg-primary-50 dark:bg-primary-900/20"
+      >
+        Dashboard
+      </Link>
+      <Link
+        href="/projects"
+        isBlock
+        color="foreground"
+        className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+      >
+        Projects
+      </Link>
+      <Link
+        href="/tasks"
+        isBlock
+        color="foreground"
+        className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+      >
+        Tasks
+      </Link>
+      <Link
+        href="/team"
+        isBlock
+        color="foreground"
+        className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+      >
+        Team
+      </Link>
+      <Link
+        href="/settings"
+        isBlock
+        color="foreground"
+        className="px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+      >
+        Settings
+      </Link>
+    </nav>
+  </aside>
+</Sandbox>
+
+### Inline Links in Content
+
+Links naturally integrated into content:
+
+<Sandbox code={`<article className="prose dark:prose-invert max-w-2xl">
+  <h2>Welcome to FlexiUI</h2>
+  <p>
+    FlexiUI is a modern React component library built with{' '}
+    <Link href="https://tailwindcss.com" isExternal showAnchorIcon color="primary">
+      Tailwind CSS
+    </Link>
+    {' '}and{' '}
+    <Link href="https://www.typescriptlang.org" isExternal showAnchorIcon color="primary">
+      TypeScript
+    </Link>
+    . It provides a comprehensive set of accessible components for building beautiful user interfaces.
+  </p>
+  <p>
+    To get started, check out our{' '}
+    <Link href="/docs/installation" color="primary" underline="hover">
+      installation guide
+    </Link>
+    {' '}or explore the{' '}
+    <Link href="/docs/components" color="primary" underline="hover">
+      component documentation
+    </Link>
+    . You can also view{' '}
+    <Link href="/examples" color="primary" underline="hover">
+      example projects
+    </Link>
+    {' '}to see FlexiUI in action.
+  </p>
+  <p>
+    Need help? Join our{' '}
+    <Link href="https://discord.gg/flexiui" isExternal showAnchorIcon color="primary">
+      Discord community
+    </Link>
+    {' '}or{' '}
+    <Link href="https://github.com/flexiui/flexi-ui/issues" isExternal showAnchorIcon color="primary">
+      report an issue
+    </Link>
+    {' '}on GitHub.
+  </p>
+</article>`}>
+  <article className="prose dark:prose-invert max-w-2xl">
+    <h2>Welcome to FlexiUI</h2>
+    <p>
+      FlexiUI is a modern React component library built with{' '}
+      <Link href="https://tailwindcss.com" isExternal showAnchorIcon color="primary">
+        Tailwind CSS
+      </Link>
+      {' '}and{' '}
+      <Link href="https://www.typescriptlang.org" isExternal showAnchorIcon color="primary">
+        TypeScript
+      </Link>
+      . It provides a comprehensive set of accessible components for building beautiful user interfaces.
+    </p>
+    <p>
+      To get started, check out our{' '}
+      <Link href="/docs/installation" color="primary" underline="hover">
+        installation guide
+      </Link>
+      {' '}or explore the{' '}
+      <Link href="/docs/components" color="primary" underline="hover">
+        component documentation
+      </Link>
+      . You can also view{' '}
+      <Link href="/examples" color="primary" underline="hover">
+        example projects
+      </Link>
+      {' '}to see FlexiUI in action.
+    </p>
+    <p>
+      Need help? Join our{' '}
+      <Link href="https://discord.gg/flexiui" isExternal showAnchorIcon color="primary">
+        Discord community
+      </Link>
+      {' '}or{' '}
+      <Link href="https://github.com/flexiui/flexi-ui/issues" isExternal showAnchorIcon color="primary">
+        report an issue
+      </Link>
+      {' '}on GitHub.
+    </p>
+  </article>
+</Sandbox>
+
+## API Reference
 
 ### Link Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| href | `string` | - | URL to navigate to |
-| isExternal | `boolean` | `false` | Whether link opens in new tab |
-| showAnchorIcon | `boolean` | `false` | Show external link icon |
-| isDisabled | `boolean` | `false` | Whether the link is disabled |
-| isBlock | `boolean` | `false` | Make link display as block |
-| size | `sm \| md \| lg` | `md` | Size of the link |
-| color | `foreground \| primary \| secondary \| success \| warning \| error` | `primary` | Color theme |
-| underline | `none \| hover \| always \| active \| focus` | `none` | When to show underline |
-| as | `ElementType` | `a` | Component to render as |
-| className | `string` | - | Additional CSS classes |
-| children | `ReactNode` | - | Link content |
+| `href` | `string` | - | The URL to navigate to (required) |
+| `color` | `'foreground' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error'` | `'primary'` | The color theme of the link |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | The size of the link |
+| `underline` | `'none' \| 'hover' \| 'always' \| 'active' \| 'focus'` | `'none'` | When to show the underline |
+| `isExternal` | `boolean` | `false` | Whether the link opens in a new tab. Automatically adds `target="_blank"` and `rel="noopener noreferrer"` |
+| `showAnchorIcon` | `boolean` | `false` | Whether to show an external link icon (only works with `isExternal`) |
+| `isDisabled` | `boolean` | `false` | Whether the link is disabled. Disables click events and adds `aria-disabled` |
+| `isBlock` | `boolean` | `false` | Whether the link should display as a block element |
+| `as` | `ElementType` | `'a'` | The component to render as (useful for framework integration) |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `ReactNode` | - | The content of the link |
 
-## Examples
+### Additional HTML Props
 
-### Colors
+The Link component also accepts all standard HTML anchor (`<a>`) attributes:
 
-```tsx
-<Link href="#" color="foreground">Foreground</Link>
-<Link href="#" color="primary">Primary</Link>
-<Link href="#" color="secondary">Secondary</Link>
-<Link href="#" color="success">Success</Link>
-<Link href="#" color="warning">Warning</Link>
-<Link href="#" color="error">Error</Link>
-```
+- `target` - Where to open the linked document
+- `rel` - Relationship between current and linked document
+- `download` - Specifies that the target will be downloaded
+- `hrefLang` - Language of the linked document
+- `referrerPolicy` - Referrer policy for the link
+- And all other standard anchor attributes
 
-### Sizes
+## Accessibility
 
-```tsx
-<Link href="#" size="sm">Small</Link>
-<Link href="#" size="md">Medium</Link>
-<Link href="#" size="lg">Large</Link>
-```
+The Link component is built with accessibility in mind and follows WAI-ARIA best practices.
 
-### Underline
+### Keyboard Navigation
 
-```tsx
-<Link href="#" underline="none">No underline</Link>
-<Link href="#" underline="hover">Underline on hover</Link>
-<Link href="#" underline="always">Always underlined</Link>
-<Link href="#" underline="active">Underline when active</Link>
-<Link href="#" underline="focus">Underline on focus</Link>
-```
+<Sandbox code={`<div className="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+    Try navigating with your keyboard:
+  </p>
+  <div className="flex flex-col gap-3">
+    <Link href="#" color="primary" underline="focus">
+      Press Tab to focus this link
+    </Link>
+    <Link href="#" color="secondary" underline="focus">
+      Continue with Tab to the next link
+    </Link>
+    <Link href="#" color="success" underline="focus">
+      Press Enter or Space to activate
+    </Link>
+  </div>
+</div>`}>
+  <div className="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      Try navigating with your keyboard:
+    </p>
+    <div className="flex flex-col gap-3">
+      <Link href="#" color="primary" underline="focus">
+        Press Tab to focus this link
+      </Link>
+      <Link href="#" color="secondary" underline="focus">
+        Continue with Tab to the next link
+      </Link>
+      <Link href="#" color="success" underline="focus">
+        Press Enter or Space to activate
+      </Link>
+    </div>
+  </div>
+</Sandbox>
 
-### Block Link
+### ARIA Attributes
 
-```tsx
-<Link href="#" isBlock>
-  This link takes up the full width
-</Link>
-```
+Links automatically include appropriate ARIA attributes:
 
-### Disabled Link
+<Sandbox code={`<div className="flex flex-col gap-4">
+  <Link href="#" isDisabled>
+    Disabled link (has aria-disabled="true")
+  </Link>
+  <Link href="https://example.com" isExternal showAnchorIcon>
+    External link (has descriptive aria-label)
+  </Link>
+  <Link href="/download" download aria-label="Download user manual PDF">
+    Download (with custom aria-label)
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-4">
+    <Link href="#" isDisabled>
+      Disabled link (has aria-disabled="true")
+    </Link>
+    <Link href="https://example.com" isExternal showAnchorIcon>
+      External link (has descriptive aria-label)
+    </Link>
+    <Link href="/download" download aria-label="Download user manual PDF">
+      Download (with custom aria-label)
+    </Link>
+  </div>
+</Sandbox>
 
-```tsx
-<Link href="#" isDisabled>
-  Disabled link
-</Link>
-```
+### Screen Reader Support
 
-### With Next.js
+Provide descriptive link text for screen readers:
 
-```tsx
+<Sandbox code={`<div className="space-y-4">
+  <div>
+    <p className="text-sm font-semibold mb-2 text-red-600">❌ Bad - Non-descriptive</p>
+    <p className="text-sm">
+      For more information,{' '}
+      <Link href="/docs" color="primary">
+        click here
+      </Link>
+    </p>
+  </div>
+  <div>
+    <p className="text-sm font-semibold mb-2 text-green-600">✓ Good - Descriptive</p>
+    <p className="text-sm">
+      <Link href="/docs" color="primary">
+        Read the full documentation
+      </Link>
+      {' '}for more information.
+    </p>
+  </div>
+</div>`}>
+  <div className="space-y-4">
+    <div>
+      <p className="text-sm font-semibold mb-2 text-red-600">Bad - Non-descriptive</p>
+      <p className="text-sm">
+        For more information,{' '}
+        <Link href="/docs" color="primary">
+          click here
+        </Link>
+      </p>
+    </div>
+    <div>
+      <p className="text-sm font-semibold mb-2 text-green-600">Good - Descriptive</p>
+      <p className="text-sm">
+        <Link href="/docs" color="primary">
+          Read the full documentation
+        </Link>
+        {' '}for more information.
+      </p>
+    </div>
+  </div>
+</Sandbox>
+
+### Key Accessibility Features
+
+- **Semantic HTML**: Uses native `<a>` elements for proper semantics
+- **Keyboard Support**: Fully accessible via keyboard (Tab, Enter, Space)
+- **Focus Indicators**: Clear visual focus states for keyboard navigation
+- **ARIA Attributes**: Appropriate `aria-disabled`, `aria-label`, and other ARIA attributes
+- **External Link Security**: Automatically adds `rel="noopener noreferrer"` for external links
+- **Screen Reader Friendly**: Descriptive link text and proper announcements
+- **Color Contrast**: All color variants meet WCAG AA standards
+- **Disabled State**: Properly communicated to assistive technologies
+
+## Best Practices
+
+### 1. Use Descriptive Link Text
+
+Always use clear, descriptive text that explains where the link goes or what action it performs:
+
+<Sandbox code={`<div className="space-y-4">
+  <div>
+    <p className="text-sm font-semibold mb-2">❌ Avoid generic text</p>
+    <Link href="/learn-more" color="primary">Click here</Link>
+  </div>
+  <div>
+    <p className="text-sm font-semibold mb-2">✓ Use descriptive text</p>
+    <Link href="/learn-more" color="primary">Learn more about our features</Link>
+  </div>
+</div>`}>
+  <div className="space-y-4">
+    <div>
+      <p className="text-sm font-semibold mb-2">Avoid generic text</p>
+      <Link href="/learn-more" color="primary">Click here</Link>
+    </div>
+    <div>
+      <p className="text-sm font-semibold mb-2">Use descriptive text</p>
+      <Link href="/learn-more" color="primary">Learn more about our features</Link>
+    </div>
+  </div>
+</Sandbox>
+
+### 2. Indicate External Links
+
+Always mark external links with `isExternal` and consider using `showAnchorIcon`:
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Link href="https://github.com" isExternal showAnchorIcon color="primary">
+    View on GitHub
+  </Link>
+  <Link href="https://twitter.com/share" isExternal showAnchorIcon color="primary">
+    Share on Twitter
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="https://github.com" isExternal showAnchorIcon color="primary">
+      View on GitHub
+    </Link>
+    <Link href="https://twitter.com/share" isExternal showAnchorIcon color="primary">
+      Share on Twitter
+    </Link>
+  </div>
+</Sandbox>
+
+### 3. Use Appropriate Underline Styles
+
+Choose underline variants that match your design and improve usability:
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <p className="text-sm">
+    For body text links, use{' '}
+    <Link href="#" underline="hover" color="primary">
+      hover underline
+    </Link>
+    {' '}to indicate interactivity.
+  </p>
+  <p className="text-sm">
+    For navigation menus, use{' '}
+    <Link href="#" underline="none" color="foreground">
+      no underline
+    </Link>
+    {' '}for a cleaner look.
+  </p>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <p className="text-sm">
+      For body text links, use{' '}
+      <Link href="#" underline="hover" color="primary">
+        hover underline
+      </Link>
+      {' '}to indicate interactivity.
+    </p>
+    <p className="text-sm">
+      For navigation menus, use{' '}
+      <Link href="#" underline="none" color="foreground">
+        no underline
+      </Link>
+      {' '}for a cleaner look.
+    </p>
+  </div>
+</Sandbox>
+
+### 4. Maintain Sufficient Color Contrast
+
+Ensure links have enough contrast with surrounding text:
+
+<Sandbox code={`<div className="p-6 bg-white dark:bg-gray-800 rounded-lg">
+  <p className="text-gray-900 dark:text-gray-100">
+    This paragraph contains a{' '}
+    <Link href="#" color="primary" underline="hover">
+      well-contrasted link
+    </Link>
+    {' '}that's easy to distinguish from surrounding text.
+  </p>
+</div>`}>
+  <div className="p-6 bg-white dark:bg-gray-800 rounded-lg">
+    <p className="text-gray-900 dark:text-gray-100">
+      This paragraph contains a{' '}
+      <Link href="#" color="primary" underline="hover">
+        well-contrasted link
+      </Link>
+      {' '}that's easy to distinguish from surrounding text.
+    </p>
+  </div>
+</Sandbox>
+
+### 5. Use Consistent Navigation Patterns
+
+Maintain consistency across your application:
+
+<Sandbox code={`<nav className="flex gap-6">
+  <Link href="/" color="foreground" underline="hover">Home</Link>
+  <Link href="/about" color="foreground" underline="hover">About</Link>
+  <Link href="/products" color="foreground" underline="hover">Products</Link>
+  <Link href="/contact" color="foreground" underline="hover">Contact</Link>
+</nav>`}>
+  <nav className="flex gap-6">
+    <Link href="/" color="foreground" underline="hover">Home</Link>
+    <Link href="/about" color="foreground" underline="hover">About</Link>
+    <Link href="/products" color="foreground" underline="hover">Products</Link>
+    <Link href="/contact" color="foreground" underline="hover">Contact</Link>
+  </nav>
+</Sandbox>
+
+### 6. Consider Mobile Touch Targets
+
+Ensure links are large enough for touch interaction (minimum 44x44px):
+
+<Sandbox code={`<div className="flex flex-col gap-2">
+  <Link
+    href="#"
+    isBlock
+    color="primary"
+    className="px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+  >
+    Large touch-friendly link
+  </Link>
+  <Link
+    href="#"
+    isBlock
+    color="secondary"
+    className="px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+  >
+    Another touch-friendly link
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-2">
+    <Link
+      href="#"
+      isBlock
+      color="primary"
+      className="px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+    >
+      Large touch-friendly link
+    </Link>
+    <Link
+      href="#"
+      isBlock
+      color="secondary"
+      className="px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+    >
+      Another touch-friendly link
+    </Link>
+  </div>
+</Sandbox>
+
+### 7. Use Semantic Colors
+
+Match link colors to their meaning and context:
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Link href="/docs" color="primary">
+    View Documentation (primary action)
+  </Link>
+  <Link href="/success" color="success">
+    Payment Successful (positive action)
+  </Link>
+  <Link href="/delete" color="error">
+    Delete Account (destructive action)
+  </Link>
+  <Link href="/warning" color="warning">
+    Review Security Settings (warning)
+  </Link>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Link href="/docs" color="primary">
+      View Documentation (primary action)
+    </Link>
+    <Link href="/success" color="success">
+      Payment Successful (positive action)
+    </Link>
+    <Link href="/delete" color="error">
+      Delete Account (destructive action)
+    </Link>
+    <Link href="/warning" color="warning">
+      Review Security Settings (warning)
+    </Link>
+  </div>
+</Sandbox>
+
+## Troubleshooting
+
+### Links Not Navigating with Framework Routers
+
+**Problem**: Links reload the page instead of using client-side navigation.
+
+**Solution**: Use the `as` prop to integrate with your router:
+
+<Sandbox code={`// For Next.js
 import NextLink from 'next/link'
-import { Link } from '@flexi-ui/link'
 
 <Link as={NextLink} href="/about">
   About
 </Link>
-```
 
-### With React Router
-
-```tsx
+// For React Router
 import { Link as RouterLink } from 'react-router-dom'
-import { Link } from '@flexi-ui/link'
 
 <Link as={RouterLink} to="/about">
   About
+</Link>`}>
+  <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+    <p className="text-sm font-mono">
+      Use the 'as' prop with your router's Link component
+    </p>
+  </div>
+</Sandbox>
+
+### External Links Not Opening in New Tab
+
+**Problem**: External links open in the same tab despite using `isExternal`.
+
+**Solution**: Ensure you're using the `isExternal` prop correctly:
+
+<Sandbox code={`// ❌ Incorrect
+<Link href="https://example.com">
+  External Link
 </Link>
-```
 
-### With Remix
-
-```tsx
-import { Link as RemixLink } from '@remix-run/react'
-import { Link } from '@flexi-ui/link'
-
-<Link as={RemixLink} to="/about">
-  About
+// ✓ Correct
+<Link href="https://example.com" isExternal>
+  External Link
 </Link>
-```
 
-### Custom Styling
+// ✓ With icon
+<Link href="https://example.com" isExternal showAnchorIcon>
+  External Link
+</Link>`}>
+  <div className="flex flex-col gap-3">
+    <div>
+      <p className="text-sm font-semibold mb-2">Incorrect</p>
+      <Link href="https://example.com">External Link</Link>
+    </div>
+    <div>
+      <p className="text-sm font-semibold mb-2">Correct</p>
+      <Link href="https://example.com" isExternal showAnchorIcon>
+        External Link
+      </Link>
+    </div>
+  </div>
+</Sandbox>
 
-```tsx
+### Disabled Links Still Clickable
+
+**Problem**: Disabled links can still be clicked and navigated.
+
+**Solution**: The `isDisabled` prop adds `aria-disabled` and prevents default behavior, but ensure your event handlers respect this:
+
+<Sandbox code={`// ✓ Correct usage
 <Link
   href="#"
-  className="font-bold uppercase"
+  isDisabled
+  onClick={(e) => {
+    // Event handlers should check disabled state
+    e.preventDefault()
+  }}
 >
-  Custom Link
+  Disabled Link
+</Link>`}>
+  <Link href="#" isDisabled>
+    Disabled Link
+  </Link>
+</Sandbox>
+
+### Custom Styles Not Applied
+
+**Problem**: Custom className styles are being overridden.
+
+**Solution**: Use Tailwind's modifier classes or increase specificity:
+
+<Sandbox code={`// ✓ Use modifier classes
+<Link
+  href="#"
+  className="hover:bg-blue-100 dark:hover:bg-blue-900"
+>
+  Custom Hover Style
 </Link>
-```
 
-## Accessibility
+// ✓ Or combine with color prop
+<Link
+  href="#"
+  color="primary"
+  className="font-bold text-lg"
+>
+  Bold Large Link
+</Link>`}>
+  <div className="flex flex-col gap-3">
+    <Link
+      href="#"
+      className="hover:bg-blue-100 dark:hover:bg-blue-900 px-3 py-2 rounded"
+    >
+      Custom Hover Style
+    </Link>
+    <Link
+      href="#"
+      color="primary"
+      className="font-bold text-lg"
+    >
+      Bold Large Link
+    </Link>
+  </div>
+</Sandbox>
 
-- Links use semantic HTML with proper ARIA attributes
-- External links include `rel="noopener noreferrer"` for security
-- Disabled links have `aria-disabled` attribute
-- Supports keyboard navigation
-- Screen readers announce link purpose and destination
-- Focus states are clearly visible
+### Anchor Icon Not Showing
+
+**Problem**: External link icon doesn't appear despite using `showAnchorIcon`.
+
+**Solution**: Ensure you also set `isExternal`:
+
+<Sandbox code={`// ❌ Incorrect - icon won't show
+<Link href="https://example.com" showAnchorIcon>
+  Link
+</Link>
+
+// ✓ Correct - both props needed
+<Link href="https://example.com" isExternal showAnchorIcon>
+  Link
+</Link>`}>
+  <div className="flex flex-col gap-3">
+    <div>
+      <p className="text-sm font-semibold mb-2">Incorrect - icon won't show</p>
+      <Link href="https://example.com" showAnchorIcon>
+        Link
+      </Link>
+    </div>
+    <div>
+      <p className="text-sm font-semibold mb-2">Correct - both props needed</p>
+      <Link href="https://example.com" isExternal showAnchorIcon>
+        Link
+      </Link>
+    </div>
+  </div>
+</Sandbox>
+
+### Focus Outline Not Visible
+
+**Problem**: Focus outline is hard to see on certain backgrounds.
+
+**Solution**: Use the `underline="focus"` variant or custom focus styles:
+
+<Sandbox code={`<div className="p-6 bg-gray-900 rounded-lg">
+  <div className="flex flex-col gap-3">
+    <Link
+      href="#"
+      color="foreground"
+      underline="focus"
+      className="text-white"
+    >
+      Link with focus underline
+    </Link>
+    <Link
+      href="#"
+      className="text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1"
+    >
+      Link with custom focus ring
+    </Link>
+  </div>
+</div>`}>
+  <div className="p-6 bg-gray-900 rounded-lg">
+    <div className="flex flex-col gap-3">
+      <Link
+        href="#"
+        color="foreground"
+        underline="focus"
+        className="text-white"
+      >
+        Link with focus underline
+      </Link>
+      <Link
+        href="#"
+        className="text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1"
+      >
+        Link with custom focus ring
+      </Link>
+    </div>
+  </div>
+</Sandbox>
+
+## Related Components
+
+- **[Button](/docs/components/button)** - For actions and form submissions
+- **[Breadcrumbs](/docs/components/breadcrumbs)** - For hierarchical navigation
+- **[Menu](/docs/components/menu)** - For dropdown navigation
+- **[Tabs](/docs/components/tabs)** - For tabbed navigation
