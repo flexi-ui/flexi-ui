@@ -229,3 +229,1393 @@ function ThemePreview() {
   )
 }
 ```
+
+## Creating Color Palettes
+
+### Generating Color Scales
+
+Create comprehensive color scales from base colors:
+
+```typescript
+// utils/color-palette.ts
+import { colord, extend } from 'colord'
+import a11yPlugin from 'colord/plugins/a11y'
+
+extend([a11yPlugin])
+
+export function generateColorScale(baseColor: string) {
+  const base = colord(baseColor)
+
+  return {
+    50: base.lighten(0.45).toHex(),
+    100: base.lighten(0.4).toHex(),
+    200: base.lighten(0.3).toHex(),
+    300: base.lighten(0.2).toHex(),
+    400: base.lighten(0.1).toHex(),
+    500: baseColor, // Base color
+    600: base.darken(0.1).toHex(),
+    700: base.darken(0.2).toHex(),
+    800: base.darken(0.3).toHex(),
+    900: base.darken(0.4).toHex(),
+  }
+}
+
+// Generate a complete theme palette
+export function generateThemePalette(primary: string, secondary: string) {
+  return {
+    primary: generateColorScale(primary),
+    secondary: generateColorScale(secondary),
+    success: generateColorScale('#10b981'),
+    warning: generateColorScale('#f59e0b'),
+    danger: generateColorScale('#ef4444'),
+  }
+}
+```
+
+### Using Color Scales
+
+Apply generated color scales in your theme:
+
+```typescript
+import { generateThemePalette } from './utils/color-palette'
+
+const palette = generateThemePalette('#0070f3', '#7928ca')
+
+export const theme: Theme = {
+  colors: {
+    primary: {
+      DEFAULT: palette.primary[500],
+      foreground: '#ffffff',
+      50: palette.primary[50],
+      100: palette.primary[100],
+      200: palette.primary[200],
+      300: palette.primary[300],
+      400: palette.primary[400],
+      500: palette.primary[500],
+      600: palette.primary[600],
+      700: palette.primary[700],
+      800: palette.primary[800],
+      900: palette.primary[900],
+    },
+    secondary: {
+      DEFAULT: palette.secondary[500],
+      foreground: '#ffffff',
+      50: palette.secondary[50],
+      100: palette.secondary[100],
+      200: palette.secondary[200],
+      300: palette.secondary[300],
+      400: palette.secondary[400],
+      500: palette.secondary[500],
+      600: palette.secondary[600],
+      700: palette.secondary[700],
+      800: palette.secondary[800],
+      900: palette.secondary[900],
+    },
+  },
+}
+```
+
+### Ensuring Accessibility
+
+Validate color contrast for accessibility:
+
+```typescript
+import { colord } from 'colord'
+
+export function ensureContrast(
+  foreground: string,
+  background: string,
+  targetContrast: number = 4.5
+): string {
+  const fg = colord(foreground)
+  const bg = colord(background)
+
+  let adjustedFg = fg
+  let contrast = bg.contrast(adjustedFg)
+
+  // Adjust foreground until contrast is met
+  while (contrast < targetContrast) {
+    if (bg.isDark()) {
+      adjustedFg = adjustedFg.lighten(0.05)
+    } else {
+      adjustedFg = adjustedFg.darken(0.05)
+    }
+    contrast = bg.contrast(adjustedFg)
+  }
+
+  return adjustedFg.toHex()
+}
+
+// Usage
+const theme = {
+  colors: {
+    primary: {
+      DEFAULT: '#0070f3',
+      foreground: ensureContrast('#ffffff', '#0070f3'),
+    },
+  },
+}
+```
+
+## Creating a Tailwind Plugin
+
+### Basic Plugin Structure
+
+Create a Tailwind plugin for your theme:
+
+```typescript
+// plugins/flexi-theme.ts
+import plugin from 'tailwindcss/plugin'
+import type { Theme } from '@flexi-ui/react'
+
+export function createFlexiThemePlugin(theme: Theme) {
+  return plugin(
+    function ({ addBase, addUtilities, theme: twTheme }) {
+      // Add CSS variables
+      addBase({
+        ':root': {
+          '--flexi-primary': theme.colors.primary.DEFAULT,
+          '--flexi-secondary': theme.colors.secondary.DEFAULT,
+          '--flexi-font-sans': theme.typography.fontFamily.sans,
+          '--flexi-font-mono': theme.typography.fontFamily.mono,
+          '--flexi-radius-small': theme.borderRadius.small,
+          '--flexi-radius-medium': theme.borderRadius.medium,
+          '--flexi-radius-large': theme.borderRadius.large,
+        },
+      })
+
+      // Add custom utilities
+      addUtilities({
+        '.flexi-card': {
+          backgroundColor: 'rgb(var(--flexi-content1))',
+          borderRadius: 'var(--flexi-radius-medium)',
+          padding: twTheme('spacing.4'),
+        },
+        '.flexi-button': {
+          backgroundColor: 'rgb(var(--flexi-primary))',
+          color: 'rgb(var(--flexi-primary-foreground))',
+          borderRadius: 'var(--flexi-radius-small)',
+          padding: `${twTheme('spacing.2')} ${twTheme('spacing.4')}`,
+        },
+      })
+    },
+    {
+      theme: {
+        extend: {
+          colors: {
+            primary: theme.colors.primary,
+            secondary: theme.colors.secondary,
+          },
+          fontFamily: {
+            sans: theme.typography.fontFamily.sans.split(','),
+            mono: theme.typography.fontFamily.mono.split(','),
+          },
+          borderRadius: theme.borderRadius,
+        },
+      },
+    }
+  )
+}
+```
+
+### Using the Plugin
+
+Apply your plugin in Tailwind configuration:
+
+```typescript
+// tailwind.config.ts
+import type { Config } from 'tailwindcss'
+import { createFlexiThemePlugin } from './plugins/flexi-theme'
+import { myCustomTheme } from './theme'
+
+const config: Config = {
+  content: ['./app/**/*.{js,ts,jsx,tsx}'],
+  plugins: [createFlexiThemePlugin(myCustomTheme)],
+}
+
+export default config
+```
+
+### Advanced Plugin Features
+
+Add component-specific styles:
+
+```typescript
+export function createFlexiThemePlugin(theme: Theme) {
+  return plugin(
+    function ({ addComponents, theme: twTheme }) {
+      addComponents({
+        '.flexi-button-primary': {
+          backgroundColor: theme.colors.primary.DEFAULT,
+          color: theme.colors.primary.foreground,
+          '&:hover': {
+            backgroundColor: theme.colors.primary[600],
+          },
+          '&:active': {
+            backgroundColor: theme.colors.primary[700],
+          },
+        },
+        '.flexi-button-secondary': {
+          backgroundColor: theme.colors.secondary.DEFAULT,
+          color: theme.colors.secondary.foreground,
+          '&:hover': {
+            backgroundColor: theme.colors.secondary[600],
+          },
+        },
+        '.flexi-card': {
+          backgroundColor: theme.colors.content1,
+          borderRadius: theme.borderRadius.medium,
+          boxShadow: twTheme('boxShadow.sm'),
+          padding: twTheme('spacing.6'),
+        },
+        '.flexi-input': {
+          borderRadius: theme.borderRadius.small,
+          borderWidth: '1px',
+          borderColor: theme.colors.content3,
+          padding: `${twTheme('spacing.2')} ${twTheme('spacing.3')}`,
+          '&:focus': {
+            borderColor: theme.colors.primary.DEFAULT,
+            outline: 'none',
+            boxShadow: `0 0 0 3px ${theme.colors.primary.DEFAULT}33`,
+          },
+        },
+      })
+    }
+  )
+}
+```
+
+## Theme Variants
+
+### Light and Dark Modes
+
+Create complete light and dark themes:
+
+```typescript
+import type { Theme } from '@flexi-ui/react'
+
+const baseTheme = {
+  typography: {
+    fontFamily: {
+      sans: 'Inter, system-ui, sans-serif',
+      mono: 'Fira Code, monospace',
+    },
+  },
+  borderRadius: {
+    small: '0.5rem',
+    medium: '0.75rem',
+    large: '1rem',
+  },
+  spacing: {
+    unit: 4,
+  },
+}
+
+export const lightTheme: Theme = {
+  ...baseTheme,
+  colors: {
+    primary: {
+      DEFAULT: '#0070f3',
+      foreground: '#ffffff',
+    },
+    secondary: {
+      DEFAULT: '#7928ca',
+      foreground: '#ffffff',
+    },
+    success: {
+      DEFAULT: '#10b981',
+      foreground: '#ffffff',
+    },
+    warning: {
+      DEFAULT: '#f59e0b',
+      foreground: '#000000',
+    },
+    danger: {
+      DEFAULT: '#ef4444',
+      foreground: '#ffffff',
+    },
+    background: '#ffffff',
+    foreground: '#000000',
+    content1: '#ffffff',
+    content2: '#f4f4f5',
+    content3: '#e4e4e7',
+    content4: '#d4d4d8',
+  },
+}
+
+export const darkTheme: Theme = {
+  ...baseTheme,
+  colors: {
+    primary: {
+      DEFAULT: '#3b82f6',
+      foreground: '#ffffff',
+    },
+    secondary: {
+      DEFAULT: '#a855f7',
+      foreground: '#ffffff',
+    },
+    success: {
+      DEFAULT: '#10b981',
+      foreground: '#ffffff',
+    },
+    warning: {
+      DEFAULT: '#f59e0b',
+      foreground: '#000000',
+    },
+    danger: {
+      DEFAULT: '#ef4444',
+      foreground: '#ffffff',
+    },
+    background: '#000000',
+    foreground: '#ffffff',
+    content1: '#18181b',
+    content2: '#27272a',
+    content3: '#3f3f46',
+    content4: '#52525b',
+  },
+}
+```
+
+### Theme Switcher Integration
+
+Integrate with theme switching:
+
+```tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+import { FlexiUIProvider } from '@flexi-ui/react'
+import { lightTheme, darkTheme } from './themes'
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // Check system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    setIsDark(prefersDark)
+  }, [])
+
+  const theme = isDark ? darkTheme : lightTheme
+
+  return (
+    <FlexiUIProvider theme={theme}>
+      <div data-theme={isDark ? 'dark' : 'light'}>
+        {children}
+      </div>
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Theme Distribution
+
+### Packaging Your Theme
+
+Create a distributable package:
+
+```json
+// package.json
+{
+  "name": "@mycompany/flexi-theme",
+  "version": "1.0.0",
+  "description": "Custom FlexiUI theme for MyCompany",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@flexi-ui/react": "^1.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+### Theme Entry Point
+
+Create an entry point for your theme package:
+
+```typescript
+// src/index.ts
+import type { Theme } from '@flexi-ui/react'
+
+export { lightTheme, darkTheme } from './themes'
+export { createFlexiThemePlugin } from './plugin'
+export type { CustomTheme } from './types'
+
+// Default export
+export const theme: Theme = {
+  // ... your default theme
+}
+
+export default theme
+```
+
+### Publishing to npm
+
+Publish your theme package:
+
+```bash
+# Build the package
+npm run build
+
+# Publish to npm
+npm publish --access public
+
+# Or to a private registry
+npm publish --registry https://npm.mycompany.com
+```
+
+### Installing Your Theme
+
+Users can install your theme:
+
+```bash
+npm install @mycompany/flexi-theme
+```
+
+```tsx
+// Usage
+import { FlexiUIProvider } from '@flexi-ui/react'
+import theme from '@mycompany/flexi-theme'
+
+function App() {
+  return (
+    <FlexiUIProvider theme={theme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Theme Validation
+
+### Type-Safe Theme Builder
+
+Create a type-safe theme builder:
+
+```typescript
+// utils/theme-builder.ts
+import type { Theme, Colors, Typography } from '@flexi-ui/react'
+
+export class ThemeBuilder {
+  private theme: Partial<Theme> = {}
+
+  colors(colors: Colors): this {
+    this.theme.colors = colors
+    return this
+  }
+
+  typography(typography: Typography): this {
+    this.theme.typography = typography
+    return this
+  }
+
+  borderRadius(borderRadius: Theme['borderRadius']): this {
+    this.theme.borderRadius = borderRadius
+    return this
+  }
+
+  spacing(spacing: Theme['spacing']): this {
+    this.theme.spacing = spacing
+    return this
+  }
+
+  validate(): Theme {
+    if (!this.theme.colors) {
+      throw new Error('Theme must include colors')
+    }
+    if (!this.theme.typography) {
+      throw new Error('Theme must include typography')
+    }
+    if (!this.theme.borderRadius) {
+      throw new Error('Theme must include borderRadius')
+    }
+    if (!this.theme.spacing) {
+      throw new Error('Theme must include spacing')
+    }
+
+    return this.theme as Theme
+  }
+
+  build(): Theme {
+    return this.validate()
+  }
+}
+
+// Usage
+const theme = new ThemeBuilder()
+  .colors({
+    primary: { DEFAULT: '#0070f3', foreground: '#ffffff' },
+    secondary: { DEFAULT: '#7928ca', foreground: '#ffffff' },
+  })
+  .typography({
+    fontFamily: {
+      sans: 'Inter, system-ui, sans-serif',
+      mono: 'Fira Code, monospace',
+    },
+  })
+  .borderRadius({
+    small: '0.5rem',
+    medium: '0.75rem',
+    large: '1rem',
+  })
+  .spacing({
+    unit: 4,
+  })
+  .build()
+```
+
+### Runtime Validation
+
+Validate themes at runtime:
+
+```typescript
+export function validateTheme(theme: Partial<Theme>): string[] {
+  const errors: string[] = []
+
+  // Validate colors
+  if (!theme.colors) {
+    errors.push('Theme must include colors')
+  } else {
+    const requiredColors = ['primary', 'secondary', 'success', 'warning', 'danger']
+    requiredColors.forEach((color) => {
+      if (!theme.colors![color]) {
+        errors.push(`Missing required color: ${color}`)
+      }
+    })
+  }
+
+  // Validate typography
+  if (!theme.typography?.fontFamily) {
+    errors.push('Theme must include typography.fontFamily')
+  }
+
+  // Validate border radius
+  if (!theme.borderRadius) {
+    errors.push('Theme must include borderRadius')
+  }
+
+  // Validate spacing
+  if (!theme.spacing) {
+    errors.push('Theme must include spacing')
+  }
+
+  return errors
+}
+
+// Usage
+const errors = validateTheme(myTheme)
+if (errors.length > 0) {
+  console.error('Theme validation errors:', errors)
+}
+```
+
+## Documentation Generation
+
+### Automatic Theme Documentation
+
+Generate documentation from your theme:
+
+```typescript
+// scripts/generate-docs.ts
+import type { Theme } from '@flexi-ui/react'
+import fs from 'fs'
+
+export function generateThemeDocs(theme: Theme, outputPath: string) {
+  let markdown = '# Theme Documentation\n\n'
+
+  // Colors section
+  markdown += '## Colors\n\n'
+  Object.entries(theme.colors).forEach(([name, value]) => {
+    if (typeof value === 'object' && 'DEFAULT' in value) {
+      markdown += `### ${name}\n`
+      markdown += `- Default: \`${value.DEFAULT}\`\n`
+      markdown += `- Foreground: \`${value.foreground}\`\n\n`
+    }
+  })
+
+  // Typography section
+  markdown += '## Typography\n\n'
+  markdown += `### Font Family\n`
+  markdown += `- Sans: \`${theme.typography.fontFamily.sans}\`\n`
+  markdown += `- Mono: \`${theme.typography.fontFamily.mono}\`\n\n`
+
+  // Border radius section
+  markdown += '## Border Radius\n\n'
+  Object.entries(theme.borderRadius).forEach(([name, value]) => {
+    markdown += `- ${name}: \`${value}\`\n`
+  })
+
+  fs.writeFileSync(outputPath, markdown)
+  console.log(`Documentation generated at ${outputPath}`)
+}
+
+// Usage
+import { myTheme } from './theme'
+generateThemeDocs(myTheme, './docs/theme.md')
+```
+
+### Interactive Theme Preview
+
+Create an interactive preview page:
+
+```tsx
+// components/ThemePreview.tsx
+import {
+  Button,
+  Input,
+  Card,
+  Badge,
+  Chip,
+  Avatar,
+} from '@flexi-ui/react'
+
+export function ThemePreview() {
+  return (
+    <div className="space-y-8 p-8">
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Colors</h2>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <Button color="primary">Primary</Button>
+          <Button color="secondary">Secondary</Button>
+          <Button color="success">Success</Button>
+          <Button color="warning">Warning</Button>
+          <Button color="danger">Danger</Button>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Typography</h2>
+        <div className="space-y-2">
+          <p className="text-xs">Extra Small Text</p>
+          <p className="text-sm">Small Text</p>
+          <p className="text-base">Base Text</p>
+          <p className="text-lg">Large Text</p>
+          <p className="text-xl">Extra Large Text</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Components</h2>
+        <div className="space-y-4">
+          <Input label="Text Input" placeholder="Enter text" />
+          <Card>
+            <Card.Header>Card Header</Card.Header>
+            <Card.Body>Card body content goes here</Card.Body>
+            <Card.Footer>Card Footer</Card.Footer>
+          </Card>
+          <div className="flex gap-2">
+            <Badge color="primary">Primary</Badge>
+            <Badge color="secondary">Secondary</Badge>
+            <Badge color="success">Success</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Border Radius</h2>
+        <div className="flex gap-4">
+          <div className="w-20 h-20 bg-primary rounded-sm" />
+          <div className="w-20 h-20 bg-primary rounded-md" />
+          <div className="w-20 h-20 bg-primary rounded-lg" />
+          <div className="w-20 h-20 bg-primary rounded-full" />
+        </div>
+      </section>
+    </div>
+  )
+}
+```
+
+## Advanced Patterns
+
+### Multi-Tenant Themes
+
+Support multiple tenants with different themes:
+
+```typescript
+// themes/tenant-themes.ts
+import type { Theme } from '@flexi-ui/react'
+
+interface TenantThemes {
+  [tenantId: string]: Theme
+}
+
+export const tenantThemes: TenantThemes = {
+  'tenant-a': {
+    colors: {
+      primary: { DEFAULT: '#ff0000', foreground: '#ffffff' },
+      // ... other colors
+    },
+    // ... rest of theme
+  },
+  'tenant-b': {
+    colors: {
+      primary: { DEFAULT: '#0000ff', foreground: '#ffffff' },
+      // ... other colors
+    },
+    // ... rest of theme
+  },
+}
+
+export function getThemeForTenant(tenantId: string): Theme {
+  return tenantThemes[tenantId] || tenantThemes['tenant-a']
+}
+```
+
+### Dynamic Theme Loading
+
+Load themes dynamically:
+
+```tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+import { FlexiUIProvider } from '@flexi-ui/react'
+import type { Theme } from '@flexi-ui/react'
+
+export function DynamicThemeProvider({
+  children,
+  tenantId,
+}: {
+  children: React.ReactNode
+  tenantId: string
+}) {
+  const [theme, setTheme] = useState<Theme | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadTheme() {
+      try {
+        // Load theme from API or local storage
+        const response = await fetch(`/api/themes/${tenantId}`)
+        const themeData = await response.json()
+        setTheme(themeData)
+      } catch (error) {
+        console.error('Failed to load theme:', error)
+        // Load default theme
+        const { default: defaultTheme } = await import('./themes/default')
+        setTheme(defaultTheme)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadTheme()
+  }, [tenantId])
+
+  if (loading || !theme) {
+    return <div>Loading theme...</div>
+  }
+
+  return <FlexiUIProvider theme={theme}>{children}</FlexiUIProvider>
+}
+```
+
+### Theme Inheritance
+
+Create theme hierarchies:
+
+```typescript
+import type { Theme } from '@flexi-ui/react'
+
+export function extendTheme(base: Theme, overrides: Partial<Theme>): Theme {
+  return {
+    colors: {
+      ...base.colors,
+      ...overrides.colors,
+    },
+    typography: {
+      ...base.typography,
+      ...overrides.typography,
+    },
+    borderRadius: {
+      ...base.borderRadius,
+      ...overrides.borderRadius,
+    },
+    spacing: {
+      ...base.spacing,
+      ...overrides.spacing,
+    },
+  }
+}
+
+// Create theme hierarchy
+const baseTheme: Theme = {
+  /* base theme */
+}
+
+const corporateTheme = extendTheme(baseTheme, {
+  colors: {
+    primary: { DEFAULT: '#003d99', foreground: '#ffffff' },
+  },
+})
+
+const startupTheme = extendTheme(baseTheme, {
+  colors: {
+    primary: { DEFAULT: '#7928ca', foreground: '#ffffff' },
+  },
+  borderRadius: {
+    small: '0.75rem',
+    medium: '1rem',
+    large: '1.5rem',
+  },
+})
+```
+
+## Testing Themes
+
+### Unit Testing
+
+Test theme properties:
+
+```typescript
+// __tests__/theme.test.ts
+import { describe, it, expect } from 'vitest'
+import { myTheme } from '../theme'
+import { validateTheme } from '../utils/validation'
+
+describe('Theme', () => {
+  it('should have all required colors', () => {
+    expect(myTheme.colors.primary).toBeDefined()
+    expect(myTheme.colors.secondary).toBeDefined()
+    expect(myTheme.colors.success).toBeDefined()
+    expect(myTheme.colors.warning).toBeDefined()
+    expect(myTheme.colors.danger).toBeDefined()
+  })
+
+  it('should have valid color format', () => {
+    expect(myTheme.colors.primary.DEFAULT).toMatch(/^#[0-9A-Fa-f]{6}$/)
+  })
+
+  it('should pass validation', () => {
+    const errors = validateTheme(myTheme)
+    expect(errors).toHaveLength(0)
+  })
+
+  it('should have typography defined', () => {
+    expect(myTheme.typography.fontFamily.sans).toBeDefined()
+    expect(myTheme.typography.fontFamily.mono).toBeDefined()
+  })
+})
+```
+
+### Visual Regression Testing
+
+Test theme visuals with Playwright:
+
+```typescript
+// e2e/theme.spec.ts
+import { test, expect } from '@playwright/test'
+
+test.describe('Theme Visual Tests', () => {
+  test('renders buttons with correct colors', async ({ page }) => {
+    await page.goto('/theme-preview')
+
+    // Take screenshot of primary button
+    const primaryButton = page.locator('button:has-text("Primary")')
+    await expect(primaryButton).toHaveScreenshot('primary-button.png')
+
+    // Test hover state
+    await primaryButton.hover()
+    await expect(primaryButton).toHaveScreenshot('primary-button-hover.png')
+  })
+
+  test('renders cards with correct styling', async ({ page }) => {
+    await page.goto('/theme-preview')
+
+    const card = page.locator('.flexi-card').first()
+    await expect(card).toHaveScreenshot('card.png')
+  })
+})
+```
+
+### Accessibility Testing
+
+Test theme accessibility:
+
+```typescript
+// __tests__/accessibility.test.ts
+import { describe, it, expect } from 'vitest'
+import { colord } from 'colord'
+import { myTheme } from '../theme'
+
+describe('Theme Accessibility', () => {
+  it('should have sufficient contrast for primary colors', () => {
+    const bg = colord(myTheme.colors.primary.DEFAULT)
+    const fg = colord(myTheme.colors.primary.foreground)
+    const contrast = bg.contrast(fg)
+
+    expect(contrast).toBeGreaterThanOrEqual(4.5) // WCAG AA
+  })
+
+  it('should have sufficient contrast for all semantic colors', () => {
+    const colors = [
+      'primary',
+      'secondary',
+      'success',
+      'warning',
+      'danger',
+    ] as const
+
+    colors.forEach((color) => {
+      const bg = colord(myTheme.colors[color].DEFAULT)
+      const fg = colord(myTheme.colors[color].foreground)
+      const contrast = bg.contrast(fg)
+
+      expect(contrast).toBeGreaterThanOrEqual(4.5)
+    })
+  })
+})
+```
+
+## Best Practices
+
+### 1. Start with a Base Theme
+
+Begin with a solid foundation:
+
+```typescript
+// themes/base.ts
+export const baseTheme = {
+  typography: {
+    fontFamily: {
+      sans: 'system-ui, -apple-system, sans-serif',
+      mono: 'monospace',
+    },
+  },
+  borderRadius: {
+    small: '0.5rem',
+    medium: '0.75rem',
+    large: '1rem',
+  },
+  spacing: {
+    unit: 4,
+  },
+}
+
+// Extend for specific themes
+export const myTheme = {
+  ...baseTheme,
+  colors: {
+    // Your custom colors
+  },
+}
+```
+
+### 2. Use Design Tokens
+
+Define design tokens separately:
+
+```typescript
+// tokens.ts
+export const designTokens = {
+  colors: {
+    brand: {
+      blue: '#0070f3',
+      purple: '#7928ca',
+    },
+    semantic: {
+      success: '#10b981',
+      warning: '#f59e0b',
+      danger: '#ef4444',
+    },
+  },
+  spacing: {
+    xs: '0.25rem',
+    sm: '0.5rem',
+    md: '1rem',
+    lg: '1.5rem',
+    xl: '2rem',
+  },
+}
+
+// Use tokens in theme
+export const theme: Theme = {
+  colors: {
+    primary: {
+      DEFAULT: designTokens.colors.brand.blue,
+      foreground: '#ffffff',
+    },
+  },
+}
+```
+
+### 3. Document Your Theme
+
+Add comprehensive documentation:
+
+```typescript
+/**
+ * Corporate Theme
+ *
+ * @description Official theme for corporate applications
+ * @version 1.0.0
+ * @author Design Team
+ *
+ * @example
+ * import { corporateTheme } from '@mycompany/theme'
+ * import { FlexiUIProvider } from '@flexi-ui/react'
+ *
+ * function App() {
+ *   return (
+ *     <FlexiUIProvider theme={corporateTheme}>
+ *       {children}
+ *     </FlexiUIProvider>
+ *   )
+ * }
+ */
+export const corporateTheme: Theme = {
+  // ... theme configuration
+}
+```
+
+### 4. Version Your Themes
+
+Manage theme versions:
+
+```typescript
+// themes/v1/index.ts
+export const themeV1: Theme = {
+  /* v1 theme */
+}
+
+// themes/v2/index.ts
+export const themeV2: Theme = {
+  /* v2 theme */
+}
+
+// themes/index.ts
+export { themeV2 as currentTheme }
+export { themeV1, themeV2 }
+```
+
+### 5. Test Extensively
+
+Test across all scenarios:
+
+- Unit tests for theme structure
+- Visual regression tests
+- Accessibility tests
+- Cross-browser tests
+- Dark mode tests
+
+### 6. Optimize for Performance
+
+Keep themes lightweight:
+
+```typescript
+// ✅ Good - minimal theme
+export const theme: Theme = {
+  colors: {
+    primary: { DEFAULT: '#0070f3', foreground: '#ffffff' },
+  },
+  typography: {
+    fontFamily: {
+      sans: 'Inter, sans-serif',
+      mono: 'monospace',
+    },
+  },
+}
+
+// ❌ Avoid - bloated theme
+export const bloatedTheme: Theme = {
+  // Hundreds of unused color variations
+  // Complex calculations
+  // Large embedded assets
+}
+```
+
+### 7. Provide Migration Guides
+
+Help users upgrade:
+
+```markdown
+# Migration Guide: v1 to v2
+
+## Breaking Changes
+
+- `primary` color changed from `#0066cc` to `#0070f3`
+- `borderRadius.small` changed from `0.25rem` to `0.5rem`
+
+## Migration Steps
+
+1. Update color references
+2. Test all components
+3. Update documentation
+```
+
+### 8. Use TypeScript
+
+Leverage TypeScript for type safety:
+
+```typescript
+import type { Theme } from '@flexi-ui/react'
+
+// ✅ Type-safe theme
+export const theme: Theme = {
+  // TypeScript will catch errors
+}
+
+// ❌ Unsafe theme
+export const unsafeTheme = {
+  // No type checking
+}
+```
+
+## Troubleshooting
+
+### Theme Not Loading
+
+**Problem:** Theme doesn't apply to components.
+
+**Solutions:**
+
+```tsx
+// ✅ Wrap app with FlexiUIProvider
+import { FlexiUIProvider } from '@flexi-ui/react'
+import { myTheme } from './theme'
+
+function App() {
+  return (
+    <FlexiUIProvider theme={myTheme}>
+      {children}
+    </FlexiUIProvider>
+  )
+}
+
+// ✅ Ensure theme is valid
+import { validateTheme } from './utils/validation'
+
+const errors = validateTheme(myTheme)
+if (errors.length > 0) {
+  console.error('Theme errors:', errors)
+}
+```
+
+### Colors Not Applying
+
+**Problem:** Custom colors don't show up.
+
+**Solutions:**
+
+```typescript
+// ✅ Include foreground colors
+colors: {
+  primary: {
+    DEFAULT: '#0070f3',
+    foreground: '#ffffff', // Required
+  },
+}
+
+// ✅ Update Tailwind content paths
+// tailwind.config.ts
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}',
+  ],
+}
+```
+
+### TypeScript Errors
+
+**Problem:** TypeScript complains about theme structure.
+
+**Solutions:**
+
+```typescript
+// ✅ Import correct types
+import type { Theme, Colors } from '@flexi-ui/react'
+
+// ✅ Satisfy all required properties
+const theme: Theme = {
+  colors: { /* all required colors */ },
+  typography: { /* required typography */ },
+  borderRadius: { /* required radii */ },
+  spacing: { /* required spacing */ },
+}
+```
+
+### Plugin Not Working
+
+**Problem:** Tailwind plugin doesn't generate utilities.
+
+**Solutions:**
+
+```typescript
+// ✅ Correct plugin registration
+// tailwind.config.ts
+import { createFlexiThemePlugin } from './plugin'
+
+export default {
+  plugins: [
+    createFlexiThemePlugin(myTheme), // Pass theme to plugin
+  ],
+}
+
+// ✅ Rebuild after changes
+// Terminal
+npm run build
+```
+
+## Complete Examples
+
+### Minimal Theme
+
+```typescript
+import type { Theme } from '@flexi-ui/react'
+
+export const minimalTheme: Theme = {
+  colors: {
+    primary: { DEFAULT: '#000000', foreground: '#ffffff' },
+    secondary: { DEFAULT: '#666666', foreground: '#ffffff' },
+    success: { DEFAULT: '#00cc66', foreground: '#ffffff' },
+    warning: { DEFAULT: '#ff9900', foreground: '#000000' },
+    danger: { DEFAULT: '#ff3333', foreground: '#ffffff' },
+    background: '#ffffff',
+    foreground: '#000000',
+    content1: '#ffffff',
+    content2: '#f5f5f5',
+    content3: '#e5e5e5',
+    content4: '#d4d4d4',
+  },
+  typography: {
+    fontFamily: {
+      sans: 'system-ui, sans-serif',
+      mono: 'monospace',
+    },
+  },
+  borderRadius: {
+    small: '0',
+    medium: '0',
+    large: '0',
+  },
+  spacing: {
+    unit: 4,
+  },
+}
+```
+
+### Full-Featured Theme
+
+```typescript
+import type { Theme } from '@flexi-ui/react'
+import { generateColorScale } from './utils/colors'
+
+const primaryScale = generateColorScale('#0070f3')
+const secondaryScale = generateColorScale('#7928ca')
+
+export const fullTheme: Theme = {
+  colors: {
+    primary: {
+      DEFAULT: primaryScale[500],
+      foreground: '#ffffff',
+      50: primaryScale[50],
+      100: primaryScale[100],
+      200: primaryScale[200],
+      300: primaryScale[300],
+      400: primaryScale[400],
+      500: primaryScale[500],
+      600: primaryScale[600],
+      700: primaryScale[700],
+      800: primaryScale[800],
+      900: primaryScale[900],
+    },
+    secondary: {
+      DEFAULT: secondaryScale[500],
+      foreground: '#ffffff',
+      50: secondaryScale[50],
+      100: secondaryScale[100],
+      200: secondaryScale[200],
+      300: secondaryScale[300],
+      400: secondaryScale[400],
+      500: secondaryScale[500],
+      600: secondaryScale[600],
+      700: secondaryScale[700],
+      800: secondaryScale[800],
+      900: secondaryScale[900],
+    },
+    success: {
+      DEFAULT: '#10b981',
+      foreground: '#ffffff',
+    },
+    warning: {
+      DEFAULT: '#f59e0b',
+      foreground: '#000000',
+    },
+    danger: {
+      DEFAULT: '#ef4444',
+      foreground: '#ffffff',
+    },
+    background: '#ffffff',
+    foreground: '#000000',
+    content1: '#ffffff',
+    content2: '#f4f4f5',
+    content3: '#e4e4e7',
+    content4: '#d4d4d8',
+  },
+  typography: {
+    fontFamily: {
+      sans: 'Inter, system-ui, -apple-system, sans-serif',
+      mono: 'Fira Code, Consolas, monospace',
+    },
+    fontSize: {
+      tiny: '0.75rem',
+      small: '0.875rem',
+      medium: '1rem',
+      large: '1.125rem',
+      xlarge: '1.25rem',
+    },
+    fontWeight: {
+      normal: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
+    },
+    lineHeight: {
+      tight: '1.25',
+      normal: '1.5',
+      relaxed: '1.75',
+    },
+  },
+  borderRadius: {
+    none: '0',
+    small: '0.5rem',
+    medium: '0.75rem',
+    large: '1rem',
+    full: '9999px',
+  },
+  spacing: {
+    unit: 4,
+    scale: {
+      0: '0',
+      1: '0.25rem',
+      2: '0.5rem',
+      3: '0.75rem',
+      4: '1rem',
+      5: '1.25rem',
+      6: '1.5rem',
+      8: '2rem',
+      10: '2.5rem',
+      12: '3rem',
+      16: '4rem',
+    },
+  },
+}
+```
+
+## Next Steps
+
+Now that you can create custom themes, explore:
+
+- **[Customize Theme](/docs/customization/customize-theme)** - Extend existing themes
+- **[Dark Mode](/docs/customization/dark-mode)** - Implement dark mode
+- **[Colors](/docs/customization/colors)** - Master color systems
+- **[Tailwind v4](/docs/guide/tailwind-v4)** - Leverage Tailwind CSS v4 features
