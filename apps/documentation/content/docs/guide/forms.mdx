@@ -1,39 +1,63 @@
 ---
 title: "Forms"
-description: "Learn how to build accessible forms with FlexiUI components."
+description: "Build accessible, robust forms with FlexiUI components and popular form libraries."
 ---
 
 # Forms
 
-FlexiUI provides form components built on React Aria, ensuring accessibility and proper form handling out of the box.
+FlexiUI provides powerful form components built on React Aria, ensuring accessibility and proper form handling out of the box. This guide covers everything from basic forms to advanced patterns with form validation libraries.
 
-## Basic Form
+## Core Concepts
 
-Create a simple form using FlexiUI components:
+FlexiUI form components are designed with these principles:
+
+- **Accessibility First** - Full ARIA support and keyboard navigation
+- **Native Validation** - Built-in HTML5 validation support
+- **Framework Agnostic** - Works with any form library or vanilla React
+- **Type Safe** - Full TypeScript support for form data
+- **Controlled & Uncontrolled** - Support for both patterns
+
+## Basic Forms
+
+### Simple Form
+
+Create a basic form using FlexiUI components:
 
 ```tsx
 import { Form } from '@flexi-ui/form'
 import { Input } from '@flexi-ui/input'
 import { Button } from '@flexi-ui/button'
 
-function ContactForm() {
+export default function ContactForm() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData)
+    console.log('Form data:', data)
+  }
+
   return (
-    <Form onSubmit={(e) => {
-      e.preventDefault()
-      // Handle form submission
-    }}>
+    <Form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <Input
         label="Name"
         name="name"
+        placeholder="Enter your name"
         isRequired
       />
       <Input
         label="Email"
         name="email"
         type="email"
+        placeholder="Enter your email"
         isRequired
       />
-      <Button type="submit">
+      <Input
+        label="Message"
+        name="message"
+        placeholder="Enter your message"
+        isRequired
+      />
+      <Button type="submit" color="primary">
         Submit
       </Button>
     </Form>
@@ -41,60 +65,1129 @@ function ContactForm() {
 }
 ```
 
+### Form with Validation Messages
+
+Add error messages for better user feedback:
+
+```tsx
+import { Form } from '@flexi-ui/form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function ValidationForm() {
+  return (
+    <Form className="flex flex-col gap-4">
+      <Input
+        label="Username"
+        name="username"
+        isRequired
+        errorMessage="Username is required"
+        description="Choose a unique username"
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+        errorMessage="Please enter a valid email address"
+      />
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        isRequired
+        minLength={8}
+        errorMessage="Password must be at least 8 characters"
+      />
+      <Button type="submit" color="primary">
+        Create Account
+      </Button>
+    </Form>
+  )
+}
+```
+
+## Form State Management
+
+### Controlled Components
+
+Use React state to control form inputs:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function ControlledForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  })
+
+  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: e.target.value
+    }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Submitted:', formData)
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <Input
+        label="Name"
+        value={formData.name}
+        onChange={handleChange('name')}
+      />
+      <Input
+        label="Email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange('email')}
+      />
+      <Input
+        label="Phone"
+        type="tel"
+        value={formData.phone}
+        onChange={handleChange('phone')}
+      />
+      <Button type="submit" color="primary">
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
+### Uncontrolled Components
+
+Use refs for uncontrolled form inputs:
+
+```tsx
+'use client'
+
+import { useRef } from 'react'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function UncontrolledForm() {
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (formRef.current) {
+      const formData = new FormData(formRef.current)
+      const data = Object.fromEntries(formData)
+      console.log('Submitted:', data)
+    }
+  }
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <Input label="Name" name="name" defaultValue="" />
+      <Input label="Email" name="email" type="email" defaultValue="" />
+      <Button type="submit" color="primary">
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
 ## Form Validation
 
-FlexiUI components support native HTML5 validation and custom validation:
+### HTML5 Validation
+
+Leverage native HTML5 validation:
+
+```tsx
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function HTML5Validation() {
+  return (
+    <form className="flex flex-col gap-4">
+      {/* Required field */}
+      <Input
+        label="Name"
+        name="name"
+        isRequired
+        errorMessage="Name is required"
+      />
+
+      {/* Email validation */}
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+        errorMessage="Please enter a valid email"
+      />
+
+      {/* Minimum length */}
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        minLength={8}
+        isRequired
+        errorMessage="Password must be at least 8 characters"
+      />
+
+      {/* Pattern validation */}
+      <Input
+        label="Phone"
+        name="phone"
+        type="tel"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        placeholder="123-456-7890"
+        errorMessage="Please enter a valid phone number (XXX-XXX-XXXX)"
+      />
+
+      {/* Number range */}
+      <Input
+        label="Age"
+        name="age"
+        type="number"
+        min={18}
+        max={100}
+        errorMessage="Age must be between 18 and 100"
+      />
+
+      <Button type="submit" color="primary">
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
+### Custom Validation
+
+Implement custom validation logic:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function CustomValidation() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {}
+
+    // Email validation
+    if (!email) {
+      newErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid'
+    }
+
+    // Password validation
+    if (!password) {
+      newErrors.password = 'Password is required'
+    } else if (password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters'
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+      newErrors.password = 'Password must contain uppercase, lowercase, and number'
+    }
+
+    // Confirm password validation
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (validate()) {
+      console.log('Form is valid!')
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <Input
+        label="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email}
+      />
+      <Input
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password}
+        description="Must be 8+ characters with uppercase, lowercase, and number"
+      />
+      <Input
+        label="Confirm Password"
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        isInvalid={!!errors.confirmPassword}
+        errorMessage={errors.confirmPassword}
+      />
+      <Button type="submit" color="primary">
+        Sign Up
+      </Button>
+    </form>
+  )
+}
+```
+
+## Form Libraries Integration
+
+### React Hook Form
+
+FlexiUI works seamlessly with React Hook Form:
+
+```bash
+npm install react-hook-form
+```
+
+```tsx
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+interface FormData {
+  name: string
+  email: string
+  password: string
+}
+
+export default function ReactHookFormExample() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm<FormData>()
+
+  const onSubmit = async (data: FormData) => {
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    console.log('Submitted:', data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <Input
+        label="Name"
+        {...register('name', {
+          required: 'Name is required',
+          minLength: {
+            value: 2,
+            message: 'Name must be at least 2 characters'
+          }
+        })}
+        isInvalid={!!errors.name}
+        errorMessage={errors.name?.message}
+      />
+      <Input
+        label="Email"
+        type="email"
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /\S+@\S+\.\S+/,
+            message: 'Email is invalid'
+          }
+        })}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
+      />
+      <Input
+        label="Password"
+        type="password"
+        {...register('password', {
+          required: 'Password is required',
+          minLength: {
+            value: 8,
+            message: 'Password must be at least 8 characters'
+          }
+        })}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password?.message}
+      />
+      <Button
+        type="submit"
+        color="primary"
+        isLoading={isSubmitting}
+      >
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </Button>
+    </form>
+  )
+}
+```
+
+### React Hook Form with Zod
+
+Combine React Hook Form with Zod for type-safe validation:
+
+```bash
+npm install react-hook-form zod @hookform/resolvers
+```
+
+```tsx
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+const schema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  age: z.number().min(18, 'Must be at least 18 years old'),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number'),
+})
+
+type FormData = z.infer<typeof schema>
+
+export default function ZodValidation() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm<FormData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = async (data: FormData) => {
+    console.log('Validated data:', data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <Input
+        label="Name"
+        {...register('name')}
+        isInvalid={!!errors.name}
+        errorMessage={errors.name?.message}
+      />
+      <Input
+        label="Email"
+        type="email"
+        {...register('email')}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
+      />
+      <Input
+        label="Age"
+        type="number"
+        {...register('age', { valueAsNumber: true })}
+        isInvalid={!!errors.age}
+        errorMessage={errors.age?.message}
+      />
+      <Input
+        label="Password"
+        type="password"
+        {...register('password')}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password?.message}
+      />
+      <Button type="submit" color="primary" isLoading={isSubmitting}>
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
+### Formik Integration
+
+Use FlexiUI with Formik:
+
+```bash
+npm install formik
+```
+
+```tsx
+'use client'
+
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+const validationSchema = Yup.object({
+  name: Yup.string()
+    .min(2, 'Name must be at least 2 characters')
+    .required('Name is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required'),
+})
+
+export default function FormikExample() {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      console.log('Submitted:', values)
+    },
+  })
+
+  return (
+    <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
+      <Input
+        label="Name"
+        name="name"
+        value={formik.values.name}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        isInvalid={formik.touched.name && !!formik.errors.name}
+        errorMessage={formik.touched.name ? formik.errors.name : undefined}
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        isInvalid={formik.touched.email && !!formik.errors.email}
+        errorMessage={formik.touched.email ? formik.errors.email : undefined}
+      />
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        isInvalid={formik.touched.password && !!formik.errors.password}
+        errorMessage={formik.touched.password ? formik.errors.password : undefined}
+      />
+      <Button
+        type="submit"
+        color="primary"
+        isLoading={formik.isSubmitting}
+      >
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
+## Advanced Patterns
+
+### Multi-Step Form
+
+Create a multi-step form with validation at each step:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+interface Step1Data {
+  firstName: string
+  lastName: string
+}
+
+interface Step2Data {
+  email: string
+  phone: string
+}
+
+interface Step3Data {
+  address: string
+  city: string
+  zipCode: string
+}
+
+export default function MultiStepForm() {
+  const [step, setStep] = useState(1)
+  const [formData, setFormData] = useState({})
+
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+  const onSubmit = (data: any) => {
+    if (step < 3) {
+      setFormData({ ...formData, ...data })
+      setStep(step + 1)
+    } else {
+      const finalData = { ...formData, ...data }
+      console.log('Final submission:', finalData)
+    }
+  }
+
+  return (
+    <div className="max-w-md mx-auto">
+      {/* Progress indicator */}
+      <div className="flex justify-between mb-8">
+        {[1, 2, 3].map((s) => (
+          <div
+            key={s}
+            className={`flex-1 h-2 mx-1 rounded ${
+              s <= step ? 'bg-primary' : 'bg-default-200'
+            }`}
+          />
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        {step === 1 && (
+          <>
+            <h2 className="text-xl font-semibold mb-2">Personal Information</h2>
+            <Input
+              label="First Name"
+              {...register('firstName', { required: 'First name is required' })}
+              isInvalid={!!errors.firstName}
+              errorMessage={errors.firstName?.message as string}
+            />
+            <Input
+              label="Last Name"
+              {...register('lastName', { required: 'Last name is required' })}
+              isInvalid={!!errors.lastName}
+              errorMessage={errors.lastName?.message as string}
+            />
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <h2 className="text-xl font-semibold mb-2">Contact Information</h2>
+            <Input
+              label="Email"
+              type="email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: 'Invalid email'
+                }
+              })}
+              isInvalid={!!errors.email}
+              errorMessage={errors.email?.message as string}
+            />
+            <Input
+              label="Phone"
+              type="tel"
+              {...register('phone', { required: 'Phone is required' })}
+              isInvalid={!!errors.phone}
+              errorMessage={errors.phone?.message as string}
+            />
+          </>
+        )}
+
+        {step === 3 && (
+          <>
+            <h2 className="text-xl font-semibold mb-2">Address</h2>
+            <Input
+              label="Street Address"
+              {...register('address', { required: 'Address is required' })}
+              isInvalid={!!errors.address}
+              errorMessage={errors.address?.message as string}
+            />
+            <Input
+              label="City"
+              {...register('city', { required: 'City is required' })}
+              isInvalid={!!errors.city}
+              errorMessage={errors.city?.message as string}
+            />
+            <Input
+              label="ZIP Code"
+              {...register('zipCode', { required: 'ZIP code is required' })}
+              isInvalid={!!errors.zipCode}
+              errorMessage={errors.zipCode?.message as string}
+            />
+          </>
+        )}
+
+        <div className="flex gap-2">
+          {step > 1 && (
+            <Button
+              type="button"
+              variant="bordered"
+              onClick={() => setStep(step - 1)}
+            >
+              Previous
+            </Button>
+          )}
+          <Button type="submit" color="primary" className="flex-1">
+            {step === 3 ? 'Submit' : 'Next'}
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
+}
+```
+
+### Dynamic Field Arrays
+
+Handle dynamic lists of fields:
+
+```tsx
+'use client'
+
+import { useFieldArray, useForm } from 'react-hook-form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+interface FormData {
+  users: {
+    name: string
+    email: string
+  }[]
+}
+
+export default function FieldArrayExample() {
+  const { register, control, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      users: [{ name: '', email: '' }]
+    }
+  })
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'users'
+  })
+
+  const onSubmit = (data: FormData) => {
+    console.log('Submitted:', data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <h2 className="text-xl font-semibold">Add Users</h2>
+
+      {fields.map((field, index) => (
+        <div key={field.id} className="flex gap-2 items-start border-b pb-4">
+          <div className="flex-1 flex flex-col gap-2">
+            <Input
+              label={`Name ${index + 1}`}
+              {...register(`users.${index}.name` as const, {
+                required: 'Name is required'
+              })}
+            />
+            <Input
+              label={`Email ${index + 1}`}
+              type="email"
+              {...register(`users.${index}.email` as const, {
+                required: 'Email is required'
+              })}
+            />
+          </div>
+          {fields.length > 1 && (
+            <Button
+              type="button"
+              color="danger"
+              variant="light"
+              onClick={() => remove(index)}
+            >
+              Remove
+            </Button>
+          )}
+        </div>
+      ))}
+
+      <Button
+        type="button"
+        variant="bordered"
+        onClick={() => append({ name: '', email: '' })}
+      >
+        Add User
+      </Button>
+
+      <Button type="submit" color="primary">
+        Submit All
+      </Button>
+    </form>
+  )
+}
+```
+
+### Conditional Fields
+
+Show/hide fields based on conditions:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function ConditionalFields() {
+  const [accountType, setAccountType] = useState<'personal' | 'business'>('personal')
+  const { register, handleSubmit } = useForm()
+
+  const onSubmit = (data: any) => {
+    console.log('Submitted:', data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Button
+          type="button"
+          color={accountType === 'personal' ? 'primary' : 'default'}
+          onClick={() => setAccountType('personal')}
+        >
+          Personal
+        </Button>
+        <Button
+          type="button"
+          color={accountType === 'business' ? 'primary' : 'default'}
+          onClick={() => setAccountType('business')}
+        >
+          Business
+        </Button>
+      </div>
+
+      {accountType === 'personal' ? (
+        <>
+          <Input
+            label="First Name"
+            {...register('firstName', { required: true })}
+          />
+          <Input
+            label="Last Name"
+            {...register('lastName', { required: true })}
+          />
+        </>
+      ) : (
+        <>
+          <Input
+            label="Company Name"
+            {...register('companyName', { required: true })}
+          />
+          <Input
+            label="Tax ID"
+            {...register('taxId', { required: true })}
+          />
+          <Input
+            label="Number of Employees"
+            type="number"
+            {...register('employees', { required: true })}
+          />
+        </>
+      )}
+
+      <Input
+        label="Email"
+        type="email"
+        {...register('email', { required: true })}
+      />
+
+      <Button type="submit" color="primary">
+        Create Account
+      </Button>
+    </form>
+  )
+}
+```
+
+## Form Submission
+
+### Basic Submission
+
+Handle form submission with loading states:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+
+export default function FormSubmission() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setMessage('')
+
+    try {
+      const formData = new FormData(e.currentTarget)
+      const data = Object.fromEntries(formData)
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
+
+      // In real app, make API request here
+      // const response = await fetch('/api/submit', {
+      //   method: 'POST',
+      //   body: JSON.stringify(data)
+      // })
+
+      setMessage('Form submitted successfully!')
+    } catch (error) {
+      setMessage('Error submitting form. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <Input label="Name" name="name" isRequired />
+      <Input label="Email" name="email" type="email" isRequired />
+
+      {message && (
+        <div className={`p-3 rounded ${
+          message.includes('Error')
+            ? 'bg-danger-50 text-danger'
+            : 'bg-success-50 text-success'
+        }`}>
+          {message}
+        </div>
+      )}
+
+      <Button type="submit" color="primary" isLoading={isLoading}>
+        {isLoading ? 'Submitting...' : 'Submit'}
+      </Button>
+    </form>
+  )
+}
+```
+
+### Server Actions (Next.js)
+
+Use Next.js Server Actions for form submission:
+
+```tsx
+'use server'
+
+import { revalidatePath } from 'next/cache'
+
+export async function submitForm(formData: FormData) {
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    message: formData.get('message'),
+  }
+
+  // Validate data
+  if (!data.name || !data.email) {
+    return { error: 'Name and email are required' }
+  }
+
+  // Save to database
+  try {
+    // await db.insert(data)
+    revalidatePath('/')
+    return { success: true }
+  } catch (error) {
+    return { error: 'Failed to submit form' }
+  }
+}
+```
+
+```tsx
+'use client'
+
+import { useFormState } from 'react-dom'
+import { Input } from '@flexi-ui/input'
+import { Button } from '@flexi-ui/button'
+import { submitForm } from './actions'
+
+export default function ServerActionForm() {
+  const [state, formAction] = useFormState(submitForm, null)
+
+  return (
+    <form action={formAction} className="flex flex-col gap-4">
+      <Input label="Name" name="name" isRequired />
+      <Input label="Email" name="email" type="email" isRequired />
+      <Input label="Message" name="message" isRequired />
+
+      {state?.error && (
+        <div className="p-3 rounded bg-danger-50 text-danger">
+          {state.error}
+        </div>
+      )}
+
+      {state?.success && (
+        <div className="p-3 rounded bg-success-50 text-success">
+          Form submitted successfully!
+        </div>
+      )}
+
+      <Button type="submit" color="primary">
+        Submit
+      </Button>
+    </form>
+  )
+}
+```
+
+## Best Practices
+
+### 1. Provide Clear Feedback
+
+Always give users feedback about their input:
 
 ```tsx
 <Input
   label="Email"
   type="email"
-  isRequired
+  description="We'll never share your email"
   errorMessage="Please enter a valid email"
+  isRequired
 />
 ```
 
-## Controlled Forms
+### 2. Use Appropriate Input Types
 
-Use controlled inputs with state:
+Use the right input type for better UX and validation:
 
 ```tsx
-import { useState } from 'react'
-import { Input } from '@flexi-ui/input'
+{/* Email */}
+<Input type="email" label="Email" />
 
-function ControlledForm() {
-  const [value, setValue] = useState('')
+{/* Phone */}
+<Input type="tel" label="Phone" />
 
-  return (
-    <Input
-      label="Username"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  )
+{/* Number */}
+<Input type="number" label="Age" min={0} max={120} />
+
+{/* Date */}
+<Input type="date" label="Birth Date" />
+
+{/* Password */}
+<Input type="password" label="Password" />
+```
+
+### 3. Disable Submit While Loading
+
+Prevent duplicate submissions:
+
+```tsx
+<Button
+  type="submit"
+  isLoading={isSubmitting}
+  isDisabled={isSubmitting}
+>
+  {isSubmitting ? 'Submitting...' : 'Submit'}
+</Button>
+```
+
+### 4. Validate on Blur
+
+Show errors after user finishes typing:
+
+```tsx
+const formik = useFormik({
+  validateOnChange: false,
+  validateOnBlur: true,
+  // ...
+})
+```
+
+### 5. Reset Form After Submission
+
+Clear form after successful submission:
+
+```tsx
+const { reset } = useForm()
+
+const onSubmit = async (data) => {
+  await submitData(data)
+  reset() // Clear form
 }
 ```
 
-## Form Libraries
+## Troubleshooting
 
-FlexiUI works with popular form libraries like React Hook Form and Formik:
+### Input Not Updating
+
+**Problem:** Controlled input value not updating.
+
+**Solution:** Ensure you're updating state correctly:
 
 ```tsx
-import { useForm } from 'react-hook-form'
-import { Input } from '@flexi-ui/input'
-import { Button } from '@flexi-ui/button'
+// Correct
+<Input
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+/>
 
-function HookFormExample() {
-  const { register, handleSubmit } = useForm()
-
-  return (
-    <form onSubmit={handleSubmit(data => console.log(data))}>
-      <Input
-        label="Name"
-        {...register('name', { required: true })}
-      />
-      <Button type="submit">Submit</Button>
-    </form>
-  )
-}
+// Incorrect - missing onChange
+<Input value={value} />
 ```
+
+### Validation Not Working
+
+**Problem:** Error messages not showing.
+
+**Solution:** Make sure to pass both `isInvalid` and `errorMessage`:
+
+```tsx
+<Input
+  isInvalid={!!errors.email}
+  errorMessage={errors.email?.message}
+/>
+```
+
+### Form Submitting on Enter
+
+**Problem:** Form submits when pressing Enter in any input.
+
+**Solution:** This is default HTML behavior. To prevent it:
+
+```tsx
+<form onSubmit={handleSubmit} onKeyDown={(e) => {
+  if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+    e.preventDefault()
+  }
+}}>
+```
+
+## Next Steps
+
+Now that you understand forms, explore:
+
+- **[Input Component](/docs/components/input)** - Detailed Input API reference
+- **[Button Component](/docs/components/button)** - Button states and variants
+- **[Form Component](/docs/components/form)** - Form component API
+- **[Validation Patterns](/docs/patterns/validation)** - Advanced validation patterns
+
