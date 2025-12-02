@@ -1,7 +1,9 @@
 import type { NextConfig } from 'next'
+import { withContentlayer } from 'next-contentlayer2'
+import redirects from './config/redirects.mjs'
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  redirects,
 }
 
-export default nextConfig
+export default withContentlayer(nextConfig)

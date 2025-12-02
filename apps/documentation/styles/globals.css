@@ -55,15 +55,85 @@
   }
 }
 
+/* Custom scrollbar styles */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--color-default-300)) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--color-default-300));
+  border-radius: 4px;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--color-default-400));
+}
+
+:where(.dark, .dark *) .custom-scrollbar {
+  scrollbar-color: hsl(var(--color-default-600)) transparent;
+}
+
+:where(.dark, .dark *) .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--color-default-600));
+}
+
+:where(.dark, .dark *) .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--color-default-500));
+}
+
 html {
   font-size: 16px;
   padding: 0px !important;
   overflow-x: hidden;
   scroll-padding-top: 64px;
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+}
+
+/* Command Palette Styles */
+[cmdk-root] {
+  width: 100%;
+}
+
+[cmdk-input] {
+  outline: none;
+}
+
+[cmdk-item] {
+  cursor: pointer;
+  user-select: none;
+}
+
+[cmdk-item][data-selected='true'] {
+  background-color: hsl(var(--color-default-100));
+}
+
+[cmdk-group-heading] {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--color-foreground-500));
+  padding: 0.5rem 0.5rem 0.25rem;
+}
+
+/* Smooth animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
 }
 
 pre details[open] > summary > span:first-child::before {

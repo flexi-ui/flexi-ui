@@ -1,0 +1,936 @@
+---
+title: "Theme"
+description: "Complete guide to understanding and customizing the FlexiUI theme system."
+---
+
+# Theme
+
+FlexiUI provides a powerful, flexible theming system built on top of Tailwind CSS. This guide covers the complete theme architecture, available tokens, and how to customize every aspect of your design system.
+
+## Overview
+
+The FlexiUI theme system is built on three key principles:
+
+- **Design Tokens** - Semantic values for colors, spacing, typography, etc.
+- **Tailwind Integration** - Full compatibility with Tailwind CSS theming
+- **Type Safety** - Complete TypeScript support for theme customization
+
+## Theme Architecture
+
+FlexiUI themes are configured through the Tailwind plugin:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          // Light theme configuration
+        },
+        dark: {
+          // Dark theme configuration
+        },
+      },
+    }),
+  ],
+}
+```
+
+## Default Theme
+
+FlexiUI comes with a carefully crafted default theme that works out of the box. No configuration is required to get started:
+
+```typescript
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+function App() {
+  return (
+    <FlexiUIProvider>
+      {/* Your app with default theme */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+The default theme includes:
+
+- **Semantic colors** - primary, secondary, success, warning, danger
+- **Neutral colors** - background, foreground, default, content
+- **Component-specific** - divider, focus, overlay, disabled
+- **Responsive spacing** - Consistent spacing scale
+- **Typography** - Font families, sizes, and weights
+- **Border radius** - Consistent radius values
+
+## Theme Structure
+
+### Complete Theme Object
+
+Here's the complete structure of a FlexiUI theme:
+
+```typescript
+{
+  colors: {
+    // Brand colors
+    primary: {
+      50: '#eff6ff',
+      100: '#dbeafe',
+      200: '#bfdbfe',
+      300: '#93c5fd',
+      400: '#60a5fa',
+      500: '#3b82f6',
+      600: '#2563eb',
+      700: '#1d4ed8',
+      800: '#1e40af',
+      900: '#1e3a8a',
+      DEFAULT: '#3b82f6',
+      foreground: '#ffffff',
+    },
+    secondary: {
+      // Similar structure
+      DEFAULT: '#7928ca',
+      foreground: '#ffffff',
+    },
+
+    // Semantic colors
+    success: {
+      DEFAULT: '#0cce6b',
+      foreground: '#ffffff',
+    },
+    warning: {
+      DEFAULT: '#ffc107',
+      foreground: '#000000',
+    },
+    danger: {
+      DEFAULT: '#f31260',
+      foreground: '#ffffff',
+    },
+
+    // Layout colors
+    background: '#ffffff',
+    foreground: '#11181c',
+
+    // Neutral colors
+    default: {
+      100: '#f4f4f5',
+      200: '#e4e4e7',
+      300: '#d4d4d8',
+      400: '#a1a1aa',
+      500: '#71717a',
+      600: '#52525b',
+      700: '#3f3f46',
+      800: '#27272a',
+      900: '#18181b',
+      DEFAULT: '#e4e4e7',
+      foreground: '#11181c',
+    },
+
+    // Component-specific
+    content1: '#ffffff',
+    content2: '#f4f4f5',
+    content3: '#e4e4e7',
+    content4: '#d4d4d8',
+
+    divider: '#e4e4e7',
+    focus: '#3b82f6',
+    overlay: 'rgba(0, 0, 0, 0.5)',
+  },
+
+  layout: {
+    dividerWeight: '1px',
+    disabledOpacity: '0.5',
+    fontSize: {
+      tiny: '0.75rem',
+      small: '0.875rem',
+      medium: '1rem',
+      large: '1.125rem',
+    },
+    lineHeight: {
+      tiny: '1rem',
+      small: '1.25rem',
+      medium: '1.5rem',
+      large: '1.75rem',
+    },
+    radius: {
+      small: '0.5rem',
+      medium: '0.75rem',
+      large: '1rem',
+    },
+  },
+
+  borderWidth: {
+    small: '1px',
+    medium: '2px',
+    large: '3px',
+  },
+}
+```
+
+## Colors
+
+### Semantic Colors
+
+FlexiUI provides semantic color tokens for common UI patterns:
+
+```typescript
+{
+  colors: {
+    primary: {
+      DEFAULT: '#0070f3',
+      foreground: '#ffffff',
+    },
+    secondary: {
+      DEFAULT: '#7928ca',
+      foreground: '#ffffff',
+    },
+    success: {
+      DEFAULT: '#0cce6b',
+      foreground: '#ffffff',
+    },
+    warning: {
+      DEFAULT: '#ffc107',
+      foreground: '#000000',
+    },
+    danger: {
+      DEFAULT: '#f31260',
+      foreground: '#ffffff',
+    },
+  },
+}
+```
+
+Each semantic color includes:
+- `DEFAULT` - The main color value
+- `foreground` - Text color to use on this background
+
+### Color Scales
+
+For more granular control, define full color scales:
+
+```typescript
+{
+  colors: {
+    primary: {
+      50: '#eff6ff',
+      100: '#dbeafe',
+      200: '#bfdbfe',
+      300: '#93c5fd',
+      400: '#60a5fa',
+      500: '#3b82f6',  // Base color
+      600: '#2563eb',
+      700: '#1d4ed8',
+      800: '#1e40af',
+      900: '#1e3a8a',
+      DEFAULT: '#3b82f6',
+      foreground: '#ffffff',
+    },
+  },
+}
+```
+
+### Layout Colors
+
+Background and foreground colors for the overall layout:
+
+```typescript
+{
+  colors: {
+    background: '#ffffff',
+    foreground: '#11181c',
+  },
+}
+```
+
+### Content Colors
+
+For layered content with different background levels:
+
+```typescript
+{
+  colors: {
+    content1: '#ffffff',  // Highest level
+    content2: '#f4f4f5',  // Second level
+    content3: '#e4e4e7',  // Third level
+    content4: '#d4d4d8',  // Lowest level
+  },
+}
+```
+
+### Component Colors
+
+Special colors for specific UI elements:
+
+```typescript
+{
+  colors: {
+    divider: '#e4e4e7',
+    focus: '#3b82f6',
+    overlay: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+```
+
+## Typography
+
+### Font Families
+
+Configure font families for different contexts:
+
+```typescript
+{
+  typography: {
+    fontFamily: {
+      sans: 'Inter, system-ui, -apple-system, sans-serif',
+      mono: 'Fira Code, Monaco, Courier New, monospace',
+    },
+  },
+}
+```
+
+### Font Sizes
+
+The theme includes predefined font sizes:
+
+```typescript
+{
+  layout: {
+    fontSize: {
+      tiny: '0.75rem',    // 12px
+      small: '0.875rem',  // 14px
+      medium: '1rem',     // 16px
+      large: '1.125rem',  // 18px
+    },
+  },
+}
+```
+
+### Line Heights
+
+Corresponding line heights for each font size:
+
+```typescript
+{
+  layout: {
+    lineHeight: {
+      tiny: '1rem',      // 16px
+      small: '1.25rem',  // 20px
+      medium: '1.5rem',  // 24px
+      large: '1.75rem',  // 28px
+    },
+  },
+}
+```
+
+## Spacing & Layout
+
+### Border Radius
+
+Consistent border radius values:
+
+```typescript
+{
+  layout: {
+    radius: {
+      small: '0.5rem',   // 8px
+      medium: '0.75rem', // 12px
+      large: '1rem',     // 16px
+    },
+  },
+}
+```
+
+### Border Width
+
+Border width tokens:
+
+```typescript
+{
+  borderWidth: {
+    small: '1px',
+    medium: '2px',
+    large: '3px',
+  },
+}
+```
+
+### Divider
+
+Divider styling:
+
+```typescript
+{
+  layout: {
+    dividerWeight: '1px',
+  },
+}
+```
+
+### Opacity
+
+Disabled element opacity:
+
+```typescript
+{
+  layout: {
+    disabledOpacity: '0.5',
+  },
+}
+```
+
+## Customization Examples
+
+### Basic Customization
+
+Override specific colors:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: '#ff0080',
+              foreground: '#ffffff',
+            },
+            focus: '#ff0080',
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Complete Custom Theme
+
+Create a full custom theme:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        'my-brand': {
+          colors: {
+            primary: {
+              DEFAULT: '#ff0080',
+              foreground: '#ffffff',
+            },
+            secondary: {
+              DEFAULT: '#7928ca',
+              foreground: '#ffffff',
+            },
+            success: {
+              DEFAULT: '#17c964',
+              foreground: '#ffffff',
+            },
+            warning: {
+              DEFAULT: '#f5a524',
+              foreground: '#000000',
+            },
+            danger: {
+              DEFAULT: '#f31260',
+              foreground: '#ffffff',
+            },
+            background: '#ffffff',
+            foreground: '#11181c',
+            focus: '#ff0080',
+          },
+          layout: {
+            radius: {
+              small: '0.25rem',
+              medium: '0.5rem',
+              large: '0.75rem',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+Then use your custom theme:
+
+```tsx
+<FlexiUIProvider theme="my-brand">
+  {/* Your app */}
+</FlexiUIProvider>
+```
+
+### Extending the Default Theme
+
+Extend rather than replace:
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          extend: 'light', // Extend default light theme
+          colors: {
+            // Only override what you need
+            primary: {
+              DEFAULT: '#0070f3',
+              foreground: '#ffffff',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+## Multi-Theme Setup
+
+### Defining Multiple Themes
+
+Create light and dark variations:
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            background: '#ffffff',
+            foreground: '#000000',
+            primary: {
+              DEFAULT: '#0070f3',
+              foreground: '#ffffff',
+            },
+          },
+        },
+        dark: {
+          colors: {
+            background: '#000000',
+            foreground: '#ffffff',
+            primary: {
+              DEFAULT: '#3291ff',
+              foreground: '#000000',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Switching Themes
+
+Switch themes at runtime:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+  return (
+    <FlexiUIProvider theme={theme}>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        Toggle theme
+      </button>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Using Theme Values
+
+### With useTheme Hook
+
+Access theme values in components:
+
+```tsx
+import { useTheme } from '@flexi-ui/system'
+
+function MyComponent() {
+  const { theme } = useTheme()
+
+  return (
+    <div style={{ color: theme.colors.primary.DEFAULT }}>
+      Themed content
+    </div>
+  )
+}
+```
+
+### With Tailwind Classes
+
+Use theme colors in Tailwind classes:
+
+```tsx
+<div className="bg-primary text-primary-foreground">
+  Primary background with foreground text
+</div>
+
+<div className="bg-secondary-500 text-white">
+  Secondary-500 background
+</div>
+```
+
+### With CSS Variables
+
+Access as CSS variables:
+
+```css
+.my-custom-class {
+  background-color: var(--flexi-colors-primary);
+  color: var(--flexi-colors-primary-foreground);
+  border-radius: var(--flexi-radius-medium);
+}
+```
+
+## Tailwind Integration
+
+### Accessing in Tailwind Config
+
+Use theme values in your Tailwind config:
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  theme: {
+    extend: {
+      colors: {
+        brand: '#ff0080', // Custom color
+      },
+    },
+  },
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            // FlexiUI theme colors
+            primary: {
+              DEFAULT: '#0070f3',
+              foreground: '#ffffff',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Extending Tailwind Theme
+
+Combine FlexiUI theme with Tailwind customizations:
+
+```typescript
+export default {
+  theme: {
+    extend: {
+      // Additional spacing
+      spacing: {
+        '128': '32rem',
+      },
+      // Additional breakpoints
+      screens: {
+        '3xl': '1920px',
+      },
+    },
+  },
+  plugins: [flexiui()],
+}
+```
+
+## Component-Specific Theming
+
+Some components accept theme overrides:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+
+<Button
+  color="primary"
+  className="custom-styles"
+>
+  Themed button
+</Button>
+```
+
+## CSS Variables Output
+
+FlexiUI automatically generates CSS variables:
+
+```css
+:root {
+  --flexi-colors-primary: #0070f3;
+  --flexi-colors-primary-foreground: #ffffff;
+  --flexi-colors-secondary: #7928ca;
+  --flexi-colors-background: #ffffff;
+  --flexi-colors-foreground: #11181c;
+  --flexi-radius-small: 0.5rem;
+  --flexi-radius-medium: 0.75rem;
+  --flexi-radius-large: 1rem;
+  /* ...and many more */
+}
+```
+
+## Best Practices
+
+### 1. Use Semantic Colors
+
+Prefer semantic colors over specific values:
+
+```tsx
+// Good - semantic
+<Button color="primary">Submit</Button>
+
+// Avoid - specific
+<Button className="bg-blue-500">Submit</Button>
+```
+
+### 2. Maintain Contrast
+
+Ensure proper contrast between background and foreground:
+
+```typescript
+{
+  colors: {
+    primary: {
+      DEFAULT: '#0070f3',
+      foreground: '#ffffff',  // High contrast
+    },
+  },
+}
+```
+
+### 3. Use Consistent Spacing
+
+Stick to the theme's spacing scale:
+
+```tsx
+// Good - uses theme values
+<div className="p-4 gap-2">
+
+// Avoid - arbitrary values
+<div className="p-[13px] gap-[7px]">
+```
+
+### 4. Define Complete Themes
+
+When creating dark mode, define all required colors:
+
+```typescript
+{
+  themes: {
+    dark: {
+      colors: {
+        background: '#000000',
+        foreground: '#ffffff',
+        primary: { /* ... */ },
+        secondary: { /* ... */ },
+        // Define all semantic colors
+      },
+    },
+  },
+}
+```
+
+### 5. Test in Both Themes
+
+Always test components in all defined themes:
+
+```tsx
+<FlexiUIProvider theme="light">
+  <MyComponent /> {/* Test in light */}
+</FlexiUIProvider>
+
+<FlexiUIProvider theme="dark">
+  <MyComponent /> {/* Test in dark */}
+</FlexiUIProvider>
+```
+
+## Troubleshooting
+
+### Colors Not Applying
+
+**Problem:** Custom theme colors not showing up.
+
+**Solution:** Ensure the theme is properly configured:
+
+```typescript
+// Correct
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: '#0070f3',
+              foreground: '#ffffff',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### CSS Variables Not Available
+
+**Problem:** CSS variables not accessible.
+
+**Solution:** Make sure FlexiUI plugin is loaded:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [flexiui()], // Plugin must be included
+}
+```
+
+### Theme Not Switching
+
+**Problem:** Theme prop not changing the active theme.
+
+**Solution:** Ensure provider is at the root:
+
+```tsx
+// Correct
+<FlexiUIProvider theme={activeTheme}>
+  <App />
+</FlexiUIProvider>
+
+// Won't work - provider inside app
+<App>
+  <FlexiUIProvider theme={activeTheme}>
+    {/* ... */}
+  </FlexiUIProvider>
+</App>
+```
+
+### TypeScript Errors
+
+**Problem:** TypeScript complaining about theme values.
+
+**Solution:** Ensure proper types are imported:
+
+```typescript
+import type { FlexiUITheme } from '@flexi-ui/theme'
+
+const customTheme: FlexiUITheme = {
+  colors: {
+    // TypeScript will validate
+  },
+}
+```
+
+## Token Reference
+
+### Color Tokens
+
+- `primary` - Primary brand color
+- `secondary` - Secondary brand color
+- `success` - Success state color
+- `warning` - Warning state color
+- `danger` - Danger/error state color
+- `background` - Page background
+- `foreground` - Default text color
+- `default` - Default neutral color
+- `content1-4` - Content layer backgrounds
+- `focus` - Focus indicator color
+- `divider` - Divider line color
+- `overlay` - Modal/overlay background
+
+### Layout Tokens
+
+- `fontSize.tiny|small|medium|large` - Text sizes
+- `lineHeight.tiny|small|medium|large` - Line heights
+- `radius.small|medium|large` - Border radius values
+- `dividerWeight` - Divider thickness
+- `disabledOpacity` - Disabled element opacity
+
+### Border Tokens
+
+- `borderWidth.small|medium|large` - Border widths
+
+## Migration from Other Libraries
+
+### From Chakra UI
+
+```typescript
+// Chakra theme
+{
+  colors: {
+    brand: {
+      500: '#0070f3',
+    },
+  },
+}
+
+// FlexiUI equivalent
+{
+  colors: {
+    primary: {
+      DEFAULT: '#0070f3',
+      foreground: '#ffffff',
+    },
+  },
+}
+```
+
+### From Material-UI
+
+```typescript
+// MUI theme
+{
+  palette: {
+    primary: {
+      main: '#0070f3',
+    },
+  },
+}
+
+// FlexiUI equivalent
+{
+  colors: {
+    primary: {
+      DEFAULT: '#0070f3',
+      foreground: '#ffffff',
+    },
+  },
+}
+```
+
+## Next Steps
+
+Now that you understand the theme system, explore:
+
+- **[Colors Guide](/docs/customization/colors)** - Work with color palettes
+- **[Dark Mode](/docs/customization/dark-mode)** - Implement dark mode
+- **[Customize Theme](/docs/customization/customize-theme)** - Advanced customization
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes from scratch
+

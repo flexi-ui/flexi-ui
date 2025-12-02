@@ -1,0 +1,131 @@
+---
+title: "Remix"
+description: "Learn how to use FlexiUI with Remix."
+---
+
+# Remix
+
+FlexiUI works perfectly with Remix, providing a great developer experience with server-side rendering.
+
+## Create a New Project
+
+Create a new Remix project:
+
+```bash
+npx create-remix@latest my-app
+cd my-app
+```
+
+## Installation
+
+Install FlexiUI:
+
+```bash
+pnpm add @flexi-ui/react
+```
+
+## Setup Tailwind CSS
+
+### 1. Install Tailwind
+
+```bash
+pnpm add -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### 2. Configure Tailwind
+
+Update `tailwind.config.ts`:
+
+```ts
+import type { Config } from 'tailwindcss'
+
+export default {
+  content: [
+    './app/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
+  ],
+  plugins: [require('@flexi-ui/tailwind-plugin')]
+} satisfies Config
+```
+
+### 3. Add Tailwind Directives
+
+Create `app/tailwind.css`:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### 4. Import Styles
+
+Update `app/root.tsx`:
+
+```tsx
+import type { LinksFunction } from '@remix-run/node'
+import stylesheet from '~/tailwind.css'
+
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: stylesheet }
+]
+```
+
+## Setup FlexiUI Provider
+
+Update `app/root.tsx`:
+
+```tsx
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <FlexiUIProvider>
+          <Outlet />
+        </FlexiUIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
+## Using Components
+
+Create a route with FlexiUI components:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { Input } from '@flexi-ui/input'
+import { Form } from '@remix-run/react'
+
+export default function Index() {
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-4">FlexiUI + Remix</h1>
+      <Form method="post" className="space-y-4">
+        <Input label="Email" name="email" type="email" />
+        <Button type="submit">Submit</Button>
+      </Form>
+    </div>
+  )
+}
+```
+
+## Server-Side Rendering
+
+FlexiUI components work seamlessly with Remix's SSR. The provider handles hydration automatically.
+
+## TypeScript
+
+FlexiUI provides full TypeScript support for Remix projects.

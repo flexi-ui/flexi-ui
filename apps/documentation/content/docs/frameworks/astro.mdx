@@ -1,0 +1,127 @@
+---
+title: "Astro"
+description: "Learn how to use FlexiUI with Astro."
+---
+
+# Astro
+
+FlexiUI can be used with Astro to create interactive islands within your static site.
+
+## Create a New Project
+
+Create a new Astro project:
+
+```bash
+pnpm create astro@latest my-app
+cd my-app
+```
+
+## Installation
+
+Install FlexiUI and the React integration:
+
+```bash
+pnpm add @flexi-ui/react
+pnpm astro add react tailwind
+```
+
+## Configure Astro
+
+Update `astro.config.mjs`:
+
+```js
+import { defineConfig } from 'astro/config'
+import react from '@astrojs/react'
+import tailwind from '@astrojs/tailwind'
+
+export default defineConfig({
+  integrations: [react(), tailwind()]
+})
+```
+
+## Configure Tailwind
+
+Update `tailwind.config.mjs`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
+  ],
+  plugins: [require('@flexi-ui/tailwind-plugin')]
+}
+```
+
+## Create a Provider Component
+
+Create `src/components/Providers.tsx`:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return <FlexiUIProvider>{children}</FlexiUIProvider>
+}
+```
+
+## Create Interactive Components
+
+Create `src/components/ContactForm.tsx`:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { Input } from '@flexi-ui/input'
+import { Providers } from './Providers'
+
+export function ContactForm() {
+  return (
+    <Providers>
+      <form className="space-y-4">
+        <Input label="Name" name="name" />
+        <Input label="Email" type="email" name="email" />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Providers>
+  )
+}
+```
+
+## Use in Astro Pages
+
+Use the component in your Astro page:
+
+```astro
+---
+import { ContactForm } from '../components/ContactForm'
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FlexiUI + Astro</title>
+  </head>
+  <body>
+    <h1>Contact Us</h1>
+    <ContactForm client:load />
+  </body>
+</html>
+```
+
+## Client Directives
+
+Use Astro's client directives to control hydration:
+
+- `client:load` - Hydrate immediately
+- `client:idle` - Hydrate when the page is idle
+- `client:visible` - Hydrate when the component is visible
+- `client:only` - Only render on the client
+
+```astro
+<ContactForm client:visible />
+```
+
+## Static Site Generation
+
+FlexiUI components integrate seamlessly with Astro's SSG capabilities, providing interactive elements within your static pages.

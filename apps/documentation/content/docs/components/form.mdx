@@ -1,0 +1,1949 @@
+---
+title: "Form"
+description: "Build accessible, validated forms with comprehensive features and integrations."
+---
+
+# Form
+
+The Form component provides a powerful wrapper for building accessible, validated forms with FlexiUI. It supports multiple validation strategies, integrates seamlessly with popular form libraries, and handles complex form scenarios like multi-step workflows and async validation.
+
+## Import
+
+```tsx
+import { Form } from '@flexi-ui/form'
+```
+
+## Basic Usage
+
+### Simple Form
+
+A basic form with standard inputs and submit button.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData)
+    alert(JSON.stringify(data, null, 2))
+  }
+
+  return (
+    <Form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        label="Full Name"
+        name="name"
+        placeholder="Enter your name"
+        isRequired
+      />
+      <Input
+        label="Email Address"
+        name="email"
+        type="email"
+        placeholder="you@example.com"
+        isRequired
+      />
+      <Input
+        label="Message"
+        name="message"
+        placeholder="Your message..."
+      />
+      <Button type="submit" variant="primary">
+        Submit
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+### Form with Validation
+
+Form with built-in validation and error handling.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [errors, setErrors] = useState({})
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+
+    // Validation logic
+    const newErrors = {}
+    const name = formData.get('name')
+    const email = formData.get('email')
+    const password = formData.get('password')
+
+    if (!name || name.length < 2) {
+      newErrors.name = 'Name must be at least 2 characters'
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Please enter a valid email address'
+    }
+
+    if (!password || password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters'
+    }
+
+    setErrors(newErrors)
+
+    if (Object.keys(newErrors).length === 0) {
+      alert('Form submitted successfully!')
+      e.currentTarget.reset()
+    }
+  }
+
+  return (
+    <Form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        label="Name"
+        name="name"
+        isRequired
+        isInvalid={!!errors.name}
+        errorMessage={errors.name}
+        onChange={() => setErrors(prev => ({ ...prev, name: undefined }))}
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+        isInvalid={!!errors.email}
+        errorMessage={errors.email}
+        onChange={() => setErrors(prev => ({ ...prev, email: undefined }))}
+      />
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        isRequired
+        isInvalid={!!errors.password}
+        errorMessage={errors.password}
+        onChange={() => setErrors(prev => ({ ...prev, password: undefined }))}
+      />
+      <Button type="submit" variant="primary">
+        Create Account
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Controlled Forms
+
+### Controlled Form State
+
+Form with controlled inputs using React state.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button, Text } from '@flexi-ui/react'
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  })
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    alert(JSON.stringify(formData, null, 2))
+  }
+
+  return (
+    <div className="space-y-6">
+      <Form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          label="First Name"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+        <Input
+          label="Last Name"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <Button type="submit" variant="primary">
+          Submit
+        </Button>
+      </Form>
+
+      <div className="p-4 bg-gray-100 rounded">
+        <Text className="font-semibold mb-2">Form State:</Text>
+        <pre className="text-sm">{JSON.stringify(formData, null, 2)}</pre>
+      </div>
+    </div>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Error States
+
+### Form with Various Error States
+
+Demonstrating different error states and validation feedback.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [touched, setTouched] = useState({})
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    website: ''
+  })
+
+  const errors = {
+    username: values.username && values.username.length < 3
+      ? 'Username must be at least 3 characters'
+      : '',
+    email: values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)
+      ? 'Invalid email format'
+      : '',
+    website: values.website && !/^https?:\/\/.+/.test(values.website)
+      ? 'URL must start with http:// or https://'
+      : ''
+  }
+
+  const handleBlur = (field) => {
+    setTouched({ ...touched, [field]: true })
+  }
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!errors.username && !errors.email && !errors.website) {
+      alert('Form is valid!')
+    }
+  }
+
+  return (
+    <Form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        label="Username"
+        name="username"
+        value={values.username}
+        onChange={handleChange}
+        onBlur={() => handleBlur('username')}
+        isInvalid={touched.username && !!errors.username}
+        errorMessage={touched.username ? errors.username : ''}
+        description="At least 3 characters"
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={() => handleBlur('email')}
+        isInvalid={touched.email && !!errors.email}
+        errorMessage={touched.email ? errors.email : ''}
+      />
+      <Input
+        label="Website"
+        name="website"
+        value={values.website}
+        onChange={handleChange}
+        onBlur={() => handleBlur('website')}
+        isInvalid={touched.website && !!errors.website}
+        errorMessage={touched.website ? errors.website : ''}
+        description="Must be a valid URL"
+      />
+      <Button type="submit" variant="primary">
+        Submit
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Multi-Step Forms
+
+### Progressive Form with Steps
+
+Multi-step form with navigation and state preservation.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [step, setStep] = useState(1)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    zipCode: ''
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleNext = (e) => {
+    e.preventDefault()
+    setStep(step + 1)
+  }
+
+  const handleBack = () => {
+    setStep(step - 1)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    alert(JSON.stringify(formData, null, 2))
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex gap-2">
+          {[1, 2, 3].map((s) => (
+            <div
+              key={s}
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                s === step
+                  ? 'bg-blue-600 text-white'
+                  : s < step
+                  ? 'bg-green-600 text-white'
+                  : 'bg-gray-200 text-gray-600'
+              }`}
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+        <span className="text-sm text-gray-600">Step {step} of 3</span>
+      </div>
+
+      {step === 1 && (
+        <Form onSubmit={handleNext} className="space-y-4">
+          <h3 className="text-lg font-semibold">Personal Information</h3>
+          <Input
+            label="Full Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            isRequired
+          />
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            isRequired
+          />
+          <Input
+            label="Phone"
+            name="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={handleChange}
+          />
+          <Button type="submit" variant="primary">
+            Next
+          </Button>
+        </Form>
+      )}
+
+      {step === 2 && (
+        <Form onSubmit={handleNext} className="space-y-4">
+          <h3 className="text-lg font-semibold">Address Information</h3>
+          <Input
+            label="Street Address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            isRequired
+          />
+          <Input
+            label="City"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            isRequired
+          />
+          <Input
+            label="Zip Code"
+            name="zipCode"
+            value={formData.zipCode}
+            onChange={handleChange}
+            isRequired
+          />
+          <div className="flex gap-2">
+            <Button type="button" onClick={handleBack}>
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
+              Next
+            </Button>
+          </div>
+        </Form>
+      )}
+
+      {step === 3 && (
+        <Form onSubmit={handleSubmit} className="space-y-4">
+          <h3 className="text-lg font-semibold">Review & Submit</h3>
+          <div className="p-4 bg-gray-100 rounded space-y-2">
+            <div><strong>Name:</strong> {formData.name}</div>
+            <div><strong>Email:</strong> {formData.email}</div>
+            <div><strong>Phone:</strong> {formData.phone}</div>
+            <div><strong>Address:</strong> {formData.address}</div>
+            <div><strong>City:</strong> {formData.city}</div>
+            <div><strong>Zip Code:</strong> {formData.zipCode}</div>
+          </div>
+          <div className="flex gap-2">
+            <Button type="button" onClick={handleBack}>
+              Back
+            </Button>
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
+          </div>
+        </Form>
+      )}
+    </div>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Async Validation
+
+### Form with Async Validation
+
+Form with asynchronous validation (e.g., checking username availability).
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [username, setUsername] = useState('')
+  const [isChecking, setIsChecking] = useState(false)
+  const [usernameError, setUsernameError] = useState('')
+
+  const checkUsername = async (value) => {
+    if (!value) return
+
+    setIsChecking(true)
+    setUsernameError('')
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    // Simulate validation
+    const taken = ['admin', 'user', 'test'].includes(value.toLowerCase())
+
+    if (taken) {
+      setUsernameError('Username is already taken')
+    }
+
+    setIsChecking(false)
+  }
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value)
+  }
+
+  const handleUsernameBlur = () => {
+    checkUsername(username)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!usernameError && username) {
+      alert('Username is available!')
+    }
+  }
+
+  return (
+    <Form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        label="Username"
+        name="username"
+        value={username}
+        onChange={handleUsernameChange}
+        onBlur={handleUsernameBlur}
+        isInvalid={!!usernameError}
+        errorMessage={usernameError}
+        description={isChecking ? 'Checking availability...' : 'Try: admin, user, or test'}
+        isRequired
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+      />
+      <Button
+        type="submit"
+        variant="primary"
+        isDisabled={isChecking || !!usernameError}
+      >
+        Register
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Library Integrations
+
+### React Hook Form Integration
+
+Integrate with React Hook Form for powerful form management.
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+function HookFormExample() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      age: ''
+    }
+  })
+
+  const onSubmit = async (data) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    console.log(data)
+    alert('Form submitted successfully!')
+  }
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <Input
+        label="Name"
+        {...register('name', {
+          required: 'Name is required',
+          minLength: {
+            value: 2,
+            message: 'Name must be at least 2 characters'
+          }
+        })}
+        isInvalid={!!errors.name}
+        errorMessage={errors.name?.message}
+      />
+
+      <Input
+        label="Email"
+        type="email"
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'Invalid email address'
+          }
+        })}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
+      />
+
+      <Input
+        label="Age"
+        type="number"
+        {...register('age', {
+          required: 'Age is required',
+          min: {
+            value: 18,
+            message: 'Must be at least 18 years old'
+          },
+          max: {
+            value: 120,
+            message: 'Please enter a valid age'
+          }
+        })}
+        isInvalid={!!errors.age}
+        errorMessage={errors.age?.message}
+      />
+
+      <Button
+        type="submit"
+        variant="primary"
+        isLoading={isSubmitting}
+      >
+        Submit
+      </Button>
+    </Form>
+  )
+}
+```
+
+### Formik Integration
+
+Use Formik for form state management and validation.
+
+```tsx
+import { useFormik } from 'formik'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+function FormikExample() {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    },
+    validate: values => {
+      const errors = {}
+
+      if (!values.email) {
+        errors.email = 'Email is required'
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+        errors.email = 'Invalid email address'
+      }
+
+      if (!values.password) {
+        errors.password = 'Password is required'
+      } else if (values.password.length < 8) {
+        errors.password = 'Password must be at least 8 characters'
+      }
+
+      if (!values.confirmPassword) {
+        errors.confirmPassword = 'Please confirm your password'
+      } else if (values.password !== values.confirmPassword) {
+        errors.confirmPassword = 'Passwords do not match'
+      }
+
+      return errors
+    },
+    onSubmit: async (values) => {
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      alert(JSON.stringify(values, null, 2))
+    }
+  })
+
+  return (
+    <Form onSubmit={formik.handleSubmit} className="space-y-4">
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        isInvalid={formik.touched.email && !!formik.errors.email}
+        errorMessage={formik.touched.email ? formik.errors.email : ''}
+      />
+
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        isInvalid={formik.touched.password && !!formik.errors.password}
+        errorMessage={formik.touched.password ? formik.errors.password : ''}
+      />
+
+      <Input
+        label="Confirm Password"
+        name="confirmPassword"
+        type="password"
+        value={formik.values.confirmPassword}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        isInvalid={formik.touched.confirmPassword && !!formik.errors.confirmPassword}
+        errorMessage={formik.touched.confirmPassword ? formik.errors.confirmPassword : ''}
+      />
+
+      <Button
+        type="submit"
+        variant="primary"
+        isLoading={formik.isSubmitting}
+      >
+        Register
+      </Button>
+    </Form>
+  )
+}
+```
+
+### Zod Validation Integration
+
+Use Zod for type-safe schema validation with React Hook Form.
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+// Define schema
+const schema = z.object({
+  username: z.string()
+    .min(3, 'Username must be at least 3 characters')
+    .max(20, 'Username must not exceed 20 characters'),
+  email: z.string()
+    .email('Invalid email address'),
+  password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number'),
+  confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ['confirmPassword']
+})
+
+type FormData = z.infer<typeof schema>
+
+function ZodFormExample() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm<FormData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = async (data: FormData) => {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    console.log(data)
+    alert('Form validated and submitted successfully!')
+  }
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <Input
+        label="Username"
+        {...register('username')}
+        isInvalid={!!errors.username}
+        errorMessage={errors.username?.message}
+      />
+
+      <Input
+        label="Email"
+        type="email"
+        {...register('email')}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email?.message}
+      />
+
+      <Input
+        label="Password"
+        type="password"
+        {...register('password')}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password?.message}
+        description="Must contain uppercase letter and number"
+      />
+
+      <Input
+        label="Confirm Password"
+        type="password"
+        {...register('confirmPassword')}
+        isInvalid={!!errors.confirmPassword}
+        errorMessage={errors.confirmPassword?.message}
+      />
+
+      <Button
+        type="submit"
+        variant="primary"
+        isLoading={isSubmitting}
+      >
+        Create Account
+      </Button>
+    </Form>
+  )
+}
+```
+
+## Custom Validation
+
+### Custom Validation Rules
+
+Form with custom validation logic and rules.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [values, setValues] = useState({
+    password: '',
+    confirmPassword: ''
+  })
+  const [errors, setErrors] = useState({})
+
+  const validatePassword = (password) => {
+    const errors = []
+
+    if (password.length < 8) {
+      errors.push('at least 8 characters')
+    }
+    if (!/[A-Z]/.test(password)) {
+      errors.push('one uppercase letter')
+    }
+    if (!/[a-z]/.test(password)) {
+      errors.push('one lowercase letter')
+    }
+    if (!/[0-9]/.test(password)) {
+      errors.push('one number')
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      errors.push('one special character')
+    }
+
+    return errors.length > 0
+      ? `Password must contain ${errors.join(', ')}`
+      : ''
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setValues(prev => ({ ...prev, [name]: value }))
+
+    // Real-time validation
+    if (name === 'password') {
+      const error = validatePassword(value)
+      setErrors(prev => ({ ...prev, password: error }))
+    }
+
+    if (name === 'confirmPassword') {
+      const error = value !== values.password
+        ? 'Passwords do not match'
+        : ''
+      setErrors(prev => ({ ...prev, confirmPassword: error }))
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const passwordError = validatePassword(values.password)
+    const confirmError = values.password !== values.confirmPassword
+      ? 'Passwords do not match'
+      : ''
+
+    if (!passwordError && !confirmError) {
+      alert('Password is strong and valid!')
+    } else {
+      setErrors({ password: passwordError, confirmPassword: confirmError })
+    }
+  }
+
+  const getPasswordStrength = (password) => {
+    let strength = 0
+    if (password.length >= 8) strength++
+    if (/[A-Z]/.test(password)) strength++
+    if (/[a-z]/.test(password)) strength++
+    if (/[0-9]/.test(password)) strength++
+    if (/[^A-Za-z0-9]/.test(password)) strength++
+    return strength
+  }
+
+  const strength = getPasswordStrength(values.password)
+  const strengthLabels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong']
+  const strengthColors = ['red', 'orange', 'yellow', 'lightgreen', 'green']
+
+  return (
+    <Form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          isInvalid={!!errors.password}
+          errorMessage={errors.password}
+          isRequired
+        />
+        {values.password && (
+          <div className="mt-2">
+            <div className="h-2 bg-gray-200 rounded overflow-hidden">
+              <div
+                className="h-full transition-all"
+                style={{
+                  width: `${strength * 20}%`,
+                  backgroundColor: strengthColors[strength - 1] || 'gray'
+                }}
+              />
+            </div>
+            <p className="text-sm mt-1" style={{ color: strengthColors[strength - 1] }}>
+              {strengthLabels[strength - 1] || 'Too Weak'}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <Input
+        label="Confirm Password"
+        name="confirmPassword"
+        type="password"
+        value={values.confirmPassword}
+        onChange={handleChange}
+        isInvalid={!!errors.confirmPassword}
+        errorMessage={errors.confirmPassword}
+        isRequired
+      />
+
+      <Button
+        type="submit"
+        variant="primary"
+        isDisabled={!!errors.password || !!errors.confirmPassword}
+      >
+        Set Password
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Form Layouts
+
+### Vertical Layout (Default)
+
+Standard vertical form layout with stacked fields.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  return (
+    <Form className="space-y-4">
+      <Input label="First Name" name="firstName" />
+      <Input label="Last Name" name="lastName" />
+      <Input label="Email" name="email" type="email" />
+      <Input label="Phone" name="phone" type="tel" />
+      <Button type="submit" variant="primary">
+        Submit
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+### Horizontal Layout
+
+Horizontal form layout with labels beside inputs.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  return (
+    <Form className="space-y-4">
+      <div className="grid grid-cols-4 gap-4 items-start">
+        <label className="text-right pt-2 font-medium">Name:</label>
+        <div className="col-span-3">
+          <Input name="name" placeholder="Enter your name" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 items-start">
+        <label className="text-right pt-2 font-medium">Email:</label>
+        <div className="col-span-3">
+          <Input name="email" type="email" placeholder="you@example.com" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 items-start">
+        <label className="text-right pt-2 font-medium">Company:</label>
+        <div className="col-span-3">
+          <Input name="company" placeholder="Your company" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-start-2 col-span-3">
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
+        </div>
+      </div>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+### Inline Layout
+
+Compact inline form layout.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  return (
+    <Form className="flex gap-2 items-end">
+      <div className="flex-1">
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+        />
+      </div>
+      <Button type="submit" variant="primary">
+        Subscribe
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+### Grid Layout
+
+Multi-column grid layout for complex forms.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  return (
+    <Form className="space-y-6">
+      <div className="grid grid-cols-2 gap-4">
+        <Input label="First Name" name="firstName" />
+        <Input label="Last Name" name="lastName" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <Input label="Email" name="email" type="email" />
+        <Input label="Phone" name="phone" type="tel" />
+      </div>
+
+      <Input label="Address" name="address" />
+
+      <div className="grid grid-cols-3 gap-4">
+        <Input label="City" name="city" />
+        <Input label="State" name="state" />
+        <Input label="Zip Code" name="zipCode" />
+      </div>
+
+      <Button type="submit" variant="primary">
+        Save Information
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Loading States
+
+### Form with Loading State
+
+Form that shows loading state during submission.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    setIsLoading(false)
+    alert('Form submitted successfully!')
+  }
+
+  return (
+    <Form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        label="Name"
+        name="name"
+        isRequired
+        isDisabled={isLoading}
+      />
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        isRequired
+        isDisabled={isLoading}
+      />
+      <Input
+        label="Message"
+        name="message"
+        isDisabled={isLoading}
+      />
+      <Button
+        type="submit"
+        variant="primary"
+        isLoading={isLoading}
+      >
+        {isLoading ? 'Submitting...' : 'Submit'}
+      </Button>
+    </Form>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Success & Error Feedback
+
+### Form with Success and Error Messages
+
+Form with visual feedback for submission states.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [status, setStatus] = useState(null) // 'success', 'error', or null
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setStatus(null)
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    // Randomly succeed or fail for demo
+    const success = Math.random() > 0.3
+
+    setIsLoading(false)
+    setStatus(success ? 'success' : 'error')
+
+    if (success) {
+      e.target.reset()
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      {status === 'success' && (
+        <div className="p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+          <strong>Success!</strong> Your message has been sent.
+        </div>
+      )}
+
+      {status === 'error' && (
+        <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+          <strong>Error!</strong> Something went wrong. Please try again.
+        </div>
+      )}
+
+      <Form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          label="Name"
+          name="name"
+          isRequired
+          isDisabled={isLoading}
+        />
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          isRequired
+          isDisabled={isLoading}
+        />
+        <Input
+          label="Subject"
+          name="subject"
+          isRequired
+          isDisabled={isLoading}
+        />
+        <Button
+          type="submit"
+          variant="primary"
+          isLoading={isLoading}
+        >
+          Send Message
+        </Button>
+      </Form>
+    </div>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## API Reference
+
+### Form Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Form content including inputs and buttons |
+| `onSubmit` | `(e: FormEvent) => void` | - | Handler called when form is submitted |
+| `validationBehavior` | `'native' \| 'aria'` | `'aria'` | Form validation behavior type |
+| `validationErrors` | `Record<string, string \| string[]>` | - | Server-side validation errors to display |
+| `className` | `string` | - | Additional CSS classes for styling |
+| `noValidate` | `boolean` | `false` | Disable native HTML5 validation |
+| `autoComplete` | `'on' \| 'off'` | - | Browser autocomplete behavior |
+| `method` | `'get' \| 'post'` | `'post'` | Form submission method |
+| `action` | `string` | - | Form submission URL |
+| `encType` | `string` | - | Form data encoding type |
+| `target` | `string` | - | Where to display response |
+| `id` | `string` | - | HTML id attribute |
+| `name` | `string` | - | Form name attribute |
+
+### Form Methods
+
+Access these methods via `ref`:
+
+| Method | Type | Description |
+|--------|------|-------------|
+| `submit` | `() => void` | Programmatically submit the form |
+| `reset` | `() => void` | Reset form to initial values |
+| `reportValidity` | `() => boolean` | Check validity and show errors |
+| `checkValidity` | `() => boolean` | Check validity without showing errors |
+
+### Form Events
+
+| Event | Type | Description |
+|-------|------|-------------|
+| `onSubmit` | `(e: FormEvent) => void` | Fired when form is submitted |
+| `onReset` | `(e: FormEvent) => void` | Fired when form is reset |
+| `onChange` | `(e: FormEvent) => void` | Fired when any input changes |
+| `onInvalid` | `(e: FormEvent) => void` | Fired when validation fails |
+
+## Real-World Examples
+
+### Contact Form
+
+Complete contact form with validation and submission.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [status, setStatus] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setStatus(null)
+
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData)
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    setIsLoading(false)
+    setStatus('success')
+    e.target.reset()
+  }
+
+  return (
+    <div className="max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
+
+      {status === 'success' && (
+        <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+          Thank you! We'll get back to you soon.
+        </div>
+      )}
+
+      <Form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          label="Your Name"
+          name="name"
+          placeholder="John Doe"
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <Input
+          label="Email Address"
+          name="email"
+          type="email"
+          placeholder="john@example.com"
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <Input
+          label="Subject"
+          name="subject"
+          placeholder="How can we help?"
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Message
+          </label>
+          <textarea
+            name="message"
+            rows={4}
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            placeholder="Your message..."
+            required
+            disabled={isLoading}
+          />
+        </div>
+
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-full"
+          isLoading={isLoading}
+        >
+          Send Message
+        </Button>
+      </Form>
+    </div>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+### Registration Form
+
+User registration form with comprehensive validation.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+  const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+
+  const validate = () => {
+    const newErrors = {}
+
+    if (!formData.username || formData.username.length < 3) {
+      newErrors.username = 'Username must be at least 3 characters'
+    }
+
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Invalid email address'
+    }
+
+    if (!formData.password || formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters'
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match'
+    }
+
+    return newErrors
+  }
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+    // Clear error for this field
+    setErrors(prev => ({ ...prev, [e.target.name]: undefined }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const newErrors = validate()
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
+    setIsLoading(true)
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    setIsLoading(false)
+
+    alert('Account created successfully!')
+  }
+
+  return (
+    <div className="max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-2">Create Account</h2>
+      <p className="text-gray-600 mb-6">Join us today!</p>
+
+      <Form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          label="Username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          isInvalid={!!errors.username}
+          errorMessage={errors.username}
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          isInvalid={!!errors.email}
+          errorMessage={errors.email}
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          isInvalid={!!errors.password}
+          errorMessage={errors.password}
+          description="At least 8 characters"
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <Input
+          label="Confirm Password"
+          name="confirmPassword"
+          type="password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          isInvalid={!!errors.confirmPassword}
+          errorMessage={errors.confirmPassword}
+          isRequired
+          isDisabled={isLoading}
+        />
+
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-full"
+          isLoading={isLoading}
+        >
+          Create Account
+        </Button>
+      </Form>
+
+      <p className="mt-4 text-center text-sm text-gray-600">
+        Already have an account? <a href="#" className="text-blue-600">Sign in</a>
+      </p>
+    </div>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+### Settings Form
+
+User settings form with sections and preferences.
+
+<Sandbox>
+  <SandboxEditor>
+```tsx
+import { useState } from 'react'
+import { Form, Input, Button } from '@flexi-ui/react'
+
+export default function App() {
+  const [settings, setSettings] = useState({
+    displayName: 'John Doe',
+    email: 'john@example.com',
+    bio: 'Software developer',
+    website: 'https://example.com',
+    location: 'San Francisco, CA'
+  })
+  const [saved, setSaved] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleChange = (e) => {
+    setSettings({ ...settings, [e.target.name]: e.target.value })
+    setSaved(false)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    setIsLoading(false)
+    setSaved(true)
+
+    setTimeout(() => setSaved(false), 3000)
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
+
+      {saved && (
+        <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+          Settings saved successfully!
+        </div>
+      )}
+
+      <Form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Profile Information</h3>
+          <div className="space-y-4">
+            <Input
+              label="Display Name"
+              name="displayName"
+              value={settings.displayName}
+              onChange={handleChange}
+              isDisabled={isLoading}
+            />
+
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              value={settings.email}
+              onChange={handleChange}
+              description="This will be your login email"
+              isDisabled={isLoading}
+            />
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Bio</label>
+              <textarea
+                name="bio"
+                value={settings.bio}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+                rows={3}
+                disabled={isLoading}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t pt-6">
+          <h3 className="text-lg font-semibold mb-4">Additional Information</h3>
+          <div className="space-y-4">
+            <Input
+              label="Website"
+              name="website"
+              type="url"
+              value={settings.website}
+              onChange={handleChange}
+              isDisabled={isLoading}
+            />
+
+            <Input
+              label="Location"
+              name="location"
+              value={settings.location}
+              onChange={handleChange}
+              isDisabled={isLoading}
+            />
+          </div>
+        </div>
+
+        <div className="flex gap-2 pt-4">
+          <Button
+            type="submit"
+            variant="primary"
+            isLoading={isLoading}
+          >
+            Save Changes
+          </Button>
+          <Button
+            type="button"
+            onClick={() => setSettings({
+              displayName: 'John Doe',
+              email: 'john@example.com',
+              bio: 'Software developer',
+              website: 'https://example.com',
+              location: 'San Francisco, CA'
+            })}
+            isDisabled={isLoading}
+          >
+            Reset
+          </Button>
+        </div>
+      </Form>
+    </div>
+  )
+}
+```
+  </SandboxEditor>
+</Sandbox>
+
+## Accessibility
+
+The Form component is built with accessibility in mind, following WAI-ARIA best practices.
+
+### Form Labels
+
+- All form inputs should have associated labels using the `label` prop
+- Labels are automatically linked to inputs via `for` and `id` attributes
+- Use `aria-label` for inputs without visible labels
+- Mark required fields with `isRequired` prop for proper ARIA attributes
+
+```tsx
+// Good: Label associated with input
+<Input label="Email" name="email" isRequired />
+
+// For inputs without visible labels
+<Input
+  name="search"
+  aria-label="Search products"
+  placeholder="Search..."
+/>
+```
+
+### Error Announcements
+
+- Error messages are automatically announced to screen readers
+- Errors are associated with inputs via `aria-describedby`
+- Invalid states use `aria-invalid="true"` attribute
+- Error messages appear immediately on validation
+
+```tsx
+<Input
+  label="Email"
+  name="email"
+  isInvalid={!!errors.email}
+  errorMessage={errors.email}
+/>
+```
+
+### Focus Management
+
+- Form maintains logical tab order
+- Submit buttons are keyboard accessible
+- Focus moves to first error on validation failure
+- Use `autoFocus` sparingly and only when appropriate
+
+```tsx
+// Auto-focus first input on mount (use carefully)
+<Input label="Name" name="name" autoFocus />
+
+// Programmatic focus management
+const inputRef = useRef()
+useEffect(() => {
+  if (errors.email) {
+    inputRef.current?.focus()
+  }
+}, [errors])
+```
+
+### Keyboard Navigation
+
+- `Tab` / `Shift+Tab`: Navigate between fields
+- `Enter`: Submit form (when focus is on submit button)
+- `Escape`: Clear field or cancel (when implemented)
+- All interactive elements are keyboard accessible
+
+### Screen Reader Support
+
+- Form landmark is identified with proper role
+- Field groups use `fieldset` and `legend` when appropriate
+- Status messages use `role="status"` or `aria-live` regions
+- Loading states are announced to screen readers
+
+## Best Practices
+
+### 1. Provide Clear Feedback
+
+Always inform users about form state and validation results.
+
+```tsx
+// Good: Clear error messages
+<Input
+  label="Email"
+  errorMessage="Please enter a valid email address"
+/>
+
+// Good: Success feedback
+{submitted && (
+  <div role="status" className="success-message">
+    Form submitted successfully!
+  </div>
+)}
+```
+
+### 2. Validate Progressively
+
+Validate fields as users interact, not just on submit.
+
+```tsx
+// Good: Validate on blur
+<Input
+  label="Email"
+  onBlur={(e) => validateEmail(e.target.value)}
+  isInvalid={touched.email && !!errors.email}
+/>
+```
+
+### 3. Disable Submit During Processing
+
+Prevent double submissions by disabling the submit button.
+
+```tsx
+<Button
+  type="submit"
+  isDisabled={isSubmitting || !isValid}
+  isLoading={isSubmitting}
+>
+  Submit
+</Button>
+```
+
+### 4. Use Appropriate Input Types
+
+Use semantic HTML input types for better UX and validation.
+
+```tsx
+<Input type="email" />  // Email keyboard on mobile
+<Input type="tel" />    // Phone keyboard on mobile
+<Input type="number" /> // Numeric keyboard
+<Input type="url" />    // URL keyboard with .com
+```
+
+### 5. Group Related Fields
+
+Use fieldsets and legends for logical grouping.
+
+```tsx
+<fieldset>
+  <legend>Billing Address</legend>
+  <Input label="Street" name="billingStreet" />
+  <Input label="City" name="billingCity" />
+  <Input label="Zip" name="billingZip" />
+</fieldset>
+```
+
+### 6. Preserve User Input
+
+Never clear valid data unexpectedly; save form state appropriately.
+
+```tsx
+// Good: Preserve form data in state
+const [formData, setFormData] = useState(() => {
+  const saved = localStorage.getItem('formData')
+  return saved ? JSON.parse(saved) : {}
+})
+
+useEffect(() => {
+  localStorage.setItem('formData', JSON.stringify(formData))
+}, [formData])
+```
+
+### 7. Handle Network Errors Gracefully
+
+Provide clear error messages and retry options.
+
+```tsx
+try {
+  await submitForm(data)
+} catch (error) {
+  setError('Unable to submit form. Please check your connection and try again.')
+}
+```
+
+## Troubleshooting
+
+### Form Not Submitting
+
+**Problem:** Form doesn't trigger `onSubmit` handler.
+
+**Solutions:**
+- Ensure submit button has `type="submit"` attribute
+- Check if `preventDefault()` is called correctly
+- Verify form validation isn't blocking submission
+- Check for JavaScript errors in console
+
+```tsx
+// Correct usage
+<Form onSubmit={(e) => {
+  e.preventDefault() // Must be first
+  handleSubmit(e)
+}}>
+  <Button type="submit">Submit</Button> {/* type="submit" required */}
+</Form>
+```
+
+### Validation Errors Not Showing
+
+**Problem:** Error messages don't appear when validation fails.
+
+**Solutions:**
+- Ensure `isInvalid` prop is set to `true`
+- Check that `errorMessage` prop is provided
+- Verify validation logic is executing correctly
+- Check if errors are cleared prematurely
+
+```tsx
+// Correct error handling
+<Input
+  label="Email"
+  isInvalid={!!errors.email}  // Convert to boolean
+  errorMessage={errors.email} // Pass error message
+/>
+```
+
+### Form State Not Updating
+
+**Problem:** Form values don't update when typing.
+
+**Solutions:**
+- Ensure controlled inputs have both `value` and `onChange`
+- Check that state is updating correctly
+- Verify no typos in state property names
+- Don't mix controlled and uncontrolled inputs
+
+```tsx
+// Correct controlled input
+<Input
+  value={formData.email}
+  onChange={(e) => setFormData({
+    ...formData,
+    email: e.target.value
+  })}
+/>
+```
+
+### Auto-fill Not Working
+
+**Problem:** Browser autocomplete doesn't work.
+
+**Solutions:**
+- Use correct `name` attributes
+- Don't set `autoComplete="off"` unnecessarily
+- Use standard field names (email, tel, address, etc.)
+- Ensure input types match content
+
+```tsx
+// Good: Enables browser autocomplete
+<Input name="email" type="email" autoComplete="email" />
+<Input name="tel" type="tel" autoComplete="tel" />
+```
+
+### Async Validation Issues
+
+**Problem:** Async validation triggers too frequently or incorrectly.
+
+**Solutions:**
+- Debounce async validation calls
+- Use `onBlur` instead of `onChange` for expensive operations
+- Show loading state during validation
+- Cancel previous requests when new one starts
+
+```tsx
+// Good: Debounced async validation
+const debouncedValidate = useMemo(
+  () => debounce(async (value) => {
+    const error = await validateAsync(value)
+    setError(error)
+  }, 500),
+  []
+)
+```
+
+## Related Components
+
+- [Input](/docs/components/input) - Text input fields with validation
+- [Button](/docs/components/button) - Submit and action buttons
+- [Checkbox](/docs/components/checkbox) - Checkbox inputs for forms
+- [Radio](/docs/components/radio) - Radio button groups
+- [Select](/docs/components/select) - Dropdown selection inputs
+- [Textarea](/docs/components/textarea) - Multi-line text inputs
+
+## Learn More
+
+- [React Hook Form Documentation](https://react-hook-form.com/)
+- [Formik Documentation](https://formik.org/)
+- [Zod Documentation](https://zod.dev/)
+- [WAI-ARIA Form Practices](https://www.w3.org/WAI/ARIA/apg/patterns/form/)
+- [HTML Form Validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)

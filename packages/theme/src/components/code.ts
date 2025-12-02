@@ -10,7 +10,7 @@ import { colorVariants } from '../utils'
  *
  * @example
  * <code className={classNames)}>
- *   npm install @flexi-ui/react
+ *   npm install @flexi-ui/theme @flexi-ui/system
  * </code>
  */
 const code = tv({

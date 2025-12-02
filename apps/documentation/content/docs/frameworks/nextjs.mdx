@@ -1,0 +1,134 @@
+---
+title: "Next.js"
+description: "Learn how to use FlexiUI with Next.js."
+---
+
+# Next.js
+
+FlexiUI works seamlessly with Next.js, supporting both the Pages Router and App Router.
+
+## Installation
+
+Install FlexiUI in your Next.js project:
+
+```bash
+pnpm add @flexi-ui/react
+```
+
+## Setup with App Router
+
+Configure FlexiUI with the App Router (Next.js 13+):
+
+### 1. Create a Provider Component
+
+Create `app/providers.tsx`:
+
+```tsx
+'use client'
+
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <FlexiUIProvider>
+      {children}
+    </FlexiUIProvider>
+  )
+}
+```
+
+### 2. Wrap Your App
+
+Update `app/layout.tsx`:
+
+```tsx
+import { Providers } from './providers'
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  )
+}
+```
+
+### 3. Configure Tailwind CSS
+
+Update `tailwind.config.ts`:
+
+```ts
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
+  ],
+  plugins: [require('@flexi-ui/tailwind-plugin')]
+}
+
+export default config
+```
+
+## Setup with Pages Router
+
+For the Pages Router (Next.js 12 and below):
+
+### 1. Update _app.tsx
+
+```tsx
+import type { AppProps } from 'next/app'
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <FlexiUIProvider>
+      <Component {...pageProps} />
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Using Components
+
+Import and use FlexiUI components:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { Input } from '@flexi-ui/input'
+
+export default function Page() {
+  return (
+    <div>
+      <Input label="Email" type="email" />
+      <Button>Submit</Button>
+    </div>
+  )
+}
+```
+
+## Server Components
+
+FlexiUI components are client components. Mark them with `'use client'` when needed:
+
+```tsx
+'use client'
+
+import { Button } from '@flexi-ui/button'
+
+export function ClientComponent() {
+  return <Button onClick={() => console.log('Clicked!')}>Click me</Button>
+}
+```
+
+## TypeScript
+
+FlexiUI provides full TypeScript support out of the box.

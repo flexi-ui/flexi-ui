@@ -1,0 +1,245 @@
+---
+title: "FlexiUIProvider"
+description: "Configure FlexiUI globally with the FlexiUIProvider component."
+---
+
+# FlexiUIProvider
+
+The FlexiUIProvider is the root component that wraps your application and provides global configuration for all FlexiUI components.
+
+## Import
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+```
+
+## Usage
+
+### Basic Setup
+
+Wrap your application with FlexiUIProvider:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+function App() {
+  return (
+    <FlexiUIProvider>
+      {/* Your app components */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+### With Next.js App Router
+
+Create a providers component:
+
+```tsx
+// app/providers.tsx
+'use client'
+
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <FlexiUIProvider>
+      {children}
+    </FlexiUIProvider>
+  )
+}
+```
+
+Then use it in your layout:
+
+```tsx
+// app/layout.tsx
+import { Providers } from './providers'
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  )
+}
+```
+
+## API
+
+### FlexiUIProvider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | - | Your application content |
+| theme | `Theme` | - | Custom theme configuration |
+| locale | `string` | `en-US` | Locale for internationalization |
+| defaultTheme | `light \| dark` | `light` | Default theme mode |
+| disableAnimation | `boolean` | `false` | Disable all animations |
+| disableRipple | `boolean` | `false` | Disable ripple effects |
+| skipFramerMotionAnimations | `boolean` | `false` | Skip Framer Motion animations |
+
+## Examples
+
+### Custom Theme
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+const customTheme = {
+  colors: {
+    primary: '#0070f3',
+    secondary: '#7928ca',
+    success: '#0cce6b',
+    warning: '#ffc107',
+    error: '#f31260'
+  },
+  borderRadius: {
+    small: '0.5rem',
+    medium: '0.75rem',
+    large: '1rem'
+  }
+}
+
+function App() {
+  return (
+    <FlexiUIProvider theme={customTheme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+### Dark Mode by Default
+
+```tsx
+<FlexiUIProvider defaultTheme="dark">
+  {/* Your app */}
+</FlexiUIProvider>
+```
+
+### Disable Animations
+
+Useful for testing or accessibility:
+
+```tsx
+<FlexiUIProvider disableAnimation>
+  {/* Your app */}
+</FlexiUIProvider>
+```
+
+### Disable Ripple Effects
+
+```tsx
+<FlexiUIProvider disableRipple>
+  {/* Your app */}
+</FlexiUIProvider>
+```
+
+### With Internationalization
+
+```tsx
+<FlexiUIProvider locale="fr-FR">
+  {/* Your app */}
+</FlexiUIProvider>
+```
+
+### Multiple Providers
+
+Combine with other providers:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+import { ThemeProvider } from 'next-themes'
+
+function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system">
+      <FlexiUIProvider>
+        {children}
+      </FlexiUIProvider>
+    </ThemeProvider>
+  )
+}
+```
+
+### SSR Configuration
+
+For server-side rendering:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+
+function App({ Component, pageProps }) {
+  return (
+    <FlexiUIProvider skipFramerMotionAnimations>
+      <Component {...pageProps} />
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Context
+
+### useFlexiUI Hook
+
+Access provider context in your components:
+
+```tsx
+import { useFlexiUI } from '@flexi-ui/react'
+
+function MyComponent() {
+  const { theme, locale } = useFlexiUI()
+
+  return (
+    <div>
+      Current theme: {theme}
+      Current locale: {locale}
+    </div>
+  )
+}
+```
+
+## TypeScript
+
+The provider is fully typed:
+
+```tsx
+import { FlexiUIProvider } from '@flexi-ui/react'
+import type { Theme } from '@flexi-ui/react'
+
+const myTheme: Theme = {
+  colors: {
+    primary: '#0070f3'
+  }
+}
+
+function App() {
+  return (
+    <FlexiUIProvider theme={myTheme}>
+      {/* Your app */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+## Best Practices
+
+1. **Place at the root** - The provider should wrap your entire application
+2. **Single provider** - Only use one FlexiUIProvider in your app
+3. **Theme consistency** - Define your theme once and reuse it
+4. **SSR considerations** - Use appropriate props for server-side rendering
+5. **Performance** - Disable animations when needed for better performance
+
+## Notes
+
+- The provider uses React Context under the hood
+- All FlexiUI components must be descendants of the provider
+- Theme changes trigger re-renders of components using theme values
+- The provider is client-side only (use `'use client'` in Next.js App Router)

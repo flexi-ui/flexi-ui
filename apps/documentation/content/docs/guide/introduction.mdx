@@ -1,0 +1,257 @@
+---
+title: "Introduction"
+description: "Get started with FlexiUI, a modern React UI library built for developers who want beautiful, accessible components with maximum flexibility."
+---
+
+# Introduction
+
+Welcome to **FlexiUI** - a beautiful, fast, and modern React UI library designed to help you build exceptional user interfaces with ease.
+
+## What is FlexiUI?
+
+FlexiUI is a modern, open-source React UI library that provides a comprehensive set of **accessible**, **customizable**, and **production-ready** components. Built on top of Tailwind CSS and React Aria, FlexiUI combines the best of both worlds: stunning visual design with world-class accessibility.
+
+Whether you're building a simple landing page, a complex dashboard, or a full-featured web application, FlexiUI provides all the tools you need to create beautiful, accessible, and performant user interfaces.
+
+## Quick Start
+
+Get up and running in minutes:
+
+```bash
+# Install FlexiUI
+npm install @flexi-ui/theme @flexi-ui/system
+
+# Install individual components
+npm install @flexi-ui/button @flexi-ui/input
+```
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+function App() {
+  return (
+    <FlexiUIProvider>
+      <Button color="primary">Get Started</Button>
+    </FlexiUIProvider>
+  )
+}
+```
+
+→ **[Read the full installation guide](/docs/guide/installation)**
+
+## Key Features
+
+### Powerful Theming System
+
+Built on Tailwind CSS, FlexiUI offers a flexible theming system that lets you customize every aspect of your components. Define your design tokens once and apply them consistently across your entire application.
+
+```tsx
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            primary: '#0070f3',
+            secondary: '#7928ca',
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Accessibility First
+
+Every FlexiUI component is built on **React Aria**, providing:
+
+- **ARIA patterns** - Proper ARIA attributes and roles
+- **Keyboard navigation** - Full keyboard support out of the box
+- **Screen reader support** - Optimized for assistive technologies
+- **Focus management** - Smart focus handling and visible focus indicators
+- **WCAG compliance** - Meeting WCAG 2.1 Level AA standards
+
+### TypeScript Native
+
+FlexiUI is written in TypeScript from the ground up, giving you:
+
+- **Full type safety** - Catch errors before runtime
+- **IntelliSense support** - Autocomplete in your IDE
+- **Type inference** - Smart prop suggestions
+- **Generic components** - Type-safe polymorphic components
+
+```tsx
+import { Button } from '@flexi-ui/button'
+
+// TypeScript knows all available props
+<Button
+  color="primary"      // ✓ Valid
+  variant="solid"      // ✓ Valid
+  size="lg"            // ✓ Valid
+  invalidProp="test"   // ✗ Type error
+/>
+```
+
+### Performance Optimized
+
+FlexiUI is designed for performance:
+
+- **Tree-shakeable** - Import only what you need
+- **Small bundle size** - Minimal overhead
+- **No runtime styles** - CSS is generated at build time
+- **SSR ready** - Full Server-Side Rendering support
+- **React Server Components** - Compatible with RSC
+
+### Responsive by Default
+
+All components are built mobile-first and work seamlessly across all devices:
+
+- **Responsive variants** - Different styles per breakpoint
+- **Touch-friendly** - Optimized touch targets
+- **Fluid typography** - Scales with viewport
+- **Adaptive layouts** - Automatic layout adjustments
+
+### Modular Architecture
+
+FlexiUI follows a modular design philosophy:
+
+- **Independent packages** - Install only the components you need
+- **Minimal dependencies** - Each package has minimal deps
+- **Framework agnostic** - Works with Next.js, Remix, Vite, and more
+- **Composable** - Build complex UIs from simple components
+
+## Design Philosophy
+
+FlexiUI is built on three core principles:
+
+### 1. Developer Experience
+
+We believe great tools should be a joy to use. FlexiUI provides:
+
+- **Intuitive API** - Props that make sense
+- **Comprehensive docs** - Clear examples for every use case
+- **Helpful errors** - Meaningful error messages
+- **Great debugging** - Easy to inspect and troubleshoot
+
+### 2. Accessibility First
+
+Accessibility isn't an afterthought—it's fundamental:
+
+- Every component meets WCAG 2.1 Level AA standards
+- Built on battle-tested React Aria patterns
+- Extensive keyboard navigation support
+- Screen reader optimized
+
+### 3. Flexibility Without Complexity
+
+Customize everything without the complexity:
+
+- Powerful theming system with simple API
+- Override styles at any level
+- Extend components easily
+- No black magic - you control the output
+
+## Use Cases
+
+FlexiUI is perfect for:
+
+### Enterprise Applications
+Build scalable, accessible dashboards and admin panels with confidence.
+
+### E-commerce Sites
+Create beautiful product pages and checkout flows that convert.
+
+### SaaS Products
+Ship polished, professional interfaces for your web application.
+
+### Content Platforms
+Build engaging content experiences with rich components.
+
+### Marketing Sites
+Create stunning landing pages that capture attention.
+
+## Architecture Overview
+
+FlexiUI follows a layered architecture:
+
+```
+┌─────────────────────────────────────┐
+│   Components (@flexi-ui/button)     │  ← UI Components
+├─────────────────────────────────────┤
+│   System (@flexi-ui/system)         │  ← Component System
+├─────────────────────────────────────┤
+│   Theme (@flexi-ui/theme)           │  ← Design Tokens
+├─────────────────────────────────────┤
+│   Tailwind CSS                      │  ← Utility Framework
+└─────────────────────────────────────┘
+```
+
+- **Components** - Individual UI components (Button, Input, etc.)
+- **System** - Core utilities and providers
+- **Theme** - Design tokens and theming system
+- **Tailwind CSS** - Foundation for styling
+
+## Comparison
+
+### vs Other UI Libraries
+
+FlexiUI differentiates itself through:
+
+| Feature | FlexiUI | Others |
+|---------|---------|--------|
+| **Built on Tailwind CSS** | ✅ Native integration | ⚠️ Limited or none |
+| **React Aria Foundation** | ✅ Full support | ⚠️ Custom or limited |
+| **TypeScript Native** | ✅ Written in TS | ⚠️ Added later |
+| **Modular Packages** | ✅ Import what you need | ❌ Monolithic |
+| **Tailwind v4 Ready** | ✅ Day one support | ❌ Not yet |
+| **Server Components** | ✅ RSC compatible | ⚠️ Limited |
+
+### Philosophy Differences
+
+**FlexiUI** embraces utility-first CSS and builds on proven foundations rather than reinventing the wheel. We believe in composability, flexibility, and giving developers control.
+
+## Getting Started
+
+Ready to build something amazing?
+
+<div className="flex flex-wrap gap-4 mt-8">
+  <Button href="/docs/guide/installation" color="primary" size="lg">
+    Installation Guide
+  </Button>
+  <Button href="/docs/components/button" variant="bordered" size="lg">
+    Browse Components
+  </Button>
+</div>
+
+## What's Next?
+
+After installing FlexiUI, check out:
+
+- **[Installation Guide](/docs/guide/installation)** - Set up FlexiUI in your project
+- **[Button Component](/docs/components/button)** - Start with the basics
+- **[Theme Customization](/docs/customization/theme)** - Make it your own
+- **[Framework Guides](/docs/frameworks/nextjs)** - Next.js, Vite, Remix, and more
+
+## Community & Support
+
+FlexiUI is open source and built by a community of developers. We welcome contributions, bug reports, and feature requests!
+
+### Get Involved
+
+- **[GitHub Repository](https://github.com/flexi-ui/flexi-ui)** - Star us and contribute
+- **[Report Issues](https://github.com/flexi-ui/flexi-ui/issues)** - Found a bug? Let us know
+- **[Discussions](https://github.com/flexi-ui/flexi-ui/discussions)** - Ask questions and share ideas
+- **[Contributing Guide](/docs/advanced/contributing)** - Learn how to contribute
+
+### Stay Updated
+
+- **[Changelog](https://github.com/flexi-ui/flexi-ui/releases)** - See what's new
+- **[Roadmap](https://github.com/flexi-ui/flexi-ui/projects)** - Check what's coming next
+
+## License
+
+FlexiUI is open source software licensed under the MIT license.

@@ -1,0 +1,859 @@
+---
+title: "Colors"
+description: "Complete guide to the FlexiUI color system, palettes, and customization."
+---
+
+# Colors
+
+FlexiUI provides a comprehensive, semantic color system built on Tailwind CSS. This guide covers the complete color palette, how to use colors effectively, and how to customize them for your brand.
+
+## Overview
+
+The FlexiUI color system is designed around:
+
+- **Semantic Colors** - Purpose-driven color tokens (primary, success, danger, etc.)
+- **Color Scales** - Full 50-900 scales for granular control
+- **Accessibility** - WCAG-compliant foreground/background pairs
+- **Dark Mode** - Automatic color adaptation
+- **Consistency** - Unified color language across components
+
+## Semantic Colors
+
+### Brand Colors
+
+Primary and secondary colors define your brand identity:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+
+<Button color="primary">Primary Action</Button>
+<Button color="secondary">Secondary Action</Button>
+```
+
+These colors are used for:
+- Call-to-action buttons
+- Interactive elements
+- Brand highlights
+- Navigation active states
+
+### Status Colors
+
+Communicate state and feedback to users:
+
+```tsx
+<Button color="success">Success</Button>
+<Button color="warning">Warning</Button>
+<Button color="danger">Danger</Button>
+```
+
+**Success (Green):**
+- Successful operations
+- Confirmation messages
+- Positive feedback
+- Completed states
+
+**Warning (Yellow/Orange):**
+- Cautionary messages
+- Pending actions
+- Important notices
+- Attention needed
+
+**Danger (Red):**
+- Errors and failures
+- Destructive actions
+- Critical alerts
+- Delete confirmations
+
+### Neutral Colors
+
+Default colors for standard UI elements:
+
+```tsx
+<Button color="default">Default</Button>
+<div className="bg-content1">Content Background</div>
+<div className="text-default-500">Muted Text</div>
+```
+
+## Complete Color Palette
+
+### Primary Scale
+
+The primary color scale from light to dark:
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `primary-50` | Lightest | Subtle backgrounds |
+| `primary-100` | Very light | Hover backgrounds |
+| `primary-200` | Light | Selected states |
+| `primary-300` | Light-medium | Borders |
+| `primary-400` | Medium-light | Disabled text |
+| `primary-500` | Base | Default primary |
+| `primary-600` | Medium-dark | Hover states |
+| `primary-700` | Dark | Active states |
+| `primary-800` | Very dark | Text on light |
+| `primary-900` | Darkest | Emphasized text |
+
+### Using Color Scales
+
+```tsx
+{/* Backgrounds */}
+<div className="bg-primary-50">Lightest background</div>
+<div className="bg-primary-500">Primary background</div>
+<div className="bg-primary-900">Darkest background</div>
+
+{/* Text */}
+<p className="text-primary-500">Primary text</p>
+<p className="text-primary-700">Dark primary text</p>
+
+{/* Borders */}
+<div className="border border-primary-300">Light border</div>
+<div className="border border-primary-500">Primary border</div>
+```
+
+### Default (Neutral) Scale
+
+Gray scale for UI elements:
+
+```tsx
+{/* Light grays */}
+<div className="bg-default-100">Very light gray</div>
+<div className="bg-default-200">Light gray</div>
+<div className="bg-default-300">Medium-light gray</div>
+
+{/* Medium grays */}
+<div className="bg-default-400">Medium gray</div>
+<div className="bg-default-500">Base gray</div>
+<div className="bg-default-600">Medium-dark gray</div>
+
+{/* Dark grays */}
+<div className="bg-default-700">Dark gray</div>
+<div className="bg-default-800">Very dark gray</div>
+<div className="bg-default-900">Darkest gray</div>
+```
+
+## Layout Colors
+
+### Background and Foreground
+
+Base colors for page layout:
+
+```tsx
+{/* Page background */}
+<div className="bg-background">
+  {/* Text color */}
+  <p className="text-foreground">
+    Default page content
+  </p>
+</div>
+```
+
+- `background` - Main page background color
+- `foreground` - Default text color
+
+These adapt automatically in dark mode.
+
+### Content Layers
+
+Multiple background levels for depth:
+
+```tsx
+<div className="bg-background">
+  <div className="bg-content1 p-4">
+    First layer (cards, panels)
+    <div className="bg-content2 p-4">
+      Second layer (nested content)
+      <div className="bg-content3 p-4">
+        Third layer (highlighted sections)
+        <div className="bg-content4 p-4">
+          Fourth layer (subtle backgrounds)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**Usage:**
+- `content1` - Cards, panels, primary surfaces
+- `content2` - Secondary surfaces, nested cards
+- `content3` - Tertiary surfaces, input backgrounds
+- `content4` - Quaternary surfaces, hover states
+
+### Component Colors
+
+Special purpose colors:
+
+```tsx
+{/* Dividers */}
+<div className="border-b border-divider">
+  Section divider
+</div>
+
+{/* Focus rings */}
+<input className="focus:ring-2 focus:ring-focus" />
+
+{/* Overlays */}
+<div className="bg-overlay">
+  Modal backdrop
+</div>
+```
+
+## Foreground Colors
+
+Each semantic color includes a foreground color for text:
+
+```tsx
+<div className="bg-primary text-primary-foreground p-4">
+  Text with proper contrast
+</div>
+
+<div className="bg-secondary text-secondary-foreground p-4">
+  Secondary with foreground
+</div>
+
+<div className="bg-success text-success-foreground p-4">
+  Success message
+</div>
+
+<div className="bg-danger text-danger-foreground p-4">
+  Error message
+</div>
+```
+
+Foreground colors ensure WCAG contrast requirements are met.
+
+## Text Colors
+
+### Basic Text
+
+```tsx
+{/* Primary text */}
+<p className="text-foreground">
+  Default text color
+</p>
+
+{/* Muted text */}
+<p className="text-default-500">
+  Secondary or muted text
+</p>
+
+{/* Subtle text */}
+<p className="text-default-400">
+  Very subtle text
+</p>
+```
+
+### Semantic Text Colors
+
+```tsx
+{/* Success text */}
+<p className="text-success">
+  Operation completed successfully
+</p>
+
+{/* Warning text */}
+<p className="text-warning">
+  Please review before continuing
+</p>
+
+{/* Danger text */}
+<p className="text-danger">
+  An error occurred
+</p>
+
+{/* Primary text */}
+<p className="text-primary">
+  Primary action or link
+</p>
+```
+
+### Text with Scales
+
+```tsx
+<p className="text-primary-400">Light primary</p>
+<p className="text-primary-500">Base primary</p>
+<p className="text-primary-600">Medium primary</p>
+<p className="text-primary-700">Dark primary</p>
+```
+
+## Background Colors
+
+### Semantic Backgrounds
+
+```tsx
+{/* Primary backgrounds */}
+<div className="bg-primary text-primary-foreground p-4">
+  Primary background
+</div>
+
+{/* Success backgrounds */}
+<div className="bg-success text-success-foreground p-4">
+  Success notification
+</div>
+
+{/* Warning backgrounds */}
+<div className="bg-warning text-warning-foreground p-4">
+  Warning alert
+</div>
+
+{/* Danger backgrounds */}
+<div className="bg-danger text-danger-foreground p-4">
+  Error message
+</div>
+```
+
+### Subtle Backgrounds
+
+Use lighter shades for subtle backgrounds:
+
+```tsx
+{/* Subtle primary */}
+<div className="bg-primary-50 text-primary-900 p-4">
+  Subtle primary background
+</div>
+
+{/* Subtle success */}
+<div className="bg-success/10 text-success p-4">
+  Subtle success background
+</div>
+
+{/* Subtle warning */}
+<div className="bg-warning/10 text-warning p-4">
+  Subtle warning background
+</div>
+
+{/* Subtle danger */}
+<div className="bg-danger/10 text-danger p-4">
+  Subtle danger background
+</div>
+```
+
+## Border Colors
+
+### Semantic Borders
+
+```tsx
+{/* Divider border */}
+<div className="border border-divider p-4">
+  Default border
+</div>
+
+{/* Primary border */}
+<div className="border-2 border-primary p-4">
+  Primary border
+</div>
+
+{/* Success border */}
+<div className="border-2 border-success p-4">
+  Success border
+</div>
+
+{/* Danger border */}
+<div className="border-2 border-danger p-4">
+  Danger border
+</div>
+```
+
+### Border Scales
+
+```tsx
+<div className="border border-default-200">Light border</div>
+<div className="border border-default-300">Medium light border</div>
+<div className="border border-default-400">Medium border</div>
+<div className="border border-default-500">Default border</div>
+```
+
+## Opacity
+
+Control color opacity with Tailwind's opacity utilities:
+
+### Background Opacity
+
+```tsx
+<div className="bg-primary/10">10% opacity</div>
+<div className="bg-primary/20">20% opacity</div>
+<div className="bg-primary/30">30% opacity</div>
+<div className="bg-primary/50">50% opacity</div>
+<div className="bg-primary/75">75% opacity</div>
+<div className="bg-primary/90">90% opacity</div>
+<div className="bg-primary/100">100% opacity</div>
+```
+
+### Text Opacity
+
+```tsx
+<p className="text-foreground/50">50% opacity text</p>
+<p className="text-foreground/75">75% opacity text</p>
+<p className="text-foreground/90">90% opacity text</p>
+```
+
+### Border Opacity
+
+```tsx
+<div className="border border-primary/30">30% opacity border</div>
+<div className="border border-primary/50">50% opacity border</div>
+```
+
+## Gradients
+
+Create beautiful gradients with FlexiUI colors:
+
+### Linear Gradients
+
+```tsx
+{/* Horizontal gradient */}
+<div className="bg-gradient-to-r from-primary to-secondary p-8 text-white">
+  Primary to Secondary
+</div>
+
+{/* Vertical gradient */}
+<div className="bg-gradient-to-b from-primary to-primary-700 p-8 text-white">
+  Primary gradient
+</div>
+
+{/* Diagonal gradient */}
+<div className="bg-gradient-to-br from-success to-primary p-8 text-white">
+  Success to Primary
+</div>
+```
+
+### Multiple Stops
+
+```tsx
+<div className="bg-gradient-to-r from-primary via-secondary to-success p-8 text-white">
+  Three-color gradient
+</div>
+
+<div className="bg-gradient-to-br from-primary-400 via-primary-600 to-primary-800 p-8 text-white">
+  Primary scale gradient
+</div>
+```
+
+### Gradient Text
+
+```tsx
+<h1 className="text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+  Gradient Text
+</h1>
+```
+
+## Color Combinations
+
+### High Contrast
+
+For maximum readability:
+
+```tsx
+{/* Light on dark */}
+<div className="bg-primary-900 text-white p-4">
+  High contrast text
+</div>
+
+{/* Dark on light */}
+<div className="bg-primary-50 text-primary-900 p-4">
+  High contrast text
+</div>
+```
+
+### Subtle Contrast
+
+For softer designs:
+
+```tsx
+<div className="bg-primary-100 text-primary-700 p-4">
+  Subtle contrast
+</div>
+
+<div className="bg-default-100 text-default-700 p-4">
+  Neutral subtle contrast
+</div>
+```
+
+### Monochromatic
+
+Using different shades of the same color:
+
+```tsx
+<div className="space-y-4">
+  <div className="bg-primary-100 text-primary-900 p-4">Lightest</div>
+  <div className="bg-primary-300 text-primary-900 p-4">Light</div>
+  <div className="bg-primary-500 text-white p-4">Base</div>
+  <div className="bg-primary-700 text-white p-4">Dark</div>
+  <div className="bg-primary-900 text-white p-4">Darkest</div>
+</div>
+```
+
+## Customization
+
+### Via Tailwind Config
+
+Customize the entire color palette:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              DEFAULT: '#3b82f6',
+              foreground: '#ffffff',
+            },
+            secondary: {
+              DEFAULT: '#7928ca',
+              foreground: '#ffffff',
+            },
+            success: {
+              DEFAULT: '#17c964',
+              foreground: '#ffffff',
+            },
+            warning: {
+              DEFAULT: '#f5a524',
+              foreground: '#000000',
+            },
+            danger: {
+              DEFAULT: '#f31260',
+              foreground: '#ffffff',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Simple Color Override
+
+Override just the main colors:
+
+```typescript
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: '#ff0080',
+              foreground: '#ffffff',
+            },
+            focus: '#ff0080',
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Brand Colors
+
+Add custom brand colors:
+
+```typescript
+export default {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          pink: '#ff0080',
+          purple: '#7928ca',
+          blue: '#0070f3',
+        },
+      },
+    },
+  },
+  plugins: [flexiui()],
+}
+```
+
+Use your brand colors:
+
+```tsx
+<div className="bg-brand-pink text-white">
+  Custom brand color
+</div>
+```
+
+## Accessibility
+
+### Contrast Requirements
+
+FlexiUI colors meet WCAG AA standards by default:
+
+- **Normal text**: 4.5:1 contrast ratio minimum
+- **Large text**: 3:1 contrast ratio minimum
+- **UI components**: 3:1 contrast ratio minimum
+
+### Testing Contrast
+
+Always test color combinations:
+
+```tsx
+{/* Good contrast - passes WCAG AA */}
+<div className="bg-primary text-primary-foreground">
+  Accessible text
+</div>
+
+{/* Poor contrast - may fail WCAG */}
+<div className="bg-primary-200 text-primary-300">
+  Low contrast text (avoid)
+</div>
+```
+
+### Color Blindness
+
+Consider color-blind users:
+
+- Don't rely solely on color to convey information
+- Use icons, labels, or patterns alongside colors
+- Test with color blindness simulators
+
+```tsx
+{/* Good - uses icon + color */}
+<div className="flex items-center gap-2 text-success">
+  <CheckIcon />
+  <span>Success</span>
+</div>
+
+{/* Poor - relies only on color */}
+<div className="text-success">
+  Success (no icon)
+</div>
+```
+
+## Dark Mode
+
+Colors automatically adapt in dark mode:
+
+```tsx
+{/* Adapts automatically */}
+<div className="bg-background text-foreground">
+  <div className="bg-content1 p-4">
+    <p className="text-foreground">Content</p>
+    <p className="text-default-500">Muted text</p>
+  </div>
+</div>
+```
+
+Define dark mode colors in your theme:
+
+```typescript
+export default {
+  plugins: [
+    flexiui({
+      themes: {
+        light: {
+          colors: {
+            background: '#ffffff',
+            foreground: '#000000',
+            primary: {
+              DEFAULT: '#0070f3',
+              foreground: '#ffffff',
+            },
+          },
+        },
+        dark: {
+          colors: {
+            background: '#000000',
+            foreground: '#ffffff',
+            primary: {
+              DEFAULT: '#3291ff',
+              foreground: '#000000',
+            },
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+## Best Practices
+
+### 1. Use Semantic Colors
+
+Prefer semantic colors over specific shades:
+
+```tsx
+{/* Good - semantic */}
+<Button color="primary">Submit</Button>
+<div className="text-success">Success message</div>
+
+{/* Avoid - specific colors */}
+<Button className="bg-blue-500">Submit</Button>
+<div className="text-green-600">Success message</div>
+```
+
+### 2. Maintain Contrast
+
+Ensure text is readable:
+
+```tsx
+{/* Good - high contrast */}
+<div className="bg-primary text-primary-foreground">
+  Readable text
+</div>
+
+{/* Bad - low contrast */}
+<div className="bg-primary-200 text-primary-300">
+  Hard to read
+</div>
+```
+
+### 3. Limit Color Palette
+
+Stick to your defined colors:
+
+```tsx
+{/* Good - uses theme colors */}
+<div className="bg-primary text-primary-foreground">
+
+{/* Avoid - random colors */}
+<div className="bg-[#ff5733] text-[#123456]">
+```
+
+### 4. Use Opacity for Variations
+
+Create variations with opacity:
+
+```tsx
+{/* Good - opacity variations */}
+<div className="bg-primary/10">Very subtle</div>
+<div className="bg-primary/30">Subtle</div>
+<div className="bg-primary">Full</div>
+
+{/* Less flexible - different colors */}
+<div className="bg-primary-50">Very subtle</div>
+<div className="bg-primary-200">Subtle</div>
+<div className="bg-primary-500">Full</div>
+```
+
+### 5. Consistent Focus States
+
+Use the focus color consistently:
+
+```tsx
+<input className="focus:ring-2 focus:ring-focus" />
+<button className="focus:ring-2 focus:ring-focus" />
+<a className="focus:ring-2 focus:ring-focus" />
+```
+
+## Common Patterns
+
+### Alert Variants
+
+```tsx
+{/* Success alert */}
+<div className="bg-success/10 border-l-4 border-success p-4">
+  <p className="text-success font-semibold">Success</p>
+  <p className="text-success/80">Operation completed successfully</p>
+</div>
+
+{/* Warning alert */}
+<div className="bg-warning/10 border-l-4 border-warning p-4">
+  <p className="text-warning font-semibold">Warning</p>
+  <p className="text-warning/80">Please review before continuing</p>
+</div>
+
+{/* Danger alert */}
+<div className="bg-danger/10 border-l-4 border-danger p-4">
+  <p className="text-danger font-semibold">Error</p>
+  <p className="text-danger/80">An error occurred</p>
+</div>
+```
+
+### Badge Variants
+
+```tsx
+<span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm">
+  Primary
+</span>
+
+<span className="bg-success text-success-foreground px-3 py-1 rounded-full text-sm">
+  Success
+</span>
+
+<span className="bg-warning text-warning-foreground px-3 py-1 rounded-full text-sm">
+  Warning
+</span>
+```
+
+### Card with Status
+
+```tsx
+<div className="bg-content1 rounded-lg p-6 border-l-4 border-primary">
+  <h3 className="text-lg font-semibold text-foreground">Card Title</h3>
+  <p className="text-default-500">Card content</p>
+</div>
+```
+
+## Troubleshooting
+
+### Colors Not Applying
+
+**Problem:** Custom colors not showing.
+
+**Solution:** Ensure FlexiUI plugin is configured:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+
+export default {
+  plugins: [flexiui()], // Required
+}
+```
+
+### Dark Mode Colors Wrong
+
+**Problem:** Colors don't adapt in dark mode.
+
+**Solution:** Use semantic color tokens:
+
+```tsx
+{/* Correct - adapts */}
+<div className="bg-background text-foreground">
+
+{/* Wrong - doesn't adapt */}
+<div className="bg-white text-black">
+```
+
+### Low Contrast
+
+**Problem:** Text hard to read.
+
+**Solution:** Use foreground colors:
+
+```tsx
+{/* Correct */}
+<div className="bg-primary text-primary-foreground">
+
+{/* Wrong */}
+<div className="bg-primary text-white">
+```
+
+## Next Steps
+
+Now that you understand colors, explore:
+
+- **[Theme](/docs/customization/theme)** - Complete theme customization
+- **[Dark Mode](/docs/customization/dark-mode)** - Implement dark mode
+- **[Accessibility](https://www.w3.org/WAI/WCAG21/quickref/)** - WCAG guidelines
+- **[Color Contrast Checker](https://webaim.org/resources/contrastchecker/)** - Test contrast ratios
+

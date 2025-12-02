@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "lint": "next lint",
-    "build": "next build",
+    "build": "contentlayer2 build && next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
-    "dev": "next dev --turbopack",
+    "dev": "rimraf .contentlayer && concurrently \"contentlayer2 dev\" \"next dev --turbopack\"",
     "clean": "rm -rf node_modules build .next"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "^1.4.0",
     "@flexi-ui/button": "workspace:*",
     "@flexi-ui/form": "workspace:*",
     "@flexi-ui/input": "workspace:*",
@@ -26,14 +28,24 @@
     "@react-aria/ssr": "^3.9.10",
     "@react-aria/utils": "^3.30.0",
     "@react-aria/visually-hidden": "^3.8.26",
+    "cmdk": "^1.0.4",
     "contentlayer2": "^0.5.8",
     "framer-motion": "catalog:",
+    "lucide-react": "^0.468.0",
+    "mdx-bundler": "^10.1.1",
     "mitt": "^3.0.1",
     "next": "catalog:",
     "next-contentlayer2": "^0.5.8",
+    "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.14.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.0",
+    "shelljs": "^0.8.5",
+    "shiki": "^1.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -42,8 +54,11 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "concurrently": "^9.1.2",
     "eslint": "^9.33.0",
     "eslint-config-next": "catalog:",
+    "next-sitemap": "^4.2.3",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^4.1.12",
     "typescript": "catalog:"
   }

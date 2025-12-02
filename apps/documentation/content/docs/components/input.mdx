@@ -1,0 +1,1904 @@
+---
+title: "Input"
+description: "Capture user text input with the Input component."
+---
+
+# Input
+
+The Input component allows users to enter text data in forms and interfaces. It provides a flexible and accessible way to collect user input with built-in support for validation, labels, icons, and various visual styles.
+
+## Import
+
+```tsx
+import { Input } from '@flexi-ui/input'
+```
+
+## Usage
+
+### Basic
+
+A simple input field with a label and placeholder text.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        label="Email"
+        placeholder="Enter your email"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### With Description
+
+Add helper text below the input to provide additional context or instructions.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        label="Email"
+        description="We'll never share your email with anyone else."
+        placeholder="Enter your email"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Required
+
+Mark an input as required with the `isRequired` prop. This adds a visual indicator and proper ARIA attributes.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        label="Email"
+        placeholder="Enter your email"
+        isRequired
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Input Types
+
+The Input component supports all standard HTML5 input types for different data formats.
+
+### All Input Types
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input type="text" label="Text" placeholder="Enter text" />
+      <Input type="email" label="Email" placeholder="Enter email" />
+      <Input type="password" label="Password" placeholder="Enter password" />
+      <Input type="number" label="Number" placeholder="Enter number" />
+      <Input type="url" label="URL" placeholder="Enter URL" />
+      <Input type="tel" label="Phone" placeholder="Enter phone number" />
+      <Input type="search" label="Search" placeholder="Search..." />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Variants
+
+Choose from four visual variants to match your design system.
+
+### Flat (Default)
+
+The flat variant has a subtle background with no border.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        variant="flat"
+        label="Flat Input"
+        placeholder="Default variant"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Bordered
+
+The bordered variant has a visible border around the input.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        variant="bordered"
+        label="Bordered Input"
+        placeholder="With border"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Faded
+
+The faded variant has a semi-transparent background with a border.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        variant="faded"
+        label="Faded Input"
+        placeholder="Faded background"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Underlined
+
+The underlined variant has only a bottom border.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        variant="underlined"
+        label="Underlined Input"
+        placeholder="Bottom border only"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### All Variants
+
+Compare all variants side by side.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input variant="flat" label="Flat" placeholder="Flat variant" />
+      <Input variant="bordered" label="Bordered" placeholder="Bordered variant" />
+      <Input variant="faded" label="Faded" placeholder="Faded variant" />
+      <Input variant="underlined" label="Underlined" placeholder="Underlined variant" />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Sizes
+
+The Input component comes in three sizes: small, medium, and large.
+
+### Small
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        size="sm"
+        label="Small Input"
+        placeholder="Small size"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Medium (Default)
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        size="md"
+        label="Medium Input"
+        placeholder="Medium size"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Large
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        size="lg"
+        label="Large Input"
+        placeholder="Large size"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### All Sizes
+
+Compare all sizes side by side.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input size="sm" label="Small" placeholder="Small size" />
+      <Input size="md" label="Medium" placeholder="Medium size" />
+      <Input size="lg" label="Large" placeholder="Large size" />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Colors
+
+Apply different color themes to inputs for various contexts.
+
+### Default
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        color="default"
+        label="Default"
+        placeholder="Default color"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Primary
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        color="primary"
+        label="Primary"
+        placeholder="Primary color"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Secondary
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        color="secondary"
+        label="Secondary"
+        placeholder="Secondary color"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Success
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        color="success"
+        label="Success"
+        placeholder="Success color"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Warning
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        color="warning"
+        label="Warning"
+        placeholder="Warning color"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Error
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        color="error"
+        label="Error"
+        placeholder="Error color"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### All Colors
+
+Compare all color variants side by side.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input color="default" label="Default" placeholder="Default color" />
+      <Input color="primary" label="Primary" placeholder="Primary color" />
+      <Input color="secondary" label="Secondary" placeholder="Secondary color" />
+      <Input color="success" label="Success" placeholder="Success color" />
+      <Input color="warning" label="Warning" placeholder="Warning color" />
+      <Input color="error" label="Error" placeholder="Error color" />
+    </div>
+  )
+}`
+  }}
+/>
+
+## With Start and End Content
+
+Add icons or other content at the start or end of the input field.
+
+### Start Content
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { Mail } from 'lucide-react'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        label="Email"
+        placeholder="Enter your email"
+        startContent={
+          <Mail className="w-4 h-4 text-gray-400" />
+        }
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### End Content
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { Search } from 'lucide-react'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        label="Search"
+        placeholder="Search..."
+        endContent={
+          <Search className="w-4 h-4 text-gray-400" />
+        }
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Both Start and End Content
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { DollarSign } from 'lucide-react'
+
+export default function App() {
+  return (
+    <div className="p-8">
+      <Input
+        type="number"
+        label="Amount"
+        placeholder="0.00"
+        startContent={
+          <DollarSign className="w-4 h-4 text-gray-400" />
+        }
+        endContent={
+          <span className="text-sm text-gray-400">USD</span>
+        }
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Multiple Icons
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { Mail, Lock, User, Phone } from 'lucide-react'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Email"
+        placeholder="email@example.com"
+        startContent={<Mail className="w-4 h-4 text-gray-400" />}
+      />
+      <Input
+        type="password"
+        label="Password"
+        placeholder="Enter password"
+        startContent={<Lock className="w-4 h-4 text-gray-400" />}
+      />
+      <Input
+        label="Username"
+        placeholder="@username"
+        startContent={<User className="w-4 h-4 text-gray-400" />}
+      />
+      <Input
+        type="tel"
+        label="Phone"
+        placeholder="+1 (555) 000-0000"
+        startContent={<Phone className="w-4 h-4 text-gray-400" />}
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+## States
+
+### Disabled
+
+Disable user interaction with the `isDisabled` prop.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Email"
+        placeholder="Enter your email"
+        isDisabled
+      />
+      <Input
+        label="Email"
+        placeholder="Enter your email"
+        defaultValue="user@example.com"
+        isDisabled
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Read-Only
+
+Make an input read-only with the `isReadOnly` prop.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Username"
+        defaultValue="johndoe"
+        isReadOnly
+      />
+      <Input
+        label="Email"
+        defaultValue="john@example.com"
+        isReadOnly
+        description="This field cannot be edited"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Required
+
+Mark fields as required with the `isRequired` prop.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Full Name"
+        placeholder="Enter your full name"
+        isRequired
+      />
+      <Input
+        label="Email"
+        type="email"
+        placeholder="Enter your email"
+        isRequired
+        description="Required for account creation"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### All States
+
+Compare all states side by side.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input label="Normal" placeholder="Normal state" />
+      <Input label="Required" placeholder="Required field" isRequired />
+      <Input label="Disabled" placeholder="Disabled state" isDisabled />
+      <Input label="Read-only" defaultValue="Read-only value" isReadOnly />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Validation
+
+### Invalid State
+
+Use the `isInvalid` prop to mark an input as invalid and display an error message.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Email"
+        placeholder="Enter your email"
+        isInvalid
+        errorMessage="Please enter a valid email address"
+      />
+      <Input
+        label="Password"
+        type="password"
+        placeholder="Enter password"
+        isInvalid
+        errorMessage="Password must be at least 8 characters"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Email Validation
+
+Real-time email validation example.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+
+export default function App() {
+  const [email, setEmail] = useState('')
+
+  const validateEmail = (value: string) => {
+    return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)
+  }
+
+  const isInvalid = email !== '' && !validateEmail(email)
+
+  return (
+    <div className="p-8">
+      <Input
+        label="Email"
+        type="email"
+        placeholder="Enter your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        isInvalid={isInvalid}
+        errorMessage={isInvalid && 'Please enter a valid email address'}
+        color={isInvalid ? 'error' : email && validateEmail(email) ? 'success' : 'default'}
+        description="We'll send a verification link to this email"
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Password Strength Validation
+
+Password validation with strength indicator.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+
+export default function App() {
+  const [password, setPassword] = useState('')
+
+  const getPasswordStrength = (pass: string) => {
+    if (pass.length === 0) return { strength: 'none', message: '' }
+    if (pass.length < 6) return { strength: 'weak', message: 'Too short' }
+    if (pass.length < 8) return { strength: 'fair', message: 'Add more characters' }
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/.test(pass)) {
+      return { strength: 'fair', message: 'Add numbers and mixed case' }
+    }
+    if (!/(?=.*[!@#$%^&*])/.test(pass)) {
+      return { strength: 'good', message: 'Add special characters' }
+    }
+    return { strength: 'strong', message: 'Strong password' }
+  }
+
+  const { strength, message } = getPasswordStrength(password)
+  const isInvalid = password !== '' && strength === 'weak'
+
+  return (
+    <div className="p-8">
+      <Input
+        type="password"
+        label="Password"
+        placeholder="Enter password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        isInvalid={isInvalid}
+        errorMessage={isInvalid && message}
+        description={!isInvalid && message}
+        color={
+          strength === 'strong' ? 'success' :
+          strength === 'good' ? 'primary' :
+          strength === 'fair' ? 'warning' :
+          isInvalid ? 'error' : 'default'
+        }
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Form Validation
+
+Complete form validation example.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    age: ''
+  })
+  const [errors, setErrors] = useState({
+    username: '',
+    email: '',
+    age: ''
+  })
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'username':
+        return value.length < 3 ? 'Username must be at least 3 characters' : ''
+      case 'email':
+        return !value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)
+          ? 'Invalid email address'
+          : ''
+      case 'age':
+        const age = parseInt(value)
+        return isNaN(age) || age < 18 || age > 120
+          ? 'Age must be between 18 and 120'
+          : ''
+      default:
+        return ''
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    setErrors(prev => ({ ...prev, [name]: validateField(name, value) }))
+  }
+
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        name="username"
+        label="Username"
+        placeholder="Enter username"
+        value={formData.username}
+        onChange={handleChange}
+        isInvalid={formData.username !== '' && !!errors.username}
+        errorMessage={errors.username}
+        isRequired
+      />
+      <Input
+        name="email"
+        type="email"
+        label="Email"
+        placeholder="Enter email"
+        value={formData.email}
+        onChange={handleChange}
+        isInvalid={formData.email !== '' && !!errors.email}
+        errorMessage={errors.email}
+        isRequired
+      />
+      <Input
+        name="age"
+        type="number"
+        label="Age"
+        placeholder="Enter age"
+        value={formData.age}
+        onChange={handleChange}
+        isInvalid={formData.age !== '' && !!errors.age}
+        errorMessage={errors.age}
+        isRequired
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Password Toggle
+
+Create a password input with a toggle to show/hide the password.
+
+### Basic Password Toggle
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+import { Eye, EyeOff } from 'lucide-react'
+
+export default function App() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const toggleVisibility = () => setIsVisible(!isVisible)
+
+  return (
+    <div className="p-8">
+      <Input
+        label="Password"
+        type={isVisible ? 'text' : 'password'}
+        placeholder="Enter password"
+        endContent={
+          <button
+            type="button"
+            onClick={toggleVisibility}
+            className="focus:outline-none"
+            aria-label={isVisible ? 'Hide password' : 'Show password'}
+          >
+            {isVisible ? (
+              <EyeOff className="w-4 h-4 text-gray-400" />
+            ) : (
+              <Eye className="w-4 h-4 text-gray-400" />
+            )}
+          </button>
+        }
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Password Toggle with Validation
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+import { Eye, EyeOff, Lock } from 'lucide-react'
+
+export default function App() {
+  const [password, setPassword] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
+
+  const toggleVisibility = () => setIsVisible(!isVisible)
+
+  const isInvalid = password !== '' && password.length < 8
+
+  return (
+    <div className="p-8">
+      <Input
+        label="Password"
+        type={isVisible ? 'text' : 'password'}
+        placeholder="Enter password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        isInvalid={isInvalid}
+        errorMessage={isInvalid && 'Password must be at least 8 characters'}
+        startContent={<Lock className="w-4 h-4 text-gray-400" />}
+        endContent={
+          <button
+            type="button"
+            onClick={toggleVisibility}
+            className="focus:outline-none"
+          >
+            {isVisible ? (
+              <EyeOff className="w-4 h-4 text-gray-400" />
+            ) : (
+              <Eye className="w-4 h-4 text-gray-400" />
+            )}
+          </button>
+        }
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Controlled vs Uncontrolled
+
+### Controlled Input
+
+The input value is controlled by React state.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+
+export default function App() {
+  const [value, setValue] = useState('')
+
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Name"
+        placeholder="Enter your name"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        description=\`You typed: \${value}\`
+      />
+      <div className="text-sm text-gray-600">
+        Character count: {value.length}
+      </div>
+    </div>
+  )
+}`
+  }}
+/>
+
+### Uncontrolled Input
+
+The input manages its own state internally.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useRef } from 'react'
+
+export default function App() {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleClick = () => {
+    if (inputRef.current) {
+      alert(\`Value: \${inputRef.current.value}\`)
+    }
+  }
+
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Name"
+        placeholder="Enter your name"
+        defaultValue="John Doe"
+      />
+      <button
+        onClick={handleClick}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Get Value
+      </button>
+    </div>
+  )
+}`
+  }}
+/>
+
+### Controlled with Multiple Inputs
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+
+export default function App() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        name="firstName"
+        label="First Name"
+        placeholder="Enter first name"
+        value={formData.firstName}
+        onChange={handleChange}
+      />
+      <Input
+        name="lastName"
+        label="Last Name"
+        placeholder="Enter last name"
+        value={formData.lastName}
+        onChange={handleChange}
+      />
+      <Input
+        name="email"
+        type="email"
+        label="Email"
+        placeholder="Enter email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <div className="p-4 bg-gray-100 rounded text-sm">
+        <div><strong>Form Data:</strong></div>
+        <pre>{JSON.stringify(formData, null, 2)}</pre>
+      </div>
+    </div>
+  )
+}`
+  }}
+/>
+
+## Custom Styling
+
+### Custom Classes
+
+Use the `classNames` prop to customize specific parts of the input.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        label="Custom Input"
+        placeholder="Type here..."
+        classNames={{
+          base: 'max-w-md',
+          label: 'text-purple-600 font-bold',
+          inputWrapper: 'border-2 border-purple-500',
+          input: 'text-purple-900 placeholder:text-purple-300',
+        }}
+      />
+      <Input
+        label="Gradient Border"
+        placeholder="Type here..."
+        classNames={{
+          inputWrapper: 'border-2 border-transparent bg-gradient-to-r from-pink-500 to-yellow-500',
+          input: 'bg-white',
+        }}
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Custom Radius
+
+Customize the border radius for different styles.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input radius="none" label="None" placeholder="No radius" />
+      <Input radius="sm" label="Small" placeholder="Small radius" />
+      <Input radius="md" label="Medium" placeholder="Medium radius" />
+      <Input radius="lg" label="Large" placeholder="Large radius" />
+      <Input radius="full" label="Full" placeholder="Full radius" />
+    </div>
+  )
+}`
+  }}
+/>
+
+### Styled with Tailwind
+
+Advanced styling with Tailwind CSS.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { Search } from 'lucide-react'
+
+export default function App() {
+  return (
+    <div className="p-8 space-y-4">
+      <Input
+        variant="bordered"
+        label="Search"
+        placeholder="Search for anything..."
+        startContent={<Search className="w-5 h-5 text-gray-400" />}
+        classNames={{
+          base: 'max-w-lg',
+          label: 'text-sm font-semibold text-gray-700',
+          inputWrapper: 'border-2 hover:border-blue-500 transition-colors',
+          input: 'text-base',
+        }}
+      />
+      <Input
+        variant="faded"
+        label="Elegant Input"
+        placeholder="Type here..."
+        classNames={{
+          base: 'max-w-lg',
+          label: 'text-sm italic text-gray-600',
+          inputWrapper: 'backdrop-blur-sm bg-white/50 border border-gray-200 shadow-lg',
+          input: 'text-gray-800',
+        }}
+      />
+    </div>
+  )
+}`
+  }}
+/>
+
+## Real-World Examples
+
+### Login Form
+
+A complete login form with email and password inputs.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
+
+export default function App() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [errors, setErrors] = useState({ email: '', password: '' })
+
+  const validateEmail = (value: string) => {
+    return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const newErrors = {
+      email: !validateEmail(email) ? 'Invalid email address' : '',
+      password: password.length < 8 ? 'Password must be at least 8 characters' : ''
+    }
+    setErrors(newErrors)
+
+    if (!newErrors.email && !newErrors.password) {
+      alert('Login successful!')
+    }
+  }
+
+  return (
+    <div className="p-8 max-w-md mx-auto">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold">Sign In</h2>
+        <p className="text-gray-600">Enter your credentials to continue</p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          type="email"
+          label="Email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          isInvalid={!!errors.email}
+          errorMessage={errors.email}
+          startContent={<Mail className="w-4 h-4 text-gray-400" />}
+          isRequired
+        />
+        <Input
+          type={showPassword ? 'text' : 'password'}
+          label="Password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          isInvalid={!!errors.password}
+          errorMessage={errors.password}
+          startContent={<Lock className="w-4 h-4 text-gray-400" />}
+          endContent={
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="focus:outline-none"
+            >
+              {showPassword ? (
+                <EyeOff className="w-4 h-4 text-gray-400" />
+              ) : (
+                <Eye className="w-4 h-4 text-gray-400" />
+              )}
+            </button>
+          }
+          isRequired
+        />
+        <button
+          type="submit"
+          className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
+  )
+}`
+  }}
+/>
+
+### Search Bar
+
+A search input with autocomplete suggestions.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+import { Search, X } from 'lucide-react'
+
+export default function App() {
+  const [search, setSearch] = useState('')
+  const [suggestions] = useState([
+    'React Hooks',
+    'TypeScript',
+    'Tailwind CSS',
+    'Next.js',
+    'Redux',
+    'GraphQL'
+  ])
+
+  const filteredSuggestions = search
+    ? suggestions.filter(s =>
+        s.toLowerCase().includes(search.toLowerCase())
+      )
+    : []
+
+  return (
+    <div className="p-8 max-w-2xl mx-auto">
+      <div className="relative">
+        <Input
+          type="search"
+          placeholder="Search documentation..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          startContent={<Search className="w-5 h-5 text-gray-400" />}
+          endContent={
+            search && (
+              <button
+                onClick={() => setSearch('')}
+                className="focus:outline-none"
+              >
+                <X className="w-4 h-4 text-gray-400" />
+              </button>
+            )
+          }
+          classNames={{
+            base: 'w-full',
+            inputWrapper: 'border-2 shadow-lg',
+            input: 'text-lg',
+          }}
+        />
+        {filteredSuggestions.length > 0 && (
+          <div className="absolute w-full mt-2 bg-white border rounded-lg shadow-lg z-10">
+            {filteredSuggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                onClick={() => setSearch(suggestion)}
+                className="w-full px-4 py-2 text-left hover:bg-gray-100 first:rounded-t-lg last:rounded-b-lg"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}`
+  }}
+/>
+
+### Profile Editor
+
+A complete profile editing form.
+
+<Sandbox
+  template="vite-react-ts"
+  files={{
+    "/App.tsx": `import { Input } from '@flexi-ui/input'
+import { useState } from 'react'
+import { User, Mail, Phone, MapPin, Briefcase } from 'lucide-react'
+
+export default function App() {
+  const [profile, setProfile] = useState({
+    fullName: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '+1 (555) 123-4567',
+    location: 'San Francisco, CA',
+    company: 'Acme Inc.',
+    jobTitle: 'Software Engineer'
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setProfile(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSave = () => {
+    alert('Profile updated successfully!')
+  }
+
+  return (
+    <div className="p-8 max-w-2xl mx-auto">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold">Edit Profile</h2>
+        <p className="text-gray-600">Update your personal information</p>
+      </div>
+
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            name="fullName"
+            label="Full Name"
+            placeholder="Enter full name"
+            value={profile.fullName}
+            onChange={handleChange}
+            startContent={<User className="w-4 h-4 text-gray-400" />}
+            isRequired
+          />
+          <Input
+            name="email"
+            type="email"
+            label="Email"
+            placeholder="Enter email"
+            value={profile.email}
+            onChange={handleChange}
+            startContent={<Mail className="w-4 h-4 text-gray-400" />}
+            isRequired
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            name="phone"
+            type="tel"
+            label="Phone"
+            placeholder="Enter phone number"
+            value={profile.phone}
+            onChange={handleChange}
+            startContent={<Phone className="w-4 h-4 text-gray-400" />}
+          />
+          <Input
+            name="location"
+            label="Location"
+            placeholder="Enter location"
+            value={profile.location}
+            onChange={handleChange}
+            startContent={<MapPin className="w-4 h-4 text-gray-400" />}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            name="company"
+            label="Company"
+            placeholder="Enter company name"
+            value={profile.company}
+            onChange={handleChange}
+            startContent={<Briefcase className="w-4 h-4 text-gray-400" />}
+          />
+          <Input
+            name="jobTitle"
+            label="Job Title"
+            placeholder="Enter job title"
+            value={profile.jobTitle}
+            onChange={handleChange}
+            startContent={<Briefcase className="w-4 h-4 text-gray-400" />}
+          />
+        </div>
+
+        <div className="flex gap-3">
+          <button
+            onClick={handleSave}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Save Changes
+          </button>
+          <button
+            onClick={() => alert('Changes discarded')}
+            className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}`
+  }}
+/>
+
+## API Reference
+
+### Input Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | - | Label text displayed above the input |
+| `placeholder` | `string` | - | Placeholder text shown when input is empty |
+| `description` | `string` | - | Helper text displayed below the input |
+| `errorMessage` | `string \| ReactNode` | - | Error message to display when input is invalid |
+| `value` | `string` | - | Controlled value of the input |
+| `defaultValue` | `string` | - | Default value for uncontrolled input |
+| `type` | `string` | `'text'` | HTML input type (text, email, password, number, url, tel, search, etc.) |
+| `name` | `string` | - | Name attribute for form submission |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the input field |
+| `radius` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'full'` | `'md'` | Border radius of the input |
+| `variant` | `'flat' \| 'bordered' \| 'faded' \| 'underlined'` | `'flat'` | Visual style variant |
+| `color` | `'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error'` | `'default'` | Color theme for the input |
+| `isRequired` | `boolean` | `false` | Whether the input is required |
+| `isReadOnly` | `boolean` | `false` | Whether the input is read-only |
+| `isDisabled` | `boolean` | `false` | Whether the input is disabled |
+| `isInvalid` | `boolean` | `false` | Whether the input is in an invalid state |
+| `startContent` | `ReactNode` | - | Content to display at the start of the input (e.g., icons) |
+| `endContent` | `ReactNode` | - | Content to display at the end of the input (e.g., icons, buttons) |
+| `classNames` | `InputClassNames` | - | Custom classes for different slots |
+| `className` | `string` | - | Additional CSS class for the base element |
+| `autoFocus` | `boolean` | `false` | Whether to auto-focus the input on mount |
+| `autoComplete` | `string` | - | HTML autocomplete attribute |
+| `min` | `number \| string` | - | Minimum value (for number/date inputs) |
+| `max` | `number \| string` | - | Maximum value (for number/date inputs) |
+| `minLength` | `number` | - | Minimum length of input value |
+| `maxLength` | `number` | - | Maximum length of input value |
+| `pattern` | `string` | - | Regex pattern for validation |
+| `onChange` | `(e: ChangeEvent<HTMLInputElement>) => void` | - | Change event handler |
+| `onFocus` | `(e: FocusEvent<HTMLInputElement>) => void` | - | Focus event handler |
+| `onBlur` | `(e: FocusEvent<HTMLInputElement>) => void` | - | Blur event handler |
+| `onKeyDown` | `(e: KeyboardEvent<HTMLInputElement>) => void` | - | Key down event handler |
+| `onKeyUp` | `(e: KeyboardEvent<HTMLInputElement>) => void` | - | Key up event handler |
+
+### InputClassNames
+
+Object for customizing component slots:
+
+```ts
+type InputClassNames = {
+  base?: string           // Main wrapper element
+  label?: string          // Label element
+  inputWrapper?: string   // Input wrapper (contains input and icons)
+  input?: string          // Input element
+  description?: string    // Description text element
+  errorMessage?: string   // Error message element
+}
+```
+
+### Slots
+
+The Input component has the following slots that can be styled:
+
+- **base** - The main wrapper containing all elements
+- **label** - The label element displayed above the input
+- **inputWrapper** - The wrapper containing the input and start/end content
+- **input** - The actual input element
+- **description** - The description text displayed below the input
+- **errorMessage** - The error message text displayed when invalid
+
+## Accessibility
+
+The Input component follows WAI-ARIA best practices for form inputs:
+
+### Keyboard Navigation
+
+- **Tab** - Move focus to/from the input
+- **Shift + Tab** - Move focus backwards
+- **All standard input shortcuts** - Copy (Ctrl+C), Paste (Ctrl+V), Select All (Ctrl+A), etc.
+
+### Screen Reader Support
+
+- Labels are automatically associated with inputs using proper `htmlFor` and `id` attributes
+- Required fields are announced with `aria-required="true"`
+- Invalid fields are announced with `aria-invalid="true"`
+- Error messages are linked using `aria-describedby`
+- Disabled state is communicated with `aria-disabled="true"`
+- Description text is associated using `aria-describedby`
+
+### ARIA Attributes
+
+The component automatically manages these ARIA attributes:
+
+- `aria-label` - When no visible label is provided
+- `aria-labelledby` - Associates the input with its label
+- `aria-describedby` - Links description and error messages
+- `aria-required` - Indicates required fields
+- `aria-invalid` - Indicates validation state
+- `aria-disabled` - Indicates disabled state
+
+### Focus Management
+
+- Clear focus indicators for keyboard navigation
+- Focus is properly managed when using `autoFocus`
+- Focus states are visible and meet WCAG contrast requirements
+
+### Best Practices
+
+1. **Always provide labels** - Use the `label` prop or `aria-label` for screen readers
+2. **Use appropriate input types** - Helps with mobile keyboards and browser validation
+3. **Provide clear error messages** - Be specific about what went wrong and how to fix it
+4. **Mark required fields** - Use `isRequired` to indicate mandatory fields
+5. **Use descriptions for additional context** - Help users understand what's expected
+6. **Ensure sufficient color contrast** - Don't rely solely on color to convey state
+
+## Best Practices
+
+### 1. Use Appropriate Input Types
+
+Choose the correct input type for the data you're collecting to provide better user experience and mobile keyboard optimization:
+
+```tsx
+<Input type="email" label="Email" />  // Shows @ on mobile keyboards
+<Input type="tel" label="Phone" />    // Shows numeric keypad
+<Input type="url" label="Website" />  // Shows .com on mobile keyboards
+<Input type="number" label="Age" />   // Shows number pad
+```
+
+### 2. Provide Clear Labels and Descriptions
+
+Always include descriptive labels and use descriptions to provide additional context:
+
+```tsx
+<Input
+  label="Password"
+  description="Must be at least 8 characters with mixed case and numbers"
+  type="password"
+/>
+```
+
+### 3. Implement Real-Time Validation
+
+Validate user input as they type to provide immediate feedback:
+
+```tsx
+const [email, setEmail] = useState('')
+const isInvalid = email !== '' && !email.includes('@')
+
+<Input
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  isInvalid={isInvalid}
+  errorMessage={isInvalid && "Please enter a valid email"}
+/>
+```
+
+### 4. Use Icons for Visual Clarity
+
+Add icons to help users quickly identify the purpose of each field:
+
+```tsx
+<Input
+  label="Email"
+  startContent={<Mail className="w-4 h-4 text-gray-400" />}
+/>
+```
+
+### 5. Handle Loading and Disabled States
+
+Disable inputs during form submission or loading states:
+
+```tsx
+<Input
+  label="Username"
+  isDisabled={isSubmitting}
+  description={isSubmitting ? "Saving..." : undefined}
+/>
+```
+
+### 6. Group Related Inputs
+
+Use consistent sizing and styling for related form fields:
+
+```tsx
+<div className="space-y-4">
+  <Input size="md" label="First Name" />
+  <Input size="md" label="Last Name" />
+  <Input size="md" label="Email" type="email" />
+</div>
+```
+
+### 7. Implement Proper Error Handling
+
+Show specific, actionable error messages:
+
+```tsx
+// ❌ Bad
+<Input isInvalid errorMessage="Invalid input" />
+
+// ✅ Good
+<Input
+  isInvalid
+  errorMessage="Email must include @ symbol and domain name"
+/>
+```
+
+### 8. Use Autocomplete Attributes
+
+Help browsers autofill forms correctly:
+
+```tsx
+<Input label="Email" type="email" autoComplete="email" />
+<Input label="Password" type="password" autoComplete="current-password" />
+<Input label="New Password" type="password" autoComplete="new-password" />
+```
+
+### 9. Consider Mobile UX
+
+Ensure inputs are properly sized for touch targets (minimum 44x44px):
+
+```tsx
+<Input size="lg" label="Mobile-Friendly Input" />
+```
+
+### 10. Provide Visual Feedback
+
+Use colors and states to communicate the input status:
+
+```tsx
+<Input
+  color={isValid ? "success" : "default"}
+  label="Username"
+  description={isValid ? "Username available!" : "Enter a username"}
+/>
+```
+
+## Troubleshooting
+
+### Input value not updating
+
+**Problem:** The input value doesn't change when typing.
+
+**Solution:** Make sure you're using either controlled (with `value` and `onChange`) or uncontrolled (with `defaultValue`) pattern correctly:
+
+```tsx
+// ✅ Controlled
+const [value, setValue] = useState('')
+<Input value={value} onChange={(e) => setValue(e.target.value)} />
+
+// ✅ Uncontrolled
+<Input defaultValue="initial value" />
+
+// ❌ Don't mix them
+<Input value={value} defaultValue="initial" />
+```
+
+### Icons not displaying properly
+
+**Problem:** Icons from `startContent` or `endContent` are misaligned or too large.
+
+**Solution:** Ensure icons have proper sizing classes and use flexbox:
+
+```tsx
+// ✅ Good
+<Input
+  startContent={<Mail className="w-4 h-4 text-gray-400" />}
+/>
+
+// ❌ Bad - no sizing
+<Input
+  startContent={<Mail />}
+/>
+```
+
+### Validation not working
+
+**Problem:** Error messages don't appear or validation doesn't trigger.
+
+**Solution:** Make sure to set both `isInvalid` and `errorMessage` props:
+
+```tsx
+// ✅ Good
+<Input
+  isInvalid={hasError}
+  errorMessage={hasError && "This field is required"}
+/>
+
+// ❌ Bad - missing isInvalid
+<Input errorMessage="Error" />
+```
+
+### AutoFocus not working
+
+**Problem:** Input doesn't receive focus on page load.
+
+**Solution:** Ensure `autoFocus` prop is set and there's only one autofocused element per page:
+
+```tsx
+<Input label="Username" autoFocus />
+```
+
+### Style overrides not applying
+
+**Problem:** Custom styles via `classNames` prop aren't being applied.
+
+**Solution:** Check that you're targeting the correct slot and using proper Tailwind classes:
+
+```tsx
+// ✅ Correct slot targeting
+<Input
+  classNames={{
+    input: 'text-blue-600',
+    inputWrapper: 'border-2 border-blue-500',
+  }}
+/>
+
+// ❌ Wrong approach
+<Input className="text-blue-600" />  // Only styles base wrapper
+```
+
+### Password toggle button not working
+
+**Problem:** Clicking the eye icon doesn't toggle password visibility.
+
+**Solution:** Ensure you're preventing default button behavior and managing state correctly:
+
+```tsx
+const [isVisible, setIsVisible] = useState(false)
+
+<Input
+  type={isVisible ? 'text' : 'password'}
+  endContent={
+    <button
+      type="button"  // Important: prevents form submission
+      onClick={() => setIsVisible(!isVisible)}
+    >
+      {isVisible ? <EyeOff /> : <Eye />}
+    </button>
+  }
+/>
+```
+
+### Form submission issues
+
+**Problem:** Form submits even when inputs are invalid.
+
+**Solution:** Implement proper form validation before submission:
+
+```tsx
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault()
+
+  // Validate all fields first
+  if (hasErrors) {
+    return
+  }
+
+  // Then submit
+  submitForm()
+}
+```
+
+### Number input accepts non-numeric characters
+
+**Problem:** Users can type non-numeric characters in number inputs.
+
+**Solution:** Use `type="number"` and optionally add additional validation:
+
+```tsx
+<Input
+  type="number"
+  min={0}
+  max={100}
+  onChange={(e) => {
+    const value = e.target.value
+    if (value === '' || /^\d+$/.test(value)) {
+      setValue(value)
+    }
+  }}
+/>
+```
+
+## Related Components
+
+- [**Textarea**](/docs/components/textarea) - Multi-line text input for longer content
+- [**Select**](/docs/components/select) - Dropdown selection input
+- [**Checkbox**](/docs/components/checkbox) - Binary selection input
+- [**Radio**](/docs/components/radio) - Single selection from multiple options
+- [**Switch**](/docs/components/switch) - Toggle between two states
+- [**Form**](/docs/components/form) - Form wrapper with validation
+- [**Button**](/docs/components/button) - Form submission and actions

@@ -1,0 +1,1381 @@
+---
+title: "Custom Variants"
+description: "Create custom component variants in FlexiUI."
+---
+
+# Custom Variants
+
+FlexiUI uses tailwind-variants under the hood, allowing you to create powerful custom variants.
+
+## What are Variants?
+
+Variants are different styles of a component. For example, a Button can have color variants (primary, secondary) and size variants (small, medium, large).
+
+## Creating Custom Variants
+
+### Basic Variant
+
+Create a custom variant using tailwind-variants:
+
+```tsx
+import { tv } from 'tailwind-variants'
+
+const button = tv({
+  base: 'font-semibold rounded-lg transition-colors',
+  variants: {
+    color: {
+      primary: 'bg-blue-500 text-white hover:bg-blue-600',
+      secondary: 'bg-purple-500 text-white hover:bg-purple-600',
+      danger: 'bg-red-500 text-white hover:bg-red-600'
+    },
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      md: 'text-base px-4 py-2',
+      lg: 'text-lg px-6 py-3'
+    }
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'md'
+  }
+})
+
+// Usage
+<button className={button({ color: 'secondary', size: 'lg' })}>
+  Custom Button
+</button>
+```
+
+## Extending FlexiUI Components
+
+Extend existing FlexiUI components with custom variants:
+
+```tsx
+import { Button } from '@flexi-ui/button'
+import { tv } from 'tailwind-variants'
+
+const customButton = tv({
+  extend: Button.classNames, // Extend existing styles
+  variants: {
+    gradient: {
+      purple: 'bg-gradient-to-r from-purple-500 to-pink-500',
+      blue: 'bg-gradient-to-r from-blue-500 to-cyan-500'
+    }
+  }
+})
+
+function GradientButton({ gradient, ...props }) {
+  return (
+    <Button
+      {...props}
+      className={customButton({ gradient })}
+    />
+  )
+}
+```
+
+## Compound Variants
+
+Create variants that depend on multiple conditions:
+
+```tsx
+const button = tv({
+  base: 'rounded-lg',
+  variants: {
+    color: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500'
+    },
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      lg: 'text-lg px-6 py-3'
+    },
+    outlined: {
+      true: 'bg-transparent border-2'
+    }
+  },
+  compoundVariants: [
+    {
+      color: 'primary',
+      outlined: true,
+      class: 'border-blue-500 text-blue-500 hover:bg-blue-50'
+    },
+    {
+      color: 'secondary',
+      outlined: true,
+      class: 'border-purple-500 text-purple-500 hover:bg-purple-50'
+    }
+  ]
+})
+```
+
+## Slots
+
+Create multi-part components with slots:
+
+```tsx
+const card = tv({
+  slots: {
+    base: 'rounded-lg shadow-lg',
+    header: 'p-4 border-b',
+    body: 'p-4',
+    footer: 'p-4 border-t bg-gray-50'
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'bg-white',
+        header: 'bg-gray-100'
+      },
+      dark: {
+        base: 'bg-gray-900 text-white',
+        header: 'bg-gray-800',
+        footer: 'bg-gray-800'
+      }
+    }
+  }
+})
+
+const { base, header, body, footer } = card({ variant: 'dark' })
+
+<div className={base()}>
+  <div className={header()}>Header</div>
+  <div className={body()}>Body</div>
+  <div className={footer()}>Footer</div>
+</div>
+```
+
+## Responsive Variants
+
+Create responsive variants:
+
+```tsx
+const button = tv({
+  base: 'rounded-lg',
+  variants: {
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      md: 'text-base px-4 py-2',
+      lg: 'text-lg px-6 py-3'
+    }
+  }
+})
+
+// Usage with responsive sizes
+<button className={button({
+  size: {
+    initial: 'sm',
+    md: 'md',
+    lg: 'lg'
+  }
+})}>
+  Responsive Button
+</button>
+```
+
+## Boolean Variants
+
+Create boolean variants for on/off states:
+
+```tsx
+const button = tv({
+  base: 'rounded-lg px-4 py-2',
+  variants: {
+    isDisabled: {
+      true: 'opacity-50 cursor-not-allowed',
+      false: 'cursor-pointer'
+    },
+    isLoading: {
+      true: 'opacity-70 cursor-wait'
+    },
+    isIconOnly: {
+      true: 'p-2 aspect-square'
+    }
+  }
+})
+
+<button className={button({ isDisabled: true })}>
+  Disabled Button
+</button>
+```
+
+## Type-Safe Variants
+
+Use TypeScript for type-safe variants:
+
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+const button = tv({
+  variants: {
+    color: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500'
+    },
+    size: {
+      sm: 'text-sm',
+      lg: 'text-lg'
+    }
+  }
+})
+
+type ButtonVariants = VariantProps<typeof button>
+
+interface ButtonProps extends ButtonVariants {
+  children: React.ReactNode
+}
+
+function CustomButton({ color, size, children }: ButtonProps) {
+  return (
+    <button className={button({ color, size })}>
+      {children}
+    </button>
+  )
+}
+```
+
+## Advanced Patterns
+
+### Conditional Class Application
+
+Apply classes conditionally based on multiple factors:
+
+```tsx
+import { tv } from 'tailwind-variants'
+
+const button = tv({
+  base: 'font-semibold rounded-lg transition-all',
+  variants: {
+    color: {
+      primary: 'bg-blue-500 text-white',
+      secondary: 'bg-purple-500 text-white',
+      danger: 'bg-red-500 text-white',
+    },
+    size: {
+      sm: 'text-sm px-3 py-1.5',
+      md: 'text-base px-4 py-2',
+      lg: 'text-lg px-6 py-3',
+    },
+    isDisabled: {
+      true: 'opacity-50 cursor-not-allowed pointer-events-none',
+    },
+    isLoading: {
+      true: 'cursor-wait',
+    },
+  },
+  compoundVariants: [
+    {
+      color: 'primary',
+      isDisabled: false,
+      class: 'hover:bg-blue-600 active:bg-blue-700',
+    },
+    {
+      color: 'danger',
+      isLoading: true,
+      class: 'opacity-70',
+    },
+  ],
+  defaultVariants: {
+    color: 'primary',
+    size: 'md',
+  },
+})
+
+// Usage
+<button className={button({
+  color: 'primary',
+  size: 'lg',
+  isDisabled: disabled,
+  isLoading: loading,
+})}>
+  Submit
+</button>
+```
+
+### Nested Variants
+
+Create deeply nested variant structures:
+
+```tsx
+const form = tv({
+  slots: {
+    container: 'space-y-4',
+    fieldGroup: 'space-y-2',
+    label: 'font-medium',
+    input: 'w-full rounded-lg border',
+    helper: 'text-sm',
+    error: 'text-sm text-red-500',
+  },
+  variants: {
+    variant: {
+      default: {
+        input: 'border-gray-300 focus:border-blue-500',
+        helper: 'text-gray-600',
+      },
+      filled: {
+        input: 'border-0 bg-gray-100 focus:bg-gray-200',
+        helper: 'text-gray-500',
+      },
+      underlined: {
+        input: 'border-0 border-b-2 border-gray-300 rounded-none',
+        helper: 'text-gray-600',
+      },
+    },
+    size: {
+      sm: {
+        input: 'text-sm px-2 py-1',
+        label: 'text-sm',
+        helper: 'text-xs',
+      },
+      md: {
+        input: 'text-base px-3 py-2',
+        label: 'text-base',
+        helper: 'text-sm',
+      },
+      lg: {
+        input: 'text-lg px-4 py-3',
+        label: 'text-lg',
+        helper: 'text-base',
+      },
+    },
+    isInvalid: {
+      true: {
+        input: 'border-red-500 focus:border-red-600',
+        label: 'text-red-700',
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      variant: 'filled',
+      isInvalid: true,
+      class: {
+        input: 'bg-red-50 focus:bg-red-100',
+      },
+    },
+  ],
+  defaultVariants: {
+    variant: 'default',
+    size: 'md',
+  },
+})
+```
+
+### State-Based Variants
+
+Manage component state through variants:
+
+```tsx
+'use client'
+
+import { tv } from 'tailwind-variants'
+import { useState } from 'react'
+
+const toggle = tv({
+  base: 'relative inline-flex h-6 w-11 items-center rounded-full transition-colors',
+  variants: {
+    isChecked: {
+      true: 'bg-blue-500',
+      false: 'bg-gray-300',
+    },
+    isDisabled: {
+      true: 'opacity-50 cursor-not-allowed',
+      false: 'cursor-pointer',
+    },
+  },
+  defaultVariants: {
+    isChecked: false,
+    isDisabled: false,
+  },
+})
+
+const toggleThumb = tv({
+  base: 'inline-block h-4 w-4 transform rounded-full bg-white transition-transform',
+  variants: {
+    isChecked: {
+      true: 'translate-x-6',
+      false: 'translate-x-1',
+    },
+  },
+})
+
+export function Toggle({ disabled = false }) {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <button
+      role="switch"
+      aria-checked={checked}
+      disabled={disabled}
+      onClick={() => !disabled && setChecked(!checked)}
+      className={toggle({ isChecked: checked, isDisabled: disabled })}
+    >
+      <span className={toggleThumb({ isChecked: checked })} />
+    </button>
+  )
+}
+```
+
+### Animation Variants
+
+Create animated variants:
+
+```tsx
+const button = tv({
+  base: 'font-semibold rounded-lg transition-all duration-200',
+  variants: {
+    animation: {
+      bounce: 'hover:animate-bounce',
+      pulse: 'hover:animate-pulse',
+      ping: 'hover:animate-ping',
+      spin: 'hover:animate-spin',
+      wiggle: 'hover:animate-wiggle',
+    },
+    transform: {
+      scale: 'hover:scale-110',
+      rotate: 'hover:rotate-3',
+      translateY: 'hover:-translate-y-1',
+      skew: 'hover:skew-y-3',
+    },
+  },
+})
+
+// Custom animation in globals.css
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out infinite;
+}
+```
+
+## Real-World Examples
+
+### Complete Button System
+
+```tsx
+// components/Button.tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+import { forwardRef } from 'react'
+
+const button = tv({
+  base: [
+    'inline-flex',
+    'items-center',
+    'justify-center',
+    'font-semibold',
+    'transition-all',
+    'duration-200',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-offset-2',
+    'disabled:opacity-50',
+    'disabled:cursor-not-allowed',
+    'disabled:pointer-events-none',
+  ],
+  variants: {
+    variant: {
+      solid: 'shadow-sm',
+      outlined: 'bg-transparent border-2',
+      ghost: 'bg-transparent',
+      link: 'bg-transparent underline-offset-4 hover:underline',
+    },
+    color: {
+      primary: '',
+      secondary: '',
+      success: '',
+      warning: '',
+      danger: '',
+    },
+    size: {
+      xs: 'text-xs px-2.5 py-1 rounded',
+      sm: 'text-sm px-3 py-1.5 rounded-md',
+      md: 'text-base px-4 py-2 rounded-lg',
+      lg: 'text-lg px-6 py-3 rounded-lg',
+      xl: 'text-xl px-8 py-4 rounded-xl',
+    },
+    fullWidth: {
+      true: 'w-full',
+    },
+    isIconOnly: {
+      true: 'p-0 aspect-square',
+    },
+    isLoading: {
+      true: 'cursor-wait',
+    },
+  },
+  compoundVariants: [
+    // Solid + Primary
+    {
+      variant: 'solid',
+      color: 'primary',
+      class: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500',
+    },
+    // Solid + Danger
+    {
+      variant: 'solid',
+      color: 'danger',
+      class: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500',
+    },
+    // Outlined + Primary
+    {
+      variant: 'outlined',
+      color: 'primary',
+      class: 'border-blue-500 text-blue-500 hover:bg-blue-50 focus:ring-blue-500',
+    },
+    // Ghost + Primary
+    {
+      variant: 'ghost',
+      color: 'primary',
+      class: 'text-blue-500 hover:bg-blue-50 focus:ring-blue-500',
+    },
+    // Icon only sizes
+    {
+      isIconOnly: true,
+      size: 'xs',
+      class: 'w-6 h-6',
+    },
+    {
+      isIconOnly: true,
+      size: 'sm',
+      class: 'w-8 h-8',
+    },
+    {
+      isIconOnly: true,
+      size: 'md',
+      class: 'w-10 h-10',
+    },
+    {
+      isIconOnly: true,
+      size: 'lg',
+      class: 'w-12 h-12',
+    },
+  ],
+  defaultVariants: {
+    variant: 'solid',
+    color: 'primary',
+    size: 'md',
+  },
+})
+
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof button> & {
+    startContent?: React.ReactNode
+    endContent?: React.ReactNode
+  }
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      variant,
+      color,
+      size,
+      fullWidth,
+      isIconOnly,
+      isLoading,
+      startContent,
+      endContent,
+      className,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <button
+        ref={ref}
+        disabled={disabled || isLoading}
+        className={button({
+          variant,
+          color,
+          size,
+          fullWidth,
+          isIconOnly,
+          isLoading,
+          className,
+        })}
+        {...props}
+      >
+        {isLoading && <Spinner className="mr-2" />}
+        {!isIconOnly && startContent}
+        {children}
+        {!isIconOnly && endContent}
+      </button>
+    )
+  }
+)
+
+Button.displayName = 'Button'
+```
+
+### Complete Card System
+
+```tsx
+// components/Card.tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+const card = tv({
+  slots: {
+    base: 'overflow-hidden transition-all',
+    header: 'flex items-center justify-between',
+    body: '',
+    footer: 'flex items-center justify-between',
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'bg-white border border-gray-200',
+        header: 'px-6 py-4 border-b border-gray-200',
+        body: 'px-6 py-4',
+        footer: 'px-6 py-4 border-t border-gray-200 bg-gray-50',
+      },
+      bordered: {
+        base: 'bg-white border-2 border-gray-300',
+        header: 'px-6 py-4 border-b-2 border-gray-300',
+        body: 'px-6 py-4',
+        footer: 'px-6 py-4 border-t-2 border-gray-300',
+      },
+      shadow: {
+        base: 'bg-white shadow-lg',
+        header: 'px-6 py-4 border-b border-gray-100',
+        body: 'px-6 py-4',
+        footer: 'px-6 py-4 border-t border-gray-100',
+      },
+      glass: {
+        base: 'bg-white/10 backdrop-blur-lg border border-white/20',
+        header: 'px-6 py-4 border-b border-white/10',
+        body: 'px-6 py-4',
+        footer: 'px-6 py-4 border-t border-white/10',
+      },
+    },
+    radius: {
+      none: { base: 'rounded-none' },
+      sm: { base: 'rounded' },
+      md: { base: 'rounded-lg' },
+      lg: { base: 'rounded-xl' },
+      xl: { base: 'rounded-2xl' },
+    },
+    shadow: {
+      none: { base: 'shadow-none' },
+      sm: { base: 'shadow-sm' },
+      md: { base: 'shadow-md' },
+      lg: { base: 'shadow-lg' },
+      xl: { base: 'shadow-xl' },
+    },
+    isHoverable: {
+      true: {
+        base: 'hover:scale-[1.02] cursor-pointer',
+      },
+    },
+    isPressable: {
+      true: {
+        base: 'active:scale-[0.98]',
+      },
+    },
+    isBlurred: {
+      true: {
+        base: 'backdrop-blur-md',
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      variant: 'shadow',
+      isHoverable: true,
+      class: {
+        base: 'hover:shadow-2xl',
+      },
+    },
+  ],
+  defaultVariants: {
+    variant: 'default',
+    radius: 'md',
+    shadow: 'none',
+  },
+})
+
+type CardSlots = VariantProps<typeof card>
+
+export interface CardProps extends CardSlots {
+  children: React.ReactNode
+  header?: React.ReactNode
+  footer?: React.ReactNode
+  className?: string
+}
+
+export function Card({
+  children,
+  header,
+  footer,
+  variant,
+  radius,
+  shadow,
+  isHoverable,
+  isPressable,
+  isBlurred,
+  className,
+}: CardProps) {
+  const slots = card({
+    variant,
+    radius,
+    shadow,
+    isHoverable,
+    isPressable,
+    isBlurred,
+  })
+
+  return (
+    <div className={slots.base({ className })}>
+      {header && <div className={slots.header()}>{header}</div>}
+      <div className={slots.body()}>{children}</div>
+      {footer && <div className={slots.footer()}>{footer}</div>}
+    </div>
+  )
+}
+```
+
+### Complete Badge System
+
+```tsx
+// components/Badge.tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+const badge = tv({
+  base: [
+    'inline-flex',
+    'items-center',
+    'justify-center',
+    'font-medium',
+    'transition-colors',
+  ],
+  variants: {
+    variant: {
+      solid: 'border-0',
+      outlined: 'border bg-transparent',
+      flat: 'border-0',
+      dot: 'border-0 px-0',
+    },
+    color: {
+      default: '',
+      primary: '',
+      secondary: '',
+      success: '',
+      warning: '',
+      danger: '',
+    },
+    size: {
+      xs: 'text-xs px-1.5 py-0.5 rounded',
+      sm: 'text-sm px-2 py-1 rounded-md',
+      md: 'text-base px-2.5 py-1 rounded-lg',
+      lg: 'text-lg px-3 py-1.5 rounded-lg',
+    },
+    hasDot: {
+      true: 'gap-1.5',
+    },
+  },
+  compoundVariants: [
+    // Solid variants
+    {
+      variant: 'solid',
+      color: 'primary',
+      class: 'bg-blue-500 text-white',
+    },
+    {
+      variant: 'solid',
+      color: 'success',
+      class: 'bg-green-500 text-white',
+    },
+    {
+      variant: 'solid',
+      color: 'danger',
+      class: 'bg-red-500 text-white',
+    },
+    // Outlined variants
+    {
+      variant: 'outlined',
+      color: 'primary',
+      class: 'border-blue-500 text-blue-500',
+    },
+    // Flat variants
+    {
+      variant: 'flat',
+      color: 'primary',
+      class: 'bg-blue-100 text-blue-700',
+    },
+    // Dot variant
+    {
+      variant: 'dot',
+      hasDot: true,
+      class: 'pl-0',
+    },
+  ],
+  defaultVariants: {
+    variant: 'solid',
+    color: 'default',
+    size: 'sm',
+  },
+})
+
+const dot = tv({
+  base: 'rounded-full',
+  variants: {
+    size: {
+      xs: 'w-1.5 h-1.5',
+      sm: 'w-2 h-2',
+      md: 'w-2.5 h-2.5',
+      lg: 'w-3 h-3',
+    },
+    color: {
+      default: 'bg-gray-500',
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500',
+      success: 'bg-green-500',
+      warning: 'bg-yellow-500',
+      danger: 'bg-red-500',
+    },
+  },
+})
+
+export type BadgeProps = React.HTMLAttributes<HTMLSpanElement> &
+  VariantProps<typeof badge> & {
+    showDot?: boolean
+  }
+
+export function Badge({
+  children,
+  variant,
+  color,
+  size,
+  showDot,
+  className,
+  ...props
+}: BadgeProps) {
+  return (
+    <span
+      className={badge({
+        variant,
+        color,
+        size,
+        hasDot: showDot,
+        className,
+      })}
+      {...props}
+    >
+      {showDot && <span className={dot({ size, color })} />}
+      {children}
+    </span>
+  )
+}
+```
+
+## Integration with React Components
+
+### Using with React.forwardRef
+
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+import { forwardRef } from 'react'
+
+const input = tv({
+  base: [
+    'w-full',
+    'rounded-lg',
+    'border',
+    'transition-colors',
+    'focus:outline-none',
+    'focus:ring-2',
+  ],
+  variants: {
+    variant: {
+      default: 'border-gray-300 focus:border-blue-500 focus:ring-blue-500',
+      filled: 'border-0 bg-gray-100 focus:bg-gray-200 focus:ring-blue-500',
+      underlined: 'border-0 border-b-2 border-gray-300 rounded-none focus:border-blue-500',
+    },
+    size: {
+      sm: 'text-sm px-2 py-1',
+      md: 'text-base px-3 py-2',
+      lg: 'text-lg px-4 py-3',
+    },
+    isInvalid: {
+      true: 'border-red-500 focus:border-red-600 focus:ring-red-500',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'md',
+  },
+})
+
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
+  VariantProps<typeof input>
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ variant, size, isInvalid, className, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        className={input({ variant, size, isInvalid, className })}
+        {...props}
+      />
+    )
+  }
+)
+
+Input.displayName = 'Input'
+```
+
+### Context-Aware Variants
+
+```tsx
+'use client'
+
+import { createContext, useContext } from 'react'
+import { tv, type VariantProps } from 'tailwind-variants'
+
+type Size = 'sm' | 'md' | 'lg'
+
+const FormContext = createContext<{ size?: Size }>({})
+
+const input = tv({
+  variants: {
+    size: {
+      sm: 'text-sm px-2 py-1',
+      md: 'text-base px-3 py-2',
+      lg: 'text-lg px-4 py-3',
+    },
+  },
+})
+
+export function FormProvider({
+  children,
+  size,
+}: {
+  children: React.ReactNode
+  size?: Size
+}) {
+  return <FormContext.Provider value={{ size }}>{children}</FormContext.Provider>
+}
+
+export function Input({ size: propSize, ...props }: InputProps) {
+  const { size: contextSize } = useContext(FormContext)
+  const size = propSize || contextSize
+
+  return <input className={input({ size })} {...props} />
+}
+
+// Usage
+<FormProvider size="lg">
+  <Input /> {/* Inherits lg size */}
+  <Input size="sm" /> {/* Overrides with sm */}
+</FormProvider>
+```
+
+## Testing Variants
+
+### Unit Testing
+
+```tsx
+// __tests__/Button.test.tsx
+import { render } from '@testing-library/react'
+import { Button } from '@/components/Button'
+
+describe('Button Variants', () => {
+  it('applies variant classes correctly', () => {
+    const { container } = render(
+      <Button variant="outlined" color="primary">
+        Test
+      </Button>
+    )
+
+    const button = container.querySelector('button')
+    expect(button).toHaveClass('border-blue-500')
+    expect(button).toHaveClass('text-blue-500')
+  })
+
+  it('applies size variants', () => {
+    const { container } = render(<Button size="lg">Test</Button>)
+
+    const button = container.querySelector('button')
+    expect(button).toHaveClass('text-lg')
+  })
+
+  it('applies compound variants', () => {
+    const { container } = render(
+      <Button variant="solid" color="danger">
+        Test
+      </Button>
+    )
+
+    const button = container.querySelector('button')
+    expect(button).toHaveClass('bg-red-500')
+    expect(button).toHaveClass('text-white')
+  })
+})
+```
+
+### Snapshot Testing
+
+```tsx
+// __tests__/Button.snapshot.test.tsx
+import { render } from '@testing-library/react'
+import { Button } from '@/components/Button'
+
+describe('Button Variants Snapshots', () => {
+  it('matches solid primary snapshot', () => {
+    const { container } = render(
+      <Button variant="solid" color="primary">
+        Test
+      </Button>
+    )
+    expect(container.firstChild).toMatchSnapshot()
+  })
+
+  it('matches outlined secondary snapshot', () => {
+    const { container } = render(
+      <Button variant="outlined" color="secondary">
+        Test
+      </Button>
+    )
+    expect(container.firstChild).toMatchSnapshot()
+  })
+})
+```
+
+## Performance Optimization
+
+### Memoizing Variant Functions
+
+```tsx
+'use client'
+
+import { tv } from 'tailwind-variants'
+import { useMemo } from 'react'
+
+const button = tv({
+  variants: {
+    color: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500',
+    },
+    size: {
+      sm: 'text-sm px-3 py-1',
+      lg: 'text-lg px-6 py-3',
+    },
+  },
+})
+
+export function OptimizedButton({ color, size, children }) {
+  // Memoize the className computation
+  const className = useMemo(
+    () => button({ color, size }),
+    [color, size]
+  )
+
+  return <button className={className}>{children}</button>
+}
+```
+
+### Extracting Static Variants
+
+```tsx
+// ✅ Good - defined outside component
+const button = tv({
+  variants: {
+    color: {
+      primary: 'bg-blue-500',
+      secondary: 'bg-purple-500',
+    },
+  },
+})
+
+export function Button({ color, children }) {
+  return <button className={button({ color })}>{children}</button>
+}
+
+// ❌ Avoid - recreated on every render
+export function BadButton({ color, children }) {
+  const button = tv({
+    variants: {
+      color: {
+        primary: 'bg-blue-500',
+        secondary: 'bg-purple-500',
+      },
+    },
+  })
+
+  return <button className={button({ color })}>{children}</button>
+}
+```
+
+## Best Practices
+
+### 1. Keep Variants Focused
+
+Each variant should control one aspect:
+
+```tsx
+// ✅ Good - focused variants
+const button = tv({
+  variants: {
+    color: { primary: '...', secondary: '...' },
+    size: { sm: '...', md: '...', lg: '...' },
+    variant: { solid: '...', outlined: '...' },
+  },
+})
+
+// ❌ Avoid - mixed concerns
+const button = tv({
+  variants: {
+    style: {
+      primaryLarge: '...',
+      secondarySmall: '...',
+    },
+  },
+})
+```
+
+### 2. Use Compound Variants for Interactions
+
+Handle complex interactions between variants:
+
+```tsx
+const button = tv({
+  variants: {
+    variant: { solid: '', outlined: '' },
+    color: { primary: '', danger: '' },
+  },
+  compoundVariants: [
+    {
+      variant: 'solid',
+      color: 'primary',
+      class: 'bg-blue-500 hover:bg-blue-600',
+    },
+    {
+      variant: 'outlined',
+      color: 'primary',
+      class: 'border-blue-500 text-blue-500 hover:bg-blue-50',
+    },
+  ],
+})
+```
+
+### 3. Provide Default Variants
+
+Make components work without props:
+
+```tsx
+const button = tv({
+  variants: {
+    color: { primary: '...', secondary: '...' },
+    size: { sm: '...', md: '...', lg: '...' },
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'md',
+  },
+})
+
+// Works without props
+<Button>Click me</Button>
+```
+
+### 4. Use TypeScript for Type Safety
+
+Leverage TypeScript for better DX:
+
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+const button = tv({
+  variants: {
+    color: { primary: '...', secondary: '...' },
+  },
+})
+
+type ButtonVariants = VariantProps<typeof button>
+
+interface ButtonProps extends ButtonVariants {
+  children: React.ReactNode
+}
+
+export function Button({ color, children }: ButtonProps) {
+  return <button className={button({ color })}>{children}</button>
+}
+```
+
+### 5. Document Variants
+
+Help others understand available options:
+
+```tsx
+/**
+ * Button component
+ *
+ * @param variant - Visual style: 'solid' | 'outlined' | 'ghost' | 'link'
+ * @param color - Color theme: 'primary' | 'secondary' | 'success' | 'danger'
+ * @param size - Size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+ * @param isLoading - Shows loading spinner
+ * @param isDisabled - Disables the button
+ *
+ * @example
+ * <Button variant="solid" color="primary" size="lg">
+ *   Click me
+ * </Button>
+ */
+export function Button({ ... }) {
+  // ...
+}
+```
+
+### 6. Use Slots for Multi-Part Components
+
+Better organization for complex components:
+
+```tsx
+const card = tv({
+  slots: {
+    base: '...',
+    header: '...',
+    body: '...',
+    footer: '...',
+  },
+  variants: {
+    variant: {
+      default: {
+        base: '...',
+        header: '...',
+      },
+    },
+  },
+})
+```
+
+### 7. Optimize Performance
+
+Memoize expensive computations:
+
+```tsx
+const className = useMemo(
+  () => button({ variant, color, size }),
+  [variant, color, size]
+)
+```
+
+### 8. Test Thoroughly
+
+Test all variant combinations:
+
+```tsx
+describe('Button', () => {
+  const variants = ['solid', 'outlined', 'ghost']
+  const colors = ['primary', 'secondary', 'danger']
+
+  variants.forEach((variant) => {
+    colors.forEach((color) => {
+      it(`renders ${variant} ${color}`, () => {
+        render(<Button variant={variant} color={color}>Test</Button>)
+      })
+    })
+  })
+})
+```
+
+## Troubleshooting
+
+### Variants Not Applying
+
+**Problem:** Variant styles don't show up.
+
+**Solutions:**
+
+```tsx
+// ✅ Check Tailwind content paths
+// tailwind.config.ts
+export default {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+}
+
+// ✅ Ensure variant keys match
+const button = tv({
+  variants: {
+    color: { primary: 'bg-blue-500' },
+  },
+})
+
+<button className={button({ color: 'primary' })}>Test</button>
+// Not: <button className={button({ colour: 'primary' })}>
+
+// ✅ Check for conflicting classes
+// Use compoundVariants to override
+```
+
+### TypeScript Errors
+
+**Problem:** TypeScript complains about variant types.
+
+**Solutions:**
+
+```tsx
+// ✅ Import VariantProps
+import { tv, type VariantProps } from 'tailwind-variants'
+
+// ✅ Extract types correctly
+const button = tv({ /* ... */ })
+type ButtonVariants = VariantProps<typeof button>
+
+// ✅ Extend types properly
+interface ButtonProps extends ButtonVariants {
+  children: React.ReactNode
+}
+```
+
+### Compound Variants Not Working
+
+**Problem:** Compound variants don't apply.
+
+**Solutions:**
+
+```tsx
+// ✅ Ensure all conditions are met
+const button = tv({
+  variants: {
+    variant: { solid: '', outlined: '' },
+    color: { primary: '', secondary: '' },
+  },
+  compoundVariants: [
+    {
+      // All these must match
+      variant: 'solid',
+      color: 'primary',
+      class: 'bg-blue-500',
+    },
+  ],
+})
+
+// ✅ Check variant values
+<button className={button({
+  variant: 'solid', // Must be 'solid'
+  color: 'primary',  // Must be 'primary'
+})}>
+  Test
+</button>
+```
+
+## Next Steps
+
+Explore more customization options:
+
+- **[Override Styles](/docs/customization/override-styles)** - Advanced styling techniques
+- **[Customize Theme](/docs/customization/customize-theme)** - Extend existing themes
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes
+- **[Colors](/docs/customization/colors)** - Master color systems

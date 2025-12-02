@@ -1,0 +1,90 @@
+---
+title: "Button"
+description: "A versatile button component with multiple variants and sizes."
+---
+
+# Button
+
+Buttons allow users to perform actions and make choices with a single tap.
+
+## Import
+
+```tsx
+import { Button } from '@flexi-ui/button'
+```
+
+## Usage
+
+<Sandbox code={`<Button color="primary">
+  Click me
+</Button>`}>
+  <Button color="primary">
+    Click me
+  </Button>
+</Sandbox>
+
+## Variants
+
+Buttons come in different variants to suit different use cases:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Button variant="solid" color="primary">Solid</Button>
+  <Button variant="bordered" color="primary">Bordered</Button>
+  <Button variant="light" color="primary">Light</Button>
+  <Button variant="flat" color="primary">Flat</Button>
+  <Button variant="ghost" color="primary">Ghost</Button>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Button variant="solid" color="primary">Solid</Button>
+    <Button variant="bordered" color="primary">Bordered</Button>
+    <Button variant="light" color="primary">Light</Button>
+    <Button variant="flat" color="primary">Flat</Button>
+    <Button variant="ghost" color="primary">Ghost</Button>
+  </div>
+</Sandbox>
+
+## Colors
+
+Choose from various color schemes:
+
+<Sandbox code={`<div className="flex flex-wrap gap-4">
+  <Button color="default">Default</Button>
+  <Button color="primary">Primary</Button>
+  <Button color="secondary">Secondary</Button>
+  <Button color="success">Success</Button>
+  <Button color="warning">Warning</Button>
+  <Button color="danger">Danger</Button>
+</div>`}>
+  <div className="flex flex-wrap gap-4">
+    <Button color="default">Default</Button>
+    <Button color="primary">Primary</Button>
+    <Button color="secondary">Secondary</Button>
+    <Button color="success">Success</Button>
+    <Button color="warning">Warning</Button>
+    <Button color="danger">Danger</Button>
+  </div>
+</Sandbox>
+
+## Sizes
+
+<Sandbox code={`<div className="flex flex-wrap items-center gap-4">
+  <Button size="sm" color="primary">Small</Button>
+  <Button size="md" color="primary">Medium</Button>
+  <Button size="lg" color="primary">Large</Button>
+</div>`}>
+  <div className="flex flex-wrap items-center gap-4">
+    <Button size="sm" color="primary">Small</Button>
+    <Button size="md" color="primary">Medium</Button>
+    <Button size="lg" color="primary">Large</Button>
+  </div>
+</Sandbox>
+
+## API Reference
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| color | `default \| primary \| secondary \| success \| warning \| danger` | `default` | The color of the button |
+| variant | `solid \| bordered \| light \| flat \| ghost` | `solid` | The variant of the button |
+| size | `sm \| md \| lg` | `md` | The size of the button |
+| isDisabled | `boolean` | `false` | Whether the button is disabled |
+| isLoading | `boolean` | `false` | Whether the button is in a loading state |
