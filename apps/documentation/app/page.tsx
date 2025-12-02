@@ -7,7 +7,7 @@ import { Community } from '@/components/marketing/Community'
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col overflow-hidden">
       <Hero />
       <Features />
       <CustomThemes />

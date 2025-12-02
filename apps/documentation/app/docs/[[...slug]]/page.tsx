@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { allDocs } from 'contentlayer/generated'
+import { allDocs } from '../../../.contentlayer/generated'
 import { DocsPager, DocsToc } from '@/components/docs'
 import { siteConfig } from '@/config/site'
 import { GITHUB_URL, REPO_NAME } from '@/libs/github/constants'
@@ -97,12 +97,7 @@ export default async function DocPage({ params }: DocPageProps) {
             className="text-sm text-primary hover:underline inline-flex items-center gap-1"
           >
             Edit this page on GitHub
-            <svg
-              className="w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

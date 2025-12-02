@@ -209,6 +209,9 @@ importers:
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@19.2.0)
+      mdx-bundler:
+        specifier: ^10.1.1
+        version: 10.1.1(esbuild@0.25.12)
       mitt:
         specifier: ^3.0.1
         version: 3.0.1

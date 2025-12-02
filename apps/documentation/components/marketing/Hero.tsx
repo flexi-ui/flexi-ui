@@ -2,65 +2,85 @@
 
 import { Button } from '@flexi-ui/button'
 import NextLink from 'next/link'
-import { ArrowRight, Github } from 'lucide-react'
+import { ArrowRight, Github, Sparkles, Zap, Shield } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { siteConfig } from '@/config/site'
 
 export const Hero = () => {
   return (
-    <section className="relative flex flex-col items-center justify-center px-6 py-20 md:py-28 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-100/20 via-background to-background dark:from-primary-900/10" />
+    <section className="relative flex flex-col items-center justify-center min-h-[90vh] px-6 py-20 md:py-32 overflow-hidden">
+      {/* Animated background gradients */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-100/10 via-transparent to-transparent dark:from-primary-900/5" />
+      </div>
 
-      <div className="max-w-4xl mx-auto text-center space-y-8">
-        {/* Badge */}
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+      <div className="max-w-6xl mx-auto text-center space-y-10 relative z-10">
+        {/* Badge with animation */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, type: 'spring' }}
           className="inline-flex"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-divider bg-content2/50 backdrop-blur-sm">
-            <span className="text-xs font-medium text-foreground-600">
-              🎉 Open source and free to use
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-divider/50 bg-content1/80 backdrop-blur-md shadow-lg hover:shadow-xl transition-all duration-300">
+            <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+            <span className="text-sm font-medium text-foreground">
+              Open source • Free forever • MIT Licensed
             </span>
           </div>
         </motion.div>
 
-        {/* Heading */}
+        {/* Main heading with enhanced typography */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-4"
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="space-y-6"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            Make beautiful websites
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
+            Build beautiful
             <br />
-            <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
-              regardless of your design experience
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                interfaces
+              </span>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="absolute -bottom-2 left-0 h-3 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-sm"
+              />
             </span>
+            <br />
+            <span className="text-foreground-600">faster than ever</span>
           </h1>
-          <p className="text-lg md:text-xl text-foreground-600 max-w-2xl mx-auto">
-            Beautiful, fast and modern React UI library. Fully typed, easy to customize, and built
-            for fast, accessible interfaces.
+          <p className="text-xl md:text-2xl text-foreground-600 max-w-3xl mx-auto leading-relaxed">
+            A modern React UI library with{' '}
+            <span className="font-semibold text-foreground">TypeScript</span>,{' '}
+            <span className="font-semibold text-foreground">accessibility</span>, and{' '}
+            <span className="font-semibold text-foreground">customization</span> at its core.
           </p>
         </motion.div>
 
-        {/* CTA Buttons */}
+        {/* Enhanced CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
         >
           <Button
             as={NextLink}
             href="/docs/guide/introduction"
             color="primary"
             size="lg"
-            endContent={<ArrowRight className="h-4 w-4" />}
-            className="font-semibold"
+            endContent={<ArrowRight className="h-5 w-5" />}
+            className="font-semibold text-base px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Get Started
           </Button>
@@ -69,36 +89,59 @@ export const Hero = () => {
             href={siteConfig.links.github}
             variant="bordered"
             size="lg"
-            startContent={<Github className="h-4 w-4" />}
+            startContent={<Github className="h-5 w-5" />}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold"
+            className="font-semibold text-base px-8 py-6 h-auto hover:bg-content2 transition-all duration-300"
           >
             View on GitHub
           </Button>
         </motion.div>
 
-        {/* Stats */}
+        {/* Enhanced stats with icons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-8 pt-8 text-sm text-foreground-600"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap items-center justify-center gap-6 md:gap-12 pt-12"
         >
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground">MIT Licensed</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground">TypeScript</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground">React 19</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground">Tailwind CSS</span>
-          </div>
+          {[
+            { icon: Shield, label: 'MIT Licensed', color: 'text-success' },
+            { icon: Zap, label: 'TypeScript', color: 'text-primary' },
+            { icon: Sparkles, label: 'React 19', color: 'text-secondary' },
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+              className="flex items-center gap-3 group"
+            >
+              <div
+                className={`p-2 rounded-lg bg-content1 border border-divider group-hover:border-primary/50 transition-colors ${stat.color}`}
+              >
+                <stat.icon className="h-5 w-5" />
+              </div>
+              <span className="text-sm font-semibold text-foreground">{stat.label}</span>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
+
+      <style jsx>{`
+        @keyframes gradient {
+          0%,
+          100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        .animate-gradient {
+          animation: gradient 3s ease infinite;
+        }
+      `}</style>
     </section>
   )
 }
