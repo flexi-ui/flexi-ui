@@ -40,29 +40,45 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
     return {}
   }
 
+  const url = `${siteConfig.siteUrl}${doc.url}`
+
   return {
     title: doc.title,
     description: doc.description,
+    keywords: [
+      ...siteConfig.keywords,
+      doc.title,
+      ...(doc.title.toLowerCase().includes('component')
+        ? ['component documentation', 'component API']
+        : []),
+      ...(doc.title.toLowerCase().includes('theme') ? ['theme customization', 'theming'] : []),
+    ],
     openGraph: {
-      title: doc.title,
+      title: `${doc.title} | ${siteConfig.name}`,
       description: doc.description,
       type: 'article',
-      url: doc.url,
+      url,
+      siteName: siteConfig.name,
       images: [
         {
-          url: siteConfig.ogImage || 'https://flexiui.com/flexiui.jpg',
+          url: siteConfig.ogImage,
           width: 1200,
           height: 630,
-          alt: siteConfig.name,
+          alt: `${doc.title} - ${siteConfig.name}`,
         },
       ],
+      locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
-      title: doc.title,
+      title: `${doc.title} | ${siteConfig.name}`,
       description: doc.description,
-      images: [siteConfig.ogImage || 'https://flexiui.com/flexiui.jpg'],
-      creator: siteConfig.creator,
+      images: [siteConfig.ogImage],
+      creator: siteConfig.twitterHandle,
+      site: siteConfig.twitterHandle,
+    },
+    alternates: {
+      canonical: url,
     },
   }
 }

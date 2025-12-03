@@ -15,7 +15,7 @@ export const DarkMode = () => {
   }, [])
 
   return (
-    <section className="px-6 py-20 md:py-28 bg-content1">
+    <section className="px-6 py-20 md:py-28">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -26,16 +26,16 @@ export const DarkMode = () => {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+            <h2 className="text-2xl font-mono md:text-3xl lg:text-4xl font-bold">
               Dark mode support
               <br />
-              <span className="text-foreground-600">out of the box</span>
+              <span className="text-foreground">out of the box</span>
             </h2>
-            <p className="text-lg text-foreground-600">
+            <p className="text-lg text-foreground">
               Every component is designed with dark mode in mind. Switch between light and dark
               themes seamlessly with our built-in theme system powered by next-themes.
             </p>
-            <ul className="space-y-3 text-foreground-600">
+            <ul className="space-y-3 text-foreground">
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">✓</span>
                 <span>Automatic dark mode detection based on system preferences</span>
@@ -52,7 +52,8 @@ export const DarkMode = () => {
             {mounted && (
               <Button
                 color="primary"
-                variant="flat"
+                variant="ghost"
+                radius="full"
                 startContent={
                   theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />
                 }

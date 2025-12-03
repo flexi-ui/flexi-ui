@@ -32,7 +32,7 @@ export default function ThemesPage() {
   // Generate theme code string
   const themeCode = useMemo(() => {
     if (!themeConfig) return ''
-    
+
     return `import { flexiui } from '@flexi-ui/theme'
 import { generateConfigFromColor } from '@flexi-ui/theme'
 
@@ -88,8 +88,9 @@ export default flexiui(themeConfig)`
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
               Create Your Perfect Theme
             </h1>
-            <p className="text-lg text-foreground-600 max-w-2xl mx-auto">
-              Customize your FlexiUI theme in real-time. Adjust colors, preview components, and export your configuration.
+            <p className="text-lg text-foreground max-w-2xl mx-auto">
+              Customize your FlexiUI theme in real-time. Adjust colors, preview components, and
+              export your configuration.
             </p>
           </div>
         </div>
@@ -101,12 +102,10 @@ export default flexiui(themeConfig)`
           <div className="lg:col-span-1 space-y-6">
             <Card className="p-6">
               <h2 className="text-xl font-semibold mb-6">Theme Settings</h2>
-              
+
               {/* Primary Color */}
               <div className="space-y-2 mb-6">
-                <label className="text-sm font-medium text-foreground-600">
-                  Primary Color
-                </label>
+                <label className="text-sm font-medium text-foreground">Primary Color</label>
                 <div className="flex gap-3 items-center">
                   <div
                     className="w-12 h-12 rounded-lg border-2 border-default-200 cursor-pointer"
@@ -129,9 +128,7 @@ export default flexiui(themeConfig)`
 
               {/* Secondary Color */}
               <div className="space-y-2 mb-6">
-                <label className="text-sm font-medium text-foreground-600">
-                  Secondary Color
-                </label>
+                <label className="text-sm font-medium text-foreground">Secondary Color</label>
                 <div className="flex gap-3 items-center">
                   <div
                     className="w-12 h-12 rounded-lg border-2 border-default-200 cursor-pointer"
@@ -154,9 +151,7 @@ export default flexiui(themeConfig)`
 
               {/* Theme Mode */}
               <div className="space-y-2 mb-6">
-                <label className="text-sm font-medium text-foreground-600">
-                  Default Theme
-                </label>
+                <label className="text-sm font-medium text-foreground">Default Theme</label>
                 <div className="flex gap-2">
                   <Button
                     size="sm"
@@ -194,7 +189,9 @@ export default flexiui(themeConfig)`
                   size="sm"
                   variant="bordered"
                   onPress={handleCopy}
-                  startContent={copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  startContent={
+                    copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />
+                  }
                   className="flex-1"
                 >
                   {copied ? 'Copied!' : 'Copy'}
@@ -221,16 +218,20 @@ export default flexiui(themeConfig)`
                     className="w-8 h-8 rounded border border-default-200"
                     style={{ backgroundColor: primaryColor }}
                   />
-                  <span className="text-sm text-foreground-600">Primary</span>
-                  <span className="ml-auto text-xs font-mono text-foreground-400">{primaryColor}</span>
+                  <span className="text-sm text-foreground">Primary</span>
+                  <span className="ml-auto text-xs font-mono text-foreground-400">
+                    {primaryColor}
+                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div
                     className="w-8 h-8 rounded border border-default-200"
                     style={{ backgroundColor: secondaryColor }}
                   />
-                  <span className="text-sm text-foreground-600">Secondary</span>
-                  <span className="ml-auto text-xs font-mono text-foreground-400">{secondaryColor}</span>
+                  <span className="text-sm text-foreground">Secondary</span>
+                  <span className="ml-auto text-xs font-mono text-foreground-400">
+                    {secondaryColor}
+                  </span>
                 </div>
               </div>
             </Card>
@@ -244,19 +245,29 @@ export default flexiui(themeConfig)`
               <div className="space-y-6">
                 {/* Buttons Preview */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-medium text-foreground-600">Buttons</h3>
+                  <h3 className="text-sm font-medium text-foreground">Buttons</h3>
                   <div className="flex flex-wrap gap-3">
-                    <Button color="primary" variant="solid">Primary</Button>
-                    <Button color="secondary" variant="solid">Secondary</Button>
-                    <Button color="primary" variant="bordered">Bordered</Button>
-                    <Button color="primary" variant="light">Light</Button>
-                    <Button color="primary" variant="flat">Flat</Button>
+                    <Button color="primary" variant="solid">
+                      Primary
+                    </Button>
+                    <Button color="secondary" variant="solid">
+                      Secondary
+                    </Button>
+                    <Button color="primary" variant="bordered">
+                      Bordered
+                    </Button>
+                    <Button color="primary" variant="light">
+                      Light
+                    </Button>
+                    <Button color="primary" variant="flat">
+                      Flat
+                    </Button>
                   </div>
                 </div>
 
                 {/* Input Preview */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-medium text-foreground-600">Input</h3>
+                  <h3 className="text-sm font-medium text-foreground">Input</h3>
                   <Input
                     label="Email"
                     placeholder="Enter your email"
@@ -267,10 +278,10 @@ export default flexiui(themeConfig)`
 
                 {/* Card Preview */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-medium text-foreground-600">Card</h3>
+                  <h3 className="text-sm font-medium text-foreground">Card</h3>
                   <Card className="p-4">
                     <h4 className="font-semibold mb-2">Card Title</h4>
-                    <p className="text-sm text-foreground-600">
+                    <p className="text-sm text-foreground">
                       This is a preview of how your theme will look with different components.
                     </p>
                   </Card>
@@ -278,7 +289,7 @@ export default flexiui(themeConfig)`
 
                 {/* Spinner Preview */}
                 <div className="space-y-3">
-                  <h3 className="text-sm font-medium text-foreground-600">Spinner</h3>
+                  <h3 className="text-sm font-medium text-foreground">Spinner</h3>
                   <div className="flex gap-4">
                     <Spinner color="primary" />
                     <Spinner color="secondary" />
@@ -301,4 +312,3 @@ export default flexiui(themeConfig)`
     </div>
   )
 }
-

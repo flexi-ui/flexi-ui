@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://www.flexiui.com/themes</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/api-references/flexiui-provider</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/components/button</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/components/form</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/components/input</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/components/link</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/components/spinner</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/colors</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/create-theme</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/custom-variants</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/customize-theme</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/dark-mode</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/layout</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/override-styles</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/theme</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/theme-export-import</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/theme-generators</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/theme-migration</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/customization/theme-presets</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/frameworks/astro</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/frameworks/nextjs</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/frameworks/remix</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/frameworks/vite</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/guide/forms</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/guide/installation</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/guide/introduction</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/guide/routing</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.flexiui.com/docs/guide/tailwind-v4</loc><lastmod>2025-12-03T08:15:53.023Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>
