@@ -52,7 +52,7 @@ export const Navbar: FC = () => {
                       href={item.href}
                       className={cn(
                         'text-sm font-medium transition-colors',
-                        isActive ? 'text-foreground' : 'text-foreground-600 hover:text-foreground',
+                        isActive ? 'text-foreground' : 'text-foreground hover:text-foreground',
                       )}
                     >
                       {item.label}
@@ -69,7 +69,7 @@ export const Navbar: FC = () => {
               aria-label="Search"
               className="min-w-xs max-w-sm w-full justify-between"
               onPress={() => setIsSearchOpen(true)}
-              // className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-default-100 dark:bg-default-50 border border-default-200 hover:bg-default-200 dark:hover:bg-default-100 transition-colors text-foreground-600 hover:text-foreground"
+              // className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-default-100 dark:bg-default-50 border border-default-200 hover:bg-default-200 dark:hover:bg-default-100 transition-colors text-foreground hover:text-foreground"
             >
               <span className="flex items-center gap-2">
                 <Search />
@@ -140,7 +140,7 @@ export const Navbar: FC = () => {
                       className={cn(
                         'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
                         'hover:bg-default-100 dark:hover:bg-default-50',
-                        isActive ? 'text-foreground' : 'text-foreground-600',
+                        isActive ? 'text-foreground' : 'text-foreground',
                       )}
                     >
                       {item.label}

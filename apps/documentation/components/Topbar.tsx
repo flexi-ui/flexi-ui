@@ -39,7 +39,7 @@ export const Topbar = () => {
       <div className="flex w-full items-center justify-between md:justify-center gap-x-4 px-4 sm:px-6 py-2.5">
         <div className="flex items-center gap-2 text-sm sm:text-base">
           <Sparkles className="h-4 w-4 text-primary hidden sm:inline" />
-          <span className="text-foreground-600 dark:text-foreground-400 font-medium">
+          <span className="text-foreground dark:text-foreground-400 font-medium">
             <span className="hidden sm:inline">Generate, edit and deploy </span>
             <span className="sm:hidden">Build </span>
             beautiful apps

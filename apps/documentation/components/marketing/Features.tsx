@@ -68,14 +68,14 @@ export const Features = () => {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-divider bg-content1/50 backdrop-blur-sm"
           >
-            <span className="text-xs font-medium text-foreground-600">Features</span>
+            <span className="text-xs font-medium text-foreground">Features</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-4xl font-mono lg:text-5xl font-bold tracking-tight"
+            className="text-3xl md:text-4xl font-mono lg:text-5xl font-bold leading-[1.1]"
           >
             Everything you need to
             <br />
@@ -132,9 +132,7 @@ export const Features = () => {
                     <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-foreground-600 leading-relaxed">
-                      {feature.description}
-                    </p>
+                    <p className="text-sm text-foreground leading-relaxed">{feature.description}</p>
                   </div>
                 </div>
 

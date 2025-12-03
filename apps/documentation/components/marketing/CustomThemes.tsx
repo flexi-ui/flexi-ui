@@ -24,7 +24,7 @@ export const CustomThemes = () => {
                 <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Primary</p>
-                  <p className="text-xs text-foreground-600">#0070F3</p>
+                  <p className="text-xs text-foreground">#0070F3</p>
                 </div>
               </div>
 
@@ -33,7 +33,7 @@ export const CustomThemes = () => {
                 <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Secondary</p>
-                  <p className="text-xs text-foreground-600">#7928CA</p>
+                  <p className="text-xs text-foreground">#7928CA</p>
                 </div>
               </div>
 
@@ -42,7 +42,7 @@ export const CustomThemes = () => {
                 <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Success</p>
-                  <p className="text-xs text-foreground-600">#17C964</p>
+                  <p className="text-xs text-foreground">#17C964</p>
                 </div>
               </div>
 
@@ -51,7 +51,7 @@ export const CustomThemes = () => {
                 <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Warning</p>
-                  <p className="text-xs text-foreground-600">#F5A524</p>
+                  <p className="text-xs text-foreground">#F5A524</p>
                 </div>
               </div>
             </div>
@@ -76,16 +76,16 @@ export const CustomThemes = () => {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-mono font-bold">
               Customize your theme
               <br />
-              <span className="text-foreground-600">with ease</span>
+              <span className="text-foreground">with ease</span>
             </h2>
-            <p className="text-lg text-foreground-600">
+            <p className="text-lg text-foreground">
               FlexiUI&apos;s powerful theming system is built on Tailwind CSS, making it easy to
               customize colors, spacing, and component styles to match your brand.
             </p>
-            <ul className="space-y-3 text-foreground-600">
+            <ul className="space-y-3 text-foreground">
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">✓</span>
                 <span>Define your brand colors with CSS variables</span>
@@ -101,9 +101,10 @@ export const CustomThemes = () => {
             </ul>
             <Button
               as={NextLink}
-              href="/docs/customization/theme"
               color="primary"
-              variant="flat"
+              variant="bordered"
+              radius="full"
+              href="/docs/customization/theme"
               endContent={<ArrowRight className="h-4 w-4" />}
             >
               Learn about theming

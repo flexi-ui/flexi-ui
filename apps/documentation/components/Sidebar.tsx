@@ -109,7 +109,7 @@ export const Sidebar = ({ routes }: SidebarProps) => {
                           ${
                             active
                               ? 'text-primary font-medium dark:text-foreground'
-                              : 'text-foreground-600 dark:text-foreground-500 hover:text-foreground dark:hover:text-foreground'
+                              : 'text-foreground dark:text-foreground-500 hover:text-foreground dark:hover:text-foreground'
                           }
                         `}
                       >
