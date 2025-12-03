@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/avatar",
-  "version": "2.0.0",
+  "version": "0.0.0",
   "description": "The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.",
   "type": "module",
   "license": "MIT",
@@ -20,12 +20,8 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
-  "keywords": [
-    "avatar"
-  ],
-  "files": [
-    "dist"
-  ],
+  "keywords": ["avatar"],
+  "files": ["dist"],
   "main": "./src/main.ts",
   "scripts": {
     "build": "tsc && vite build",

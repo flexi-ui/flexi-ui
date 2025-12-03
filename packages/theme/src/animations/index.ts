@@ -1,5 +1,10 @@
+/**
+ * Enhanced animations with more keyframes and better timing
+ * Based on HeroUI v3 animation system improvements
+ */
 export const animations = {
   animation: {
+    // Existing animations
     'drip-expand': 'drip-expand 420ms linear',
     'spinner-ease-spin': 'spinner-spin 0.8s ease infinite',
     'spinner-linear-spin': 'spinner-spin 0.8s linear infinite',
@@ -10,6 +15,22 @@ export const animations = {
     'appearance-out': 'appearance-out 60ms ease-in normal both',
     'indeterminate-bar':
       'indeterminate-bar 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite normal none running',
+    // Enhanced animations
+    'fade-in': 'fade-in 200ms ease-out',
+    'scale-in': 'scale-in 200ms ease-out',
+    'scale-out': 'scale-out 150ms ease-in',
+    'slide-in-up': 'slide-in-up 200ms ease-out',
+    'slide-in-down': 'slide-in-down 200ms ease-out',
+    'slide-in-left': 'slide-in-left 200ms ease-out',
+    'slide-in-right': 'slide-in-right 200ms ease-out',
+    'slide-out-up': 'slide-out-up 150ms ease-in',
+    'slide-out-down': 'slide-out-down 150ms ease-in',
+    'slide-out-left': 'slide-out-left 150ms ease-in',
+    'slide-out-right': 'slide-out-right 150ms ease-in',
+    'zoom-in': 'zoom-in 200ms ease-out',
+    'zoom-out': 'zoom-out 150ms ease-in',
+    'spin-slow': 'spinner-spin 2s linear infinite',
+    'spin-fast': 'spinner-spin 0.5s linear infinite',
   },
   keyframes: {
     shimmer: {
@@ -98,6 +119,135 @@ export const animations = {
       },
       '100%': {
         opacity: '0.15',
+      },
+    },
+    // Enhanced keyframes
+    'fade-in': {
+      '0%': {
+        opacity: '0',
+      },
+      '100%': {
+        opacity: '1',
+      },
+    },
+    'scale-in': {
+      '0%': {
+        opacity: '0',
+        transform: 'scale(0.95)',
+      },
+      '100%': {
+        opacity: '1',
+        transform: 'scale(1)',
+      },
+    },
+    'scale-out': {
+      '0%': {
+        opacity: '1',
+        transform: 'scale(1)',
+      },
+      '100%': {
+        opacity: '0',
+        transform: 'scale(0.95)',
+      },
+    },
+    'slide-in-up': {
+      '0%': {
+        opacity: '0',
+        transform: 'translateY(10px)',
+      },
+      '100%': {
+        opacity: '1',
+        transform: 'translateY(0)',
+      },
+    },
+    'slide-in-down': {
+      '0%': {
+        opacity: '0',
+        transform: 'translateY(-10px)',
+      },
+      '100%': {
+        opacity: '1',
+        transform: 'translateY(0)',
+      },
+    },
+    'slide-in-left': {
+      '0%': {
+        opacity: '0',
+        transform: 'translateX(10px)',
+      },
+      '100%': {
+        opacity: '1',
+        transform: 'translateX(0)',
+      },
+    },
+    'slide-in-right': {
+      '0%': {
+        opacity: '0',
+        transform: 'translateX(-10px)',
+      },
+      '100%': {
+        opacity: '1',
+        transform: 'translateX(0)',
+      },
+    },
+    'slide-out-up': {
+      '0%': {
+        opacity: '1',
+        transform: 'translateY(0)',
+      },
+      '100%': {
+        opacity: '0',
+        transform: 'translateY(-10px)',
+      },
+    },
+    'slide-out-down': {
+      '0%': {
+        opacity: '1',
+        transform: 'translateY(0)',
+      },
+      '100%': {
+        opacity: '0',
+        transform: 'translateY(10px)',
+      },
+    },
+    'slide-out-left': {
+      '0%': {
+        opacity: '1',
+        transform: 'translateX(0)',
+      },
+      '100%': {
+        opacity: '0',
+        transform: 'translateX(-10px)',
+      },
+    },
+    'slide-out-right': {
+      '0%': {
+        opacity: '1',
+        transform: 'translateX(0)',
+      },
+      '100%': {
+        opacity: '0',
+        transform: 'translateX(10px)',
+      },
+    },
+    'zoom-in': {
+      '0%': {
+        opacity: '0',
+        transform: 'scale(0.9)',
+      },
+      '100%': {
+        opacity: '1',
+        transform: 'scale(1)',
+      },
+    },
+    'zoom-out': {
+      '0%': {
+        opacity: '1',
+        transform: 'scale(1)',
+      },
+      '100%': {
+        opacity: '0',
+        transform: 'scale(0.9)',
       },
     },
   },

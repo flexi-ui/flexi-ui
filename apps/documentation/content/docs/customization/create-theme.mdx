@@ -234,85 +234,85 @@ function ThemePreview() {
 
 ### Generating Color Scales
 
-Create comprehensive color scales from base colors:
+FlexiUI provides built-in utilities to generate color scales:
 
 ```typescript
-// utils/color-palette.ts
-import { colord, extend } from 'colord'
-import a11yPlugin from 'colord/plugins/a11y'
+import { generateColorScale } from '@flexi-ui/theme'
 
-extend([a11yPlugin])
+// Generate full color scale from base color
+const primaryScale = generateColorScale('#006FEE')
 
-export function generateColorScale(baseColor: string) {
-  const base = colord(baseColor)
-
-  return {
-    50: base.lighten(0.45).toHex(),
-    100: base.lighten(0.4).toHex(),
-    200: base.lighten(0.3).toHex(),
-    300: base.lighten(0.2).toHex(),
-    400: base.lighten(0.1).toHex(),
-    500: baseColor, // Base color
-    600: base.darken(0.1).toHex(),
-    700: base.darken(0.2).toHex(),
-    800: base.darken(0.3).toHex(),
-    900: base.darken(0.4).toHex(),
-  }
-}
-
-// Generate a complete theme palette
-export function generateThemePalette(primary: string, secondary: string) {
-  return {
-    primary: generateColorScale(primary),
-    secondary: generateColorScale(secondary),
-    success: generateColorScale('#10b981'),
-    warning: generateColorScale('#f59e0b'),
-    danger: generateColorScale('#ef4444'),
-  }
-}
+// Result includes:
+// {
+//   50: '#E6F1FE',   // Lightest
+//   100: '#CCE3FD',
+//   200: '#99C7FB',
+//   300: '#66ABF9',
+//   400: '#338FF7',
+//   500: '#006FEE',  // Base color
+//   600: '#0059BE',
+//   700: '#00438F',
+//   800: '#002D5F',
+//   900: '#001730',  // Darkest
+//   DEFAULT: '#006FEE',
+//   foreground: '#FFFFFF', // Auto-calculated
+// }
 ```
+
+### Using Theme Generators
+
+Generate complete themes from colors:
+
+```typescript
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+// Generate complete theme config from brand color
+const config = generateConfigFromColor('#006FEE', {
+  defaultTheme: 'light',
+})
+
+// Use with plugin
+const plugin = flexiui(config)
+```
+
+Learn more in the [Theme Generators](/docs/customization/theme-generators) guide.
 
 ### Using Color Scales
 
 Apply generated color scales in your theme:
 
 ```typescript
-import { generateThemePalette } from './utils/color-palette'
+import { generateColorScale } from '@flexi-ui/theme'
+import type { Theme } from '@flexi-ui/react'
 
-const palette = generateThemePalette('#0070f3', '#7928ca')
+const primaryScale = generateColorScale('#0070f3')
+const secondaryScale = generateColorScale('#7928ca')
 
 export const theme: Theme = {
   colors: {
     primary: {
-      DEFAULT: palette.primary[500],
-      foreground: '#ffffff',
-      50: palette.primary[50],
-      100: palette.primary[100],
-      200: palette.primary[200],
-      300: palette.primary[300],
-      400: palette.primary[400],
-      500: palette.primary[500],
-      600: palette.primary[600],
-      700: palette.primary[700],
-      800: palette.primary[800],
-      900: palette.primary[900],
+      ...primaryScale,
+      DEFAULT: primaryScale.DEFAULT || primaryScale[500],
+      foreground: primaryScale.foreground,
     },
     secondary: {
-      DEFAULT: palette.secondary[500],
-      foreground: '#ffffff',
-      50: palette.secondary[50],
-      100: palette.secondary[100],
-      200: palette.secondary[200],
-      300: palette.secondary[300],
-      400: palette.secondary[400],
-      500: palette.secondary[500],
-      600: palette.secondary[600],
-      700: palette.secondary[700],
-      800: palette.secondary[800],
-      900: palette.secondary[900],
+      ...secondaryScale,
+      DEFAULT: secondaryScale.DEFAULT || secondaryScale[500],
+      foreground: secondaryScale.foreground,
     },
   },
 }
+```
+
+Or use the theme generator for complete themes:
+
+```typescript
+import { generateThemesFromPalette } from '@flexi-ui/theme'
+
+const { light, dark } = generateThemesFromPalette({
+  primary: '#0070f3',
+  secondary: '#7928ca',
+})
 ```
 
 ### Ensuring Accessibility
@@ -1611,11 +1611,41 @@ export const fullTheme: Theme = {
 }
 ```
 
+## Using Theme Presets
+
+Start with a pre-built preset and customize:
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+// Start with a preset
+const config = createConfigFromPreset('modern', {
+  themes: {
+    light: {
+      // Customize as needed
+      colors: {
+        primary: {
+          DEFAULT: '#YOUR_BRAND_COLOR',
+        },
+      },
+    },
+  },
+})
+
+const plugin = flexiui(config)
+```
+
+Learn more in the [Theme Presets](/docs/customization/theme-presets) guide.
+
 ## Next Steps
 
 Now that you can create custom themes, explore:
 
+- **[Theme Presets](/docs/customization/theme-presets)** - Use pre-built themes
+- **[Theme Generators](/docs/customization/theme-generators)** - Generate themes programmatically
 - **[Customize Theme](/docs/customization/customize-theme)** - Extend existing themes
 - **[Dark Mode](/docs/customization/dark-mode)** - Implement dark mode
 - **[Colors](/docs/customization/colors)** - Master color systems
-- **[Tailwind v4](/docs/guide/tailwind-v4)** - Leverage Tailwind CSS v4 features
+- **[Theme Migration](/docs/customization/theme-migration)** - Migrate from other systems
+- **[Theme Export/Import](/docs/customization/theme-export-import)** - Share and version themes

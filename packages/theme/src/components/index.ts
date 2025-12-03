@@ -1,43 +1,70 @@
-export * from './avatar'
-export * from './card'
-export * from './link'
-export * from './user'
-export * from './button'
-export * from './drip'
-export * from './spinner'
-export * from './code'
-export * from './popover'
-export * from './snippet'
-export * from './chip'
-export * from './badge'
+/**
+ * @flexi-ui/theme/components
+ * 
+ * Component theme definitions
+ * 
+ * Import individual components for better tree-shaking:
+ * @example
+ * ```ts
+ * import { button, input, card } from '@flexi-ui/theme/components'
+ * ```
+ */
+
+// Form Components
+export * from './input'
+export * from './form'
 export * from './checkbox'
 export * from './radio'
-export * from './pagination'
-export * from './toggle'
-export * from './accordion'
-export * from './progress'
-export * from './input-otp'
-export * from './input'
-export * from './dropdown'
-export * from './image'
-export * from './modal'
-export * from './navbar'
-export * from './table'
-export * from './spacer'
-export * from './divider'
-export * from './kbd'
-export * from './tabs'
-export * from './skeleton'
 export * from './select'
+export * from './input-otp'
+
+// Button & Actions
+export * from './button'
+export * from './link'
+export * from './toggle'
+
+// Display Components
+export * from './card'
+export * from './badge'
+export * from './chip'
+export * from './avatar'
+export * from './image'
+export * from './code'
+export * from './snippet'
+export * from './kbd'
+export * from './divider'
+export * from './spacer'
+export * from './skeleton'
+export * from './spinner'
+export * from './progress'
+
+// Navigation
 export * from './menu'
-export * from './listbox'
-export * from './scroll-shadow'
-export * from './slider'
+export * from './dropdown'
+export * from './navbar'
 export * from './breadcrumbs'
-export * from './autocomplete'
+export * from './pagination'
+export * from './tabs'
+
+// Overlays
+export * from './modal'
+export * from './drawer'
+export * from './popover'
+export * from './alert'
+
+// Data Display
+export * from './table'
+export * from './listbox'
+export * from './accordion'
 export * from './calendar'
 export * from './date-input'
 export * from './date-picker'
-export * from './alert'
-export * from './drawer'
-export * from './form'
+export * from './autocomplete'
+
+// Input Components
+export * from './slider'
+export * from './scroll-shadow'
+
+// Other
+export * from './user'
+export * from './drip'

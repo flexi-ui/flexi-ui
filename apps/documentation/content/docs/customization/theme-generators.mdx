@@ -1,0 +1,445 @@
+---
+title: "Theme Generators"
+description: "Generate themes programmatically from colors using FlexiUI's theme generator utilities."
+---
+
+# Theme Generators
+
+FlexiUI provides powerful utilities to generate complete themes programmatically from base colors or color palettes. This is perfect for creating themes that match your brand colors automatically.
+
+## Overview
+
+Theme generators allow you to:
+
+- Generate complete themes from a single brand color
+- Create themes from color palettes
+- Automatically generate both light and dark variants
+- Ensure proper contrast and accessibility
+- Generate semantic colors automatically
+
+## Quick Start
+
+### Generate from a Single Color
+
+The simplest way to generate a theme:
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+// Generate complete config from brand color
+const config = generateConfigFromColor('#006FEE', {
+  defaultTheme: 'light',
+})
+
+const plugin = flexiui(config)
+```
+
+This automatically:
+- Creates a full color scale (50-900) from your base color
+- Generates both light and dark themes
+- Creates semantic colors (success, warning, danger)
+- Ensures proper contrast ratios
+
+## API Reference
+
+### `generateThemeFromColor()`
+
+Generate a single theme from a base color:
+
+```typescript
+import { generateThemeFromColor } from '@flexi-ui/theme'
+
+const theme = generateThemeFromColor('#006FEE', {
+  extend: 'light',
+  colorName: 'primary',
+  generateSemantic: true,
+})
+```
+
+**Options:**
+- `extend` - Base theme to extend ('light' or 'dark')
+- `colorName` - Name for the generated color (default: 'primary')
+- `generateSemantic` - Whether to generate semantic colors (default: true)
+- `additionalColors` - Additional colors to include
+
+### `generateThemeFromPalette()`
+
+Generate a theme from multiple colors:
+
+```typescript
+import { generateThemeFromPalette } from '@flexi-ui/theme'
+
+const theme = generateThemeFromPalette(
+  {
+    primary: '#006FEE',
+    secondary: '#7828C8',
+    accent: '#17C964',
+  },
+  {
+    extend: 'light',
+    generateSemantic: true,
+  }
+)
+```
+
+### `generateThemesFromColor()`
+
+Generate both light and dark themes from a color:
+
+```typescript
+import { generateThemesFromColor } from '@flexi-ui/theme'
+
+const { light, dark } = generateThemesFromColor('#006FEE')
+```
+
+### `generateThemesFromPalette()`
+
+Generate both themes from a palette:
+
+```typescript
+import { generateThemesFromPalette } from '@flexi-ui/theme'
+
+const { light, dark } = generateThemesFromPalette({
+  primary: '#006FEE',
+  secondary: '#7828C8',
+})
+```
+
+### `generateConfigFromColor()`
+
+Generate a complete plugin config from a color:
+
+```typescript
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+const config = generateConfigFromColor('#006FEE', {
+  defaultTheme: 'light',
+  generateSemantic: true,
+})
+
+// Use with plugin
+const plugin = flexiui(config)
+```
+
+### `generateConfigFromPalette()`
+
+Generate a complete plugin config from a palette:
+
+```typescript
+import { generateConfigFromPalette } from '@flexi-ui/theme'
+
+const config = generateConfigFromPalette(
+  {
+    primary: '#006FEE',
+    secondary: '#7828C8',
+  },
+  {
+    defaultTheme: 'light',
+  }
+)
+
+const plugin = flexiui(config)
+```
+
+## Examples
+
+### Brand Color Integration
+
+Generate a theme from your brand color:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+const BRAND_COLOR = '#006FEE' // Your brand color
+
+const config = generateConfigFromColor(BRAND_COLOR, {
+  defaultTheme: 'light',
+})
+
+export default {
+  plugins: [flexiui(config)],
+}
+```
+
+### Multi-Color Brand
+
+Generate from multiple brand colors:
+
+```typescript
+import { generateConfigFromPalette } from '@flexi-ui/theme'
+
+const config = generateConfigFromPalette(
+  {
+    primary: '#006FEE',    // Brand primary
+    secondary: '#7828C8',   // Brand secondary
+    accent: '#17C964',     // Brand accent
+  },
+  {
+    defaultTheme: 'light',
+  }
+)
+
+const plugin = flexiui(config)
+```
+
+### Custom Color Names
+
+Use custom color names:
+
+```typescript
+import { generateThemeFromColor } from '@flexi-ui/theme'
+
+const theme = generateThemeFromColor('#FF6B6B', {
+  extend: 'light',
+  colorName: 'brand', // Custom name instead of 'primary'
+  generateSemantic: true,
+})
+```
+
+### Without Semantic Colors
+
+Generate only your brand colors:
+
+```typescript
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+const config = generateConfigFromColor('#006FEE', {
+  defaultTheme: 'light',
+  generateSemantic: false, // Don't generate success/warning/danger
+})
+
+const plugin = flexiui(config)
+```
+
+### With Additional Colors
+
+Add custom colors alongside generated ones:
+
+```typescript
+import { generateThemeFromColor } from '@flexi-ui/theme'
+
+const theme = generateThemeFromColor('#006FEE', {
+  extend: 'light',
+  additionalColors: {
+    custom: '#FF6B6B',
+    accent: '#4ECDC4',
+  },
+})
+```
+
+## Advanced Usage
+
+### Combining with Manual Themes
+
+Merge generated themes with manual customizations:
+
+```typescript
+import { generateThemesFromColor } from '@flexi-ui/theme'
+import { flexiui } from '@flexi-ui/theme'
+
+const { light, dark } = generateThemesFromColor('#006FEE')
+
+const plugin = flexiui({
+  themes: {
+    light: {
+      ...light,
+      layout: {
+        radius: {
+          small: '0.25rem', // Override generated radius
+        },
+      },
+    },
+    dark: {
+      ...dark,
+      colors: {
+        ...dark.colors,
+        custom: {
+          DEFAULT: '#FF6B6B',
+        },
+      },
+    },
+  },
+})
+```
+
+### Dynamic Theme Generation
+
+Generate themes dynamically based on user preferences:
+
+```typescript
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+function createUserTheme(brandColor: string, prefersDark: boolean) {
+  return generateConfigFromColor(brandColor, {
+    defaultTheme: prefersDark ? 'dark' : 'light',
+  })
+}
+
+// Usage
+const userConfig = createUserTheme('#006FEE', true)
+const plugin = flexiui(userConfig)
+```
+
+### Theme Variants from Generated Themes
+
+Use generated themes as a base for variants:
+
+```typescript
+import { generateThemesFromColor } from '@flexi-ui/theme'
+import { createThemeVariant } from '@flexi-ui/theme'
+
+const { light } = generateThemesFromColor('#006FEE')
+
+// Create variants
+const blueVariant = createThemeVariant('light', {
+  colors: {
+    primary: light.colors?.primary,
+  },
+})
+
+const greenVariant = createThemeVariant('light', {
+  colors: {
+    primary: {
+      DEFAULT: '#17C964', // Override with green
+    },
+  },
+})
+
+const plugin = flexiui({
+  themes: {
+    light: blueVariant,
+    'light-green': greenVariant,
+  },
+})
+```
+
+## Color Scale Generation
+
+The generator automatically creates full color scales:
+
+```typescript
+import { generateColorScale } from '@flexi-ui/theme'
+
+const scale = generateColorScale('#006FEE')
+
+// Result:
+// {
+//   50: '#E6F1FE',   // Lightest
+//   100: '#CCE3FD',
+//   200: '#99C7FB',
+//   300: '#66ABF9',
+//   400: '#338FF7',
+//   500: '#006FEE',  // Base color
+//   600: '#0059BE',
+//   700: '#00438F',
+//   800: '#002D5F',
+//   900: '#001730',  // Darkest
+//   DEFAULT: '#006FEE',
+//   foreground: '#FFFFFF', // Auto-calculated for contrast
+// }
+```
+
+## Best Practices
+
+### 1. Use Brand Colors
+
+Always use your actual brand colors:
+
+```typescript
+// ✅ Good - uses brand color
+const config = generateConfigFromColor(BRAND_PRIMARY_COLOR)
+
+// ❌ Avoid - arbitrary colors
+const config = generateConfigFromColor('#000000')
+```
+
+### 2. Test Generated Themes
+
+Always test generated themes:
+
+```typescript
+import { generateConfigFromColor } from '@flexi-ui/theme'
+import { assertValidConfig } from '@flexi-ui/theme/test-utils'
+
+const config = generateConfigFromColor('#006FEE')
+assertValidConfig(config) // Ensure it's valid
+```
+
+### 3. Customize When Needed
+
+Don't hesitate to customize generated themes:
+
+```typescript
+const { light } = generateThemesFromColor('#006FEE')
+
+const plugin = flexiui({
+  themes: {
+    light: {
+      ...light,
+      // Override specific values
+      layout: {
+        radius: {
+          small: '0.25rem', // Your preference
+        },
+      },
+    },
+  },
+})
+```
+
+### 4. Generate Both Themes
+
+Always generate both light and dark:
+
+```typescript
+// ✅ Good - both themes
+const { light, dark } = generateThemesFromColor('#006FEE')
+
+// ❌ Avoid - only one theme
+const light = generateThemeFromColor('#006FEE', { extend: 'light' })
+```
+
+## TypeScript Support
+
+All generator functions are fully typed:
+
+```typescript
+import type { ThemeGenOptions } from '@flexi-ui/theme'
+
+const options: ThemeGenOptions = {
+  extend: 'light',
+  generateSemantic: true,
+  colorName: 'primary',
+}
+
+const theme = generateThemeFromColor('#006FEE', options)
+```
+
+## Performance
+
+Theme generation is fast and can be done at build time:
+
+```typescript
+// Generate at build time (recommended)
+const config = generateConfigFromColor('#006FEE')
+
+// Or cache for runtime
+const themeCache = new Map()
+
+function getCachedTheme(color: string) {
+  if (!themeCache.has(color)) {
+    themeCache.set(color, generateConfigFromColor(color))
+  }
+  return themeCache.get(color)
+}
+```
+
+## Next Steps
+
+- **[Theme Presets](/docs/customization/theme-presets)** - Use pre-built themes
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes
+- **[Theme Variants](/docs/customization/custom-variants)** - Create theme variants
+

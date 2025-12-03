@@ -18,6 +18,8 @@ export default defineConfig({
         components: resolve(__dirname, 'src/components/index.ts'),
         utils: resolve(__dirname, 'src/utils/index.ts'),
         colors: resolve(__dirname, 'src/colors/index.ts'),
+        presets: resolve(__dirname, 'src/presets/index.ts'),
+        'test-utils': resolve(__dirname, 'src/test-utils/index.ts'),
       },
       name: '@flexi-ui/theme',
       fileName: (format, entryName) => {

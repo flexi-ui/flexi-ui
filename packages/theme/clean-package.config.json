@@ -22,6 +22,14 @@
       "./colors": {
         "import": "./dist/colors.js",
         "types": "./dist/colors/index.d.ts"
+      },
+      "./presets": {
+        "import": "./dist/presets.js",
+        "types": "./dist/presets/index.d.ts"
+      },
+      "./test-utils": {
+        "import": "./dist/test-utils.js",
+        "types": "./dist/test-utils/index.d.ts"
       }
     }
   }

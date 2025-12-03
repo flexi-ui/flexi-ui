@@ -9,16 +9,6 @@ import { siteConfig } from '@/config/site'
 export const Hero = () => {
   return (
     <section className="relative flex flex-col items-center justify-center min-h-[90vh] px-6 py-20 md:py-32 overflow-hidden">
-      {/* Animated background gradients */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-100/10 via-transparent to-transparent dark:from-primary-900/5" />
-      </div>
-
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-
       <div className="max-w-6xl mx-auto text-center space-y-10 relative z-10">
         {/* Badge with animation */}
         <motion.div
@@ -29,9 +19,7 @@ export const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-divider/50 bg-content1/80 backdrop-blur-md shadow-lg hover:shadow-xl transition-all duration-300">
             <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-            <span className="text-sm font-medium text-foreground">
-              Open source • Free forever • MIT Licensed
-            </span>
+            <span className="text-sm font-medium text-foreground">Open source • MIT Licensed</span>
           </div>
         </motion.div>
 
@@ -42,9 +30,8 @@ export const Hero = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="space-y-6"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
-            Build beautiful
-            <br />
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-mono tracking-tight leading-[1.1]">
+            Build beautiful {` `}
             <span className="relative inline-block">
               <span className="bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                 interfaces
@@ -57,13 +44,13 @@ export const Hero = () => {
               />
             </span>
             <br />
-            <span className="text-foreground-600">faster than ever</span>
+            <span>faster than ever</span>
           </h1>
-          <p className="text-xl md:text-2xl text-foreground-600 max-w-3xl mx-auto leading-relaxed">
-            A modern React UI library with{' '}
-            <span className="font-semibold text-foreground">TypeScript</span>,{' '}
-            <span className="font-semibold text-foreground">accessibility</span>, and{' '}
-            <span className="font-semibold text-foreground">customization</span> at its core.
+          <p className="text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
+            FlexiUI is the modern React UI library built with{' '}
+            <span className="font-semibold text-primary">TypeScript</span>,{' '}
+            <span className="font-semibold text-primary">accessibility</span>, and{' '}
+            <span className="font-semibold text-primary">customization</span> at its core.
           </p>
         </motion.div>
 
@@ -76,23 +63,20 @@ export const Hero = () => {
         >
           <Button
             as={NextLink}
+            radius="full"
             href="/docs/guide/introduction"
-            color="primary"
-            size="lg"
             endContent={<ArrowRight className="h-5 w-5" />}
-            className="font-semibold text-base px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Get Started
           </Button>
           <Button
             as={NextLink}
             href={siteConfig.links.github}
-            variant="bordered"
-            size="lg"
-            startContent={<Github className="h-5 w-5" />}
+            radius="full"
+            variant="flat"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-base px-8 py-6 h-auto hover:bg-content2 transition-all duration-300"
+            startContent={<Github className="h-5 w-5" />}
           >
             View on GitHub
           </Button>
