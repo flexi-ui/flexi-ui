@@ -16,7 +16,7 @@ export const ThemeSwitcher = () => {
   if (!mounted) {
     return (
       <Button isIconOnly size="sm" variant="light" aria-label="Theme switcher loading">
-        <Sun className="h-4 w-4" />
+        <Sun className="size-5" />
       </Button>
     )
   }
@@ -30,7 +30,7 @@ export const ThemeSwitcher = () => {
       onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {theme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
     </Button>
   )
 }

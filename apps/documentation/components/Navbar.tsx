@@ -25,7 +25,7 @@ export const Navbar: FC = () => {
 
   return (
     <>
-      <nav className="flex z-40 w-full items-center justify-center sticky top-0 inset-x-0 bg-background/30 backdrop-blur-sm">
+      <nav className="flex z-40 w-full items-center justify-center sticky py-2 top-0 inset-x-0 backdrop-blur-sm">
         <header className="z-40 flex px-4 sm:px-6 gap-4 w-full flex-row relative flex-nowrap items-center-safe justify-between h-16 max-w-7xl">
           {/* Left: Logo and Desktop Nav */}
           <div className="flex items-center gap-8">
@@ -67,9 +67,8 @@ export const Navbar: FC = () => {
               variant="bordered"
               color="default"
               aria-label="Search"
-              className="min-w-xs max-w-sm w-full justify-between"
+              className="min-w-xs max-w-sm w-full justify-between hidden sm:flex"
               onPress={() => setIsSearchOpen(true)}
-              // className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-default-100 dark:bg-default-50 border border-default-200 hover:bg-default-200 dark:hover:bg-default-100 transition-colors text-foreground hover:text-foreground"
             >
               <span className="flex items-center gap-2">
                 <Search />
@@ -84,12 +83,13 @@ export const Navbar: FC = () => {
             <Button
               isIconOnly
               radius="full"
-              variant="flat"
+              variant="light"
+              color="default"
               aria-label="Search"
               className="sm:hidden"
               onPress={() => setIsSearchOpen(true)}
             >
-              <Search className="h-4 w-4" />
+              <Search className="size-5" />
             </Button>
 
             {/* GitHub Link */}
@@ -104,7 +104,7 @@ export const Navbar: FC = () => {
               rel="noopener noreferrer"
               href={siteConfig.links.github}
             >
-              <Github className="h-4 w-4" />
+              <Github className="size-5" />
             </Button>
 
             {/* Theme Switcher */}
@@ -119,7 +119,7 @@ export const Navbar: FC = () => {
               aria-label="Toggle menu"
               onPress={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {isMobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
             </Button>
           </div>
         </header>
