@@ -1,5 +1,13 @@
 # @flexi-ui/ripple
 
+## 5.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`b627f12`](https://github.com/flexi-ui/flexi-ui/commit/b627f12e61d465dfd73db1031ff7c7c52767f43c)]:
+  - @flexi-ui/theme@2.3.0
+  - @flexi-ui/system@1.1.2
+
 ## 4.0.0
 
 ### Patch Changes

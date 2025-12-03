@@ -1,5 +1,23 @@
 # @flexi-ui/theme
 
+## 2.3.0
+
+### Minor Changes
+
+- [#68](https://github.com/flexi-ui/flexi-ui/pull/68) [`b627f12`](https://github.com/flexi-ui/flexi-ui/commit/b627f12e61d465dfd73db1031ff7c7c52767f43c) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - Modern theme system upgrade with enhanced features:
+  - Added theme presets system (modern, minimal, vibrant)
+  - Added theme generators for programmatic theme creation
+  - Added theme migration utilities
+  - Added theme export/import functionality
+  - Enhanced spacing system with comprehensive scale
+  - Added theme variant utilities
+  - Added theme testing utilities
+  - Added theme preview/visualizer utilities
+  - Improved theme validation and error handling
+  - Updated documentation with new theme features
+  - Created real-time theme generator page
+  - Redesigned documentation UI with modern gradients and gray-shaded backgrounds
+
 ## 2.2.0
 
 ### Minor Changes

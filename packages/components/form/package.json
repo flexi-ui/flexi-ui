@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/form",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A simple implementation to display a form animation when the source component is clicked",
   "type": "module",
   "license": "MIT",
@@ -36,8 +36,8 @@
     "clean": "rm -rf node_modules dist"
   },
   "peerDependencies": {
-    "@flexi-ui/system": ">=1.1.1",
-    "@flexi-ui/theme": ">=2.2.0",
+    "@flexi-ui/system": ">=1.1.2",
+    "@flexi-ui/theme": ">=2.3.0",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },

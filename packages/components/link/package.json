@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/link",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Links allow users to click their way from page to page. This component is styled to resemble a hyperlink and semantically renders an &lt;a&gt; element.",
   "type": "module",
   "license": "MIT",
@@ -38,8 +38,8 @@
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0",
-    "@flexi-ui/theme": ">=2.2.0",
-    "@flexi-ui/system": ">=1.1.1"
+    "@flexi-ui/theme": ">=2.3.0",
+    "@flexi-ui/system": ">=1.1.2"
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",
