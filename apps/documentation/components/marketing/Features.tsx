@@ -58,12 +58,6 @@ const features: Feature[] = [
 export const Features = () => {
   return (
     <section className="px-6 py-24 md:py-32 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary-500/5 rounded-full blur-3xl" />
-      </div>
-
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-20 space-y-6">
@@ -81,7 +75,7 @@ export const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-3xl md:text-4xl font-mono lg:text-5xl font-bold tracking-tight"
           >
             Everything you need to
             <br />
@@ -94,7 +88,7 @@ export const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-foreground-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-base max-w-3xl mx-auto leading-relaxed"
           >
             FlexiUI provides all the tools you need to create beautiful, accessible, and performant
             user interfaces with minimal setup.
@@ -112,7 +106,7 @@ export const Features = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group relative"
             >
-              <div className="relative h-full p-8 rounded-3xl border border-divider bg-content1 hover:bg-content2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
+              <div className="relative h-full p-8 rounded-3xl border overflow-hidden border-divider bg-content1 hover:bg-content2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1">
                 {/* Gradient accent */}
                 <div
                   className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl`}
@@ -126,7 +120,7 @@ export const Features = () => {
                     />
                     <div className="absolute top-4 left-4">
                       <div
-                        className={`p-3 rounded-xl bg-gradient-to-br ${feature.gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                        className={`p-2 rounded-xl bg-gradient-to-br ${feature.gradient} shadow-small group-hover:scale-110 transition-transform duration-300`}
                       >
                         <feature.icon className="h-6 w-6" />
                       </div>
@@ -134,7 +128,7 @@ export const Features = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-2 pt-6">
                     <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                       {feature.title}
                     </h3>

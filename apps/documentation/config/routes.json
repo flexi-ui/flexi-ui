@@ -117,6 +117,26 @@
           "key": "custom-variants",
           "title": "Custom variants",
           "path": "/docs/customization/custom-variants.mdx"
+        },
+        {
+          "key": "theme-presets",
+          "title": "Theme Presets",
+          "path": "/docs/customization/theme-presets.mdx"
+        },
+        {
+          "key": "theme-generators",
+          "title": "Theme Generators",
+          "path": "/docs/customization/theme-generators.mdx"
+        },
+        {
+          "key": "theme-migration",
+          "title": "Theme Migration",
+          "path": "/docs/customization/theme-migration.mdx"
+        },
+        {
+          "key": "theme-export-import",
+          "title": "Theme Export/Import",
+          "path": "/docs/customization/theme-export-import.mdx"
         }
       ]
     },
@@ -126,12 +146,6 @@
       "keywords": "interface elements, interactive components, UI components, widgets",
       "defaultOpen": true,
       "routes": [
-        {
-          "key": "avatar",
-          "title": "Avatar",
-          "keywords": "avatar, profile picture, user representation, identity",
-          "path": "/docs/components/avatar.mdx"
-        },
         {
           "key": "button",
           "title": "Button",

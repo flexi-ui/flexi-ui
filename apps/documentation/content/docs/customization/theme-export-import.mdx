@@ -1,0 +1,488 @@
+---
+title: "Theme Export/Import"
+description: "Export and import theme configurations for sharing, version control, and backup."
+---
+
+# Theme Export/Import
+
+FlexiUI provides utilities to export and import theme configurations, making it easy to share themes, version control them, and create backups.
+
+## Overview
+
+Export/Import utilities support:
+
+- **JSON Export** - Export themes to JSON format
+- **JSON Import** - Import themes from JSON
+- **Backup/Restore** - Create and restore theme backups
+- **Validation** - Validate exported theme formats
+- **Metadata** - Include custom metadata in exports
+
+## Exporting Themes
+
+### Basic Export
+
+Export a complete theme configuration:
+
+```typescript
+import { exportTheme } from '@flexi-ui/theme'
+
+const config = {
+  themes: {
+    light: {
+      colors: {
+        primary: {
+          DEFAULT: '#006FEE',
+        },
+      },
+    },
+    dark: {
+      colors: {
+        primary: {
+          DEFAULT: '#338FF7',
+        },
+      },
+    },
+  },
+  defaultTheme: 'light',
+}
+
+// Export to JSON string
+const json = exportTheme(config)
+
+// Save to file
+fs.writeFileSync('theme.json', json)
+```
+
+### Export with Options
+
+Customize export format:
+
+```typescript
+import { exportTheme } from '@flexi-ui/theme'
+
+const json = exportTheme(config, {
+  includeDefaults: false, // Exclude default values
+  minify: true,           // Minify JSON
+  metadata: {
+    author: 'John Doe',
+    version: '1.0.0',
+    description: 'My custom theme',
+  },
+})
+```
+
+### Export Single Theme
+
+Export just one theme:
+
+```typescript
+import { exportSingleTheme } from '@flexi-ui/theme'
+
+const theme = {
+  colors: {
+    primary: {
+      DEFAULT: '#006FEE',
+    },
+  },
+}
+
+const json = exportSingleTheme(theme, 'my-theme')
+
+// Result includes:
+// {
+//   name: 'my-theme',
+//   theme: { ... },
+//   exportedAt: '2024-01-01T00:00:00.000Z'
+// }
+```
+
+### Export for Download
+
+Export in a format ready for download:
+
+```typescript
+import { exportThemesToFile } from '@flexi-ui/theme'
+
+const json = exportThemesToFile(config, {
+  includeDefaults: true,
+  metadata: {
+    name: 'Corporate Theme',
+    version: '2.0.0',
+  },
+})
+
+// Use in download handler
+function downloadTheme() {
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'theme.json'
+  a.click()
+}
+```
+
+## Importing Themes
+
+### Basic Import
+
+Import a theme from JSON:
+
+```typescript
+import { importTheme } from '@flexi-ui/theme'
+
+// Read from file
+const json = fs.readFileSync('theme.json', 'utf-8')
+
+// Import
+const config = importTheme(json)
+
+// Use with plugin
+const plugin = flexiui(config)
+```
+
+### Import Single Theme
+
+Import a single theme:
+
+```typescript
+import { importSingleTheme } from '@flexi-ui/theme'
+
+const json = `{
+  "name": "my-theme",
+  "theme": {
+    "colors": {
+      "primary": {
+        "DEFAULT": "#006FEE"
+      }
+    }
+  }
+}`
+
+const { name, theme } = importSingleTheme(json)
+
+// Use theme
+const plugin = flexiui({
+  themes: {
+    [name]: theme,
+  },
+})
+```
+
+### Import from File
+
+Import from a file-like format:
+
+```typescript
+import { importThemesFromFile } from '@flexi-ui/theme'
+
+// From file upload
+function handleFileUpload(file: File) {
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    const json = e.target?.result as string
+    const config = importThemesFromFile(json)
+    const plugin = flexiui(config)
+  }
+  reader.readAsText(file)
+}
+```
+
+### Validate Before Import
+
+Validate exported theme format:
+
+```typescript
+import { validateExportedTheme, importTheme } from '@flexi-ui/theme'
+
+const json = fs.readFileSync('theme.json', 'utf-8')
+
+// Validate first
+const validation = validateExportedTheme(json)
+
+if (validation.valid) {
+  const config = importTheme(json)
+} else {
+  console.error('Invalid theme format:', validation.error)
+}
+```
+
+## Backup and Restore
+
+### Create Backup
+
+Create a backup of your theme:
+
+```typescript
+import { createThemeBackup } from '@flexi-ui/theme'
+
+const config = {
+  themes: {
+    light: { /* ... */ },
+    dark: { /* ... */ },
+  },
+}
+
+// Create backup
+const backup = createThemeBackup(config)
+
+// Save to file
+fs.writeFileSync('theme-backup.json', backup)
+
+// Or store in database
+await db.themes.save({
+  name: 'backup-2024-01-01',
+  data: backup,
+})
+```
+
+### Restore from Backup
+
+Restore a theme from backup:
+
+```typescript
+import { restoreThemeFromBackup } from '@flexi-ui/theme'
+
+// Load backup
+const backup = fs.readFileSync('theme-backup.json', 'utf-8')
+
+// Restore
+const config = restoreThemeFromBackup(backup)
+
+// Use restored config
+const plugin = flexiui(config)
+```
+
+### Version Control
+
+Use with version control:
+
+```typescript
+import { exportTheme } from '@flexi-ui/theme'
+
+// Export with version info
+const json = exportTheme(config, {
+  metadata: {
+    version: '1.2.3',
+    gitCommit: process.env.GIT_COMMIT,
+    buildDate: new Date().toISOString(),
+  },
+})
+
+// Commit to git
+fs.writeFileSync('themes/v1.2.3.json', json)
+```
+
+## Examples
+
+### Complete Export/Import Workflow
+
+```typescript
+import { exportTheme, importTheme } from '@flexi-ui/theme'
+import { flexiui } from '@flexi-ui/theme'
+
+// 1. Export current theme
+const currentConfig = {
+  themes: {
+    light: { /* ... */ },
+  },
+}
+
+const exported = exportTheme(currentConfig, {
+  metadata: {
+    name: 'Production Theme',
+    version: '1.0.0',
+  },
+})
+
+// 2. Save to file
+fs.writeFileSync('themes/production-v1.0.0.json', exported)
+
+// 3. Later, import it
+const imported = importTheme(
+  fs.readFileSync('themes/production-v1.0.0.json', 'utf-8')
+)
+
+// 4. Use imported theme
+const plugin = flexiui(imported)
+```
+
+### Theme Sharing
+
+Share themes between projects:
+
+```typescript
+// Project A - Export
+import { exportTheme } from '@flexi-ui/theme'
+
+const config = { /* theme config */ }
+const json = exportTheme(config, {
+  includeDefaults: true,
+  metadata: {
+    project: 'Project A',
+    exportedBy: 'John Doe',
+  },
+})
+
+// Share JSON (via API, file, etc.)
+
+// Project B - Import
+import { importTheme } from '@flexi-ui/theme'
+
+const sharedJson = /* from Project A */
+const config = importTheme(sharedJson)
+const plugin = flexiui(config)
+```
+
+### Theme Versioning
+
+Version your themes:
+
+```typescript
+import { exportTheme } from '@flexi-ui/theme'
+
+function exportVersionedTheme(config: FlexiUIPluginConfig, version: string) {
+  return exportTheme(config, {
+    metadata: {
+      version,
+      exportedAt: new Date().toISOString(),
+    },
+  })
+}
+
+// Export versions
+const v1 = exportVersionedTheme(config, '1.0.0')
+const v2 = exportVersionedTheme(config, '2.0.0')
+
+fs.writeFileSync('themes/v1.0.0.json', v1)
+fs.writeFileSync('themes/v2.0.0.json', v2)
+```
+
+### Theme Migration Tool
+
+Build a migration tool:
+
+```typescript
+import { exportTheme, importTheme } from '@flexi-ui/theme'
+
+async function migrateTheme(
+  sourcePath: string,
+  targetPath: string
+) {
+  // 1. Import old theme
+  const oldJson = fs.readFileSync(sourcePath, 'utf-8')
+  const oldConfig = importTheme(oldJson)
+
+  // 2. Transform (if needed)
+  const newConfig = {
+    ...oldConfig,
+    // Add any transformations
+  }
+
+  // 3. Export new theme
+  const newJson = exportTheme(newConfig, {
+    metadata: {
+      migratedFrom: sourcePath,
+      migratedAt: new Date().toISOString(),
+    },
+  })
+
+  // 4. Save
+  fs.writeFileSync(targetPath, newJson)
+}
+```
+
+## Best Practices
+
+### 1. Always Validate
+
+Validate before importing:
+
+```typescript
+import { validateExportedTheme, importTheme } from '@flexi-ui/theme'
+
+const json = /* ... */
+const validation = validateExportedTheme(json)
+
+if (!validation.valid) {
+  throw new Error(`Invalid theme: ${validation.error}`)
+}
+
+const config = importTheme(json)
+```
+
+### 2. Include Metadata
+
+Always include metadata:
+
+```typescript
+const json = exportTheme(config, {
+  metadata: {
+    version: '1.0.0',
+    author: 'Team Name',
+    description: 'Theme description',
+    exportedAt: new Date().toISOString(),
+  },
+})
+```
+
+### 3. Version Your Exports
+
+Use versioning:
+
+```typescript
+function exportVersioned(config: FlexiUIPluginConfig) {
+  return exportTheme(config, {
+    metadata: {
+      version: getVersion(),
+      gitCommit: getGitCommit(),
+    },
+  })
+}
+```
+
+### 4. Backup Regularly
+
+Create regular backups:
+
+```typescript
+import { createThemeBackup } from '@flexi-ui/theme'
+
+function backupTheme(config: FlexiUIPluginConfig) {
+  const backup = createThemeBackup(config)
+  const filename = `backup-${Date.now()}.json`
+  fs.writeFileSync(`backups/${filename}`, backup)
+}
+
+// Schedule regular backups
+setInterval(() => {
+  backupTheme(currentConfig)
+}, 24 * 60 * 60 * 1000) // Daily
+```
+
+## Export Format
+
+The exported format includes:
+
+```typescript
+{
+  version: '1.0.0',
+  metadata: {
+    // Your custom metadata
+  },
+  config: {
+    // Your theme configuration
+    themes: { /* ... */ },
+    defaultTheme: 'light',
+    // etc.
+  },
+  exportedAt: '2024-01-01T00:00:00.000Z',
+}
+```
+
+## Next Steps
+
+- **[Theme Migration](/docs/customization/theme-migration)** - Migrate from other systems
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes
+- **[Theme Presets](/docs/customization/theme-presets)** - Use pre-built themes
+

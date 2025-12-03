@@ -1,0 +1,525 @@
+---
+title: "Theme Migration"
+description: "Migrate themes from other systems to FlexiUI using migration utilities."
+---
+
+# Theme Migration
+
+FlexiUI provides utilities to help you migrate themes from other systems, making it easy to adopt FlexiUI while preserving your existing design tokens.
+
+## Overview
+
+Migration utilities support:
+
+- **Tailwind CSS** - Migrate from Tailwind config
+- **CSS Variables** - Import from CSS custom properties
+- **Generic Themes** - Convert from any theme object
+- **Migration Reports** - See what was migrated
+
+## Migrating from Tailwind CSS
+
+### Basic Migration
+
+Migrate colors from your Tailwind configuration:
+
+```typescript
+import { migrateFromTailwindConfig } from '@flexi-ui/theme'
+import { flexiui } from '@flexi-ui/theme'
+
+// Your existing Tailwind config
+const tailwindConfig = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6', // Base color
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+        primary: '#3b82f6',
+        secondary: '#8b5cf6',
+      },
+    },
+  },
+}
+
+// Migrate to FlexiUI
+const flexiConfig = migrateFromTailwindConfig(tailwindConfig)
+
+// Use with plugin
+const plugin = flexiui(flexiConfig)
+```
+
+### Color Scale Mapping
+
+Tailwind color scales are automatically mapped:
+
+```typescript
+// Tailwind format
+{
+  colors: {
+    brand: {
+      500: '#3b82f6', // Maps to DEFAULT
+      600: '#2563eb', // Maps to 600
+      // etc.
+    },
+  },
+}
+
+// FlexiUI format (after migration)
+{
+  colors: {
+    brand: {
+      DEFAULT: '#3b82f6', // From 500
+      600: '#2563eb',
+      // etc.
+    },
+  },
+}
+```
+
+## Migrating from CSS Variables
+
+### Basic Migration
+
+Import themes from CSS custom properties:
+
+```typescript
+import { migrateFromCSSVariables } from '@flexi-ui/theme'
+
+// Your CSS variables
+const cssVariables = {
+  '--primary': '#006FEE',
+  '--secondary': '#7828C8',
+  '--success': '#17C964',
+  '--warning': '#F5A524',
+  '--danger': '#F31260',
+  '--background': '#FFFFFF',
+  '--foreground': '#11181C',
+}
+
+// Migrate to FlexiUI
+const flexiConfig = migrateFromCSSVariables(cssVariables)
+
+const plugin = flexiui(flexiConfig)
+```
+
+### Variable Name Mapping
+
+Common CSS variable names are automatically mapped:
+
+- `--primary` → `primary`
+- `--secondary` → `secondary`
+- `--success` → `success`
+- `--warning` → `warning`
+- `--danger` or `--error` → `danger`
+- `--background` → `background`
+- `--foreground` → `foreground`
+
+### Custom Prefix Support
+
+Works with custom prefixes:
+
+```typescript
+const cssVariables = {
+  '--my-app-primary': '#006FEE',
+  '--my-app-secondary': '#7828C8',
+  '--flexi-ui-primary': '#006FEE', // Also supported
+}
+
+const flexiConfig = migrateFromCSSVariables(cssVariables)
+```
+
+## Migrating from Generic Themes
+
+### Basic Migration
+
+Convert from any theme object structure:
+
+```typescript
+import { migrateFromGenericTheme } from '@flexi-ui/theme'
+
+// Your existing theme (any structure)
+const existingTheme = {
+  colors: {
+    primary: '#006FEE',
+    secondary: '#7828C8',
+    accent: '#17C964',
+  },
+  layout: {
+    borderRadius: {
+      small: '0.5rem',
+      medium: '0.75rem',
+      large: '1rem',
+    },
+  },
+}
+
+// Migrate to FlexiUI format
+const flexiTheme = migrateFromGenericTheme(existingTheme)
+
+// Use in config
+const plugin = flexiui({
+  themes: {
+    light: flexiTheme,
+  },
+})
+```
+
+### Supported Structures
+
+The migration utility handles various theme structures:
+
+```typescript
+// Simple string colors
+{
+  colors: {
+    primary: '#006FEE',
+  },
+}
+
+// Color scale objects
+{
+  colors: {
+    primary: {
+      50: '#eff6ff',
+      500: '#3b82f6',
+      900: '#1e3a8a',
+    },
+  },
+}
+
+// Mixed structures
+{
+  colors: {
+    primary: '#006FEE', // String
+    secondary: {         // Object
+      500: '#7828C8',
+    },
+  },
+}
+```
+
+## Migration Reports
+
+### Generate Reports
+
+Get detailed information about what was migrated:
+
+```typescript
+import { migrateFromTailwindConfig, createMigrationReport } from '@flexi-ui/theme'
+
+const tailwindConfig = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#006FEE',
+        secondary: '#7828C8',
+      },
+    },
+  },
+}
+
+const flexiConfig = migrateFromTailwindConfig(tailwindConfig)
+const report = createMigrationReport('Tailwind CSS', flexiConfig)
+
+console.log(report)
+// {
+//   source: 'Tailwind CSS',
+//   migrated: true,
+//   themesCount: 1,
+//   colorsCount: 2,
+//   warnings: []
+// }
+```
+
+### Handling Warnings
+
+Check for migration issues:
+
+```typescript
+const report = createMigrationReport('CSS Variables', flexiConfig)
+
+if (report.warnings.length > 0) {
+  console.warn('Migration warnings:', report.warnings)
+  // Handle warnings
+}
+
+if (!report.migrated) {
+  console.error('Migration failed - no themes or colors migrated')
+}
+```
+
+## Complete Examples
+
+### Full Tailwind Migration
+
+```typescript
+// tailwind.config.ts (old)
+export default {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+      },
+    },
+  },
+}
+
+// tailwind.config.ts (new with FlexiUI)
+import { flexiui } from '@flexi-ui/theme'
+import { migrateFromTailwindConfig } from '@flexi-ui/theme'
+
+const oldConfig = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#eff6ff',
+          500: '#3b82f6',
+          900: '#1e3a8a',
+        },
+      },
+    },
+  },
+}
+
+const flexiConfig = migrateFromTailwindConfig(oldConfig)
+
+export default {
+  plugins: [
+    flexiui({
+      ...flexiConfig,
+      // Add any additional FlexiUI-specific config
+    }),
+  ],
+}
+```
+
+### CSS Variables to FlexiUI
+
+```typescript
+// Extract from existing CSS
+const existingCSS = `
+  :root {
+    --primary: #006FEE;
+    --secondary: #7828C8;
+    --background: #FFFFFF;
+    --foreground: #11181C;
+  }
+`
+
+// Parse and migrate
+const cssVariables = {
+  '--primary': '#006FEE',
+  '--secondary': '#7828C8',
+  '--background': '#FFFFFF',
+  '--foreground': '#11181C',
+}
+
+const flexiConfig = migrateFromCSSVariables(cssVariables)
+
+const plugin = flexiui(flexiConfig)
+```
+
+### Chakra UI Migration
+
+```typescript
+// Chakra UI theme
+const chakraTheme = {
+  colors: {
+    brand: {
+      50: '#eff6ff',
+      500: '#3b82f6',
+      900: '#1e3a8a',
+    },
+  },
+}
+
+// Migrate to FlexiUI
+const flexiTheme = migrateFromGenericTheme(chakraTheme)
+
+const plugin = flexiui({
+  themes: {
+    light: {
+      colors: {
+        primary: flexiTheme.colors?.brand,
+      },
+    },
+  },
+})
+```
+
+### Material-UI Migration
+
+```typescript
+// MUI theme
+const muiTheme = {
+  palette: {
+    primary: {
+      main: '#006FEE',
+      light: '#338FF7',
+      dark: '#0059BE',
+    },
+    secondary: {
+      main: '#7828C8',
+    },
+  },
+}
+
+// Convert to generic format first
+const genericTheme = {
+  colors: {
+    primary: muiTheme.palette.primary.main,
+    secondary: muiTheme.palette.secondary.main,
+  },
+}
+
+// Then migrate
+const flexiTheme = migrateFromGenericTheme(genericTheme)
+```
+
+## Best Practices
+
+### 1. Validate After Migration
+
+Always validate migrated themes:
+
+```typescript
+import { migrateFromTailwindConfig } from '@flexi-ui/theme'
+import { assertValidConfig } from '@flexi-ui/theme/test-utils'
+
+const flexiConfig = migrateFromTailwindConfig(tailwindConfig)
+assertValidConfig(flexiConfig) // Ensure it's valid
+```
+
+### 2. Review Migration Reports
+
+Check what was migrated:
+
+```typescript
+const report = createMigrationReport('Tailwind CSS', flexiConfig)
+
+if (report.colorsCount === 0) {
+  console.warn('No colors were migrated - check your source config')
+}
+```
+
+### 3. Test Migrated Themes
+
+Test your migrated themes thoroughly:
+
+```typescript
+const flexiConfig = migrateFromTailwindConfig(tailwindConfig)
+
+// Test in both themes
+const plugin = flexiui(flexiConfig)
+
+// Use in your app and test all components
+```
+
+### 4. Customize After Migration
+
+Don't hesitate to customize after migration:
+
+```typescript
+const flexiConfig = migrateFromTailwindConfig(tailwindConfig)
+
+const plugin = flexiui({
+  ...flexiConfig,
+  themes: {
+    ...flexiConfig.themes,
+    light: {
+      ...flexiConfig.themes?.light,
+      // Add FlexiUI-specific customizations
+      layout: {
+        radius: {
+          small: '0.5rem',
+        },
+      },
+    },
+  },
+})
+```
+
+## Troubleshooting
+
+### No Colors Migrated
+
+**Problem:** Migration returns empty colors.
+
+**Solution:** Check your source format:
+
+```typescript
+// ✅ Correct Tailwind format
+{
+  theme: {
+    extend: {
+      colors: {
+        primary: '#006FEE',
+      },
+    },
+  },
+}
+
+// ❌ Wrong format
+{
+  colors: {
+    primary: '#006FEE', // Missing theme.extend
+  },
+}
+```
+
+### Color Scales Not Mapped
+
+**Problem:** Color scales not properly converted.
+
+**Solution:** Ensure proper Tailwind scale format:
+
+```typescript
+// ✅ Correct - has 500 key
+{
+  colors: {
+    brand: {
+      500: '#3b82f6', // Required for DEFAULT
+      600: '#2563eb',
+    },
+  },
+}
+```
+
+### CSS Variables Not Recognized
+
+**Problem:** CSS variables not mapped to colors.
+
+**Solution:** Use recognized variable names or check mapping:
+
+```typescript
+// ✅ Recognized names
+'--primary', '--secondary', '--background'
+
+// ❌ Unrecognized (will be skipped)
+'--custom-color', '--my-brand'
+```
+
+## Next Steps
+
+- **[Theme Export/Import](/docs/customization/theme-export-import)** - Share and version themes
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes
+- **[Theme Presets](/docs/customization/theme-presets)** - Use pre-built themes
+

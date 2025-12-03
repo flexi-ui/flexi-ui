@@ -14,14 +14,15 @@ export interface LogoProps extends IconSvgProps {
   size?: number
 }
 
-export const Logo: React.FC<LogoProps> = ({ auto, className, ...props }) => (
+export const Logo: React.FC<LogoProps> = ({ auto, className, fill, ...props }) => (
   <svg
     viewBox="0 0 1366 248"
     data-auto={dataAttr(auto)}
     className={cn(
-      'data-[auto=true]:hidden sm:data-[auto=true]:block block text-foreground h-5 md:h-6 fill-[#761AE8]',
+      'data-[auto=true]:hidden sm:data-[auto=true]:block block text-foreground h-5 md:h-6 fill-primary',
       className,
     )}
+    fill={fill}
     {...props}
   >
     <g transform="translate(0.000000,248.000000) scale(0.100000,-0.100000)" stroke="none">

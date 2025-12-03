@@ -325,6 +325,27 @@ Corresponding line heights for each font size:
 
 ## Spacing & Layout
 
+### Enhanced Spacing System
+
+FlexiUI includes a comprehensive spacing scale for consistent layouts:
+
+```typescript
+{
+  layout: {
+    spacing: {
+      xs: '0.25rem',   // 4px
+      sm: '0.5rem',    // 8px
+      md: '0.75rem',   // 12px
+      lg: '1rem',      // 16px
+      xl: '1.5rem',    // 24px
+      '2xl': '2rem',   // 32px
+      '3xl': '3rem',   // 48px
+      '4xl': '4rem',   // 64px
+    },
+  },
+}
+```
+
 ### Border Radius
 
 Consistent border radius values:
@@ -925,12 +946,52 @@ const customTheme: FlexiUITheme = {
 }
 ```
 
+## Theme Presets
+
+FlexiUI includes pre-built theme presets for quick starts:
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+// Use a preset
+const plugin = flexiui(createConfigFromPreset('modern'))
+```
+
+Available presets:
+- **Modern** - Clean, contemporary design with vibrant colors
+- **Minimal** - Clean, minimal design with subtle colors
+- **Vibrant** - Bold, colorful design with high contrast
+
+Learn more in the [Theme Presets](/docs/customization/theme-presets) guide.
+
+## Theme Generators
+
+Generate themes programmatically from colors:
+
+```typescript
+import { generateConfigFromColor } from '@flexi-ui/theme'
+
+// Generate from brand color
+const config = generateConfigFromColor('#006FEE', {
+  defaultTheme: 'light'
+})
+
+const plugin = flexiui(config)
+```
+
+Learn more in the [Theme Generators](/docs/customization/theme-generators) guide.
+
 ## Next Steps
 
 Now that you understand the theme system, explore:
 
+- **[Theme Presets](/docs/customization/theme-presets)** - Use pre-built themes
+- **[Theme Generators](/docs/customization/theme-generators)** - Generate themes programmatically
 - **[Colors Guide](/docs/customization/colors)** - Work with color palettes
 - **[Dark Mode](/docs/customization/dark-mode)** - Implement dark mode
 - **[Customize Theme](/docs/customization/customize-theme)** - Advanced customization
 - **[Create Theme](/docs/customization/create-theme)** - Build custom themes from scratch
+- **[Theme Migration](/docs/customization/theme-migration)** - Migrate from other systems
+- **[Theme Export/Import](/docs/customization/theme-export-import)** - Share and version themes
 

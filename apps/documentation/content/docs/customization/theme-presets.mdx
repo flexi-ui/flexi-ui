@@ -1,0 +1,397 @@
+---
+title: "Theme Presets"
+description: "Use pre-built theme presets to get started quickly with FlexiUI."
+---
+
+# Theme Presets
+
+FlexiUI includes pre-built theme presets that you can use out of the box or customize to match your brand.
+
+## Overview
+
+Theme presets are complete, ready-to-use theme configurations that provide a great starting point for your application. They include:
+
+- Complete color palettes with full scales
+- Light and dark theme variants
+- Optimized layout tokens
+- WCAG-compliant contrast ratios
+
+## Available Presets
+
+### Modern Preset
+
+Clean, contemporary design with vibrant colors. Perfect for modern web applications.
+
+```typescript
+import { flexiui } from '@flexi-ui/theme'
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+const plugin = flexiui(createConfigFromPreset('modern'))
+```
+
+**Features:**
+- Vibrant primary colors (blue)
+- Rich secondary colors (purple)
+- High contrast for accessibility
+- Modern border radius values
+
+### Minimal Preset
+
+Clean, minimal design with subtle colors. Ideal for content-focused applications.
+
+```typescript
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+const plugin = flexiui(createConfigFromPreset('minimal'))
+```
+
+**Features:**
+- Subtle, neutral colors
+- Minimal border radius
+- Clean, professional appearance
+- Perfect for corporate applications
+
+### Vibrant Preset
+
+Bold, colorful design with high contrast. Great for creative and marketing applications.
+
+```typescript
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+const plugin = flexiui(createConfigFromPreset('vibrant'))
+```
+
+**Features:**
+- Bold, eye-catching colors
+- High contrast ratios
+- Larger border radius for playful feel
+- Perfect for marketing sites
+
+## Using Presets
+
+### Basic Usage
+
+The simplest way to use a preset:
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+export default {
+  plugins: [
+    flexiui(createConfigFromPreset('modern')),
+  ],
+}
+```
+
+### Customizing Presets
+
+Merge a preset with your custom themes:
+
+```typescript
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+const config = createConfigFromPreset('modern', {
+  themes: {
+    custom: {
+      colors: {
+        primary: {
+          DEFAULT: '#FF0000', // Override primary color
+        },
+      },
+    },
+  },
+})
+
+const plugin = flexiui(config)
+```
+
+### Merging Presets with Custom Themes
+
+Use `mergePresetWithThemes` to combine presets with your themes:
+
+```typescript
+import { mergePresetWithThemes } from '@flexi-ui/theme/presets'
+
+const themes = mergePresetWithThemes('modern', {
+  corporate: {
+    colors: {
+      primary: {
+        DEFAULT: '#003366', // Corporate blue
+      },
+    },
+  },
+})
+
+const plugin = flexiui({ themes })
+```
+
+## Preset Details
+
+### Modern Preset Colors
+
+```typescript
+{
+  light: {
+    colors: {
+      primary: {
+        DEFAULT: '#006FEE',
+        // Full color scale 50-900
+      },
+      secondary: {
+        DEFAULT: '#7828C8',
+        // Full color scale
+      },
+      success: '#17C964',
+      warning: '#F5A524',
+      danger: '#F31260',
+    },
+  },
+  dark: {
+    // Inverted color scales for dark mode
+  },
+}
+```
+
+### Minimal Preset Colors
+
+```typescript
+{
+  light: {
+    colors: {
+      primary: {
+        DEFAULT: '#000000',
+        // Grayscale palette
+      },
+      secondary: {
+        DEFAULT: '#6B7280',
+        // Neutral grays
+      },
+    },
+  },
+  dark: {
+    // Light grays for dark mode
+  },
+}
+```
+
+### Vibrant Preset Colors
+
+```typescript
+{
+  light: {
+    colors: {
+      primary: {
+        DEFAULT: '#FF006E', // Hot pink
+        // Full vibrant scale
+      },
+      secondary: {
+        DEFAULT: '#8338EC', // Purple
+        // Full vibrant scale
+      },
+      success: '#06FFA5', // Neon green
+      warning: '#FFBE0B', // Bright yellow
+      danger: '#FB5607', // Orange-red
+    },
+  },
+  dark: {
+    // Vibrant dark variants
+  },
+}
+```
+
+## Preset Layout Tokens
+
+All presets include optimized layout tokens:
+
+```typescript
+{
+  layout: {
+    radius: {
+      small: '0.5rem',   // Modern & Minimal
+      medium: '0.75rem',
+      large: '1rem',
+    },
+    // Vibrant preset uses larger radius:
+    // small: '0.75rem',
+    // medium: '1rem',
+    // large: '1.5rem',
+  },
+}
+```
+
+## Examples
+
+### Using Modern Preset
+
+```typescript
+// tailwind.config.ts
+import { flexiui } from '@flexi-ui/theme'
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+export default {
+  plugins: [
+    flexiui(createConfigFromPreset('modern')),
+  ],
+}
+```
+
+```tsx
+// app.tsx
+import { FlexiUIProvider } from '@flexi-ui/system'
+
+function App() {
+  return (
+    <FlexiUIProvider>
+      {/* Your app with modern theme */}
+    </FlexiUIProvider>
+  )
+}
+```
+
+### Extending a Preset
+
+```typescript
+import { createConfigFromPreset } from '@flexi-ui/theme/presets'
+
+const config = createConfigFromPreset('modern', {
+  themes: {
+    light: {
+      layout: {
+        radius: {
+          small: '0.25rem', // Override radius
+        },
+      },
+    },
+  },
+  defaultTheme: 'dark',
+  prefix: 'my-app',
+})
+
+const plugin = flexiui(config)
+```
+
+### Creating Custom Preset Variants
+
+```typescript
+import { mergePresetWithThemes } from '@flexi-ui/theme/presets'
+
+// Start with modern preset
+const themes = mergePresetWithThemes('modern', {
+  // Add custom theme variants
+  'modern-blue': {
+    extend: 'light',
+    colors: {
+      primary: {
+        DEFAULT: '#0066CC', // Custom blue
+      },
+    },
+  },
+  'modern-green': {
+    extend: 'light',
+    colors: {
+      primary: {
+        DEFAULT: '#00CC66', // Custom green
+      },
+    },
+  },
+})
+
+const plugin = flexiui({ themes })
+```
+
+## Preset Comparison
+
+| Feature | Modern | Minimal | Vibrant |
+|---------|--------|---------|---------|
+| Primary Color | Blue (#006FEE) | Black (#000000) | Hot Pink (#FF006E) |
+| Secondary Color | Purple (#7828C8) | Gray (#6B7280) | Purple (#8338EC) |
+| Border Radius | Medium | Small | Large |
+| Best For | Web Apps | Corporate | Marketing |
+| Contrast | High | Medium | Very High |
+
+## Best Practices
+
+### 1. Start with a Preset
+
+Begin with a preset that matches your brand style:
+
+```typescript
+// Choose based on your brand
+const preset = isCorporate ? 'minimal' : 'modern'
+const plugin = flexiui(createConfigFromPreset(preset))
+```
+
+### 2. Customize Gradually
+
+Start with a preset and customize only what you need:
+
+```typescript
+const config = createConfigFromPreset('modern', {
+  themes: {
+    light: {
+      colors: {
+        // Only override what's different
+        primary: {
+          DEFAULT: '#YOUR_BRAND_COLOR',
+        },
+      },
+    },
+  },
+})
+```
+
+### 3. Test in Both Themes
+
+Always test your customizations in both light and dark modes:
+
+```tsx
+<FlexiUIProvider theme="light">
+  <YourComponent />
+</FlexiUIProvider>
+
+<FlexiUIProvider theme="dark">
+  <YourComponent />
+</FlexiUIProvider>
+```
+
+### 4. Maintain Contrast
+
+When customizing presets, ensure you maintain proper contrast:
+
+```typescript
+import { generateColorScale } from '@flexi-ui/theme'
+
+const primaryScale = generateColorScale('#YOUR_COLOR')
+const config = createConfigFromPreset('modern', {
+  themes: {
+    light: {
+      colors: {
+        primary: {
+          ...primaryScale,
+          foreground: '#FFFFFF', // Ensure good contrast
+        },
+      },
+    },
+  },
+})
+```
+
+## TypeScript Support
+
+All presets are fully typed:
+
+```typescript
+import type { PresetName } from '@flexi-ui/theme/presets'
+
+const presetName: PresetName = 'modern' // Type-safe preset names
+const config = createConfigFromPreset(presetName)
+```
+
+## Next Steps
+
+- **[Theme Generators](/docs/customization/theme-generators)** - Generate themes from colors
+- **[Create Theme](/docs/customization/create-theme)** - Build custom themes
+- **[Customize Theme](/docs/customization/customize-theme)** - Advanced customization
+
