@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 import { withContentlayer } from 'next-contentlayer2'
-import redirects from './config/redirects.mjs'
+import redirects from './config/redirects'
 
 const nextConfig: NextConfig = {
   redirects,

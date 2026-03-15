@@ -3,8 +3,8 @@
   "version": "1.0.4",
   "private": true,
   "scripts": {
-    "lint": "next lint",
-    "build": "contentlayer2 build && next build",
+    "lint": "eslint .",
+    "build": "contentlayer2 build && next build --webpack",
     "postbuild": "next-sitemap",
     "start": "next start",
     "dev": "rimraf .contentlayer && concurrently \"contentlayer2 dev\" \"next dev --turbopack\"",
