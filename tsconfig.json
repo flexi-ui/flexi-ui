@@ -1,32 +1,7 @@
 {
+  "extends": "@flexi-ui/standard/tsconfig/react",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "declaration": true,
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "lib": ["dom", "esnext"],
-    "types": ["@testing-library/jest-dom", "node"],
-
-    /* Bundler mode */
-    "noEmit": true,
-    "sourceMap": true,
-    "jsx": "react-jsx",
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "downlevelIteration": true,
-    "moduleDetection": "force",
-    "allowImportingTsExtensions": true,
-
-    /* Linting */
-    "strict": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "noUncheckedSideEffectImports": true
+    "types": ["@testing-library/jest-dom", "node"]
   },
   "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["**/node_modules", "**/dist", "**/coverage", "**/.nx"]
