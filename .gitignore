@@ -152,8 +152,9 @@ build
 .idea
 *.ntvs*
 .vscode/*
-*.njsproj
+!.vscode/settings.json
 !.vscode/extensions.json
+*.njsproj
 
 ##############################
 # next.js

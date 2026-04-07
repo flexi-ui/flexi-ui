@@ -1,0 +1,148 @@
+# FlexiUI - Cursor Rules
+
+You are an expert senior developer working on FlexiUI, a modern React UI component library built with Tailwind CSS v4, published as individual npm packages in a pnpm monorepo managed by Nx.
+
+## Project Context
+
+- **Monorepo**: pnpm workspaces + Nx for build orchestration
+- **Framework**: React 19+ with TypeScript
+- **Styling**: Tailwind CSS v4 + tailwind-variants (tv()) + BEM CSS classes
+- **Accessibility**: React Aria Components (react-aria-components)
+- **Testing**: Vitest
+- **Storybook**: Component development & visual testing
+- **Versioning**: Changesets
+- **Package scope**: `@flexi-ui/*` - each component is a separate npm package
+
+## Architecture Rules
+
+### Component Pattern
+
+Every component follows a **compound component pattern** (similar to Radix UI), built on top of **React Aria Components**:
+
+```typescript
+"use client";
+
+import { createContext, useContext, forwardRef, useMemo } from "react";
+import { Button as ButtonPrimitive } from "react-aria-components";
+import { tv, type VariantProps } from "tailwind-variants";
+import { composeTwRenderProps } from "@flexi-ui/react-utils";
+
+// 1. Styles in separate .styles.ts file
+// 2. Context for compound components
+// 3. Root component with forwardRef
+// 4. Sub-components consuming context
+// 5. Object.assign for compound export
+// 6. Default export
+```
+
+### File Structure (per component package)
+
+```
+packages/components/component-name/
+├── src/
+│   ├── component-name.tsx        # Component implementation
+│   ├── component-name.styles.ts  # Tailwind Variants (tv())
+│   ├── main.ts                   # Barrel exports
+│   └── use-component-name.ts     # Hook (if needed)
+├── stories/
+│   └── component-name.stories.tsx
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
+
+### Styling Rules
+
+1. **ALWAYS** define styles in `.styles.ts` files using `tv()` from `tailwind-variants`
+2. **NEVER** use `twMerge` manually - `tailwind-variants` includes it
+3. **ALWAYS** import from `tailwind-variants`, never from `@flexi-ui/standard`
+4. CSS files use BEM naming: `.button`, `.button--primary`, `.button__icon`
+5. Base classes include default size (md equivalent)
+6. Medium variants (`--md`) are empty with comment
+
+### CSS BEM Pattern
+
+```css
+.component {
+  @apply [base-styles] [default-md-size];
+}
+
+.component--sm { @apply [small-overrides]; }
+.component--md { /* No styles - default size */ }
+.component--lg { @apply [large-overrides]; }
+.component--primary { @apply [primary-styles]; }
+
+.component__child { @apply [child-styles]; }
+```
+
+### Interactive States (REQUIRED for all interactive components)
+
+```css
+.component {
+  &:hover, &[data-hovered="true"] { /* hover styles */ }
+  &:active, &[data-pressed="true"] { /* pressed styles */ }
+  &:focus-visible, &[data-focus-visible="true"] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  &:disabled, &[aria-disabled="true"] {
+    @apply pointer-events-none opacity-[var(--disabled-opacity)];
+  }
+}
+```
+
+### Export Pattern
+
+```typescript
+// Compound component
+const CompoundComponent = Object.assign(ComponentRoot, {
+  Item: ComponentItem,
+  Trigger: ComponentTrigger,
+  Content: ComponentContent,
+});
+
+export default CompoundComponent;
+export type { ComponentRootProps, ComponentItemProps };
+export { componentVariants, type ComponentVariants } from "./component.styles";
+```
+
+### React Aria Components className
+
+- **Render prop components** (Button, Checkbox, etc.): Use `composeTwRenderProps(className, slots.base())`
+- **String-only components** (Label, Input, etc.): Use `slots?.label({ className })`
+
+## Code Style
+
+- Use `forwardRef` for all components
+- Display names: `FlexiUI.ComponentName`
+- Single quotes, no semicolons (per .prettierrc)
+- Trailing commas everywhere
+- 100 char print width
+- Icons: Iconify with gravity-ui set (`@iconify/react`)
+
+## Commit Convention
+
+```
+<type>(<scope>): <message>
+```
+
+Types: feat, fix, refactor, docs, style, test, chore, ci
+
+## Key Dependencies
+
+- `react-aria-components` - Accessibility primitives
+- `tailwind-variants` - Style variants with tv()
+- `@flexi-ui/ripple` - Ripple effect (used by Button)
+- `@flexi-ui/spinner` - Loading spinners
+- `@flexi-ui/shared-utils` - Shared utilities
+- `@flexi-ui/react-utils` - React-specific utilities
+- `@flexi-ui/system` - System primitives (forwardRef, provider)
+
+## Don'ts
+
+- DON'T construct Tailwind class names dynamically (`bg-${color}-500`)
+- DON'T create component-specific Label/Description components
+- DON'T add documentation files unless explicitly asked
+- DON'T use framer-motion (migrating away from it)
+- DON'T put styles in component .tsx files - use .styles.ts
+- DON'T use multiple @apply statements per CSS rule block
