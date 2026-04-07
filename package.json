@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
+    "@flexi-ui/standard": "workspace:*",
     "@changesets/cli": "^2.27.11",
     "@changesets/get-github-info": "^0.6.0",
     "@changesets/get-release-plan": "^4.0.6",
