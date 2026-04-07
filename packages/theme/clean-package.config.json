@@ -2,34 +2,39 @@
   "indent": 2,
   "remove": ["scripts", "devDependencies", "clean-package"],
   "replace": {
-    "main": "./dist/lib.js",
-    "module": "./dist/lib.js",
+    "main": "./dist/main.cjs",
+    "module": "./dist/main.js",
     "types": "./dist/main.d.ts",
     "exports": {
       ".": {
-        "import": "./dist/lib.js",
-        "require": "./dist/lib.umd.cjs",
+        "import": "./dist/main.js",
+        "require": "./dist/main.cjs",
         "types": "./dist/main.d.ts"
       },
       "./components": {
         "import": "./dist/components.js",
-        "types": "./dist/components/index.d.ts"
+        "require": "./dist/components.cjs",
+        "types": "./dist/components.d.ts"
       },
       "./utils": {
         "import": "./dist/utils.js",
-        "types": "./dist/utils/index.d.ts"
+        "require": "./dist/utils.cjs",
+        "types": "./dist/utils.d.ts"
       },
       "./colors": {
         "import": "./dist/colors.js",
-        "types": "./dist/colors/index.d.ts"
+        "require": "./dist/colors.cjs",
+        "types": "./dist/colors.d.ts"
       },
       "./presets": {
         "import": "./dist/presets.js",
-        "types": "./dist/presets/index.d.ts"
+        "require": "./dist/presets.cjs",
+        "types": "./dist/presets.d.ts"
       },
       "./test-utils": {
         "import": "./dist/test-utils.js",
-        "types": "./dist/test-utils/index.d.ts"
+        "require": "./dist/test-utils.cjs",
+        "types": "./dist/test-utils.d.ts"
       }
     }
   }

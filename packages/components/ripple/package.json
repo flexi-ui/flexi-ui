@@ -28,8 +28,8 @@
   ],
   "main": "./src/main.ts",
   "scripts": {
-    "build": "tsc && vite build",
-    "dev:watch": "pnpm build --watch",
+    "build": "tsup",
+    "dev:watch": "tsup --watch",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
@@ -57,8 +57,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "vite": "catalog:",
-    "vite-plugin-dts": "catalog:"
+    "@types/react-dom": "catalog:"
   }
 }

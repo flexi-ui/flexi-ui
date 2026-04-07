@@ -29,8 +29,8 @@
   ],
   "main": "./src/main.ts",
   "scripts": {
-    "build": "tsc && vite build",
-    "dev:watch": "pnpm build --watch",
+    "build": "tsup",
+    "dev:watch": "tsup --watch",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
@@ -50,9 +50,7 @@
     "@types/react": "catalog:",
     "prop-types": "^15.8.1",
     "react": "catalog:",
-    "tailwind-variants": "^0.3.0",
-    "vite": "catalog:",
-    "vite-plugin-dts": "catalog:"
+    "tailwind-variants": "^0.3.0"
   },
   "dependencies": {
     "@react-types/shared": "3.26.0",

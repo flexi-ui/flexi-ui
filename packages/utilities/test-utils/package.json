@@ -30,8 +30,8 @@
   ],
   "main": "./src/main.ts",
   "scripts": {
-    "build": "tsc && vite build",
-    "dev:watch": "pnpm build --watch",
+    "build": "tsup",
+    "dev:watch": "tsup --watch",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "typecheck": "tsc --noEmit",
@@ -43,8 +43,6 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "vite": "catalog:",
-    "clean-package": "2.2.0",
-    "vite-plugin-dts": "catalog:"
+    "clean-package": "2.2.0"
   }
 }

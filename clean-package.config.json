@@ -1,16 +1,14 @@
 {
   "remove": ["devDependencies"],
   "replace": {
-    "main": "./dist/lib.umd.cjs",
-    "module": "./dist/lib.js",
-    "types": "dist/main.d.ts",
+    "main": "./dist/main.cjs",
+    "module": "./dist/main.js",
+    "types": "./dist/main.d.ts",
     "exports": {
       ".": {
-        "node": "./dist/lib.umd.cjs",
-        "types": "./dist/main.d.ts",
-        "import": "./dist/lib.js",
-        "require": "./dist/lib.umd.cjs",
-        "default": "./dist/lib.js"
+        "import": "./dist/main.js",
+        "require": "./dist/main.cjs",
+        "types": "./dist/main.d.ts"
       },
       "./package.json": "./package.json"
     }
