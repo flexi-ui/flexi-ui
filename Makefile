@@ -108,8 +108,8 @@ component: ## Create a new component package
 	  ],
 	  "main": "./src/main.ts",
 	  "scripts": {
-	    "build": "tsc && vite build",
-	    "dev:watch": "pnpm build --watch",
+	    "build": "tsup",
+	    "dev:watch": "tsup --watch",
 	    "prepack": "clean-package",
 	    "postpack": "clean-package restore",
 	    "typecheck": "tsc --noEmit",
@@ -133,8 +133,6 @@ component: ## Create a new component package
 	    "@types/react-dom": "catalog:",
 	    "react": "catalog:",
 	    "react-dom": "catalog:",
-	    "vite": "catalog:",
-	    "vite-plugin-dts": "catalog:"
 	  }
 	}
 	PKG
@@ -150,12 +148,12 @@ component: ## Create a new component package
 	npm i @flexi-ui/$$COMPONENT_NAME
 	\`\`\`
 	README
-	echo "📝 Creating vite.config.ts..."; \
-	cat > "$$PACKAGE_DIR/vite.config.ts" <<-'VITE'
-	import { createViteConfig } from '../../../vite.config'
+	echo "📝 Creating tsup.config.ts..."; \
+	cat > "$$PACKAGE_DIR/tsup.config.ts" <<-'TSUP'
+	import { createTsupConfig } from '../../../tsup.config'
 
-	export default createViteConfig()
-	VITE
+	export default createTsupConfig()
+	TSUP
 	echo "✅ Component package '$$COMPONENT_NAME' created successfully at $$PACKAGE_DIR"; \
 	npx prettier --write $$PACKAGE_DIR
 	echo ""; \
@@ -219,8 +217,8 @@ hook: ## Create a new hook package
 	  ],
 	  "main": "./src/main.ts",
 	  "scripts": {
-	    "build": "tsc && vite build",
-	    "dev:watch": "pnpm build --watch",
+	    "build": "tsup",
+	    "dev:watch": "tsup --watch",
 	    "prepack": "clean-package",
 	    "postpack": "clean-package restore",
 	    "typecheck": "tsc --noEmit",
@@ -233,8 +231,6 @@ hook: ## Create a new hook package
 	  },
 	  "devDependencies": {
 	    "clean-package": "2.2.0",
-	    "vite": "catalog:",
-	    "vite-plugin-dts": "catalog:"
 	  }
 	}
 	PKG
@@ -250,12 +246,12 @@ hook: ## Create a new hook package
 	npm i @flexi-ui/$$HOOK_NAME
 	\`\`\`
 	README
-	echo "📝 Creating vite.config.ts..."; \
-	cat > "$$PACKAGE_DIR/vite.config.ts" <<-'VITE'
-	import { createViteConfig } from '../../../vite.config'
+	echo "📝 Creating tsup.config.ts..."; \
+	cat > "$$PACKAGE_DIR/tsup.config.ts" <<-'TSUP'
+	import { createTsupConfig } from '../../../tsup.config'
 
-	export default createViteConfig()
-	VITE
+	export default createTsupConfig()
+	TSUP
 	echo "✅ Hook package '$$HOOK_NAME' created successfully at $$PACKAGE_DIR"; \
 	npx prettier --write $$PACKAGE_DIR
 	echo ""; \

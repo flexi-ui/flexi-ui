@@ -1,25 +1,49 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build"]
-      }
-    }
-  },
+  "$schema": "https://nx.dev/reference/nx-json",
   "namedInputs": {
-    "noMarkdown": ["!{projectRoot}/**/*.md"]
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/tsconfig.json"],
+    "noMarkdown": ["!{projectRoot}/**/*.md"],
+    "production": [
+      "default",
+      "noMarkdown",
+      "!{projectRoot}/**/*.test.ts",
+      "!{projectRoot}/**/*.test.tsx",
+      "!{projectRoot}/**/*.spec.ts",
+      "!{projectRoot}/**/*.spec.tsx",
+      "!{projectRoot}/**/*.stories.tsx"
+    ]
   },
   "targetDefaults": {
     "build": {
-      "inputs": ["noMarkdown", "^noMarkdown"],
-      "dependsOn": ["^build"]
+      "inputs": ["production", "^production"],
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/dist"],
+      "cache": true
     },
     "dev": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "lint": {
+      "inputs": ["noMarkdown", "^noMarkdown"],
+      "outputs": [],
+      "cache": true
+    },
+    "typecheck": {
+      "inputs": ["noMarkdown", "^noMarkdown"],
+      "outputs": [],
+      "cache": true
     },
     "test": {
-      "inputs": ["noMarkdown", "^noMarkdown"]
+      "inputs": ["noMarkdown", "^noMarkdown"],
+      "outputs": ["{projectRoot}/coverage"],
+      "cache": true
+    },
+    "format": {
+      "outputs": [],
+      "cache": false
     }
-  }
+  },
+  "defaultBase": "main"
 }

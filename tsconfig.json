@@ -28,6 +28,6 @@
     "allowSyntheticDefaultImports": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["packages/**/*"],
-  "exclude": ["**/node_modules", "**/dist", "**/coverage", "**/.turbo"]
+  "include": ["packages/**/*", "apps/**/*"],
+  "exclude": ["**/node_modules", "**/dist", "**/coverage", "**/.nx"]
 }
