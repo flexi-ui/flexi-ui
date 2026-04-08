@@ -1,8 +1,27 @@
-// export types
-export type { SpinnerProps } from './spinner'
+import type { ComponentProps } from 'react'
 
-// export hooks
-export { useSpinner } from './use-spinner'
+import { SpinnerRoot } from './spinner'
 
-// export component
-export { default as Spinner } from './spinner'
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Spinner = Object.assign(SpinnerRoot, {
+  Root: SpinnerRoot,
+})
+
+export type Spinner = {
+  Props: ComponentProps<typeof SpinnerRoot>
+  RootProps: ComponentProps<typeof SpinnerRoot>
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { SpinnerRoot }
+export type { SpinnerRootProps, SpinnerRootProps as SpinnerProps } from './spinner'
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export { spinnerVariants } from '@flexi-ui/styles'
+export type { SpinnerVariants } from '@flexi-ui/styles'

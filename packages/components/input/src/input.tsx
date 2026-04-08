@@ -1,127 +1,71 @@
-import { CloseFilledIcon } from '@flexi-ui/shared-icons'
-import { useMemo } from 'react'
-import { forwardRef } from '@flexi-ui/system'
+'use client'
 
-import { type UseInputProps, useInput } from './use-input'
+import type { InputVariants } from '@flexi-ui/styles'
+import type { ComponentPropsWithRef } from 'react'
 
-export interface InputProps extends Omit<UseInputProps, 'isMultiline'> {}
+import { inputVariants } from '@flexi-ui/styles'
+import { TextField, Input as AriaInput, Label, Text, FieldError } from 'react-aria-components'
 
-const Input = forwardRef<'input', InputProps>((props, ref) => {
-  const {
-    Component,
-    label,
-    description,
-    isClearable,
-    startContent,
-    endContent,
-    labelPlacement,
-    hasHelper,
-    isOutsideLeft,
-    isOutsideTop,
-    shouldLabelBeOutside,
-    errorMessage,
-    isInvalid,
-    getBaseProps,
-    getLabelProps,
-    getInputProps,
-    getInnerWrapperProps,
-    getInputWrapperProps,
-    getMainWrapperProps,
-    getHelperWrapperProps,
-    getDescriptionProps,
-    getErrorMessageProps,
-    getClearButtonProps,
-  } = useInput({ ...props, ref })
+import { composeTwRenderProps } from '@flexi-ui/react-utils'
 
-  const labelContent = label ? <label {...getLabelProps()}>{label}</label> : null
+/* -------------------------------------------------------------------------------------------------
+ * Input Root
+ * -----------------------------------------------------------------------------------------------*/
+interface InputRootProps
+  extends Omit<ComponentPropsWithRef<typeof TextField>, 'className'>,
+    InputVariants {
+  label?: string
+  description?: string
+  errorMessage?: string
+  placeholder?: string
+  startContent?: React.ReactNode
+  endContent?: React.ReactNode
+  className?: string
+}
 
-  const end = useMemo(() => {
-    if (isClearable) {
-      return <button {...getClearButtonProps()}>{endContent || <CloseFilledIcon />}</button>
-    }
-
-    return endContent
-  }, [isClearable, getClearButtonProps])
-
-  const helperWrapper = useMemo(() => {
-    const shouldShowError = isInvalid && errorMessage
-    const hasContent = shouldShowError || description
-
-    if (!hasHelper || !hasContent) return null
-
-    return (
-      <div {...getHelperWrapperProps()}>
-        {shouldShowError ? (
-          <div {...getErrorMessageProps()}>{errorMessage}</div>
-        ) : (
-          <div {...getDescriptionProps()}>{description}</div>
-        )}
-      </div>
-    )
-  }, [
-    hasHelper,
-    isInvalid,
-    errorMessage,
-    description,
-    getHelperWrapperProps,
-    getErrorMessageProps,
-    getDescriptionProps,
-  ])
-
-  const innerWrapper = useMemo(() => {
-    return (
-      <div {...getInnerWrapperProps()}>
-        {startContent}
-        <input {...getInputProps()} />
-        {end}
-      </div>
-    )
-  }, [startContent, end, getInputProps, getInnerWrapperProps])
-
-  const mainWrapper = useMemo(() => {
-    if (shouldLabelBeOutside) {
-      return (
-        <div {...getMainWrapperProps()}>
-          <div {...getInputWrapperProps()}>
-            {!isOutsideLeft && !isOutsideTop ? labelContent : null}
-            {innerWrapper}
-          </div>
-          {helperWrapper}
-        </div>
-      )
-    }
-
-    return (
-      <>
-        <div {...getInputWrapperProps()}>
-          {labelContent}
-          {innerWrapper}
-        </div>
-        {helperWrapper}
-      </>
-    )
-  }, [
-    labelPlacement,
-    helperWrapper,
-    shouldLabelBeOutside,
-    labelContent,
-    innerWrapper,
-    errorMessage,
-    description,
-    getMainWrapperProps,
-    getInputWrapperProps,
-    getErrorMessageProps,
-    getDescriptionProps,
-  ])
+const InputRoot = ({
+  className,
+  fullWidth,
+  isDisabled,
+  isInvalid,
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  size,
+  startContent,
+  endContent,
+  variant,
+  ...rest
+}: InputRootProps) => {
+  const styles = inputVariants({ fullWidth, isDisabled, isInvalid, size, variant })
 
   return (
-    <Component {...getBaseProps()}>
-      {isOutsideLeft || isOutsideTop ? labelContent : null}
-      {mainWrapper}
-    </Component>
+    <TextField
+      className={composeTwRenderProps(className, styles)}
+      data-slot="input"
+      isDisabled={isDisabled}
+      isInvalid={isInvalid}
+      {...rest}
+    >
+      {label && <Label className="input__label">{label}</Label>}
+      <div className="input__wrapper">
+        {startContent && <span className="input__start-content">{startContent}</span>}
+        <AriaInput className="input__field" placeholder={placeholder} />
+        {endContent && <span className="input__end-content">{endContent}</span>}
+      </div>
+      {description && <Text className="input__description" slot="description">{description}</Text>}
+      {errorMessage ? (
+        <Text className="input__error-message" slot="errorMessage">{errorMessage}</Text>
+      ) : (
+        <FieldError className="input__error-message" />
+      )}
+    </TextField>
   )
-})
+}
 
-Input.displayName = 'FlexiUI.Input'
-
-export default Input
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { InputRoot }
+export type { InputRootProps }

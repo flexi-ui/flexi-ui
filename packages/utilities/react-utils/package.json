@@ -40,7 +40,9 @@
   },
   "dependencies": {
     "@flexi-ui/shared-utils": "workspace:*",
-    "@flexi-ui/react-rsc-utils": "workspace:*"
+    "@flexi-ui/react-rsc-utils": "workspace:*",
+    "react-aria-components": "catalog:",
+    "tailwind-variants": "^3.2.2"
   },
   "clean-package": "../../../clean-package.config.json",
   "devDependencies": {

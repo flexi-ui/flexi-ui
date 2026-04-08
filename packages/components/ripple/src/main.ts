@@ -1,11 +1,27 @@
-import Ripple from './ripple'
+import type { ComponentProps } from 'react'
 
-// export types
-export type { RippleProps } from './ripple'
-export type { RippleType } from './use-ripple'
+import { RippleRoot } from './ripple'
 
-// export hooks
-export { useRipple } from './use-ripple'
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Ripple = Object.assign(RippleRoot, {
+  Root: RippleRoot,
+})
 
-// export component
-export { Ripple }
+export type Ripple = {
+  Props: ComponentProps<typeof RippleRoot>
+  RootProps: ComponentProps<typeof RippleRoot>
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { RippleRoot, useRipple } from './ripple'
+export type { RippleProps, RippleType } from './ripple'
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export { rippleVariants } from '@flexi-ui/styles'
+export type { RippleVariants } from '@flexi-ui/styles'

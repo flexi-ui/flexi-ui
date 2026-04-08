@@ -1,14 +1,33 @@
-import type { ForwardedRef } from 'react'
+'use client'
 
-import { useProviderContext } from '@flexi-ui/system'
-import { forwardRef } from 'react'
+import type { FormVariants } from '@flexi-ui/styles'
+import type { ComponentPropsWithRef } from 'react'
 
-import { Form as AriaForm, FormProps } from './base-form'
+import { formVariants } from '@flexi-ui/styles'
+import { Form as FormPrimitive } from 'react-aria-components'
+import { cx } from 'tailwind-variants'
 
-export const Form = forwardRef(function Form(props: FormProps, ref: ForwardedRef<HTMLFormElement>) {
-  const globalContext = useProviderContext()
-  const validationBehavior =
-    props.validationBehavior ?? globalContext?.validationBehavior ?? 'native'
+/* -------------------------------------------------------------------------------------------------
+ * Form Root
+ * -----------------------------------------------------------------------------------------------*/
+interface FormRootProps
+  extends Omit<ComponentPropsWithRef<typeof FormPrimitive>, 'className'>,
+    FormVariants {
+  className?: string
+}
 
-  return <AriaForm {...props} ref={ref} validationBehavior={validationBehavior} />
-})
+const FormRoot = ({ children, className, fullWidth, ...rest }: FormRootProps) => {
+  const styles = formVariants({ fullWidth })
+
+  return (
+    <FormPrimitive className={cx(styles, className) ?? undefined} data-slot="form" {...rest}>
+      {children}
+    </FormPrimitive>
+  )
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { FormRoot }
+export type { FormRootProps }

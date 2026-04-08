@@ -1,12 +1,40 @@
-import Input from './input'
-import Textarea from './textarea'
+import type { ComponentProps } from 'react'
 
-// export types
-export type { InputProps } from './input'
-export type { TextAreaProps } from './textarea'
+import { InputRoot } from './input'
+import { TextAreaRoot } from './textarea'
 
-// export hooks
-export { useInput } from './use-input'
+/* -------------------------------------------------------------------------------------------------
+ * Compound Components
+ * -----------------------------------------------------------------------------------------------*/
+export const Input = Object.assign(InputRoot, {
+  Root: InputRoot,
+})
 
-// export component
-export { Input, Textarea }
+export const TextArea = Object.assign(TextAreaRoot, {
+  Root: TextAreaRoot,
+})
+
+export type Input = {
+  Props: ComponentProps<typeof InputRoot>
+  RootProps: ComponentProps<typeof InputRoot>
+}
+
+export type TextArea = {
+  Props: ComponentProps<typeof TextAreaRoot>
+  RootProps: ComponentProps<typeof TextAreaRoot>
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { InputRoot }
+export type { InputRootProps, InputRootProps as InputProps } from './input'
+
+export { TextAreaRoot }
+export type { TextAreaRootProps, TextAreaRootProps as TextAreaProps } from './textarea'
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export { inputVariants } from '@flexi-ui/styles'
+export type { InputVariants } from '@flexi-ui/styles'
