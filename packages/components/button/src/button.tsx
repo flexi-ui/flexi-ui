@@ -1,41 +1,58 @@
-import { Spinner } from '@flexi-ui/spinner'
-import { Ripple } from '@flexi-ui/ripple'
-import { forwardRef } from '@flexi-ui/system'
+'use client'
 
-import { UseButtonProps, useButton } from './use-button'
+import type { ButtonVariants } from '@flexi-ui/styles'
+import type { ComponentPropsWithRef } from 'react'
 
-export interface ButtonProps extends UseButtonProps {}
+import { buttonVariants } from '@flexi-ui/styles'
+import { useContext } from 'react'
+import { Button as ButtonPrimitive } from 'react-aria-components'
 
-const Button = forwardRef<'button', ButtonProps>((props, ref) => {
-  const {
-    Component,
-    domRef,
-    children,
-    styles,
-    spinnerSize,
-    spinner = <Spinner color="current" size={spinnerSize} />,
-    spinnerPlacement,
-    startContent,
-    endContent,
-    isLoading,
-    disableRipple,
-    getButtonProps,
-    getRippleProps,
+import { composeTwRenderProps } from '@flexi-ui/react-utils'
+import { ButtonGroupContext } from './button-group'
+
+/* -------------------------------------------------------------------------------------------------
+ * Button Root
+ * -----------------------------------------------------------------------------------------------*/
+interface ButtonRootProps extends ComponentPropsWithRef<typeof ButtonPrimitive>, ButtonVariants {}
+
+const ButtonRoot = ({
+  children,
+  className,
+  fullWidth,
+  isDisabled,
+  isIconOnly,
+  size,
+  variant,
+  ...rest
+}: ButtonRootProps) => {
+  const groupContext = useContext(ButtonGroupContext)
+
+  const finalSize = size ?? groupContext?.size
+  const finalVariant = variant ?? groupContext?.variant
+  const finalIsDisabled = isDisabled ?? groupContext?.isDisabled
+  const finalFullWidth = fullWidth ?? groupContext?.fullWidth
+
+  const styles = buttonVariants({
+    fullWidth: finalFullWidth,
     isIconOnly,
-  } = useButton({ ...props, ref })
+    size: finalSize,
+    variant: finalVariant,
+  })
 
   return (
-    <Component ref={domRef} className={styles} {...getButtonProps()}>
-      {startContent}
-      {isLoading && spinnerPlacement === 'start' && spinner}
-      {isLoading && isIconOnly ? null : children}
-      {isLoading && spinnerPlacement === 'end' && spinner}
-      {endContent}
-      {!disableRipple && <Ripple {...getRippleProps()} />}
-    </Component>
+    <ButtonPrimitive
+      className={composeTwRenderProps(className, styles)}
+      data-slot="button"
+      isDisabled={finalIsDisabled}
+      {...rest}
+    >
+      {(renderProps) => (typeof children === 'function' ? children(renderProps) : children)}
+    </ButtonPrimitive>
   )
-})
+}
 
-Button.displayName = 'FlexiUI.Button'
-
-export default Button
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { ButtonRoot }
+export type { ButtonRootProps }

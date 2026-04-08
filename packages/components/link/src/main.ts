@@ -1,13 +1,27 @@
-import Link from './link'
+import type { ComponentProps } from 'react'
 
-// export types
-export type { LinkProps } from './link'
+import { LinkRoot } from './link'
 
-// export hooks
-export { useLink } from './use-link'
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Link = Object.assign(LinkRoot, {
+  Root: LinkRoot,
+})
 
-// export misc
-export { LinkIcon } from './link-icon'
+export type Link = {
+  Props: ComponentProps<typeof LinkRoot>
+  RootProps: ComponentProps<typeof LinkRoot>
+}
 
-// export component
-export { Link }
+/* -------------------------------------------------------------------------------------------------
+ * Named Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { LinkRoot, LinkIcon } from './link'
+export type { LinkRootProps, LinkRootProps as LinkProps } from './link'
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export { linkVariants } from '@flexi-ui/styles'
+export type { LinkVariants } from '@flexi-ui/styles'

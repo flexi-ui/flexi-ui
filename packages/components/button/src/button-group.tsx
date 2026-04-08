@@ -1,25 +1,56 @@
-import { forwardRef } from '@flexi-ui/system'
+'use client'
 
-import { ButtonGroupProvider } from './button-group-context'
-import { UseButtonGroupProps, useButtonGroup } from './use-button-group'
+import type { ButtonGroupVariants, ButtonVariants } from '@flexi-ui/styles'
+import type { ComponentPropsWithRef } from 'react'
 
-export interface ButtonGroupProps extends UseButtonGroupProps {}
+import { buttonGroupVariants } from '@flexi-ui/styles'
+import { createContext } from 'react'
 
-const ButtonGroup = forwardRef<'div', ButtonGroupProps>((props, ref) => {
-  const { Component, domRef, context, children, classNames, getButtonGroupProps } = useButtonGroup({
-    ...props,
-    ref,
-  })
+/* -------------------------------------------------------------------------------------------------
+ * ButtonGroup Context
+ * -----------------------------------------------------------------------------------------------*/
+interface ButtonGroupContextValue {
+  size?: ButtonVariants['size']
+  variant?: ButtonVariants['variant']
+  isDisabled?: boolean
+  fullWidth?: ButtonVariants['fullWidth']
+}
+
+export const ButtonGroupContext = createContext<ButtonGroupContextValue | null>(null)
+
+/* -------------------------------------------------------------------------------------------------
+ * ButtonGroup Root
+ * -----------------------------------------------------------------------------------------------*/
+interface ButtonGroupRootProps
+  extends Omit<ComponentPropsWithRef<'div'>, 'size'>,
+    ButtonGroupVariants {
+  size?: ButtonVariants['size']
+  variant?: ButtonVariants['variant']
+  isDisabled?: boolean
+}
+
+const ButtonGroupRoot = ({
+  children,
+  className,
+  fullWidth,
+  size,
+  variant,
+  isDisabled,
+  ...rest
+}: ButtonGroupRootProps) => {
+  const styles = buttonGroupVariants({ className, fullWidth })
 
   return (
-    <ButtonGroupProvider value={context}>
-      <Component ref={domRef} className={classNames} {...getButtonGroupProps()}>
+    <ButtonGroupContext.Provider value={{ size, variant, isDisabled, fullWidth }}>
+      <div className={styles} data-slot="button-group" role="group" {...rest}>
         {children}
-      </Component>
-    </ButtonGroupProvider>
+      </div>
+    </ButtonGroupContext.Provider>
   )
-})
+}
 
-ButtonGroup.displayName = 'FlexiUI.ButtonGroup'
-
-export default ButtonGroup
+/* -------------------------------------------------------------------------------------------------
+ * Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { ButtonGroupRoot }
+export type { ButtonGroupRootProps }

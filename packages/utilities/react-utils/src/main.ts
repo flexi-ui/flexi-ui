@@ -34,3 +34,5 @@ export {
 } from '@flexi-ui/react-rsc-utils'
 
 export { useIsHydrated } from './use-is-hydrated'
+
+export { composeTwRenderProps, composeSlotClassName } from './compose'

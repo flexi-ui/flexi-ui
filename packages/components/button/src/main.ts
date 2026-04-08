@@ -1,16 +1,40 @@
-import Button from './button'
-import ButtonGroup from './button-group'
+import type { ComponentProps } from 'react'
 
-// export types
-export type { ButtonProps } from './button'
-export type { ButtonGroupProps } from './button-group'
+import { ButtonRoot } from './button'
+import { ButtonGroupRoot } from './button-group'
 
-// export hooks
-export { useButton } from './use-button'
-export { useButtonGroup } from './use-button-group'
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const Button = Object.assign(ButtonRoot, {
+  Root: ButtonRoot,
+})
 
-// export context
-export { ButtonGroupProvider, useButtonGroupContext } from './button-group-context'
+export const ButtonGroup = Object.assign(ButtonGroupRoot, {
+  Root: ButtonGroupRoot,
+})
 
-// export component
-export { Button, ButtonGroup }
+export type Button = {
+  Props: ComponentProps<typeof ButtonRoot>
+  RootProps: ComponentProps<typeof ButtonRoot>
+}
+
+export type ButtonGroup = {
+  Props: ComponentProps<typeof ButtonGroupRoot>
+  RootProps: ComponentProps<typeof ButtonGroupRoot>
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { ButtonRoot }
+export type { ButtonRootProps, ButtonRootProps as ButtonProps } from './button'
+
+export { ButtonGroupRoot, ButtonGroupContext } from './button-group'
+export type { ButtonGroupRootProps, ButtonGroupRootProps as ButtonGroupProps } from './button-group'
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export { buttonVariants, buttonGroupVariants } from '@flexi-ui/styles'
+export type { ButtonVariants, ButtonGroupVariants } from '@flexi-ui/styles'

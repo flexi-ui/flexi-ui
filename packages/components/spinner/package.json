@@ -38,19 +38,15 @@
     "clean": "rm -rf node_modules dist"
   },
   "peerDependencies": {
-    "@flexi-ui/theme": ">=2.3.0",
     "react": ">=18 || >=19.0.0-rc.0",
     "react-dom": ">=18 || >=19.0.0-rc.0"
   },
   "clean-package": "../../../clean-package.config.json",
   "dependencies": {
-    "@flexi-ui/react-utils": "workspace:*",
-    "@flexi-ui/shared-utils": "workspace:*",
-    "@flexi-ui/system-rsc": "workspace:*"
+    "@flexi-ui/styles": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "@flexi-ui/theme": "workspace:*",
     "@storybook/react": "^8.4.7",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
