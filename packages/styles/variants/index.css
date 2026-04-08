@@ -1,0 +1,81 @@
+/**
+ * FlexiUI Custom Tailwind CSS Variants
+ *
+ * Custom variants with intelligent fallback: explicit controls override system preferences.
+ */
+
+/* motion-reduce — Minimize animations for accessibility */
+@custom-variant motion-reduce {
+  &:is([data-reduce-motion='true'], [data-reduce-motion='true'] *) {
+    @slot;
+
+    &::before,
+    &::after {
+      @slot;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:not(:is([data-reduce-motion='true'], [data-reduce-motion='true'] *)) {
+      @slot;
+
+      &::before,
+      &::after {
+        @slot;
+      }
+    }
+  }
+}
+
+/* motion-safe — Enable full animations and transitions */
+@custom-variant motion-safe {
+  &:is([data-reduce-motion='false'], [data-reduce-motion='false'] *) {
+    @slot;
+
+    &::before,
+    &::after {
+      @slot;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:not(
+      :is(
+        [data-reduce-motion='true'],
+        [data-reduce-motion='true'] *,
+        [data-reduce-motion='false'],
+        [data-reduce-motion='false'] *
+      )
+    ) {
+      @slot;
+
+      &::before,
+      &::after {
+        @slot;
+      }
+    }
+  }
+}
+
+/* dark — Dark mode styles */
+@custom-variant dark {
+  &:is(.dark, .dark *, [data-theme='dark'], [data-theme='dark'] *) {
+    @slot;
+
+    &::before,
+    &::after {
+      @slot;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:not(:is(.dark, .dark *, [data-theme='dark'], [data-theme='dark'] *)) & {
+      @slot;
+
+      &::before,
+      &::after {
+        @slot;
+      }
+    }
+  }
+}

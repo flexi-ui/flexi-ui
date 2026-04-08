@@ -1,0 +1,122 @@
+/* Spinner component styles */
+
+/* Base spinner styles */
+.spinner {
+  @apply relative inline-flex flex-col items-center justify-center gap-2;
+}
+
+.spinner__wrapper {
+  @apply relative flex h-8 w-8;
+}
+
+.spinner__circle1 {
+  @apply absolute h-full w-full rounded-full border-3 border-solid border-t-transparent border-l-transparent border-r-transparent;
+  animation: spinner-ease-spin 0.8s ease infinite;
+}
+
+.spinner__circle2 {
+  @apply absolute h-full w-full rounded-full border-3 border-dotted border-t-transparent border-l-transparent border-r-transparent opacity-75;
+  animation: spinner-linear-spin 0.8s linear infinite;
+}
+
+.spinner__label {
+  @apply text-base text-foreground;
+}
+
+/* Size variants */
+.spinner--sm {
+  .spinner__wrapper {
+    @apply h-5 w-5;
+  }
+
+  .spinner__circle1,
+  .spinner__circle2 {
+    @apply border-2;
+  }
+
+  .spinner__label {
+    @apply text-sm;
+  }
+}
+
+.spinner--md {
+  /* No styles as this is the default size */
+}
+
+.spinner--lg {
+  .spinner__wrapper {
+    @apply h-10 w-10;
+  }
+
+  .spinner__label {
+    @apply text-lg;
+  }
+}
+
+/* Color variants */
+.spinner--current {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: currentColor;
+  }
+}
+
+.spinner--primary {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: var(--color-accent);
+  }
+}
+
+.spinner--secondary {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: var(--color-default-foreground);
+  }
+}
+
+.spinner--success {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: var(--color-success);
+  }
+}
+
+.spinner--warning {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: var(--color-warning);
+  }
+}
+
+.spinner--danger {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: var(--color-danger);
+  }
+}
+
+.spinner--white {
+  .spinner__circle1,
+  .spinner__circle2 {
+    border-bottom-color: #ffffff;
+  }
+}
+
+@keyframes spinner-ease-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-linear-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

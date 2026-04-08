@@ -1,0 +1,133 @@
+@layer base {
+  /* FlexiUI Default Theme */
+  :root,
+  .light,
+  .default,
+  [data-theme='light'],
+  [data-theme='default'] {
+    color-scheme: light;
+
+    /* == Common Variables == */
+
+    /* Primitive Colors */
+    --white: #ffffff;
+    --black: #000000;
+
+    /* Spacing */
+    --spacing: 0.25rem;
+
+    /* Border */
+    --border-width: 1px;
+    --disabled-opacity: 0.5;
+
+    /* Ring offset */
+    --ring-offset-width: 2px;
+
+    /* Cursor */
+    --cursor-interactive: pointer;
+    --cursor-disabled: not-allowed;
+
+    /* Radius */
+    --radius: 0.5rem;
+
+    /* == Light Theme Variables == */
+
+    /* Base Colors */
+    --background: #ffffff;
+    --foreground: #11181c;
+
+    /* Surface */
+    --surface: #ffffff;
+    --surface-foreground: var(--foreground);
+
+    --surface-secondary: #f4f4f5;
+    --surface-secondary-foreground: var(--foreground);
+
+    /* Overlay */
+    --overlay: #ffffff;
+    --overlay-foreground: var(--foreground);
+
+    --muted: #71717a;
+
+    /* Default */
+    --default: #f4f4f5;
+    --default-foreground: #11181c;
+
+    /* Accent / Primary */
+    --accent: #006fee;
+    --accent-foreground: #ffffff;
+
+    /* Status Colors */
+    --success: #17c964;
+    --success-foreground: #000000;
+
+    --warning: #f5a524;
+    --warning-foreground: #000000;
+
+    --danger: #f31260;
+    --danger-foreground: #ffffff;
+
+    /* Misc */
+    --border: #e4e4e7;
+    --separator: #e4e4e7;
+    --focus: var(--accent);
+    --link: var(--foreground);
+
+    /* Backdrop */
+    --backdrop: rgba(0, 0, 0, 0.5);
+
+    /* Shadows */
+    --surface-shadow:
+      0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06),
+      0 0 1px 0 rgba(0, 0, 0, 0.06);
+    --overlay-shadow:
+      0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 -6px 12px 0 rgba(0, 0, 0, 0.03),
+      0 14px 28px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .dark,
+  [data-theme='dark'] {
+    color-scheme: dark;
+
+    /* Base Colors */
+    --background: #000000;
+    --foreground: #ecedee;
+
+    /* Surface */
+    --surface: #18181b;
+    --surface-foreground: var(--foreground);
+
+    --surface-secondary: #27272a;
+    --surface-secondary-foreground: var(--foreground);
+
+    /* Overlay */
+    --overlay: #18181b;
+    --overlay-foreground: var(--foreground);
+
+    --muted: #a1a1aa;
+
+    /* Default */
+    --default: #27272a;
+    --default-foreground: #ecedee;
+
+    /* Status Colors */
+    --warning: #f5a524;
+    --warning-foreground: #000000;
+
+    --danger: #f31260;
+    --danger-foreground: #ffffff;
+
+    /* Misc */
+    --border: #27272a;
+    --separator: #27272a;
+    --focus: var(--accent);
+    --link: var(--foreground);
+
+    /* Backdrop */
+    --backdrop: rgba(0, 0, 0, 0.6);
+
+    /* Shadows */
+    --surface-shadow: 0 0 0 0 transparent inset;
+    --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  }
+}
