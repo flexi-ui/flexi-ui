@@ -1,0 +1,58 @@
+{
+  "name": "@flexi-ui/styles",
+  "version": "0.0.1",
+  "description": "FlexiUI core styles and Tailwind CSS component library",
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneeb.it.dev@gmail.com"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "style": "./index.css",
+  "exports": {
+    ".": {
+      "style": "./index.css",
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./css": {
+      "style": "./index.css",
+      "default": "./index.css"
+    },
+    "./components/*": {
+      "types": "./src/components/*/index.ts",
+      "import": "./src/components/*/index.ts",
+      "default": "./src/components/*/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf dist .turbo tsconfig.tsbuildinfo",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "tailwind-variants": "^3.2.2"
+  },
+  "devDependencies": {
+    "@flexi-ui/standard": "workspace:*",
+    "tailwindcss": "^4.1.12",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=4.0.0"
+  }
+}

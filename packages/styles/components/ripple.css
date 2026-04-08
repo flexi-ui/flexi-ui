@@ -1,0 +1,25 @@
+/* Ripple component styles */
+
+/* Base ripple styles */
+.ripple {
+  @apply pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit];
+}
+
+.ripple__drop {
+  @apply absolute rounded-full;
+  background-color: currentColor;
+  transform-origin: center;
+  pointer-events: none;
+  animation: ripple-expand 0.5s ease-out forwards;
+}
+
+@keyframes ripple-expand {
+  0% {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

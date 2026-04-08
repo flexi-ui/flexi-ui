@@ -1,0 +1,191 @@
+/* Button component styles */
+
+/* Base button styles */
+.button {
+  @apply relative isolate inline-flex h-10 w-fit origin-center items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium whitespace-nowrap outline-none select-none no-highlight;
+
+  /**
+   * Transitions
+   * CRITICAL: motion-reduce must be AFTER transition for correct override specificity
+   */
+  transition:
+    transform 250ms var(--ease-smooth),
+    background-color 100ms var(--ease-out),
+    box-shadow 100ms var(--ease-out),
+    opacity 100ms var(--ease-out);
+  @apply transform-gpu motion-reduce:transition-none;
+
+  /* Cursor */
+  cursor: var(--cursor-interactive);
+
+  /* Default tokens (fallback behavior) */
+  --button-bg: transparent;
+  --button-bg-hover: var(--button-bg);
+  --button-bg-pressed: var(--button-bg-hover);
+  --button-fg: currentColor;
+
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+
+  /* Focus state */
+  &:focus-visible:not(:focus),
+  &[data-focus-visible='true'] {
+    @apply status-focused;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &[aria-disabled='true'] {
+    @apply status-disabled;
+  }
+
+  /* Pending state */
+  &[data-pending='true'] {
+    @apply status-pending;
+  }
+
+  /* Active / pressed */
+  &:active,
+  &[data-pressed='true'] {
+    background-color: var(--button-bg-pressed);
+    transform: scale(0.97);
+  }
+
+  /* Hover */
+  @media (hover: hover) {
+    &:hover,
+    &[data-hovered='true'] {
+      background-color: var(--button-bg-hover);
+    }
+  }
+
+  /* SVG icon styling */
+  & svg:not([data-slot='spinner'] svg) {
+    @apply pointer-events-none -mx-0.5 my-0.5 size-5 shrink-0 self-center;
+  }
+}
+
+/* Size variants */
+.button--sm {
+  @apply h-8 gap-2 rounded-md px-3 text-xs;
+
+  & svg:not([data-slot='spinner'] svg) {
+    @apply size-4;
+  }
+
+  &:active,
+  &[data-pressed='true'] {
+    transform: scale(0.98);
+  }
+}
+
+.button--md {
+  /* No styles as this is the default size */
+}
+
+.button--lg {
+  @apply h-12 gap-3 rounded-xl px-6 text-base;
+
+  &:active,
+  &[data-pressed='true'] {
+    transform: scale(0.96);
+  }
+}
+
+/* Color variants */
+.button--primary {
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-bg-pressed: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
+}
+
+.button--secondary {
+  --button-bg: var(--color-default);
+  --button-bg-hover: var(--color-default-hover);
+  --button-bg-pressed: var(--color-default-hover);
+  --button-fg: var(--color-default-foreground);
+}
+
+.button--success {
+  --button-bg: var(--color-success);
+  --button-bg-hover: var(--color-success-hover);
+  --button-bg-pressed: var(--color-success-hover);
+  --button-fg: var(--color-success-foreground);
+}
+
+.button--warning {
+  --button-bg: var(--color-warning);
+  --button-bg-hover: var(--color-warning-hover);
+  --button-bg-pressed: var(--color-warning-hover);
+  --button-fg: var(--color-warning-foreground);
+}
+
+.button--danger {
+  --button-bg: var(--color-danger);
+  --button-bg-hover: var(--color-danger-hover);
+  --button-bg-pressed: var(--color-danger-hover);
+  --button-fg: var(--color-danger-foreground);
+}
+
+.button--ghost {
+  --button-bg: transparent;
+  --button-bg-hover: var(--color-default);
+  --button-bg-pressed: var(--color-default);
+  --button-fg: var(--color-default-foreground);
+}
+
+.button--bordered {
+  @apply border border-border;
+  --button-bg: transparent;
+  --button-bg-hover: color-mix(in srgb, var(--color-default) 60%, transparent);
+  --button-bg-pressed: var(--color-default);
+}
+
+.button--flat {
+  --button-bg: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --button-bg-hover: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  --button-bg-pressed: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  --button-fg: var(--color-accent);
+}
+
+.button--shadow {
+  --button-bg: var(--color-accent);
+  --button-bg-hover: var(--color-accent-hover);
+  --button-bg-pressed: var(--color-accent-hover);
+  --button-fg: var(--color-accent-foreground);
+  box-shadow: 0 4px 14px 0 color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+.button--light {
+  --button-bg: transparent;
+  --button-bg-hover: color-mix(in srgb, var(--color-default) 50%, transparent);
+  --button-bg-pressed: color-mix(in srgb, var(--color-default) 70%, transparent);
+}
+
+/* Icon-only modifier */
+.button--icon-only {
+  @apply w-10 p-0;
+}
+
+.button--icon-only.button--sm {
+  @apply w-8;
+}
+
+.button--icon-only.button--lg {
+  @apply w-12;
+}
+
+/* Full width modifier */
+.button--full-width {
+  @apply w-full;
+}
+
+/* Button group */
+.button-group {
+  @apply inline-flex h-auto items-center justify-center;
+}
+
+.button-group--full-width {
+  @apply w-full;
+}

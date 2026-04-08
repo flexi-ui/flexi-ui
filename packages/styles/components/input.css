@@ -1,0 +1,168 @@
+/* Input component styles */
+
+/* Base input wrapper */
+.input {
+  @apply group flex w-full flex-col;
+
+  &[data-hidden='true'] {
+    @apply hidden;
+  }
+}
+
+.input__label {
+  @apply pointer-events-none z-10 block shrink-0 text-sm text-muted subpixel-antialiased;
+}
+
+.input__main-wrapper {
+  @apply h-full;
+}
+
+.input__wrapper {
+  @apply relative inline-flex w-full flex-row items-center gap-3 rounded-lg px-3;
+  @apply bg-default;
+
+  transition:
+    background-color 150ms var(--ease-smooth),
+    border-color 150ms var(--ease-smooth),
+    box-shadow 150ms var(--ease-smooth);
+  @apply motion-reduce:transition-none;
+
+  @media (hover: hover) {
+    &:hover,
+    &[data-hover='true'] {
+      @apply bg-default-hover;
+    }
+  }
+
+  &[data-focus='true'],
+  &:focus-within {
+    @apply ring-2 ring-focus;
+  }
+}
+
+.input__inner-wrapper {
+  @apply inline-flex h-full w-full items-center;
+}
+
+.input__field {
+  @apply w-full bg-transparent font-normal !outline-none;
+  @apply placeholder:text-muted;
+
+  &[data-has-start-content='true'] {
+    @apply ps-1.5;
+  }
+
+  &[data-has-end-content='true'] {
+    @apply pe-1.5;
+  }
+}
+
+.input__clear-button {
+  @apply absolute end-3 z-10 cursor-pointer appearance-none rounded-full p-2 opacity-0 outline-none select-none;
+
+  &[data-visible='true'] {
+    @apply pointer-events-auto opacity-70;
+  }
+
+  &:active {
+    @apply opacity-100;
+  }
+}
+
+.input__helper-wrapper {
+  @apply hidden p-1;
+
+  .input[data-has-helper='true'] & {
+    @apply flex flex-col gap-1.5;
+  }
+}
+
+.input__description {
+  @apply text-xs text-muted;
+}
+
+.input__error-message {
+  @apply text-xs text-danger;
+}
+
+/* Size variants */
+.input--sm {
+  .input__wrapper {
+    @apply h-8 rounded-md text-xs;
+  }
+
+  .input__label {
+    @apply text-xs;
+  }
+}
+
+.input--md {
+  .input__wrapper {
+    @apply h-10;
+  }
+}
+
+.input--lg {
+  .input__wrapper {
+    @apply h-12 rounded-xl text-base;
+  }
+
+  .input__label {
+    @apply text-base;
+  }
+}
+
+/* Variant: bordered */
+.input--bordered {
+  .input__wrapper {
+    @apply border border-border bg-transparent;
+
+    @media (hover: hover) {
+      &:hover,
+      &[data-hover='true'] {
+        @apply border-border bg-transparent;
+      }
+    }
+  }
+}
+
+/* Variant: underlined */
+.input--underlined {
+  .input__wrapper {
+    @apply rounded-none border-b-2 border-border bg-transparent px-0;
+
+    @media (hover: hover) {
+      &:hover,
+      &[data-hover='true'] {
+        @apply bg-transparent;
+      }
+    }
+
+    &[data-focus='true'],
+    &:focus-within {
+      @apply ring-0 border-b-accent;
+    }
+  }
+}
+
+/* Invalid state */
+.input--invalid {
+  .input__wrapper {
+    @apply border-danger;
+
+    &[data-focus='true'],
+    &:focus-within {
+      @apply ring-danger;
+    }
+  }
+}
+
+/* Disabled state */
+.input--disabled {
+  @apply status-disabled;
+}
+
+/* Full width */
+.input--full-width {
+  @apply w-full;
+}

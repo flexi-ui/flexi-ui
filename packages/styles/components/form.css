@@ -1,0 +1,10 @@
+/* Form component styles */
+
+/* Base form styles */
+.form {
+  @apply flex flex-col gap-4;
+}
+
+.form--full-width {
+  @apply w-full;
+}
