@@ -15,7 +15,7 @@ FlexiUI is a modern React UI library built with Tailwind CSS v4, using a pnpm mo
 - **TypeScript**: v5.7+
 - **Nx**: Build orchestration
 - **Storybook**: Component development
-- **Vitest**: Testing framework (migration from Jest)
+- **Vitest**: Testing framework
 - **Changesets**: Version management & publishing
 
 ## Development Commands
