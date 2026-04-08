@@ -1,11 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-type MockInstance = {
-  mock: {
-    calls: any[][]
-  }
-  mockImplementation: (fn: (...args: any[]) => any) => MockInstance
-}
+import { vi, type MockInstance } from 'vitest'
 
 export function shouldIgnoreReactWarning(spy: MockInstance): boolean {
   if (spy.mock.calls.length > 0) {
@@ -19,17 +12,6 @@ export function shouldIgnoreReactWarning(spy: MockInstance): boolean {
   return false
 }
 
-// These will be initialized at runtime when used in a Jest environment
-let errorSpy: MockInstance | undefined
-let warnSpy: MockInstance | undefined
-let spy: MockInstance | undefined
-
-// Initialize spies if in Jest environment
-if (typeof globalThis !== 'undefined' && (globalThis as any).jest) {
-  const jestGlobal = (globalThis as any).jest
-  errorSpy = jestGlobal.spyOn(console, 'error').mockImplementation(() => {})
-  warnSpy = jestGlobal.spyOn(console, 'warn').mockImplementation(() => {})
-  spy = errorSpy
-}
-
-export { spy, errorSpy, warnSpy }
+export const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+export const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+export const spy = errorSpy

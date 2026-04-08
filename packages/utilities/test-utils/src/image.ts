@@ -6,7 +6,7 @@ const originalImage = window.Image
 export function mockImage() {
   let status: Status
 
-  //@ts-expect-error
+  // @ts-expect-error -- mock Image class for testing
   window.Image = class Image {
     onload: VoidFunction = () => {
       // eslint-disable-next-line no-console

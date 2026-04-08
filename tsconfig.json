@@ -1,7 +1,7 @@
 {
   "extends": "@flexi-ui/standard/tsconfig/react",
   "compilerOptions": {
-    "types": ["@testing-library/jest-dom", "node"]
+    "types": ["node"]
   },
   "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["**/node_modules", "**/dist", "**/coverage", "**/.nx"]
