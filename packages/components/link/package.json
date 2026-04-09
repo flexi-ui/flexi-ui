@@ -47,7 +47,7 @@
   "clean-package": "../../../clean-package.config.json",
   "devDependencies": {
     "clean-package": "2.2.0",
-    "@storybook/react": "^8.4.7",
+    "@storybook/react": "^8.6.18",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "react": "catalog:",

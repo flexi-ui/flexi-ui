@@ -140,6 +140,7 @@ config/tunnel.pid
 
 dist
 build
+storybook-static
 *.tsbuildinfo
 
 ##############################

@@ -1,53 +1,55 @@
-import { Meta } from '@storybook/react'
-import { spinner } from '@flexi-ui/theme'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Spinner } from '../src/main'
 
-export default {
+const meta: Meta<typeof Spinner> = {
   title: 'Components/Spinner',
   component: Spinner,
   argTypes: {
     color: {
-      control: {
-        type: 'select',
-      },
-      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger'],
-    },
-    labelColor: {
-      control: {
-        type: 'select',
-      },
-      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger'],
+      control: 'select',
+      options: ['current', 'primary', 'secondary', 'success', 'warning', 'danger', 'white'],
     },
     size: {
-      control: {
-        type: 'select',
-      },
+      control: 'select',
       options: ['sm', 'md', 'lg'],
     },
   },
-  decorators: [
-    (Story) => (
-      <div className="ml-4">
-        <Story />
-      </div>
-    ),
-  ],
-} as Meta<typeof Spinner>
-
-const defaultProps = {
-  ...spinner.defaultVariants,
-}
-
-export const Default = {
   args: {
-    ...defaultProps,
+    size: 'md',
+    color: 'primary',
   },
 }
 
-export const WithLabel = {
+export default meta
+type Story = StoryObj<typeof Spinner>
+
+export const Default: Story = {}
+
+export const WithLabel: Story = {
   args: {
-    ...defaultProps,
     label: 'Loading...',
   },
+}
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex items-center gap-4">
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+    </div>
+  ),
+}
+
+export const Colors: Story = {
+  render: () => (
+    <div className="flex items-center gap-4">
+      <Spinner color="primary" />
+      <Spinner color="secondary" />
+      <Spinner color="success" />
+      <Spinner color="warning" />
+      <Spinner color="danger" />
+    </div>
+  ),
 }
