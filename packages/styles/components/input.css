@@ -2,7 +2,7 @@
 
 /* Base input wrapper */
 .input {
-  @apply group flex w-full flex-col;
+  @apply flex w-full flex-col;
 
   &[data-hidden='true'] {
     @apply hidden;

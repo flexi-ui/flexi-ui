@@ -1,150 +1,95 @@
-import React from 'react'
-import { Meta } from '@storybook/react'
-import { button } from '@flexi-ui/theme'
-import { Camera, HeadphonesIcon, Notification } from '@flexi-ui/shared-icons'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button, ButtonProps } from '../src/main'
+import { Button } from '../src/main'
 
-export default {
+const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   argTypes: {
     variant: {
-      control: {
-        type: 'select',
-      },
-      options: ['solid', 'bordered', 'light', 'flat', 'faded', 'shadow', 'ghost'],
-    },
-    color: {
-      control: {
-        type: 'select',
-      },
-      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger'],
+      control: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'warning',
+        'danger',
+        'ghost',
+        'bordered',
+        'flat',
+        'shadow',
+        'light',
+      ],
     },
     size: {
-      control: {
-        type: 'select',
-      },
+      control: 'select',
       options: ['sm', 'md', 'lg'],
     },
-    spinnerPlacement: {
-      control: {
-        type: 'select',
-      },
-      options: ['start', 'end'],
-    },
     fullWidth: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    radius: {
-      control: {
-        type: 'select',
-      },
-      options: ['none', 'sm', 'md', 'lg', 'full'],
+      control: 'boolean',
     },
     isDisabled: {
-      control: {
-        type: 'boolean',
-      },
+      control: 'boolean',
     },
-    isLoading: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    disableAnimation: {
-      control: {
-        type: 'boolean',
-      },
+    isIconOnly: {
+      control: 'boolean',
     },
   },
-} as Meta<typeof Button>
-
-const defaultProps = {
-  children: 'Button',
-  spinnerPlacement: 'start',
-  ...button.defaultVariants,
-}
-
-const StateTemplate = (args: ButtonProps) => {
-  const [isOpen, setIsOpen] = React.useState(false)
-
-  const handlePress = (e: any) => {
-    // eslint-disable-next-line no-console
-    console.log('Pressed', e)
-    setIsOpen((prev) => !prev)
-  }
-
-  return (
-    <Button
-      {...args}
-      aria-label={isOpen ? 'Close' : 'Open'}
-      aria-pressed={isOpen}
-      onClick={handlePress}
-    >
-      {isOpen ? 'Close' : 'Open'}
-    </Button>
-  )
-}
-
-export const Default = {
   args: {
-    ...defaultProps,
+    children: 'Button',
+    variant: 'primary',
+    size: 'md',
   },
 }
 
-export const WithState = {
-  render: StateTemplate,
+export default meta
+type Story = StoryObj<typeof Button>
 
-  args: {
-    ...defaultProps,
-  },
+export const Default: Story = {}
+
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3">
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="warning">Warning</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="bordered">Bordered</Button>
+      <Button variant="flat">Flat</Button>
+      <Button variant="shadow">Shadow</Button>
+      <Button variant="light">Light</Button>
+    </div>
+  ),
 }
 
-export const IsDisabled = {
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex items-center gap-3">
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+    </div>
+  ),
+}
+
+export const Disabled: Story = {
   args: {
-    ...defaultProps,
     isDisabled: true,
   },
 }
 
-export const DisableRipple = {
+export const FullWidth: Story = {
   args: {
-    ...defaultProps,
-    disableRipple: true,
+    fullWidth: true,
   },
 }
 
-export const WithIcons = {
+export const IconOnly: Story = {
   args: {
-    ...defaultProps,
-    startContent: <Notification className="fill-current" />,
-    endContent: <Camera className="fill-current" />,
-  },
-}
-
-export const IconButton = {
-  args: {
-    ...defaultProps,
     isIconOnly: true,
-    children: <HeadphonesIcon className="w-5 h-5" />,
-  },
-}
-
-export const IsLoading = {
-  args: {
-    ...defaultProps,
-    color: 'primary',
-    isLoading: true,
-  },
-}
-
-export const CustomWithClassNames = {
-  args: {
-    ...defaultProps,
-    radius: 'full',
-    className: 'bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg',
+    children: '✕',
+    'aria-label': 'Close',
   },
 }
