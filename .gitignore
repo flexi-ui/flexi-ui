@@ -172,7 +172,7 @@ next-env.d.ts
 .vercel
 
 ##############################
-# contentlayer
+# fumadocs
 ##############################
 
-.contentlayer
+.source

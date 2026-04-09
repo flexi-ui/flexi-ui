@@ -22,10 +22,8 @@ export const CodeBlock = ({ code, language = 'tsx' }: CodeBlockProps) => {
     <div className="relative group">
       <div className="absolute right-2 top-2 z-10">
         <Button
-          isIconOnly
           size="sm"
           variant="flat"
-          color={copied ? 'success' : 'default'}
           onPress={handleCopy}
           aria-label="Copy code"
         >

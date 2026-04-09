@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { allDocs } from '../.contentlayer/generated'
+import { source } from '@/lib/source'
 import { siteConfig } from '@/config/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -27,12 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Dynamic doc pages
-  const docPages: MetadataRoute.Sitemap = allDocs.map((doc) => ({
-    url: `${baseUrl}${doc.url}`,
+  // Dynamic doc pages from fumadocs source
+  const docPages: MetadataRoute.Sitemap = source.getPages().map((page) => ({
+    url: `${baseUrl}${page.url}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: doc.url.includes('/guide/') ? 0.9 : doc.url.includes('/components/') ? 0.8 : 0.7,
+    priority: page.url.includes('/guide/') ? 0.9 : page.url.includes('/components/') ? 0.8 : 0.7,
   }))
 
   return [...staticPages, ...docPages]

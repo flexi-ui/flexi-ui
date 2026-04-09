@@ -6,7 +6,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "@/.source/*": ["./.source/*"]
     }
   },
   "include": [
@@ -14,7 +14,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".contentlayer/generated",
+    ".source/**/*",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
