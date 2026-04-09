@@ -1,13 +1,14 @@
 'use client'
 
-import { useMDXComponent } from 'next-contentlayer2/hooks'
-import { CodeBlock } from '@/components/CodeBlock'
+import { useEffect, useState, type ComponentType } from 'react'
+import defaultMdxComponents from 'fumadocs-ui/mdx'
 import { MDXComponents } from '@/components/mdx-components'
+import { CodeBlock } from '@/components/CodeBlock'
 
-const components = {
+const components: Record<string, unknown> = {
+  ...defaultMdxComponents,
   ...MDXComponents,
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
-    // Extract code from children
     const code = (children as { props?: { children?: string } })?.props?.children || ''
     const language =
       (children as { props?: { className?: string } })?.props?.className?.replace(
@@ -18,7 +19,6 @@ const components = {
     return <CodeBlock code={code} language={language} {...props} />
   },
   code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => {
-    // Inline code
     if (typeof children === 'string' && !children.includes('\n')) {
       return (
         <code
@@ -31,27 +31,61 @@ const components = {
     }
     return <code {...props}>{children}</code>
   },
-  a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
-    const isExternal = href?.startsWith('http')
-    return (
-      <a
-        href={href}
-        className="text-primary hover:underline"
-        {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
-        {...props}
-      >
-        {children}
-      </a>
-    )
-  },
+}
+
+ 
+type MDXModule = ComponentType<any>
+
+// Static import map for all MDX content files
+const mdxModules: Record<string, () => Promise<{ default: MDXModule }>> = {
+  'api-references/flexiui-provider': () => import('@/content/docs/api-references/flexiui-provider.mdx'),
+  'components/button': () => import('@/content/docs/components/button.mdx'),
+  'components/form': () => import('@/content/docs/components/form.mdx'),
+  'components/input': () => import('@/content/docs/components/input.mdx'),
+  'components/link': () => import('@/content/docs/components/link.mdx'),
+  'components/spinner': () => import('@/content/docs/components/spinner.mdx'),
+  'customization/colors': () => import('@/content/docs/customization/colors.mdx'),
+  'customization/create-theme': () => import('@/content/docs/customization/create-theme.mdx'),
+  'customization/custom-variants': () => import('@/content/docs/customization/custom-variants.mdx'),
+  'customization/customize-theme': () => import('@/content/docs/customization/customize-theme.mdx'),
+  'customization/dark-mode': () => import('@/content/docs/customization/dark-mode.mdx'),
+  'customization/layout': () => import('@/content/docs/customization/layout.mdx'),
+  'customization/override-styles': () => import('@/content/docs/customization/override-styles.mdx'),
+  'customization/theme': () => import('@/content/docs/customization/theme.mdx'),
+  'customization/theme-export-import': () => import('@/content/docs/customization/theme-export-import.mdx'),
+  'customization/theme-generators': () => import('@/content/docs/customization/theme-generators.mdx'),
+  'customization/theme-migration': () => import('@/content/docs/customization/theme-migration.mdx'),
+  'customization/theme-presets': () => import('@/content/docs/customization/theme-presets.mdx'),
+  'frameworks/astro': () => import('@/content/docs/frameworks/astro.mdx'),
+  'frameworks/nextjs': () => import('@/content/docs/frameworks/nextjs.mdx'),
+  'frameworks/remix': () => import('@/content/docs/frameworks/remix.mdx'),
+  'frameworks/vite': () => import('@/content/docs/frameworks/vite.mdx'),
+  'guide/forms': () => import('@/content/docs/guide/forms.mdx'),
+  'guide/installation': () => import('@/content/docs/guide/installation.mdx'),
+  'guide/introduction': () => import('@/content/docs/guide/introduction.mdx'),
+  'guide/routing': () => import('@/content/docs/guide/routing.mdx'),
+  'guide/tailwind-v4': () => import('@/content/docs/guide/tailwind-v4.mdx'),
 }
 
 interface MDXContentProps {
-  code: string
+  slug: string[]
 }
 
-export function MDXContent({ code }: MDXContentProps) {
-  const Component = useMDXComponent(code)
+export function MDXContent({ slug }: MDXContentProps) {
+  const [Component, setComponent] = useState<MDXModule | null>(null)
+
+  const slugPath = slug.join('/')
+
+  useEffect(() => {
+    const loader = mdxModules[slugPath]
+    if (loader) {
+      loader().then((mod) => setComponent(() => mod.default))
+    }
+  }, [slugPath])
+
+  if (!Component) {
+    return <div className="animate-pulse h-96 bg-content2 rounded-lg" />
+  }
 
   return <Component components={components} />
 }

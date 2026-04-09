@@ -1,5 +1,3 @@
-'use client'
-
 interface SandboxEditorProps {
   children: React.ReactNode
 }

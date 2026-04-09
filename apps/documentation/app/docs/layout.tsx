@@ -15,25 +15,25 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           aria-hidden="true"
           className="absolute -bottom-[30%] -left-[15%] w-[600px] h-[600px] rounded-full bg-primary-500/20 dark:bg-primary-500/15 blur-3xl transition-opacity duration-500"
         />
-        
+
         {/* Secondary gradient orb - top right */}
         <div
           aria-hidden="true"
           className="absolute -top-[25%] -right-[20%] w-[700px] h-[700px] rounded-full bg-secondary-500/15 dark:bg-secondary-500/10 blur-3xl transition-opacity duration-500"
         />
-        
+
         {/* Primary gradient orb - center right */}
         <div
           aria-hidden="true"
           className="absolute top-1/2 -right-[10%] -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary-400/10 dark:bg-primary-400/20 blur-3xl transition-opacity duration-500"
         />
-        
+
         {/* Secondary gradient orb - bottom right */}
         <div
           aria-hidden="true"
           className="absolute -bottom-[20%] -right-[5%] w-[400px] h-[400px] rounded-full bg-secondary-400/8 dark:bg-secondary-400/12 blur-3xl transition-opacity duration-500"
         />
-        
+
         {/* Subtle gradient mesh overlay */}
         <div
           aria-hidden="true"
@@ -46,7 +46,7 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
             `,
           }}
         />
-        
+
         {/* Subtle grid pattern for depth */}
         <div
           aria-hidden="true"

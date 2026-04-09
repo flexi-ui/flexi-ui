@@ -1,0 +1,10 @@
+{
+  "title": "Frameworks",
+  "defaultOpen": true,
+  "pages": [
+    "nextjs",
+    "vite",
+    "remix",
+    "astro"
+  ]
+}

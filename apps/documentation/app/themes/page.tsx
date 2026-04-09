@@ -24,6 +24,7 @@ export default function ThemesPage() {
         },
       })
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating theme:', error)
       return null
     }
@@ -52,6 +53,7 @@ export default flexiui(themeConfig)`
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Failed to copy:', error)
     }
   }
@@ -114,13 +116,13 @@ export default flexiui(themeConfig)`
                   <Input
                     type="color"
                     value={primaryColor}
-                    onChange={(e) => setPrimaryColor(e.target.value)}
+                    onChange={(v) => setPrimaryColor(v)}
                     className="flex-1"
                   />
                   <Input
                     type="text"
                     value={primaryColor}
-                    onChange={(e) => setPrimaryColor(e.target.value)}
+                    onChange={(v) => setPrimaryColor(v)}
                     className="w-24 font-mono text-sm"
                   />
                 </div>
@@ -137,13 +139,13 @@ export default flexiui(themeConfig)`
                   <Input
                     type="color"
                     value={secondaryColor}
-                    onChange={(e) => setSecondaryColor(e.target.value)}
+                    onChange={(v) => setSecondaryColor(v)}
                     className="flex-1"
                   />
                   <Input
                     type="text"
                     value={secondaryColor}
-                    onChange={(e) => setSecondaryColor(e.target.value)}
+                    onChange={(v) => setSecondaryColor(v)}
                     className="w-24 font-mono text-sm"
                   />
                 </div>
@@ -155,8 +157,7 @@ export default flexiui(themeConfig)`
                 <div className="flex gap-2">
                   <Button
                     size="sm"
-                    variant={themeMode === 'light' ? 'solid' : 'bordered'}
-                    color={themeMode === 'light' ? 'primary' : 'default'}
+                    variant={themeMode === 'light' ? 'flat' : 'bordered'}
                     onPress={() => setThemeMode('light')}
                     className="flex-1"
                   >
@@ -164,8 +165,7 @@ export default flexiui(themeConfig)`
                   </Button>
                   <Button
                     size="sm"
-                    variant={themeMode === 'dark' ? 'solid' : 'bordered'}
-                    color={themeMode === 'dark' ? 'primary' : 'default'}
+                    variant={themeMode === 'dark' ? 'flat' : 'bordered'}
                     onPress={() => setThemeMode('dark')}
                     className="flex-1"
                   >
@@ -180,30 +180,27 @@ export default flexiui(themeConfig)`
                   size="sm"
                   variant="bordered"
                   onPress={handleReset}
-                  startContent={<RefreshCw className="h-4 w-4" />}
                   className="flex-1"
                 >
+                  <RefreshCw className="h-4 w-4" />
                   Reset
                 </Button>
                 <Button
                   size="sm"
                   variant="bordered"
                   onPress={handleCopy}
-                  startContent={
-                    copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />
-                  }
                   className="flex-1"
                 >
+                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   {copied ? 'Copied!' : 'Copy'}
                 </Button>
                 <Button
                   size="sm"
-                  variant="solid"
-                  color="primary"
+                  variant="primary"
                   onPress={handleDownload}
-                  startContent={<Download className="h-4 w-4" />}
                   className="flex-1"
                 >
+                  <Download className="h-4 w-4" />
                   Export
                 </Button>
               </div>
@@ -247,19 +244,19 @@ export default flexiui(themeConfig)`
                 <div className="space-y-3">
                   <h3 className="text-sm font-medium text-foreground">Buttons</h3>
                   <div className="flex flex-wrap gap-3">
-                    <Button color="primary" variant="solid">
+                    <Button variant="primary">
                       Primary
                     </Button>
-                    <Button color="secondary" variant="solid">
+                    <Button variant="secondary">
                       Secondary
                     </Button>
-                    <Button color="primary" variant="bordered">
+                    <Button variant="bordered">
                       Bordered
                     </Button>
-                    <Button color="primary" variant="light">
+                    <Button variant="light">
                       Light
                     </Button>
-                    <Button color="primary" variant="flat">
+                    <Button variant="flat">
                       Flat
                     </Button>
                   </div>

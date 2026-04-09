@@ -1,0 +1,11 @@
+{
+  "title": "Components",
+  "defaultOpen": true,
+  "pages": [
+    "button",
+    "form",
+    "input",
+    "link",
+    "spinner"
+  ]
+}
