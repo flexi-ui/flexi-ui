@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-overlay-state",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "React hook to manage controlled/uncontrolled overlay state",
   "type": "module",
   "license": "MIT",

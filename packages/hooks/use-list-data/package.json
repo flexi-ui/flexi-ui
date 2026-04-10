@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-list-data",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "React hook for managing immutable list data with selection and filtering",
   "type": "module",
   "license": "MIT",
