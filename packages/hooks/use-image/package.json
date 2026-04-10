@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React hook for progressing image loading",
   "type": "module",
   "license": "MIT",

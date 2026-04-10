@@ -1,5 +1,12 @@
 # @flexi-ui/link
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`6904270`](https://github.com/flexi-ui/flexi-ui/commit/69042707410aac7e8f0f7be5c5d422e8919f70a5)]:
+  - @flexi-ui/react-utils@1.1.0
+
 ## 4.0.0
 
 ### Patch Changes
