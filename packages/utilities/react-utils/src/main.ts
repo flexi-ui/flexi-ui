@@ -36,3 +36,15 @@ export {
 export { useIsHydrated } from './use-is-hydrated'
 
 export { composeTwRenderProps, composeSlotClassName } from './compose'
+
+export { tv } from './tv'
+export type { VariantProps } from './tv'
+
+export {
+  mapPropsVariants,
+  createVariantBuilder,
+  createVariants,
+} from './variants'
+export type { VariantConfig, VariantDefinition, VariantPropsOf } from './variants'
+
+export { Logger } from './logger'

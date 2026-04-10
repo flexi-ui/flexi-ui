@@ -566,6 +566,22 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4
 
+  packages/hooks/use-css-variable:
+    dependencies:
+      '@react-aria/ssr':
+        specifier: ^3.9.10
+        version: 3.9.10(react@19.2.4)
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
   packages/hooks/use-image:
     dependencies:
       '@flexi-ui/react-utils':
@@ -578,6 +594,86 @@ importers:
       '@flexi-ui/test-utils':
         specifier: workspace:*
         version: link:../../utilities/test-utils
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
+  packages/hooks/use-is-hydrated:
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
+  packages/hooks/use-list-data:
+    dependencies:
+      '@react-types/shared':
+        specifier: 'catalog:'
+        version: 3.26.0(react@19.2.4)
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
+  packages/hooks/use-measured-height:
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
+  packages/hooks/use-media-query:
+    dependencies:
+      '@flexi-ui/use-safe-layout-effect':
+        specifier: workspace:*
+        version: link:../use-safe-layout-effect
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
+  packages/hooks/use-mounted:
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+
+  packages/hooks/use-overlay-state:
+    devDependencies:
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.14
@@ -3333,11 +3429,6 @@ packages:
 
   '@react-types/shared@3.28.0':
     resolution: {integrity: sha512-9oMEYIDc3sk0G5rysnYvdNrkSg7B04yTKl50HHSZVbokeHpnU0yRmsDaWb9B/5RprcKj8XszEk5guBO8Sa/Q+Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
-  '@react-types/shared@3.32.1':
-    resolution: {integrity: sha512-famxyD5emrGGpFuUlgOP6fVW2h/ZaF405G5KDi3zPHzyjAWys/8W6NAVJtNbkCkhedmvL0xOhvt8feGXyXaw5w==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -10874,7 +10965,7 @@ snapshots:
   '@react-types/calendar@3.8.0(react@19.2.4)':
     dependencies:
       '@internationalized/date': 3.10.0
-      '@react-types/shared': 3.32.1(react@19.2.4)
+      '@react-types/shared': 3.33.1(react@19.2.4)
       react: 19.2.4
 
   '@react-types/calendar@3.8.3(react@19.2.4)':
@@ -10998,10 +11089,6 @@ snapshots:
       react: 19.2.4
 
   '@react-types/shared@3.28.0(react@19.2.4)':
-    dependencies:
-      react: 19.2.4
-
-  '@react-types/shared@3.32.1(react@19.2.4)':
     dependencies:
       react: 19.2.4
 
