@@ -9,9 +9,9 @@
 '@flexi-ui/use-list-data': major
 ---
 
-**Phase 1 — Foundations for HeroUI parity**
+**Phase 1 — Foundation utilities and hooks**
 
-This is the first phase of bringing FlexiUI to feature-parity with HeroUI v3. It introduces the foundational utilities and hooks every upcoming component will rely on.
+Introduces the foundational utilities and hooks every upcoming FlexiUI component will rely on.
 
 **`@flexi-ui/react-utils` — new exports:**
 
@@ -29,4 +29,4 @@ This is the first phase of bringing FlexiUI to feature-parity with HeroUI v3. It
 - `@flexi-ui/use-mounted` — getter for mounted state, useful in async callbacks
 - `@flexi-ui/use-measured-height` — observe an element's `scrollHeight` via `ResizeObserver`
 - `@flexi-ui/use-overlay-state` — controlled/uncontrolled open state for Modal, Popover, Drawer, etc.
-- `@flexi-ui/use-list-data` — immutable list state with selection and filtering (inlined from `@react-stately/data` to avoid the dependency)
+- `@flexi-ui/use-list-data` — immutable list state with selection and filtering (based on `@react-stately/data`, inlined to avoid the dependency)
