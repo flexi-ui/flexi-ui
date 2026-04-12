@@ -1,5 +1,12 @@
 # @flexi-ui/use-image
 
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flexi-ui/react-utils@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

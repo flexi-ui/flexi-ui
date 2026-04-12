@@ -1,5 +1,18 @@
 # @flexi-ui/documentation
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`a89c6c5`](https://github.com/flexi-ui/flexi-ui/commit/a89c6c5a8f280e38e4d8caf93630cbb456e07e2e)]:
+  - @flexi-ui/shared-utils@2.0.3
+  - @flexi-ui/theme@3.0.2
+  - @flexi-ui/system@2.0.2
+  - @flexi-ui/button@6.0.2
+  - @flexi-ui/form@5.0.2
+  - @flexi-ui/input@5.0.2
+  - @flexi-ui/link@5.0.2
+
 ## 1.0.7
 
 ### Patch Changes

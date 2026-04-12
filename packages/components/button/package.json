@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/button",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "Buttons allow users to perform actions and choose with a single tap.",
   "type": "module",
   "license": "MIT",

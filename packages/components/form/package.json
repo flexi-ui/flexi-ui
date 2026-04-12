@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/form",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "A form component that provides validation and submission handling.",
   "type": "module",
   "license": "MIT",
