@@ -1,5 +1,11 @@
 # @flexi-ui/shared-utils
 
+## 2.0.2
+
+### Patch Changes
+
+- [#84](https://github.com/flexi-ui/flexi-ui/pull/84) [`79b9565`](https://github.com/flexi-ui/flexi-ui/commit/79b9565009155972fb76652ef07710df4d2d3ecb) Thanks [@Muneeb-Mughal-Dev](https://github.com/Muneeb-Mughal-Dev)! - Bump past npm version collision — 2.0.0 was previously published and unpublished on npm, blocking republication.
+
 ## 2.0.0
 
 ### Major Changes

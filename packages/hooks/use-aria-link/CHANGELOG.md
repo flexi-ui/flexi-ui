@@ -1,5 +1,12 @@
 # @flexi-ui/use-aria-link
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`79b9565`](https://github.com/flexi-ui/flexi-ui/commit/79b9565009155972fb76652ef07710df4d2d3ecb)]:
+  - @flexi-ui/shared-utils@2.0.2
+
 ## 2.0.0
 
 ### Major Changes
