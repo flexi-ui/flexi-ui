@@ -46,7 +46,7 @@ export function filterDOMProps(
   props: DOMProps & AriaLabelingProps,
   opts: Options = {},
 ): DOMProps & AriaLabelingProps {
-  let {
+  const {
     labelable = true,
     enabled = true,
     propNames,
@@ -55,7 +55,7 @@ export function filterDOMProps(
     omitDataProps,
     omitEventProps,
   } = opts
-  let filteredProps = {}
+  const filteredProps = {}
 
   if (!enabled) {
     return props
@@ -89,7 +89,6 @@ export function filterDOMProps(
           propRe.test(prop))) ||
       funcRe.test(prop)
     ) {
-      // @ts-ignore
       filteredProps[prop] = props[prop]
     }
   }

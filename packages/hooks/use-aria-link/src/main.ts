@@ -43,12 +43,12 @@ export interface LinkAria {
  * or application.
  */
 export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElement>): LinkAria {
-  let {
+  const {
     elementType = 'a',
     onPress,
     onPressStart,
     onPressEnd,
-    // @ts-ignore
+    // @ts-expect-error — deprecated onClick handler
     onClick: deprecatedOnClick,
     role,
     isDisabled,
@@ -65,7 +65,7 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
     }
   }
 
-  let isMobile = isIOS() || isAndroid()
+  const isMobile = isIOS() || isAndroid()
 
   if (
     deprecatedOnClick &&
@@ -91,18 +91,18 @@ export function useAriaLink(props: AriaLinkOptions, ref: RefObject<FocusableElem
     onPress?.(e)
   }
 
-  let { focusableProps } = useFocusable(props, ref)
-  let { pressProps, isPressed } = usePress({
+  const { focusableProps } = useFocusable(props, ref)
+  const { pressProps, isPressed } = usePress({
     onPress: handlePress,
     onPressStart,
     onPressEnd,
     isDisabled,
     ref,
   })
-  let domProps = filterDOMProps(otherProps, { labelable: true, isLink: elementType === 'a' })
-  let interactionHandlers = mergeProps(focusableProps, pressProps)
-  let router = useRouter()
-  let routerLinkProps = useLinkProps(props)
+  const domProps = filterDOMProps(otherProps, { labelable: true, isLink: elementType === 'a' })
+  const interactionHandlers = mergeProps(focusableProps, pressProps)
+  const router = useRouter()
+  const routerLinkProps = useLinkProps(props)
 
   return {
     isPressed, // Used to indicate press state for visual

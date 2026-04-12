@@ -11,7 +11,6 @@
     "clean": "rm -rf node_modules build .next .source"
   },
   "dependencies": {
-    "@emotion/is-prop-valid": "^1.4.0",
     "@flexi-ui/button": "workspace:*",
     "@flexi-ui/form": "workspace:*",
     "@flexi-ui/input": "workspace:*",
@@ -21,13 +20,6 @@
     "@flexi-ui/spinner": "workspace:*",
     "@flexi-ui/system": "workspace:*",
     "@flexi-ui/theme": "workspace:*",
-    "@react-aria/focus": "^3.21.0",
-    "@react-aria/i18n": "3.12.4",
-    "@react-aria/interactions": "^3.25.4",
-    "@react-aria/selection": "^3.25.0",
-    "@react-aria/ssr": "^3.9.10",
-    "@react-aria/utils": "^3.30.0",
-    "@react-aria/visually-hidden": "^3.8.26",
     "cmdk": "^1.0.4",
     "framer-motion": "catalog:",
     "fumadocs-core": "^16.7.11",

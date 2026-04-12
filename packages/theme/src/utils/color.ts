@@ -1,6 +1,6 @@
+/* eslint-disable no-console */
 /**
  * Enhanced color utilities for FlexiUI theme system
- * Based on HeroUI v3 color system improvements
  */
 
 import { parseToHsla, readableColor, mix, darken, lighten, saturate, desaturate } from 'color2k'

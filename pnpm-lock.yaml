@@ -173,9 +173,6 @@ importers:
 
   apps/documentation:
     dependencies:
-      '@emotion/is-prop-valid':
-        specifier: ^1.4.0
-        version: 1.4.0
       '@flexi-ui/button':
         specifier: workspace:*
         version: link:../../packages/components/button
@@ -203,27 +200,6 @@ importers:
       '@flexi-ui/theme':
         specifier: workspace:*
         version: link:../../packages/theme
-      '@react-aria/focus':
-        specifier: ^3.21.0
-        version: 3.21.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@react-aria/i18n':
-        specifier: 3.12.4
-        version: 3.12.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@react-aria/interactions':
-        specifier: ^3.25.4
-        version: 3.27.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@react-aria/selection':
-        specifier: ^3.25.0
-        version: 3.27.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@react-aria/ssr':
-        specifier: ^3.9.10
-        version: 3.9.10(react@19.2.4)
-      '@react-aria/utils':
-        specifier: ^3.30.0
-        version: 3.33.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@react-aria/visually-hidden':
-        specifier: ^3.8.26
-        version: 3.8.31(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       cmdk:
         specifier: ^1.0.4
         version: 1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -8727,8 +8703,10 @@ snapshots:
   '@emotion/is-prop-valid@1.4.0':
     dependencies:
       '@emotion/memoize': 0.9.0
+    optional: true
 
-  '@emotion/memoize@0.9.0': {}
+  '@emotion/memoize@0.9.0':
+    optional: true
 
   '@esbuild/aix-ppc64@0.25.12':
     optional: true

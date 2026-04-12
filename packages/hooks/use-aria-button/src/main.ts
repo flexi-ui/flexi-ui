@@ -63,18 +63,17 @@ export function useAriaButton(
   props: AriaButtonProps<ElementType>,
   ref: RefObject<any>,
 ): ButtonAria<HTMLAttributes<any>> {
-  let {
+  const {
     elementType = 'button',
     isDisabled,
     onPress,
     onPressStart,
     onPressEnd,
     onPressChange,
-    // @ts-ignore - undocumented
     preventFocusOnPress,
-    // @ts-ignore - undocumented
+    // @ts-expect-error — undocumented prop
     allowFocusWhenDisabled,
-    // @ts-ignore
+    // @ts-expect-error — deprecated onClick handler
     onClick: deprecatedOnClick,
     href,
     target,
@@ -102,7 +101,7 @@ export function useAriaButton(
     }
   }
 
-  let isMobile = isIOS() || isAndroid()
+  const isMobile = isIOS() || isAndroid()
 
   if (deprecatedOnClick && typeof deprecatedOnClick === 'function') {
     warn(
@@ -122,7 +121,7 @@ export function useAriaButton(
     onPress?.(e)
   }
 
-  let { pressProps, isPressed } = usePress({
+  const { pressProps, isPressed } = usePress({
     onPressStart,
     onPressEnd,
     onPressChange,
@@ -133,12 +132,12 @@ export function useAriaButton(
     ref,
   })
 
-  let { focusableProps } = useFocusable(props, ref)
+  const { focusableProps } = useFocusable(props, ref)
 
   if (allowFocusWhenDisabled) {
     focusableProps.tabIndex = isDisabled ? -1 : focusableProps.tabIndex
   }
-  let buttonProps = mergeProps(
+  const buttonProps = mergeProps(
     focusableProps,
     pressProps,
     filterDOMProps(props, { labelable: true }),

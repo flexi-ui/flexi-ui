@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 /**
  * Based on tw-colors by L-Blondy
  * @see https://github.com/L-Blondy/tw-colors

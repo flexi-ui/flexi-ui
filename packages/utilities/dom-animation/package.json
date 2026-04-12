@@ -1,7 +1,8 @@
 {
   "name": "@flexi-ui/dom-animation",
   "version": "2.0.0",
-  "description": "Dom Animation from Framer Motion for dynamic import",
+  "private": true,
+  "description": "[DEPRECATED] Dom Animation from Framer Motion for dynamic import",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
