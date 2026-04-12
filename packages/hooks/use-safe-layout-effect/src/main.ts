@@ -1,3 +1,3 @@
 import { useEffect, useLayoutEffect } from 'react'
 
-export const useSafeLayoutEffect = Boolean(globalThis?.document) ? useLayoutEffect : useEffect
+export const useSafeLayoutEffect = globalThis?.document ? useLayoutEffect : useEffect

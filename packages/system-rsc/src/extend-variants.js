@@ -11,7 +11,7 @@ function getSlots(variants) {
         .reduce((acc, slot) => {
           if (typeof slot === 'object' && slot !== null && !(slot instanceof String)) {
             Object.keys(slot).forEach((key) => {
-              if (!acc.hasOwnProperty(key)) {
+              if (!Object.prototype.hasOwnProperty.call(acc, key)) {
                 acc[key] = ''
               }
             })

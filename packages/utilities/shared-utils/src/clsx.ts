@@ -1,7 +1,5 @@
-/* eslint-disable no-shadow-restricted-names */
-/* eslint-disable no-plusplus */
-function toVal(mix: any) {
-  var k,
+function toVal(mix: any): string {
+  let k,
     y,
     str = ''
 
@@ -11,8 +9,9 @@ function toVal(mix: any) {
     if (Array.isArray(mix)) {
       for (k = 0; k < mix.length; k++) {
         if (mix[k]) {
-          if ((y = toVal(mix[k]))) {
-            str && (str += ' ')
+          y = toVal(mix[k])
+          if (y) {
+            if (str) str += ' '
             str += y
           }
         }
@@ -20,7 +19,7 @@ function toVal(mix: any) {
     } else {
       for (k in mix) {
         if (mix[k]) {
-          str && (str += ' ')
+          if (str) str += ' '
           str += k
         }
       }
@@ -30,16 +29,18 @@ function toVal(mix: any) {
   return str
 }
 
-export function clsx(...args: any[]) {
-  var i = 0,
+export function clsx(...args: any[]): string {
+  let i = 0,
     tmp,
     x,
     str = ''
 
   while (i < args.length) {
-    if ((tmp = args[i++])) {
-      if ((x = toVal(tmp))) {
-        str && (str += ' ')
+    tmp = args[i++]
+    if (tmp) {
+      x = toVal(tmp)
+      if (x) {
+        if (str) str += ' '
         str += x
       }
     }

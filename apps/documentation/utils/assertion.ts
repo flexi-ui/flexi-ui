@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 export type Dict<T = any> = Record<string, T>
 
 export function isArray<T>(value: any): value is Array<T> {

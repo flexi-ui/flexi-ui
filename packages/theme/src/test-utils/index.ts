@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Theme Testing Utilities
  * Testing helpers for theme validation and test theme creation

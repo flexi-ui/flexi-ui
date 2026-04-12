@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { relative } = require('path')
 
 const { ESLint } = require('eslint')
