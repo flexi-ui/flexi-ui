@@ -1,5 +1,13 @@
 # @flexi-ui/system
 
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`a89c6c5`](https://github.com/flexi-ui/flexi-ui/commit/a89c6c5a8f280e38e4d8caf93630cbb456e07e2e)]:
+  - @flexi-ui/system-rsc@6.0.1
+  - @flexi-ui/react-utils@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

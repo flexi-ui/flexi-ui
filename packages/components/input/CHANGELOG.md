@@ -1,5 +1,12 @@
 # @flexi-ui/input
 
+## 5.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flexi-ui/react-utils@2.0.2
+
 ## 5.0.1
 
 ### Patch Changes
