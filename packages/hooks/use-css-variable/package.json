@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-css-variable",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "React hook to read CSS custom property values with SSR support",
   "type": "module",
   "license": "MIT",
