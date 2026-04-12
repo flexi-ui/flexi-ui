@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-measured-height",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "React hook to observe an element's scroll height via ResizeObserver",
   "type": "module",
   "license": "MIT",

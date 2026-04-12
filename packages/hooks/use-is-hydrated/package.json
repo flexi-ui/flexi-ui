@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/use-is-hydrated",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "React hook that returns true after client hydration",
   "type": "module",
   "license": "MIT",

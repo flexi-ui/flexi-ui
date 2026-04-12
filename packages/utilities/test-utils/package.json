@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/test-utils",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A set of utilities for react testing",
   "type": "module",
   "private": false,
