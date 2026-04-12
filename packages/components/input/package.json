@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/input",
-  "version": "4.0.1",
+  "version": "4.0.0",
   "description": "The input component is designed for capturing user input within a text field.",
   "type": "module",
   "license": "MIT",
