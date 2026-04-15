@@ -1,5 +1,12 @@
 # @flexi-ui/link
 
+## 5.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`606cbd7`](https://github.com/flexi-ui/flexi-ui/commit/606cbd7677e61dc6188fab95119994c3b24b62e3)]:
+  - @flexi-ui/styles@1.1.0
+
 ## 5.0.2
 
 ### Patch Changes

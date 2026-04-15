@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/card",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A flexible card container component with header, body, and footer sections.",
   "type": "module",
   "license": "MIT",
@@ -19,8 +19,12 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
-  "keywords": ["card"],
-  "files": ["dist"],
+  "keywords": [
+    "card"
+  ],
+  "files": [
+    "dist"
+  ],
   "main": "./src/main.ts",
   "scripts": {
     "build": "tsup",

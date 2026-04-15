@@ -1,15 +1,30 @@
 {
   "name": "@flexi-ui/skeleton",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Skeleton loading placeholder component.",
   "type": "module",
   "license": "MIT",
-  "publishConfig": { "access": "public" },
-  "author": { "name": "Muneeb Mughal", "email": "muneeb.it.dev@gmail.com", "url": "https://github.com/Muneeb-Mughal-Dev" },
-  "repository": { "type": "git", "url": "https://github.com/flexi-ui/flexi-ui.git" },
-  "bugs": { "url": "https://github.com/flexi-ui/flexi-ui/issues" },
-  "keywords": ["skeleton"],
-  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneeb.it.dev@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "skeleton"
+  ],
+  "files": [
+    "dist"
+  ],
   "main": "./src/main.ts",
   "scripts": {
     "build": "tsup",
@@ -19,8 +34,13 @@
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf node_modules dist"
   },
-  "peerDependencies": { "react": ">=18 || >=19.0.0-rc.0", "react-dom": ">=18 || >=19.0.0-rc.0" },
-  "dependencies": { "@flexi-ui/styles": "workspace:*" },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0"
+  },
+  "dependencies": {
+    "@flexi-ui/styles": "workspace:*"
+  },
   "clean-package": "../../../clean-package.config.json",
   "devDependencies": {
     "clean-package": "2.2.0",
