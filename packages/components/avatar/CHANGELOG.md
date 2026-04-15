@@ -1,5 +1,11 @@
 # @flexi-ui/avatar
 
+## 1.0.2
+
+### Patch Changes
+
+- [#90](https://github.com/flexi-ui/flexi-ui/pull/90) [`bc42b72`](https://github.com/flexi-ui/flexi-ui/commit/bc42b72538930515817c0dd326887fe6dfe7f7bd) Thanks [@muneeb-builds](https://github.com/muneeb-builds)! - Bump version to resolve npm publish collision
+
 ## 1.0.1
 
 ### Patch Changes
