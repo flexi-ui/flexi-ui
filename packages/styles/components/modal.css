@@ -1,0 +1,127 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Modal Overlay
+   * -----------------------------------------------------------------------------------------------*/
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+
+    &[data-entering] {
+      animation: modal-fade-in 200ms ease-out;
+    }
+
+    &[data-exiting] {
+      animation: modal-fade-out 150ms ease-in;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Modal
+   * -----------------------------------------------------------------------------------------------*/
+  .modal {
+    @apply relative mx-4 w-full max-w-md rounded-xl bg-[var(--bg-card)] shadow-xl outline-none;
+
+    &[data-entering] {
+      animation: modal-zoom-in 200ms ease-out;
+    }
+
+    &[data-exiting] {
+      animation: modal-zoom-out 150ms ease-in;
+    }
+  }
+
+  /* Size Variants */
+  .modal--sm {
+    @apply max-w-sm;
+  }
+
+  .modal--md {
+    /* Default size */
+  }
+
+  .modal--lg {
+    @apply max-w-lg;
+  }
+
+  .modal--xl {
+    @apply max-w-xl;
+  }
+
+  .modal--full {
+    @apply mx-0 h-dvh max-w-full rounded-none;
+  }
+
+  /* Scroll Behavior */
+  .modal--scroll-inside {
+    @apply max-h-[80dvh];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Modal Sub-parts
+   * -----------------------------------------------------------------------------------------------*/
+  .modal__header {
+    @apply flex flex-col gap-1 px-6 pt-6 pb-2;
+  }
+
+  .modal__body {
+    @apply flex-1 overflow-y-auto px-6 py-2;
+  }
+
+  .modal__footer {
+    @apply flex justify-end gap-2 px-6 pt-2 pb-6;
+  }
+
+  .modal__close {
+    @apply absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors;
+    @apply hover:bg-[var(--bg-muted)] hover:text-[var(--text)];
+
+    &:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Animations
+   * -----------------------------------------------------------------------------------------------*/
+  @keyframes modal-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes modal-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes modal-zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes modal-zoom-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+}
