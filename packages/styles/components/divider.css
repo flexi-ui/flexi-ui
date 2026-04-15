@@ -1,0 +1,15 @@
+/* Divider component styles */
+
+/* Base divider styles */
+.divider {
+  @apply shrink-0 border-none bg-separator;
+}
+
+/* Orientation */
+.divider--horizontal {
+  @apply h-px w-full;
+}
+
+.divider--vertical {
+  @apply h-full w-px;
+}
