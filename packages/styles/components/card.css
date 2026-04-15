@@ -1,0 +1,92 @@
+/* Card component styles */
+
+/* Base card styles */
+.card {
+  @apply relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface text-surface-foreground shadow-surface;
+}
+
+/* Card sub-elements */
+.card__header {
+  @apply flex flex-col gap-1.5 px-4 pt-4;
+}
+
+.card__body {
+  @apply flex flex-1 flex-col px-4 py-3;
+}
+
+.card__footer {
+  @apply flex items-center px-4 pb-4;
+}
+
+/* Size modifiers */
+.card--sm {
+  .card__header {
+    @apply px-3 pt-3;
+  }
+  .card__body {
+    @apply px-3 py-2;
+  }
+  .card__footer {
+    @apply px-3 pb-3;
+  }
+}
+
+.card--md {
+  /* No styles as this is the default size */
+}
+
+.card--lg {
+  .card__header {
+    @apply px-6 pt-6;
+  }
+  .card__body {
+    @apply px-6 py-4;
+  }
+  .card__footer {
+    @apply px-6 pb-6;
+  }
+}
+
+/* Variant modifiers */
+.card--bordered {
+  @apply border-2 shadow-none;
+}
+
+.card--flat {
+  @apply border-0 bg-default/40 shadow-none;
+}
+
+.card--shadow {
+  @apply border-0 shadow-md;
+}
+
+/* Interactive card */
+.card--pressable {
+  @apply cursor-pointer transition-transform duration-200;
+
+  &:hover,
+  &[data-hovered='true'] {
+    @apply -translate-y-0.5 shadow-md;
+  }
+
+  &:active,
+  &[data-pressed='true'] {
+    @apply translate-y-0 shadow-surface;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible='true'] {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Full width modifier */
+.card--full-width {
+  @apply w-full;
+}
+
+/* Blurred footer */
+.card__footer--blurred {
+  @apply border-t border-border/50 bg-surface/80 backdrop-blur-md backdrop-saturate-150;
+}

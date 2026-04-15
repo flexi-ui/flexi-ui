@@ -1,0 +1,85 @@
+/* Switch component styles */
+
+/* Base switch styles */
+.switch {
+  @apply group inline-flex cursor-pointer items-center gap-2;
+}
+
+.switch__track {
+  @apply relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border-2 border-transparent bg-default;
+  @apply transition-colors duration-200;
+}
+
+.switch__thumb {
+  @apply pointer-events-none block size-5 rounded-full bg-white shadow-sm ring-0;
+  @apply translate-x-0 transition-transform duration-200;
+}
+
+/* Selected state */
+.switch--selected .switch__track {
+  @apply bg-accent;
+}
+
+.switch--selected .switch__thumb {
+  @apply translate-x-5;
+}
+
+/* Size modifiers */
+.switch--sm .switch__track {
+  @apply h-5 w-9;
+}
+
+.switch--sm .switch__thumb {
+  @apply size-4;
+}
+
+.switch--sm.switch--selected .switch__thumb {
+  @apply translate-x-4;
+}
+
+.switch--md {
+  /* No styles as this is the default size */
+}
+
+.switch--lg .switch__track {
+  @apply h-7 w-[3.25rem];
+}
+
+.switch--lg .switch__thumb {
+  @apply size-6;
+}
+
+.switch--lg.switch--selected .switch__thumb {
+  @apply translate-x-6;
+}
+
+/* Color modifiers */
+.switch--success.switch--selected .switch__track {
+  @apply bg-success;
+}
+
+.switch--warning.switch--selected .switch__track {
+  @apply bg-warning;
+}
+
+.switch--danger.switch--selected .switch__track {
+  @apply bg-danger;
+}
+
+/* Disabled state */
+.switch--disabled {
+  @apply pointer-events-none opacity-[var(--disabled-opacity,0.5)];
+  cursor: var(--cursor-disabled, not-allowed);
+}
+
+/* Focus state */
+.switch__track:focus-visible,
+.switch[data-focus-visible='true'] .switch__track {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Label */
+.switch__label {
+  @apply text-sm text-foreground;
+}

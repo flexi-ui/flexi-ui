@@ -1,0 +1,92 @@
+/* Badge component styles */
+
+/* Base badge styles */
+.badge {
+  @apply inline-flex items-center gap-1 rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold;
+  @apply transition-colors duration-150;
+}
+
+/* Size modifiers */
+.badge--sm {
+  @apply px-2 py-px text-[0.625rem];
+}
+
+.badge--md {
+  /* No styles as this is the default size */
+}
+
+.badge--lg {
+  @apply px-3 py-1 text-sm;
+}
+
+/* Variant modifiers */
+.badge--default {
+  @apply bg-default text-default-foreground;
+}
+
+.badge--accent {
+  @apply bg-accent text-accent-foreground;
+}
+
+.badge--success {
+  @apply bg-success text-success-foreground;
+}
+
+.badge--warning {
+  @apply bg-warning text-warning-foreground;
+}
+
+.badge--danger {
+  @apply bg-danger text-danger-foreground;
+}
+
+/* Flat variant modifiers */
+.badge--flat-default {
+  @apply border-default bg-default/20 text-default-foreground;
+}
+
+.badge--flat-accent {
+  @apply bg-accent-soft text-accent-soft-foreground;
+}
+
+.badge--flat-success {
+  @apply bg-success-soft text-success-soft-foreground;
+}
+
+.badge--flat-warning {
+  @apply bg-warning-soft text-warning-soft-foreground;
+}
+
+.badge--flat-danger {
+  @apply bg-danger-soft text-danger-soft-foreground;
+}
+
+/* Bordered variant modifiers */
+.badge--bordered-default {
+  @apply border-default bg-transparent text-default-foreground;
+}
+
+.badge--bordered-accent {
+  @apply border-accent bg-transparent text-accent;
+}
+
+.badge--bordered-success {
+  @apply border-success bg-transparent text-success;
+}
+
+.badge--bordered-warning {
+  @apply border-warning bg-transparent text-warning;
+}
+
+.badge--bordered-danger {
+  @apply border-danger bg-transparent text-danger;
+}
+
+/* Dot modifier */
+.badge--dot {
+  @apply px-1;
+}
+
+.badge__dot {
+  @apply size-1.5 rounded-full bg-current;
+}
