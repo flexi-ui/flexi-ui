@@ -1,5 +1,12 @@
 # @flexi-ui/card
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`723ff94`](https://github.com/flexi-ui/flexi-ui/commit/723ff9435bfc91eaddcfe83087e1aa7b155f4a92)]:
+  - @flexi-ui/styles@1.3.0
+
 ## 0.1.1
 
 ### Patch Changes
