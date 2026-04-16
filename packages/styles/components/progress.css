@@ -1,0 +1,92 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Progress
+   * -----------------------------------------------------------------------------------------------*/
+  .progress {
+    @apply flex w-full flex-col gap-1.5;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Progress Label
+   * -----------------------------------------------------------------------------------------------*/
+  .progress__label {
+    @apply flex justify-between text-sm font-medium text-[var(--text)];
+  }
+
+  .progress__value {
+    @apply text-sm text-[var(--text-muted)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Progress Track
+   * -----------------------------------------------------------------------------------------------*/
+  .progress__track {
+    @apply h-2 w-full overflow-hidden rounded-full bg-[var(--bg-muted)];
+  }
+
+  /* Size Variants */
+  .progress--sm .progress__track {
+    @apply h-1;
+  }
+
+  .progress--md .progress__track {
+    /* Default size */
+  }
+
+  .progress--lg .progress__track {
+    @apply h-3;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Progress Bar (fill)
+   * -----------------------------------------------------------------------------------------------*/
+  .progress__bar {
+    @apply h-full rounded-full bg-[var(--color-accent)] transition-all duration-300 ease-out;
+  }
+
+  /* Color Variants */
+  .progress--success .progress__bar {
+    @apply bg-[var(--color-success)];
+  }
+
+  .progress--warning .progress__bar {
+    @apply bg-[var(--color-warning)];
+  }
+
+  .progress--danger .progress__bar {
+    @apply bg-[var(--color-danger)];
+  }
+
+  /* Striped */
+  .progress--striped .progress__bar {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 1rem 1rem;
+  }
+
+  /* Indeterminate */
+  .progress--indeterminate .progress__bar {
+    @apply w-1/3;
+    animation: progress-indeterminate 1.5s ease-in-out infinite;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Animations
+   * -----------------------------------------------------------------------------------------------*/
+  @keyframes progress-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+}
