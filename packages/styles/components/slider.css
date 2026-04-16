@@ -1,0 +1,97 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Slider
+   * -----------------------------------------------------------------------------------------------*/
+  .slider {
+    @apply flex w-full flex-col gap-1.5;
+  }
+
+  .slider__label {
+    @apply flex justify-between text-sm font-medium text-[var(--text)];
+  }
+
+  .slider__output {
+    @apply text-sm text-[var(--text-muted)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Slider Track
+   * -----------------------------------------------------------------------------------------------*/
+  .slider__track {
+    @apply relative h-2 w-full cursor-pointer rounded-full bg-[var(--bg-muted)];
+  }
+
+  .slider__fill {
+    @apply absolute h-full rounded-full bg-[var(--color-accent)];
+  }
+
+  /* Size Variants */
+  .slider--sm .slider__track {
+    @apply h-1;
+  }
+
+  .slider--md .slider__track {
+    /* Default size */
+  }
+
+  .slider--lg .slider__track {
+    @apply h-3;
+  }
+
+  /* Color Variants */
+  .slider--success .slider__fill {
+    @apply bg-[var(--color-success)];
+  }
+
+  .slider--warning .slider__fill {
+    @apply bg-[var(--color-warning)];
+  }
+
+  .slider--danger .slider__fill {
+    @apply bg-[var(--color-danger)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Slider Thumb
+   * -----------------------------------------------------------------------------------------------*/
+  .slider__thumb {
+    @apply absolute top-1/2 size-5 -translate-y-1/2 cursor-grab rounded-full border-2 border-[var(--color-accent)] bg-white shadow-sm transition-shadow;
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:active,
+    &[data-dragging='true'] {
+      @apply cursor-grabbing shadow-md;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  .slider--sm .slider__thumb {
+    @apply size-4;
+  }
+
+  .slider--lg .slider__thumb {
+    @apply size-6;
+  }
+
+  /* Color Variants for thumb */
+  .slider--success .slider__thumb {
+    @apply border-[var(--color-success)];
+  }
+
+  .slider--warning .slider__thumb {
+    @apply border-[var(--color-warning)];
+  }
+
+  .slider--danger .slider__thumb {
+    @apply border-[var(--color-danger)];
+  }
+}

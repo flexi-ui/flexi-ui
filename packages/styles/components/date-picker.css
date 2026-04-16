@@ -1,0 +1,129 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Date Picker
+   * -----------------------------------------------------------------------------------------------*/
+  .date-picker {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .date-picker__group {
+    @apply inline-flex h-10 items-center overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--bg-card)] transition-colors;
+
+    &:hover {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .date-picker__input {
+    @apply flex flex-1 items-center px-3 text-sm text-[var(--text)];
+  }
+
+  .date-picker__segment {
+    @apply rounded px-0.5 tabular-nums outline-none;
+
+    &:focus {
+      @apply bg-[var(--color-accent)] text-white;
+    }
+
+    &[data-placeholder] {
+      @apply text-[var(--text-muted)];
+    }
+  }
+
+  .date-picker__button {
+    @apply inline-flex size-10 shrink-0 cursor-pointer items-center justify-center text-[var(--text-muted)] transition-colors;
+
+    &:hover {
+      @apply text-[var(--text)];
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Calendar
+   * -----------------------------------------------------------------------------------------------*/
+  .calendar {
+    @apply w-fit rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-4 shadow-lg;
+  }
+
+  .calendar__header {
+    @apply mb-4 flex items-center justify-between;
+  }
+
+  .calendar__heading {
+    @apply text-sm font-semibold text-[var(--text)];
+  }
+
+  .calendar__nav-button {
+    @apply inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-[var(--text-muted)] transition-colors;
+
+    &:hover {
+      @apply bg-[var(--bg-muted)] text-[var(--text)];
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .calendar__grid {
+    @apply w-full border-collapse;
+  }
+
+  .calendar__grid-header {
+    @apply text-xs font-medium text-[var(--text-muted)];
+  }
+
+  .calendar__cell {
+    @apply p-0.5 text-center;
+  }
+
+  .calendar__day {
+    @apply inline-flex size-9 cursor-pointer items-center justify-center rounded-full text-sm transition-colors;
+
+    &:hover {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &[data-selected] {
+      @apply bg-[var(--color-accent)] font-medium text-white;
+    }
+
+    &[data-today] {
+      @apply font-bold;
+    }
+
+    &[data-outside-month] {
+      @apply text-[var(--text-muted)] opacity-50;
+    }
+
+    &[data-disabled] {
+      @apply pointer-events-none opacity-30;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Date Picker Label
+   * -----------------------------------------------------------------------------------------------*/
+  .date-picker__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .date-picker__description {
+    @apply text-xs text-[var(--text-muted)];
+  }
+
+  .date-picker__error {
+    @apply text-xs text-[var(--color-danger)];
+  }
+}

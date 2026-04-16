@@ -377,6 +377,34 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
 
+  packages/components/breadcrumbs:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      react-aria-components:
+        specifier: 'catalog:'
+        version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
   packages/components/button:
     dependencies:
       '@flexi-ui/react-utils':
@@ -434,6 +462,34 @@ importers:
         version: 19.2.4(react@19.2.4)
 
   packages/components/checkbox:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      react-aria-components:
+        specifier: 'catalog:'
+        version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
+  packages/components/date-picker:
     dependencies:
       '@flexi-ui/styles':
         specifier: workspace:*
@@ -629,6 +685,34 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
 
+  packages/components/number-field:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      react-aria-components:
+        specifier: 'catalog:'
+        version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
   packages/components/popover:
     dependencies:
       '@flexi-ui/styles':
@@ -682,6 +766,34 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
 
+  packages/components/radio:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      react-aria-components:
+        specifier: 'catalog:'
+        version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
   packages/components/ripple:
     dependencies:
       '@flexi-ui/styles':
@@ -704,11 +816,67 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
 
+  packages/components/select:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      react-aria-components:
+        specifier: 'catalog:'
+        version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
   packages/components/skeleton:
     dependencies:
       '@flexi-ui/styles':
         specifier: workspace:*
         version: link:../../styles
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
+  packages/components/slider:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      react-aria-components:
+        specifier: 'catalog:'
+        version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     devDependencies:
       '@storybook/react':
         specifier: ^8.6.18
@@ -790,6 +958,31 @@ importers:
       react-aria-components:
         specifier: 'catalog:'
         version: 1.16.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    devDependencies:
+      '@storybook/react':
+        specifier: ^8.6.18
+        version: 8.6.18(@storybook/test@8.6.18(storybook@8.6.18(prettier@3.7.4)))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@8.6.18(prettier@3.7.4))(typescript@5.8.2)
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+
+  packages/components/textarea:
+    dependencies:
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../styles
     devDependencies:
       '@storybook/react':
         specifier: ^8.6.18

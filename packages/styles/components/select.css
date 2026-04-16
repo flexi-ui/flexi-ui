@@ -1,0 +1,134 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Select
+   * -----------------------------------------------------------------------------------------------*/
+  .select {
+    @apply flex flex-col gap-1.5;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Select Trigger
+   * -----------------------------------------------------------------------------------------------*/
+  .select__trigger {
+    @apply inline-flex h-10 w-full cursor-pointer items-center justify-between gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-3 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .select__value {
+    @apply flex-1 truncate text-left;
+  }
+
+  .select__icon {
+    @apply text-[var(--text-muted)] transition-transform;
+  }
+
+  /* Size Variants */
+  .select--sm .select__trigger {
+    @apply h-8 px-2.5 text-xs;
+  }
+
+  .select--md .select__trigger {
+    /* Default size */
+  }
+
+  .select--lg .select__trigger {
+    @apply h-12 px-4 text-base;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Select Popover / Listbox
+   * -----------------------------------------------------------------------------------------------*/
+  .select__popover {
+    @apply z-50 min-w-[var(--trigger-width)] rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-1 shadow-lg;
+
+    &[data-entering] {
+      animation: select-fade-in 150ms ease-out;
+    }
+
+    &[data-exiting] {
+      animation: select-fade-out 100ms ease-in;
+    }
+  }
+
+  .select__listbox {
+    @apply max-h-60 overflow-y-auto outline-none;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Select Option
+   * -----------------------------------------------------------------------------------------------*/
+  .select__option {
+    @apply relative flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'],
+    &[data-focused='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &[data-selected='true'] {
+      @apply font-medium text-[var(--color-accent)];
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Select Label
+   * -----------------------------------------------------------------------------------------------*/
+  .select__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .select__description {
+    @apply text-xs text-[var(--text-muted)];
+  }
+
+  .select__error {
+    @apply text-xs text-[var(--color-danger)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Animations
+   * -----------------------------------------------------------------------------------------------*/
+  @keyframes select-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes select-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+}
