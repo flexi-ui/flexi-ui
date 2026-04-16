@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/badge",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Badge component for status indicators and labels.",
   "type": "module",
   "license": "MIT",
