@@ -1,15 +1,30 @@
 {
   "name": "@flexi-ui/tooltip",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Tooltip component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
-  "publishConfig": { "access": "public" },
-  "author": { "name": "Muneeb Mughal", "email": "muneeb.it.dev@gmail.com", "url": "https://github.com/Muneeb-Mughal-Dev" },
-  "repository": { "type": "git", "url": "https://github.com/flexi-ui/flexi-ui.git" },
-  "bugs": { "url": "https://github.com/flexi-ui/flexi-ui/issues" },
-  "keywords": ["tooltip"],
-  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneeb.it.dev@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "tooltip"
+  ],
+  "files": [
+    "dist"
+  ],
   "main": "./src/main.ts",
   "scripts": {
     "build": "tsup",
@@ -19,7 +34,10 @@
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf node_modules dist"
   },
-  "peerDependencies": { "react": ">=18 || >=19.0.0-rc.0", "react-dom": ">=18 || >=19.0.0-rc.0" },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0"
+  },
   "dependencies": {
     "@flexi-ui/styles": "workspace:*",
     "react-aria-components": "catalog:"
