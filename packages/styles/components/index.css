@@ -18,6 +18,7 @@
 @import './link.css';
 @import './tabs.css';
 @import './accordion.css';
+@import './breadcrumbs.css';
 
 /* ------------------------------------------------------------------------------------------------
  * Buttons
@@ -40,6 +41,12 @@
 @import './input.css';
 @import './switch.css';
 @import './checkbox.css';
+@import './radio.css';
+@import './select.css';
+@import './slider.css';
+@import './textarea.css';
+@import './number-field.css';
+@import './date-picker.css';
 
 /* ------------------------------------------------------------------------------------------------
  * Overlays

@@ -1,0 +1,61 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Breadcrumbs
+   * -----------------------------------------------------------------------------------------------*/
+  .breadcrumbs {
+    @apply flex items-center;
+  }
+
+  .breadcrumbs__list {
+    @apply flex items-center gap-1;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Breadcrumb Item
+   * -----------------------------------------------------------------------------------------------*/
+  .breadcrumbs__item {
+    @apply flex items-center gap-1;
+  }
+
+  .breadcrumbs__link {
+    @apply text-sm text-[var(--text-muted)] transition-colors;
+
+    &:hover {
+      @apply text-[var(--text)];
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    &[data-current] {
+      @apply cursor-default font-medium text-[var(--text)];
+    }
+
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  .breadcrumbs__separator {
+    @apply text-sm text-[var(--text-muted)];
+  }
+
+  /* Size Variants */
+  .breadcrumbs--sm .breadcrumbs__link,
+  .breadcrumbs--sm .breadcrumbs__separator {
+    @apply text-xs;
+  }
+
+  .breadcrumbs--md .breadcrumbs__link,
+  .breadcrumbs--md .breadcrumbs__separator {
+    /* Default size */
+  }
+
+  .breadcrumbs--lg .breadcrumbs__link,
+  .breadcrumbs--lg .breadcrumbs__separator {
+    @apply text-base;
+  }
+}

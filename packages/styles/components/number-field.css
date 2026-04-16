@@ -1,0 +1,99 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Number Field
+   * -----------------------------------------------------------------------------------------------*/
+  .number-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .number-field__group {
+    @apply inline-flex items-center overflow-hidden rounded-lg border border-[var(--border)] transition-colors;
+
+    &:hover {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .number-field__input {
+    @apply w-full bg-[var(--bg-card)] px-3 text-center text-sm text-[var(--text)] outline-none;
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  .number-field__button {
+    @apply inline-flex size-10 shrink-0 cursor-pointer items-center justify-center bg-[var(--bg-muted)] text-[var(--text-muted)] transition-colors;
+
+    &:hover {
+      @apply bg-[var(--bg-muted)] text-[var(--text)];
+    }
+
+    &:active {
+      @apply bg-[var(--border)];
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* Size Variants */
+  .number-field--sm .number-field__group {
+    @apply h-8;
+  }
+
+  .number-field--sm .number-field__input {
+    @apply text-xs;
+  }
+
+  .number-field--sm .number-field__button {
+    @apply size-8;
+  }
+
+  .number-field--md .number-field__group {
+    @apply h-10;
+  }
+
+  .number-field--lg .number-field__group {
+    @apply h-12;
+  }
+
+  .number-field--lg .number-field__input {
+    @apply text-base;
+  }
+
+  .number-field--lg .number-field__button {
+    @apply size-12;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Number Field Label
+   * -----------------------------------------------------------------------------------------------*/
+  .number-field__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .number-field__description {
+    @apply text-xs text-[var(--text-muted)];
+  }
+
+  .number-field__error {
+    @apply text-xs text-[var(--color-danger)];
+  }
+}

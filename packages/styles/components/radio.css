@@ -1,0 +1,104 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Radio Group
+   * -----------------------------------------------------------------------------------------------*/
+  .radio-group {
+    @apply flex flex-col gap-2;
+  }
+
+  .radio-group__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .radio-group__description {
+    @apply text-xs text-[var(--text-muted)];
+  }
+
+  .radio-group__error {
+    @apply text-xs text-[var(--color-danger)];
+  }
+
+  /* Orientation */
+  .radio-group--horizontal {
+    @apply flex-row flex-wrap items-center;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Radio
+   * -----------------------------------------------------------------------------------------------*/
+  .radio {
+    @apply inline-flex cursor-pointer items-center gap-2 text-sm text-[var(--text)];
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .radio__circle {
+    @apply flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-[var(--border)] transition-colors;
+  }
+
+  .radio__dot {
+    @apply size-2.5 scale-0 rounded-full bg-current transition-transform;
+  }
+
+  /* Selected State */
+  .radio--selected .radio__circle {
+    @apply border-[var(--color-accent)] text-[var(--color-accent)];
+  }
+
+  .radio--selected .radio__dot {
+    @apply scale-100;
+  }
+
+  /* Size Variants */
+  .radio--sm {
+    @apply text-xs;
+  }
+
+  .radio--sm .radio__circle {
+    @apply size-4;
+  }
+
+  .radio--sm .radio__dot {
+    @apply size-2;
+  }
+
+  .radio--md {
+    /* Default size */
+  }
+
+  .radio--lg {
+    @apply text-base;
+  }
+
+  .radio--lg .radio__circle {
+    @apply size-6;
+  }
+
+  .radio--lg .radio__dot {
+    @apply size-3;
+  }
+
+  /* Color Variants */
+  .radio--success.radio--selected .radio__circle {
+    @apply border-[var(--color-success)] text-[var(--color-success)];
+  }
+
+  .radio--warning.radio--selected .radio__circle {
+    @apply border-[var(--color-warning)] text-[var(--color-warning)];
+  }
+
+  .radio--danger.radio--selected .radio__circle {
+    @apply border-[var(--color-danger)] text-[var(--color-danger)];
+  }
+}
