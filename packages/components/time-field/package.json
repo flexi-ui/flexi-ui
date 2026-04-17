@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/time-field",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "TimeField component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
@@ -19,7 +19,11 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
-  "keywords": ["time","time-field","time-input"],
+  "keywords": [
+    "time",
+    "time-field",
+    "time-input"
+  ],
   "files": [
     "dist"
   ],
