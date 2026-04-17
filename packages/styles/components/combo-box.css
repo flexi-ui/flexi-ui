@@ -1,0 +1,129 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ComboBox
+   * -----------------------------------------------------------------------------------------------*/
+  .combo-box {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .combo-box__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ComboBox Group
+   * -----------------------------------------------------------------------------------------------*/
+  .combo-box__group {
+    @apply relative flex items-center;
+  }
+
+  .combo-box__input {
+    @apply h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-3 pr-9 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &::placeholder {
+      @apply text-[var(--text-muted)];
+    }
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus,
+    &[data-focused='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .combo-box__button {
+    @apply absolute right-2 flex size-6 cursor-pointer items-center justify-center rounded-md text-[var(--text-muted)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply text-[var(--text)];
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ComboBox Popover / Listbox
+   * -----------------------------------------------------------------------------------------------*/
+  .combo-box__popover {
+    @apply z-50 min-w-[var(--trigger-width)] rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-1 shadow-lg;
+
+    &[data-entering] {
+      animation: combo-box-fade-in 150ms ease-out;
+    }
+
+    &[data-exiting] {
+      animation: combo-box-fade-out 100ms ease-in;
+    }
+  }
+
+  .combo-box__listbox {
+    @apply max-h-60 overflow-y-auto outline-none;
+  }
+
+  .combo-box__option {
+    @apply relative flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'],
+    &[data-focused='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &[data-selected='true'] {
+      @apply font-medium text-[var(--color-accent)];
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  /* Size Variants */
+  .combo-box--sm .combo-box__input {
+    @apply h-8 pr-8 text-xs;
+  }
+
+  .combo-box--md .combo-box__input {
+    /* Default size */
+  }
+
+  .combo-box--lg .combo-box__input {
+    @apply h-12 pr-10 text-base;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Animations
+   * -----------------------------------------------------------------------------------------------*/
+  @keyframes combo-box-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes combo-box-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+}

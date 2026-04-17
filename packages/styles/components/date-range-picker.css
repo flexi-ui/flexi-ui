@@ -1,0 +1,55 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * DateRangePicker
+   * -----------------------------------------------------------------------------------------------*/
+  .date-range-picker {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .date-range-picker__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .date-range-picker__group {
+    @apply inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--bg-card)] transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .date-range-picker__input {
+    @apply flex items-center px-3 py-2 text-sm;
+  }
+
+  .date-range-picker__separator {
+    @apply px-1 text-[var(--text-muted)];
+  }
+
+  .date-range-picker__segment {
+    @apply rounded px-0.5 text-sm text-[var(--text)] outline-none;
+
+    &[data-placeholder='true'] {
+      @apply text-[var(--text-muted)];
+    }
+
+    &:focus {
+      @apply bg-[var(--color-accent)] text-white;
+    }
+  }
+
+  .date-range-picker__button {
+    @apply flex size-8 cursor-pointer items-center justify-center rounded-r-lg text-[var(--text-muted)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)] text-[var(--text)];
+    }
+  }
+}

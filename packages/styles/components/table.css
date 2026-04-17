@@ -1,0 +1,101 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Table
+   * -----------------------------------------------------------------------------------------------*/
+  .table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Table Header
+   * -----------------------------------------------------------------------------------------------*/
+  .table__header {
+    @apply border-b border-[var(--border)];
+  }
+
+  .table__column {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] outline-none;
+
+    &[data-sort-direction] {
+      @apply cursor-pointer;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Table Body
+   * -----------------------------------------------------------------------------------------------*/
+  .table__body {
+    @apply divide-y divide-[var(--border)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Table Row
+   * -----------------------------------------------------------------------------------------------*/
+  .table__row {
+    @apply outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &[data-selected='true'] {
+      @apply bg-[var(--color-accent)]/10;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Table Cell
+   * -----------------------------------------------------------------------------------------------*/
+  .table__cell {
+    @apply px-4 py-3 text-sm text-[var(--text)] outline-none;
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+  }
+
+  /* Size Variants */
+  .table--sm .table__column {
+    @apply px-3 py-2;
+  }
+
+  .table--sm .table__cell {
+    @apply px-3 py-2 text-xs;
+  }
+
+  .table--md .table__column {
+    /* Default size */
+  }
+
+  .table--md .table__cell {
+    /* Default size */
+  }
+
+  .table--lg .table__column {
+    @apply px-5 py-4;
+  }
+
+  .table--lg .table__cell {
+    @apply px-5 py-4 text-base;
+  }
+}
