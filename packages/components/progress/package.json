@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/progress",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Progress bar component for displaying completion status.",
   "type": "module",
   "license": "MIT",

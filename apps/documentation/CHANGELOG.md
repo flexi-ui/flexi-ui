@@ -1,5 +1,16 @@
 # @flexi-ui/documentation
 
+## 1.0.14
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flexi-ui/button@6.0.8
+  - @flexi-ui/form@5.0.8
+  - @flexi-ui/input@5.0.8
+  - @flexi-ui/link@5.0.8
+  - @flexi-ui/spinner@6.0.6
+
 ## 1.0.13
 
 ### Patch Changes

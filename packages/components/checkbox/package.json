@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/checkbox",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Checkbox and CheckboxGroup components built on React Aria Components.",
   "type": "module",
   "license": "MIT",

@@ -1,5 +1,12 @@
 # @flexi-ui/spinner
 
+## 6.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`d5930b4`](https://github.com/flexi-ui/flexi-ui/commit/d5930b45e0959b41dad28c932743bf5d75566d7a)]:
+  - @flexi-ui/styles@1.6.0
+
 ## 6.0.5
 
 ### Patch Changes
