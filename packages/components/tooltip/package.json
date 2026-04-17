@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/tooltip",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tooltip component built on React Aria Components.",
   "type": "module",
   "license": "MIT",

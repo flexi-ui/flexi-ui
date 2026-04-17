@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/tabs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tabs component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
