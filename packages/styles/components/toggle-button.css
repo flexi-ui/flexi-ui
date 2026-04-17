@@ -1,0 +1,53 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ToggleButton
+   * -----------------------------------------------------------------------------------------------*/
+  .toggle-button {
+    @apply inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-4 text-sm font-medium text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &[data-selected='true'] {
+      @apply border-[var(--color-accent)] bg-[var(--color-accent)] text-white;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* Size Variants */
+  .toggle-button--sm {
+    @apply h-8 px-3 text-xs;
+  }
+
+  .toggle-button--md {
+    /* Default size */
+  }
+
+  .toggle-button--lg {
+    @apply h-12 px-6 text-base;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ToggleButtonGroup
+   * -----------------------------------------------------------------------------------------------*/
+  .toggle-button-group {
+    @apply inline-flex gap-1;
+  }
+
+  .toggle-button-group--vertical {
+    @apply flex-col;
+  }
+}

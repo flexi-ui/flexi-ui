@@ -1,0 +1,102 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * TagGroup
+   * -----------------------------------------------------------------------------------------------*/
+  .tag-group {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .tag-group__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .tag-group__description {
+    @apply text-xs text-[var(--text-muted)];
+  }
+
+  .tag-group__error {
+    @apply text-xs text-[var(--color-danger)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * TagList
+   * -----------------------------------------------------------------------------------------------*/
+  .tag-group__list {
+    @apply flex flex-wrap gap-1.5;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Tag
+   * -----------------------------------------------------------------------------------------------*/
+  .tag-group__tag {
+    @apply inline-flex items-center gap-1 rounded-md border border-[var(--border)] bg-[var(--bg-muted)] px-2 py-0.5 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-card)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &[data-selected='true'] {
+      @apply border-[var(--color-accent)] bg-[var(--color-accent)] text-white;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .tag-group__tag-remove {
+    @apply flex size-4 cursor-pointer items-center justify-center rounded-full text-current opacity-60 transition-opacity;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply opacity-100;
+    }
+  }
+
+  /* Size Variants */
+  .tag-group--sm .tag-group__tag {
+    @apply px-1.5 py-px text-xs;
+  }
+
+  .tag-group--sm .tag-group__tag-remove {
+    @apply size-3.5;
+  }
+
+  .tag-group--md .tag-group__tag {
+    /* Default size */
+  }
+
+  .tag-group--lg .tag-group__tag {
+    @apply px-3 py-1 text-base;
+  }
+
+  .tag-group--lg .tag-group__tag-remove {
+    @apply size-5;
+  }
+
+  /* Color Variants */
+  .tag-group--accent .tag-group__tag {
+    @apply border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)];
+  }
+
+  .tag-group--success .tag-group__tag {
+    @apply border-[var(--color-success)] bg-[var(--color-success)]/10 text-[var(--color-success)];
+  }
+
+  .tag-group--warning .tag-group__tag {
+    @apply border-[var(--color-warning)] bg-[var(--color-warning)]/10 text-[var(--color-warning)];
+  }
+
+  .tag-group--danger .tag-group__tag {
+    @apply border-[var(--color-danger)] bg-[var(--color-danger)]/10 text-[var(--color-danger)];
+  }
+}
