@@ -1,0 +1,52 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorSlider
+   * -----------------------------------------------------------------------------------------------*/
+  .color-slider {
+    @apply flex flex-col gap-2;
+
+    &[data-orientation='vertical'] {
+      @apply h-40 w-fit flex-row items-start;
+    }
+  }
+
+  .color-slider__label {
+    @apply flex items-center justify-between text-sm font-medium text-[var(--text)];
+  }
+
+  .color-slider__output {
+    @apply text-xs text-[var(--text-muted)];
+  }
+
+  .color-slider__track {
+    @apply relative h-6 w-full rounded-md;
+    forced-color-adjust: none;
+
+    .color-slider[data-orientation='vertical'] & {
+      @apply h-full w-6;
+    }
+  }
+
+  .color-slider__thumb {
+    @apply size-5 rounded-full border-2 border-white shadow-md outline-none;
+    forced-color-adjust: none;
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      @apply ring-2 ring-[var(--focus)] ring-offset-2;
+    }
+  }
+
+  /* Size Variants */
+  .color-slider--sm .color-slider__track {
+    @apply h-4;
+  }
+
+  .color-slider--md .color-slider__track {
+    /* Default size */
+  }
+
+  .color-slider--lg .color-slider__track {
+    @apply h-8;
+  }
+}

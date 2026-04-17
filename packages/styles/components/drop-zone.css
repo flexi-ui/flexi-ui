@@ -1,0 +1,42 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * DropZone
+   * -----------------------------------------------------------------------------------------------*/
+  .drop-zone {
+    @apply flex min-h-40 w-full flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[var(--border)] bg-[var(--bg-card)] p-6 text-sm text-[var(--text-muted)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply border-[var(--color-accent)]/60 bg-[var(--bg-muted)];
+    }
+
+    &[data-drop-target='true'] {
+      @apply border-[var(--color-accent)] bg-[var(--color-accent)]/5 text-[var(--color-accent)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* Size Variants */
+  .drop-zone--sm {
+    @apply min-h-28 p-4 text-xs;
+  }
+
+  .drop-zone--md {
+    /* Default size */
+  }
+
+  .drop-zone--lg {
+    @apply min-h-56 p-8 text-base;
+  }
+}

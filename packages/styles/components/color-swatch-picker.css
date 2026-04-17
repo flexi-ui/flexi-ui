@@ -1,0 +1,50 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorSwatchPicker
+   * -----------------------------------------------------------------------------------------------*/
+  .color-swatch-picker {
+    @apply flex flex-wrap gap-2 outline-none;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ColorSwatchPicker Item
+   * -----------------------------------------------------------------------------------------------*/
+  .color-swatch-picker__item {
+    @apply relative size-8 cursor-pointer rounded border border-[var(--border)] outline-none transition-transform;
+    forced-color-adjust: none;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply scale-110;
+    }
+
+    &[data-selected='true'] {
+      @apply ring-2 ring-[var(--color-accent)] ring-offset-2;
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* Size Variants */
+  .color-swatch-picker--sm .color-swatch-picker__item {
+    @apply size-6;
+  }
+
+  .color-swatch-picker--md .color-swatch-picker__item {
+    /* Default size */
+  }
+
+  .color-swatch-picker--lg .color-swatch-picker__item {
+    @apply size-10;
+  }
+}

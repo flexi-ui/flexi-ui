@@ -1,0 +1,39 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorArea
+   * -----------------------------------------------------------------------------------------------*/
+  .color-area {
+    @apply relative size-48 rounded-lg outline-none;
+    forced-color-adjust: none;
+
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ColorArea Thumb
+   * -----------------------------------------------------------------------------------------------*/
+  .color-area__thumb {
+    @apply size-4 rounded-full border-2 border-white shadow-md outline-none;
+    forced-color-adjust: none;
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      @apply size-5 ring-2 ring-[var(--focus)] ring-offset-2;
+    }
+  }
+
+  /* Size Variants */
+  .color-area--sm {
+    @apply size-32;
+  }
+
+  .color-area--md {
+    /* Default size */
+  }
+
+  .color-area--lg {
+    @apply size-64;
+  }
+}

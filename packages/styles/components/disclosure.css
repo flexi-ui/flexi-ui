@@ -1,0 +1,79 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * DisclosureGroup
+   * -----------------------------------------------------------------------------------------------*/
+  .disclosure-group {
+    @apply flex flex-col divide-y divide-[var(--border)] overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--bg-card)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Disclosure
+   * -----------------------------------------------------------------------------------------------*/
+  .disclosure {
+    @apply flex flex-col;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Disclosure Trigger (Heading + Button)
+   * -----------------------------------------------------------------------------------------------*/
+  .disclosure__heading {
+    @apply m-0 text-sm font-medium text-[var(--text)];
+  }
+
+  .disclosure__button {
+    @apply flex w-full items-center justify-between gap-2 px-4 py-3 text-left text-sm font-medium text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    &:disabled,
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .disclosure__indicator {
+    @apply size-4 shrink-0 transition-transform;
+
+    .disclosure[data-expanded='true'] & {
+      @apply rotate-180;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Disclosure Panel
+   * -----------------------------------------------------------------------------------------------*/
+  .disclosure__panel {
+    @apply px-4 pb-3 text-sm text-[var(--text-muted)];
+  }
+
+  /* Size Variants */
+  .disclosure-group--sm .disclosure__button {
+    @apply px-3 py-2 text-xs;
+  }
+
+  .disclosure-group--sm .disclosure__panel {
+    @apply px-3 pb-2 text-xs;
+  }
+
+  .disclosure-group--md {
+    /* Default size */
+  }
+
+  .disclosure-group--lg .disclosure__button {
+    @apply px-5 py-4 text-base;
+  }
+
+  .disclosure-group--lg .disclosure__panel {
+    @apply px-5 pb-4 text-base;
+  }
+}
