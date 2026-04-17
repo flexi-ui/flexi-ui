@@ -1,0 +1,22 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorSwatch
+   * -----------------------------------------------------------------------------------------------*/
+  .color-swatch {
+    @apply size-8 rounded border border-[var(--border)];
+    forced-color-adjust: none;
+  }
+
+  /* Size Variants */
+  .color-swatch--sm {
+    @apply size-6;
+  }
+
+  .color-swatch--md {
+    /* Default size */
+  }
+
+  .color-swatch--lg {
+    @apply size-10;
+  }
+}

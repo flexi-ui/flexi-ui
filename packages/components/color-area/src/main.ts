@@ -1,0 +1,33 @@
+import type { ComponentProps } from 'react'
+
+import { ColorAreaRoot, ColorAreaThumb } from './color-area'
+
+/* -------------------------------------------------------------------------------------------------
+ * Compound Component
+ * -----------------------------------------------------------------------------------------------*/
+export const ColorArea = Object.assign(ColorAreaRoot, {
+  Root: ColorAreaRoot,
+  Thumb: ColorAreaThumb,
+})
+
+export type ColorArea = {
+  Props: ComponentProps<typeof ColorAreaRoot>
+  RootProps: ComponentProps<typeof ColorAreaRoot>
+  ThumbProps: ComponentProps<typeof ColorAreaThumb>
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Named Exports
+ * -----------------------------------------------------------------------------------------------*/
+export { ColorAreaRoot, ColorAreaThumb }
+export type {
+  ColorAreaRootProps,
+  ColorAreaRootProps as ColorAreaProps,
+  ColorAreaThumbProps,
+} from './color-area'
+
+/* -------------------------------------------------------------------------------------------------
+ * Variants
+ * -----------------------------------------------------------------------------------------------*/
+export { colorAreaVariants } from '@flexi-ui/styles'
+export type { ColorAreaVariants } from '@flexi-ui/styles'

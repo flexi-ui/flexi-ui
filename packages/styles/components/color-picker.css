@@ -1,0 +1,27 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorPicker
+   * -----------------------------------------------------------------------------------------------*/
+  .color-picker {
+    @apply flex flex-col gap-3;
+  }
+
+  .color-picker__trigger {
+    @apply inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-3 py-1.5 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .color-picker__swatch {
+    @apply size-5 rounded border border-[var(--border)];
+  }
+}

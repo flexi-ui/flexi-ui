@@ -1,0 +1,40 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorField
+   * -----------------------------------------------------------------------------------------------*/
+  .color-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .color-field__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .color-field__input {
+    @apply h-10 w-full rounded-md border border-[var(--border)] bg-[var(--bg-input)] px-3 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:focus,
+    &[data-focused='true'] {
+      @apply border-[var(--color-accent)] ring-2 ring-[var(--focus)] ring-offset-2;
+    }
+
+    &:disabled,
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* Size Variants */
+  .color-field--sm .color-field__input {
+    @apply h-8 px-2.5 text-xs;
+  }
+
+  .color-field--md .color-field__input {
+    /* Default size */
+  }
+
+  .color-field--lg .color-field__input {
+    @apply h-12 px-4 text-base;
+  }
+}
