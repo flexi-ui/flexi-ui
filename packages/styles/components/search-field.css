@@ -1,0 +1,96 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * SearchField
+   * -----------------------------------------------------------------------------------------------*/
+  .search-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .search-field__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * SearchField Group
+   * -----------------------------------------------------------------------------------------------*/
+  .search-field__group {
+    @apply relative flex items-center;
+  }
+
+  .search-field__icon {
+    @apply pointer-events-none absolute left-3 size-4 text-[var(--text-muted)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * SearchField Input
+   * -----------------------------------------------------------------------------------------------*/
+  .search-field__input {
+    @apply h-10 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-card)] pl-9 pr-9 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &::placeholder {
+      @apply text-[var(--text-muted)];
+    }
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus,
+    &[data-focused='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * SearchField Clear Button
+   * -----------------------------------------------------------------------------------------------*/
+  .search-field__clear {
+    @apply absolute right-2 flex size-6 cursor-pointer items-center justify-center rounded-md text-[var(--text-muted)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)] text-[var(--text)];
+    }
+
+    &[data-empty='true'] {
+      @apply hidden;
+    }
+  }
+
+  /* Size Variants */
+  .search-field--sm .search-field__input {
+    @apply h-8 pl-8 pr-8 text-xs;
+  }
+
+  .search-field--sm .search-field__icon {
+    @apply left-2.5 size-3.5;
+  }
+
+  .search-field--sm .search-field__clear {
+    @apply right-1.5 size-5;
+  }
+
+  .search-field--md .search-field__input {
+    /* Default size */
+  }
+
+  .search-field--lg .search-field__input {
+    @apply h-12 pl-10 pr-10 text-base;
+  }
+
+  .search-field--lg .search-field__icon {
+    @apply left-3.5 size-5;
+  }
+
+  .search-field--lg .search-field__clear {
+    @apply right-3 size-7;
+  }
+}

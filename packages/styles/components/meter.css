@@ -1,0 +1,59 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Meter
+   * -----------------------------------------------------------------------------------------------*/
+  .meter {
+    @apply flex w-full flex-col gap-1.5;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Meter Label
+   * -----------------------------------------------------------------------------------------------*/
+  .meter__label {
+    @apply flex justify-between text-sm font-medium text-[var(--text)];
+  }
+
+  .meter__value {
+    @apply text-sm text-[var(--text-muted)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Meter Track
+   * -----------------------------------------------------------------------------------------------*/
+  .meter__track {
+    @apply h-2 w-full overflow-hidden rounded-full bg-[var(--bg-muted)];
+  }
+
+  /* Size Variants */
+  .meter--sm .meter__track {
+    @apply h-1;
+  }
+
+  .meter--md .meter__track {
+    /* Default size */
+  }
+
+  .meter--lg .meter__track {
+    @apply h-3;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Meter Bar (fill)
+   * -----------------------------------------------------------------------------------------------*/
+  .meter__bar {
+    @apply h-full rounded-full bg-[var(--color-accent)] transition-all duration-300 ease-out;
+  }
+
+  /* Color Variants */
+  .meter--success .meter__bar {
+    @apply bg-[var(--color-success)];
+  }
+
+  .meter--warning .meter__bar {
+    @apply bg-[var(--color-warning)];
+  }
+
+  .meter--danger .meter__bar {
+    @apply bg-[var(--color-danger)];
+  }
+}

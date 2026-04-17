@@ -1,0 +1,50 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * FileTrigger
+   * -----------------------------------------------------------------------------------------------*/
+  .file-trigger {
+    @apply inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-4 text-sm font-medium text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .file-trigger__icon {
+    @apply size-4;
+  }
+
+  /* Size Variants */
+  .file-trigger--sm {
+    @apply h-8 px-3 text-xs;
+  }
+
+  .file-trigger--sm .file-trigger__icon {
+    @apply size-3.5;
+  }
+
+  .file-trigger--md {
+    /* Default size */
+  }
+
+  .file-trigger--lg {
+    @apply h-12 px-6 text-base;
+  }
+
+  .file-trigger--lg .file-trigger__icon {
+    @apply size-5;
+  }
+}

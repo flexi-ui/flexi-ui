@@ -1,0 +1,110 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Menu
+   * -----------------------------------------------------------------------------------------------*/
+  .menu {
+    @apply flex flex-col;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Menu Popover
+   * -----------------------------------------------------------------------------------------------*/
+  .menu__popover {
+    @apply z-50 min-w-48 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-1 shadow-lg outline-none;
+
+    &[data-entering] {
+      animation: menu-fade-in 150ms ease-out;
+    }
+
+    &[data-exiting] {
+      animation: menu-fade-out 100ms ease-in;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Menu Item
+   * -----------------------------------------------------------------------------------------------*/
+  .menu__item {
+    @apply relative flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'],
+    &[data-focused='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &[data-selected='true'] {
+      @apply font-medium text-[var(--color-accent)];
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .menu__item-icon {
+    @apply size-4 text-[var(--text-muted)];
+  }
+
+  .menu__item-kbd {
+    @apply ml-auto text-xs text-[var(--text-muted)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Menu Separator
+   * -----------------------------------------------------------------------------------------------*/
+  .menu__separator {
+    @apply my-1 h-px bg-[var(--border)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Menu Section / Header
+   * -----------------------------------------------------------------------------------------------*/
+  .menu__section {
+    @apply flex flex-col;
+  }
+
+  .menu__header {
+    @apply px-3 py-1.5 text-xs font-semibold text-[var(--text-muted)];
+  }
+
+  /* Size Variants */
+  .menu--sm .menu__item {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+
+  .menu--md .menu__item {
+    /* Default size */
+  }
+
+  .menu--lg .menu__item {
+    @apply px-4 py-2.5 text-base;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Animations
+   * -----------------------------------------------------------------------------------------------*/
+  @keyframes menu-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes menu-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+}
