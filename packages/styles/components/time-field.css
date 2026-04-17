@@ -1,0 +1,65 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * TimeField
+   * -----------------------------------------------------------------------------------------------*/
+  .time-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .time-field__label {
+    @apply text-sm font-medium text-[var(--text)];
+  }
+
+  .time-field__input {
+    @apply inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-3 py-2 text-sm transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply border-[var(--border-hover)];
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .time-field__segment {
+    @apply rounded px-0.5 text-sm text-[var(--text)] outline-none;
+
+    &[data-placeholder='true'] {
+      @apply text-[var(--text-muted)];
+    }
+
+    &:focus {
+      @apply bg-[var(--color-accent)] text-white;
+    }
+  }
+
+  /* Size Variants */
+  .time-field--sm .time-field__input {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+
+  .time-field--sm .time-field__segment {
+    @apply text-xs;
+  }
+
+  .time-field--md .time-field__input {
+    /* Default size */
+  }
+
+  .time-field--lg .time-field__input {
+    @apply px-4 py-2.5 text-base;
+  }
+
+  .time-field--lg .time-field__segment {
+    @apply text-base;
+  }
+}

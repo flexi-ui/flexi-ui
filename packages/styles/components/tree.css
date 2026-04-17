@@ -1,0 +1,48 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Tree
+   * -----------------------------------------------------------------------------------------------*/
+  .tree {
+    @apply flex flex-col gap-0.5 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-1 outline-none;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Tree Item
+   * -----------------------------------------------------------------------------------------------*/
+  .tree__item {
+    @apply flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1.5 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &[data-selected='true'] {
+      @apply bg-[var(--color-accent)]/10 text-[var(--color-accent)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  .tree__item-indicator {
+    @apply flex size-4 items-center justify-center text-[var(--text-muted)] transition-transform;
+  }
+
+  .tree__item[data-expanded='true'] .tree__item-indicator {
+    @apply rotate-90;
+  }
+
+  .tree__item-content {
+    @apply flex-1;
+  }
+}
