@@ -1,5 +1,12 @@
 # @flexi-ui/alert
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`bbaf324`](https://github.com/flexi-ui/flexi-ui/commit/bbaf324f94431476edb5c41ada2d3e117d506e84)]:
+  - @flexi-ui/styles@1.4.0
+
 ## 0.1.2
 
 ### Patch Changes

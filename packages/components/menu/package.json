@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/menu",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Menu component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
