@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/date-field",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "DateField component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
@@ -19,7 +19,11 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
-  "keywords": ["date","date-field","date-input"],
+  "keywords": [
+    "date",
+    "date-field",
+    "date-input"
+  ],
   "files": [
     "dist"
   ],

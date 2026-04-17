@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/date-range-picker",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "DateRangePicker component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
@@ -19,7 +19,10 @@
   "bugs": {
     "url": "https://github.com/flexi-ui/flexi-ui/issues"
   },
-  "keywords": ["date-range","date-range-picker"],
+  "keywords": [
+    "date-range",
+    "date-range-picker"
+  ],
   "files": [
     "dist"
   ],

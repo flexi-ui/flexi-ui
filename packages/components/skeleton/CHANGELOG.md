@@ -1,5 +1,12 @@
 # @flexi-ui/skeleton
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`f7186ec`](https://github.com/flexi-ui/flexi-ui/commit/f7186ec3f15cfd17600fdd6c756ca9f006cf44dc)]:
+  - @flexi-ui/styles@1.5.0
+
 ## 0.1.3
 
 ### Patch Changes
