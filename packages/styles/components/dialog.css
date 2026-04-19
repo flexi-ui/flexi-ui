@@ -1,0 +1,29 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Dialog (standalone)
+   * -----------------------------------------------------------------------------------------------*/
+  .dialog {
+    @apply relative flex flex-col gap-3 rounded-lg bg-[var(--bg-card)] p-6 text-[var(--text)] outline-none;
+  }
+
+  .dialog__title {
+    @apply text-lg font-semibold leading-none text-[var(--text)];
+  }
+
+  .dialog__description {
+    @apply text-sm text-[var(--text-muted)];
+  }
+
+  /* Size Variants */
+  .dialog--sm {
+    @apply gap-2 p-4 text-xs;
+  }
+
+  .dialog--md {
+    /* Default size */
+  }
+
+  .dialog--lg {
+    @apply gap-4 p-8 text-base;
+  }
+}

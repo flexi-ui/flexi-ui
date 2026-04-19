@@ -1,0 +1,44 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ColorWheel
+   * -----------------------------------------------------------------------------------------------*/
+  .color-wheel {
+    @apply relative outline-none;
+    forced-color-adjust: none;
+
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  .color-wheel__track {
+    @apply outline-none;
+    forced-color-adjust: none;
+  }
+
+  .color-wheel__thumb {
+    @apply size-5 rounded-full border-2 border-white shadow-md outline-none;
+    forced-color-adjust: none;
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      @apply ring-2 ring-[var(--focus)] ring-offset-2;
+    }
+  }
+
+  /* Size Variants — sets inner CSS vars consumed by the primitive */
+  .color-wheel--sm {
+    --color-wheel-outer-radius: 60;
+    --color-wheel-inner-radius: 45;
+  }
+
+  .color-wheel--md {
+    --color-wheel-outer-radius: 100;
+    --color-wheel-inner-radius: 80;
+  }
+
+  .color-wheel--lg {
+    --color-wheel-outer-radius: 140;
+    --color-wheel-inner-radius: 115;
+  }
+}
