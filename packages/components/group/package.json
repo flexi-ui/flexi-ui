@@ -1,0 +1,56 @@
+{
+  "name": "@flexi-ui/group",
+  "version": "0.1.0",
+  "description": "Group component built on React Aria Components.",
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Muneeb Mughal",
+    "email": "muneeb.it.dev@gmail.com",
+    "url": "https://github.com/Muneeb-Mughal-Dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexi-ui/flexi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flexi-ui/flexi-ui/issues"
+  },
+  "keywords": [
+    "group",
+    "form",
+    "container"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./src/main.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev:watch": "tsup --watch",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf node_modules dist"
+  },
+  "peerDependencies": {
+    "react": ">=18 || >=19.0.0-rc.0",
+    "react-dom": ">=18 || >=19.0.0-rc.0"
+  },
+  "dependencies": {
+    "@flexi-ui/styles": "workspace:*",
+    "react-aria-components": "catalog:"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "devDependencies": {
+    "clean-package": "2.2.0",
+    "@storybook/react": "^8.6.18",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}

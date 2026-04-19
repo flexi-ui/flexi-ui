@@ -1,0 +1,28 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Group
+   * -----------------------------------------------------------------------------------------------*/
+  .group {
+    @apply flex items-center gap-2 outline-none;
+
+    &[data-focus-within='true'] {
+      @apply outline outline-2 outline-offset-2 outline-[var(--color-accent)];
+    }
+
+    &[data-invalid='true'] {
+      @apply outline outline-2 outline-offset-2 outline-[var(--color-danger)];
+    }
+
+    &[data-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+    }
+  }
+
+  .group--horizontal {
+    @apply flex-row;
+  }
+
+  .group--vertical {
+    @apply flex-col items-stretch;
+  }
+}
