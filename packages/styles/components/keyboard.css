@@ -1,0 +1,21 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Keyboard (kbd)
+   * -----------------------------------------------------------------------------------------------*/
+  .keyboard {
+    @apply inline-flex h-6 min-w-6 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--bg-muted)] px-1.5 font-mono text-xs font-medium text-[var(--text)];
+  }
+
+  /* Size Variants */
+  .keyboard--sm {
+    @apply h-5 min-w-5 px-1 text-[10px];
+  }
+
+  .keyboard--md {
+    /* Default size */
+  }
+
+  .keyboard--lg {
+    @apply h-7 min-w-7 px-2 text-sm;
+  }
+}
