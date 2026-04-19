@@ -1,5 +1,11 @@
 # @flexi-ui/input
 
+## 5.0.12
+
+### Patch Changes
+
+- [#108](https://github.com/flexi-ui/flexi-ui/pull/108) [`2a8d8d2`](https://github.com/flexi-ui/flexi-ui/commit/2a8d8d245dfe6b2a617021486b5913fc0cf2420a) Thanks [@muneeb-builds](https://github.com/muneeb-builds)! - Remove legacy packages (`@flexi-ui/theme`, `@flexi-ui/system`, `@flexi-ui/system-rsc`, `@flexi-ui/react-utils`, `@flexi-ui/react-rsc-utils`, `@flexi-ui/dom-animation`) and migrate all components to the `cx` helper from `tailwind-variants` in place of the removed `composeTwRenderProps` utility. `@flexi-ui/use-image` now depends on `@flexi-ui/use-is-hydrated` directly.
+
 ## 5.0.11
 
 ### Patch Changes
