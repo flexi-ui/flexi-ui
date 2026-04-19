@@ -1,0 +1,87 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ToastRegion
+   * -----------------------------------------------------------------------------------------------*/
+  .toast-region {
+    @apply pointer-events-none fixed bottom-4 right-4 z-50 flex flex-col gap-2 outline-none;
+  }
+
+  .toast-region--top-right {
+    @apply bottom-auto left-auto right-4 top-4;
+  }
+
+  .toast-region--top-left {
+    @apply bottom-auto left-4 right-auto top-4;
+  }
+
+  .toast-region--bottom-left {
+    @apply bottom-4 left-4 right-auto top-auto;
+  }
+
+  .toast-region--bottom-right {
+    /* Default position — no additional styles */
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ToastList
+   * -----------------------------------------------------------------------------------------------*/
+  .toast-list {
+    @apply pointer-events-auto flex flex-col gap-2;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * Toast
+   * -----------------------------------------------------------------------------------------------*/
+  .toast {
+    @apply pointer-events-auto flex min-w-[280px] items-start gap-3 rounded-md border border-[var(--color-border)] bg-[var(--color-background)] p-3 text-sm shadow-lg;
+
+    &[data-focus-visible='true'] {
+      @apply outline outline-2 outline-offset-2 outline-[var(--color-accent)];
+    }
+  }
+
+  .toast--info {
+    @apply border-[var(--color-accent)];
+  }
+
+  .toast--success {
+    @apply border-[var(--color-success)];
+  }
+
+  .toast--warning {
+    @apply border-[var(--color-warning)];
+  }
+
+  .toast--danger {
+    @apply border-[var(--color-danger)];
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ToastContent
+   * -----------------------------------------------------------------------------------------------*/
+  .toast__content {
+    @apply flex flex-1 flex-col gap-0.5;
+  }
+
+  .toast__title {
+    @apply font-medium text-[var(--color-foreground)];
+  }
+
+  .toast__description {
+    @apply text-[var(--color-muted-foreground)];
+  }
+
+  .toast__close {
+    @apply shrink-0 rounded p-1 text-[var(--color-muted-foreground)] transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--color-muted)] text-[var(--color-foreground)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      @apply outline outline-2 outline-offset-2 outline-[var(--color-accent)];
+    }
+  }
+}

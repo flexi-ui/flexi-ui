@@ -1,0 +1,11 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * VisuallyHidden
+   * Hides content visually while keeping it accessible to assistive technologies.
+   * -----------------------------------------------------------------------------------------------*/
+  .visually-hidden {
+    @apply absolute m-[-1px] h-px w-px overflow-hidden whitespace-nowrap border-0 p-0;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+  }
+}
