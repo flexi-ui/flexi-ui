@@ -1,44 +1,79 @@
-/* @import './prism.css';
-@import './ads.css'; */
-
 @import './nprogress.css';
 @import 'tailwindcss';
-
 @plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-muted: var(--accent-muted);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.52 0 0);
+  --surface: oklch(0.985 0 0);
+  --surface-foreground: oklch(0.145 0 0);
+  --border: oklch(0.922 0 0);
+  --ring: oklch(0.585 0.233 277.117);
+  --accent: oklch(0.585 0.233 277.117);
+  --accent-foreground: oklch(1 0 0);
+  --accent-muted: oklch(0.94 0.05 277 / 0.55);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --muted: oklch(0.205 0 0);
+  --muted-foreground: oklch(0.66 0 0);
+  --surface: oklch(0.182 0 0);
+  --surface-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --ring: oklch(0.673 0.182 276.935);
+  --accent: oklch(0.673 0.182 276.935);
+  --accent-foreground: oklch(0.145 0 0);
+  --accent-muted: oklch(0.3 0.08 277 / 0.35);
+}
+
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  * {
+    border-color: var(--color-border);
   }
 
-  /* 
-    Default button style missing pointer cursor property  
-    Issue: https://github.com/tailwindlabs/tailwindcss/issues/15773
-  */
+  html {
+    scroll-padding-top: 64px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100vh;
+  }
+
   button,
   [role='button'] {
     cursor: pointer;
   }
 
-  /*
-    Make sure disabled buttons don't get the pointer cursor.
-  */
   :disabled {
     cursor: default;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--accent) 30%, transparent);
   }
 }
 
@@ -46,21 +81,20 @@
   counter-increment: step;
 
   &:before {
-    @apply absolute w-7 h-7 border border-gray-200 bg-gray-100 rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
+    @apply absolute w-7 h-7 border border-border bg-muted text-muted-foreground rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
     @apply ml-[-41px];
     content: counter(step);
   }
 }
 
-/* Custom scrollbar styles */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--color-default-300)) transparent;
+  scrollbar-color: var(--border) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -68,39 +102,10 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--color-default-300));
-  border-radius: 4px;
+  background-color: var(--border);
+  border-radius: 3px;
 }
 
-.custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--color-default-400));
-}
-
-:where(.dark, .dark *) .custom-scrollbar {
-  scrollbar-color: hsl(var(--color-default-600)) transparent;
-}
-
-:where(.dark, .dark *) .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--color-default-600));
-}
-
-:where(.dark, .dark *) .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--color-default-500));
-}
-
-html {
-  font-size: 16px;
-  padding: 0px !important;
-  overflow-x: hidden;
-  scroll-padding-top: 64px;
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-}
-
-/* Command Palette Styles */
 [cmdk-root] {
   width: 100%;
 }
@@ -115,22 +120,16 @@ body {
 }
 
 [cmdk-item][data-selected='true'] {
-  background-color: hsl(var(--color-default-100));
+  background-color: var(--muted);
 }
 
 [cmdk-group-heading] {
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: hsl(var(--color-foreground-500));
+  color: var(--muted-foreground);
   padding: 0.5rem 0.5rem 0.25rem;
-}
-
-/* Smooth animations */
-@media (prefers-reduced-motion: no-preference) {
-  * {
-    scroll-behavior: smooth;
-  }
+  letter-spacing: 0.05em;
 }
 
 pre details[open] > summary > span:first-child::before {
@@ -190,5 +189,5 @@ pre summary > span:first-child::before {
   font-size: 12px;
   font-style: normal;
   transition: transform 100ms;
-  color: #999;
+  color: var(--muted-foreground);
 }

@@ -34,16 +34,18 @@ export const DocsToc = ({ headings }: DocsTocProps) => {
 
   return (
     <div className="space-y-2">
-      <p className="font-semibold text-sm mb-4">On this page</p>
+      <p className="mb-4 text-sm font-semibold text-foreground">On this page</p>
       <ul className="space-y-2 text-sm">
         {headings
           .filter((heading) => heading.level > 1 && heading.level <= 3)
           .map((heading) => (
-            <li key={heading.id} className={`${heading.level === 3 ? 'ml-4' : ''}`}>
+            <li key={heading.id} className={heading.level === 3 ? 'ml-4' : ''}>
               <a
                 href={`#${heading.id}`}
-                className={`block py-1 transition-colors hover:text-foreground ${
-                  activeId === heading.id ? 'text-primary font-medium' : 'text-foreground'
+                className={`block py-1 transition-colors ${
+                  activeId === heading.id
+                    ? 'font-medium text-accent'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {heading.text}

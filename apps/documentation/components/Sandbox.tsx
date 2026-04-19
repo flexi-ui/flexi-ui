@@ -9,15 +9,10 @@ interface SandboxProps {
 
 export function Sandbox({ children, code, language = 'tsx' }: SandboxProps) {
   return (
-    <div className="not-prose my-6 rounded-lg border border-default-200 dark:border-default-100 overflow-hidden">
-      {/* Preview Section */}
-      <div className="relative bg-content1 p-6 md:p-8">
-        <div className="flex items-center justify-center min-h-[120px]">
-          {children}
-        </div>
+    <div className="not-prose my-6 overflow-hidden rounded-lg border border-border">
+      <div className="relative bg-surface p-6 md:p-8">
+        <div className="flex min-h-[120px] items-center justify-center">{children}</div>
       </div>
-
-      {/* Toggle and Code Section */}
       <SandboxToggle code={code} language={language} />
     </div>
   )

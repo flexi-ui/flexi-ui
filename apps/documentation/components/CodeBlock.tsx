@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@flexi-ui/button'
 import { Check, Copy } from 'lucide-react'
 
 interface CodeBlockProps {
@@ -19,19 +18,17 @@ export const CodeBlock = ({ code, language = 'tsx' }: CodeBlockProps) => {
   }
 
   return (
-    <div className="relative group">
-      <div className="absolute right-2 top-2 z-10">
-        <Button
-          size="sm"
-          variant="flat"
-          onPress={handleCopy}
-          aria-label="Copy code"
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-        </Button>
-      </div>
-      <pre className="overflow-x-auto p-4 rounded-lg bg-content2 border border-divider">
-        <code className={`language-${language} text-sm`}>{code}</code>
+    <div className="group relative">
+      <button
+        type="button"
+        onClick={handleCopy}
+        aria-label="Copy code"
+        className="absolute right-2 top-2 z-10 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-background/80 text-muted-foreground opacity-0 backdrop-blur transition-all group-hover:opacity-100 hover:bg-muted hover:text-foreground"
+      >
+        {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+      </button>
+      <pre className="overflow-x-auto rounded-md border border-border bg-muted p-4">
+        <code className={`language-${language} font-mono text-sm`}>{code}</code>
       </pre>
     </div>
   )
