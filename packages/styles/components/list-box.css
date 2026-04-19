@@ -1,0 +1,65 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * ListBox
+   * -----------------------------------------------------------------------------------------------*/
+  .list-box {
+    @apply flex flex-col gap-0.5 overflow-auto rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-1 outline-none;
+    max-height: 20rem;
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ListBox Item
+   * -----------------------------------------------------------------------------------------------*/
+  .list-box__item {
+    @apply flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm text-[var(--text)] outline-none transition-colors;
+
+    &:hover,
+    &[data-hovered='true'] {
+      @apply bg-[var(--bg-muted)];
+    }
+
+    &[data-selected='true'] {
+      @apply bg-[var(--color-accent)]/10 text-[var(--color-accent)];
+    }
+
+    &:focus-visible,
+    &[data-focus-visible='true'] {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply pointer-events-none opacity-[var(--disabled-opacity)];
+      cursor: var(--cursor-disabled);
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------------
+   * ListBox Section
+   * -----------------------------------------------------------------------------------------------*/
+  .list-box__section {
+    @apply flex flex-col gap-0.5;
+
+    &:not(:first-child) {
+      @apply mt-1.5 border-t border-[var(--border)] pt-1.5;
+    }
+  }
+
+  .list-box__header {
+    @apply px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--text-muted)];
+  }
+
+  /* Size Variants */
+  .list-box--sm .list-box__item {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+
+  .list-box--md {
+    /* Default size */
+  }
+
+  .list-box--lg .list-box__item {
+    @apply px-4 py-3 text-base;
+  }
+}

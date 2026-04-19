@@ -1,0 +1,21 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Autocomplete
+   * -----------------------------------------------------------------------------------------------*/
+  .autocomplete {
+    @apply flex flex-col gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-2 outline-none;
+  }
+
+  /* Size Variants */
+  .autocomplete--sm {
+    @apply p-1.5 text-xs;
+  }
+
+  .autocomplete--md {
+    /* Default size */
+  }
+
+  .autocomplete--lg {
+    @apply p-3 text-base;
+  }
+}
