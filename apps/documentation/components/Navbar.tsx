@@ -1,21 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { FC } from 'react'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Search, Github, Menu, X } from 'lucide-react'
-import { Button } from '@flexi-ui/button'
+import { Github, Menu, Search, X } from 'lucide-react'
+import { clsx } from '@flexi-ui/shared-utils'
 import { Logo } from '@/components/Logo'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { CommandPalette } from '@/components/CommandPalette'
 import { siteConfig } from '@/config/site'
-import { clsx } from '@flexi-ui/shared-utils'
 
 const navItems = [
   { label: 'Docs', href: '/docs/guide/introduction' },
   { label: 'Components', href: '/docs/components/button' },
-  { label: 'Theme', href: '/themes' },
 ]
 
 export const Navbar: FC = () => {
@@ -23,36 +21,30 @@ export const Navbar: FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [pathname])
+
   return (
     <>
-      <nav className="flex z-40 w-full items-center justify-center sticky py-2 top-0 inset-x-0 backdrop-blur-sm">
-        <header className="z-40 flex px-4 sm:px-6 gap-4 w-full flex-row relative flex-nowrap items-center-safe justify-between h-16 max-w-7xl">
-          {/* Left: Logo and Desktop Nav */}
+      <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-6 px-6">
           <div className="flex items-center gap-8">
-            <NextLink
-              href="/"
-              aria-label="Home"
-              className="flex justify-start items-center gap-2 tap-highlight-transparent transition-opacity hover:opacity-80"
-            >
+            <NextLink href="/" aria-label="FlexiUI" className="flex items-center">
               <Logo />
             </NextLink>
-          </div>
-
-          {/* Right: Actions */}
-          <div className="flex items-center gap-2">
-            {/* Desktop Navigation */}
-            <ul className="hidden md:flex gap-6 items-center mr-3">
+            <ul className="hidden items-center gap-6 md:flex">
               {navItems.map((item) => {
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== '/themes' && pathname?.startsWith(item.href))
+                const active = pathname?.startsWith(item.href.split('/').slice(0, 3).join('/'))
                 return (
                   <li key={item.href}>
                     <NextLink
                       href={item.href}
                       className={clsx(
-                        'text-sm font-medium transition-colors',
-                        isActive ? 'text-foreground' : 'text-foreground hover:text-foreground',
+                        'text-sm transition-colors',
+                        active
+                          ? 'font-medium text-foreground'
+                          : 'text-muted-foreground hover:text-foreground',
                       )}
                     >
                       {item.label}
@@ -61,99 +53,74 @@ export const Navbar: FC = () => {
                 )
               })}
             </ul>
-            {/* Search */}
-            <Button
-              radius="full"
-              variant="bordered"
-              color="default"
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
-              className="min-w-xs max-w-sm w-full justify-between hidden sm:flex"
-              onPress={() => setIsSearchOpen(true)}
+              className="hidden h-9 w-60 items-center justify-between rounded-md border border-border bg-muted/50 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted sm:flex"
             >
               <span className="flex items-center gap-2">
-                <Search />
-                <span className="text-sm hidden lg:inline">Search</span>
+                <Search className="h-4 w-4" />
+                Search docs…
               </span>
-              <kbd className="hidden lg:inline-flex h-5 select-none items-center gap-1 rounded bg-background border border-default-200 px-1.5 font-mono text-[10px] font-medium text-foreground-500">
-                <span className="text-xs">⌘</span>K
+              <kbd className="inline-flex h-5 items-center gap-1 rounded border border-border bg-background px-1.5 font-mono text-[10px] font-medium">
+                <span>⌘</span>K
               </kbd>
-            </Button>
+            </button>
 
-            {/* Mobile Search Icon */}
-            <Button
-              isIconOnly
-              radius="full"
-              variant="light"
-              color="default"
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
-              className="sm:hidden"
-              onPress={() => setIsSearchOpen(true)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:hidden"
             >
-              <Search className="size-5" />
-            </Button>
+              <Search className="h-4 w-4" />
+            </button>
 
-            {/* GitHub Link */}
-            <Button
-              as={NextLink}
-              isIconOnly
-              radius="full"
-              variant="light"
-              color="default"
-              target="_blank"
-              aria-label="GitHub"
-              rel="noopener noreferrer"
+            <a
               href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
-              <Github className="size-5" />
-            </Button>
+              <Github className="h-4 w-4" />
+            </a>
 
-            {/* Theme Switcher */}
             <ThemeSwitcher />
 
-            {/* Mobile Menu Toggle */}
-            <Button
-              isIconOnly
-              size="sm"
-              variant="light"
-              className="md:hidden"
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
               aria-label="Toggle menu"
-              onPress={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
             >
-              {isMobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-            </Button>
+              {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </button>
           </div>
-        </header>
+        </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 inset-x-0 bg-background/95 backdrop-blur-xl border-b border-divider">
-            <ul className="flex flex-col p-4 gap-1">
-              {navItems.map((item) => {
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== '/themes' && pathname?.startsWith(item.href))
-                return (
-                  <li key={item.href}>
-                    <NextLink
-                      href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={clsx(
-                        'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                        'hover:bg-default-100 dark:hover:bg-default-50',
-                        isActive ? 'text-foreground' : 'text-foreground',
-                      )}
-                    >
-                      {item.label}
-                    </NextLink>
-                  </li>
-                )
-              })}
+          <nav className="border-t border-border bg-background md:hidden">
+            <ul className="flex flex-col px-6 py-2">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <NextLink
+                    href={item.href}
+                    className="block rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    {item.label}
+                  </NextLink>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
         )}
-      </nav>
+      </header>
 
-      {/* Command Palette */}
       <CommandPalette isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   )

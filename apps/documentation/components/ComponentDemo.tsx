@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@flexi-ui/button'
-import { Eye, Code as CodeIcon } from 'lucide-react'
+import { Code as CodeIcon, Eye } from 'lucide-react'
 import { CodeBlock } from './CodeBlock'
 
 interface ComponentDemoProps {
@@ -14,38 +13,44 @@ export const ComponentDemo = ({ code, children }: ComponentDemoProps) => {
   const [showCode, setShowCode] = useState(false)
 
   return (
-    <div className="border border-divider rounded-lg overflow-hidden">
-      {/* Preview/Code Toggle */}
-      <div className="flex items-center justify-end gap-2 px-4 py-2 bg-content2 border-b border-divider">
-        <Button
-          size="sm"
-          variant={!showCode ? 'flat' : 'light'}
-          onPress={() => setShowCode(false)}
-          startContent={<Eye className="h-3 w-3" />}
+    <div className="overflow-hidden rounded-lg border border-border">
+      <div className="flex items-center justify-end gap-1 border-b border-border bg-muted/60 px-2 py-1.5">
+        <button
+          type="button"
+          onClick={() => setShowCode(false)}
+          className={`inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors ${
+            !showCode
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          }`}
         >
+          <Eye className="h-3 w-3" />
           Preview
-        </Button>
-        <Button
-          size="sm"
-          variant={showCode ? 'flat' : 'light'}
-          onPress={() => setShowCode(true)}
-          startContent={<CodeIcon className="h-3 w-3" />}
+        </button>
+        <button
+          type="button"
+          onClick={() => setShowCode(true)}
+          className={`inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors ${
+            showCode
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          }`}
         >
+          <CodeIcon className="h-3 w-3" />
           Code
-        </Button>
+        </button>
       </div>
 
-      {/* Content */}
       {!showCode ? (
-        <div className="p-8 bg-background flex items-center justify-center min-h-[200px]">
+        <div className="flex min-h-[200px] items-center justify-center bg-background p-8">
           {children || (
-            <div className="text-center text-foreground-500">
+            <div className="text-center text-muted-foreground">
               Component preview will be rendered here
             </div>
           )}
         </div>
       ) : (
-        <div className="p-4 bg-content1">
+        <div className="bg-surface p-4">
           <CodeBlock code={code} language="tsx" />
         </div>
       )}

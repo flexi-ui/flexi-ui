@@ -7,7 +7,6 @@ import { clsx } from '@flexi-ui/shared-utils'
 import { Providers } from '@/app/providers'
 import { siteConfig } from '@/config/site'
 import { fonts } from '@/config/fonts'
-import { Topbar } from '@/components/Topbar'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { StructuredData } from '@/components/StructuredData'
@@ -100,10 +99,9 @@ export default function RootLayout({
       >
         <StructuredData />
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className="relative flex flex-col" id="app-container">
-            <Topbar />
+          <div className="relative flex min-h-screen flex-col" id="app-container">
             <Navbar />
-            {children}
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </Providers>

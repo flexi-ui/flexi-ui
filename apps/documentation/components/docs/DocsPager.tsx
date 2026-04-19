@@ -2,7 +2,6 @@
 
 import NextLink from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@flexi-ui/button'
 import manifest from '@/config/routes.json'
 import type { Route } from '@/libs/docs/utils'
 
@@ -11,7 +10,6 @@ interface DocsPagerProps {
 }
 
 export const DocsPager = ({ currentRoute }: DocsPagerProps) => {
-  // Flatten all routes
   const allRoutes = manifest.routes.flatMap((section) =>
     section.routes.map((route) => ({
       ...route,
@@ -29,37 +27,33 @@ export const DocsPager = ({ currentRoute }: DocsPagerProps) => {
   if (!prevRoute && !nextRoute) return null
 
   return (
-    <div className="flex items-center justify-between gap-4 py-8 border-t border-divider mt-12">
+    <div className="mt-12 flex items-center justify-between gap-4 border-t border-border py-8">
       {prevRoute ? (
-        <Button
-          as={NextLink}
+        <NextLink
           href={prevRoute.path || '#'}
-          variant="flat"
-          startContent={<ChevronLeft className="h-4 w-4" />}
-          className="flex-1"
+          className="group flex flex-1 items-center gap-3 rounded-lg border border-border bg-surface/50 p-4 transition-colors hover:border-foreground/20"
         >
+          <ChevronLeft className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
           <div className="flex flex-col items-start">
-            <span className="text-xs text-foreground-500">Previous</span>
-            <span className="font-semibold">{prevRoute.title}</span>
+            <span className="text-xs text-muted-foreground">Previous</span>
+            <span className="text-sm font-semibold text-foreground">{prevRoute.title}</span>
           </div>
-        </Button>
+        </NextLink>
       ) : (
         <div className="flex-1" />
       )}
 
       {nextRoute ? (
-        <Button
-          as={NextLink}
+        <NextLink
           href={nextRoute.path || '#'}
-          variant="flat"
-          endContent={<ChevronRight className="h-4 w-4" />}
-          className="flex-1"
+          className="group flex flex-1 items-center justify-end gap-3 rounded-lg border border-border bg-surface/50 p-4 transition-colors hover:border-foreground/20"
         >
           <div className="flex flex-col items-end">
-            <span className="text-xs text-foreground-500">Next</span>
-            <span className="font-semibold">{nextRoute.title}</span>
+            <span className="text-xs text-muted-foreground">Next</span>
+            <span className="text-sm font-semibold text-foreground">{nextRoute.title}</span>
           </div>
-        </Button>
+          <ChevronRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+        </NextLink>
       ) : (
         <div className="flex-1" />
       )}

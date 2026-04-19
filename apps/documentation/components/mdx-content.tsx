@@ -1,12 +1,10 @@
 'use client'
 
 import { useEffect, useState, type ComponentType } from 'react'
-import defaultMdxComponents from 'fumadocs-ui/mdx'
 import { MDXComponents } from '@/components/mdx-components'
 import { CodeBlock } from '@/components/CodeBlock'
 
 const components: Record<string, unknown> = {
-  ...defaultMdxComponents,
   ...MDXComponents,
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
     const code = (children as { props?: { children?: string } })?.props?.children || ''
@@ -22,7 +20,7 @@ const components: Record<string, unknown> = {
     if (typeof children === 'string' && !children.includes('\n')) {
       return (
         <code
-          className="relative rounded bg-content2 px-[0.3rem] py-[0.2rem] font-mono text-sm"
+          className="relative rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
           {...props}
         >
           {children}
@@ -33,10 +31,9 @@ const components: Record<string, unknown> = {
   },
 }
 
- 
+
 type MDXModule = ComponentType<any>
 
-// Static import map for all MDX content files
 const mdxModules: Record<string, () => Promise<{ default: MDXModule }>> = {
   'api-references/flexiui-provider': () => import('@/content/docs/api-references/flexiui-provider.mdx'),
   'components/button': () => import('@/content/docs/components/button.mdx'),
@@ -72,7 +69,7 @@ export function MDXContent({ slug }: MDXContentProps) {
   }, [slugPath])
 
   if (!Component) {
-    return <div className="animate-pulse h-96 bg-content2 rounded-lg" />
+    return <div className="h-96 animate-pulse rounded-lg bg-muted" />
   }
 
   return <Component components={components} />

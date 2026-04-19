@@ -60,14 +60,16 @@ export default async function DocPage({ params }: DocPageProps) {
   if (!page) notFound()
 
   return (
-    <div className="col-span-12 lg:col-span-10 xl:col-span-8 lg:px-16 mt-10">
-      <div className="w-full prose prose-neutral dark:prose-invert max-w-none">
-        <h1>{page.data.title}</h1>
+    <article className="mx-auto w-full max-w-3xl">
+      <header className="mb-10 border-b border-border pb-8">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground">{page.data.title}</h1>
         {page.data.description && (
-          <p className="text-lg text-foreground-500">{page.data.description}</p>
+          <p className="mt-3 text-lg text-muted-foreground">{page.data.description}</p>
         )}
+      </header>
+      <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-headings:font-semibold prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-[0.875em] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-muted prose-pre:border prose-pre:border-border">
         <MDXContent slug={slug} />
       </div>
-    </div>
+    </article>
   )
 }
