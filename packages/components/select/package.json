@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/select",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Select dropdown component built on React Aria Components.",
   "type": "module",
   "license": "MIT",

@@ -1,5 +1,12 @@
 # @flexi-ui/color-swatch-picker
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`04c5b04`](https://github.com/flexi-ui/flexi-ui/commit/04c5b04862ee7f62d6f3fa4e86dcb6f82af143b7)]:
+  - @flexi-ui/styles@1.7.0
+
 ## 0.2.0
 
 ### Minor Changes

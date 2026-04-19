@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/range-calendar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "RangeCalendar component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
