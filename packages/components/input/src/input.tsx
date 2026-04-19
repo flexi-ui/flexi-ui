@@ -5,8 +5,7 @@ import type { ComponentPropsWithRef } from 'react'
 
 import { inputVariants } from '@flexi-ui/styles'
 import { TextField, Input as AriaInput, Label, Text, FieldError } from 'react-aria-components'
-
-import { composeTwRenderProps } from '@flexi-ui/react-utils'
+import { cx } from 'tailwind-variants'
 
 /* -------------------------------------------------------------------------------------------------
  * Input Root
@@ -42,7 +41,7 @@ const InputRoot = ({
 
   return (
     <TextField
-      className={composeTwRenderProps(className, styles)}
+      className={cx(styles, className) ?? ''}
       data-slot="input"
       isDisabled={isDisabled}
       isInvalid={isInvalid}

@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@flexi-ui/use-safe-layout-effect": "workspace:*",
-    "@flexi-ui/react-utils": "workspace:*"
+    "@flexi-ui/use-is-hydrated": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18 || >=19.0.0-rc.0"

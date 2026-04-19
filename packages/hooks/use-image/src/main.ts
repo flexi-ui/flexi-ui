@@ -5,7 +5,7 @@
 import type { ImgHTMLAttributes, SyntheticEvent } from 'react'
 
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { useIsHydrated } from '@flexi-ui/react-utils'
+import { useIsHydrated } from '@flexi-ui/use-is-hydrated'
 import { useSafeLayoutEffect } from '@flexi-ui/use-safe-layout-effect'
 
 type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>

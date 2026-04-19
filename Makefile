@@ -117,17 +117,15 @@ component: ## Create a new component package
 	  },
 	  "peerDependencies": {
 	    "react": ">=18 || >=19.0.0-rc.0",
-	    "react-dom": ">=18 || >=19.0.0-rc.0",
-	    "@flexi-ui/theme": ">=2.1.1",
-	    "@flexi-ui/system": ">=1.1.0"
+	    "react-dom": ">=18 || >=19.0.0-rc.0"
 	  },
 	  "dependencies": {
+	    "@flexi-ui/styles": "workspace:*",
+	    "react-aria-components": "catalog:"
 	  },
 	  "clean-package": "../../../clean-package.config.json",
 	  "devDependencies": {
 	    "clean-package": "2.2.0",
-	    "@flexi-ui/system": "workspace:*",
-	    "@flexi-ui/theme": "workspace:*",
 	    "@storybook/react": "^8.4.7",
 	    "@types/react": "catalog:",
 	    "@types/react-dom": "catalog:",

@@ -105,34 +105,16 @@ git commit -m "ci: add Claude Code GitHub Action workflow"
 ├── apps/
 │   └── documentation/       # Documentation site (Next.js)
 ├── packages/
-│   ├── components/          # Individual component packages
-│   │   ├── button/          # @flexi-ui/button
-│   │   ├── spinner/         # @flexi-ui/spinner
-│   │   ├── avatar/          # @flexi-ui/avatar
-│   │   ├── form/            # @flexi-ui/form
-│   │   ├── input/           # @flexi-ui/input
-│   │   ├── link/            # @flexi-ui/link
-│   │   └── ripple/          # @flexi-ui/ripple
-│   ├── hooks/               # Shared React hooks
-│   │   ├── use-aria-button/
-│   │   ├── use-aria-link/
-│   │   ├── use-callback-ref/
-│   │   ├── use-image/
-│   │   └── use-safe-layout-effect/
+│   ├── components/          # Individual component packages (one dir per @flexi-ui/* component)
+│   ├── hooks/               # Shared React hooks (one dir per @flexi-ui/use-* package)
 │   ├── utilities/           # Shared utilities
-│   │   ├── shared-utils/
-│   │   ├── shared-icons/
-│   │   ├── react-utils/
-│   │   ├── react-rsc-utils/
-│   │   ├── dom-animation/
-│   │   └── test-utils/
+│   │   ├── shared-utils/    # clsx + runtime helpers
+│   │   ├── shared-icons/    # Icon typings
+│   │   └── test-utils/      # Testing helpers
 │   ├── styles/              # CSS styling layer (BEM + Tailwind)
 │   ├── standard/            # Shared ESLint, Prettier, TypeScript configs
 │   ├── storybook/           # Storybook configuration
-│   ├── system/              # FlexiUI system primitives
-│   ├── system-rsc/          # RSC-compatible system primitives
-│   ├── storage/             # Storage utilities
-│   ├── theme/               # Theme (legacy - migrating to styles/)
+│   ├── storage/             # Standalone storage utilities
 │   └── vitest/              # Shared Vitest configurations
 ├── nx.json                  # Nx configuration
 └── pnpm-workspace.yaml      # Workspace definition
@@ -247,25 +229,30 @@ export { componentVariants, type ComponentVariants } from "./component-name.styl
 // Context for sharing state/styles
 const ComponentContext = createContext<{ slots?: ReturnType<typeof componentVariants> }>({});
 
-// Root component wraps with context
+// Root component wraps with context (render-prop-capable RAC primitive)
 const ComponentRoot = React.forwardRef<...>(({ children, className, ...props }, ref) => {
   const slots = React.useMemo(() => componentVariants({ ... }), [...]);
 
   return (
     <ComponentContext value={{ slots }}>
-      <ReactAriaComponent ref={ref} className={composeTwRenderProps(className, slots.base())}>
+      <ReactAriaComponent
+        ref={ref}
+        className={(renderProps) =>
+          cx(slots.base(), typeof className === 'function' ? className(renderProps) : className) ?? ''
+        }
+      >
         {children}
       </ReactAriaComponent>
     </ComponentContext>
   );
 });
 
-// Child components consume context
+// Child components consume context (string-only className primitive)
 const ComponentItem = React.forwardRef<...>(({ className, ...props }, ref) => {
   const { slots } = useContext(ComponentContext);
 
   return (
-    <ReactAriaComponent ref={ref} className={composeTwRenderProps(className, slots?.item())}>
+    <ReactAriaComponent ref={ref} className={cx(slots?.item(), className) ?? ''}>
       {props.children}
     </ReactAriaComponent>
   );
@@ -278,11 +265,12 @@ const ComponentItem = React.forwardRef<...>(({ className, ...props }, ref) => {
    - Styles defined in `.styles.ts` files using `tv()` function from `tailwind-variants`
    - **IMPORTANT**: Always import from `tailwind-variants`, never from `@flexi-ui/standard`
    - **CRITICAL**: tailwind-variants already includes `twMerge` functionality, so NEVER manually use `twMerge`
+   - **CRITICAL**: Use `cx` from `tailwind-variants` to compose class strings — NEVER use the removed `composeTwRenderProps` helper
    - **RULE**: All component styles MUST be defined in separate `.styles.ts` files, NOT in the component implementation files
    - Example imports:
      ```typescript
      import type { VariantProps } from "tailwind-variants";
-     import { tv } from "tailwind-variants";
+     import { tv, cx } from "tailwind-variants";
      ```
 
 2. **Component Features**:
@@ -302,16 +290,26 @@ const ComponentItem = React.forwardRef<...>(({ className, ...props }, ref) => {
 
 4. **React Aria Components className Patterns**:
 
-   **CRITICAL**: React Aria components have different className prop behaviors:
+   **CRITICAL**: React Aria components have different className prop behaviors. In both cases, compose with `cx` from `tailwind-variants` — never use `composeTwRenderProps` or `twMerge`.
 
-   **Components that support render props** (use `composeTwRenderProps`):
+   **Components that support render-prop className** (className can be a function):
    - Button, TextField, FieldError, Checkbox, CheckboxGroup
    - Switch, RadioGroup, Radio, Slider
-   - Popover, Tooltip, Tabs, Link, Menu, MenuItem
+   - Popover, Tooltip, Tabs, Link, Menu, MenuItem, Group, DropZone
+
+   ```tsx
+   className={(renderProps) =>
+     cx(styles, typeof className === 'function' ? className(renderProps) : className) ?? ''
+   }
+   ```
 
    **Components that ONLY accept string className** (pass className directly):
-   - Label, Text, Input, TextArea
-   - Heading, Dialog, OverlayArrow
+   - Label, Text, Input, TextArea, Keyboard, VisuallyHidden
+   - Heading, Dialog, OverlayArrow, DropIndicator, Toast, ToastContent
+
+   ```tsx
+   className={cx(styles, className) ?? ''}
+   ```
 
 5. **Composition Pattern with Existing Components**:
 
@@ -323,13 +321,7 @@ const ComponentItem = React.forwardRef<...>(({ className, ...props }, ref) => {
 
 ### Current Components
 
-- `button`: Button with variants, sizes, ripple effect, and loading state
-- `spinner`: Loading indicators
-- `avatar`: User avatars (in progress)
-- `form`: Form wrapper component
-- `input`: Text input field
-- `link`: Styled anchor links
-- `ripple`: Press ripple effect (used by Button)
+Each component lives as its own publishable package under `packages/components/`. Run `ls packages/components` for the authoritative list — do not rely on this README to enumerate them.
 
 ## Development Workflow
 

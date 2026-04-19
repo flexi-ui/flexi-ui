@@ -8,7 +8,7 @@ import { Check, Copy, ArrowRight, Terminal } from 'lucide-react'
 
 export const InstallBanner = () => {
   const [copied, setCopied] = useState(false)
-  const installCommand = 'npm install @flexi-ui/theme @flexi-ui/system'
+  const installCommand = 'npm install @flexi-ui/button @flexi-ui/styles'
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(installCommand)
