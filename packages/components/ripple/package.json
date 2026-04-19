@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/ripple",
-  "version": "6.0.7",
+  "version": "6.0.8",
   "description": "A simple implementation to display a ripple animation when the source component is clicked",
   "type": "module",
   "license": "MIT",

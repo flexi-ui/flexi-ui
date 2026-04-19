@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/autocomplete",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Autocomplete component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
