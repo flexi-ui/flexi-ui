@@ -5,8 +5,7 @@ import type { ComponentPropsWithRef } from 'react'
 
 import { linkVariants } from '@flexi-ui/styles'
 import { Link as LinkPrimitive } from 'react-aria-components'
-
-import { composeTwRenderProps } from '@flexi-ui/react-utils'
+import { cx } from 'tailwind-variants'
 
 /* -------------------------------------------------------------------------------------------------
  * Link Icon
@@ -63,7 +62,9 @@ const LinkRoot = ({
 
   return (
     <LinkPrimitive
-      className={composeTwRenderProps(className, styles)}
+      className={(renderProps) =>
+        cx(styles, typeof className === 'function' ? className(renderProps) : className) ?? ''
+      }
       data-slot="link"
       isDisabled={isDisabled}
       {...externalProps}

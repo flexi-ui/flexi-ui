@@ -10,7 +10,7 @@ import { Logo } from '@/components/Logo'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { CommandPalette } from '@/components/CommandPalette'
 import { siteConfig } from '@/config/site'
-import { cn } from '@flexi-ui/theme'
+import { clsx } from '@flexi-ui/shared-utils'
 
 const navItems = [
   { label: 'Docs', href: '/docs/guide/introduction' },
@@ -50,7 +50,7 @@ export const Navbar: FC = () => {
                   <li key={item.href}>
                     <NextLink
                       href={item.href}
-                      className={cn(
+                      className={clsx(
                         'text-sm font-medium transition-colors',
                         isActive ? 'text-foreground' : 'text-foreground hover:text-foreground',
                       )}
@@ -137,7 +137,7 @@ export const Navbar: FC = () => {
                     <NextLink
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={cn(
+                      className={clsx(
                         'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
                         'hover:bg-default-100 dark:hover:bg-default-50',
                         isActive ? 'text-foreground' : 'text-foreground',

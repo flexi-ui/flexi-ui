@@ -1,7 +1,7 @@
 import type { IconSvgProps } from '@flexi-ui/shared-icons'
 
 import React from 'react'
-import { cn } from '@flexi-ui/theme'
+import { clsx } from '@flexi-ui/shared-utils'
 
 import { dataAttr } from '@/utils'
 
@@ -18,7 +18,7 @@ export const Logo: React.FC<LogoProps> = ({ auto, className, fill, ...props }) =
   <svg
     viewBox="0 0 1366 248"
     data-auto={dataAttr(auto)}
-    className={cn(
+    className={clsx(
       'data-[auto=true]:hidden sm:data-[auto=true]:block block text-foreground h-5 md:h-6 fill-primary',
       className,
     )}

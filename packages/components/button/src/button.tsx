@@ -6,8 +6,8 @@ import type { ComponentPropsWithRef } from 'react'
 import { buttonVariants } from '@flexi-ui/styles'
 import { useContext } from 'react'
 import { Button as ButtonPrimitive } from 'react-aria-components'
+import { cx } from 'tailwind-variants'
 
-import { composeTwRenderProps } from '@flexi-ui/react-utils'
 import { ButtonGroupContext } from './button-group'
 
 /* -------------------------------------------------------------------------------------------------
@@ -41,7 +41,9 @@ const ButtonRoot = ({
 
   return (
     <ButtonPrimitive
-      className={composeTwRenderProps(className, styles)}
+      className={(renderProps) =>
+        cx(styles, typeof className === 'function' ? className(renderProps) : className) ?? ''
+      }
       data-slot="button"
       isDisabled={finalIsDisabled}
       {...rest}

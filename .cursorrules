@@ -24,8 +24,7 @@ Every component follows a **compound component pattern** (similar to Radix UI), 
 
 import { createContext, useContext, forwardRef, useMemo } from "react";
 import { Button as ButtonPrimitive } from "react-aria-components";
-import { tv, type VariantProps } from "tailwind-variants";
-import { composeTwRenderProps } from "@flexi-ui/react-utils";
+import { tv, cx, type VariantProps } from "tailwind-variants";
 
 // 1. Styles in separate .styles.ts file
 // 2. Context for compound components
@@ -108,8 +107,9 @@ export { componentVariants, type ComponentVariants } from "./component.styles";
 
 ### React Aria Components className
 
-- **Render prop components** (Button, Checkbox, etc.): Use `composeTwRenderProps(className, slots.base())`
-- **String-only components** (Label, Input, etc.): Use `slots?.label({ className })`
+- **Render prop components** (Button, Checkbox, etc.): Use `cx(styles, typeof className === 'function' ? className(renderProps) : className)`
+- **String-only components** (Label, Input, etc.): Use `cx(styles, className)`
+- **NEVER** use `composeTwRenderProps` or `twMerge` — `cx` from `tailwind-variants` handles merging
 
 ## Code Style
 
@@ -135,8 +135,7 @@ Types: feat, fix, refactor, docs, style, test, chore, ci
 - `@flexi-ui/ripple` - Ripple effect (used by Button)
 - `@flexi-ui/spinner` - Loading spinners
 - `@flexi-ui/shared-utils` - Shared utilities
-- `@flexi-ui/react-utils` - React-specific utilities
-- `@flexi-ui/system` - System primitives (forwardRef, provider)
+- `@flexi-ui/styles` - Shared CSS layer (BEM classes)
 
 ## Don'ts
 

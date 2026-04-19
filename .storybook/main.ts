@@ -27,7 +27,6 @@ const config: StorybookConfig = {
       alias: {
         ...config.resolve?.alias,
         '@flexi-ui/styles': resolve(root, 'packages/styles/src/index.ts'),
-        '@flexi-ui/react-utils': resolve(root, 'packages/utilities/react-utils/src/main.ts'),
         '@flexi-ui/button': resolve(root, 'packages/components/button/src/main.ts'),
         '@flexi-ui/spinner': resolve(root, 'packages/components/spinner/src/main.ts'),
         '@flexi-ui/link': resolve(root, 'packages/components/link/src/main.ts'),

@@ -18,8 +18,6 @@
     "@flexi-ui/shared-icons": "workspace:*",
     "@flexi-ui/shared-utils": "workspace:*",
     "@flexi-ui/spinner": "workspace:*",
-    "@flexi-ui/system": "workspace:*",
-    "@flexi-ui/theme": "workspace:*",
     "cmdk": "^1.0.4",
     "framer-motion": "catalog:",
     "fumadocs-core": "^16.7.11",
