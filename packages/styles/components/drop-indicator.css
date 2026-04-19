@@ -1,0 +1,29 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * DropIndicator
+   * -----------------------------------------------------------------------------------------------*/
+  .drop-indicator {
+    @apply outline-none;
+
+    &[data-drop-target='true'] {
+      @apply outline outline-2 outline-offset-[-1px] outline-[var(--color-accent)];
+    }
+  }
+
+  .drop-indicator--between {
+    @apply pointer-events-none relative h-0.5 w-full bg-transparent;
+
+    &[data-drop-target='true'] {
+      @apply bg-[var(--color-accent)];
+    }
+
+    &::before {
+      content: '';
+      @apply absolute left-0 top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0;
+    }
+
+    &[data-drop-target='true']::before {
+      @apply bg-[var(--color-accent)] opacity-100;
+    }
+  }
+}

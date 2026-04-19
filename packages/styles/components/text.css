@@ -1,0 +1,63 @@
+@layer components {
+  /* -------------------------------------------------------------------------------------------------
+   * Text
+   * -----------------------------------------------------------------------------------------------*/
+  .text {
+    @apply text-sm text-[var(--text)];
+  }
+
+  /* Size Variants */
+  .text--xs {
+    @apply text-xs;
+  }
+
+  .text--sm {
+    @apply text-sm;
+  }
+
+  .text--md {
+    @apply text-base;
+  }
+
+  .text--lg {
+    @apply text-lg;
+  }
+
+  .text--xl {
+    @apply text-xl;
+  }
+
+  /* Tone Variants */
+  .text--default {
+    @apply text-[var(--text)];
+  }
+
+  .text--muted {
+    @apply text-[var(--text-muted)];
+  }
+
+  .text--danger {
+    @apply text-[var(--color-danger)];
+  }
+
+  .text--success {
+    @apply text-[var(--color-success)];
+  }
+
+  /* Weight Variants */
+  .text--normal {
+    @apply font-normal;
+  }
+
+  .text--medium {
+    @apply font-medium;
+  }
+
+  .text--semibold {
+    @apply font-semibold;
+  }
+
+  .text--bold {
+    @apply font-bold;
+  }
+}
