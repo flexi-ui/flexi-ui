@@ -1,5 +1,12 @@
 # @flexi-ui/avatar
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`fe182af`](https://github.com/flexi-ui/flexi-ui/commit/fe182afaa37af40cedea6e299dc6f0a255500fc2)]:
+  - @flexi-ui/styles@1.9.0
+
 ## 1.0.9
 
 ### Patch Changes
