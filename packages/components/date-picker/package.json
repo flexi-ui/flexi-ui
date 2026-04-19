@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/date-picker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Date picker component built on React Aria Components.",
   "type": "module",
   "license": "MIT",

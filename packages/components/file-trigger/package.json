@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/file-trigger",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "File trigger component built on React Aria Components.",
   "type": "module",
   "license": "MIT",

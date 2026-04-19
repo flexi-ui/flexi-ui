@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/alert",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Alert component for displaying feedback messages.",
   "type": "module",
   "license": "MIT",

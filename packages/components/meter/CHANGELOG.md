@@ -1,5 +1,12 @@
 # @flexi-ui/meter
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`293d641`](https://github.com/flexi-ui/flexi-ui/commit/293d64153e08243c056c6ffd711e56880c7d61d9)]:
+  - @flexi-ui/styles@1.8.0
+
 ## 0.1.3
 
 ### Patch Changes
