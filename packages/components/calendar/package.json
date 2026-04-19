@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/calendar",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Calendar component built on React Aria Components.",
   "type": "module",
   "license": "MIT",

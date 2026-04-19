@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/keyboard",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Keyboard shortcut display component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
