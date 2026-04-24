@@ -19,7 +19,7 @@ export const Logo: React.FC<LogoProps> = ({ auto, className, fill, ...props }) =
     viewBox="0 0 1366 248"
     data-auto={dataAttr(auto)}
     className={clsx(
-      'data-[auto=true]:hidden sm:data-[auto=true]:block block text-foreground h-5 md:h-6 fill-primary',
+      'data-[auto=true]:hidden sm:data-[auto=true]:block block text-foreground h-5 md:h-6 fill-[#761AE8]',
       className,
     )}
     fill={fill}

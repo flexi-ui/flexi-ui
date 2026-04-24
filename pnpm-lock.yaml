@@ -170,9 +170,24 @@ importers:
 
   apps/documentation:
     dependencies:
+      '@flexi-ui/alert':
+        specifier: workspace:*
+        version: link:../../packages/components/alert
+      '@flexi-ui/avatar':
+        specifier: workspace:*
+        version: link:../../packages/components/avatar
+      '@flexi-ui/badge':
+        specifier: workspace:*
+        version: link:../../packages/components/badge
       '@flexi-ui/button':
         specifier: workspace:*
         version: link:../../packages/components/button
+      '@flexi-ui/card':
+        specifier: workspace:*
+        version: link:../../packages/components/card
+      '@flexi-ui/divider':
+        specifier: workspace:*
+        version: link:../../packages/components/divider
       '@flexi-ui/form':
         specifier: workspace:*
         version: link:../../packages/components/form
@@ -188,9 +203,15 @@ importers:
       '@flexi-ui/shared-utils':
         specifier: workspace:*
         version: link:../../packages/utilities/shared-utils
+      '@flexi-ui/skeleton':
+        specifier: workspace:*
+        version: link:../../packages/components/skeleton
       '@flexi-ui/spinner':
         specifier: workspace:*
         version: link:../../packages/components/spinner
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../packages/styles
       cmdk:
         specifier: ^1.0.4
         version: 1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)

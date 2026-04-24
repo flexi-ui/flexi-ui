@@ -1,5 +1,5 @@
 @import './nprogress.css';
-@import 'tailwindcss';
+@import '@flexi-ui/styles/css';
 @plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -28,10 +28,10 @@
   --surface: oklch(0.985 0 0);
   --surface-foreground: oklch(0.145 0 0);
   --border: oklch(0.922 0 0);
-  --ring: oklch(0.585 0.233 277.117);
-  --accent: oklch(0.585 0.233 277.117);
+  --ring: #761ae8;
+  --accent: #761ae8;
   --accent-foreground: oklch(1 0 0);
-  --accent-muted: oklch(0.94 0.05 277 / 0.55);
+  --accent-muted: color-mix(in oklch, #761ae8 14%, transparent);
 }
 
 .dark {
@@ -42,10 +42,10 @@
   --surface: oklch(0.182 0 0);
   --surface-foreground: oklch(0.985 0 0);
   --border: oklch(0.269 0 0);
-  --ring: oklch(0.673 0.182 276.935);
-  --accent: oklch(0.673 0.182 276.935);
-  --accent-foreground: oklch(0.145 0 0);
-  --accent-muted: oklch(0.3 0.08 277 / 0.35);
+  --ring: #8f4bee;
+  --accent: #8f4bee;
+  --accent-foreground: oklch(0.985 0 0);
+  --accent-muted: color-mix(in oklch, #8f4bee 22%, transparent);
 }
 
 @layer base {

@@ -1,0 +1,116 @@
+---
+title: "Avatar"
+description: "User avatar with image, initials fallback, and custom fallback content."
+---
+
+# Avatar
+
+`Avatar` renders a user's profile image with graceful fallbacks. If the image fails to load or isn't provided, it can fall back to a `name`-derived initials badge or any custom node.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/avatar @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Avatar } from '@flexi-ui/avatar'
+```
+
+## Usage
+
+<Sandbox code={`<Avatar src="https://i.pravatar.cc/96?img=12" alt="Alex Morgan" />`}>
+  <Avatar src="https://i.pravatar.cc/96?img=12" alt="Alex Morgan" />
+</Sandbox>
+
+## Sizes
+
+Four sizes cover typical layouts. Medium is the default.
+
+<Sandbox code={`<div className="flex items-center gap-4">
+  <Avatar size="sm" src="https://i.pravatar.cc/96?img=12" />
+  <Avatar size="md" src="https://i.pravatar.cc/96?img=12" />
+  <Avatar size="lg" src="https://i.pravatar.cc/96?img=12" />
+  <Avatar size="xl" src="https://i.pravatar.cc/96?img=12" />
+</div>`}>
+  <div className="flex items-center gap-4">
+    <Avatar size="sm" src="https://i.pravatar.cc/96?img=12" />
+    <Avatar size="md" src="https://i.pravatar.cc/96?img=12" />
+    <Avatar size="lg" src="https://i.pravatar.cc/96?img=12" />
+    <Avatar size="xl" src="https://i.pravatar.cc/96?img=12" />
+  </div>
+</Sandbox>
+
+## Bordered
+
+<Sandbox code={`<Avatar isBordered src="https://i.pravatar.cc/96?img=5" alt="Jamie Lee" />`}>
+  <Avatar isBordered src="https://i.pravatar.cc/96?img=5" alt="Jamie Lee" />
+</Sandbox>
+
+## Initials fallback
+
+When `src` is absent or fails to load, Avatar derives up to two uppercase initials from `name`.
+
+<Sandbox code={`<div className="flex items-center gap-4">
+  <Avatar name="Alex Morgan" />
+  <Avatar name="Jamie Lee" size="lg" />
+  <Avatar name="Sam" size="xl" isBordered />
+</div>`}>
+  <div className="flex items-center gap-4">
+    <Avatar name="Alex Morgan" />
+    <Avatar name="Jamie Lee" size="lg" />
+    <Avatar name="Sam" size="xl" isBordered />
+  </div>
+</Sandbox>
+
+## Custom fallback
+
+Pass a node to `fallback` for an icon, emoji, or custom badge when no image is available.
+
+<Sandbox code={`<Avatar
+  fallback={<span role="img" aria-label="ghost">👻</span>}
+  size="lg"
+/>`}>
+  <Avatar
+    fallback={<span role="img" aria-label="ghost">👻</span>}
+    size="lg"
+  />
+</Sandbox>
+
+## Graceful image failure
+
+If the image URL 404s or errors, Avatar silently falls back to `fallback` or `name`-initials — no broken icon flash.
+
+```tsx
+<Avatar src="/broken.png" name="Alex Morgan" />
+```
+
+## API Reference
+
+### Avatar (Root)
+
+| Prop         | Type                                  | Default   | Description                                             |
+| ------------ | ------------------------------------- | --------- | ------------------------------------------------------- |
+| `src`        | `string`                              | —         | Image URL.                                              |
+| `alt`        | `string`                              | `name`    | Alt text for the image. Falls back to `name`.           |
+| `name`       | `string`                              | —         | Used to derive initials when the image is unavailable.  |
+| `fallback`   | `ReactNode`                           | —         | Custom node rendered when there's no image.             |
+| `size`       | `'sm' \| 'md' \| 'lg' \| 'xl'`        | `'md'`    | Visual size.                                            |
+| `isBordered` | `boolean`                             | `false`   | Adds a ring around the avatar.                          |
+
+Extends native `span` props (omits `size`).
+
+### Fallback priority
+
+1. `src` and image loads → renders `<img>`
+2. Else if `fallback` is provided → renders it
+3. Else if `name` is provided → renders derived initials
+4. Else → empty
+
+## Accessibility
+
+- The underlying `<img>` uses `alt` (falling back to `name`), so screen readers announce who the avatar represents.
+- When displaying initials or a decorative fallback, provide a `name` so the avatar still has semantic meaning in context.
+- Avatars are non-interactive by default. Wrap one in a `Link` or `button` to make it actionable.

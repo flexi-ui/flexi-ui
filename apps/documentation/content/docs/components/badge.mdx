@@ -1,0 +1,144 @@
+---
+title: "Badge"
+description: "Compact status labels for counts, tags, and inline states."
+---
+
+# Badge
+
+`Badge` is a small inline label used for counts, tags, and status markers. It supports four visual variants (solid, flat, bordered, dot) and five semantic colors.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/badge @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Badge } from '@flexi-ui/badge'
+```
+
+## Usage
+
+<Sandbox code={`<Badge>Badge</Badge>`}>
+  <Badge>Badge</Badge>
+</Sandbox>
+
+## Variants
+
+<Sandbox code={`<div className="flex flex-wrap items-center gap-3">
+  <Badge variant="solid" color="accent">Solid</Badge>
+  <Badge variant="flat" color="accent">Flat</Badge>
+  <Badge variant="bordered" color="accent">Bordered</Badge>
+  <Badge variant="dot" color="accent">Dot</Badge>
+</div>`}>
+  <div className="flex flex-wrap items-center gap-3">
+    <Badge variant="solid" color="accent">Solid</Badge>
+    <Badge variant="flat" color="accent">Flat</Badge>
+    <Badge variant="bordered" color="accent">Bordered</Badge>
+    <Badge variant="dot" color="accent">Dot</Badge>
+  </div>
+</Sandbox>
+
+## Colors
+
+Five semantic colors pair with each variant.
+
+<Sandbox code={`<div className="flex flex-wrap gap-3">
+  <Badge color="default">default</Badge>
+  <Badge color="accent">accent</Badge>
+  <Badge color="success">success</Badge>
+  <Badge color="warning">warning</Badge>
+  <Badge color="danger">danger</Badge>
+</div>`}>
+  <div className="flex flex-wrap gap-3">
+    <Badge color="default">default</Badge>
+    <Badge color="accent">accent</Badge>
+    <Badge color="success">success</Badge>
+    <Badge color="warning">warning</Badge>
+    <Badge color="danger">danger</Badge>
+  </div>
+</Sandbox>
+
+## Sizes
+
+<Sandbox code={`<div className="flex items-center gap-3">
+  <Badge size="sm" color="accent">Small</Badge>
+  <Badge size="md" color="accent">Medium</Badge>
+  <Badge size="lg" color="accent">Large</Badge>
+</div>`}>
+  <div className="flex items-center gap-3">
+    <Badge size="sm" color="accent">Small</Badge>
+    <Badge size="md" color="accent">Medium</Badge>
+    <Badge size="lg" color="accent">Large</Badge>
+  </div>
+</Sandbox>
+
+## Dot indicator
+
+The `dot` variant renders a small solid circle before the label. Useful for online status or "new" markers.
+
+<Sandbox code={`<div className="flex flex-wrap gap-3">
+  <Badge variant="dot" color="success">Online</Badge>
+  <Badge variant="dot" color="warning">Idle</Badge>
+  <Badge variant="dot" color="danger">Offline</Badge>
+</div>`}>
+  <div className="flex flex-wrap gap-3">
+    <Badge variant="dot" color="success">Online</Badge>
+    <Badge variant="dot" color="warning">Idle</Badge>
+    <Badge variant="dot" color="danger">Offline</Badge>
+  </div>
+</Sandbox>
+
+## With counts
+
+Badges work well for notification counts. Render numbers directly as children.
+
+<Sandbox code={`<div className="flex items-center gap-6">
+  <div className="relative">
+    <Button variant="bordered">Messages</Button>
+    <span className="absolute -right-2 -top-2">
+      <Badge size="sm" color="danger">3</Badge>
+    </span>
+  </div>
+  <div className="relative">
+    <Button variant="bordered">Updates</Button>
+    <span className="absolute -right-2 -top-2">
+      <Badge size="sm" color="accent">12</Badge>
+    </span>
+  </div>
+</div>`}>
+  <div className="flex items-center gap-6">
+    <div className="relative">
+      <Button variant="bordered">Messages</Button>
+      <span className="absolute -right-2 -top-2">
+        <Badge size="sm" color="danger">3</Badge>
+      </span>
+    </div>
+    <div className="relative">
+      <Button variant="bordered">Updates</Button>
+      <span className="absolute -right-2 -top-2">
+        <Badge size="sm" color="accent">12</Badge>
+      </span>
+    </div>
+  </div>
+</Sandbox>
+
+## API Reference
+
+### Badge (Root)
+
+| Prop      | Type                                                            | Default     | Description            |
+| --------- | --------------------------------------------------------------- | ----------- | ---------------------- |
+| `variant` | `'solid' \| 'flat' \| 'bordered' \| 'dot'`                      | `'solid'`   | Visual style.          |
+| `color`   | `'default' \| 'accent' \| 'success' \| 'warning' \| 'danger'`   | `'default'` | Semantic color.        |
+| `size`    | `'sm' \| 'md' \| 'lg'`                                          | `'md'`      | Visual size.           |
+| `children`| `ReactNode`                                                     | —           | Label content.         |
+
+Extends native `span` props (omits `color`).
+
+## Accessibility
+
+- Badges are decorative by default. If the badge conveys information not available elsewhere (e.g. "3 unread"), include it in the button's `aria-label` or an adjacent `VisuallyHidden` span.
+- The `dot` variant's colored dot is purely visual — always pair it with a text label for screen readers.

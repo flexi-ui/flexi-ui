@@ -35,11 +35,16 @@ const components: Record<string, unknown> = {
 type MDXModule = ComponentType<any>
 
 const mdxModules: Record<string, () => Promise<{ default: MDXModule }>> = {
-  'api-references/flexiui-provider': () => import('@/content/docs/api-references/flexiui-provider.mdx'),
+  'components/alert': () => import('@/content/docs/components/alert.mdx'),
+  'components/avatar': () => import('@/content/docs/components/avatar.mdx'),
+  'components/badge': () => import('@/content/docs/components/badge.mdx'),
   'components/button': () => import('@/content/docs/components/button.mdx'),
+  'components/card': () => import('@/content/docs/components/card.mdx'),
+  'components/divider': () => import('@/content/docs/components/divider.mdx'),
   'components/form': () => import('@/content/docs/components/form.mdx'),
   'components/input': () => import('@/content/docs/components/input.mdx'),
   'components/link': () => import('@/content/docs/components/link.mdx'),
+  'components/skeleton': () => import('@/content/docs/components/skeleton.mdx'),
   'components/spinner': () => import('@/content/docs/components/spinner.mdx'),
   'frameworks/astro': () => import('@/content/docs/frameworks/astro.mdx'),
   'frameworks/nextjs': () => import('@/content/docs/frameworks/nextjs.mdx'),

@@ -1,26 +1,34 @@
-import { Button } from '@flexi-ui/button'
+import { Alert } from '@flexi-ui/alert'
+import { Avatar } from '@flexi-ui/avatar'
+import { Badge } from '@flexi-ui/badge'
+import { Button, ButtonGroup } from '@flexi-ui/button'
+import { Card } from '@flexi-ui/card'
+import { Divider } from '@flexi-ui/divider'
+import { Form } from '@flexi-ui/form'
 import { Input, TextArea } from '@flexi-ui/input'
 import { Link } from '@flexi-ui/link'
+import { Skeleton } from '@flexi-ui/skeleton'
 import { Spinner } from '@flexi-ui/spinner'
-import { Form } from '@flexi-ui/form'
 import { Sandbox } from './Sandbox'
 import { SandboxEditor } from './SandboxEditor'
-import { Card, CardHeader, CardBody, CardFooter } from './Card'
 
 export const MDXComponents = {
-  // FlexiUI Components
+  Alert,
+  Avatar,
+  Badge,
   Button,
+  ButtonGroup,
+  Card,
+  CardHeader: Card.Header,
+  CardBody: Card.Body,
+  CardFooter: Card.Footer,
+  Divider,
+  Form,
   Input,
   TextArea,
   Link,
+  Skeleton,
   Spinner,
-  Form,
-
-  // Documentation Components
   Sandbox,
   SandboxEditor,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
 }
