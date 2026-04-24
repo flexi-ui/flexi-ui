@@ -1,5 +1,23 @@
 # @flexi-ui/documentation
 
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`d178b88`](https://github.com/flexi-ui/flexi-ui/commit/d178b8899ffb0776dd1c9b0d62051241c82a3228)]:
+  - @flexi-ui/styles@1.9.1
+  - @flexi-ui/alert@0.1.9
+  - @flexi-ui/avatar@1.0.11
+  - @flexi-ui/badge@0.1.9
+  - @flexi-ui/button@6.0.13
+  - @flexi-ui/card@0.1.9
+  - @flexi-ui/divider@0.1.9
+  - @flexi-ui/form@5.0.13
+  - @flexi-ui/input@5.0.13
+  - @flexi-ui/link@5.0.13
+  - @flexi-ui/skeleton@0.1.9
+  - @flexi-ui/spinner@6.0.10
+
 ## 1.0.18
 
 ### Patch Changes

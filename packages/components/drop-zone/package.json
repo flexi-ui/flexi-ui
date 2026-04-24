@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/drop-zone",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "DropZone component built on React Aria Components.",
   "type": "module",
   "license": "MIT",
