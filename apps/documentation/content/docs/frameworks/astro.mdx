@@ -1,127 +1,104 @@
 ---
 title: "Astro"
-description: "Learn how to use FlexiUI with Astro."
+description: "Use FlexiUI inside an Astro site via the React integration."
 ---
 
 # Astro
 
-FlexiUI can be used with Astro to create interactive islands within your static site.
+Astro renders static HTML by default, so FlexiUI components (which are React client components) need Astro's React integration and a `client:*` directive on each island.
 
-## Create a New Project
-
-Create a new Astro project:
+## 1. Create or open an Astro project
 
 ```bash
-pnpm create astro@latest my-app
-cd my-app
+pnpm create astro@latest my-site
+cd my-site
 ```
 
-## Installation
-
-Install FlexiUI and the React integration:
+## 2. Add React and Tailwind v4
 
 ```bash
-pnpm add @flexi-ui/react
-pnpm astro add react tailwind
+pnpm astro add react
+pnpm add -D tailwindcss @tailwindcss/vite
+pnpm add @flexi-ui/styles @flexi-ui/button
 ```
 
-## Configure Astro
+## 3. Register the Tailwind Vite plugin
 
-Update `astro.config.mjs`:
-
-```js
+```ts
+// astro.config.mjs
 import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  integrations: [react(), tailwind()]
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 })
 ```
 
-## Configure Tailwind
+## 4. Create the stylesheet
 
-Update `tailwind.config.mjs`:
+```css
+/* src/styles/global.css */
+@import '@flexi-ui/styles/css';
 
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
-  ],
-  plugins: [require('@flexi-ui/tailwind-plugin')]
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
 }
 ```
 
-## Create a Provider Component
-
-Create `src/components/Providers.tsx`:
-
-```tsx
-import { FlexiUIProvider } from '@flexi-ui/react'
-
-export function Providers({ children }: { children: React.ReactNode }) {
-  return <FlexiUIProvider>{children}</FlexiUIProvider>
-}
-```
-
-## Create Interactive Components
-
-Create `src/components/ContactForm.tsx`:
-
-```tsx
-import { Button } from '@flexi-ui/button'
-import { Input } from '@flexi-ui/input'
-import { Providers } from './Providers'
-
-export function ContactForm() {
-  return (
-    <Providers>
-      <form className="space-y-4">
-        <Input label="Name" name="name" />
-        <Input label="Email" type="email" name="email" />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Providers>
-  )
-}
-```
-
-## Use in Astro Pages
-
-Use the component in your Astro page:
+Import it from your layout or root page:
 
 ```astro
 ---
-import { ContactForm } from '../components/ContactForm'
+// src/layouts/Layout.astro
+import '../styles/global.css'
 ---
-
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>FlexiUI + Astro</title>
+    <meta charset="UTF-8" />
+    <title>My site</title>
   </head>
   <body>
-    <h1>Contact Us</h1>
-    <ContactForm client:load />
+    <slot />
   </body>
 </html>
 ```
 
-## Client Directives
+## 5. Use a FlexiUI component as an island
 
-Use Astro's client directives to control hydration:
-
-- `client:load` - Hydrate immediately
-- `client:idle` - Hydrate when the page is idle
-- `client:visible` - Hydrate when the component is visible
-- `client:only` - Only render on the client
+FlexiUI components are interactive, so Astro needs a hydration directive:
 
 ```astro
-<ContactForm client:visible />
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro'
+import { Button } from '@flexi-ui/button'
+---
+<Layout>
+  <main class="flex min-h-screen items-center justify-center">
+    <Button client:load>Hello FlexiUI</Button>
+  </main>
+</Layout>
 ```
 
-## Static Site Generation
+Pick the directive that fits the component's role:
 
-FlexiUI components integrate seamlessly with Astro's SSG capabilities, providing interactive elements within your static pages.
+- `client:load` — hydrate immediately (good for above-the-fold interactive UI).
+- `client:idle` — hydrate when the browser is idle.
+- `client:visible` — hydrate when the island scrolls into view (ideal for footers, modals).
+- `client:only="react"` — skip SSR entirely; only render on the client. Use this if a component depends on APIs that don't exist on the server.
+
+## Dark mode
+
+Toggle a `dark` class on `<html>` — FlexiUI's dark variant activates automatically. Since Astro doesn't ship with a theme library, use a small inline script in the `<head>` to apply the user's preference before paint, preventing a flash of unstyled content.

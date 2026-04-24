@@ -3,8 +3,6 @@
   "pages": [
     "guide",
     "frameworks",
-    "customization",
-    "components",
-    "api-references"
+    "components"
   ]
 }

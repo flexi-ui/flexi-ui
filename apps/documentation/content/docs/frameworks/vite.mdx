@@ -1,135 +1,109 @@
 ---
 title: "Vite"
-description: "Learn how to use FlexiUI with Vite."
+description: "Wire FlexiUI into a Vite + React project with Tailwind CSS v4."
 ---
 
 # Vite
 
-FlexiUI integrates seamlessly with Vite for blazing-fast development.
+FlexiUI works with any Vite-based React project (`create-vite`, `tanstack-router`, custom setups). The setup is a Tailwind plugin and one CSS import.
 
-## Create a New Project
-
-Create a new Vite + React project:
+## 1. Create the project
 
 ```bash
-pnpm create vite my-app --template react-ts
+pnpm create vite@latest my-app -- --template react-ts
 cd my-app
+pnpm install
 ```
 
-## Installation
-
-Install FlexiUI and its peer dependencies:
+## 2. Install Tailwind v4 + FlexiUI
 
 ```bash
-pnpm add @flexi-ui/react
-pnpm add -D tailwindcss postcss autoprefixer
+pnpm add -D tailwindcss @tailwindcss/vite
+pnpm add @flexi-ui/styles @flexi-ui/button
 ```
 
-## Setup Tailwind CSS
+## 3. Register the Tailwind Vite plugin
 
-### 1. Initialize Tailwind
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-```bash
-npx tailwindcss init -p
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
 ```
 
-### 2. Configure Tailwind
+## 4. Create the stylesheet
 
-Update `tailwind.config.js`:
+```css
+/* src/index.css */
+@import '@flexi-ui/styles/css';
 
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@flexi-ui/**/*.{js,ts,jsx,tsx}'
-  ],
-  plugins: [require('@flexi-ui/tailwind-plugin')]
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
 }
 ```
 
-### 3. Add Tailwind Directives
-
-Create or update `src/index.css`:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-## Setup FlexiUI Provider
-
-Update `src/main.tsx`:
+Import it once at your entry point:
 
 ```tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { FlexiUIProvider } from '@flexi-ui/react'
-import App from './App'
+// src/main.tsx
 import './index.css'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <FlexiUIProvider>
-      <App />
-    </FlexiUIProvider>
-  </React.StrictMode>
-)
 ```
 
-## Using Components
-
-Import and use FlexiUI components in your app:
+## 5. Use a component
 
 ```tsx
+// src/App.tsx
 import { Button } from '@flexi-ui/button'
-import { Input } from '@flexi-ui/input'
 
-function App() {
+export default function App() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">FlexiUI + Vite</h1>
-      <div className="space-y-4">
-        <Input label="Email" type="email" />
-        <Button>Submit</Button>
-      </div>
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Hello FlexiUI</Button>
     </div>
   )
 }
-
-export default App
 ```
 
-## Development
+Run `pnpm dev` and you're set.
 
-Start the development server:
+## Client-side routing
 
-```bash
-pnpm dev
-```
+If you're using React Router or TanStack Router, wrap your app in React Aria's `RouterProvider` so FlexiUI's `<Link>` uses client-side navigation. See the [Routing guide](/docs/guide/routing) for framework-specific snippets.
 
-## Build for Production
+## Dark mode
 
-Build your app for production:
+There's no theme provider in FlexiUI. To toggle dark mode, add/remove a `dark` class on `<html>` (or any ancestor) — the styles package scopes its dark-mode rules with `@custom-variant dark (&:where(.dark, .dark *))`.
 
-```bash
-pnpm build
-```
+A one-file helper:
 
-## Vite Configuration
+```tsx
+// src/use-theme.ts
+import { useEffect, useState } from 'react'
 
-Optimize your Vite configuration for FlexiUI:
+type Theme = 'light' | 'dark'
 
-```ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+export function useTheme() {
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem('theme') as Theme) ?? 'light',
+  )
 
-export default defineConfig({
-  plugins: [react()],
-  optimizeDeps: {
-    include: ['@flexi-ui/react']
-  }
-})
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  return { theme, setTheme }
+}
 ```

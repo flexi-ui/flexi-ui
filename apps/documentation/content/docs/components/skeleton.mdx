@@ -1,0 +1,117 @@
+---
+title: "Skeleton"
+description: "Shimmering placeholder for content that's loading."
+---
+
+# Skeleton
+
+`Skeleton` renders a shimmering placeholder that occupies the same space your real content will fill. Once the data arrives, flip `isLoaded` to `true` and the shimmer disappears — your children render in place without layout shift.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/skeleton @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Skeleton } from '@flexi-ui/skeleton'
+```
+
+## Usage
+
+Give the skeleton explicit dimensions via utility classes, then wrap whatever it's standing in for.
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <Skeleton className="h-4 w-48 rounded" />
+  <Skeleton className="h-4 w-64 rounded" />
+  <Skeleton className="h-4 w-40 rounded" />
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <Skeleton className="h-4 w-48 rounded" />
+    <Skeleton className="h-4 w-64 rounded" />
+    <Skeleton className="h-4 w-40 rounded" />
+  </div>
+</Sandbox>
+
+## Loaded state
+
+When your data resolves, pass `isLoaded` to remove the shimmer and reveal the children.
+
+```tsx
+'use client'
+
+import { useEffect, useState } from 'react'
+import { Skeleton } from '@flexi-ui/skeleton'
+
+export function UserName() {
+  const [name, setName] = useState<string | null>(null)
+
+  useEffect(() => {
+    const t = setTimeout(() => setName('Alex Morgan'), 1200)
+    return () => clearTimeout(t)
+  }, [])
+
+  return (
+    <Skeleton isLoaded={!!name} className="h-5 w-40 rounded">
+      <span className="text-sm font-medium">{name}</span>
+    </Skeleton>
+  )
+}
+```
+
+<Sandbox code={`<Skeleton isLoaded className="h-5 w-40 rounded">
+  <span className="text-sm font-medium">Alex Morgan</span>
+</Skeleton>`}>
+  <Skeleton isLoaded className="h-5 w-40 rounded">
+    <span className="text-sm font-medium">Alex Morgan</span>
+  </Skeleton>
+</Sandbox>
+
+## Card placeholder
+
+Compose multiple skeletons to reserve the shape of a richer layout. Matching the final dimensions avoids layout shift.
+
+<Sandbox code={`<div className="flex w-72 flex-col gap-4 rounded-lg border p-4">
+  <div className="flex items-center gap-3">
+    <Skeleton className="h-10 w-10 rounded-full" />
+    <div className="flex flex-col gap-2">
+      <Skeleton className="h-4 w-32 rounded" />
+      <Skeleton className="h-3 w-24 rounded" />
+    </div>
+  </div>
+  <Skeleton className="h-3 w-full rounded" />
+  <Skeleton className="h-3 w-11/12 rounded" />
+  <Skeleton className="h-3 w-3/4 rounded" />
+</div>`}>
+  <div className="flex w-72 flex-col gap-4 rounded-lg border p-4">
+    <div className="flex items-center gap-3">
+      <Skeleton className="h-10 w-10 rounded-full" />
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-4 w-32 rounded" />
+        <Skeleton className="h-3 w-24 rounded" />
+      </div>
+    </div>
+    <Skeleton className="h-3 w-full rounded" />
+    <Skeleton className="h-3 w-11/12 rounded" />
+    <Skeleton className="h-3 w-3/4 rounded" />
+  </div>
+</Sandbox>
+
+## API Reference
+
+### Skeleton
+
+| Prop       | Type        | Default | Description                                                |
+| ---------- | ----------- | ------- | ---------------------------------------------------------- |
+| `isLoaded` | `boolean`   | `false` | When `true`, disables the shimmer and renders children.    |
+| `children` | `ReactNode` | —       | The real content, revealed once `isLoaded` is `true`.      |
+
+Extends native `div` props. Size is controlled by your own utility classes (`className="h-4 w-48 rounded"`).
+
+## Accessibility
+
+- Skeletons are decorative placeholders and are hidden from assistive tech once `isLoaded` is true.
+- For longer loads, consider announcing state with a `role="status"` region elsewhere (e.g. a `Spinner` with a `label`) so screen reader users hear that content is loading.
+- Always reserve the correct final dimensions to prevent layout shift when content arrives.

@@ -1,0 +1,89 @@
+---
+title: "Divider"
+description: "Thin separator between content regions, horizontal or vertical."
+---
+
+# Divider
+
+`Divider` renders a thin line that separates content. It's a semantic `role="separator"` element and supports both horizontal (default) and vertical orientations.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/divider @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Divider } from '@flexi-ui/divider'
+```
+
+## Usage
+
+<Sandbox code={`<div>
+  <p className="text-sm">Above the line</p>
+  <Divider className="my-3" />
+  <p className="text-sm">Below the line</p>
+</div>`}>
+  <div>
+    <p className="text-sm">Above the line</p>
+    <Divider className="my-3" />
+    <p className="text-sm">Below the line</p>
+  </div>
+</Sandbox>
+
+## Horizontal
+
+The default orientation. Use inside stacked layouts to separate sections.
+
+<Sandbox code={`<div className="flex flex-col gap-3">
+  <span className="text-sm">Account</span>
+  <Divider />
+  <span className="text-sm">Preferences</span>
+  <Divider />
+  <span className="text-sm">Billing</span>
+</div>`}>
+  <div className="flex flex-col gap-3">
+    <span className="text-sm">Account</span>
+    <Divider />
+    <span className="text-sm">Preferences</span>
+    <Divider />
+    <span className="text-sm">Billing</span>
+  </div>
+</Sandbox>
+
+## Vertical
+
+Pass `orientation="vertical"` to render an inline rule. The parent must have a defined height — flexbox handles this naturally.
+
+<Sandbox code={`<div className="flex h-8 items-center gap-3">
+  <span className="text-sm">Docs</span>
+  <Divider orientation="vertical" />
+  <span className="text-sm">API</span>
+  <Divider orientation="vertical" />
+  <span className="text-sm">Support</span>
+</div>`}>
+  <div className="flex h-8 items-center gap-3">
+    <span className="text-sm">Docs</span>
+    <Divider orientation="vertical" />
+    <span className="text-sm">API</span>
+    <Divider orientation="vertical" />
+    <span className="text-sm">Support</span>
+  </div>
+</Sandbox>
+
+## API Reference
+
+### Divider
+
+| Prop          | Type                          | Default        | Description                        |
+| ------------- | ----------------------------- | -------------- | ---------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'`  | `'horizontal'` | Layout direction.                  |
+
+Extends native `div` props.
+
+## Accessibility
+
+- Renders `role="separator"` with `aria-orientation` reflecting the current orientation, so assistive tech announces the break in content.
+- Dividers are purely visual. If you need a labelled section break (e.g. "OR" between options), render the label next to the divider, not inside it.
