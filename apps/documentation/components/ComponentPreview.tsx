@@ -1,7 +1,7 @@
 'use client'
 
+import { Icon } from '@iconify/react'
 import { Suspense, useState } from 'react'
-import { Code as CodeIcon, Eye } from 'lucide-react'
 import { getDemo } from '@/demos/registry'
 import { CodeBlock } from './CodeBlock'
 
@@ -48,7 +48,7 @@ export function ComponentPreview({
               : 'text-muted-foreground hover:text-foreground'
           }`}
         >
-          <Eye className="h-3 w-3" />
+          <Icon className="h-3 w-3" icon="gravity-ui:eye" />
           Preview
         </button>
         <button
@@ -60,7 +60,7 @@ export function ComponentPreview({
               : 'text-muted-foreground hover:text-foreground'
           }`}
         >
-          <CodeIcon className="h-3 w-3" />
+          <Icon className="h-3 w-3" icon="gravity-ui:code" />
           Code
         </button>
       </div>

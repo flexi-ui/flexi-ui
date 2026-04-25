@@ -1,8 +1,8 @@
 'use client'
 
+import { Icon } from '@iconify/react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
 
 export const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false)
@@ -21,7 +21,10 @@ export const ThemeSwitcher = () => {
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
     >
-      {mounted && isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <Icon
+        className="h-4 w-4"
+        icon={mounted && isDark ? 'gravity-ui:sun' : 'gravity-ui:moon'}
+      />
     </button>
   )
 }

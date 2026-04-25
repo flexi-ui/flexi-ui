@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import type { FC } from 'react'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Github, Menu, Search, X } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { clsx } from '@flexi-ui/shared-utils'
 import { Logo } from '@/components/Logo'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
@@ -63,7 +63,7 @@ export const Navbar: FC = () => {
               className="hidden h-9 w-60 items-center justify-between rounded-md border border-border bg-muted/50 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted sm:flex"
             >
               <span className="flex items-center gap-2">
-                <Search className="h-4 w-4" />
+                <Icon className="h-4 w-4" icon="gravity-ui:magnifier" />
                 Search docs…
               </span>
               <kbd className="inline-flex h-5 items-center gap-1 rounded border border-border bg-background px-1.5 font-mono text-[10px] font-medium">
@@ -77,7 +77,7 @@ export const Navbar: FC = () => {
               aria-label="Search"
               className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:hidden"
             >
-              <Search className="h-4 w-4" />
+              <Icon className="h-4 w-4" icon="gravity-ui:magnifier" />
             </button>
 
             <a
@@ -87,7 +87,7 @@ export const Navbar: FC = () => {
               aria-label="GitHub"
               className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
-              <Github className="h-4 w-4" />
+              <Icon className="h-4 w-4" icon="gravity-ui:logo-github" />
             </a>
 
             <ThemeSwitcher />
@@ -98,7 +98,10 @@ export const Navbar: FC = () => {
               aria-label="Toggle menu"
               className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
             >
-              {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              <Icon
+                className="h-4 w-4"
+                icon={isMobileMenuOpen ? 'gravity-ui:xmark' : 'gravity-ui:bars'}
+              />
             </button>
           </div>
         </div>

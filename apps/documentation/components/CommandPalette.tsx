@@ -3,8 +3,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Command } from 'cmdk'
-import { Book, Component as ComponentIcon, FileText, Search } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import manifest from '@/config/routes.json'
+
+const sectionIcons: Record<string, string> = {
+  guide: 'gravity-ui:book-open',
+  components: 'gravity-ui:square-bracket-square-bracket',
+  frameworks: 'gravity-ui:cubes-3',
+}
 
 const routes = manifest.routes
 
@@ -51,7 +57,10 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
           loop
         >
           <div className="flex items-center gap-2 border-b border-border px-3">
-            <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+            <Icon
+              className="h-4 w-4 shrink-0 text-muted-foreground"
+              icon="gravity-ui:magnifier"
+            />
             <Command.Input
               value={search}
               onValueChange={setSearch}
@@ -68,7 +77,7 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
               <Command.Group key={section.key} heading={section.title}>
                 {section.routes.map((route) => {
                   const href = route.path?.replace('.mdx', '') || '#'
-                  const Icon = getIcon(section.key)
+                  const sectionIcon = sectionIcons[section.key] ?? 'gravity-ui:file-text'
 
                   return (
                     <Command.Item
@@ -77,7 +86,7 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
                       onSelect={() => handleSelect(href)}
                       className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground data-[selected=true]:bg-muted"
                     >
-                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <Icon className="h-4 w-4 text-muted-foreground" icon={sectionIcon} />
                       <span>{route.title}</span>
                     </Command.Item>
                   )
@@ -91,13 +100,3 @@ export const CommandPalette = ({ isOpen, onClose }: CommandPaletteProps) => {
   )
 }
 
-function getIcon(sectionKey: string) {
-  switch (sectionKey) {
-    case 'guide':
-      return Book
-    case 'components':
-      return ComponentIcon
-    default:
-      return FileText
-  }
-}

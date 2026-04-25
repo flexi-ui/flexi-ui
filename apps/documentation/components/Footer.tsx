@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { Github } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { Logo } from '@/components/Logo'
 import { siteConfig } from '@/config/site'
 
@@ -31,7 +31,9 @@ export const Footer = () => {
                   {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
                   className="flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {link.label === 'GitHub' && <Github className="h-4 w-4" />}
+                  {link.label === 'GitHub' && (
+                    <Icon className="h-4 w-4" icon="gravity-ui:logo-github" />
+                  )}
                   {link.label}
                 </NextLink>
               </li>

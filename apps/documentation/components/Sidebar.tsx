@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronRight } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { clsx } from '@flexi-ui/shared-utils'
 
 interface Route {
@@ -73,11 +73,12 @@ export const Sidebar = ({ routes }: SidebarProps) => {
               className="flex w-full items-center justify-between py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
             >
               <span>{section.title}</span>
-              <ChevronRight
+              <Icon
                 className={clsx(
                   'h-3.5 w-3.5 transition-transform',
                   isOpen && 'rotate-90',
                 )}
+                icon="gravity-ui:chevron-right"
               />
             </button>
 
