@@ -21,109 +21,33 @@ import { Badge } from '@flexi-ui/badge'
 
 ## Usage
 
-<Sandbox code={`<Badge>Badge</Badge>`}>
-  <Badge>Badge</Badge>
-</Sandbox>
+<ComponentPreview name="badge-usage" />
 
 ## Variants
 
-<Sandbox code={`<div className="flex flex-wrap items-center gap-3">
-  <Badge variant="solid" color="accent">Solid</Badge>
-  <Badge variant="flat" color="accent">Flat</Badge>
-  <Badge variant="bordered" color="accent">Bordered</Badge>
-  <Badge variant="dot" color="accent">Dot</Badge>
-</div>`}>
-  <div className="flex flex-wrap items-center gap-3">
-    <Badge variant="solid" color="accent">Solid</Badge>
-    <Badge variant="flat" color="accent">Flat</Badge>
-    <Badge variant="bordered" color="accent">Bordered</Badge>
-    <Badge variant="dot" color="accent">Dot</Badge>
-  </div>
-</Sandbox>
+<ComponentPreview name="badge-variants" />
 
 ## Colors
 
 Five semantic colors pair with each variant.
 
-<Sandbox code={`<div className="flex flex-wrap gap-3">
-  <Badge color="default">default</Badge>
-  <Badge color="accent">accent</Badge>
-  <Badge color="success">success</Badge>
-  <Badge color="warning">warning</Badge>
-  <Badge color="danger">danger</Badge>
-</div>`}>
-  <div className="flex flex-wrap gap-3">
-    <Badge color="default">default</Badge>
-    <Badge color="accent">accent</Badge>
-    <Badge color="success">success</Badge>
-    <Badge color="warning">warning</Badge>
-    <Badge color="danger">danger</Badge>
-  </div>
-</Sandbox>
+<ComponentPreview name="badge-colors" />
 
 ## Sizes
 
-<Sandbox code={`<div className="flex items-center gap-3">
-  <Badge size="sm" color="accent">Small</Badge>
-  <Badge size="md" color="accent">Medium</Badge>
-  <Badge size="lg" color="accent">Large</Badge>
-</div>`}>
-  <div className="flex items-center gap-3">
-    <Badge size="sm" color="accent">Small</Badge>
-    <Badge size="md" color="accent">Medium</Badge>
-    <Badge size="lg" color="accent">Large</Badge>
-  </div>
-</Sandbox>
+<ComponentPreview name="badge-sizes" />
 
 ## Dot indicator
 
 The `dot` variant renders a small solid circle before the label. Useful for online status or "new" markers.
 
-<Sandbox code={`<div className="flex flex-wrap gap-3">
-  <Badge variant="dot" color="success">Online</Badge>
-  <Badge variant="dot" color="warning">Idle</Badge>
-  <Badge variant="dot" color="danger">Offline</Badge>
-</div>`}>
-  <div className="flex flex-wrap gap-3">
-    <Badge variant="dot" color="success">Online</Badge>
-    <Badge variant="dot" color="warning">Idle</Badge>
-    <Badge variant="dot" color="danger">Offline</Badge>
-  </div>
-</Sandbox>
+<ComponentPreview name="badge-dot" />
 
 ## With counts
 
 Badges work well for notification counts. Render numbers directly as children.
 
-<Sandbox code={`<div className="flex items-center gap-6">
-  <div className="relative">
-    <Button variant="bordered">Messages</Button>
-    <span className="absolute -right-2 -top-2">
-      <Badge size="sm" color="danger">3</Badge>
-    </span>
-  </div>
-  <div className="relative">
-    <Button variant="bordered">Updates</Button>
-    <span className="absolute -right-2 -top-2">
-      <Badge size="sm" color="accent">12</Badge>
-    </span>
-  </div>
-</div>`}>
-  <div className="flex items-center gap-6">
-    <div className="relative">
-      <Button variant="bordered">Messages</Button>
-      <span className="absolute -right-2 -top-2">
-        <Badge size="sm" color="danger">3</Badge>
-      </span>
-    </div>
-    <div className="relative">
-      <Button variant="bordered">Updates</Button>
-      <span className="absolute -right-2 -top-2">
-        <Badge size="sm" color="accent">12</Badge>
-      </span>
-    </div>
-  </div>
-</Sandbox>
+<ComponentPreview name="badge-counts" />
 
 ## API Reference
 

@@ -9,8 +9,7 @@ import { Input, TextArea } from '@flexi-ui/input'
 import { Link } from '@flexi-ui/link'
 import { Skeleton } from '@flexi-ui/skeleton'
 import { Spinner } from '@flexi-ui/spinner'
-import { Sandbox } from './Sandbox'
-import { SandboxEditor } from './SandboxEditor'
+import { ComponentPreview } from './ComponentPreview'
 
 export const MDXComponents = {
   Alert,
@@ -29,6 +28,5 @@ export const MDXComponents = {
   Link,
   Skeleton,
   Spinner,
-  Sandbox,
-  SandboxEditor,
+  ComponentPreview,
 }

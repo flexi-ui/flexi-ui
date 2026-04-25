@@ -23,49 +23,19 @@ import { Button } from '@flexi-ui/button'
 
 ## Usage
 
-<Sandbox code={`<Form onSubmit={(e) => { e.preventDefault(); alert('Submitted') }}>
-  <Input label="Email" name="email" type="email" isRequired />
-  <Input label="Password" name="password" type="password" isRequired />
-  <Button type="submit">Sign in</Button>
-</Form>`}>
-  <Form onSubmit={(e) => { e.preventDefault(); alert('Submitted') }}>
-    <Input label="Email" name="email" type="email" isRequired />
-    <Input label="Password" name="password" type="password" isRequired />
-    <Button type="submit">Sign in</Button>
-  </Form>
-</Sandbox>
+<ComponentPreview name="form-usage" />
 
 ## Full width
 
 Pass `fullWidth` to stretch the form and any descendant `fullWidth` fields to the container.
 
-<Sandbox code={`<Form fullWidth onSubmit={(e) => e.preventDefault()}>
-  <Input label="Subject" name="subject" />
-  <TextArea label="Message" name="message" rows={4} />
-  <Button type="submit">Send</Button>
-</Form>`}>
-  <Form fullWidth onSubmit={(e) => e.preventDefault()}>
-    <Input label="Subject" name="subject" />
-    <TextArea label="Message" name="message" rows={4} />
-    <Button type="submit">Send</Button>
-  </Form>
-</Sandbox>
+<ComponentPreview name="form-full-width" />
 
 ## Validation
 
 `Form` participates in the standard HTML constraint validation API. FlexiUI's `Input` reads `isRequired`, `type`, `pattern`, and `minLength`/`maxLength` and surfaces browser messages via `FieldError` automatically.
 
-<Sandbox code={`<Form onSubmit={(e) => { e.preventDefault(); alert('Valid — submitted') }}>
-  <Input label="Email" name="email" type="email" isRequired />
-  <Input label="PIN" name="pin" type="text" pattern="[0-9]{4}" isRequired description="4 digits" />
-  <Button type="submit">Submit</Button>
-</Form>`}>
-  <Form onSubmit={(e) => { e.preventDefault(); alert('Valid — submitted') }}>
-    <Input label="Email" name="email" type="email" isRequired />
-    <Input label="PIN" name="pin" type="text" pattern="[0-9]{4}" isRequired description="4 digits" />
-    <Button type="submit">Submit</Button>
-  </Form>
-</Sandbox>
+<ComponentPreview name="form-validation" />
 
 ## Custom error messages
 

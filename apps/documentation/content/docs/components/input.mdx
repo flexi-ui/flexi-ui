@@ -21,137 +21,45 @@ import { Input, TextArea } from '@flexi-ui/input'
 
 ## Usage
 
-<Sandbox code={`<Input label="Email" placeholder="you@example.com" />`}>
-  <Input label="Email" placeholder="you@example.com" />
-</Sandbox>
+<ComponentPreview name="input-usage" />
 
 ## Variants
 
 Three visual treatments:
 
-<Sandbox code={`<div className="flex flex-col gap-4 w-full max-w-sm">
-  <Input variant="flat" label="Flat" placeholder="Default style" />
-  <Input variant="bordered" label="Bordered" placeholder="Outlined" />
-  <Input variant="underlined" label="Underlined" placeholder="Minimal" />
-</div>`}>
-  <div className="flex flex-col gap-4 w-full max-w-sm">
-    <Input variant="flat" label="Flat" placeholder="Default style" />
-    <Input variant="bordered" label="Bordered" placeholder="Outlined" />
-    <Input variant="underlined" label="Underlined" placeholder="Minimal" />
-  </div>
-</Sandbox>
+<ComponentPreview name="input-variants" />
 
 ## Sizes
 
-<Sandbox code={`<div className="flex flex-col gap-3 w-full max-w-sm">
-  <Input size="sm" label="Small" placeholder="Small input" />
-  <Input size="md" label="Medium" placeholder="Medium input" />
-  <Input size="lg" label="Large" placeholder="Large input" />
-</div>`}>
-  <div className="flex flex-col gap-3 w-full max-w-sm">
-    <Input size="sm" label="Small" placeholder="Small input" />
-    <Input size="md" label="Medium" placeholder="Medium input" />
-    <Input size="lg" label="Large" placeholder="Large input" />
-  </div>
-</Sandbox>
+<ComponentPreview name="input-sizes" />
 
 ## Description
 
 Helper copy that lives below the field.
 
-<Sandbox code={`<Input
-  label="Username"
-  placeholder="your-handle"
-  description="Letters, numbers, and hyphens only."
-/>`}>
-  <Input
-    label="Username"
-    placeholder="your-handle"
-    description="Letters, numbers, and hyphens only."
-  />
-</Sandbox>
+<ComponentPreview name="input-description" />
 
 ## Error state
 
 Pass `isInvalid` and `errorMessage` to signal a validation error. The message renders in the same slot as automatic browser errors, so transitions feel seamless.
 
-<Sandbox code={`<Input
-  label="Email"
-  placeholder="you@example.com"
-  isInvalid
-  errorMessage="That address doesn't look quite right."
-/>`}>
-  <Input
-    label="Email"
-    placeholder="you@example.com"
-    isInvalid
-    errorMessage="That address doesn't look quite right."
-  />
-</Sandbox>
+<ComponentPreview name="input-error" />
 
 ## Disabled
 
-<Sandbox code={`<Input isDisabled label="Team" placeholder="You can't edit this" />`}>
-  <Input isDisabled label="Team" placeholder="You can't edit this" />
-</Sandbox>
+<ComponentPreview name="input-disabled" />
 
 ## Start and end content
 
 Use `startContent` and `endContent` to render icons or inline controls alongside the text. The field resizes to keep the actual input line height consistent.
 
-<Sandbox code={`<div className="flex flex-col gap-4 w-full max-w-sm">
-  <Input
-    label="Search"
-    placeholder="Search repositories"
-    startContent={
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.3-4.3" />
-      </svg>
-    }
-  />
-  <Input
-    label="Website"
-    placeholder="example.com"
-    startContent={<span className="text-sm text-muted-foreground">https://</span>}
-    endContent={<span className="text-xs text-muted-foreground">.com</span>}
-  />
-</div>`}>
-  <div className="flex flex-col gap-4 w-full max-w-sm">
-    <Input
-      label="Search"
-      placeholder="Search repositories"
-      startContent={
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
-      }
-    />
-    <Input
-      label="Website"
-      placeholder="example.com"
-      startContent={<span className="text-sm text-muted-foreground">https://</span>}
-      endContent={<span className="text-xs text-muted-foreground">.com</span>}
-    />
-  </div>
-</Sandbox>
+<ComponentPreview name="input-content-slots" />
 
 ## TextArea
 
 `TextArea` shares the same API minus the content slots, and adds a `rows` prop.
 
-<Sandbox code={`<TextArea
-  label="Release notes"
-  placeholder="What changed in this release?"
-  rows={5}
-/>`}>
-  <TextArea
-    label="Release notes"
-    placeholder="What changed in this release?"
-    rows={5}
-  />
-</Sandbox>
+<ComponentPreview name="input-textarea" />
 
 ## API Reference
 

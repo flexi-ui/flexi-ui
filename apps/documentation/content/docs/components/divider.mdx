@@ -21,57 +21,19 @@ import { Divider } from '@flexi-ui/divider'
 
 ## Usage
 
-<Sandbox code={`<div>
-  <p className="text-sm">Above the line</p>
-  <Divider className="my-3" />
-  <p className="text-sm">Below the line</p>
-</div>`}>
-  <div>
-    <p className="text-sm">Above the line</p>
-    <Divider className="my-3" />
-    <p className="text-sm">Below the line</p>
-  </div>
-</Sandbox>
+<ComponentPreview name="divider-usage" />
 
 ## Horizontal
 
 The default orientation. Use inside stacked layouts to separate sections.
 
-<Sandbox code={`<div className="flex flex-col gap-3">
-  <span className="text-sm">Account</span>
-  <Divider />
-  <span className="text-sm">Preferences</span>
-  <Divider />
-  <span className="text-sm">Billing</span>
-</div>`}>
-  <div className="flex flex-col gap-3">
-    <span className="text-sm">Account</span>
-    <Divider />
-    <span className="text-sm">Preferences</span>
-    <Divider />
-    <span className="text-sm">Billing</span>
-  </div>
-</Sandbox>
+<ComponentPreview name="divider-horizontal" />
 
 ## Vertical
 
 Pass `orientation="vertical"` to render an inline rule. The parent must have a defined height — flexbox handles this naturally.
 
-<Sandbox code={`<div className="flex h-8 items-center gap-3">
-  <span className="text-sm">Docs</span>
-  <Divider orientation="vertical" />
-  <span className="text-sm">API</span>
-  <Divider orientation="vertical" />
-  <span className="text-sm">Support</span>
-</div>`}>
-  <div className="flex h-8 items-center gap-3">
-    <span className="text-sm">Docs</span>
-    <Divider orientation="vertical" />
-    <span className="text-sm">API</span>
-    <Divider orientation="vertical" />
-    <span className="text-sm">Support</span>
-  </div>
-</Sandbox>
+<ComponentPreview name="divider-vertical" />
 
 ## API Reference
 

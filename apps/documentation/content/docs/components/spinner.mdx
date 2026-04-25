@@ -21,95 +21,35 @@ import { Spinner } from '@flexi-ui/spinner'
 
 ## Usage
 
-<Sandbox code={`<Spinner />`}>
-  <Spinner />
-</Sandbox>
+<ComponentPreview name="spinner-usage" />
 
 ## Sizes
 
-<Sandbox code={`<div className="flex items-center gap-6">
-  <Spinner size="sm" />
-  <Spinner size="md" />
-  <Spinner size="lg" />
-</div>`}>
-  <div className="flex items-center gap-6">
-    <Spinner size="sm" />
-    <Spinner size="md" />
-    <Spinner size="lg" />
-  </div>
-</Sandbox>
+<ComponentPreview name="spinner-sizes" />
 
 ## Colors
 
 Seven colors — five semantic, plus `current` (inherits from the parent's text color) and `white` (for use on dark overlays).
 
-<Sandbox code={`<div className="flex flex-wrap items-center gap-6">
-  <Spinner color="primary" />
-  <Spinner color="secondary" />
-  <Spinner color="success" />
-  <Spinner color="warning" />
-  <Spinner color="danger" />
-  <Spinner color="current" />
-  <div className="rounded bg-foreground p-2">
-    <Spinner color="white" />
-  </div>
-</div>`}>
-  <div className="flex flex-wrap items-center gap-6">
-    <Spinner color="primary" />
-    <Spinner color="secondary" />
-    <Spinner color="success" />
-    <Spinner color="warning" />
-    <Spinner color="danger" />
-    <Spinner color="current" />
-    <div className="rounded bg-foreground p-2">
-      <Spinner color="white" />
-    </div>
-  </div>
-</Sandbox>
+<ComponentPreview name="spinner-colors" />
 
 ### `color="current"`
 
 Inherit the parent's text color — useful when dropping a spinner into a colored container or a `Button`.
 
-<Sandbox code={`<div className="flex items-center gap-3 text-danger">
-  <Spinner color="current" />
-  <span className="text-sm">Retrying…</span>
-</div>`}>
-  <div className="flex items-center gap-3 text-danger">
-    <Spinner color="current" />
-    <span className="text-sm">Retrying…</span>
-  </div>
-</Sandbox>
+<ComponentPreview name="spinner-current" />
 
 ## Label
 
 `label` renders screen-reader-accessible status text beside the spinner. Use it whenever the spinner is the only indicator that something is loading.
 
-<Sandbox code={`<Spinner label="Loading your projects…" />`}>
-  <Spinner label="Loading your projects…" />
-</Sandbox>
+<ComponentPreview name="spinner-label" />
 
 ## Inside a Button
 
 A common pattern: swap a button's label for a spinner while a request is in flight. `color="current"` matches the button's text color automatically.
 
-<Sandbox code={`<div className="flex gap-3">
-  <Button variant="primary" isDisabled>
-    <Spinner size="sm" color="current" /> Saving…
-  </Button>
-  <Button variant="bordered" isDisabled>
-    <Spinner size="sm" color="current" /> Retrying
-  </Button>
-</div>`}>
-  <div className="flex gap-3">
-    <Button variant="primary" isDisabled>
-      <Spinner size="sm" color="current" /> Saving…
-    </Button>
-    <Button variant="bordered" isDisabled>
-      <Spinner size="sm" color="current" /> Retrying
-    </Button>
-  </div>
-</Sandbox>
+<ComponentPreview name="spinner-in-button" />
 
 ## API Reference
 

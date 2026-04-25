@@ -21,63 +21,29 @@ import { Avatar } from '@flexi-ui/avatar'
 
 ## Usage
 
-<Sandbox code={`<Avatar src="https://i.pravatar.cc/96?img=12" alt="Alex Morgan" />`}>
-  <Avatar src="https://i.pravatar.cc/96?img=12" alt="Alex Morgan" />
-</Sandbox>
+<ComponentPreview name="avatar-usage" />
 
 ## Sizes
 
 Four sizes cover typical layouts. Medium is the default.
 
-<Sandbox code={`<div className="flex items-center gap-4">
-  <Avatar size="sm" src="https://i.pravatar.cc/96?img=12" />
-  <Avatar size="md" src="https://i.pravatar.cc/96?img=12" />
-  <Avatar size="lg" src="https://i.pravatar.cc/96?img=12" />
-  <Avatar size="xl" src="https://i.pravatar.cc/96?img=12" />
-</div>`}>
-  <div className="flex items-center gap-4">
-    <Avatar size="sm" src="https://i.pravatar.cc/96?img=12" />
-    <Avatar size="md" src="https://i.pravatar.cc/96?img=12" />
-    <Avatar size="lg" src="https://i.pravatar.cc/96?img=12" />
-    <Avatar size="xl" src="https://i.pravatar.cc/96?img=12" />
-  </div>
-</Sandbox>
+<ComponentPreview name="avatar-sizes" />
 
 ## Bordered
 
-<Sandbox code={`<Avatar isBordered src="https://i.pravatar.cc/96?img=5" alt="Jamie Lee" />`}>
-  <Avatar isBordered src="https://i.pravatar.cc/96?img=5" alt="Jamie Lee" />
-</Sandbox>
+<ComponentPreview name="avatar-bordered" />
 
 ## Initials fallback
 
 When `src` is absent or fails to load, Avatar derives up to two uppercase initials from `name`.
 
-<Sandbox code={`<div className="flex items-center gap-4">
-  <Avatar name="Alex Morgan" />
-  <Avatar name="Jamie Lee" size="lg" />
-  <Avatar name="Sam" size="xl" isBordered />
-</div>`}>
-  <div className="flex items-center gap-4">
-    <Avatar name="Alex Morgan" />
-    <Avatar name="Jamie Lee" size="lg" />
-    <Avatar name="Sam" size="xl" isBordered />
-  </div>
-</Sandbox>
+<ComponentPreview name="avatar-initials" />
 
 ## Custom fallback
 
 Pass a node to `fallback` for an icon, emoji, or custom badge when no image is available.
 
-<Sandbox code={`<Avatar
-  fallback={<span role="img" aria-label="ghost">👻</span>}
-  size="lg"
-/>`}>
-  <Avatar
-    fallback={<span role="img" aria-label="ghost">👻</span>}
-    size="lg"
-  />
-</Sandbox>
+<ComponentPreview name="avatar-fallback" />
 
 ## Graceful image failure
 

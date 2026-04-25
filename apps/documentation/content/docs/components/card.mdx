@@ -38,121 +38,25 @@ import { Card } from '@flexi-ui/card'
 
 ## Usage
 
-<Sandbox code={`<Card>
-  <Card.Header>
-    <h3 className="text-base font-semibold">New message</h3>
-  </Card.Header>
-  <Card.Body>
-    <p className="text-sm text-muted-foreground">
-      Alex sent you a file. Open it to review the shared notes.
-    </p>
-  </Card.Body>
-  <Card.Footer>
-    <Button size="sm">Open</Button>
-  </Card.Footer>
-</Card>`}>
-  <Card>
-    <Card.Header>
-      <h3 className="text-base font-semibold">New message</h3>
-    </Card.Header>
-    <Card.Body>
-      <p className="text-sm text-muted-foreground">
-        Alex sent you a file. Open it to review the shared notes.
-      </p>
-    </Card.Body>
-    <Card.Footer>
-      <Button size="sm">Open</Button>
-    </Card.Footer>
-  </Card>
-</Sandbox>
+<ComponentPreview name="card-usage" />
 
 ## Variants
 
 Four visual styles match how prominent the surface should feel.
 
-<Sandbox code={`<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-  <Card variant="default">
-    <Card.Body>Default</Card.Body>
-  </Card>
-  <Card variant="bordered">
-    <Card.Body>Bordered</Card.Body>
-  </Card>
-  <Card variant="flat">
-    <Card.Body>Flat</Card.Body>
-  </Card>
-  <Card variant="shadow">
-    <Card.Body>Shadow</Card.Body>
-  </Card>
-</div>`}>
-  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-    <Card variant="default">
-      <Card.Body>Default</Card.Body>
-    </Card>
-    <Card variant="bordered">
-      <Card.Body>Bordered</Card.Body>
-    </Card>
-    <Card variant="flat">
-      <Card.Body>Flat</Card.Body>
-    </Card>
-    <Card variant="shadow">
-      <Card.Body>Shadow</Card.Body>
-    </Card>
-  </div>
-</Sandbox>
+<ComponentPreview name="card-variants" />
 
 ## Sizes
 
 Size affects padding and radius. Default is `md`.
 
-<Sandbox code={`<div className="flex flex-col gap-3">
-  <Card size="sm" variant="bordered">
-    <Card.Body>Small</Card.Body>
-  </Card>
-  <Card size="md" variant="bordered">
-    <Card.Body>Medium</Card.Body>
-  </Card>
-  <Card size="lg" variant="bordered">
-    <Card.Body>Large</Card.Body>
-  </Card>
-</div>`}>
-  <div className="flex flex-col gap-3">
-    <Card size="sm" variant="bordered">
-      <Card.Body>Small</Card.Body>
-    </Card>
-    <Card size="md" variant="bordered">
-      <Card.Body>Medium</Card.Body>
-    </Card>
-    <Card size="lg" variant="bordered">
-      <Card.Body>Large</Card.Body>
-    </Card>
-  </div>
-</Sandbox>
+<ComponentPreview name="card-sizes" />
 
 ## Pressable
 
 Set `isPressable` to apply hover, press, and focus affordances when the card links to a detail view or triggers an action.
 
-<Sandbox code={`<Card isPressable variant="bordered" onClick={() => alert('Opened card')}>
-  <Card.Header>
-    <h3 className="text-base font-semibold">Open project</h3>
-  </Card.Header>
-  <Card.Body>
-    <p className="text-sm text-muted-foreground">
-      Navigate to the full workspace.
-    </p>
-  </Card.Body>
-</Card>`}>
-  <Card isPressable variant="bordered" onClick={() => alert('Opened card')}>
-    <Card.Header>
-      <h3 className="text-base font-semibold">Open project</h3>
-    </Card.Header>
-    <Card.Body>
-      <p className="text-sm text-muted-foreground">
-        Navigate to the full workspace.
-      </p>
-    </Card.Body>
-  </Card>
-</Sandbox>
+<ComponentPreview name="card-pressable" />
 
 When using `isPressable`, add a proper accessible handler — for example an anchor/button wrapper or an `onClick` paired with `role="button"` and a `tabIndex`. For routing, prefer wrapping the card content in a `Link`.
 
@@ -160,49 +64,13 @@ When using `isPressable`, add a proper accessible handler — for example an anc
 
 Stretch the card to fill its container with `fullWidth`.
 
-<Sandbox code={`<Card fullWidth variant="bordered">
-  <Card.Body>Full width card</Card.Body>
-</Card>`}>
-  <Card fullWidth variant="bordered">
-    <Card.Body>Full width card</Card.Body>
-  </Card>
-</Sandbox>
+<ComponentPreview name="card-full-width" />
 
 ## Blurred footer
 
 `Card.Footer` accepts `isBlurred` to render a translucent, frosted footer — useful when overlaying media in the body.
 
-<Sandbox code={`<Card variant="shadow" className="overflow-hidden">
-  <Card.Body className="relative h-48 p-0">
-    <img
-      alt="gradient"
-      className="h-full w-full object-cover"
-      src="https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80"
-    />
-  </Card.Body>
-  <Card.Footer isBlurred className="absolute inset-x-0 bottom-0 z-10">
-    <div className="flex items-center justify-between gap-3">
-      <span className="text-sm font-medium">Northern Lights</span>
-      <Button size="sm" variant="flat">View</Button>
-    </div>
-  </Card.Footer>
-</Card>`}>
-  <Card variant="shadow" className="overflow-hidden">
-    <Card.Body className="relative h-48 p-0">
-      <img
-        alt="gradient"
-        className="h-full w-full object-cover"
-        src="https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80"
-      />
-    </Card.Body>
-    <Card.Footer isBlurred className="absolute inset-x-0 bottom-0 z-10">
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-sm font-medium">Northern Lights</span>
-        <Button size="sm" variant="flat">View</Button>
-      </div>
-    </Card.Footer>
-  </Card>
-</Sandbox>
+<ComponentPreview name="card-blurred-footer" />
 
 ## API Reference
 

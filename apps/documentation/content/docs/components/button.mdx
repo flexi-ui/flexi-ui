@@ -23,151 +23,43 @@ import { Button, ButtonGroup } from '@flexi-ui/button'
 
 ## Usage
 
-<Sandbox code={`<Button>Continue</Button>`}>
-  <Button>Continue</Button>
-</Sandbox>
+<ComponentPreview name="button-usage" />
 
 ## Variants
 
 Ten variants pair semantic tone (primary, success, warning, danger) with style families (solid, bordered, flat, ghost, light, shadow).
 
-<Sandbox code={`<div className="flex flex-wrap gap-2">
-  <Button variant="primary">Primary</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="success">Success</Button>
-  <Button variant="warning">Warning</Button>
-  <Button variant="danger">Danger</Button>
-  <Button variant="ghost">Ghost</Button>
-  <Button variant="bordered">Bordered</Button>
-  <Button variant="flat">Flat</Button>
-  <Button variant="shadow">Shadow</Button>
-  <Button variant="light">Light</Button>
-</div>`}>
-  <div className="flex flex-wrap gap-2">
-    <Button variant="primary">Primary</Button>
-    <Button variant="secondary">Secondary</Button>
-    <Button variant="success">Success</Button>
-    <Button variant="warning">Warning</Button>
-    <Button variant="danger">Danger</Button>
-    <Button variant="ghost">Ghost</Button>
-    <Button variant="bordered">Bordered</Button>
-    <Button variant="flat">Flat</Button>
-    <Button variant="shadow">Shadow</Button>
-    <Button variant="light">Light</Button>
-  </div>
-</Sandbox>
+<ComponentPreview name="button-variants" />
 
 ## Sizes
 
-<Sandbox code={`<div className="flex items-center gap-3">
-  <Button size="sm">Small</Button>
-  <Button size="md">Medium</Button>
-  <Button size="lg">Large</Button>
-</div>`}>
-  <div className="flex items-center gap-3">
-    <Button size="sm">Small</Button>
-    <Button size="md">Medium</Button>
-    <Button size="lg">Large</Button>
-  </div>
-</Sandbox>
+<ComponentPreview name="button-sizes" />
 
 ## Disabled
 
 Use `isDisabled` (React Aria convention) rather than the native `disabled`. React Aria wires up the correct ARIA state and keyboard behavior.
 
-<Sandbox code={`<div className="flex gap-3">
-  <Button isDisabled>Disabled</Button>
-  <Button isDisabled variant="bordered">Disabled</Button>
-  <Button isDisabled variant="flat">Disabled</Button>
-</div>`}>
-  <div className="flex gap-3">
-    <Button isDisabled>Disabled</Button>
-    <Button isDisabled variant="bordered">Disabled</Button>
-    <Button isDisabled variant="flat">Disabled</Button>
-  </div>
-</Sandbox>
+<ComponentPreview name="button-disabled" />
 
 ## Icon only
 
 For square buttons that contain only an icon, set `isIconOnly`. The button becomes square and the label should go into `aria-label`.
 
-<Sandbox code={`<div className="flex gap-2">
-  <Button isIconOnly aria-label="Search" variant="flat">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  </Button>
-  <Button isIconOnly aria-label="Add" variant="primary">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  </Button>
-  <Button isIconOnly aria-label="Close" variant="bordered">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M18 6 6 18M6 6l12 12" />
-    </svg>
-  </Button>
-</div>`}>
-  <div className="flex gap-2">
-    <Button isIconOnly aria-label="Search" variant="flat">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.3-4.3" />
-      </svg>
-    </Button>
-    <Button isIconOnly aria-label="Add" variant="primary">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 5v14M5 12h14" />
-      </svg>
-    </Button>
-    <Button isIconOnly aria-label="Close" variant="bordered">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M18 6 6 18M6 6l12 12" />
-      </svg>
-    </Button>
-  </div>
-</Sandbox>
+<ComponentPreview name="button-icon-only" />
 
 ## Full width
 
-<Sandbox code={`<div className="w-full max-w-sm">
-  <Button fullWidth>Continue to payment</Button>
-</div>`}>
-  <div className="w-full max-w-sm">
-    <Button fullWidth>Continue to payment</Button>
-  </div>
-</Sandbox>
+<ComponentPreview name="button-full-width" />
 
 ## ButtonGroup
 
 `ButtonGroup` visually joins several buttons into a segmented control. Props set on the group (`size`, `variant`, `isDisabled`, `fullWidth`) flow down to any child `Button` that doesn't override them.
 
-<Sandbox code={`<ButtonGroup variant="bordered">
-  <Button>Day</Button>
-  <Button>Week</Button>
-  <Button>Month</Button>
-</ButtonGroup>`}>
-  <ButtonGroup variant="bordered">
-    <Button>Day</Button>
-    <Button>Week</Button>
-    <Button>Month</Button>
-  </ButtonGroup>
-</Sandbox>
+<ComponentPreview name="button-group" />
 
 Children can still override individual props — useful for highlighting the active option.
 
-<Sandbox code={`<ButtonGroup variant="bordered">
-  <Button>Day</Button>
-  <Button variant="primary">Week</Button>
-  <Button>Month</Button>
-</ButtonGroup>`}>
-  <ButtonGroup variant="bordered">
-    <Button>Day</Button>
-    <Button variant="primary">Week</Button>
-    <Button>Month</Button>
-  </ButtonGroup>
-</Sandbox>
+<ComponentPreview name="button-group-override" />
 
 ## API Reference
 
