@@ -21,109 +21,43 @@ import { Link } from '@flexi-ui/link'
 
 ## Usage
 
-<Sandbox code={`<Link href="/">Go to dashboard</Link>`}>
-  <Link href="/">Go to dashboard</Link>
-</Sandbox>
+<ComponentPreview name="link-usage" />
 
 ## Colors
 
 Six semantic colors cover most use cases.
 
-<Sandbox code={`<div className="flex flex-wrap gap-4">
-  <Link href="#" color="foreground">foreground</Link>
-  <Link href="#" color="primary">primary</Link>
-  <Link href="#" color="secondary">secondary</Link>
-  <Link href="#" color="success">success</Link>
-  <Link href="#" color="warning">warning</Link>
-  <Link href="#" color="danger">danger</Link>
-</div>`}>
-  <div className="flex flex-wrap gap-4">
-    <Link href="#" color="foreground">foreground</Link>
-    <Link href="#" color="primary">primary</Link>
-    <Link href="#" color="secondary">secondary</Link>
-    <Link href="#" color="success">success</Link>
-    <Link href="#" color="warning">warning</Link>
-    <Link href="#" color="danger">danger</Link>
-  </div>
-</Sandbox>
+<ComponentPreview name="link-colors" />
 
 ## Sizes
 
-<Sandbox code={`<div className="flex items-center gap-4">
-  <Link href="#" size="sm">Small</Link>
-  <Link href="#" size="md">Medium</Link>
-  <Link href="#" size="lg">Large</Link>
-</div>`}>
-  <div className="flex items-center gap-4">
-    <Link href="#" size="sm">Small</Link>
-    <Link href="#" size="md">Medium</Link>
-    <Link href="#" size="lg">Large</Link>
-  </div>
-</Sandbox>
+<ComponentPreview name="link-sizes" />
 
 ## Underline strategies
 
 Control when the underline appears.
 
-<Sandbox code={`<div className="flex flex-wrap gap-4">
-  <Link href="#" underline="none">none</Link>
-  <Link href="#" underline="hover">hover</Link>
-  <Link href="#" underline="always">always</Link>
-  <Link href="#" underline="active">active</Link>
-</div>`}>
-  <div className="flex flex-wrap gap-4">
-    <Link href="#" underline="none">none</Link>
-    <Link href="#" underline="hover">hover</Link>
-    <Link href="#" underline="always">always</Link>
-    <Link href="#" underline="active">active</Link>
-  </div>
-</Sandbox>
+<ComponentPreview name="link-underline" />
 
 ## Block
 
 Pass `isBlock` to get a chunkier link treatment — a pill-shaped hover target that's easier to tap in dense lists.
 
-<Sandbox code={`<div className="flex flex-col gap-1">
-  <Link href="#" isBlock color="foreground">Account settings</Link>
-  <Link href="#" isBlock color="foreground">Notifications</Link>
-  <Link href="#" isBlock color="foreground">Billing</Link>
-</div>`}>
-  <div className="flex flex-col gap-1">
-    <Link href="#" isBlock color="foreground">Account settings</Link>
-    <Link href="#" isBlock color="foreground">Notifications</Link>
-    <Link href="#" isBlock color="foreground">Billing</Link>
-  </div>
-</Sandbox>
+<ComponentPreview name="link-block" />
 
 ## External links
 
 Pass `isExternal` to add `target="_blank"` and `rel="noopener noreferrer"` in one step. Combine with `showAnchorIcon` to append a visual indicator.
 
-<Sandbox code={`<div className="flex flex-wrap gap-4">
-  <Link href="https://github.com" isExternal>GitHub</Link>
-  <Link href="https://github.com" isExternal showAnchorIcon>GitHub</Link>
-</div>`}>
-  <div className="flex flex-wrap gap-4">
-    <Link href="https://github.com" isExternal>GitHub</Link>
-    <Link href="https://github.com" isExternal showAnchorIcon>GitHub</Link>
-  </div>
-</Sandbox>
+<ComponentPreview name="link-external" />
 
 You can replace the default icon with any node via `anchorIcon`.
 
-<Sandbox code={`<Link href="https://github.com" isExternal showAnchorIcon anchorIcon={<span aria-hidden>→</span>}>
-  Open on GitHub
-</Link>`}>
-  <Link href="https://github.com" isExternal showAnchorIcon anchorIcon={<span aria-hidden>→</span>}>
-    Open on GitHub
-  </Link>
-</Sandbox>
+<ComponentPreview name="link-custom-icon" />
 
 ## Disabled
 
-<Sandbox code={`<Link href="#" isDisabled>Unavailable</Link>`}>
-  <Link href="#" isDisabled>Unavailable</Link>
-</Sandbox>
+<ComponentPreview name="link-disabled" />
 
 ## API Reference
 

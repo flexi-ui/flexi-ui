@@ -23,17 +23,7 @@ import { Skeleton } from '@flexi-ui/skeleton'
 
 Give the skeleton explicit dimensions via utility classes, then wrap whatever it's standing in for.
 
-<Sandbox code={`<div className="flex flex-col gap-3">
-  <Skeleton className="h-4 w-48 rounded" />
-  <Skeleton className="h-4 w-64 rounded" />
-  <Skeleton className="h-4 w-40 rounded" />
-</div>`}>
-  <div className="flex flex-col gap-3">
-    <Skeleton className="h-4 w-48 rounded" />
-    <Skeleton className="h-4 w-64 rounded" />
-    <Skeleton className="h-4 w-40 rounded" />
-  </div>
-</Sandbox>
+<ComponentPreview name="skeleton-usage" />
 
 ## Loaded state
 
@@ -61,43 +51,13 @@ export function UserName() {
 }
 ```
 
-<Sandbox code={`<Skeleton isLoaded className="h-5 w-40 rounded">
-  <span className="text-sm font-medium">Alex Morgan</span>
-</Skeleton>`}>
-  <Skeleton isLoaded className="h-5 w-40 rounded">
-    <span className="text-sm font-medium">Alex Morgan</span>
-  </Skeleton>
-</Sandbox>
+<ComponentPreview name="skeleton-loaded" />
 
 ## Card placeholder
 
 Compose multiple skeletons to reserve the shape of a richer layout. Matching the final dimensions avoids layout shift.
 
-<Sandbox code={`<div className="flex w-72 flex-col gap-4 rounded-lg border p-4">
-  <div className="flex items-center gap-3">
-    <Skeleton className="h-10 w-10 rounded-full" />
-    <div className="flex flex-col gap-2">
-      <Skeleton className="h-4 w-32 rounded" />
-      <Skeleton className="h-3 w-24 rounded" />
-    </div>
-  </div>
-  <Skeleton className="h-3 w-full rounded" />
-  <Skeleton className="h-3 w-11/12 rounded" />
-  <Skeleton className="h-3 w-3/4 rounded" />
-</div>`}>
-  <div className="flex w-72 flex-col gap-4 rounded-lg border p-4">
-    <div className="flex items-center gap-3">
-      <Skeleton className="h-10 w-10 rounded-full" />
-      <div className="flex flex-col gap-2">
-        <Skeleton className="h-4 w-32 rounded" />
-        <Skeleton className="h-3 w-24 rounded" />
-      </div>
-    </div>
-    <Skeleton className="h-3 w-full rounded" />
-    <Skeleton className="h-3 w-11/12 rounded" />
-    <Skeleton className="h-3 w-3/4 rounded" />
-  </div>
-</Sandbox>
+<ComponentPreview name="skeleton-card-placeholder" />
 
 ## API Reference
 
