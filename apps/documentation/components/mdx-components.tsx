@@ -23,6 +23,9 @@ import { Slider } from '@flexi-ui/slider'
 import { Spinner } from '@flexi-ui/spinner'
 import { Switch } from '@flexi-ui/switch'
 import { Tabs } from '@flexi-ui/tabs'
+import { TagGroup } from '@flexi-ui/tag-group'
+import { Textarea } from '@flexi-ui/textarea'
+import { ToggleButton } from '@flexi-ui/toggle-button'
 import { Tooltip } from '@flexi-ui/tooltip'
 import { ComponentPreview } from './ComponentPreview'
 
@@ -59,6 +62,9 @@ export const MDXComponents = {
   Spinner,
   Switch,
   Tabs,
+  TagGroup,
+  Textarea,
+  ToggleButton,
   Tooltip,
   ComponentPreview,
 }

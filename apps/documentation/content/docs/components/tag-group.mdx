@@ -1,0 +1,103 @@
+---
+title: "Tag Group"
+description: "Compact list of removable, selectable tags built on React Aria TagGroup."
+---
+
+# Tag Group
+
+`TagGroup` shows a list of tags — labels, chips, filters. Each tag can be selectable, removable, or pure decoration. Use it for filter chips, applied facets, or any horizontal list of small status markers.
+
+It's built on React Aria's `TagGroup` + `TagList` + `Tag`, so keyboard navigation and announcements come from the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/tag-group @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { TagGroup } from '@flexi-ui/tag-group'
+```
+
+## Anatomy
+
+```tsx
+<TagGroup>
+  <TagGroup.List>
+    <TagGroup.Tag>Label</TagGroup.Tag>
+  </TagGroup.List>
+</TagGroup>
+```
+
+| Part            | Element  | Purpose                                       |
+| --------------- | -------- | --------------------------------------------- |
+| `TagGroup`      | `div`    | Root. Owns size + label + selection state.    |
+| `TagGroup.List` | `ul`     | Container with horizontal layout.             |
+| `TagGroup.Tag`  | `li`     | A single tag.                                 |
+
+## Usage
+
+<ComponentPreview name="tag-group-usage" />
+
+## Sizes
+
+<ComponentPreview name="tag-group-sizes" />
+
+## Removable
+
+Pass `onRemove` on the group to opt into a per-tag remove button. The handler receives a `Set` of removed tag ids.
+
+<ComponentPreview name="tag-group-removable" />
+
+## Selection
+
+`TagGroup` accepts `selectionMode="single" | "multiple"` for filter-chip style behavior:
+
+```tsx
+<TagGroup
+  defaultSelectedKeys={['react', 'ts']}
+  selectionMode="multiple"
+  onSelectionChange={setSelected}
+>
+  <TagGroup.List>
+    <TagGroup.Tag id="react">React</TagGroup.Tag>
+    <TagGroup.Tag id="ts">TypeScript</TagGroup.Tag>
+    <TagGroup.Tag id="tw">Tailwind</TagGroup.Tag>
+  </TagGroup.List>
+</TagGroup>
+```
+
+## API Reference
+
+### TagGroup
+
+| Prop                     | Type                              | Default | Description                                |
+| ------------------------ | --------------------------------- | ------- | ------------------------------------------ |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                               |
+| `label`                  | `string`                          | —       | Visible label rendered above the list.     |
+| `selectionMode`          | `'none' \| 'single' \| 'multiple'`| `'none'`| Selection behavior.                        |
+| `selectedKeys` / `defaultSelectedKeys` | `Iterable<Key>`     | —       | Selected tag ids.                          |
+| `onSelectionChange`      | `(keys: Set<Key>) => void`        | —       | Fires when the selection changes.          |
+| `onRemove`               | `(keys: Set<Key>) => void`        | —       | Enables remove buttons; called on remove.  |
+| `disabledKeys`           | `Iterable<Key>`                   | —       | Tags that can't be selected or removed.    |
+
+Forwards all props of React Aria's `TagGroup`.
+
+### TagGroup.Tag
+
+| Prop          | Type      | Default | Description                                |
+| ------------- | --------- | ------- | ------------------------------------------ |
+| `id`          | `Key`     | —       | Required when using selection or removal.  |
+| `isDisabled`  | `boolean` | `false` | Disables this tag.                         |
+| `textValue`   | `string`  | —       | Used for type-to-find when children isn't plain text. |
+
+Forwards all props of React Aria's `Tag`.
+
+## Accessibility
+
+- The root sets `role="grid"` (via React Aria) with each tag as `role="row"` / `role="gridcell"`.
+- Arrow keys move focus, Backspace/Delete removes tags when `onRemove` is set.
+- For selection, the current state is announced via `aria-selected` on each tag.
+- Always pass `label` (or wrap with `aria-label`) so the group has an accessible name.

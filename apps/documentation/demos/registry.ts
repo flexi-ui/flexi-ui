@@ -78,6 +78,20 @@ import MenuDisabledSource from './menu/disabled.tsx?raw'
 import BreadcrumbsUsageSource from './breadcrumbs/usage.tsx?raw'
 import BreadcrumbsSizesSource from './breadcrumbs/sizes.tsx?raw'
 
+import TextareaUsageSource from './textarea/usage.tsx?raw'
+import TextareaSizesSource from './textarea/sizes.tsx?raw'
+import TextareaDescriptionSource from './textarea/description.tsx?raw'
+import TextareaErrorSource from './textarea/error.tsx?raw'
+
+import ToggleButtonUsageSource from './toggle-button/usage.tsx?raw'
+import ToggleButtonSizesSource from './toggle-button/sizes.tsx?raw'
+import ToggleButtonGroupSource from './toggle-button/group.tsx?raw'
+import ToggleButtonMultipleSource from './toggle-button/multiple.tsx?raw'
+
+import TagGroupUsageSource from './tag-group/usage.tsx?raw'
+import TagGroupSizesSource from './tag-group/sizes.tsx?raw'
+import TagGroupRemovableSource from './tag-group/removable.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -334,6 +348,53 @@ export const demos: Record<string, Demo> = {
   'breadcrumbs-sizes': {
     component: lazy(() => import('./breadcrumbs/sizes')),
     source: BreadcrumbsSizesSource,
+  },
+
+  'textarea-usage': {
+    component: lazy(() => import('./textarea/usage')),
+    source: TextareaUsageSource,
+  },
+  'textarea-sizes': {
+    component: lazy(() => import('./textarea/sizes')),
+    source: TextareaSizesSource,
+  },
+  'textarea-description': {
+    component: lazy(() => import('./textarea/description')),
+    source: TextareaDescriptionSource,
+  },
+  'textarea-error': {
+    component: lazy(() => import('./textarea/error')),
+    source: TextareaErrorSource,
+  },
+
+  'toggle-button-usage': {
+    component: lazy(() => import('./toggle-button/usage')),
+    source: ToggleButtonUsageSource,
+  },
+  'toggle-button-sizes': {
+    component: lazy(() => import('./toggle-button/sizes')),
+    source: ToggleButtonSizesSource,
+  },
+  'toggle-button-group': {
+    component: lazy(() => import('./toggle-button/group')),
+    source: ToggleButtonGroupSource,
+  },
+  'toggle-button-multiple': {
+    component: lazy(() => import('./toggle-button/multiple')),
+    source: ToggleButtonMultipleSource,
+  },
+
+  'tag-group-usage': {
+    component: lazy(() => import('./tag-group/usage')),
+    source: TagGroupUsageSource,
+  },
+  'tag-group-sizes': {
+    component: lazy(() => import('./tag-group/sizes')),
+    source: TagGroupSizesSource,
+  },
+  'tag-group-removable': {
+    component: lazy(() => import('./tag-group/removable')),
+    source: TagGroupRemovableSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

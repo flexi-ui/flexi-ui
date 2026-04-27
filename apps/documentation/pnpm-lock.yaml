@@ -1,0 +1,110 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@flexi-ui/accordion':
+        specifier: workspace:^
+        version: link:../../packages/components/accordion
+      '@flexi-ui/alert':
+        specifier: workspace:*
+        version: link:../../packages/components/alert
+      '@flexi-ui/avatar':
+        specifier: workspace:*
+        version: link:../../packages/components/avatar
+      '@flexi-ui/badge':
+        specifier: workspace:*
+        version: link:../../packages/components/badge
+      '@flexi-ui/breadcrumbs':
+        specifier: workspace:^
+        version: link:../../packages/components/breadcrumbs
+      '@flexi-ui/button':
+        specifier: workspace:*
+        version: link:../../packages/components/button
+      '@flexi-ui/card':
+        specifier: workspace:*
+        version: link:../../packages/components/card
+      '@flexi-ui/checkbox':
+        specifier: workspace:^
+        version: link:../../packages/components/checkbox
+      '@flexi-ui/divider':
+        specifier: workspace:*
+        version: link:../../packages/components/divider
+      '@flexi-ui/form':
+        specifier: workspace:*
+        version: link:../../packages/components/form
+      '@flexi-ui/input':
+        specifier: workspace:*
+        version: link:../../packages/components/input
+      '@flexi-ui/link':
+        specifier: workspace:*
+        version: link:../../packages/components/link
+      '@flexi-ui/menu':
+        specifier: workspace:^
+        version: link:../../packages/components/menu
+      '@flexi-ui/meter':
+        specifier: workspace:^
+        version: link:../../packages/components/meter
+      '@flexi-ui/modal':
+        specifier: workspace:^
+        version: link:../../packages/components/modal
+      '@flexi-ui/popover':
+        specifier: workspace:^
+        version: link:../../packages/components/popover
+      '@flexi-ui/progress':
+        specifier: workspace:^
+        version: link:../../packages/components/progress
+      '@flexi-ui/radio':
+        specifier: workspace:^
+        version: link:../../packages/components/radio
+      '@flexi-ui/search-field':
+        specifier: workspace:^
+        version: link:../../packages/components/search-field
+      '@flexi-ui/select':
+        specifier: workspace:^
+        version: link:../../packages/components/select
+      '@flexi-ui/shared-icons':
+        specifier: workspace:*
+        version: link:../../packages/utilities/shared-icons
+      '@flexi-ui/shared-utils':
+        specifier: workspace:*
+        version: link:../../packages/utilities/shared-utils
+      '@flexi-ui/skeleton':
+        specifier: workspace:*
+        version: link:../../packages/components/skeleton
+      '@flexi-ui/slider':
+        specifier: workspace:^
+        version: link:../../packages/components/slider
+      '@flexi-ui/spinner':
+        specifier: workspace:*
+        version: link:../../packages/components/spinner
+      '@flexi-ui/styles':
+        specifier: workspace:*
+        version: link:../../packages/styles
+      '@flexi-ui/switch':
+        specifier: workspace:^
+        version: link:../../packages/components/switch
+      '@flexi-ui/tabs':
+        specifier: workspace:^
+        version: link:../../packages/components/tabs
+      '@flexi-ui/tag-group':
+        specifier: workspace:*
+        version: link:../../packages/components/tag-group
+      '@flexi-ui/textarea':
+        specifier: workspace:*
+        version: link:../../packages/components/textarea
+      '@flexi-ui/toggle-button':
+        specifier: workspace:*
+        version: link:../../packages/components/toggle-button
+      '@flexi-ui/tooltip':
+        specifier: workspace:^
+        version: link:../../packages/components/tooltip
+    devDependencies:
+      '@flexi-ui/standard':
+        specifier: workspace:*
+        version: link:../../packages/standard

@@ -1,0 +1,74 @@
+---
+title: "Toggle Button"
+description: "Pressable button with on/off state, optionally grouped into segmented controls."
+---
+
+# Toggle Button
+
+`ToggleButton` is a button that holds a binary on/off state — bold/italic/underline in a text formatter, pin/unpin, follow/unfollow. Group several together for radio-style or checkbox-style segmented controls.
+
+Built on React Aria's `ToggleButton` + `ToggleButtonGroup`, so keyboard handling, focus, and selection state come from the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/toggle-button @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ToggleButton } from '@flexi-ui/toggle-button'
+```
+
+## Usage
+
+<ComponentPreview name="toggle-button-usage" />
+
+## Sizes
+
+<ComponentPreview name="toggle-button-sizes" />
+
+## Single-selection group
+
+`ToggleButton.Group` with `selectionMode="single"` enforces "exactly one selected" — the radio-button equivalent rendered as buttons.
+
+<ComponentPreview name="toggle-button-group" />
+
+## Multiple-selection group
+
+`selectionMode="multiple"` lets users toggle each option independently.
+
+<ComponentPreview name="toggle-button-multiple" />
+
+## API Reference
+
+### ToggleButton
+
+| Prop         | Type                              | Default | Description                                |
+| ------------ | --------------------------------- | ------- | ------------------------------------------ |
+| `size`       | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                               |
+| `id`         | `Key`                             | —       | Required when used inside a `Group`.       |
+| `isSelected` / `defaultSelected` | `boolean`     | —       | Controlled / uncontrolled pressed state.   |
+| `onChange`   | `(isSelected: boolean) => void`   | —       | Fires when the pressed state changes.      |
+| `isDisabled` | `boolean`                         | `false` | Disables interaction.                      |
+
+Forwards all props of React Aria's `ToggleButton`.
+
+### ToggleButton.Group
+
+| Prop              | Type                              | Default        | Description                                  |
+| ----------------- | --------------------------------- | -------------- | -------------------------------------------- |
+| `orientation`     | `'horizontal' \| 'vertical'`      | `'horizontal'` | Layout direction.                            |
+| `selectionMode`   | `'single' \| 'multiple'`          | `'single'`     | Whether one or many can be selected.         |
+| `selectedKeys` / `defaultSelectedKeys` | `Iterable<Key>` | —      | Currently pressed item ids.                  |
+| `onSelectionChange` | `(keys: Set<Key>) => void`      | —              | Fires when the selection changes.            |
+| `isDisabled`      | `boolean`                         | `false`        | Disables every child.                        |
+
+Forwards all props of React Aria's `ToggleButtonGroup`.
+
+## Accessibility
+
+- Renders `aria-pressed` so screen readers announce the toggled state ("Bold, pressed").
+- Inside a `Group` with `selectionMode="single"`, arrow keys move focus between buttons; Enter/Space toggles.
+- Use `aria-label` for icon-only toggles (`<ToggleButton aria-label="Bold">B</ToggleButton>`).

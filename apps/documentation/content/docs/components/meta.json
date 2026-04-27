@@ -27,6 +27,9 @@
     "spinner",
     "switch",
     "tabs",
+    "tag-group",
+    "textarea",
+    "toggle-button",
     "tooltip"
   ]
 }
