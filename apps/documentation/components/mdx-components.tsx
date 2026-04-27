@@ -2,6 +2,7 @@ import { Accordion } from '@flexi-ui/accordion'
 import { Alert } from '@flexi-ui/alert'
 import { Avatar } from '@flexi-ui/avatar'
 import { Badge } from '@flexi-ui/badge'
+import { Breadcrumbs } from '@flexi-ui/breadcrumbs'
 import { Button, ButtonGroup } from '@flexi-ui/button'
 import { Card } from '@flexi-ui/card'
 import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
@@ -9,7 +10,9 @@ import { Divider } from '@flexi-ui/divider'
 import { Form } from '@flexi-ui/form'
 import { Input, TextArea } from '@flexi-ui/input'
 import { Link } from '@flexi-ui/link'
+import { Menu } from '@flexi-ui/menu'
 import { Meter } from '@flexi-ui/meter'
+import { Modal } from '@flexi-ui/modal'
 import { Popover } from '@flexi-ui/popover'
 import { Progress } from '@flexi-ui/progress'
 import { Radio, RadioGroupRoot } from '@flexi-ui/radio'
@@ -28,6 +31,7 @@ export const MDXComponents = {
   Alert,
   Avatar,
   Badge,
+  Breadcrumbs,
   Button,
   ButtonGroup,
   Card,
@@ -41,7 +45,9 @@ export const MDXComponents = {
   Input,
   TextArea,
   Link,
+  Menu,
   Meter,
+  Modal,
   Popover,
   Progress,
   Radio,

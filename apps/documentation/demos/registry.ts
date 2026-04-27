@@ -67,6 +67,17 @@ import SearchFieldUsageSource from './search-field/usage.tsx?raw'
 import SearchFieldSizesSource from './search-field/sizes.tsx?raw'
 import SearchFieldControlledSource from './search-field/controlled.tsx?raw'
 
+import ModalUsageSource from './modal/usage.tsx?raw'
+import ModalSizesSource from './modal/sizes.tsx?raw'
+import ModalScrollSource from './modal/scroll.tsx?raw'
+
+import MenuUsageSource from './menu/usage.tsx?raw'
+import MenuSectionsSource from './menu/sections.tsx?raw'
+import MenuDisabledSource from './menu/disabled.tsx?raw'
+
+import BreadcrumbsUsageSource from './breadcrumbs/usage.tsx?raw'
+import BreadcrumbsSizesSource from './breadcrumbs/sizes.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -300,6 +311,29 @@ export const demos: Record<string, Demo> = {
   'search-field-controlled': {
     component: lazy(() => import('./search-field/controlled')),
     source: SearchFieldControlledSource,
+  },
+
+  'modal-usage': { component: lazy(() => import('./modal/usage')), source: ModalUsageSource },
+  'modal-sizes': { component: lazy(() => import('./modal/sizes')), source: ModalSizesSource },
+  'modal-scroll': { component: lazy(() => import('./modal/scroll')), source: ModalScrollSource },
+
+  'menu-usage': { component: lazy(() => import('./menu/usage')), source: MenuUsageSource },
+  'menu-sections': {
+    component: lazy(() => import('./menu/sections')),
+    source: MenuSectionsSource,
+  },
+  'menu-disabled': {
+    component: lazy(() => import('./menu/disabled')),
+    source: MenuDisabledSource,
+  },
+
+  'breadcrumbs-usage': {
+    component: lazy(() => import('./breadcrumbs/usage')),
+    source: BreadcrumbsUsageSource,
+  },
+  'breadcrumbs-sizes': {
+    component: lazy(() => import('./breadcrumbs/sizes')),
+    source: BreadcrumbsSizesSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

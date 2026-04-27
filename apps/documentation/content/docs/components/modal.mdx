@@ -1,0 +1,93 @@
+---
+title: "Modal"
+description: "Compound modal dialog with overlay, sizes, and scroll-inside support."
+---
+
+# Modal
+
+`Modal` is a focus-trapped dialog that floats above the rest of the page. Use it for confirmations, edit forms, and anything where the user needs to finish or cancel before continuing. It's built on React Aria's `Modal` + `ModalOverlay` + `Dialog` primitives, so focus management, scroll locking, and Escape-to-close are wired in.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/modal @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Modal } from '@flexi-ui/modal'
+```
+
+## Anatomy
+
+```tsx
+<Modal.Overlay isOpen onOpenChange>
+  <Modal>
+    <Modal.Dialog>
+      <Modal.Header />
+      <Modal.Body />
+      <Modal.Footer />
+    </Modal.Dialog>
+  </Modal>
+</Modal.Overlay>
+```
+
+| Part            | Element  | Purpose                                              |
+| --------------- | -------- | ---------------------------------------------------- |
+| `Modal.Overlay` | `div`    | Backdrop. Owns the open / close state.               |
+| `Modal`         | `div`    | The floating panel. Owns the size variant.           |
+| `Modal.Dialog`  | `div`    | Focus-trapped region with the `dialog` role.         |
+| `Modal.Header`  | `div`    | Title + optional subtitle.                           |
+| `Modal.Body`    | `div`    | Main content. Scrolls when content overflows.        |
+| `Modal.Footer`  | `div`    | Actions (cancel + confirm).                          |
+| `Modal.Close`   | `button` | A standalone close button you can drop anywhere.     |
+
+## Usage
+
+<ComponentPreview name="modal-usage" />
+
+## Sizes
+
+Five widths from compact (`sm`) to viewport-filling (`full`).
+
+<ComponentPreview name="modal-sizes" />
+
+## Scroll inside
+
+For tall content, set `scrollBehavior="inside"` on `Modal` to keep the modal pinned and scroll the body region instead of the page.
+
+<ComponentPreview name="modal-scroll" />
+
+## API Reference
+
+### Modal.Overlay
+
+| Prop           | Type                          | Default | Description                                  |
+| -------------- | ----------------------------- | ------- | -------------------------------------------- |
+| `isOpen` / `defaultOpen` | `boolean`           | —       | Controlled / uncontrolled open state.        |
+| `onOpenChange` | `(open: boolean) => void`     | —       | Fires when the modal opens or closes.        |
+| `isDismissable`| `boolean`                     | `true`  | Click-outside dismisses the modal.           |
+| `isKeyboardDismissDisabled` | `boolean`        | `false` | Disable Escape-to-close.                     |
+
+Forwards all props of React Aria's `ModalOverlay`.
+
+### Modal
+
+| Prop            | Type                                              | Default    | Description                  |
+| --------------- | ------------------------------------------------- | ---------- | ---------------------------- |
+| `size`          | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'`          | `'md'`     | Panel width.                 |
+| `scrollBehavior`| `'inside' \| 'outside'`                           | `'outside'`| Where overflow scrolling happens. |
+
+Forwards all props of React Aria's `Modal`.
+
+### Modal.Header / Modal.Body / Modal.Footer / Modal.Close
+
+Native `div` / `button` props plus `className` and `children`. `Modal.Close` is a button preset with `aria-label="Close"`.
+
+## Accessibility
+
+- The dialog renders `role="dialog"` with `aria-modal="true"`. Focus is trapped inside while open and returned to the trigger on close.
+- Background scroll is locked while the modal is open.
+- Always include text inside the `Modal.Header` (or pass `aria-label` on `Modal.Dialog`) so screen readers announce *what* the modal is.
+- Pair confirmations with two buttons (cancel + confirm). Don't make Escape the only way out of a destructive action.

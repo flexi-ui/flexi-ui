@@ -182,6 +182,9 @@ importers:
       '@flexi-ui/badge':
         specifier: workspace:*
         version: link:../../packages/components/badge
+      '@flexi-ui/breadcrumbs':
+        specifier: workspace:^
+        version: link:../../packages/components/breadcrumbs
       '@flexi-ui/button':
         specifier: workspace:*
         version: link:../../packages/components/button
@@ -203,9 +206,15 @@ importers:
       '@flexi-ui/link':
         specifier: workspace:*
         version: link:../../packages/components/link
+      '@flexi-ui/menu':
+        specifier: workspace:^
+        version: link:../../packages/components/menu
       '@flexi-ui/meter':
         specifier: workspace:^
         version: link:../../packages/components/meter
+      '@flexi-ui/modal':
+        specifier: workspace:^
+        version: link:../../packages/components/modal
       '@flexi-ui/popover':
         specifier: workspace:^
         version: link:../../packages/components/popover
