@@ -92,6 +92,19 @@ import TagGroupUsageSource from './tag-group/usage.tsx?raw'
 import TagGroupSizesSource from './tag-group/sizes.tsx?raw'
 import TagGroupRemovableSource from './tag-group/removable.tsx?raw'
 
+import ComboBoxUsageSource from './combo-box/usage.tsx?raw'
+import ComboBoxSizesSource from './combo-box/sizes.tsx?raw'
+import ComboBoxDisabledSource from './combo-box/disabled.tsx?raw'
+
+import NumberFieldUsageSource from './number-field/usage.tsx?raw'
+import NumberFieldSizesSource from './number-field/sizes.tsx?raw'
+import NumberFieldRangeSource from './number-field/range.tsx?raw'
+import NumberFieldCurrencySource from './number-field/currency.tsx?raw'
+
+import FileTriggerUsageSource from './file-trigger/usage.tsx?raw'
+import FileTriggerMultipleSource from './file-trigger/multiple.tsx?raw'
+import FileTriggerPreviewSource from './file-trigger/preview.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -395,6 +408,49 @@ export const demos: Record<string, Demo> = {
   'tag-group-removable': {
     component: lazy(() => import('./tag-group/removable')),
     source: TagGroupRemovableSource,
+  },
+
+  'combo-box-usage': {
+    component: lazy(() => import('./combo-box/usage')),
+    source: ComboBoxUsageSource,
+  },
+  'combo-box-sizes': {
+    component: lazy(() => import('./combo-box/sizes')),
+    source: ComboBoxSizesSource,
+  },
+  'combo-box-disabled': {
+    component: lazy(() => import('./combo-box/disabled')),
+    source: ComboBoxDisabledSource,
+  },
+
+  'number-field-usage': {
+    component: lazy(() => import('./number-field/usage')),
+    source: NumberFieldUsageSource,
+  },
+  'number-field-sizes': {
+    component: lazy(() => import('./number-field/sizes')),
+    source: NumberFieldSizesSource,
+  },
+  'number-field-range': {
+    component: lazy(() => import('./number-field/range')),
+    source: NumberFieldRangeSource,
+  },
+  'number-field-currency': {
+    component: lazy(() => import('./number-field/currency')),
+    source: NumberFieldCurrencySource,
+  },
+
+  'file-trigger-usage': {
+    component: lazy(() => import('./file-trigger/usage')),
+    source: FileTriggerUsageSource,
+  },
+  'file-trigger-multiple': {
+    component: lazy(() => import('./file-trigger/multiple')),
+    source: FileTriggerMultipleSource,
+  },
+  'file-trigger-preview': {
+    component: lazy(() => import('./file-trigger/preview')),
+    source: FileTriggerPreviewSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

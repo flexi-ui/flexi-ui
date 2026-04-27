@@ -1,0 +1,57 @@
+---
+title: "File Trigger"
+description: "Button that opens the native file picker, with single or multiple selection."
+---
+
+# File Trigger
+
+`FileTrigger` is a button that opens the OS file picker. It hides the awkward native `<input type="file">` styling behind a normal-looking button, and gives you the selected `FileList` via `onSelect`. Built on React Aria's `FileTrigger`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/file-trigger @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { FileTrigger } from '@flexi-ui/file-trigger'
+```
+
+## Usage
+
+<ComponentPreview name="file-trigger-usage" />
+
+## Multiple files + accepted types
+
+Pass `allowsMultiple` to let users pick more than one file at a time, and `acceptedFileTypes` to restrict the picker to specific MIME types.
+
+<ComponentPreview name="file-trigger-multiple" />
+
+## Reading selected files
+
+`onSelect` receives a `FileList`. Read filenames, sizes, or upload them to your endpoint:
+
+<ComponentPreview name="file-trigger-preview" />
+
+## API Reference
+
+### FileTrigger
+
+| Prop                | Type                             | Default | Description                                  |
+| ------------------- | -------------------------------- | ------- | -------------------------------------------- |
+| `size`              | `'sm' \| 'md' \| 'lg'`           | `'md'`  | Visual size of the trigger button.           |
+| `acceptedFileTypes` | `string[]`                       | —       | Allowed MIME types (e.g. `['image/png']`).   |
+| `allowsMultiple`    | `boolean`                        | `false` | Permit selecting more than one file.         |
+| `acceptDirectory`   | `boolean`                        | `false` | Permit selecting a directory.                |
+| `defaultCamera`     | `'user' \| 'environment'`        | —       | Hint mobile to open the front/back camera.   |
+| `onSelect`          | `(files: FileList \| null) => void` | —    | Fires with the user's selection.             |
+
+Forwards all props of React Aria's `FileTrigger` plus the inner `Button`.
+
+## Accessibility
+
+- Renders a real `<button>` that programmatically clicks a hidden `<input type="file">`. Keyboard users get exactly the same affordance as pointer users.
+- Pair with a visible "Selected: filename" line (as in the preview demo) — never let the only feedback be the OS picker closing.
+- For drag-and-drop uploads, combine with `DropZone` from `@flexi-ui/drop-zone` so users have both options.

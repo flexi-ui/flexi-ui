@@ -194,9 +194,15 @@ importers:
       '@flexi-ui/checkbox':
         specifier: workspace:^
         version: link:../../packages/components/checkbox
+      '@flexi-ui/combo-box':
+        specifier: workspace:^
+        version: link:../../packages/components/combo-box
       '@flexi-ui/divider':
         specifier: workspace:*
         version: link:../../packages/components/divider
+      '@flexi-ui/file-trigger':
+        specifier: workspace:^
+        version: link:../../packages/components/file-trigger
       '@flexi-ui/form':
         specifier: workspace:*
         version: link:../../packages/components/form
@@ -215,6 +221,9 @@ importers:
       '@flexi-ui/modal':
         specifier: workspace:^
         version: link:../../packages/components/modal
+      '@flexi-ui/number-field':
+        specifier: workspace:^
+        version: link:../../packages/components/number-field
       '@flexi-ui/popover':
         specifier: workspace:^
         version: link:../../packages/components/popover
@@ -254,6 +263,15 @@ importers:
       '@flexi-ui/tabs':
         specifier: workspace:^
         version: link:../../packages/components/tabs
+      '@flexi-ui/tag-group':
+        specifier: workspace:*
+        version: link:../../packages/components/tag-group
+      '@flexi-ui/textarea':
+        specifier: workspace:*
+        version: link:../../packages/components/textarea
+      '@flexi-ui/toggle-button':
+        specifier: workspace:*
+        version: link:../../packages/components/toggle-button
       '@flexi-ui/tooltip':
         specifier: workspace:^
         version: link:../../packages/components/tooltip

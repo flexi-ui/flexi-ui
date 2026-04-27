@@ -1,0 +1,86 @@
+---
+title: "Number Field"
+description: "Numeric input with increment/decrement buttons, ranges, and locale formatting."
+---
+
+# Number Field
+
+`NumberField` is a text input dedicated to numeric values. It includes increment/decrement buttons, parses locale-aware input, and accepts `Intl.NumberFormatOptions` for currency, percent, or unit formatting. Built on React Aria's `NumberField`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/number-field @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { NumberField } from '@flexi-ui/number-field'
+```
+
+## Usage
+
+<ComponentPreview name="number-field-usage" />
+
+## Sizes
+
+<ComponentPreview name="number-field-sizes" />
+
+## Range and step
+
+<ComponentPreview name="number-field-range" />
+
+## Currency formatting
+
+Pass `formatOptions` to render the value with locale-aware formatting. The user can still type a plain number — React Aria parses, validates, and reformats on blur.
+
+<ComponentPreview name="number-field-currency" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { NumberField } from '@flexi-ui/number-field'
+
+export function Quantity() {
+  const [count, setCount] = useState(1)
+
+  return (
+    <NumberField
+      label="Quantity"
+      minValue={0}
+      onChange={setCount}
+      value={count}
+    />
+  )
+}
+```
+
+## API Reference
+
+### NumberField
+
+| Prop                     | Type                              | Default    | Description                                  |
+| ------------------------ | --------------------------------- | ---------- | -------------------------------------------- |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`     | Visual size.                                 |
+| `label`                  | `string`                          | —          | Visible label rendered above the input.      |
+| `value` / `defaultValue` | `number`                          | —          | Controlled / uncontrolled numeric value.     |
+| `onChange`               | `(value: number) => void`         | —          | Fires when the value changes.                |
+| `minValue`               | `number`                          | —          | Lower bound. Value clamps on commit.         |
+| `maxValue`               | `number`                          | —          | Upper bound. Value clamps on commit.         |
+| `step`                   | `number`                          | `1`        | Increment per arrow / button press.          |
+| `formatOptions`          | `Intl.NumberFormatOptions`        | —          | Locale-aware formatting (currency, percent…).|
+| `isDisabled`             | `boolean`                         | `false`    | Disables the field.                          |
+| `isReadOnly`             | `boolean`                         | `false`    | Read-only — visible but no editing.          |
+
+Forwards all props of React Aria's `NumberField`.
+
+## Accessibility
+
+- The input renders `role="spinbutton"` with `aria-valuenow` / `aria-valuemin` / `aria-valuemax`.
+- Arrow up/down step the value; PageUp/PageDown step by 10× `step`; Home/End jump to bounds.
+- The increment / decrement buttons are also focusable, so pointer + assistive-tech users have the same affordance.
+- Pair with `formatOptions` for any non-integer input — typing `1,000` works because the parser is locale-aware.
