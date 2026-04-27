@@ -2,6 +2,7 @@
   "title": "Components",
   "defaultOpen": true,
   "pages": [
+    "accordion",
     "alert",
     "avatar",
     "badge",
@@ -12,7 +13,9 @@
     "form",
     "input",
     "link",
+    "meter",
     "popover",
+    "progress",
     "radio",
     "skeleton",
     "spinner",

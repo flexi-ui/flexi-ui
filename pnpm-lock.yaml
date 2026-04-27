@@ -170,6 +170,9 @@ importers:
 
   apps/documentation:
     dependencies:
+      '@flexi-ui/accordion':
+        specifier: workspace:^
+        version: link:../../packages/components/accordion
       '@flexi-ui/alert':
         specifier: workspace:*
         version: link:../../packages/components/alert
@@ -200,6 +203,15 @@ importers:
       '@flexi-ui/link':
         specifier: workspace:*
         version: link:../../packages/components/link
+      '@flexi-ui/meter':
+        specifier: workspace:^
+        version: link:../../packages/components/meter
+      '@flexi-ui/popover':
+        specifier: workspace:^
+        version: link:../../packages/components/popover
+      '@flexi-ui/progress':
+        specifier: workspace:^
+        version: link:../../packages/components/progress
       '@flexi-ui/radio':
         specifier: workspace:^
         version: link:../../packages/components/radio
@@ -221,6 +233,12 @@ importers:
       '@flexi-ui/switch':
         specifier: workspace:^
         version: link:../../packages/components/switch
+      '@flexi-ui/tabs':
+        specifier: workspace:^
+        version: link:../../packages/components/tabs
+      '@flexi-ui/tooltip':
+        specifier: workspace:^
+        version: link:../../packages/components/tooltip
       '@iconify-json/gravity-ui':
         specifier: ^1.2.12
         version: 1.2.12

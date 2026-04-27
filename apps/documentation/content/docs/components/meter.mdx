@@ -1,0 +1,67 @@
+---
+title: "Meter"
+description: "Static measurement display for known fixed ranges — storage, capacity, scores."
+---
+
+# Meter
+
+`Meter` shows a value within a known range — disk usage, battery, score. Unlike `Progress`, a meter doesn't represent work being done; it's a snapshot of *how full* something is right now.
+
+Built on React Aria's `Meter`, so it ships with `role="meter"` and the right `aria-valuenow` / `aria-valuemin` / `aria-valuemax` wiring.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/meter @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Meter } from '@flexi-ui/meter'
+```
+
+## Usage
+
+<ComponentPreview name="meter-usage" />
+
+## Sizes
+
+<ComponentPreview name="meter-sizes" />
+
+## Colors
+
+Pick a color that matches the *meaning* of the value — `success` for healthy, `warning` near a threshold, `danger` when over.
+
+<ComponentPreview name="meter-colors" />
+
+## API Reference
+
+### Meter
+
+| Prop        | Type                                              | Default    | Description                              |
+| ----------- | ------------------------------------------------- | ---------- | ---------------------------------------- |
+| `value`     | `number`                                          | `0`        | Current value.                           |
+| `minValue`  | `number`                                          | `0`        | Lower bound of the range.                |
+| `maxValue`  | `number`                                          | `100`      | Upper bound of the range.                |
+| `size`      | `'sm' \| 'md' \| 'lg'`                            | `'md'`     | Visual size.                             |
+| `color`     | `'accent' \| 'success' \| 'warning' \| 'danger'`  | `'accent'` | Track + label color.                     |
+| `label`     | `string`                                          | —          | Visible label rendered above the track.  |
+| `showValue` | `boolean`                                         | `true`     | Show the computed percentage next to the label. |
+
+Forwards every other prop of React Aria's `Meter`.
+
+## Progress vs Meter
+
+| Use case                       | Reach for |
+| ------------------------------ | --------- |
+| File upload, install, sync     | `Progress` (it represents work) |
+| Battery, storage, score, rating | `Meter` (it represents a state) |
+
+If your value never decreases over time and ends at 100%, it's progress. If it can move up *and* down, it's a meter.
+
+## Accessibility
+
+- Uses `role="meter"`, which tells screen readers this isn't progress (so it isn't announced as "loading").
+- The visible label and percentage are both wired to the meter via `aria-labelledby` automatically.
+- For values where colour conveys meaning (warning/danger), make sure the label or surrounding text also expresses it — colour alone fails colour-blind users.

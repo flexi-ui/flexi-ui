@@ -1,0 +1,111 @@
+---
+title: "Accordion"
+description: "Compound disclosure list with single or multi-expand and three visual treatments."
+---
+
+# Accordion
+
+`Accordion` shows a list of expandable sections. Use it for FAQs, dense settings, or any layout where users only need one or two sections at a time. It's built on React Aria's `DisclosureGroup` + `Disclosure`, so keyboard navigation, focus management, and ARIA wiring come from the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/accordion @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Accordion } from '@flexi-ui/accordion'
+```
+
+## Anatomy
+
+```tsx
+<Accordion>
+  <Accordion.Item id="...">
+    <Accordion.Trigger>Title</Accordion.Trigger>
+    <Accordion.Panel>Body</Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+| Part                  | Element  | Purpose                                         |
+| --------------------- | -------- | ----------------------------------------------- |
+| `Accordion`           | `div`    | Group root. Owns variant + expansion state.     |
+| `Accordion.Item`      | `div`    | A single section. Needs an `id` for state keys. |
+| `Accordion.Trigger`   | `button` | The clickable heading. Includes its own caret.  |
+| `Accordion.Panel`     | `div`    | The collapsible content region.                 |
+
+## Usage
+
+<ComponentPreview name="accordion-usage" />
+
+## Variants
+
+Three visual styles. The default is `default` (flat headers + dividers).
+
+<ComponentPreview name="accordion-variants" />
+
+## Multiple expanded
+
+Pass `allowsMultipleExpanded` to keep more than one panel open at the same time.
+
+<ComponentPreview name="accordion-multiple" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Accordion } from '@flexi-ui/accordion'
+
+export function ControlledAccordion() {
+  const [keys, setKeys] = useState<Set<string>>(new Set(['shipping']))
+
+  return (
+    <Accordion expandedKeys={keys} onExpandedChange={(next) => setKeys(next as Set<string>)}>
+      <Accordion.Item id="shipping">
+        <Accordion.Trigger>Shipping</Accordion.Trigger>
+        <Accordion.Panel>Three to five days.</Accordion.Panel>
+      </Accordion.Item>
+      <Accordion.Item id="returns">
+        <Accordion.Trigger>Returns</Accordion.Trigger>
+        <Accordion.Panel>Free for 30 days.</Accordion.Panel>
+      </Accordion.Item>
+    </Accordion>
+  )
+}
+```
+
+## API Reference
+
+### Accordion (Root)
+
+| Prop                       | Type                                             | Default     | Description                                          |
+| -------------------------- | ------------------------------------------------ | ----------- | ---------------------------------------------------- |
+| `variant`                  | `'default' \| 'bordered' \| 'splitted'`          | `'default'` | Visual treatment.                                    |
+| `expandedKeys` / `defaultExpandedKeys` | `Iterable<Key>`                      | —           | Controlled / uncontrolled set of expanded item ids.  |
+| `onExpandedChange`         | `(keys: Set<Key>) => void`                       | —           | Fires when the expansion state changes.              |
+| `allowsMultipleExpanded`   | `boolean`                                        | `false`     | Allow more than one panel open simultaneously.       |
+| `isDisabled`               | `boolean`                                        | `false`     | Disables every trigger.                              |
+
+Forwards every other prop of React Aria's `DisclosureGroup`.
+
+### Accordion.Item
+
+| Prop         | Type      | Default | Description                                    |
+| ------------ | --------- | ------- | ---------------------------------------------- |
+| `id`         | `string`  | —       | Required. The key used by `expandedKeys`.      |
+| `isDisabled` | `boolean` | `false` | Disables this item only.                       |
+
+### Accordion.Trigger / Accordion.Panel
+
+Forward native `button` / `div` props plus `className` and `children`. The trigger renders an indicator chevron automatically.
+
+## Accessibility
+
+- The trigger is wrapped in a real `<h3>` heading, so screen readers announce the section structure correctly.
+- Renders `aria-expanded` and `aria-controls` linkage between each trigger and its panel.
+- Arrow keys move between triggers when focus is inside the group; Enter/Space toggles.

@@ -40,6 +40,19 @@ import PopoverUsageSource from './popover/usage.tsx?raw'
 import PopoverWithArrowSource from './popover/with-arrow.tsx?raw'
 import PopoverSizesSource from './popover/sizes.tsx?raw'
 
+import AccordionUsageSource from './accordion/usage.tsx?raw'
+import AccordionVariantsSource from './accordion/variants.tsx?raw'
+import AccordionMultipleSource from './accordion/multiple.tsx?raw'
+
+import ProgressUsageSource from './progress/usage.tsx?raw'
+import ProgressSizesSource from './progress/sizes.tsx?raw'
+import ProgressColorsSource from './progress/colors.tsx?raw'
+import ProgressIndeterminateSource from './progress/indeterminate.tsx?raw'
+
+import MeterUsageSource from './meter/usage.tsx?raw'
+import MeterSizesSource from './meter/sizes.tsx?raw'
+import MeterColorsSource from './meter/colors.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -208,6 +221,40 @@ export const demos: Record<string, Demo> = {
     component: lazy(() => import('./popover/sizes')),
     source: PopoverSizesSource,
   },
+
+  'accordion-usage': {
+    component: lazy(() => import('./accordion/usage')),
+    source: AccordionUsageSource,
+  },
+  'accordion-variants': {
+    component: lazy(() => import('./accordion/variants')),
+    source: AccordionVariantsSource,
+  },
+  'accordion-multiple': {
+    component: lazy(() => import('./accordion/multiple')),
+    source: AccordionMultipleSource,
+  },
+
+  'progress-usage': {
+    component: lazy(() => import('./progress/usage')),
+    source: ProgressUsageSource,
+  },
+  'progress-sizes': {
+    component: lazy(() => import('./progress/sizes')),
+    source: ProgressSizesSource,
+  },
+  'progress-colors': {
+    component: lazy(() => import('./progress/colors')),
+    source: ProgressColorsSource,
+  },
+  'progress-indeterminate': {
+    component: lazy(() => import('./progress/indeterminate')),
+    source: ProgressIndeterminateSource,
+  },
+
+  'meter-usage': { component: lazy(() => import('./meter/usage')), source: MeterUsageSource },
+  'meter-sizes': { component: lazy(() => import('./meter/sizes')), source: MeterSizesSource },
+  'meter-colors': { component: lazy(() => import('./meter/colors')), source: MeterColorsSource },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },
   'badge-variants': {

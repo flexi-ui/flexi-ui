@@ -11,6 +11,7 @@
     "clean": "rm -rf node_modules build .next .source"
   },
   "dependencies": {
+    "@flexi-ui/accordion": "workspace:^",
     "@flexi-ui/alert": "workspace:*",
     "@flexi-ui/avatar": "workspace:*",
     "@flexi-ui/badge": "workspace:*",
@@ -21,7 +22,9 @@
     "@flexi-ui/form": "workspace:*",
     "@flexi-ui/input": "workspace:*",
     "@flexi-ui/link": "workspace:*",
+    "@flexi-ui/meter": "workspace:^",
     "@flexi-ui/popover": "workspace:^",
+    "@flexi-ui/progress": "workspace:^",
     "@flexi-ui/radio": "workspace:^",
     "@flexi-ui/shared-icons": "workspace:*",
     "@flexi-ui/shared-utils": "workspace:*",
