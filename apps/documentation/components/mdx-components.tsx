@@ -8,10 +8,13 @@ import { Divider } from '@flexi-ui/divider'
 import { Form } from '@flexi-ui/form'
 import { Input, TextArea } from '@flexi-ui/input'
 import { Link } from '@flexi-ui/link'
+import { Popover } from '@flexi-ui/popover'
 import { Radio, RadioGroupRoot } from '@flexi-ui/radio'
 import { Skeleton } from '@flexi-ui/skeleton'
 import { Spinner } from '@flexi-ui/spinner'
 import { Switch } from '@flexi-ui/switch'
+import { Tabs } from '@flexi-ui/tabs'
+import { Tooltip } from '@flexi-ui/tooltip'
 import { ComponentPreview } from './ComponentPreview'
 
 export const MDXComponents = {
@@ -31,10 +34,13 @@ export const MDXComponents = {
   Input,
   TextArea,
   Link,
+  Popover,
   Radio,
   RadioGroup: RadioGroupRoot,
   Skeleton,
   Spinner,
   Switch,
+  Tabs,
+  Tooltip,
   ComponentPreview,
 }

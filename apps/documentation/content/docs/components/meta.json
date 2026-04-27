@@ -12,9 +12,12 @@
     "form",
     "input",
     "link",
+    "popover",
     "radio",
     "skeleton",
     "spinner",
-    "switch"
+    "switch",
+    "tabs",
+    "tooltip"
   ]
 }

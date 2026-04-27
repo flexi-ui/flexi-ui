@@ -1,0 +1,88 @@
+---
+title: "Tooltip"
+description: "Hover- and focus-triggered description for an interactive element."
+---
+
+# Tooltip
+
+`Tooltip` shows a short label or hint when a user hovers or focuses an interactive element. It's built on React Aria's `Tooltip`, so the open/close timing, focus tracking, and pointer interactions are handled for you.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/tooltip @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Tooltip } from '@flexi-ui/tooltip'
+```
+
+## Anatomy
+
+```tsx
+<Tooltip>
+  <Trigger />
+  <Tooltip.Content>Tooltip text</Tooltip.Content>
+</Tooltip>
+```
+
+The first child is the trigger (any focusable element — typically a `Button`). `Tooltip.Content` is the floating description.
+
+## Usage
+
+<ComponentPreview name="tooltip-usage" />
+
+## With arrow
+
+Pass `showArrow` on the content to render a small pointer linking the tooltip to its trigger.
+
+<ComponentPreview name="tooltip-with-arrow" />
+
+## Placement
+
+Tooltips position themselves automatically, but you can pin a specific side with `placement` on the content.
+
+<ComponentPreview name="tooltip-placement" />
+
+## Delay
+
+Customize the open/close delay (ms) via the trigger:
+
+```tsx
+<Tooltip delay={300} closeDelay={100}>
+  <Button>Hover</Button>
+  <Tooltip.Content>Quick tip</Tooltip.Content>
+</Tooltip>
+```
+
+## API Reference
+
+### Tooltip (Trigger)
+
+| Prop         | Type      | Default | Description                                            |
+| ------------ | --------- | ------- | ------------------------------------------------------ |
+| `delay`      | `number`  | `1500`  | Time (ms) before the tooltip opens on hover.           |
+| `closeDelay` | `number`  | `500`   | Time (ms) before the tooltip closes on pointer leave.  |
+| `trigger`    | `'focus'` | —       | Set to `'focus'` to disable hover-only triggering.     |
+| `isDisabled` | `boolean` | `false` | Prevents the tooltip from opening at all.              |
+| `isOpen` / `defaultOpen` | `boolean` | —    | Controlled / uncontrolled open state.                  |
+
+Forwards all props of React Aria's `TooltipTrigger`.
+
+### Tooltip.Content
+
+| Prop        | Type                                                            | Default      | Description                                |
+| ----------- | --------------------------------------------------------------- | ------------ | ------------------------------------------ |
+| `placement` | `'top' \| 'right' \| 'bottom' \| 'left'` (and corner variants)  | `'top'`      | Preferred side. Auto-flips if cramped.     |
+| `offset`    | `number`                                                        | —            | Pixel offset from the trigger.             |
+| `showArrow` | `boolean`                                                       | `false`      | Render an arrow pointing at the trigger.   |
+
+Forwards all props of React Aria's `Tooltip`.
+
+## Accessibility
+
+- Renders `role="tooltip"` and links to the trigger via `aria-describedby` automatically.
+- Tooltips open on focus *and* hover, so keyboard users get the same affordance as pointer users.
+- Don't put interactive content inside a tooltip — the floating element disappears on hover-out and isn't reachable via keyboard. Use a `Popover` for that.

@@ -27,6 +27,19 @@ import SwitchSizesSource from './switch/sizes.tsx?raw'
 import SwitchColorsSource from './switch/colors.tsx?raw'
 import SwitchDisabledSource from './switch/disabled.tsx?raw'
 
+import TabsUsageSource from './tabs/usage.tsx?raw'
+import TabsVariantsSource from './tabs/variants.tsx?raw'
+import TabsSizesSource from './tabs/sizes.tsx?raw'
+import TabsDisabledSource from './tabs/disabled.tsx?raw'
+
+import TooltipUsageSource from './tooltip/usage.tsx?raw'
+import TooltipWithArrowSource from './tooltip/with-arrow.tsx?raw'
+import TooltipPlacementSource from './tooltip/placement.tsx?raw'
+
+import PopoverUsageSource from './popover/usage.tsx?raw'
+import PopoverWithArrowSource from './popover/with-arrow.tsx?raw'
+import PopoverSizesSource from './popover/sizes.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -157,6 +170,43 @@ export const demos: Record<string, Demo> = {
   'switch-disabled': {
     component: lazy(() => import('./switch/disabled')),
     source: SwitchDisabledSource,
+  },
+
+  'tabs-usage': { component: lazy(() => import('./tabs/usage')), source: TabsUsageSource },
+  'tabs-variants': {
+    component: lazy(() => import('./tabs/variants')),
+    source: TabsVariantsSource,
+  },
+  'tabs-sizes': { component: lazy(() => import('./tabs/sizes')), source: TabsSizesSource },
+  'tabs-disabled': {
+    component: lazy(() => import('./tabs/disabled')),
+    source: TabsDisabledSource,
+  },
+
+  'tooltip-usage': {
+    component: lazy(() => import('./tooltip/usage')),
+    source: TooltipUsageSource,
+  },
+  'tooltip-with-arrow': {
+    component: lazy(() => import('./tooltip/with-arrow')),
+    source: TooltipWithArrowSource,
+  },
+  'tooltip-placement': {
+    component: lazy(() => import('./tooltip/placement')),
+    source: TooltipPlacementSource,
+  },
+
+  'popover-usage': {
+    component: lazy(() => import('./popover/usage')),
+    source: PopoverUsageSource,
+  },
+  'popover-with-arrow': {
+    component: lazy(() => import('./popover/with-arrow')),
+    source: PopoverWithArrowSource,
+  },
+  'popover-sizes': {
+    component: lazy(() => import('./popover/sizes')),
+    source: PopoverSizesSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },
