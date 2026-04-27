@@ -5,7 +5,7 @@ IMPORTS
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/black.css';
 @import 'fumadocs-ui/css/preset.css';
-@import '@flexi-ui/styles/css';
+@import '@flexi-ui/styles';
 
 /* ============================================================================
    THEME TOKENS

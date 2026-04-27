@@ -206,9 +206,15 @@ importers:
       '@flexi-ui/form':
         specifier: workspace:*
         version: link:../../packages/components/form
+      '@flexi-ui/heading':
+        specifier: workspace:^
+        version: link:../../packages/components/heading
       '@flexi-ui/input':
         specifier: workspace:*
         version: link:../../packages/components/input
+      '@flexi-ui/keyboard':
+        specifier: workspace:^
+        version: link:../../packages/components/keyboard
       '@flexi-ui/link':
         specifier: workspace:*
         version: link:../../packages/components/link
@@ -266,6 +272,9 @@ importers:
       '@flexi-ui/tag-group':
         specifier: workspace:*
         version: link:../../packages/components/tag-group
+      '@flexi-ui/text':
+        specifier: workspace:^
+        version: link:../../packages/components/text
       '@flexi-ui/textarea':
         specifier: workspace:*
         version: link:../../packages/components/textarea

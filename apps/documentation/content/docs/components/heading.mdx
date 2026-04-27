@@ -1,0 +1,58 @@
+---
+title: "Heading"
+description: "Semantic headings (h1–h6) with consistent type scale."
+---
+
+# Heading
+
+`Heading` renders a real `<h1>`–`<h6>` tag with a consistent type ramp. Use it instead of plain `<h{n}>` so styles stay in lockstep with the rest of the system, and so React Aria knows the document hierarchy when wiring `aria-labelledby` for dialogs and other labelled regions.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/heading @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Heading } from '@flexi-ui/heading'
+```
+
+## Usage
+
+<ComponentPreview name="heading-usage" />
+
+## Levels
+
+`level` controls *both* the rendered tag (`h1`–`h6`) and the visual size. Default is `h2`.
+
+<ComponentPreview name="heading-levels" />
+
+## Visual ≠ semantic
+
+Sometimes you need the visual weight of an `h2` but the document structure of an `h3`. Pass both:
+
+```tsx
+<Heading className="text-3xl" level="h3">
+  Looks bigger, semantically h3
+</Heading>
+```
+
+`className` overrides the default size. The `level` controls the tag.
+
+## API Reference
+
+### Heading
+
+| Prop    | Type                                                  | Default | Description                                  |
+| ------- | ----------------------------------------------------- | ------- | -------------------------------------------- |
+| `level` | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'`        | `'h2'`  | Rendered tag and default visual size.        |
+
+Forwards all props of React Aria's `Heading`.
+
+## Accessibility
+
+- Always use a sensible heading sequence — `h1` once per page, then `h2` for sections, `h3` for sub-sections, etc.
+- Don't pick `level` purely for visual size. Screen-reader users rely on the heading hierarchy to navigate.
+- For dialogs, modals, and popovers, pass a `Heading` inside so React Aria can wire `aria-labelledby` automatically.

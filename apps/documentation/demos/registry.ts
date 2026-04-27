@@ -105,6 +105,18 @@ import FileTriggerUsageSource from './file-trigger/usage.tsx?raw'
 import FileTriggerMultipleSource from './file-trigger/multiple.tsx?raw'
 import FileTriggerPreviewSource from './file-trigger/preview.tsx?raw'
 
+import TextUsageSource from './text/usage.tsx?raw'
+import TextSizesSource from './text/sizes.tsx?raw'
+import TextTonesSource from './text/tones.tsx?raw'
+import TextWeightsSource from './text/weights.tsx?raw'
+
+import HeadingUsageSource from './heading/usage.tsx?raw'
+import HeadingLevelsSource from './heading/levels.tsx?raw'
+
+import KeyboardUsageSource from './keyboard/usage.tsx?raw'
+import KeyboardSizesSource from './keyboard/sizes.tsx?raw'
+import KeyboardInButtonSource from './keyboard/in-button.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -451,6 +463,36 @@ export const demos: Record<string, Demo> = {
   'file-trigger-preview': {
     component: lazy(() => import('./file-trigger/preview')),
     source: FileTriggerPreviewSource,
+  },
+
+  'text-usage': { component: lazy(() => import('./text/usage')), source: TextUsageSource },
+  'text-sizes': { component: lazy(() => import('./text/sizes')), source: TextSizesSource },
+  'text-tones': { component: lazy(() => import('./text/tones')), source: TextTonesSource },
+  'text-weights': {
+    component: lazy(() => import('./text/weights')),
+    source: TextWeightsSource,
+  },
+
+  'heading-usage': {
+    component: lazy(() => import('./heading/usage')),
+    source: HeadingUsageSource,
+  },
+  'heading-levels': {
+    component: lazy(() => import('./heading/levels')),
+    source: HeadingLevelsSource,
+  },
+
+  'keyboard-usage': {
+    component: lazy(() => import('./keyboard/usage')),
+    source: KeyboardUsageSource,
+  },
+  'keyboard-sizes': {
+    component: lazy(() => import('./keyboard/sizes')),
+    source: KeyboardSizesSource,
+  },
+  'keyboard-in-button': {
+    component: lazy(() => import('./keyboard/in-button')),
+    source: KeyboardInButtonSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

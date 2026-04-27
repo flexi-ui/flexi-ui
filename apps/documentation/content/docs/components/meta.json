@@ -14,7 +14,9 @@
     "divider",
     "file-trigger",
     "form",
+    "heading",
     "input",
+    "keyboard",
     "link",
     "menu",
     "meter",
@@ -31,6 +33,7 @@
     "switch",
     "tabs",
     "tag-group",
+    "text",
     "textarea",
     "toggle-button",
     "tooltip"

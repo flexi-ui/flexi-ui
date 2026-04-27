@@ -10,7 +10,9 @@ import { ComboBox } from '@flexi-ui/combo-box'
 import { Divider } from '@flexi-ui/divider'
 import { FileTrigger } from '@flexi-ui/file-trigger'
 import { Form } from '@flexi-ui/form'
+import { Heading } from '@flexi-ui/heading'
 import { Input, TextArea } from '@flexi-ui/input'
+import { Keyboard } from '@flexi-ui/keyboard'
 import { Link } from '@flexi-ui/link'
 import { Menu } from '@flexi-ui/menu'
 import { Meter } from '@flexi-ui/meter'
@@ -27,6 +29,7 @@ import { Spinner } from '@flexi-ui/spinner'
 import { Switch } from '@flexi-ui/switch'
 import { Tabs } from '@flexi-ui/tabs'
 import { TagGroup } from '@flexi-ui/tag-group'
+import { Text } from '@flexi-ui/text'
 import { Textarea } from '@flexi-ui/textarea'
 import { ToggleButton } from '@flexi-ui/toggle-button'
 import { Tooltip } from '@flexi-ui/tooltip'
@@ -50,8 +53,10 @@ export const MDXComponents = {
   Divider,
   FileTrigger,
   Form,
+  Heading,
   Input,
   TextArea,
+  Keyboard,
   Link,
   Menu,
   Meter,
@@ -69,6 +74,7 @@ export const MDXComponents = {
   Switch,
   Tabs,
   TagGroup,
+  Text,
   Textarea,
   ToggleButton,
   Tooltip,

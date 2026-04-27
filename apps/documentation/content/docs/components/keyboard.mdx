@@ -1,0 +1,62 @@
+---
+title: "Keyboard"
+description: "Inline keyboard-shortcut indicator rendered as a styled <kbd>."
+---
+
+# Keyboard
+
+`Keyboard` is a styled `<kbd>` element for marking up keyboard shortcuts inline with prose, in tooltips, or alongside menu items. It signals "this is a key the user can press."
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/keyboard @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Keyboard } from '@flexi-ui/keyboard'
+```
+
+## Usage
+
+<ComponentPreview name="keyboard-usage" />
+
+## Sizes
+
+<ComponentPreview name="keyboard-sizes" />
+
+## Inside a button or menu
+
+A common pattern is showing the shortcut next to the action that triggers it.
+
+<ComponentPreview name="keyboard-in-button" />
+
+## Multi-key shortcuts
+
+Render each key in its own `Keyboard` so they're individually styled. Separators (`+`, `then`) can be plain text:
+
+```tsx
+<>
+  <Keyboard>⌘</Keyboard>
+  <Keyboard>K</Keyboard>{' '}then{' '}
+  <Keyboard>P</Keyboard>
+</>
+```
+
+## API Reference
+
+### Keyboard
+
+| Prop   | Type                              | Default | Description    |
+| ------ | --------------------------------- | ------- | -------------- |
+| `size` | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.   |
+
+Forwards all props of React Aria's `Keyboard` (which renders `<kbd>`).
+
+## Accessibility
+
+- Renders a real `<kbd>` element, so assistive tech announces it as keyboard input.
+- For platform-specific shortcuts, use the appropriate symbol (⌘ on macOS, Ctrl on Windows). The `useIsPlatformMac` hook from `@flexi-ui/use-*` (or your own user-agent check) can drive the rendering.
+- Pair shortcut indicators with the action they trigger — never put a `Keyboard` somewhere the user can't act on the shortcut.
