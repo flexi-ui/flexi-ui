@@ -1,0 +1,68 @@
+---
+title: "Search Field"
+description: "Specialised text input with a built-in clear button and search semantics."
+---
+
+# Search Field
+
+`SearchField` is a text input dedicated to search queries. It includes a magnifier icon, a clear button that appears once the field has content, and the right `type="search"` semantics so browsers and password managers treat it as a search.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/search-field @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { SearchField } from '@flexi-ui/search-field'
+```
+
+## Usage
+
+<ComponentPreview name="search-field-usage" />
+
+## Sizes
+
+<ComponentPreview name="search-field-sizes" />
+
+## Controlled
+
+Drive the field externally for live filtering. Pressing the clear button calls `onChange('')` so your filter resets instantly.
+
+<ComponentPreview name="search-field-controlled" />
+
+## Submit
+
+`SearchField` fires `onSubmit` when Enter is pressed, with the current text value. Use it to dispatch the search:
+
+```tsx
+<SearchField
+  label="Find issues"
+  onSubmit={(value) => router.push(`/search?q=${encodeURIComponent(value)}`)}
+/>
+```
+
+## API Reference
+
+### SearchField
+
+| Prop          | Type                              | Default | Description                                          |
+| ------------- | --------------------------------- | ------- | ---------------------------------------------------- |
+| `value` / `defaultValue` | `string`               | —       | Controlled / uncontrolled value.                     |
+| `onChange`    | `(value: string) => void`         | —       | Fires on every keystroke (and on clear).             |
+| `onSubmit`    | `(value: string) => void`         | —       | Fires when the user presses Enter.                   |
+| `onClear`     | `() => void`                      | —       | Fires when the clear button is pressed.              |
+| `size`        | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                                         |
+| `label`       | `string`                          | —       | Visible label rendered above the field.              |
+| `placeholder` | `string`                          | —       | Native placeholder text.                             |
+| `isDisabled`  | `boolean`                         | `false` | Disables the field.                                  |
+
+Forwards all props of React Aria's `SearchField`.
+
+## Accessibility
+
+- Renders an `<input type="search">` so screen readers announce it as a search field and password managers skip it.
+- The clear button has `aria-label="Clear"` and is hidden until there's content to clear, which keeps the tab order tidy.
+- Pair with `aria-controls` pointing at your results list when you want assistive tech to follow the search → results relationship.

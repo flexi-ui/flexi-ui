@@ -53,6 +53,20 @@ import MeterUsageSource from './meter/usage.tsx?raw'
 import MeterSizesSource from './meter/sizes.tsx?raw'
 import MeterColorsSource from './meter/colors.tsx?raw'
 
+import SelectUsageSource from './select/usage.tsx?raw'
+import SelectSizesSource from './select/sizes.tsx?raw'
+import SelectDisabledOptionSource from './select/disabled-option.tsx?raw'
+import SelectDisabledSource from './select/disabled.tsx?raw'
+
+import SliderUsageSource from './slider/usage.tsx?raw'
+import SliderSizesSource from './slider/sizes.tsx?raw'
+import SliderColorsSource from './slider/colors.tsx?raw'
+import SliderRangeSource from './slider/range.tsx?raw'
+
+import SearchFieldUsageSource from './search-field/usage.tsx?raw'
+import SearchFieldSizesSource from './search-field/sizes.tsx?raw'
+import SearchFieldControlledSource from './search-field/controlled.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -255,6 +269,38 @@ export const demos: Record<string, Demo> = {
   'meter-usage': { component: lazy(() => import('./meter/usage')), source: MeterUsageSource },
   'meter-sizes': { component: lazy(() => import('./meter/sizes')), source: MeterSizesSource },
   'meter-colors': { component: lazy(() => import('./meter/colors')), source: MeterColorsSource },
+
+  'select-usage': { component: lazy(() => import('./select/usage')), source: SelectUsageSource },
+  'select-sizes': { component: lazy(() => import('./select/sizes')), source: SelectSizesSource },
+  'select-disabled-option': {
+    component: lazy(() => import('./select/disabled-option')),
+    source: SelectDisabledOptionSource,
+  },
+  'select-disabled': {
+    component: lazy(() => import('./select/disabled')),
+    source: SelectDisabledSource,
+  },
+
+  'slider-usage': { component: lazy(() => import('./slider/usage')), source: SliderUsageSource },
+  'slider-sizes': { component: lazy(() => import('./slider/sizes')), source: SliderSizesSource },
+  'slider-colors': {
+    component: lazy(() => import('./slider/colors')),
+    source: SliderColorsSource,
+  },
+  'slider-range': { component: lazy(() => import('./slider/range')), source: SliderRangeSource },
+
+  'search-field-usage': {
+    component: lazy(() => import('./search-field/usage')),
+    source: SearchFieldUsageSource,
+  },
+  'search-field-sizes': {
+    component: lazy(() => import('./search-field/sizes')),
+    source: SearchFieldSizesSource,
+  },
+  'search-field-controlled': {
+    component: lazy(() => import('./search-field/controlled')),
+    source: SearchFieldControlledSource,
+  },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },
   'badge-variants': {

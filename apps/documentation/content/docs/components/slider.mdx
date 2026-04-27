@@ -1,0 +1,87 @@
+---
+title: "Slider"
+description: "Single-value slider with label, output, sizes, and semantic colors."
+---
+
+# Slider
+
+`Slider` is a draggable thumb on a track for picking a numeric value. It's built on React Aria's `Slider` primitive — keyboard arrow stepping, touch support, and proper ARIA value attributes are all handled for you.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/slider @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Slider } from '@flexi-ui/slider'
+```
+
+## Usage
+
+<ComponentPreview name="slider-usage" />
+
+## Sizes
+
+<ComponentPreview name="slider-sizes" />
+
+## Colors
+
+<ComponentPreview name="slider-colors" />
+
+## Custom range and step
+
+The defaults are `0–100` step `1`. Override `minValue` / `maxValue` / `step` for any other range:
+
+<ComponentPreview name="slider-range" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Slider } from '@flexi-ui/slider'
+
+export function VolumeSlider() {
+  const [value, setValue] = useState(50)
+
+  return (
+    <Slider
+      label="Volume"
+      onChange={(v) => setValue(v as number)}
+      showOutput
+      value={value}
+    />
+  )
+}
+```
+
+## API Reference
+
+### Slider
+
+| Prop         | Type                                              | Default    | Description                                    |
+| ------------ | ------------------------------------------------- | ---------- | ---------------------------------------------- |
+| `value` / `defaultValue` | `number`                              | —          | Controlled / uncontrolled value.               |
+| `minValue`   | `number`                                          | `0`        | Lower bound.                                   |
+| `maxValue`   | `number`                                          | `100`      | Upper bound.                                   |
+| `step`       | `number`                                          | `1`        | Increment per arrow keypress / drag tick.      |
+| `size`       | `'sm' \| 'md' \| 'lg'`                            | `'md'`     | Visual size.                                   |
+| `color`      | `'accent' \| 'success' \| 'warning' \| 'danger'`  | `'accent'` | Track + thumb color.                           |
+| `label`      | `string`                                          | —          | Visible label rendered above the track.        |
+| `showOutput` | `boolean`                                         | `false`    | Render the current value next to the label.    |
+| `onChange`   | `(value: number) => void`                         | —          | Fires while dragging.                          |
+| `onChangeEnd`| `(value: number) => void`                         | —          | Fires when the user releases the thumb.        |
+| `isDisabled` | `boolean`                                         | `false`    | Disables interaction.                          |
+| `orientation`| `'horizontal' \| 'vertical'`                      | `'horizontal'` | Layout direction.                          |
+
+Forwards all props of React Aria's `Slider`.
+
+## Accessibility
+
+- The thumb has `role="slider"` with `aria-valuenow` / `aria-valuemin` / `aria-valuemax` set automatically.
+- Arrow keys step by `step`; PageUp/PageDown step by 10× `step`; Home/End jump to bounds.
+- Set `label` (or pass `aria-label`) so the slider has an accessible name — never ship a label-less slider.

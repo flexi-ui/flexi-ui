@@ -215,6 +215,12 @@ importers:
       '@flexi-ui/radio':
         specifier: workspace:^
         version: link:../../packages/components/radio
+      '@flexi-ui/search-field':
+        specifier: workspace:^
+        version: link:../../packages/components/search-field
+      '@flexi-ui/select':
+        specifier: workspace:^
+        version: link:../../packages/components/select
       '@flexi-ui/shared-icons':
         specifier: workspace:*
         version: link:../../packages/utilities/shared-icons
@@ -224,6 +230,9 @@ importers:
       '@flexi-ui/skeleton':
         specifier: workspace:*
         version: link:../../packages/components/skeleton
+      '@flexi-ui/slider':
+        specifier: workspace:^
+        version: link:../../packages/components/slider
       '@flexi-ui/spinner':
         specifier: workspace:*
         version: link:../../packages/components/spinner
