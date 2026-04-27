@@ -185,6 +185,9 @@ importers:
       '@flexi-ui/card':
         specifier: workspace:*
         version: link:../../packages/components/card
+      '@flexi-ui/checkbox':
+        specifier: workspace:^
+        version: link:../../packages/components/checkbox
       '@flexi-ui/divider':
         specifier: workspace:*
         version: link:../../packages/components/divider
@@ -197,6 +200,9 @@ importers:
       '@flexi-ui/link':
         specifier: workspace:*
         version: link:../../packages/components/link
+      '@flexi-ui/radio':
+        specifier: workspace:^
+        version: link:../../packages/components/radio
       '@flexi-ui/shared-icons':
         specifier: workspace:*
         version: link:../../packages/utilities/shared-icons
@@ -212,6 +218,9 @@ importers:
       '@flexi-ui/styles':
         specifier: workspace:*
         version: link:../../packages/styles
+      '@flexi-ui/switch':
+        specifier: workspace:^
+        version: link:../../packages/components/switch
       '@iconify-json/gravity-ui':
         specifier: ^1.2.12
         version: 1.2.12

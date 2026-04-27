@@ -11,6 +11,22 @@ import AvatarBorderedSource from './avatar/bordered.tsx?raw'
 import AvatarInitialsSource from './avatar/initials.tsx?raw'
 import AvatarFallbackSource from './avatar/fallback.tsx?raw'
 
+import CheckboxUsageSource from './checkbox/usage.tsx?raw'
+import CheckboxSizesSource from './checkbox/sizes.tsx?raw'
+import CheckboxColorsSource from './checkbox/colors.tsx?raw'
+import CheckboxGroupSource from './checkbox/group.tsx?raw'
+import CheckboxDisabledSource from './checkbox/disabled.tsx?raw'
+
+import RadioUsageSource from './radio/usage.tsx?raw'
+import RadioSizesSource from './radio/sizes.tsx?raw'
+import RadioColorsSource from './radio/colors.tsx?raw'
+import RadioOrientationSource from './radio/orientation.tsx?raw'
+
+import SwitchUsageSource from './switch/usage.tsx?raw'
+import SwitchSizesSource from './switch/sizes.tsx?raw'
+import SwitchColorsSource from './switch/colors.tsx?raw'
+import SwitchDisabledSource from './switch/disabled.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -101,6 +117,46 @@ export const demos: Record<string, Demo> = {
   'avatar-fallback': {
     component: lazy(() => import('./avatar/fallback')),
     source: AvatarFallbackSource,
+  },
+
+  'checkbox-usage': {
+    component: lazy(() => import('./checkbox/usage')),
+    source: CheckboxUsageSource,
+  },
+  'checkbox-sizes': {
+    component: lazy(() => import('./checkbox/sizes')),
+    source: CheckboxSizesSource,
+  },
+  'checkbox-colors': {
+    component: lazy(() => import('./checkbox/colors')),
+    source: CheckboxColorsSource,
+  },
+  'checkbox-group': {
+    component: lazy(() => import('./checkbox/group')),
+    source: CheckboxGroupSource,
+  },
+  'checkbox-disabled': {
+    component: lazy(() => import('./checkbox/disabled')),
+    source: CheckboxDisabledSource,
+  },
+
+  'radio-usage': { component: lazy(() => import('./radio/usage')), source: RadioUsageSource },
+  'radio-sizes': { component: lazy(() => import('./radio/sizes')), source: RadioSizesSource },
+  'radio-colors': { component: lazy(() => import('./radio/colors')), source: RadioColorsSource },
+  'radio-orientation': {
+    component: lazy(() => import('./radio/orientation')),
+    source: RadioOrientationSource,
+  },
+
+  'switch-usage': { component: lazy(() => import('./switch/usage')), source: SwitchUsageSource },
+  'switch-sizes': { component: lazy(() => import('./switch/sizes')), source: SwitchSizesSource },
+  'switch-colors': {
+    component: lazy(() => import('./switch/colors')),
+    source: SwitchColorsSource,
+  },
+  'switch-disabled': {
+    component: lazy(() => import('./switch/disabled')),
+    source: SwitchDisabledSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

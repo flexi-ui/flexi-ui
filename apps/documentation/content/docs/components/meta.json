@@ -2,10 +2,19 @@
   "title": "Components",
   "defaultOpen": true,
   "pages": [
+    "alert",
+    "avatar",
+    "badge",
     "button",
+    "card",
+    "checkbox",
+    "divider",
     "form",
     "input",
     "link",
-    "spinner"
+    "radio",
+    "skeleton",
+    "spinner",
+    "switch"
   ]
 }

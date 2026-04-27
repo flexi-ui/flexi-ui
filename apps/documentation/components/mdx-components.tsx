@@ -3,12 +3,15 @@ import { Avatar } from '@flexi-ui/avatar'
 import { Badge } from '@flexi-ui/badge'
 import { Button, ButtonGroup } from '@flexi-ui/button'
 import { Card } from '@flexi-ui/card'
+import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
 import { Divider } from '@flexi-ui/divider'
 import { Form } from '@flexi-ui/form'
 import { Input, TextArea } from '@flexi-ui/input'
 import { Link } from '@flexi-ui/link'
+import { Radio, RadioGroupRoot } from '@flexi-ui/radio'
 import { Skeleton } from '@flexi-ui/skeleton'
 import { Spinner } from '@flexi-ui/spinner'
+import { Switch } from '@flexi-ui/switch'
 import { ComponentPreview } from './ComponentPreview'
 
 export const MDXComponents = {
@@ -21,12 +24,17 @@ export const MDXComponents = {
   CardHeader: Card.Header,
   CardBody: Card.Body,
   CardFooter: Card.Footer,
+  Checkbox,
+  CheckboxGroup: CheckboxGroupRoot,
   Divider,
   Form,
   Input,
   TextArea,
   Link,
+  Radio,
+  RadioGroup: RadioGroupRoot,
   Skeleton,
   Spinner,
+  Switch,
   ComponentPreview,
 }

@@ -1,0 +1,94 @@
+---
+title: "Radio"
+description: "Mutually exclusive selection within a RadioGroup, with sizes, colors, and orientation."
+---
+
+# Radio
+
+`Radio` is a single option inside a `RadioGroup`. Selecting one deselects the rest. Use radios when the user picks exactly one option from a small, finite list — for larger lists prefer `Select` or `ComboBox`.
+
+Both components are built on React Aria Components' `RadioGroup` and `Radio`, so keyboard navigation and form integration are handled by the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/radio @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Radio, RadioGroup } from '@flexi-ui/radio'
+```
+
+## Usage
+
+<ComponentPreview name="radio-usage" />
+
+## Sizes
+
+<ComponentPreview name="radio-sizes" />
+
+## Colors
+
+Color applies to each option's selected dot.
+
+<ComponentPreview name="radio-colors" />
+
+## Orientation
+
+Pass `orientation="horizontal"` on the group for inline lists. The default is vertical.
+
+<ComponentPreview name="radio-orientation" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Radio, RadioGroup } from '@flexi-ui/radio'
+
+export function ShippingPicker() {
+  const [value, setValue] = useState('standard')
+
+  return (
+    <RadioGroup value={value} onChange={setValue}>
+      <Radio value="standard">Standard</Radio>
+      <Radio value="express">Express</Radio>
+      <Radio value="overnight">Overnight</Radio>
+    </RadioGroup>
+  )
+}
+```
+
+## API Reference
+
+### RadioGroup
+
+| Prop          | Type                              | Default      | Description                                    |
+| ------------- | --------------------------------- | ------------ | ---------------------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'`      | `'vertical'` | Layout direction.                              |
+| `value` / `defaultValue` | `string`               | —            | Currently selected option's `value`.           |
+| `onChange`    | `(value: string) => void`         | —            | Fires when the selection changes.              |
+| `isDisabled`  | `boolean`                         | `false`      | Disables every option.                         |
+| `isInvalid`   | `boolean`                         | `false`      | Renders the group in an error state.           |
+
+Forwards every other prop of React Aria's `RadioGroup` — `label`, `description`, `errorMessage`, `name`.
+
+### Radio
+
+| Prop         | Type                                              | Default    | Description                                |
+| ------------ | ------------------------------------------------- | ---------- | ------------------------------------------ |
+| `value`      | `string`                                          | —          | Required. The value reported when selected.|
+| `size`       | `'sm' \| 'md' \| 'lg'`                            | `'md'`     | Visual size.                               |
+| `color`      | `'accent' \| 'success' \| 'warning' \| 'danger'`  | `'accent'` | Selected-dot tint.                         |
+| `isDisabled` | `boolean`                                         | `false`    | Disables this option only.                 |
+
+Forwards every other prop of React Aria's `Radio`.
+
+## Accessibility
+
+- Renders a `radiogroup` role with each option as `role="radio"`. Arrow keys move between options and roving focus stays inside the group.
+- The selected option's `aria-checked="true"` is updated automatically.
+- Always wrap radios in a `RadioGroup` — a lone radio is semantically invalid.
