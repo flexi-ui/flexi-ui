@@ -11,9 +11,11 @@
     "card",
     "checkbox",
     "combo-box",
+    "disclosure",
     "divider",
     "file-trigger",
     "form",
+    "group",
     "heading",
     "input",
     "keyboard",
@@ -36,6 +38,7 @@
     "text",
     "textarea",
     "toggle-button",
-    "tooltip"
+    "tooltip",
+    "visually-hidden"
   ]
 }

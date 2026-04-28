@@ -117,6 +117,16 @@ import KeyboardUsageSource from './keyboard/usage.tsx?raw'
 import KeyboardSizesSource from './keyboard/sizes.tsx?raw'
 import KeyboardInButtonSource from './keyboard/in-button.tsx?raw'
 
+import VisuallyHiddenUsageSource from './visually-hidden/usage.tsx?raw'
+import VisuallyHiddenSkipLinkSource from './visually-hidden/skip-link.tsx?raw'
+
+import GroupUsageSource from './group/usage.tsx?raw'
+import GroupOrientationSource from './group/orientation.tsx?raw'
+
+import DisclosureUsageSource from './disclosure/usage.tsx?raw'
+import DisclosureGroupSource from './disclosure/group.tsx?raw'
+import DisclosureControlledSource from './disclosure/controlled.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -493,6 +503,34 @@ export const demos: Record<string, Demo> = {
   'keyboard-in-button': {
     component: lazy(() => import('./keyboard/in-button')),
     source: KeyboardInButtonSource,
+  },
+
+  'visually-hidden-usage': {
+    component: lazy(() => import('./visually-hidden/usage')),
+    source: VisuallyHiddenUsageSource,
+  },
+  'visually-hidden-skip-link': {
+    component: lazy(() => import('./visually-hidden/skip-link')),
+    source: VisuallyHiddenSkipLinkSource,
+  },
+
+  'group-usage': { component: lazy(() => import('./group/usage')), source: GroupUsageSource },
+  'group-orientation': {
+    component: lazy(() => import('./group/orientation')),
+    source: GroupOrientationSource,
+  },
+
+  'disclosure-usage': {
+    component: lazy(() => import('./disclosure/usage')),
+    source: DisclosureUsageSource,
+  },
+  'disclosure-group': {
+    component: lazy(() => import('./disclosure/group')),
+    source: DisclosureGroupSource,
+  },
+  'disclosure-controlled': {
+    component: lazy(() => import('./disclosure/controlled')),
+    source: DisclosureControlledSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

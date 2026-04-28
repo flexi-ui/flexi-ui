@@ -7,9 +7,11 @@ import { Button, ButtonGroup } from '@flexi-ui/button'
 import { Card } from '@flexi-ui/card'
 import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
 import { ComboBox } from '@flexi-ui/combo-box'
+import { Disclosure } from '@flexi-ui/disclosure'
 import { Divider } from '@flexi-ui/divider'
 import { FileTrigger } from '@flexi-ui/file-trigger'
 import { Form } from '@flexi-ui/form'
+import { Group } from '@flexi-ui/group'
 import { Heading } from '@flexi-ui/heading'
 import { Input, TextArea } from '@flexi-ui/input'
 import { Keyboard } from '@flexi-ui/keyboard'
@@ -33,6 +35,7 @@ import { Text } from '@flexi-ui/text'
 import { Textarea } from '@flexi-ui/textarea'
 import { ToggleButton } from '@flexi-ui/toggle-button'
 import { Tooltip } from '@flexi-ui/tooltip'
+import { VisuallyHidden } from '@flexi-ui/visually-hidden'
 import { ComponentPreview } from './ComponentPreview'
 
 export const MDXComponents = {
@@ -50,9 +53,11 @@ export const MDXComponents = {
   Checkbox,
   CheckboxGroup: CheckboxGroupRoot,
   ComboBox,
+  Disclosure,
   Divider,
   FileTrigger,
   Form,
+  Group,
   Heading,
   Input,
   TextArea,
@@ -78,5 +83,6 @@ export const MDXComponents = {
   Textarea,
   ToggleButton,
   Tooltip,
+  VisuallyHidden,
   ComponentPreview,
 }

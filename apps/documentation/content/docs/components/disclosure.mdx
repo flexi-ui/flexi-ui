@@ -1,0 +1,94 @@
+---
+title: "Disclosure"
+description: "Single expandable region — the building block behind Accordion."
+---
+
+# Disclosure
+
+`Disclosure` is a single expandable region with a heading-style trigger and a panel. Use it for "Show more" patterns, optional details inside a form, or anywhere a single section needs to collapse independently. For a *list* of expandable sections, reach for [`Accordion`](/docs/components/accordion) — it's a thin wrapper around `Disclosure.Group`.
+
+Built on React Aria's `Disclosure` + `DisclosureGroup`, so keyboard handling and ARIA wiring come from the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/disclosure @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Disclosure } from '@flexi-ui/disclosure'
+```
+
+## Anatomy
+
+```tsx
+<Disclosure>
+  <Disclosure.Trigger />
+  <Disclosure.Panel />
+</Disclosure>
+```
+
+| Part                  | Element  | Purpose                                     |
+| --------------------- | -------- | ------------------------------------------- |
+| `Disclosure`          | `div`    | Root with the heading + panel.              |
+| `Disclosure.Trigger`  | `button` | Heading-wrapped button. Renders the caret.  |
+| `Disclosure.Panel`    | `div`    | Collapsible content region.                 |
+| `Disclosure.Group`    | `div`    | Wraps multiple `Disclosure`s.               |
+
+## Usage
+
+<ComponentPreview name="disclosure-usage" />
+
+## Group
+
+Wrap several `Disclosure`s in `Disclosure.Group` for an accordion-like layout. The group supports `expandedKeys` / `defaultExpandedKeys` and `allowsMultipleExpanded` just like `Accordion`.
+
+<ComponentPreview name="disclosure-group" />
+
+## Controlled
+
+Drive the expansion state externally for shortcuts, programmatic open/close, or sync with URL state.
+
+<ComponentPreview name="disclosure-controlled" />
+
+## API Reference
+
+### Disclosure (Root)
+
+| Prop                                  | Type                              | Default | Description                          |
+| ------------------------------------- | --------------------------------- | ------- | ------------------------------------ |
+| `id`                                  | `string`                          | —       | Required when used inside a `Group`. |
+| `isExpanded` / `defaultExpanded`      | `boolean`                         | —       | Controlled / uncontrolled state.     |
+| `onExpandedChange`                    | `(expanded: boolean) => void`     | —       | Fires when the panel toggles.        |
+| `isDisabled`                          | `boolean`                         | `false` | Disables the trigger.                |
+
+Forwards all props of React Aria's `Disclosure`.
+
+### Disclosure.Group
+
+| Prop                                       | Type                              | Default | Description                              |
+| ------------------------------------------ | --------------------------------- | ------- | ---------------------------------------- |
+| `size`                                     | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size for child triggers.          |
+| `expandedKeys` / `defaultExpandedKeys`     | `Iterable<Key>`                   | —       | Currently expanded item ids.             |
+| `onExpandedChange`                         | `(keys: Set<Key>) => void`        | —       | Fires when the expansion set changes.    |
+| `allowsMultipleExpanded`                   | `boolean`                         | `false` | Permit more than one open at a time.     |
+| `isDisabled`                               | `boolean`                         | `false` | Disables every child.                    |
+
+Forwards all props of React Aria's `DisclosureGroup`.
+
+## Disclosure vs Accordion
+
+| Use case                                      | Reach for     |
+| --------------------------------------------- | ------------- |
+| One collapsible section in a layout           | `Disclosure`  |
+| A list of FAQ-style sections                  | `Accordion`   |
+
+`Accordion` is just `Disclosure.Group` with a configured variant. If you need fine-grained control over individual `Disclosure`s, drop down to this primitive.
+
+## Accessibility
+
+- The trigger is wrapped in a real heading element, so screen readers announce the section's role in the document.
+- `aria-expanded` and `aria-controls` link the trigger and panel.
+- Inside a `Group`, arrow keys move focus between triggers.

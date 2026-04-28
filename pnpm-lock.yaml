@@ -197,6 +197,9 @@ importers:
       '@flexi-ui/combo-box':
         specifier: workspace:^
         version: link:../../packages/components/combo-box
+      '@flexi-ui/disclosure':
+        specifier: workspace:^
+        version: link:../../packages/components/disclosure
       '@flexi-ui/divider':
         specifier: workspace:*
         version: link:../../packages/components/divider
@@ -206,6 +209,9 @@ importers:
       '@flexi-ui/form':
         specifier: workspace:*
         version: link:../../packages/components/form
+      '@flexi-ui/group':
+        specifier: workspace:^
+        version: link:../../packages/components/group
       '@flexi-ui/heading':
         specifier: workspace:^
         version: link:../../packages/components/heading
@@ -284,6 +290,9 @@ importers:
       '@flexi-ui/tooltip':
         specifier: workspace:^
         version: link:../../packages/components/tooltip
+      '@flexi-ui/visually-hidden':
+        specifier: workspace:^
+        version: link:../../packages/components/visually-hidden
       '@iconify-json/gravity-ui':
         specifier: ^1.2.12
         version: 1.2.12
