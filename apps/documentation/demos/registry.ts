@@ -189,6 +189,13 @@ import ListBoxSectionsSource from './list-box/sections.tsx?raw'
 import GridListUsageSource from './grid-list/usage.tsx?raw'
 import GridListMultipleSource from './grid-list/multiple.tsx?raw'
 
+import TableUsageSource from './table/usage.tsx?raw'
+import TableSelectionSource from './table/selection.tsx?raw'
+
+import TreeUsageSource from './tree/usage.tsx?raw'
+
+import ToastUsageSource from './toast/usage.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -776,6 +783,16 @@ export const demos: Record<string, Demo> = {
     component: lazy(() => import('./grid-list/multiple')),
     source: GridListMultipleSource,
   },
+
+  'table-usage': { component: lazy(() => import('./table/usage')), source: TableUsageSource },
+  'table-selection': {
+    component: lazy(() => import('./table/selection')),
+    source: TableSelectionSource,
+  },
+
+  'tree-usage': { component: lazy(() => import('./tree/usage')), source: TreeUsageSource },
+
+  'toast-usage': { component: lazy(() => import('./toast/usage')), source: ToastUsageSource },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },
   'badge-variants': {

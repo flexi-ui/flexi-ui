@@ -1,0 +1,133 @@
+---
+title: "Table"
+description: "Tabular data with row selection, sortable columns, and multi-column rows."
+---
+
+# Table
+
+`Table` is the right component for tabular data — multiple columns per row, sortable headers, optional row selection. Built on React Aria's `Table`. Each cell is independently focusable so users can copy values, expand actions, or activate inline controls.
+
+For a simple list (one piece of content per row), use [`ListBox`](/docs/components/list-box) or [`GridList`](/docs/components/grid-list).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/table @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Table } from '@flexi-ui/table'
+```
+
+## Anatomy
+
+```tsx
+<Table>
+  <Table.Header>
+    <Table.Column isRowHeader>Name</Table.Column>
+    <Table.Column>Role</Table.Column>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell />
+      <Table.Cell />
+    </Table.Row>
+  </Table.Body>
+</Table>
+```
+
+| Part            | Element  | Purpose                                       |
+| --------------- | -------- | --------------------------------------------- |
+| `Table`         | `table`  | Root with selection + sort state.             |
+| `Table.Header`  | `thead`  | Row of column definitions.                    |
+| `Table.Column`  | `th`     | Column. `isRowHeader` makes it the row header.|
+| `Table.Body`    | `tbody`  | Container for rows.                           |
+| `Table.Row`     | `tr`     | A single row.                                 |
+| `Table.Cell`    | `td`     | A cell within a row.                          |
+
+## Usage
+
+<ComponentPreview name="table-usage" />
+
+## Selection
+
+Pass `selectionMode="single"` or `"multiple"` to make rows selectable. Each `Table.Row` needs an `id`.
+
+<ComponentPreview name="table-selection" />
+
+## Sorting
+
+`Table` accepts `sortDescriptor` + `onSortChange` to drive header-based sorting. Each `Table.Column` opts in with `allowsSorting`:
+
+```tsx
+'use client'
+
+import { Table } from '@flexi-ui/table'
+import type { SortDescriptor } from 'react-aria-components'
+import { useState, useMemo } from 'react'
+
+const data = [
+  { id: 'a', name: 'Alex', role: 'Owner' },
+  { id: 'b', name: 'Jamie', role: 'Editor' },
+  { id: 'c', name: 'Sam', role: 'Viewer' },
+]
+
+export function SortableTable() {
+  const [sort, setSort] = useState<SortDescriptor>({ column: 'name', direction: 'ascending' })
+  const sorted = useMemo(() => {
+    const sorted = [...data].sort((a, b) =>
+      String(a[sort.column as keyof typeof a]).localeCompare(String(b[sort.column as keyof typeof b])),
+    )
+    return sort.direction === 'descending' ? sorted.reverse() : sorted
+  }, [sort])
+
+  return (
+    <Table aria-label="Members" sortDescriptor={sort} onSortChange={setSort}>
+      <Table.Header>
+        <Table.Column id="name" isRowHeader allowsSorting>Name</Table.Column>
+        <Table.Column id="role" allowsSorting>Role</Table.Column>
+      </Table.Header>
+      <Table.Body>
+        {sorted.map((row) => (
+          <Table.Row key={row.id} id={row.id}>
+            <Table.Cell>{row.name}</Table.Cell>
+            <Table.Cell>{row.role}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  )
+}
+```
+
+## API Reference
+
+### Table
+
+| Prop                                      | Type                              | Default | Description                                |
+| ----------------------------------------- | --------------------------------- | ------- | ------------------------------------------ |
+| `size`                                    | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                               |
+| `selectionMode`                           | `'none' \| 'single' \| 'multiple'`| `'none'`| Selection behavior.                        |
+| `selectedKeys` / `defaultSelectedKeys`    | `Iterable<Key>`                   | —       | Currently selected rows.                   |
+| `onSelectionChange`                       | `(keys: Set<Key>) => void`        | —       | Fires when the selection changes.          |
+| `sortDescriptor`                          | `SortDescriptor`                  | —       | Current sort state.                        |
+| `onSortChange`                            | `(d: SortDescriptor) => void`     | —       | Fires when the user clicks a sortable header. |
+
+Forwards all props of React Aria's `Table`.
+
+### Table.Column
+
+| Prop            | Type      | Default | Description                                |
+| --------------- | --------- | ------- | ------------------------------------------ |
+| `id`            | `Key`     | —       | Required when sorting; matches `sortDescriptor.column`. |
+| `isRowHeader`   | `boolean` | `false` | Marks this column as the row's accessible name. |
+| `allowsSorting` | `boolean` | `false` | Render the header as a clickable sort trigger. |
+
+## Accessibility
+
+- Renders proper `<table>` semantics — screen readers announce row × column headers when navigating cells.
+- Arrow keys move between cells; Tab into a cell enters its inner interactive content; Tab out leaves the row.
+- Always pass `aria-label` (or `aria-labelledby`) so the table has an accessible name.
+- For selectable tables, the selection column is rendered automatically as a checkbox column.

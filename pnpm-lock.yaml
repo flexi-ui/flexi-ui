@@ -329,6 +329,9 @@ importers:
       '@flexi-ui/switch':
         specifier: workspace:^
         version: link:../../packages/components/switch
+      '@flexi-ui/table':
+        specifier: workspace:^
+        version: link:../../packages/components/table
       '@flexi-ui/tabs':
         specifier: workspace:^
         version: link:../../packages/components/tabs
@@ -344,6 +347,9 @@ importers:
       '@flexi-ui/time-field':
         specifier: workspace:^
         version: link:../../packages/components/time-field
+      '@flexi-ui/toast':
+        specifier: workspace:^
+        version: link:../../packages/components/toast
       '@flexi-ui/toggle-button':
         specifier: workspace:*
         version: link:../../packages/components/toggle-button
@@ -353,6 +359,9 @@ importers:
       '@flexi-ui/tooltip':
         specifier: workspace:^
         version: link:../../packages/components/tooltip
+      '@flexi-ui/tree':
+        specifier: workspace:^
+        version: link:../../packages/components/tree
       '@flexi-ui/visually-hidden':
         specifier: workspace:^
         version: link:../../packages/components/visually-hidden

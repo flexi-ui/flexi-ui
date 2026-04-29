@@ -1,0 +1,103 @@
+---
+title: "Tree"
+description: "Hierarchical list with expandable nodes — file trees, sitemaps, nested settings."
+---
+
+# Tree
+
+`Tree` renders a hierarchical, expandable list — file explorers, sitemaps, nested category pickers. Built on React Aria's `Tree`. Each item can hold child items; expansion state is independent per node, and selection works the same way as `ListBox`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/tree @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Tree } from '@flexi-ui/tree'
+```
+
+## Anatomy
+
+```tsx
+<Tree>
+  <Tree.Item id="...">
+    <Tree.ItemContent>Label</Tree.ItemContent>
+    <Tree.Item id="...">
+      <Tree.ItemContent>Nested label</Tree.ItemContent>
+    </Tree.Item>
+  </Tree.Item>
+</Tree>
+```
+
+| Part                | Element  | Purpose                                       |
+| ------------------- | -------- | --------------------------------------------- |
+| `Tree`              | `div`    | Root with expansion + selection state.        |
+| `Tree.Item`         | `div`    | A single node. Nest items inside for children. |
+| `Tree.ItemContent`  | —        | Wrapper for the item's visible content (so the item can hold both content and child items). |
+
+## Usage
+
+<ComponentPreview name="tree-usage" />
+
+## Controlled expansion
+
+```tsx
+'use client'
+
+import { Tree } from '@flexi-ui/tree'
+import { useState } from 'react'
+
+export function ControlledTree() {
+  const [expanded, setExpanded] = useState<Set<string>>(new Set(['src']))
+
+  return (
+    <Tree
+      aria-label="Files"
+      expandedKeys={expanded}
+      onExpandedChange={(keys) => setExpanded(keys as Set<string>)}
+    >
+      <Tree.Item id="src" textValue="src">
+        <Tree.ItemContent>src/</Tree.ItemContent>
+        <Tree.Item id="app" textValue="app">
+          <Tree.ItemContent>app.tsx</Tree.ItemContent>
+        </Tree.Item>
+      </Tree.Item>
+    </Tree>
+  )
+}
+```
+
+## API Reference
+
+### Tree
+
+| Prop                                      | Type                              | Default | Description                                |
+| ----------------------------------------- | --------------------------------- | ------- | ------------------------------------------ |
+| `expandedKeys` / `defaultExpandedKeys`    | `Iterable<Key>`                   | —       | Currently expanded items.                  |
+| `onExpandedChange`                        | `(keys: Set<Key>) => void`        | —       | Fires when expansion changes.              |
+| `selectionMode`                           | `'none' \| 'single' \| 'multiple'`| `'none'`| Selection behavior.                        |
+| `selectedKeys` / `defaultSelectedKeys`    | `Iterable<Key>`                   | —       | Currently selected items.                  |
+| `onSelectionChange`                       | `(keys: Set<Key>) => void`        | —       | Fires when the selection changes.          |
+| `disabledKeys`                            | `Iterable<Key>`                   | —       | Keys that can't be selected.               |
+
+Forwards all props of React Aria's `Tree`.
+
+### Tree.Item
+
+| Prop          | Type      | Default | Description                                |
+| ------------- | --------- | ------- | ------------------------------------------ |
+| `id`          | `Key`     | —       | Required. Used by `expandedKeys` / `selectedKeys`. |
+| `textValue`   | `string`  | —       | Used for type-to-find when content has nested elements. |
+| `isDisabled`  | `boolean` | `false` | Disables this node only.                   |
+
+Forwards all props of React Aria's `TreeItem`.
+
+## Accessibility
+
+- Renders `role="tree"` with each item as `role="treeitem"`.
+- Arrow keys navigate; Right opens an item, Left closes (or moves to parent); Enter activates.
+- Type-to-find works against each item's `textValue` (or rendered text content).
+- Pair with `aria-label` so the tree has an accessible name in screen readers.

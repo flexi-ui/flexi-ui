@@ -1,0 +1,106 @@
+---
+title: "Toast"
+description: "Transient notification that appears and dismisses automatically."
+---
+
+# Toast
+
+`Toast` shows a brief notification — "File uploaded", "Saved", "Connection lost" — that appears, holds for a few seconds, then dismisses on its own. The compound API has three pieces: a `ToastQueue` (the imperative push API), a `ToastRegion` (the rendered slot), and `Toast` itself (the visible message).
+
+Built on React Aria's `UNSTABLE_Toast` primitives. The API is marked unstable upstream — consider that when adopting for production-critical UX.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/toast @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Toast, ToastQueue, ToastRegion } from '@flexi-ui/toast'
+```
+
+## Anatomy
+
+```tsx
+const queue = new ToastQueue<MyPayload>()
+
+<>
+  <Button onPress={() => queue.add({ title: 'Saved' })}>Save</Button>
+  <ToastRegion queue={queue}>
+    <ToastRegion.List>
+      {({ toast }) => (
+        <Toast toast={toast}>
+          <Toast.Content>{toast.content.title}</Toast.Content>
+        </Toast>
+      )}
+    </ToastRegion.List>
+  </ToastRegion>
+</>
+```
+
+| Part              | Element  | Purpose                                            |
+| ----------------- | -------- | -------------------------------------------------- |
+| `ToastQueue`      | —        | Imperative `add()` / `close()` API.                |
+| `ToastRegion`     | `div`    | Mounted slot where toasts render.                  |
+| `ToastRegion.List`| —        | Render-prop list of active toasts.                 |
+| `Toast`           | `div`    | A single toast — accepts a `tone`.                 |
+| `Toast.Content`   | —        | Wraps the toast's title / body.                    |
+
+## Usage
+
+<ComponentPreview name="toast-usage" />
+
+## Tones
+
+`Toast` accepts a `tone`: `info` (default), `success`, `warning`, `danger`. Pass it from your queue payload so a single region renders all four kinds:
+
+```tsx
+queue.add({ title: 'Saved', tone: 'success' })
+queue.add({ title: "Couldn't save — try again", tone: 'danger' })
+```
+
+## Position
+
+The `ToastRegion` accepts `position`: `top-right` (default), `top-left`, `bottom-right`, `bottom-left`.
+
+```tsx
+<ToastRegion position="bottom-right" queue={queue}>...</ToastRegion>
+```
+
+## API Reference
+
+### ToastQueue
+
+```ts
+const queue = new ToastQueue<T>(options?: { maxVisibleToasts?: number; hasExitAnimation?: boolean })
+queue.add(content: T, options?: { timeout?: number }): string
+queue.close(key: string): void
+```
+
+The constructor accepts standard React Aria queue options. Re-export of React Aria's `UNSTABLE_ToastQueue`.
+
+### ToastRegion
+
+| Prop       | Type                                                                | Default       | Description                                  |
+| ---------- | ------------------------------------------------------------------- | ------------- | -------------------------------------------- |
+| `queue`    | `ToastQueue<T>`                                                     | —             | Required. The queue this region listens to.  |
+| `position` | `'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right'`      | `'bottom-right'` | Where toasts stack on screen.            |
+
+Forwards all props of React Aria's `UNSTABLE_ToastRegion`.
+
+### Toast
+
+| Prop    | Type                                                       | Default  | Description                                     |
+| ------- | ---------------------------------------------------------- | -------- | ----------------------------------------------- |
+| `toast` | `QueuedToast<T>`                                           | —        | Required — the toast object from the render-prop. |
+| `tone`  | `'info' \| 'success' \| 'warning' \| 'danger'`             | `'info'` | Visual tone.                                    |
+
+Forwards all props of React Aria's `UNSTABLE_Toast`.
+
+## Accessibility
+
+- Renders `role="status"` with `aria-live="polite"` so screen readers announce new toasts without interrupting the user.
+- Toasts auto-dismiss after a default timeout — pass `{ timeout: ... }` to `queue.add` to override.
+- Don't put critical errors *only* in toasts — they disappear. Use them for confirmations and ephemeral notices, with persistent UI for anything that requires action.

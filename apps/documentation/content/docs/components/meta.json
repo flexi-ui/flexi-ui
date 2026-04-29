@@ -52,14 +52,17 @@
     "slider",
     "spinner",
     "switch",
+    "table",
     "tabs",
     "tag-group",
     "text",
     "textarea",
     "time-field",
+    "toast",
     "toggle-button",
     "toolbar",
     "tooltip",
+    "tree",
     "visually-hidden"
   ]
 }

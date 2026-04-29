@@ -48,14 +48,17 @@ import { Skeleton } from '@flexi-ui/skeleton'
 import { Slider } from '@flexi-ui/slider'
 import { Spinner } from '@flexi-ui/spinner'
 import { Switch } from '@flexi-ui/switch'
+import { Table } from '@flexi-ui/table'
 import { Tabs } from '@flexi-ui/tabs'
 import { TagGroup } from '@flexi-ui/tag-group'
 import { Text } from '@flexi-ui/text'
 import { Textarea } from '@flexi-ui/textarea'
 import { TimeField } from '@flexi-ui/time-field'
+import { Toast, ToastRegion } from '@flexi-ui/toast'
 import { ToggleButton } from '@flexi-ui/toggle-button'
 import { Toolbar } from '@flexi-ui/toolbar'
 import { Tooltip } from '@flexi-ui/tooltip'
+import { Tree } from '@flexi-ui/tree'
 import { VisuallyHidden } from '@flexi-ui/visually-hidden'
 import { ComponentPreview } from './ComponentPreview'
 
@@ -117,14 +120,18 @@ export const MDXComponents = {
   Slider,
   Spinner,
   Switch,
+  Table,
   Tabs,
   TagGroup,
   Text,
   Textarea,
   TimeField,
+  Toast,
+  ToastRegion,
   ToggleButton,
   Toolbar,
   Tooltip,
+  Tree,
   VisuallyHidden,
   ComponentPreview,
 }
