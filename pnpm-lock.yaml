@@ -176,6 +176,9 @@ importers:
       '@flexi-ui/alert':
         specifier: workspace:*
         version: link:../../packages/components/alert
+      '@flexi-ui/autocomplete':
+        specifier: workspace:^
+        version: link:../../packages/components/autocomplete
       '@flexi-ui/avatar':
         specifier: workspace:*
         version: link:../../packages/components/avatar
@@ -203,6 +206,9 @@ importers:
       '@flexi-ui/divider':
         specifier: workspace:*
         version: link:../../packages/components/divider
+      '@flexi-ui/drop-zone':
+        specifier: workspace:^
+        version: link:../../packages/components/drop-zone
       '@flexi-ui/file-trigger':
         specifier: workspace:^
         version: link:../../packages/components/file-trigger
@@ -287,6 +293,9 @@ importers:
       '@flexi-ui/toggle-button':
         specifier: workspace:*
         version: link:../../packages/components/toggle-button
+      '@flexi-ui/toolbar':
+        specifier: workspace:^
+        version: link:../../packages/components/toolbar
       '@flexi-ui/tooltip':
         specifier: workspace:^
         version: link:../../packages/components/tooltip

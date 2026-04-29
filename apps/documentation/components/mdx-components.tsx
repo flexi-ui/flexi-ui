@@ -1,5 +1,6 @@
 import { Accordion } from '@flexi-ui/accordion'
 import { Alert } from '@flexi-ui/alert'
+import { Autocomplete } from '@flexi-ui/autocomplete'
 import { Avatar } from '@flexi-ui/avatar'
 import { Badge } from '@flexi-ui/badge'
 import { Breadcrumbs } from '@flexi-ui/breadcrumbs'
@@ -9,6 +10,7 @@ import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
 import { ComboBox } from '@flexi-ui/combo-box'
 import { Disclosure } from '@flexi-ui/disclosure'
 import { Divider } from '@flexi-ui/divider'
+import { DropZone } from '@flexi-ui/drop-zone'
 import { FileTrigger } from '@flexi-ui/file-trigger'
 import { Form } from '@flexi-ui/form'
 import { Group } from '@flexi-ui/group'
@@ -34,6 +36,7 @@ import { TagGroup } from '@flexi-ui/tag-group'
 import { Text } from '@flexi-ui/text'
 import { Textarea } from '@flexi-ui/textarea'
 import { ToggleButton } from '@flexi-ui/toggle-button'
+import { Toolbar } from '@flexi-ui/toolbar'
 import { Tooltip } from '@flexi-ui/tooltip'
 import { VisuallyHidden } from '@flexi-ui/visually-hidden'
 import { ComponentPreview } from './ComponentPreview'
@@ -41,6 +44,7 @@ import { ComponentPreview } from './ComponentPreview'
 export const MDXComponents = {
   Accordion,
   Alert,
+  Autocomplete,
   Avatar,
   Badge,
   Breadcrumbs,
@@ -55,6 +59,7 @@ export const MDXComponents = {
   ComboBox,
   Disclosure,
   Divider,
+  DropZone,
   FileTrigger,
   Form,
   Group,
@@ -82,6 +87,7 @@ export const MDXComponents = {
   Text,
   Textarea,
   ToggleButton,
+  Toolbar,
   Tooltip,
   VisuallyHidden,
   ComponentPreview,

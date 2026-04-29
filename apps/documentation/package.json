@@ -13,6 +13,7 @@
   "dependencies": {
     "@flexi-ui/accordion": "workspace:^",
     "@flexi-ui/alert": "workspace:*",
+    "@flexi-ui/autocomplete": "workspace:^",
     "@flexi-ui/avatar": "workspace:*",
     "@flexi-ui/badge": "workspace:*",
     "@flexi-ui/breadcrumbs": "workspace:^",
@@ -22,6 +23,7 @@
     "@flexi-ui/combo-box": "workspace:^",
     "@flexi-ui/disclosure": "workspace:^",
     "@flexi-ui/divider": "workspace:*",
+    "@flexi-ui/drop-zone": "workspace:^",
     "@flexi-ui/file-trigger": "workspace:^",
     "@flexi-ui/form": "workspace:*",
     "@flexi-ui/group": "workspace:^",
@@ -50,6 +52,7 @@
     "@flexi-ui/text": "workspace:^",
     "@flexi-ui/textarea": "workspace:*",
     "@flexi-ui/toggle-button": "workspace:*",
+    "@flexi-ui/toolbar": "workspace:^",
     "@flexi-ui/tooltip": "workspace:^",
     "@flexi-ui/visually-hidden": "workspace:^",
     "@iconify-json/gravity-ui": "^1.2.12",

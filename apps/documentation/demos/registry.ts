@@ -127,6 +127,16 @@ import DisclosureUsageSource from './disclosure/usage.tsx?raw'
 import DisclosureGroupSource from './disclosure/group.tsx?raw'
 import DisclosureControlledSource from './disclosure/controlled.tsx?raw'
 
+import AutocompleteUsageSource from './autocomplete/usage.tsx?raw'
+import AutocompleteSectionsSource from './autocomplete/sections.tsx?raw'
+
+import ToolbarUsageSource from './toolbar/usage.tsx?raw'
+import ToolbarOrientationSource from './toolbar/orientation.tsx?raw'
+
+import DropZoneUsageSource from './drop-zone/usage.tsx?raw'
+import DropZoneSizesSource from './drop-zone/sizes.tsx?raw'
+import DropZoneWithTriggerSource from './drop-zone/with-trigger.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -531,6 +541,37 @@ export const demos: Record<string, Demo> = {
   'disclosure-controlled': {
     component: lazy(() => import('./disclosure/controlled')),
     source: DisclosureControlledSource,
+  },
+
+  'autocomplete-usage': {
+    component: lazy(() => import('./autocomplete/usage')),
+    source: AutocompleteUsageSource,
+  },
+  'autocomplete-sections': {
+    component: lazy(() => import('./autocomplete/sections')),
+    source: AutocompleteSectionsSource,
+  },
+
+  'toolbar-usage': {
+    component: lazy(() => import('./toolbar/usage')),
+    source: ToolbarUsageSource,
+  },
+  'toolbar-orientation': {
+    component: lazy(() => import('./toolbar/orientation')),
+    source: ToolbarOrientationSource,
+  },
+
+  'drop-zone-usage': {
+    component: lazy(() => import('./drop-zone/usage')),
+    source: DropZoneUsageSource,
+  },
+  'drop-zone-sizes': {
+    component: lazy(() => import('./drop-zone/sizes')),
+    source: DropZoneSizesSource,
+  },
+  'drop-zone-with-trigger': {
+    component: lazy(() => import('./drop-zone/with-trigger')),
+    source: DropZoneWithTriggerSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

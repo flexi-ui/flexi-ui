@@ -4,6 +4,7 @@
   "pages": [
     "accordion",
     "alert",
+    "autocomplete",
     "avatar",
     "badge",
     "breadcrumbs",
@@ -13,6 +14,7 @@
     "combo-box",
     "disclosure",
     "divider",
+    "drop-zone",
     "file-trigger",
     "form",
     "group",
@@ -38,6 +40,7 @@
     "text",
     "textarea",
     "toggle-button",
+    "toolbar",
     "tooltip",
     "visually-hidden"
   ]
