@@ -1,0 +1,58 @@
+---
+title: "Drop Indicator"
+description: "Insertion marker rendered between items during drag-and-drop reorder."
+---
+
+# Drop Indicator
+
+`DropIndicator` paints the line that shows *where* a dragged item will land when the user releases. It's a low-level building block — collections like `GridList`, `ListBox`, and `Tree` render it automatically when they're set up for drag-and-drop. You'll only reach for it directly when building a custom collection.
+
+Built on React Aria's `DropIndicator`. Only visible while a valid drop is hovering — invisible at rest.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/drop-indicator @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { DropIndicator } from '@flexi-ui/drop-indicator'
+```
+
+## When to use it
+
+You typically *don't* render `DropIndicator` yourself. The collections that support drag reordering (`GridList`, `ListBox`, `Tree`) render it through their `renderDropIndicator` prop:
+
+```tsx
+<GridList
+  dragAndDropHooks={dragAndDropHooks}
+  renderDropIndicator={() => <DropIndicator variant="between" />}
+>
+  {/* items */}
+</GridList>
+```
+
+The `between` variant is the typical insertion marker (a thin line between items). The `default` variant covers the *whole* item region — useful when dragging into a container rather than between siblings.
+
+## API Reference
+
+### DropIndicator
+
+| Prop      | Type                              | Default     | Description                                      |
+| --------- | --------------------------------- | ----------- | ------------------------------------------------ |
+| `variant` | `'default' \| 'between'`          | `'default'` | `between` = thin insertion line; `default` = full-item highlight. |
+
+Forwards all props of React Aria's `DropIndicator`. The render-prop `className` exposes `isDropTarget` so you can style only when active.
+
+## Accessibility
+
+- `DropIndicator` is purely visual. The semantic announcement of where a drop will land is handled by React Aria's drag-and-drop hooks.
+- For keyboard drag users, the indicator updates as they move through valid targets with arrow keys.
+- For pointer users, the indicator follows the cursor.
+
+## See also
+
+- [`DropZone`](/docs/components/drop-zone) — surface that accepts external file drops (not item reordering).
+- [React Aria drag-and-drop docs](https://react-spectrum.adobe.com/react-aria/dnd.html) — the primitives this composes with.

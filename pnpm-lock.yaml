@@ -200,12 +200,18 @@ importers:
       '@flexi-ui/combo-box':
         specifier: workspace:^
         version: link:../../packages/components/combo-box
+      '@flexi-ui/dialog':
+        specifier: workspace:^
+        version: link:../../packages/components/dialog
       '@flexi-ui/disclosure':
         specifier: workspace:^
         version: link:../../packages/components/disclosure
       '@flexi-ui/divider':
         specifier: workspace:*
         version: link:../../packages/components/divider
+      '@flexi-ui/drop-indicator':
+        specifier: workspace:^
+        version: link:../../packages/components/drop-indicator
       '@flexi-ui/drop-zone':
         specifier: workspace:^
         version: link:../../packages/components/drop-zone
@@ -251,6 +257,9 @@ importers:
       '@flexi-ui/radio':
         specifier: workspace:^
         version: link:../../packages/components/radio
+      '@flexi-ui/ripple':
+        specifier: workspace:^
+        version: link:../../packages/components/ripple
       '@flexi-ui/search-field':
         specifier: workspace:^
         version: link:../../packages/components/search-field

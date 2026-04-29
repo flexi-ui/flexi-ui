@@ -137,6 +137,11 @@ import DropZoneUsageSource from './drop-zone/usage.tsx?raw'
 import DropZoneSizesSource from './drop-zone/sizes.tsx?raw'
 import DropZoneWithTriggerSource from './drop-zone/with-trigger.tsx?raw'
 
+import DialogUsageSource from './dialog/usage.tsx?raw'
+import DialogSizesSource from './dialog/sizes.tsx?raw'
+
+import RippleUsageSource from './ripple/usage.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -572,6 +577,14 @@ export const demos: Record<string, Demo> = {
   'drop-zone-with-trigger': {
     component: lazy(() => import('./drop-zone/with-trigger')),
     source: DropZoneWithTriggerSource,
+  },
+
+  'dialog-usage': { component: lazy(() => import('./dialog/usage')), source: DialogUsageSource },
+  'dialog-sizes': { component: lazy(() => import('./dialog/sizes')), source: DialogSizesSource },
+
+  'ripple-usage': {
+    component: lazy(() => import('./ripple/usage')),
+    source: RippleUsageSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

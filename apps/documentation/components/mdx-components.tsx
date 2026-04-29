@@ -8,8 +8,10 @@ import { Button, ButtonGroup } from '@flexi-ui/button'
 import { Card } from '@flexi-ui/card'
 import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
 import { ComboBox } from '@flexi-ui/combo-box'
+import { Dialog } from '@flexi-ui/dialog'
 import { Disclosure } from '@flexi-ui/disclosure'
 import { Divider } from '@flexi-ui/divider'
+import { DropIndicator } from '@flexi-ui/drop-indicator'
 import { DropZone } from '@flexi-ui/drop-zone'
 import { FileTrigger } from '@flexi-ui/file-trigger'
 import { Form } from '@flexi-ui/form'
@@ -25,6 +27,7 @@ import { NumberField } from '@flexi-ui/number-field'
 import { Popover } from '@flexi-ui/popover'
 import { Progress } from '@flexi-ui/progress'
 import { Radio, RadioGroupRoot } from '@flexi-ui/radio'
+import { Ripple } from '@flexi-ui/ripple'
 import { SearchField } from '@flexi-ui/search-field'
 import { Select } from '@flexi-ui/select'
 import { Skeleton } from '@flexi-ui/skeleton'
@@ -57,8 +60,10 @@ export const MDXComponents = {
   Checkbox,
   CheckboxGroup: CheckboxGroupRoot,
   ComboBox,
+  Dialog,
   Disclosure,
   Divider,
+  DropIndicator,
   DropZone,
   FileTrigger,
   Form,
@@ -76,6 +81,7 @@ export const MDXComponents = {
   Progress,
   Radio,
   RadioGroup: RadioGroupRoot,
+  Ripple,
   SearchField,
   Select,
   Skeleton,

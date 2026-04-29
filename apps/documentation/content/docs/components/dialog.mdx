@@ -1,0 +1,70 @@
+---
+title: "Dialog"
+description: "Focus-trapped content region — the inner surface used by Modal and Popover."
+---
+
+# Dialog
+
+`Dialog` is the focus-trapped content surface that lives inside `Modal` and `Popover`. Use it directly when you need the dialog semantics (`role="dialog"`, focus trap, accessible title) without the overlay or popover chrome — for example, inside a custom drawer or sheet.
+
+For the *full* modal experience (overlay + scroll-lock + dismiss-on-click-outside), reach for [`Modal`](/docs/components/modal). For inline dropdown panels, [`Popover`](/docs/components/popover).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/dialog @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Dialog } from '@flexi-ui/dialog'
+```
+
+## Anatomy
+
+```tsx
+<Dialog>
+  <Dialog.Title />
+  <Dialog.Description />
+  {/* body + actions */}
+</Dialog>
+```
+
+| Part                  | Element  | Purpose                                       |
+| --------------------- | -------- | --------------------------------------------- |
+| `Dialog`              | `div`    | Focus-trapped region with `role="dialog"`.    |
+| `Dialog.Title`        | heading  | Accessible name. Wires `aria-labelledby`.     |
+| `Dialog.Description`  | `p`      | Optional description. Wires `aria-describedby`. |
+
+## Usage
+
+`Dialog` is most often nested inside `Modal` — the example below opens it that way.
+
+<ComponentPreview name="dialog-usage" />
+
+## Sizes
+
+`size` controls the panel width when `Dialog` is used as the body of a `Modal`.
+
+<ComponentPreview name="dialog-sizes" />
+
+## API Reference
+
+### Dialog
+
+| Prop   | Type                              | Default | Description    |
+| ------ | --------------------------------- | ------- | -------------- |
+| `size` | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.   |
+
+Forwards all props of React Aria's `Dialog`.
+
+### Dialog.Title / Dialog.Description
+
+Native `heading` / `p` props plus `className` and `children`. Title uses the React Aria `slot="title"` so the parent dialog wires `aria-labelledby` automatically.
+
+## Accessibility
+
+- Renders `role="dialog"` with `aria-modal="true"` (when nested inside `Modal`).
+- Focus is trapped inside the dialog while open, and returned to the trigger when it closes.
+- Always include `Dialog.Title` (or pass `aria-label` on `Dialog`) — assistive tech reads the title to announce *what* dialog is open.
