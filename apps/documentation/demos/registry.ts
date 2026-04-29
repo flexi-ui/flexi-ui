@@ -179,6 +179,16 @@ import ColorSwatchSizesSource from './color-swatch/sizes.tsx?raw'
 import ColorSwatchPickerUsageSource from './color-swatch-picker/usage.tsx?raw'
 import ColorSwatchPickerControlledSource from './color-swatch-picker/controlled.tsx?raw'
 
+import ColorWheelUsageSource from './color-wheel/usage.tsx?raw'
+import ColorWheelSizesSource from './color-wheel/sizes.tsx?raw'
+
+import ListBoxUsageSource from './list-box/usage.tsx?raw'
+import ListBoxMultipleSource from './list-box/multiple.tsx?raw'
+import ListBoxSectionsSource from './list-box/sections.tsx?raw'
+
+import GridListUsageSource from './grid-list/usage.tsx?raw'
+import GridListMultipleSource from './grid-list/multiple.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -734,6 +744,37 @@ export const demos: Record<string, Demo> = {
   'color-swatch-picker-controlled': {
     component: lazy(() => import('./color-swatch-picker/controlled')),
     source: ColorSwatchPickerControlledSource,
+  },
+
+  'color-wheel-usage': {
+    component: lazy(() => import('./color-wheel/usage')),
+    source: ColorWheelUsageSource,
+  },
+  'color-wheel-sizes': {
+    component: lazy(() => import('./color-wheel/sizes')),
+    source: ColorWheelSizesSource,
+  },
+
+  'list-box-usage': {
+    component: lazy(() => import('./list-box/usage')),
+    source: ListBoxUsageSource,
+  },
+  'list-box-multiple': {
+    component: lazy(() => import('./list-box/multiple')),
+    source: ListBoxMultipleSource,
+  },
+  'list-box-sections': {
+    component: lazy(() => import('./list-box/sections')),
+    source: ListBoxSectionsSource,
+  },
+
+  'grid-list-usage': {
+    component: lazy(() => import('./grid-list/usage')),
+    source: GridListUsageSource,
+  },
+  'grid-list-multiple': {
+    component: lazy(() => import('./grid-list/multiple')),
+    source: GridListMultipleSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

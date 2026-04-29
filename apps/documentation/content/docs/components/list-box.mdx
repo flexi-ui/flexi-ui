@@ -1,0 +1,85 @@
+---
+title: "List Box"
+description: "Vertical, selectable list with single/multiple modes and section grouping."
+---
+
+# List Box
+
+`ListBox` is a flat vertical list of selectable items — picker overlays, settings panes, contact lists. Unlike `Menu`, it stays open and supports persistent selection. Built on React Aria's `ListBox`.
+
+For inline filtered lists, see [`Autocomplete`](/docs/components/autocomplete). For action menus, [`Menu`](/docs/components/menu). For more complex grids, [`GridList`](/docs/components/grid-list).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/list-box @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ListBox } from '@flexi-ui/list-box'
+```
+
+## Anatomy
+
+```tsx
+<ListBox>
+  <ListBox.Item id="..." />
+  <ListBox.Section>
+    <ListBox.Header />
+    <ListBox.Item id="..." />
+  </ListBox.Section>
+</ListBox>
+```
+
+| Part                | Element  | Purpose                                       |
+| ------------------- | -------- | --------------------------------------------- |
+| `ListBox`           | `ul`     | Root with selection state.                    |
+| `ListBox.Item`      | `li`     | A single selectable row.                      |
+| `ListBox.Section`   | `li`     | Groups related items.                         |
+| `ListBox.Header`    | `header` | Caption inside a section.                     |
+
+## Usage
+
+<ComponentPreview name="list-box-usage" />
+
+## Multiple selection
+
+<ComponentPreview name="list-box-multiple" />
+
+## Sections
+
+<ComponentPreview name="list-box-sections" />
+
+## API Reference
+
+### ListBox
+
+| Prop                                      | Type                              | Default | Description                                |
+| ----------------------------------------- | --------------------------------- | ------- | ------------------------------------------ |
+| `size`                                    | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                               |
+| `selectionMode`                           | `'none' \| 'single' \| 'multiple'`| `'none'`| Selection behavior.                        |
+| `selectedKeys` / `defaultSelectedKeys`    | `Iterable<Key>`                   | —       | Currently selected items.                  |
+| `onSelectionChange`                       | `(keys: Set<Key>) => void`        | —       | Fires when the selection changes.          |
+| `disabledKeys`                            | `Iterable<Key>`                   | —       | Keys that can't be selected.               |
+| `onAction`                                | `(key: Key) => void`              | —       | Fires on Enter/click of a non-selectable item. |
+
+Forwards all props of React Aria's `ListBox`.
+
+### ListBox.Item
+
+| Prop          | Type      | Default | Description                                |
+| ------------- | --------- | ------- | ------------------------------------------ |
+| `id`          | `Key`     | —       | Required. Reported via `selectedKeys`.     |
+| `isDisabled`  | `boolean` | `false` | Disables this row.                         |
+| `textValue`   | `string`  | —       | Used for type-to-find when children isn't plain text. |
+
+Forwards all props of React Aria's `ListBoxItem`.
+
+## Accessibility
+
+- Renders `role="listbox"` with each item as `role="option"`.
+- Arrow keys move focus, Home/End jump to ends, Enter/Space activates or toggles.
+- Type-to-find works automatically — typing focuses matching items.
+- Always pass `aria-label` (or wire `aria-labelledby`) so the listbox has an accessible name.

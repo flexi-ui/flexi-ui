@@ -1,0 +1,118 @@
+---
+title: "Grid List"
+description: "Vertical list with row-level interactive content and full keyboard grid navigation."
+---
+
+# Grid List
+
+`GridList` is a vertical list where each row can contain its own interactive content (buttons, links, action menus) — file lists, mail rows, settings entries. Unlike `ListBox`, row activation and inner controls are independent. Built on React Aria's `GridList`.
+
+For a flat list of selectable rows without inner controls, use [`ListBox`](/docs/components/list-box). For tabular data with multiple cells per row, use [`Table`](/docs/components/table).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/grid-list @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { GridList } from '@flexi-ui/grid-list'
+```
+
+## Anatomy
+
+```tsx
+<GridList>
+  <GridList.Item id="...">
+    Row content (can include buttons, links)
+  </GridList.Item>
+</GridList>
+```
+
+| Part                | Element  | Purpose                                       |
+| ------------------- | -------- | --------------------------------------------- |
+| `GridList`          | `div`    | Root with selection + drag/drop state.        |
+| `GridList.Item`     | `div`    | A single row.                                 |
+
+## Usage
+
+<ComponentPreview name="grid-list-usage" />
+
+## Multiple selection
+
+<ComponentPreview name="grid-list-multiple" />
+
+## Drag and drop
+
+`GridList` supports row reordering via React Aria's drag-and-drop hooks. Wire `useListData` + `useDragAndDrop` and pass the resulting `dragAndDropHooks`:
+
+```tsx
+'use client'
+
+import { GridList } from '@flexi-ui/grid-list'
+import { useDragAndDrop } from 'react-aria-components'
+import { useListData } from 'react-stately'
+
+export function ReorderableList() {
+  const list = useListData({
+    initialItems: [
+      { id: 'todo', name: 'Buy milk' },
+      { id: 'doing', name: 'Cook dinner' },
+      { id: 'done', name: 'Walk the dog' },
+    ],
+  })
+
+  const { dragAndDropHooks } = useDragAndDrop({
+    getItems: (keys) => [...keys].map((key) => ({ 'text/plain': list.getItem(key)!.name })),
+    onReorder: (e) => {
+      if (e.target.dropPosition === 'before') list.moveBefore(e.target.key, e.keys)
+      if (e.target.dropPosition === 'after') list.moveAfter(e.target.key, e.keys)
+    },
+  })
+
+  return (
+    <GridList
+      aria-label="Reorderable items"
+      dragAndDropHooks={dragAndDropHooks}
+      items={list.items}
+    >
+      {(item) => <GridList.Item id={item.id}>{item.name}</GridList.Item>}
+    </GridList>
+  )
+}
+```
+
+## API Reference
+
+### GridList
+
+| Prop                                      | Type                              | Default | Description                                |
+| ----------------------------------------- | --------------------------------- | ------- | ------------------------------------------ |
+| `size`                                    | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                               |
+| `selectionMode`                           | `'none' \| 'single' \| 'multiple'`| `'none'`| Selection behavior.                        |
+| `selectedKeys` / `defaultSelectedKeys`    | `Iterable<Key>`                   | —       | Currently selected items.                  |
+| `onSelectionChange`                       | `(keys: Set<Key>) => void`        | —       | Fires when the selection changes.          |
+| `disabledKeys`                            | `Iterable<Key>`                   | —       | Keys that can't be selected.               |
+| `onAction`                                | `(key: Key) => void`              | —       | Fires when a row is activated.             |
+| `dragAndDropHooks`                        | `DragAndDropHooks`                | —       | Result of React Aria's `useDragAndDrop`.   |
+
+Forwards all props of React Aria's `GridList`.
+
+### GridList.Item
+
+| Prop          | Type      | Default | Description                                |
+| ------------- | --------- | ------- | ------------------------------------------ |
+| `id`          | `Key`     | —       | Required. Reported via `selectedKeys`.     |
+| `isDisabled`  | `boolean` | `false` | Disables this row.                         |
+| `textValue`   | `string`  | —       | Used for type-to-find when children has nested elements. |
+
+Forwards all props of React Aria's `GridListItem`.
+
+## Accessibility
+
+- Renders `role="grid"` with each row as `role="row"` containing `role="gridcell"`.
+- Arrow keys move focus by row; Tab into a row enters its inner interactive content; Tab out leaves the row.
+- Pair with `aria-label` so screen readers announce *what kind* of list this is.
+- For pure rendering of a list with no inner buttons or links, prefer `ListBox` — it has lighter ARIA semantics.

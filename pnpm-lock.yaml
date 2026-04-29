@@ -218,6 +218,9 @@ importers:
       '@flexi-ui/color-swatch-picker':
         specifier: workspace:^
         version: link:../../packages/components/color-swatch-picker
+      '@flexi-ui/color-wheel':
+        specifier: workspace:^
+        version: link:../../packages/components/color-wheel
       '@flexi-ui/combo-box':
         specifier: workspace:^
         version: link:../../packages/components/combo-box
@@ -251,6 +254,9 @@ importers:
       '@flexi-ui/form':
         specifier: workspace:*
         version: link:../../packages/components/form
+      '@flexi-ui/grid-list':
+        specifier: workspace:^
+        version: link:../../packages/components/grid-list
       '@flexi-ui/group':
         specifier: workspace:^
         version: link:../../packages/components/group
@@ -266,6 +272,9 @@ importers:
       '@flexi-ui/link':
         specifier: workspace:*
         version: link:../../packages/components/link
+      '@flexi-ui/list-box':
+        specifier: workspace:^
+        version: link:../../packages/components/list-box
       '@flexi-ui/menu':
         specifier: workspace:^
         version: link:../../packages/components/menu

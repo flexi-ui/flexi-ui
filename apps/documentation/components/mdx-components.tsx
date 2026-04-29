@@ -14,6 +14,7 @@ import { ColorPicker } from '@flexi-ui/color-picker'
 import { ColorSlider } from '@flexi-ui/color-slider'
 import { ColorSwatch } from '@flexi-ui/color-swatch'
 import { ColorSwatchPicker } from '@flexi-ui/color-swatch-picker'
+import { ColorWheel } from '@flexi-ui/color-wheel'
 import { ComboBox } from '@flexi-ui/combo-box'
 import { DateField } from '@flexi-ui/date-field'
 import { DatePicker } from '@flexi-ui/date-picker'
@@ -25,11 +26,13 @@ import { DropIndicator } from '@flexi-ui/drop-indicator'
 import { DropZone } from '@flexi-ui/drop-zone'
 import { FileTrigger } from '@flexi-ui/file-trigger'
 import { Form } from '@flexi-ui/form'
+import { GridList } from '@flexi-ui/grid-list'
 import { Group } from '@flexi-ui/group'
 import { Heading } from '@flexi-ui/heading'
 import { Input, TextArea } from '@flexi-ui/input'
 import { Keyboard } from '@flexi-ui/keyboard'
 import { Link } from '@flexi-ui/link'
+import { ListBox } from '@flexi-ui/list-box'
 import { Menu } from '@flexi-ui/menu'
 import { Meter } from '@flexi-ui/meter'
 import { Modal } from '@flexi-ui/modal'
@@ -78,6 +81,7 @@ export const MDXComponents = {
   ColorSlider,
   ColorSwatch,
   ColorSwatchPicker,
+  ColorWheel,
   ComboBox,
   DateField,
   DatePicker,
@@ -89,12 +93,14 @@ export const MDXComponents = {
   DropZone,
   FileTrigger,
   Form,
+  GridList,
   Group,
   Heading,
   Input,
   TextArea,
   Keyboard,
   Link,
+  ListBox,
   Menu,
   Meter,
   Modal,
