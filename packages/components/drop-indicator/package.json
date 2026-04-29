@@ -1,6 +1,6 @@
 {
   "name": "@flexi-ui/drop-indicator",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "DropIndicator component built on React Aria Components.",
   "type": "module",
   "license": "MIT",

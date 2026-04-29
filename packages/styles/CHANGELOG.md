@@ -1,5 +1,17 @@
 # @flexi-ui/styles
 
+## 1.9.1
+
+### Patch Changes
+
+- [#111](https://github.com/flexi-ui/flexi-ui/pull/111) [`d178b88`](https://github.com/flexi-ui/flexi-ui/commit/d178b8899ffb0776dd1c9b0d62051241c82a3228) Thanks [@muneeb-builds](https://github.com/muneeb-builds)! - fix(styles): remove invalid `@apply group` from switch and checkbox
+
+  Tailwind v4 no longer allows `@apply group` because `group` is a variant
+  marker, not a utility. No `group-*` variants are used within the styles
+  package, so the directive was dead code. Removing it unblocks consumers
+  like the docs app that import `@flexi-ui/styles/css` through
+  `@tailwindcss/postcss`.
+
 ## 1.9.0
 
 ### Minor Changes

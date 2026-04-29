@@ -1,5 +1,12 @@
 # @flexi-ui/badge
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [[`d178b88`](https://github.com/flexi-ui/flexi-ui/commit/d178b8899ffb0776dd1c9b0d62051241c82a3228)]:
+  - @flexi-ui/styles@1.9.1
+
 ## 0.1.8
 
 ### Patch Changes
