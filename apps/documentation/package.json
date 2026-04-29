@@ -21,6 +21,9 @@
     "@flexi-ui/calendar": "workspace:^",
     "@flexi-ui/card": "workspace:*",
     "@flexi-ui/checkbox": "workspace:^",
+    "@flexi-ui/color-picker": "workspace:^",
+    "@flexi-ui/color-swatch": "workspace:^",
+    "@flexi-ui/color-swatch-picker": "workspace:^",
     "@flexi-ui/combo-box": "workspace:^",
     "@flexi-ui/date-field": "workspace:^",
     "@flexi-ui/date-picker": "workspace:^",
@@ -72,6 +75,7 @@
     "fumadocs-ui": "^16.7.11",
     "next": "catalog:",
     "react": "catalog:",
+    "react-aria-components": "^1.17.0",
     "react-dom": "catalog:",
     "shiki": "^1.24.2"
   },

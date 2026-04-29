@@ -8,6 +8,9 @@ import { Button, ButtonGroup } from '@flexi-ui/button'
 import { Calendar } from '@flexi-ui/calendar'
 import { Card } from '@flexi-ui/card'
 import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
+import { ColorPicker } from '@flexi-ui/color-picker'
+import { ColorSwatch } from '@flexi-ui/color-swatch'
+import { ColorSwatchPicker } from '@flexi-ui/color-swatch-picker'
 import { ComboBox } from '@flexi-ui/combo-box'
 import { DateField } from '@flexi-ui/date-field'
 import { DatePicker } from '@flexi-ui/date-picker'
@@ -66,6 +69,9 @@ export const MDXComponents = {
   CardFooter: Card.Footer,
   Checkbox,
   CheckboxGroup: CheckboxGroupRoot,
+  ColorPicker,
+  ColorSwatch,
+  ColorSwatchPicker,
   ComboBox,
   DateField,
   DatePicker,

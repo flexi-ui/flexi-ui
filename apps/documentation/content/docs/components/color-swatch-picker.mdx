@@ -1,0 +1,86 @@
+---
+title: "Color Swatch Picker"
+description: "Selectable grid of pre-defined color swatches."
+---
+
+# Color Swatch Picker
+
+`ColorSwatchPicker` is a grid of selectable color swatches — useful for brand-color pickers, theme presets, and any "pick from this fixed list" interaction. Built on React Aria's `ColorSwatchPicker`.
+
+For single colored chips without selection, use [`ColorSwatch`](/docs/components/color-swatch). For freeform color selection (any RGB/HSV value), use [`ColorPicker`](/docs/components/color-picker) composed with `ColorArea` and `ColorSlider`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-swatch-picker @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ColorSwatchPicker } from '@flexi-ui/color-swatch-picker'
+```
+
+## Anatomy
+
+```tsx
+<ColorSwatchPicker>
+  <ColorSwatchPicker.Item color="#hex" />
+</ColorSwatchPicker>
+```
+
+| Part                       | Element  | Purpose                                       |
+| -------------------------- | -------- | --------------------------------------------- |
+| `ColorSwatchPicker`        | `div`    | Selectable group container.                   |
+| `ColorSwatchPicker.Item`   | `button` | A single selectable swatch.                   |
+
+## Usage
+
+<ComponentPreview name="color-swatch-picker-usage" />
+
+## Controlled
+
+`ColorSwatchPicker` value is a `Color` from `react-aria-components`. Convert to a CSS string for storage with `value.toString('hex')`.
+
+<ComponentPreview name="color-swatch-picker-controlled" />
+
+## Inside a Color Picker
+
+When nested inside `ColorPicker`, the swatch picker drives the picker's current color — no manual state needed:
+
+```tsx
+<ColorPicker defaultValue="#761ae8">
+  <ColorSwatchPicker>
+    <ColorSwatchPicker.Item color="#761ae8" />
+    <ColorSwatchPicker.Item color="#17c964" />
+    <ColorSwatchPicker.Item color="#f31260" />
+  </ColorSwatchPicker>
+</ColorPicker>
+```
+
+## API Reference
+
+### ColorSwatchPicker
+
+| Prop                     | Type                              | Default | Description                                |
+| ------------------------ | --------------------------------- | ------- | ------------------------------------------ |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size of every swatch.               |
+| `value` / `defaultValue` | `Color \| string`                 | —       | Currently selected color.                  |
+| `onChange`               | `(value: Color) => void`          | —       | Fires when the selection changes.          |
+
+Forwards all props of React Aria's `ColorSwatchPicker`.
+
+### ColorSwatchPicker.Item
+
+| Prop    | Type      | Default | Description                                 |
+| ------- | --------- | ------- | ------------------------------------------- |
+| `color` | `string`  | —       | Required. The color this item represents.   |
+
+Forwards all props of React Aria's `ColorSwatchPickerItem`.
+
+## Accessibility
+
+- Renders as a `role="grid"` with each item as a selectable cell.
+- Arrow keys navigate the grid; Enter/Space selects.
+- The currently selected swatch is announced via `aria-selected`.
+- Always pair a visual swatch grid with a textual color affordance for users who can't distinguish similar colors.

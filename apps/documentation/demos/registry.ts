@@ -162,6 +162,14 @@ import DateRangePickerMinMaxSource from './date-range-picker/min-max.tsx?raw'
 import RangeCalendarUsageSource from './range-calendar/usage.tsx?raw'
 import RangeCalendarMinMaxSource from './range-calendar/min-max.tsx?raw'
 
+import ColorPickerUsageSource from './color-picker/usage.tsx?raw'
+
+import ColorSwatchUsageSource from './color-swatch/usage.tsx?raw'
+import ColorSwatchSizesSource from './color-swatch/sizes.tsx?raw'
+
+import ColorSwatchPickerUsageSource from './color-swatch-picker/usage.tsx?raw'
+import ColorSwatchPickerControlledSource from './color-swatch-picker/controlled.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -667,6 +675,29 @@ export const demos: Record<string, Demo> = {
   'range-calendar-min-max': {
     component: lazy(() => import('./range-calendar/min-max')),
     source: RangeCalendarMinMaxSource,
+  },
+
+  'color-picker-usage': {
+    component: lazy(() => import('./color-picker/usage')),
+    source: ColorPickerUsageSource,
+  },
+
+  'color-swatch-usage': {
+    component: lazy(() => import('./color-swatch/usage')),
+    source: ColorSwatchUsageSource,
+  },
+  'color-swatch-sizes': {
+    component: lazy(() => import('./color-swatch/sizes')),
+    source: ColorSwatchSizesSource,
+  },
+
+  'color-swatch-picker-usage': {
+    component: lazy(() => import('./color-swatch-picker/usage')),
+    source: ColorSwatchPickerUsageSource,
+  },
+  'color-swatch-picker-controlled': {
+    component: lazy(() => import('./color-swatch-picker/controlled')),
+    source: ColorSwatchPickerControlledSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

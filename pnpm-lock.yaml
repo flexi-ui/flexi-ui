@@ -200,6 +200,15 @@ importers:
       '@flexi-ui/checkbox':
         specifier: workspace:^
         version: link:../../packages/components/checkbox
+      '@flexi-ui/color-picker':
+        specifier: workspace:^
+        version: link:../../packages/components/color-picker
+      '@flexi-ui/color-swatch':
+        specifier: workspace:^
+        version: link:../../packages/components/color-swatch
+      '@flexi-ui/color-swatch-picker':
+        specifier: workspace:^
+        version: link:../../packages/components/color-swatch-picker
       '@flexi-ui/combo-box':
         specifier: workspace:^
         version: link:../../packages/components/combo-box

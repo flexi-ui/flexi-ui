@@ -1,0 +1,57 @@
+---
+title: "Color Swatch"
+description: "Static colored chip with automatic checkerboard for transparent colors."
+---
+
+# Color Swatch
+
+`ColorSwatch` renders a small filled square representing a color. It draws a checkerboard pattern behind transparent or semi-transparent values so users can see the actual alpha, and reads from a parent `ColorPicker` context when no explicit `color` is set.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-swatch @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ColorSwatch } from '@flexi-ui/color-swatch'
+```
+
+## Usage
+
+<ComponentPreview name="color-swatch-usage" />
+
+## Sizes
+
+<ComponentPreview name="color-swatch-sizes" />
+
+## Inside a Color Picker
+
+When nested inside a `ColorPicker`, `ColorSwatch` automatically displays the picker's current value:
+
+```tsx
+<ColorPicker defaultValue="#761ae8">
+  <ColorSwatch />
+</ColorPicker>
+```
+
+Useful for "current color" previews next to a `ColorArea` or `ColorSwatchPicker`.
+
+## API Reference
+
+### ColorSwatch
+
+| Prop    | Type                              | Default | Description                                  |
+| ------- | --------------------------------- | ------- | -------------------------------------------- |
+| `color` | `Color \| string`                 | —       | The color to render. Falls back to context.  |
+| `size`  | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                                 |
+
+Forwards all props of React Aria's `ColorSwatch`.
+
+## Accessibility
+
+- Renders `role="img"` with the color's accessible name (e.g. "rgb(0, 0, 0)") so screen readers announce *what* color is shown.
+- The transparent-color checkerboard is decorative and `aria-hidden`.
+- For lists of swatches users *select* between, use `ColorSwatchPicker` — it handles the selectable item semantics.
