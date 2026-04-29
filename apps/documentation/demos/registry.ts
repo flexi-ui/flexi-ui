@@ -153,6 +153,15 @@ import TimeFieldHourCycleSource from './time-field/hour-cycle.tsx?raw'
 import CalendarUsageSource from './calendar/usage.tsx?raw'
 import CalendarMinMaxSource from './calendar/min-max.tsx?raw'
 
+import DatePickerUsageSource from './date-picker/usage.tsx?raw'
+import DatePickerMinMaxSource from './date-picker/min-max.tsx?raw'
+
+import DateRangePickerUsageSource from './date-range-picker/usage.tsx?raw'
+import DateRangePickerMinMaxSource from './date-range-picker/min-max.tsx?raw'
+
+import RangeCalendarUsageSource from './range-calendar/usage.tsx?raw'
+import RangeCalendarMinMaxSource from './range-calendar/min-max.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -631,6 +640,33 @@ export const demos: Record<string, Demo> = {
   'calendar-min-max': {
     component: lazy(() => import('./calendar/min-max')),
     source: CalendarMinMaxSource,
+  },
+
+  'date-picker-usage': {
+    component: lazy(() => import('./date-picker/usage')),
+    source: DatePickerUsageSource,
+  },
+  'date-picker-min-max': {
+    component: lazy(() => import('./date-picker/min-max')),
+    source: DatePickerMinMaxSource,
+  },
+
+  'date-range-picker-usage': {
+    component: lazy(() => import('./date-range-picker/usage')),
+    source: DateRangePickerUsageSource,
+  },
+  'date-range-picker-min-max': {
+    component: lazy(() => import('./date-range-picker/min-max')),
+    source: DateRangePickerMinMaxSource,
+  },
+
+  'range-calendar-usage': {
+    component: lazy(() => import('./range-calendar/usage')),
+    source: RangeCalendarUsageSource,
+  },
+  'range-calendar-min-max': {
+    component: lazy(() => import('./range-calendar/min-max')),
+    source: RangeCalendarMinMaxSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },

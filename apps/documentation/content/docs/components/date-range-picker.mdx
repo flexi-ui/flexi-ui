@@ -1,0 +1,71 @@
+---
+title: "Date Range Picker"
+description: "Pick a start and end date with a paired segmented input + range calendar."
+---
+
+# Date Range Picker
+
+`DateRangePicker` lets users pick a start *and* end date. Two segmented inputs share a popover that opens a `RangeCalendar`. Users can drag-select on the calendar or type each date directly. Built on React Aria's `DateRangePicker`.
+
+For a calendar without the segmented input, use [`RangeCalendar`](/docs/components/range-calendar). For a single date, [`DatePicker`](/docs/components/date-picker).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/date-range-picker @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { DateRangePicker } from '@flexi-ui/date-range-picker'
+```
+
+## Usage
+
+<ComponentPreview name="date-range-picker-usage" />
+
+## Min / max bounds
+
+Restrict the selectable window. Useful for booking flows where dates outside a campaign shouldn't be selectable.
+
+<ComponentPreview name="date-range-picker-min-max" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { CalendarDate } from '@internationalized/date'
+import { DateRangePicker } from '@flexi-ui/date-range-picker'
+import { useState } from 'react'
+
+type Range = { start: CalendarDate; end: CalendarDate }
+
+export function StayPicker() {
+  const [range, setRange] = useState<Range | null>(null)
+
+  return <DateRangePicker label="Stay" value={range} onChange={setRange} />
+}
+```
+
+## API Reference
+
+### DateRangePicker
+
+| Prop                     | Type                                          | Default | Description                                |
+| ------------------------ | --------------------------------------------- | ------- | ------------------------------------------ |
+| `label`                  | `string`                                      | —       | Visible label rendered above the fields.   |
+| `value` / `defaultValue` | `{ start: CalendarDate; end: CalendarDate } \| null` | — | The current range.                       |
+| `onChange`               | `(value: Range) => void`                      | —       | Fires when the range changes.              |
+| `minValue` / `maxValue`  | `CalendarDate`                                | —       | Restrict the selectable range.             |
+| `granularity`            | `'day' \| 'hour' \| 'minute' \| 'second'`     | `'day'` | Smallest segment shown.                    |
+| `isInvalid` / `isDisabled` | `boolean`                                   | `false` | Standard validation / disabled flags.      |
+
+Forwards all props of React Aria's `DateRangePicker`.
+
+## Accessibility
+
+- The two segmented inputs are independently focusable; arrow keys edit segments and Tab moves between them and out of the field.
+- The calendar within the popover supports both pointer and keyboard range selection (Shift+arrow extends from the focused date).
+- React Aria announces "start of range" and "end of range" when focus moves between the two segmented inputs.

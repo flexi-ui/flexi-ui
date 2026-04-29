@@ -206,6 +206,12 @@ importers:
       '@flexi-ui/date-field':
         specifier: workspace:^
         version: link:../../packages/components/date-field
+      '@flexi-ui/date-picker':
+        specifier: workspace:^
+        version: link:../../packages/components/date-picker
+      '@flexi-ui/date-range-picker':
+        specifier: workspace:^
+        version: link:../../packages/components/date-range-picker
       '@flexi-ui/dialog':
         specifier: workspace:^
         version: link:../../packages/components/dialog
@@ -263,6 +269,9 @@ importers:
       '@flexi-ui/radio':
         specifier: workspace:^
         version: link:../../packages/components/radio
+      '@flexi-ui/range-calendar':
+        specifier: workspace:^
+        version: link:../../packages/components/range-calendar
       '@flexi-ui/ripple':
         specifier: workspace:^
         version: link:../../packages/components/ripple

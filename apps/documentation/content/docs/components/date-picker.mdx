@@ -1,0 +1,67 @@
+---
+title: "Date Picker"
+description: "Segmented date input combined with a popover calendar."
+---
+
+# Date Picker
+
+`DatePicker` bundles a `DateField` segmented input with a popover that opens a `Calendar`. Users can type the date directly or click the calendar button to pick visually. Built on React Aria's `DatePicker`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/date-picker @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { DatePicker } from '@flexi-ui/date-picker'
+```
+
+## Usage
+
+<ComponentPreview name="date-picker-usage" />
+
+## Min / max bounds
+
+Restrict selectable dates with `minValue` / `maxValue`. Both the segmented input and the calendar respect the range.
+
+<ComponentPreview name="date-picker-min-max" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { CalendarDate } from '@internationalized/date'
+import { DatePicker } from '@flexi-ui/date-picker'
+import { useState } from 'react'
+
+export function FlightDate() {
+  const [value, setValue] = useState<CalendarDate | null>(null)
+
+  return <DatePicker label="Flight" value={value} onChange={setValue} />
+}
+```
+
+## API Reference
+
+### DatePicker
+
+| Prop                     | Type                              | Default | Description                                  |
+| ------------------------ | --------------------------------- | ------- | -------------------------------------------- |
+| `label`                  | `string`                          | —       | Visible label rendered above the field.      |
+| `value` / `defaultValue` | `CalendarDate \| null`            | —       | From `@internationalized/date`.              |
+| `onChange`               | `(value: CalendarDate) => void`   | —       | Fires when the value changes.                |
+| `minValue` / `maxValue`  | `CalendarDate`                    | —       | Restrict the editable range.                 |
+| `granularity`            | `'day' \| 'hour' \| 'minute' \| 'second'` | `'day'` | Smallest segment shown.              |
+| `isInvalid` / `isDisabled` | `boolean`                       | `false` | Standard validation / disabled flags.        |
+
+Forwards all props of React Aria's `DatePicker`.
+
+## Accessibility
+
+- The text input uses the same segmented model as `DateField` — type or arrow-key edit per segment.
+- The calendar trigger is a real button with `aria-haspopup` and announces the popover state.
+- The popover-locked calendar traps focus while open and returns focus to the trigger on close.

@@ -10,6 +10,8 @@ import { Card } from '@flexi-ui/card'
 import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
 import { ComboBox } from '@flexi-ui/combo-box'
 import { DateField } from '@flexi-ui/date-field'
+import { DatePicker } from '@flexi-ui/date-picker'
+import { DateRangePicker } from '@flexi-ui/date-range-picker'
 import { Dialog } from '@flexi-ui/dialog'
 import { Disclosure } from '@flexi-ui/disclosure'
 import { Divider } from '@flexi-ui/divider'
@@ -29,6 +31,7 @@ import { NumberField } from '@flexi-ui/number-field'
 import { Popover } from '@flexi-ui/popover'
 import { Progress } from '@flexi-ui/progress'
 import { Radio, RadioGroupRoot } from '@flexi-ui/radio'
+import { RangeCalendar } from '@flexi-ui/range-calendar'
 import { Ripple } from '@flexi-ui/ripple'
 import { SearchField } from '@flexi-ui/search-field'
 import { Select } from '@flexi-ui/select'
@@ -65,6 +68,8 @@ export const MDXComponents = {
   CheckboxGroup: CheckboxGroupRoot,
   ComboBox,
   DateField,
+  DatePicker,
+  DateRangePicker,
   Dialog,
   Disclosure,
   Divider,
@@ -86,6 +91,7 @@ export const MDXComponents = {
   Progress,
   Radio,
   RadioGroup: RadioGroupRoot,
+  RangeCalendar,
   Ripple,
   SearchField,
   Select,
