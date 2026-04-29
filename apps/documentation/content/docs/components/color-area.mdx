@@ -1,0 +1,71 @@
+---
+title: "Color Area"
+description: "2D plane for picking saturation and value (or any other channel pair) of a color."
+---
+
+# Color Area
+
+`ColorArea` is the 2D draggable plane in a typical color picker — pick saturation × value, or any other channel pair. It composes with `ColorSlider` (for hue) and `ColorPicker` (the state container) to build a full HSV/HSL/RGB picker. Built on React Aria's `ColorArea`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-area @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ColorArea } from '@flexi-ui/color-area'
+```
+
+## Usage
+
+<ComponentPreview name="color-area-usage" />
+
+## Sizes
+
+<ComponentPreview name="color-area-sizes" />
+
+## Inside a Color Picker
+
+Pair with `ColorSlider` (hue) inside a `ColorPicker` for the canonical color picker UI:
+
+```tsx
+<ColorPicker defaultValue="#761ae8">
+  <ColorArea />
+  <ColorSlider channel="hue" />
+</ColorPicker>
+```
+
+## Channels
+
+By default, `ColorArea` picks the saturation × value plane. Override with `xChannel` / `yChannel` to pick different combinations (e.g. red × green for an RGB picker).
+
+```tsx
+<ColorArea
+  defaultValue="rgb(127, 0, 255)"
+  xChannel="red"
+  yChannel="green"
+/>
+```
+
+## API Reference
+
+### ColorArea
+
+| Prop                     | Type                              | Default | Description                                 |
+| ------------------------ | --------------------------------- | ------- | ------------------------------------------- |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size of the plane.                   |
+| `value` / `defaultValue` | `Color \| string`                 | —       | Current color. Falls back to picker context.|
+| `onChange`               | `(value: Color) => void`          | —       | Fires while dragging.                       |
+| `onChangeEnd`            | `(value: Color) => void`          | —       | Fires when the user releases the thumb.     |
+| `xChannel` / `yChannel`  | `ColorChannel`                    | `'saturation'` / `'brightness'` | Which channels the axes drive. |
+
+Forwards all props of React Aria's `ColorArea`.
+
+## Accessibility
+
+- The thumb is keyboard-reachable. Arrow keys move the thumb by `step`, PageUp/PageDown by 10× step.
+- Screen readers announce the current channel values as the thumb moves.
+- Always pair with text-based input (`ColorField`) or labelled swatches — users who can't perceive the 2D plane need an alternative way to enter a color.

@@ -1,0 +1,115 @@
+---
+title: "Select"
+description: "Compound dropdown picker built on React Aria Select."
+---
+
+# Select
+
+`Select` is a single-value dropdown built on React Aria's `Select` + `ListBox`. The compound API exposes the trigger, popover, listbox, and option as separate parts so you can compose icons, descriptions, or rich rows without wrapping the whole thing.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/select @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Select } from '@flexi-ui/select'
+```
+
+## Anatomy
+
+```tsx
+<Select>
+  <Select.Trigger />
+  <Select.Popover>
+    <Select.Listbox>
+      <Select.Option id="...">Label</Select.Option>
+    </Select.Listbox>
+  </Select.Popover>
+</Select>
+```
+
+| Part              | Element     | Purpose                                                |
+| ----------------- | ----------- | ------------------------------------------------------ |
+| `Select`          | `div`       | Root. Owns size + selection state.                     |
+| `Select.Trigger`  | `button`    | The visible button. Renders selected value + caret.    |
+| `Select.Popover`  | `div`       | Floating panel anchored to the trigger.                |
+| `Select.Listbox`  | `ul`        | Scrollable list of options.                            |
+| `Select.Option`   | `li`        | A single option. Needs an `id`.                        |
+
+## Usage
+
+<ComponentPreview name="select-usage" />
+
+## Sizes
+
+<ComponentPreview name="select-sizes" />
+
+## Disabled option
+
+Disable a single option with `isDisabled` on `Select.Option`. Disabled options are skipped during keyboard navigation.
+
+<ComponentPreview name="select-disabled-option" />
+
+## Disabled
+
+<ComponentPreview name="select-disabled" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Select } from '@flexi-ui/select'
+
+export function ControlledSelect() {
+  const [city, setCity] = useState<string>('sf')
+
+  return (
+    <Select selectedKey={city} onSelectionChange={(key) => setCity(String(key))}>
+      <Select.Trigger />
+      <Select.Popover>
+        <Select.Listbox>
+          <Select.Option id="sf">San Francisco</Select.Option>
+          <Select.Option id="ny">New York</Select.Option>
+        </Select.Listbox>
+      </Select.Popover>
+    </Select>
+  )
+}
+```
+
+## API Reference
+
+### Select (Root)
+
+| Prop                                  | Type                       | Default | Description                                  |
+| ------------------------------------- | -------------------------- | ------- | -------------------------------------------- |
+| `size`                                | `'sm' \| 'md' \| 'lg'`     | `'md'`  | Visual size.                                 |
+| `selectedKey` / `defaultSelectedKey`  | `Key`                      | —       | Controlled / uncontrolled current option.    |
+| `onSelectionChange`                   | `(key: Key) => void`       | —       | Fires when the selection changes.            |
+| `placeholder`                         | `string`                   | —       | Trigger text when no option is selected.     |
+| `isDisabled`                          | `boolean`                  | `false` | Disables the whole select.                   |
+| `isInvalid`                           | `boolean`                  | `false` | Renders the trigger in an error state.       |
+
+Forwards all props of React Aria's `Select`.
+
+### Select.Option
+
+| Prop         | Type      | Default | Description                                |
+| ------------ | --------- | ------- | ------------------------------------------ |
+| `id`         | `Key`     | —       | Required. Reported via `selectedKey`.      |
+| `isDisabled` | `boolean` | `false` | Disables this option only.                 |
+| `textValue`  | `string`  | —       | Used for type-to-select when children isn't plain text. |
+
+Forwards all props of React Aria's `ListBoxItem`.
+
+## Accessibility
+
+- Uses `role="combobox"` on the trigger and `role="listbox"` / `role="option"` inside, with proper `aria-expanded` / `aria-controls` linkage.
+- Type-to-select works out of the box: typing focuses the matching option.
+- For options with rich children (icons, descriptions), set `textValue` so type-to-select still finds them.

@@ -1,0 +1,87 @@
+---
+title: "Checkbox"
+description: "Single checkbox and grouped multi-select with sizes, colors, and indeterminate support."
+---
+
+# Checkbox
+
+`Checkbox` is a labelled toggle for binary state. Pair it with `CheckboxGroup` to render a list of related options that share a single value array.
+
+Both components are built on React Aria Components, so keyboard navigation, focus rings, indeterminate state, and form integration come from the primitive.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/checkbox @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Checkbox, CheckboxGroup } from '@flexi-ui/checkbox'
+```
+
+## Usage
+
+<ComponentPreview name="checkbox-usage" />
+
+## Sizes
+
+<ComponentPreview name="checkbox-sizes" />
+
+## Colors
+
+Pair semantic color with the selected state. The unselected box is always neutral.
+
+<ComponentPreview name="checkbox-colors" />
+
+## Disabled
+
+<ComponentPreview name="checkbox-disabled" />
+
+## Group
+
+`CheckboxGroup` controls a list of values. Each `Checkbox` inside contributes its `value` to the array exposed via `value` / `defaultValue` / `onChange`.
+
+<ComponentPreview name="checkbox-group" />
+
+## Indeterminate
+
+`Checkbox` accepts `isIndeterminate` for "partially selected" states (e.g. a parent toggle in a tree). React Aria sets `aria-checked="mixed"` for you.
+
+```tsx
+<Checkbox isIndeterminate>Select all</Checkbox>
+```
+
+## API Reference
+
+### Checkbox
+
+| Prop         | Type                                              | Default    | Description                                |
+| ------------ | ------------------------------------------------- | ---------- | ------------------------------------------ |
+| `size`       | `'sm' \| 'md' \| 'lg'`                            | `'md'`     | Visual size.                               |
+| `color`      | `'accent' \| 'success' \| 'warning' \| 'danger'`  | `'accent'` | Selected-state tint.                       |
+| `value`      | `string`                                          | —          | Used inside `CheckboxGroup`.               |
+| `isSelected` / `defaultSelected` | `boolean`                     | —          | Controlled / uncontrolled checked state.   |
+| `isIndeterminate` | `boolean`                                    | `false`    | Mixed-state visual + ARIA.                 |
+| `isDisabled` | `boolean`                                         | `false`    | Disables interaction.                      |
+| `isInvalid`  | `boolean`                                         | `false`    | Surfaces validation error styling.         |
+
+Forwards every other prop of React Aria's `Checkbox` — `name`, `onChange`, `onBlur`, render-prop `children`, etc.
+
+### CheckboxGroup
+
+| Prop           | Type       | Default | Description                                          |
+| -------------- | ---------- | ------- | ---------------------------------------------------- |
+| `value` / `defaultValue` | `string[]` | —       | Currently selected values.                  |
+| `onChange`     | `(values: string[]) => void` | —     | Fired when the array changes.        |
+| `isDisabled`   | `boolean`  | `false` | Disables every child checkbox.                       |
+| `isInvalid`    | `boolean`  | `false` | Renders the group in an error state.                 |
+
+Forwards every other prop of React Aria's `CheckboxGroup`, including `label` and `description` slots.
+
+## Accessibility
+
+- Renders a real `<input type="checkbox">` so browsers and screen readers handle it natively.
+- The label is wired via `aria-labelledby` automatically — no `htmlFor` needed.
+- `isIndeterminate` toggles `aria-checked="mixed"` in addition to the visual state.

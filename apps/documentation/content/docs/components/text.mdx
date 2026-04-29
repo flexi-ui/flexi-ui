@@ -1,0 +1,58 @@
+---
+title: "Text"
+description: "Body-text primitive with size, tone, and weight variants."
+---
+
+# Text
+
+`Text` is the primitive for body copy — paragraphs, captions, helper text, inline labels. Use it whenever you'd reach for a plain `<p>` or `<span>` and want consistent typography that responds to theme tokens.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/text @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Text } from '@flexi-ui/text'
+```
+
+## Usage
+
+<ComponentPreview name="text-usage" />
+
+## Sizes
+
+Five steps from `xs` to `xl`. Default is `sm`.
+
+<ComponentPreview name="text-sizes" />
+
+## Tones
+
+Pick a tone that matches the *meaning* of the copy — `muted` for secondary, `success`/`danger` for state-driven content.
+
+<ComponentPreview name="text-tones" />
+
+## Weights
+
+<ComponentPreview name="text-weights" />
+
+## API Reference
+
+### Text
+
+| Prop     | Type                                                  | Default     | Description                |
+| -------- | ----------------------------------------------------- | ----------- | -------------------------- |
+| `size`   | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                | `'sm'`      | Font size step.            |
+| `tone`   | `'default' \| 'muted' \| 'success' \| 'danger'`       | `'default'` | Semantic color.            |
+| `weight` | `'normal' \| 'medium' \| 'semibold' \| 'bold'`        | `'normal'`  | Font weight.               |
+
+Forwards all props of React Aria's `Text`. Renders a `<span>` by default; use the `slot` prop to attach it to a labelled context (e.g. a `Label`'s description slot).
+
+## Accessibility
+
+- Renders a real `<span>`, so screen readers treat it like any inline text.
+- For headings, use the `Heading` component instead — `Text` doesn't add document structure.
+- Use `tone` together with text content that conveys the meaning. Don't rely on color alone to communicate errors — pair `tone="danger"` with the word "Error" or an icon.

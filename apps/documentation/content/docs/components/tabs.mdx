@@ -1,0 +1,118 @@
+---
+title: "Tabs"
+description: "Compound tab list and panels with three visual variants and three sizes."
+---
+
+# Tabs
+
+`Tabs` switches between sibling content regions. The compound API mirrors the underlying React Aria `Tabs` primitive: a `Tabs.List` of `Tabs.Tab` triggers paired with `Tabs.Panel` regions, all linked by `id`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/tabs @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Tabs } from '@flexi-ui/tabs'
+```
+
+## Anatomy
+
+```tsx
+<Tabs>
+  <Tabs.List>
+    <Tabs.Tab id="one">One</Tabs.Tab>
+    <Tabs.Tab id="two">Two</Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel id="one">First panel</Tabs.Panel>
+  <Tabs.Panel id="two">Second panel</Tabs.Panel>
+</Tabs>
+```
+
+| Part         | Element     | Purpose                                    |
+| ------------ | ----------- | ------------------------------------------ |
+| `Tabs`       | `div`       | Root. Owns variant/size + selection state. |
+| `Tabs.List`  | `div`       | Container of triggers.                     |
+| `Tabs.Tab`   | `button`    | Trigger. Needs an `id` matching a panel.   |
+| `Tabs.Panel` | `div`       | Content region. Matches a tab's `id`.      |
+
+## Usage
+
+<ComponentPreview name="tabs-usage" />
+
+## Variants
+
+Three visual treatments. The default is `underlined`.
+
+<ComponentPreview name="tabs-variants" />
+
+## Sizes
+
+<ComponentPreview name="tabs-sizes" />
+
+## Disabled tab
+
+Per-tab disabling via `isDisabled`. Disabled tabs are skipped during keyboard navigation.
+
+<ComponentPreview name="tabs-disabled" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Tabs } from '@flexi-ui/tabs'
+
+export function ControlledTabs() {
+  const [selected, setSelected] = useState<string>('overview')
+
+  return (
+    <Tabs selectedKey={selected} onSelectionChange={(key) => setSelected(String(key))}>
+      <Tabs.List>
+        <Tabs.Tab id="overview">Overview</Tabs.Tab>
+        <Tabs.Tab id="activity">Activity</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel id="overview">Overview</Tabs.Panel>
+      <Tabs.Panel id="activity">Activity</Tabs.Panel>
+    </Tabs>
+  )
+}
+```
+
+## API Reference
+
+### Tabs (Root)
+
+| Prop                  | Type                                            | Default       | Description                                |
+| --------------------- | ----------------------------------------------- | ------------- | ------------------------------------------ |
+| `variant`             | `'underlined' \| 'solid' \| 'bordered'`         | `'underlined'`| Visual style.                              |
+| `size`                | `'sm' \| 'md' \| 'lg'`                          | `'md'`        | Visual size.                               |
+| `selectedKey` / `defaultSelectedKey` | `string`                          | —             | Controlled / uncontrolled active tab.      |
+| `onSelectionChange`   | `(key: Key) => void`                            | —             | Fires when the active tab changes.         |
+| `orientation`         | `'horizontal' \| 'vertical'`                    | `'horizontal'`| Layout direction.                          |
+| `keyboardActivation`  | `'automatic' \| 'manual'`                       | `'automatic'` | Whether arrow keys auto-activate panels.   |
+
+Forwards all props of React Aria's `Tabs`.
+
+### Tabs.Tab
+
+| Prop         | Type     | Default | Description                                       |
+| ------------ | -------- | ------- | ------------------------------------------------- |
+| `id`         | `string` | —       | Required. Pairs the tab with its `Panel`.         |
+| `isDisabled` | `boolean`| `false` | Disables interaction and keyboard reachability.   |
+
+### Tabs.Panel
+
+| Prop | Type     | Default | Description                                    |
+| ---- | -------- | ------- | ---------------------------------------------- |
+| `id` | `string` | —       | Required. Pairs the panel with a `Tab`.        |
+
+## Accessibility
+
+- Renders `role="tablist"` / `role="tab"` / `role="tabpanel"` with the correct `aria-controls` / `aria-labelledby` linkage.
+- Arrow keys move between tabs (Home/End jump to first/last).
+- `keyboardActivation="manual"` requires Enter/Space to activate after focusing — useful when each panel is heavy to render.

@@ -1,0 +1,98 @@
+---
+title: "Breadcrumbs"
+description: "Hierarchical trail of links for navigating back up a page tree."
+---
+
+# Breadcrumbs
+
+`Breadcrumbs` shows the user's location in a hierarchy and lets them jump back up to a parent. Each crumb is a `Breadcrumbs.Item` containing a `Breadcrumbs.Link`. The last item should be the current page (no `href` — it'll render as plain text).
+
+Built on React Aria's `Breadcrumbs` + `Breadcrumb` + `Link`, so keyboard reachability and screen-reader semantics come from the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/breadcrumbs @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Breadcrumbs } from '@flexi-ui/breadcrumbs'
+```
+
+## Anatomy
+
+```tsx
+<Breadcrumbs>
+  <Breadcrumbs.Item>
+    <Breadcrumbs.Link href="/" />
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item>
+    <Breadcrumbs.Link>Current</Breadcrumbs.Link>
+  </Breadcrumbs.Item>
+</Breadcrumbs>
+```
+
+| Part                  | Element | Purpose                                       |
+| --------------------- | ------- | --------------------------------------------- |
+| `Breadcrumbs`         | `nav`   | Root. Renders `aria-label="Breadcrumb"`.      |
+| `Breadcrumbs.Item`    | `li`    | Wraps a single crumb plus its separator.      |
+| `Breadcrumbs.Link`    | `a`     | The crumb itself. Omit `href` for the leaf.   |
+
+## Usage
+
+<ComponentPreview name="breadcrumbs-usage" />
+
+## Sizes
+
+<ComponentPreview name="breadcrumbs-sizes" />
+
+## Truncating long trails
+
+Breadcrumbs render whatever JSX you give them, so you can collapse middle segments behind an ellipsis:
+
+```tsx
+<Breadcrumbs>
+  <Breadcrumbs.Item>
+    <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item>
+    <span aria-label="Hidden segments">…</span>
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item>
+    <Breadcrumbs.Link href="/projects/flexi/settings">Settings</Breadcrumbs.Link>
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item>
+    <Breadcrumbs.Link>General</Breadcrumbs.Link>
+  </Breadcrumbs.Item>
+</Breadcrumbs>
+```
+
+## API Reference
+
+### Breadcrumbs
+
+| Prop   | Type                              | Default | Description    |
+| ------ | --------------------------------- | ------- | -------------- |
+| `size` | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.   |
+
+Forwards all props of React Aria's `Breadcrumbs`.
+
+### Breadcrumbs.Item
+
+Forwards every prop of React Aria's `Breadcrumb`.
+
+### Breadcrumbs.Link
+
+| Prop   | Type      | Default | Description                                                     |
+| ------ | --------- | ------- | --------------------------------------------------------------- |
+| `href` | `string`  | —       | Omit on the *current* page link; React Aria styles it as text. |
+
+Forwards all props of React Aria's `Link` — `onPress`, `target`, etc.
+
+## Accessibility
+
+- The root renders `<nav aria-label="Breadcrumb">`, so screen readers announce the navigation landmark.
+- The current page (the last item) is marked with `aria-current="page"` automatically when its link omits `href`.
+- Keep crumb labels short — verbose breadcrumb labels feel cluttered and bury the current page name.

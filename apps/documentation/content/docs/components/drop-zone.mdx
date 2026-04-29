@@ -1,0 +1,93 @@
+---
+title: "Drop Zone"
+description: "Drag-and-drop target for files and rich content with hover state styling."
+---
+
+# Drop Zone
+
+`DropZone` accepts dragged items — files, text, internal items — and exposes hover/drop state via data attributes. Pair with `FileTrigger` to give users both drag-and-drop *and* a click-to-browse fallback.
+
+Built on React Aria's `DropZone`. Keyboard activation, focus rings, and `data-drop-target` for styling come from the primitive.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/drop-zone @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { DropZone } from '@flexi-ui/drop-zone'
+```
+
+## Usage
+
+<ComponentPreview name="drop-zone-usage" />
+
+## Sizes
+
+<ComponentPreview name="drop-zone-sizes" />
+
+## With FileTrigger
+
+A common pattern: render a drop zone for drag users *and* a button for click users. Both feed the same upload handler.
+
+<ComponentPreview name="drop-zone-with-trigger" />
+
+## Reading dropped content
+
+`onDrop` receives an event with `items`. Each item has a `kind` (`'file'`, `'text'`, `'directory'`) and a getter:
+
+```tsx
+<DropZone
+  onDrop={async (e) => {
+    const files = await Promise.all(
+      e.items
+        .filter((item) => item.kind === 'file')
+        .map((item) => item.getFile()),
+    )
+    upload(files)
+  }}
+/>
+```
+
+Restrict accepted types via `getDropOperation`:
+
+```tsx
+<DropZone
+  getDropOperation={(types) =>
+    types.has('image/png') || types.has('image/jpeg') ? 'copy' : 'cancel'
+  }
+  onDrop={...}
+/>
+```
+
+## API Reference
+
+### DropZone
+
+| Prop                | Type                                                | Default | Description                                  |
+| ------------------- | --------------------------------------------------- | ------- | -------------------------------------------- |
+| `size`              | `'sm' \| 'md' \| 'lg'`                              | `'md'`  | Visual size.                                 |
+| `onDrop`            | `(e: DropEvent) => void`                            | —       | Fires when content is dropped.               |
+| `onDropEnter`       | `(e: DropEnterEvent) => void`                       | —       | Fires when content enters the zone.          |
+| `onDropExit`        | `(e: DropExitEvent) => void`                        | —       | Fires when content leaves without dropping.  |
+| `getDropOperation`  | `(types: Set<string>) => DropOperation`             | —       | Decide whether to accept based on MIME types.|
+| `isDisabled`        | `boolean`                                           | `false` | Reject all drops.                            |
+
+Forwards all props of React Aria's `DropZone`. Renders `data-drop-target="true"` while content hovers — style it with CSS:
+
+```css
+.drop-zone[data-drop-target='true'] {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-color: var(--accent);
+}
+```
+
+## Accessibility
+
+- Renders `role="button"` with the drop zone announced as activatable. Pressing Enter / Space fires the same picker as `FileTrigger`.
+- Keyboard users can drop content via the OS's "Move to clipboard / paste" affordance.
+- Always include a visible label or instructions inside the zone so users know what's accepted.
+- Pair with `FileTrigger` for users who can't or won't drag.

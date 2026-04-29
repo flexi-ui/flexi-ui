@@ -1,0 +1,113 @@
+---
+title: "Combo Box"
+description: "Searchable dropdown that filters options as the user types."
+---
+
+# Combo Box
+
+`ComboBox` combines a text input with a popover list — users type to filter, then pick. It's the right choice when the option list is long enough that a `Select` becomes unwieldy. Built on React Aria's `ComboBox`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/combo-box @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ComboBox } from '@flexi-ui/combo-box'
+```
+
+## Anatomy
+
+```tsx
+<ComboBox label="...">
+  <ComboBox.Popover>
+    <ComboBox.Listbox>
+      <ComboBox.Option id="...">Label</ComboBox.Option>
+    </ComboBox.Listbox>
+  </ComboBox.Popover>
+</ComboBox>
+```
+
+| Part                | Element  | Purpose                                                |
+| ------------------- | -------- | ------------------------------------------------------ |
+| `ComboBox`          | `div`    | Root. Renders the text input + dropdown trigger.       |
+| `ComboBox.Popover`  | `div`    | Floating panel anchored to the input.                  |
+| `ComboBox.Listbox`  | `ul`     | Scrollable list of filtered options.                   |
+| `ComboBox.Option`   | `li`     | A single option. Needs an `id`.                        |
+
+## Usage
+
+<ComponentPreview name="combo-box-usage" />
+
+## Sizes
+
+<ComponentPreview name="combo-box-sizes" />
+
+## Disabled
+
+<ComponentPreview name="combo-box-disabled" />
+
+## Async / dynamic options
+
+The list of options is just children — render them from any data source. Use `inputValue` / `onInputChange` to drive a server-side filter:
+
+```tsx
+'use client'
+
+import { useState, useMemo } from 'react'
+import { ComboBox } from '@flexi-ui/combo-box'
+
+export function CountryPicker({ countries }: { countries: { id: string; name: string }[] }) {
+  const [query, setQuery] = useState('')
+
+  const filtered = useMemo(
+    () => countries.filter((c) => c.name.toLowerCase().includes(query.toLowerCase())),
+    [countries, query],
+  )
+
+  return (
+    <ComboBox inputValue={query} onInputChange={setQuery} label="Country">
+      <ComboBox.Popover>
+        <ComboBox.Listbox>
+          {filtered.map((c) => (
+            <ComboBox.Option key={c.id} id={c.id}>
+              {c.name}
+            </ComboBox.Option>
+          ))}
+        </ComboBox.Listbox>
+      </ComboBox.Popover>
+    </ComboBox>
+  )
+}
+```
+
+## API Reference
+
+### ComboBox (Root)
+
+| Prop                                  | Type                              | Default | Description                                  |
+| ------------------------------------- | --------------------------------- | ------- | -------------------------------------------- |
+| `size`                                | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                                 |
+| `label`                               | `string`                          | —       | Visible label rendered above the input.      |
+| `inputValue` / `defaultInputValue`    | `string`                          | —       | Controlled / uncontrolled text in the input. |
+| `onInputChange`                       | `(value: string) => void`         | —       | Fires on every keystroke.                    |
+| `selectedKey` / `defaultSelectedKey`  | `Key`                             | —       | Currently chosen option id.                  |
+| `onSelectionChange`                   | `(key: Key) => void`              | —       | Fires when the chosen option changes.        |
+| `isDisabled`                          | `boolean`                         | `false` | Disables the field.                          |
+| `allowsCustomValue`                   | `boolean`                         | `false` | Permit values that aren't in the list.       |
+
+Forwards all props of React Aria's `ComboBox`.
+
+### ComboBox.Option
+
+Forwards all props of React Aria's `ListBoxItem`. Set `textValue` if children isn't plain text.
+
+## Accessibility
+
+- The input has `role="combobox"` with `aria-expanded` / `aria-controls` linking to the listbox.
+- Arrow keys navigate options; Enter selects; Escape closes the popover.
+- Type-ahead filtering uses each option's text content (or `textValue` if set).
+- Keep the trigger button (`>`) as the only thing inside the input row that's not the input itself — assistive tech expects exactly that combo-box pattern.

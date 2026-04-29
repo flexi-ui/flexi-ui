@@ -1,0 +1,67 @@
+---
+title: "Textarea"
+description: "Standalone multi-line text input with label, description, and error message slots."
+---
+
+# Textarea
+
+`Textarea` is a vanilla, controlled-or-uncontrolled multi-line text input with built-in label, description, and error slots. It's a lighter alternative to `TextArea` from `@flexi-ui/input` — pick `Textarea` when you don't need React Aria's `TextField` validation contract.
+
+## When to use which
+
+| Use case                              | Reach for                          |
+| ------------------------------------- | ---------------------------------- |
+| Inside a `Form` with native validation | `TextArea` (from `@flexi-ui/input`) |
+| Standalone field outside a form        | `Textarea` (this package)          |
+
+The two have nearly identical API surfaces; the difference is whether they hook into React Aria's form pipeline.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/textarea @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Textarea } from '@flexi-ui/textarea'
+```
+
+## Usage
+
+<ComponentPreview name="textarea-usage" />
+
+## Sizes
+
+<ComponentPreview name="textarea-sizes" />
+
+## With description
+
+<ComponentPreview name="textarea-description" />
+
+## Error state
+
+<ComponentPreview name="textarea-error" />
+
+## API Reference
+
+### Textarea
+
+| Prop           | Type                       | Default | Description                                       |
+| -------------- | -------------------------- | ------- | ------------------------------------------------- |
+| `size`         | `'sm' \| 'md' \| 'lg'`     | `'md'`  | Visual size.                                      |
+| `label`        | `string`                   | —       | Visible label rendered above the textarea.        |
+| `description`  | `string`                   | —       | Helper copy under the field. Hidden when error.   |
+| `errorMessage` | `string`                   | —       | Error copy under the field. Replaces description. |
+| `isInvalid`    | `boolean`                  | `false` | Renders the field in an error state.              |
+| `rows`         | `number`                   | —       | Visible row count. Forwarded to the native textarea. |
+
+Forwards every other prop of the native `<textarea>` element — `value`, `defaultValue`, `onChange`, `name`, `placeholder`, `maxLength`, etc.
+
+## Accessibility
+
+- Renders a real `<textarea>`, so screen readers and forms see it as a standard text area.
+- The label is associated via `htmlFor` automatically.
+- `errorMessage` is rendered in a paragraph adjacent to the field; its `aria-invalid` reflects `isInvalid` for assistive tech.
+- For *forms* that should validate on submit, use `TextArea` from `@flexi-ui/input` — it integrates with React Aria's `Form` constraint API.

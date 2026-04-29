@@ -1,0 +1,75 @@
+---
+title: "Time Field"
+description: "Segmented time input with 12- or 24-hour clock and locale-aware formatting."
+---
+
+# Time Field
+
+`TimeField` is the time-only counterpart to `DateField` — segmented hour / minute / (optionally second) editing with locale-aware formatting and 12/24-hour clock support. Built on React Aria's `TimeField`.
+
+For combined date + time, reach for `DateField` with `granularity="minute"` (or `"second"`).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/time-field @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { TimeField } from '@flexi-ui/time-field'
+```
+
+## Usage
+
+<ComponentPreview name="time-field-usage" />
+
+## Sizes
+
+<ComponentPreview name="time-field-sizes" />
+
+## Hour cycle
+
+`hourCycle={12}` forces an AM/PM clock; `hourCycle={24}` forces a 24-hour clock. Without this prop, the user's locale decides.
+
+<ComponentPreview name="time-field-hour-cycle" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { Time } from '@internationalized/date'
+import { TimeField } from '@flexi-ui/time-field'
+import { useState } from 'react'
+
+export function MeetingTime() {
+  const [value, setValue] = useState<Time | null>(new Time(9, 30))
+
+  return <TimeField label="Meeting" value={value} onChange={setValue} />
+}
+```
+
+## API Reference
+
+### TimeField
+
+| Prop                      | Type                              | Default | Description                                    |
+| ------------------------- | --------------------------------- | ------- | ---------------------------------------------- |
+| `size`                    | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                                   |
+| `label`                   | `string`                          | —       | Visible label rendered above the field.        |
+| `value` / `defaultValue`  | `Time \| null`                    | —       | From `@internationalized/date`.                |
+| `onChange`                | `(value: Time) => void`           | —       | Fires when the value changes.                  |
+| `hourCycle`               | `12 \| 24`                        | —       | Force a clock format. Defaults to user locale. |
+| `granularity`             | `'hour' \| 'minute' \| 'second'`  | `'minute'` | Smallest segment shown.                    |
+| `minValue` / `maxValue`   | `Time`                            | —       | Restrict the editable range.                   |
+| `isDisabled`              | `boolean`                         | `false` | Disables editing.                              |
+
+Forwards all props of React Aria's `TimeField`.
+
+## Accessibility
+
+- Each segment is independently focusable; arrow keys edit, Tab moves between segments.
+- AM/PM toggles via Up/Down arrows like any other segment when `hourCycle={12}`.
+- Always pass `label` (or `aria-label`) so screen readers announce *what* time is being picked.

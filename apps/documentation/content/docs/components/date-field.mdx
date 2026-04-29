@@ -1,0 +1,75 @@
+---
+title: "Date Field"
+description: "Locale-aware segmented date input with optional time granularity."
+---
+
+# Date Field
+
+`DateField` is a segmented date input — month, day, year (and optionally hour/minute) appear as individual editable spans. Type or use arrow keys to change each segment. Built on React Aria's `DateField`, so locale parsing, validation, and ARIA wiring come from the primitive.
+
+For a date *picker* with a popup calendar, reach for [`DatePicker`](/docs/components/date-picker). For a calendar grid only, [`Calendar`](/docs/components/calendar).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/date-field @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { DateField } from '@flexi-ui/date-field'
+```
+
+## Usage
+
+<ComponentPreview name="date-field-usage" />
+
+## Sizes
+
+<ComponentPreview name="date-field-sizes" />
+
+## Granularity
+
+`granularity` controls which segments are editable. The default `day` shows MM/DD/YYYY; `hour` adds an hour segment; `minute` adds minutes (and seconds via `granularity="second"`).
+
+<ComponentPreview name="date-field-granularity" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { CalendarDate } from '@internationalized/date'
+import { DateField } from '@flexi-ui/date-field'
+import { useState } from 'react'
+
+export function StartDate() {
+  const [value, setValue] = useState<CalendarDate | null>(null)
+
+  return <DateField label="Start" value={value} onChange={setValue} />
+}
+```
+
+## API Reference
+
+### DateField
+
+| Prop                        | Type                              | Default | Description                                  |
+| --------------------------- | --------------------------------- | ------- | -------------------------------------------- |
+| `size`                      | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                                 |
+| `label`                     | `string`                          | —       | Visible label rendered above the field.      |
+| `value` / `defaultValue`    | `CalendarDate \| null`            | —       | From `@internationalized/date`.              |
+| `onChange`                  | `(value: CalendarDate) => void`   | —       | Fires when the value changes.                |
+| `granularity`               | `'day' \| 'hour' \| 'minute' \| 'second'` | `'day'` | Smallest segment shown.                |
+| `minValue` / `maxValue`     | `CalendarDate`                    | —       | Restrict the editable range.                 |
+| `isInvalid`                 | `boolean`                         | `false` | Renders the error state.                     |
+| `isDisabled`                | `boolean`                         | `false` | Disables editing.                            |
+
+Forwards all props of React Aria's `DateField`. Date values use [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) types — install it as a peer if you're constructing values manually.
+
+## Accessibility
+
+- Each segment is independently focusable. Arrow keys cycle the value, type characters jump-edit, Tab moves between segments.
+- Locale-aware: with `locale="de-DE"` the segments render as DD.MM.YYYY without changing the underlying value.
+- Pair with `errorMessage` for validation feedback; React Aria wires `aria-describedby` automatically.

@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { ArrowRight, Github } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import { siteConfig } from '@/config/site'
 
 export const Hero = () => {
@@ -25,7 +25,7 @@ export const Hero = () => {
           className="inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90"
         >
           Get started
-          <ArrowRight className="h-4 w-4" />
+          <Icon className="h-4 w-4" icon="gravity-ui:arrow-right" />
         </NextLink>
         <a
           href={siteConfig.links.github}
@@ -33,7 +33,7 @@ export const Hero = () => {
           rel="noopener noreferrer"
           className="inline-flex h-11 items-center gap-2 rounded-full border border-border px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
         >
-          <Github className="h-4 w-4" />
+          <Icon className="h-4 w-4" icon="gravity-ui:logo-github" />
           GitHub
         </a>
       </div>

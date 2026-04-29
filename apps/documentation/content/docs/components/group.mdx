@@ -1,0 +1,63 @@
+---
+title: "Group"
+description: "Generic container that announces a related set of controls to assistive tech."
+---
+
+# Group
+
+`Group` is a thin wrapper that bundles related controls — a row of filter buttons, a toolbar of icons, a multi-input compound field. It applies `role="group"` so screen readers can announce the relationship, and exposes `data-focus-within` / `data-disabled` / `data-invalid` for state-driven styling.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/group @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Group } from '@flexi-ui/group'
+```
+
+## Usage
+
+<ComponentPreview name="group-usage" />
+
+## Orientation
+
+Pass `orientation="vertical"` when the controls stack instead of sitting side by side.
+
+<ComponentPreview name="group-orientation" />
+
+## State styling
+
+`Group` exposes data attributes you can target:
+
+```css
+.group[data-focus-within='true'] {
+  outline: 2px solid var(--color-accent);
+}
+.group[data-disabled='true'] {
+  opacity: 0.5;
+}
+```
+
+The styles ship as defaults in `@flexi-ui/styles` — override or extend in your own CSS as needed.
+
+## API Reference
+
+### Group
+
+| Prop          | Type                              | Default        | Description                                  |
+| ------------- | --------------------------------- | -------------- | -------------------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'`      | `'horizontal'` | Layout direction.                            |
+| `aria-label`  | `string`                          | —              | Accessible name for the group.               |
+| `aria-labelledby` | `string`                      | —              | ID reference for an external label.          |
+
+Forwards all props of React Aria's `Group`. The standard render-prop API gives you `isFocusWithin`, `isInvalid`, etc. inside the className function.
+
+## Accessibility
+
+- Renders `role="group"` so screen readers announce the relationship.
+- Always pass `aria-label` (or wire `aria-labelledby` to an existing label) — a group without a name is harder for screen-reader users to skim.
+- For *form* groupings with a visible legend, prefer `<fieldset>` + `<legend>` over `Group` — the native semantics carry more meaning.

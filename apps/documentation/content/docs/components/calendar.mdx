@@ -1,0 +1,92 @@
+---
+title: "Calendar"
+description: "Standalone month grid with prev/next navigation and date selection."
+---
+
+# Calendar
+
+`Calendar` renders a month grid where users pick a single date. It includes a header with prev/next month buttons and a focused date that arrow keys move. Built on React Aria's `Calendar`.
+
+For *range* selection, see [`RangeCalendar`](#). For a calendar inside a popover triggered by an input, see [`DatePicker`](/docs/components/date-picker).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/calendar @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Calendar } from '@flexi-ui/calendar'
+```
+
+## Anatomy
+
+```tsx
+<Calendar>
+  <Calendar.Header />
+  <Calendar.Grid />
+</Calendar>
+```
+
+`Calendar` renders `Calendar.Header` + `Calendar.Grid` automatically when you pass no children, so the simple form is just `<Calendar />`.
+
+| Part                | Element  | Purpose                                       |
+| ------------------- | -------- | --------------------------------------------- |
+| `Calendar`          | `div`    | Root with the month state.                    |
+| `Calendar.Header`   | `header` | Prev/next nav + month/year heading.           |
+| `Calendar.Grid`     | `table`  | The month grid itself.                        |
+
+## Usage
+
+<ComponentPreview name="calendar-usage" />
+
+## Min / max bounds
+
+Restrict selectable dates with `minValue` / `maxValue`. Disabled days remain visible but can't be focused or activated.
+
+<ComponentPreview name="calendar-min-max" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { CalendarDate, today, getLocalTimeZone } from '@internationalized/date'
+import { Calendar } from '@flexi-ui/calendar'
+import { useState } from 'react'
+
+export function ReviewDate() {
+  const [value, setValue] = useState<CalendarDate>(today(getLocalTimeZone()))
+
+  return <Calendar aria-label="Review date" value={value} onChange={setValue} />
+}
+```
+
+## API Reference
+
+### Calendar
+
+| Prop                           | Type                              | Default | Description                                |
+| ------------------------------ | --------------------------------- | ------- | ------------------------------------------ |
+| `value` / `defaultValue`       | `CalendarDate \| null`            | —       | Currently selected date.                   |
+| `onChange`                     | `(value: CalendarDate) => void`   | —       | Fires when the user picks a new date.      |
+| `focusedValue` / `defaultFocusedValue` | `CalendarDate`            | —       | Date with keyboard focus.                  |
+| `minValue` / `maxValue`        | `CalendarDate`                    | —       | Selectable range.                          |
+| `isDateUnavailable`            | `(date: CalendarDate) => boolean` | —       | Function-based disable rule (e.g. weekends). |
+| `isDisabled` / `isReadOnly`    | `boolean`                         | `false` | Disable interaction or editing.            |
+| `pageBehavior`                 | `'visible' \| 'single'`           | `'visible'` | How prev/next paginates.               |
+
+Forwards all props of React Aria's `Calendar`. Date values use [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/).
+
+### Calendar.Header / Calendar.Grid
+
+Native props plus `className` and `children`. Override the children to customize the layout — e.g. render two grids side-by-side for a two-month calendar.
+
+## Accessibility
+
+- Renders `role="application"` on the root and `role="grid"` on the day grid.
+- Arrow keys move focus between days; PageUp/Down moves by month; Home/End jumps to month bounds.
+- The current month is announced via the heading; days expose `aria-selected` and `aria-disabled` based on state.
+- Always pass `aria-label` (or `aria-labelledby`) so the calendar has an accessible name.

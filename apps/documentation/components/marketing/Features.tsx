@@ -1,26 +1,26 @@
-import { Accessibility, Boxes, Palette, Zap } from 'lucide-react'
+import { Icon } from '@iconify/react'
 
 const features = [
   {
-    icon: Boxes,
+    icon: 'gravity-ui:cubes-3',
     title: 'Modular by design',
     description:
       'Every component is an independent package. Install only the pieces your app actually uses.',
   },
   {
-    icon: Accessibility,
+    icon: 'gravity-ui:person-magnifier',
     title: 'Accessible primitives',
     description:
       'Built on React Aria Components with full keyboard, screen-reader, and RTL support out of the box.',
   },
   {
-    icon: Palette,
+    icon: 'gravity-ui:palette',
     title: 'Themeable tokens',
     description:
       'BEM-structured CSS layered on Tailwind v4 tokens. Theme the whole system with a few variables.',
   },
   {
-    icon: Zap,
+    icon: 'gravity-ui:bolt',
     title: 'Modern stack',
     description:
       'React 19, TypeScript 5.7, Tailwind v4, and tailwind-variants. No legacy baggage.',
@@ -45,7 +45,7 @@ export const Features = () => {
             key={feature.title}
             className="rounded-lg border border-border bg-surface/50 p-5 transition-colors hover:border-foreground/20"
           >
-            <feature.icon className="h-5 w-5 text-accent" />
+            <Icon className="h-5 w-5 text-accent" icon={feature.icon} />
             <h3 className="mt-4 text-base font-semibold text-foreground">{feature.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
           </div>

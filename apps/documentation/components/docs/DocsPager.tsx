@@ -1,7 +1,7 @@
 'use client'
 
 import NextLink from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { Icon } from '@iconify/react'
 import manifest from '@/config/routes.json'
 import type { Route } from '@/libs/docs/utils'
 
@@ -33,7 +33,10 @@ export const DocsPager = ({ currentRoute }: DocsPagerProps) => {
           href={prevRoute.path || '#'}
           className="group flex flex-1 items-center gap-3 rounded-lg border border-border bg-surface/50 p-4 transition-colors hover:border-foreground/20"
         >
-          <ChevronLeft className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+          <Icon
+            className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground"
+            icon="gravity-ui:chevron-left"
+          />
           <div className="flex flex-col items-start">
             <span className="text-xs text-muted-foreground">Previous</span>
             <span className="text-sm font-semibold text-foreground">{prevRoute.title}</span>
@@ -52,7 +55,10 @@ export const DocsPager = ({ currentRoute }: DocsPagerProps) => {
             <span className="text-xs text-muted-foreground">Next</span>
             <span className="text-sm font-semibold text-foreground">{nextRoute.title}</span>
           </div>
-          <ChevronRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+          <Icon
+            className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground"
+            icon="gravity-ui:chevron-right"
+          />
         </NextLink>
       ) : (
         <div className="flex-1" />

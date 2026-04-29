@@ -1,0 +1,73 @@
+---
+title: "Color Wheel"
+description: "Circular hue picker — drag to set the hue channel."
+---
+
+# Color Wheel
+
+`ColorWheel` is a circular draggable picker dedicated to the hue channel. Pair it with a `ColorArea` (saturation × value) for the classic Photoshop-style color picker, or use it standalone when only hue matters.
+
+Built on React Aria's `ColorWheel`. The wheel renders as an SVG; sizes preset the inner/outer radii, but you can override them with `innerRadius` / `outerRadius` for fully custom layouts.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-wheel @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ColorWheel } from '@flexi-ui/color-wheel'
+```
+
+## Usage
+
+<ComponentPreview name="color-wheel-usage" />
+
+## Sizes
+
+<ComponentPreview name="color-wheel-sizes" />
+
+## Custom radii
+
+The default radii come from `size`. Override either to fit a custom design:
+
+```tsx
+<ColorWheel innerRadius={70} outerRadius={120} defaultValue="hsl(0, 100%, 50%)" />
+```
+
+## Inside a Color Picker
+
+Wheel + area is the canonical "freeform" layout:
+
+```tsx
+<ColorPicker defaultValue="hsl(40, 100%, 50%)">
+  <div className="relative">
+    <ColorWheel />
+    {/* Center the area inside the wheel via absolute positioning */}
+    <ColorArea className="absolute inset-0 m-auto" xChannel="saturation" yChannel="brightness" />
+  </div>
+</ColorPicker>
+```
+
+## API Reference
+
+### ColorWheel
+
+| Prop                     | Type                              | Default | Description                                  |
+| ------------------------ | --------------------------------- | ------- | -------------------------------------------- |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size preset (sets inner + outer radii). |
+| `outerRadius`            | `number`                          | from size | Override the outer radius (in pixels).     |
+| `innerRadius`            | `number`                          | from size | Override the inner radius (in pixels).     |
+| `value` / `defaultValue` | `Color \| string`                 | —       | Current color. Falls back to picker context. |
+| `onChange`               | `(value: Color) => void`          | —       | Fires while dragging.                        |
+| `onChangeEnd`            | `(value: Color) => void`          | —       | Fires when the user releases the thumb.      |
+
+Forwards all props of React Aria's `ColorWheel`.
+
+## Accessibility
+
+- The thumb is keyboard-reachable. Arrow keys rotate the hue by `step`; PageUp/Down step by 10×.
+- Screen readers announce the current hue value as the thumb moves.
+- Pair with `ColorField` or labelled swatches for users who can't operate the visual wheel.

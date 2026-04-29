@@ -1,0 +1,64 @@
+---
+title: "Progress"
+description: "Determinate or indeterminate progress bar with sizes, semantic colors, and labels."
+---
+
+# Progress
+
+`Progress` is a horizontal bar that shows how much of a task is complete. Use the determinate form (`value`) when you can quantify progress, and the indeterminate form (`isIndeterminate`) when you can't.
+
+The component sets the correct `role="progressbar"` and `aria-value*` attributes for assistive tech.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/progress @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Progress } from '@flexi-ui/progress'
+```
+
+## Usage
+
+<ComponentPreview name="progress-usage" />
+
+## Sizes
+
+<ComponentPreview name="progress-sizes" />
+
+## Colors
+
+<ComponentPreview name="progress-colors" />
+
+## Indeterminate
+
+When you don't know how long a task will take, render an indeterminate bar. The animation tells users that work is still happening without committing to a finish line.
+
+<ComponentPreview name="progress-indeterminate" />
+
+## API Reference
+
+### Progress
+
+| Prop              | Type                                              | Default    | Description                                |
+| ----------------- | ------------------------------------------------- | ---------- | ------------------------------------------ |
+| `value`           | `number`                                          | `0`        | Current progress value.                    |
+| `minValue`        | `number`                                          | `0`        | Lower bound of the value range.            |
+| `maxValue`        | `number`                                          | `100`      | Upper bound of the value range.            |
+| `size`            | `'sm' \| 'md' \| 'lg'`                            | `'md'`     | Visual size.                               |
+| `color`           | `'accent' \| 'success' \| 'warning' \| 'danger'`  | `'accent'` | Bar color.                                 |
+| `label`           | `string`                                          | —          | Visible label rendered above the bar.      |
+| `showValueLabel`  | `boolean`                                         | `false`    | Render the percentage next to the label.   |
+| `isIndeterminate` | `boolean`                                         | `false`    | Switch to the looping indeterminate state. |
+| `isStriped`       | `boolean`                                         | `false`    | Render diagonal stripes inside the bar.    |
+
+Extends native `div` props (omits `color`).
+
+## Accessibility
+
+- Renders `role="progressbar"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax` reflecting the current state.
+- For long-running tasks paired with a spinner elsewhere on screen, use `label` so screen readers announce *what's* progressing — not just that something is.
+- The indeterminate variant omits `aria-valuenow`, telling screen readers the value is unknown.

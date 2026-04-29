@@ -1,0 +1,87 @@
+---
+title: "Color Picker"
+description: "Headless color state container that wires its children together."
+---
+
+# Color Picker
+
+`ColorPicker` is the state container that ties color sub-components together — `ColorArea`, `ColorSlider`, `ColorField`, `ColorSwatch`, `ColorSwatchPicker`. It owns the current color value and shares it with descendants via React Aria context. Compose only the parts your UX needs.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-picker @flexi-ui/styles
+```
+
+You'll typically also want one or more of:
+
+```bash
+pnpm add @flexi-ui/color-swatch @flexi-ui/color-swatch-picker @flexi-ui/color-area @flexi-ui/color-slider @flexi-ui/color-field
+```
+
+## Import
+
+```tsx
+import { ColorPicker } from '@flexi-ui/color-picker'
+```
+
+## Usage
+
+A simple swatch-only picker — `ColorSwatch` reads from the picker context, `ColorSwatchPicker` drives the value.
+
+<ComponentPreview name="color-picker-usage" />
+
+## Anatomy
+
+`ColorPicker` itself is a state container. Compose the visual parts you need:
+
+```tsx
+<ColorPicker label="Brand color" defaultValue="#761ae8">
+  <ColorArea />          {/* 2D saturation/value plane */}
+  <ColorSlider channel="hue" />
+  <ColorField />         {/* Hex / RGB text input */}
+  <ColorSwatchPicker>
+    <ColorSwatchPicker.Item color="#761ae8" />
+    <ColorSwatchPicker.Item color="#17c964" />
+  </ColorSwatchPicker>
+</ColorPicker>
+```
+
+## Controlled
+
+```tsx
+'use client'
+
+import { ColorPicker } from '@flexi-ui/color-picker'
+import { ColorSwatch } from '@flexi-ui/color-swatch'
+import type { Color } from 'react-aria-components'
+import { parseColor } from 'react-aria-components'
+import { useState } from 'react'
+
+export function BrandPicker() {
+  const [color, setColor] = useState<Color>(parseColor('#761ae8'))
+
+  return (
+    <ColorPicker value={color} onChange={setColor}>
+      <ColorSwatch />
+    </ColorPicker>
+  )
+}
+```
+
+## API Reference
+
+### ColorPicker
+
+| Prop                     | Type                              | Default | Description                                |
+| ------------------------ | --------------------------------- | ------- | ------------------------------------------ |
+| `label`                  | `string`                          | —       | Accessible name for the picker.            |
+| `value` / `defaultValue` | `Color \| string`                 | —       | Initial color. Strings are auto-parsed.    |
+| `onChange`               | `(value: Color) => void`          | —       | Fires whenever any child updates the color.|
+
+Forwards all props of React Aria's `ColorPicker`. The `Color` value type is from `react-aria-components`; convert to/from CSS strings with `value.toString('hex')` / `parseColor('#hex')`.
+
+## Accessibility
+
+- ColorPicker itself is just state — accessibility lives on the visual children (each one announces its channel and current value).
+- Always pair a visual color region with a text-based affordance (`ColorField` for hex input, or a `ColorSwatchPicker` of named brand colors) so users who can't perceive the color region can still operate the picker.

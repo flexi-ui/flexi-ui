@@ -2,13 +2,11 @@ import '@/styles/globals.css'
 
 import type { Metadata, Viewport } from 'next'
 
+import { RootProvider } from 'fumadocs-ui/provider/next'
 import { clsx } from '@flexi-ui/shared-utils'
 
-import { Providers } from '@/app/providers'
 import { siteConfig } from '@/config/site'
 import { fonts } from '@/config/fonts'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
 import { StructuredData } from '@/components/StructuredData'
 
 export const metadata: Metadata = {
@@ -64,12 +62,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    // Add verification codes when available
-    // google: 'your-google-verification-code',
-    // yandex: 'your-yandex-verification-code',
-    // yahoo: 'your-yahoo-verification-code',
-  },
 }
 
 export const viewport: Viewport = {
@@ -92,19 +84,13 @@ export default function RootLayout({
     <html suppressHydrationWarning dir="ltr" lang="en">
       <body
         className={clsx(
-          'min-h-screen text-foreground bg-background font-sans antialiased',
+          'min-h-screen bg-background font-sans text-foreground antialiased',
           fonts.sans.variable,
           fonts.mono.variable,
         )}
       >
         <StructuredData />
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className="relative flex min-h-screen flex-col" id="app-container">
-            <Navbar />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
-        </Providers>
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   )

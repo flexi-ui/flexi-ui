@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { Icon } from '@iconify/react'
 
 export const InstallBanner = () => {
   return (
@@ -18,7 +18,7 @@ export const InstallBanner = () => {
           className="inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90"
         >
           Installation guide
-          <ArrowRight className="h-4 w-4" />
+          <Icon className="h-4 w-4" icon="gravity-ui:arrow-right" />
         </NextLink>
       </div>
     </section>

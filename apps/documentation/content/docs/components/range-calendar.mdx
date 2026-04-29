@@ -1,0 +1,76 @@
+---
+title: "Range Calendar"
+description: "Standalone month grid for picking a start and end date."
+---
+
+# Range Calendar
+
+`RangeCalendar` is the range counterpart to `Calendar` — users pick a start date, then an end date, and the days in between are highlighted as the selection. Built on React Aria's `RangeCalendar`.
+
+For a range picker that pairs a calendar with text inputs, use [`DateRangePicker`](/docs/components/date-range-picker). For single-date selection, [`Calendar`](/docs/components/calendar).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/range-calendar @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { RangeCalendar } from '@flexi-ui/range-calendar'
+```
+
+## Usage
+
+<ComponentPreview name="range-calendar-usage" />
+
+## Min / max bounds
+
+<ComponentPreview name="range-calendar-min-max" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { CalendarDate } from '@internationalized/date'
+import { RangeCalendar } from '@flexi-ui/range-calendar'
+import { useState } from 'react'
+
+type Range = { start: CalendarDate; end: CalendarDate }
+
+export function ReportingRange() {
+  const [range, setRange] = useState<Range | null>(null)
+
+  return (
+    <RangeCalendar
+      aria-label="Reporting range"
+      value={range}
+      onChange={setRange}
+    />
+  )
+}
+```
+
+## API Reference
+
+### RangeCalendar
+
+| Prop                              | Type                                                           | Default | Description                                |
+| --------------------------------- | -------------------------------------------------------------- | ------- | ------------------------------------------ |
+| `value` / `defaultValue`          | `{ start: CalendarDate; end: CalendarDate } \| null`           | —       | The current range.                         |
+| `onChange`                        | `(value: Range) => void`                                       | —       | Fires when the range changes.              |
+| `focusedValue` / `defaultFocusedValue` | `CalendarDate`                                            | —       | Date that has keyboard focus.              |
+| `minValue` / `maxValue`           | `CalendarDate`                                                 | —       | Selectable range.                          |
+| `isDateUnavailable`               | `(date: CalendarDate) => boolean`                              | —       | Function-based disable rule.               |
+| `isDisabled` / `isReadOnly`       | `boolean`                                                      | `false` | Disable interaction or editing.            |
+| `pageBehavior`                    | `'visible' \| 'single'`                                        | `'visible'` | How prev/next paginates.               |
+
+Forwards all props of React Aria's `RangeCalendar`.
+
+## Accessibility
+
+- The first click sets the start; the second click sets the end. Focus + Shift+arrow extends an existing selection.
+- React Aria announces "start", "end", and the currently-focused date as the user navigates.
+- Days within the selected range expose `data-selection-start` / `data-selection-end` for styling the bookend visual.

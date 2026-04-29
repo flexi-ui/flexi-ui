@@ -1,0 +1,80 @@
+---
+title: "Ripple"
+description: "Material-style press-feedback overlay you wire into your own pressable surfaces."
+---
+
+# Ripple
+
+`Ripple` renders the Material-style press feedback animation. It's not a full component — it's a primitive plus a hook (`useRipple`) you compose into your own pressable elements (custom buttons, list rows, cards). FlexiUI's `Button` ships with this baked in; reach for `Ripple` directly when you need the same effect on a non-Button element.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/ripple @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Ripple, useRipple } from '@flexi-ui/ripple'
+```
+
+## Usage
+
+Pair `useRipple` (which tracks the active ripple list) with `Ripple` (which paints them) inside a `position: relative` container.
+
+<ComponentPreview name="ripple-usage" />
+
+## Anatomy
+
+```tsx
+function MyButton() {
+  const { ripples, onPress, onClear } = useRipple()
+
+  return (
+    <button
+      type="button"
+      className="relative overflow-hidden …"
+      onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        onPress({
+          target: e.currentTarget,
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        })
+      }}
+    >
+      Label
+      <Ripple ripples={ripples} onClear={onClear} />
+    </button>
+  )
+}
+```
+
+The container needs `position: relative` and `overflow: hidden` so the ripple stays within the surface.
+
+## API Reference
+
+### useRipple
+
+Returns:
+
+| Prop      | Type                                                          | Description                                  |
+| --------- | ------------------------------------------------------------- | -------------------------------------------- |
+| `ripples` | `RippleType[]`                                                | Active ripple list. Pass to `<Ripple>`.      |
+| `onPress` | `(e: { target: Element; x: number; y: number }) => void`      | Call from your click/press handler.          |
+| `onClear` | `(key: React.Key) => void`                                    | Pass to `<Ripple>` so it removes finished ripples. |
+
+### Ripple
+
+| Prop      | Type                                  | Default          | Description                                    |
+| --------- | ------------------------------------- | ---------------- | ---------------------------------------------- |
+| `ripples` | `RippleType[]`                        | —                | Active ripples to paint.                       |
+| `color`   | `string`                              | `'currentColor'` | CSS color for the ripple fill.                 |
+| `onClear` | `(key: React.Key) => void`            | —                | Called when a ripple finishes its animation.   |
+
+## Accessibility
+
+- Ripple is purely visual feedback — it has no semantic meaning. Don't rely on it as the *only* indicator of activation.
+- Ensure your underlying element handles keyboard activation (Enter/Space) and focus-visible rings independently.
+- For Button-shaped UI, reach for `@flexi-ui/button` — it already integrates Ripple plus all the React Aria press semantics.

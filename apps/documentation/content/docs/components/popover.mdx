@@ -1,0 +1,98 @@
+---
+title: "Popover"
+description: "Floating, focus-trapped panel anchored to a trigger element."
+---
+
+# Popover
+
+`Popover` is a non-modal floating panel that opens from a trigger and is dismissable by clicking outside or pressing Escape. Use it for inline forms, settings menus, and rich tooltips that need interactive content (a tooltip can't hold focus).
+
+It's built on React Aria's `DialogTrigger` + `Popover` + `Dialog` primitives, so positioning, focus trapping, and keyboard handling are wired for you.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/popover @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Popover } from '@flexi-ui/popover'
+```
+
+## Anatomy
+
+```tsx
+<Popover>
+  <Trigger />
+  <Popover.Content>Panel content</Popover.Content>
+</Popover>
+```
+
+The first child is the trigger (typically a `Button`). `Popover.Content` is the floating panel.
+
+## Usage
+
+<ComponentPreview name="popover-usage" />
+
+## With arrow
+
+<ComponentPreview name="popover-with-arrow" />
+
+## Sizes
+
+`size` controls the panel's max-width and padding. The default is `md`.
+
+<ComponentPreview name="popover-sizes" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Button } from '@flexi-ui/button'
+import { Popover } from '@flexi-ui/popover'
+
+export function ControlledPopover() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Popover isOpen={open} onOpenChange={setOpen}>
+      <Button>Toggle</Button>
+      <Popover.Content>
+        <div className="p-4">Open: {String(open)}</div>
+      </Popover.Content>
+    </Popover>
+  )
+}
+```
+
+## API Reference
+
+### Popover (Trigger)
+
+| Prop          | Type                  | Default | Description                                  |
+| ------------- | --------------------- | ------- | -------------------------------------------- |
+| `isOpen` / `defaultOpen` | `boolean` | —       | Controlled / uncontrolled open state.        |
+| `onOpenChange`| `(open: boolean) => void` | —   | Fires when the popover opens or closes.      |
+
+Forwards all props of React Aria's `DialogTrigger`.
+
+### Popover.Content
+
+| Prop        | Type                                                            | Default      | Description                                |
+| ----------- | --------------------------------------------------------------- | ------------ | ------------------------------------------ |
+| `size`      | `'sm' \| 'md' \| 'lg'`                                          | `'md'`       | Panel max-width and padding scale.         |
+| `placement` | `'top' \| 'right' \| 'bottom' \| 'left'` (and corner variants)  | `'bottom'`   | Preferred side. Auto-flips if cramped.     |
+| `offset`    | `number`                                                        | —            | Pixel offset from the trigger.             |
+| `showArrow` | `boolean`                                                       | `false`      | Render an arrow pointing at the trigger.   |
+
+Forwards all props of React Aria's `Popover`.
+
+## Accessibility
+
+- Wraps content in a `Dialog`, so focus is trapped inside while open and returned to the trigger on close.
+- Closes on Escape and on click outside the panel.
+- For purely informational tooltips that don't need interactive content, prefer `Tooltip` — it avoids the focus trap and stays out of the tab order.

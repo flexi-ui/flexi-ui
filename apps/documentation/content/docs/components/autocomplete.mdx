@@ -1,0 +1,93 @@
+---
+title: "Autocomplete"
+description: "Type-ahead glue that filters a Menu or ListBox from a search input."
+---
+
+# Autocomplete
+
+`Autocomplete` is a thin wrapper that connects a search input to a list of items, filtering as the user types. Unlike `ComboBox`, it doesn't open a popover — the list is always visible. Use it for command palettes, picker dialogs, and inline filtering of long lists.
+
+It composes existing FlexiUI primitives: pair it with `SearchField` and `Menu` (or `ListBox`).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/autocomplete @flexi-ui/search-field @flexi-ui/menu @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Autocomplete } from '@flexi-ui/autocomplete'
+import { SearchField } from '@flexi-ui/search-field'
+import { Menu } from '@flexi-ui/menu'
+```
+
+## Usage
+
+<ComponentPreview name="autocomplete-usage" />
+
+## Sections
+
+Group related items with `Menu.Section` + `Menu.Header`. Type-ahead filters across all sections.
+
+<ComponentPreview name="autocomplete-sections" />
+
+## Async / dynamic items
+
+`Autocomplete` accepts `inputValue` / `onInputChange` so you can drive the filter from server data:
+
+```tsx
+'use client'
+
+import { Autocomplete } from '@flexi-ui/autocomplete'
+import { Menu } from '@flexi-ui/menu'
+import { SearchField } from '@flexi-ui/search-field'
+import { useState } from 'react'
+
+export function AsyncAutocomplete() {
+  const [query, setQuery] = useState('')
+  const items = useFilteredItems(query) // your fetcher
+
+  return (
+    <Autocomplete inputValue={query} onInputChange={setQuery}>
+      <SearchField label="Search" />
+      <Menu>
+        {items.map((item) => (
+          <Menu.Item key={item.id} id={item.id}>
+            {item.name}
+          </Menu.Item>
+        ))}
+      </Menu>
+    </Autocomplete>
+  )
+}
+```
+
+## API Reference
+
+### Autocomplete
+
+| Prop                                  | Type                              | Default | Description                                  |
+| ------------------------------------- | --------------------------------- | ------- | -------------------------------------------- |
+| `size`                                | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size of the wrapper.                  |
+| `inputValue` / `defaultInputValue`    | `string`                          | —       | Controlled / uncontrolled input text.        |
+| `onInputChange`                       | `(value: string) => void`         | —       | Fires on every keystroke.                    |
+| `filter`                              | `(text: string, query: string) => boolean` | — | Custom filter function.                  |
+| `disableAutoFocusFirst`               | `boolean`                         | `false` | Don't auto-focus the first item.             |
+
+Forwards all props of React Aria's `Autocomplete`.
+
+## Autocomplete vs ComboBox
+
+| Use case                               | Reach for     |
+| -------------------------------------- | ------------- |
+| Inline list always visible             | `Autocomplete` |
+| Single field with collapsing dropdown   | `ComboBox`    |
+| Command palette inside a popover       | `Autocomplete` (in a `Popover`) |
+
+## Accessibility
+
+- The composed `SearchField` and `Menu` carry their own ARIA — Autocomplete just glues them with the right `aria-controls` / `aria-activedescendant` linkage.
+- The first matching item is highlighted by default; press Enter to activate it.
+- Pair with `aria-label` on the `SearchField` so screen-reader users know what they're filtering.

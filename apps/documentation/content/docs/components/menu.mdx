@@ -1,0 +1,117 @@
+---
+title: "Menu"
+description: "Compound dropdown menu with sections, headers, and separators."
+---
+
+# Menu
+
+`Menu` is a list of actions triggered by a button — toolbars, kebab menus, context shortcuts. It's built on React Aria's `MenuTrigger` + `Menu` + `MenuItem`, so keyboard navigation, type-to-find, and focus return on close come from the primitives.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/menu @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Menu } from '@flexi-ui/menu'
+```
+
+## Anatomy
+
+```tsx
+<Menu.Trigger>
+  <Trigger />
+  <Menu.Popover>
+    <Menu>
+      <Menu.Item />
+      <Menu.Separator />
+      <Menu.Section>
+        <Menu.Header />
+        <Menu.Item />
+      </Menu.Section>
+    </Menu>
+  </Menu.Popover>
+</Menu.Trigger>
+```
+
+| Part              | Element  | Purpose                                                |
+| ----------------- | -------- | ------------------------------------------------------ |
+| `Menu.Trigger`    | —        | Wraps the button + popover. Owns open state.           |
+| `Menu.Popover`    | `div`    | Floating panel anchored to the trigger.                |
+| `Menu`            | `ul`     | The actual menu container.                             |
+| `Menu.Item`       | `li`     | A single action.                                       |
+| `Menu.Section`    | `li`     | Groups related items.                                  |
+| `Menu.Header`     | `header` | Caption for a section.                                 |
+| `Menu.Separator`  | `hr`     | Visual divider between groups.                         |
+
+## Usage
+
+<ComponentPreview name="menu-usage" />
+
+## Sections + headers
+
+Use `Menu.Section` to group related actions, with `Menu.Header` as the caption.
+
+<ComponentPreview name="menu-sections" />
+
+## Disabled items
+
+Pass `disabledKeys` on `Menu` listing the `id`s of items that shouldn't be selectable.
+
+<ComponentPreview name="menu-disabled" />
+
+## Handling actions
+
+`Menu` accepts `onAction(key)` to handle the user's choice in one place:
+
+```tsx
+<Menu onAction={(key) => router.push(`/actions/${key}`)}>
+  <Menu.Item id="rename">Rename</Menu.Item>
+  <Menu.Item id="archive">Archive</Menu.Item>
+</Menu>
+```
+
+For per-item handlers, pass `onAction` on the item instead.
+
+## API Reference
+
+### Menu.Trigger
+
+| Prop           | Type                  | Default | Description                                  |
+| -------------- | --------------------- | ------- | -------------------------------------------- |
+| `isOpen` / `defaultOpen` | `boolean`   | —       | Controlled / uncontrolled open state.        |
+| `onOpenChange` | `(open: boolean) => void` | —   | Fires when the menu opens or closes.         |
+
+Forwards all props of React Aria's `MenuTrigger`.
+
+### Menu (Container)
+
+| Prop              | Type                              | Default | Description                            |
+| ----------------- | --------------------------------- | ------- | -------------------------------------- |
+| `size`            | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                           |
+| `disabledKeys`    | `Iterable<Key>`                   | —       | Keys of items that can't be selected.  |
+| `onAction`        | `(key: Key) => void`              | —       | Single handler for any item activation.|
+| `selectionMode`   | `'none' \| 'single' \| 'multiple'`| `'none'`| Whether items are selectable.          |
+| `selectedKeys`    | `Iterable<Key>`                   | —       | Selected items (selection-mode menus). |
+
+Forwards all props of React Aria's `Menu`.
+
+### Menu.Item
+
+| Prop         | Type      | Default | Description                                |
+| ------------ | --------- | ------- | ------------------------------------------ |
+| `id`         | `Key`     | —       | Required if you use `disabledKeys` or `selectedKeys`. |
+| `isDisabled` | `boolean` | `false` | Disables this item.                        |
+| `onAction`   | `() => void` | —    | Per-item handler, called when activated.   |
+
+Forwards all props of React Aria's `MenuItem`.
+
+## Accessibility
+
+- The trigger gets `role="button"` with `aria-haspopup="menu"`. The menu uses `role="menu"` / `role="menuitem"` with proper `aria-activedescendant`.
+- Arrow keys move focus, Home/End jump to ends, Enter/Space activate, Escape closes and returns focus to the trigger.
+- Type-to-find works: typing focuses the matching item.
+- For navigational menus (links to other pages), use a `<nav>` with `Link` instead — `Menu` is for transient actions.

@@ -1,0 +1,61 @@
+---
+title: "Visually Hidden"
+description: "Hide content visually while keeping it readable by assistive technology."
+---
+
+# Visually Hidden
+
+`VisuallyHidden` hides its children from sighted users but keeps them in the accessibility tree. Use it for icon-only button labels, skip links, screen-reader-only descriptions, and any other content that exists *only* for assistive tech.
+
+It applies the standard `clip` / `position` / `width:1px` recipe under the hood, so the hidden content can still receive focus when wrapped around an interactive element (e.g. a focus-visible skip link).
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/visually-hidden @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { VisuallyHidden } from '@flexi-ui/visually-hidden'
+```
+
+## Usage
+
+Pair an icon with a hidden label so screen readers announce the button's purpose.
+
+<ComponentPreview name="visually-hidden-usage" />
+
+## Skip link
+
+A "Skip to main content" link should normally be hidden but visible on focus. Combine `VisuallyHidden` with a focus-only outline pattern:
+
+<ComponentPreview name="visually-hidden-skip-link" />
+
+## Custom element
+
+By default, `VisuallyHidden` renders a `<span>`. Pass `elementType` if you need a different tag (e.g. an inline `<label>` for an unlabelled input):
+
+```tsx
+<label>
+  <VisuallyHidden elementType="span">Search query</VisuallyHidden>
+  <input type="search" placeholder="Search…" />
+</label>
+```
+
+## API Reference
+
+### VisuallyHidden
+
+| Prop          | Type                              | Default  | Description                                       |
+| ------------- | --------------------------------- | -------- | ------------------------------------------------- |
+| `elementType` | `keyof JSX.IntrinsicElements`     | `'span'` | Tag to render. Use `'label'`, `'div'`, etc.       |
+
+Forwards all props of React Aria's `VisuallyHidden`.
+
+## Accessibility
+
+- Renders content that screen readers see but sighted users don't. Don't put critical content here that doesn't have a visible counterpart.
+- `display: none` and `aria-hidden="true"` *both* hide content from assistive tech — use `VisuallyHidden` only when you want the opposite.
+- For decorative icons next to a visible label, prefer `aria-hidden` on the icon — keep the label as plain text. Reserve `VisuallyHidden` for the icon-only case.

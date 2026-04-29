@@ -1,0 +1,77 @@
+---
+title: "Switch"
+description: "Toggle switch for on/off settings, with sizes and semantic colors."
+---
+
+# Switch
+
+`Switch` is a one-tap on/off control. Use it for settings that take effect immediately (notifications, preferences) where a checkbox would feel formal. It's built on React Aria Components' `Switch`, so keyboard handling, focus rings, and form integration come from the primitive.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/switch @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Switch } from '@flexi-ui/switch'
+```
+
+## Usage
+
+<ComponentPreview name="switch-usage" />
+
+## Sizes
+
+<ComponentPreview name="switch-sizes" />
+
+## Colors
+
+Color applies to the selected (on) state. The track stays neutral when off.
+
+<ComponentPreview name="switch-colors" />
+
+## Disabled
+
+<ComponentPreview name="switch-disabled" />
+
+## Controlled
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { Switch } from '@flexi-ui/switch'
+
+export function NotificationsToggle() {
+  const [enabled, setEnabled] = useState(false)
+
+  return (
+    <Switch isSelected={enabled} onChange={setEnabled}>
+      Enable notifications
+    </Switch>
+  )
+}
+```
+
+## API Reference
+
+### Switch
+
+| Prop         | Type                                              | Default    | Description                                  |
+| ------------ | ------------------------------------------------- | ---------- | -------------------------------------------- |
+| `size`       | `'sm' \| 'md' \| 'lg'`                            | `'md'`     | Visual size.                                 |
+| `color`      | `'accent' \| 'success' \| 'warning' \| 'danger'`  | `'accent'` | Track color when selected.                   |
+| `isSelected` / `defaultSelected` | `boolean`                     | —          | Controlled / uncontrolled toggled state.     |
+| `isDisabled` | `boolean`                                         | `false`    | Disables interaction.                        |
+| `isReadOnly` | `boolean`                                         | `false`    | Read-only — visible state but no toggling.   |
+
+Forwards every other prop of React Aria's `Switch` — `name`, `value`, `onChange`, `onBlur`, render-prop `children`.
+
+## Accessibility
+
+- Renders `role="switch"` with `aria-checked` reflecting current state, so screen readers announce it as a toggle (not a checkbox).
+- Pair with a `Label` element or pass plain text as `children` for the visible label.
+- Switches signal *immediate* state changes. If your action needs confirmation or is destructive, use a `Checkbox` + submit pattern instead.

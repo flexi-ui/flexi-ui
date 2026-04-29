@@ -1,0 +1,77 @@
+---
+title: "Toolbar"
+description: "Horizontal or vertical row of related actions with arrow-key navigation."
+---
+
+# Toolbar
+
+`Toolbar` groups related actions into a single landmark. Unlike a regular row of buttons, it takes a single Tab stop — once focus is inside, arrow keys move between actions. Use it for editor toolbars, batch-action bars, and any cluster of related controls.
+
+Built on React Aria's `Toolbar`, so keyboard handling and ARIA wiring come from the primitive.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/toolbar @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Toolbar } from '@flexi-ui/toolbar'
+```
+
+## Anatomy
+
+```tsx
+<Toolbar>
+  <Toolbar.Group>
+    <Button />
+    <Button />
+  </Toolbar.Group>
+  <Toolbar.Separator />
+  <Button />
+</Toolbar>
+```
+
+| Part                | Element  | Purpose                                       |
+| ------------------- | -------- | --------------------------------------------- |
+| `Toolbar`           | `div`    | Root with `role="toolbar"`.                   |
+| `Toolbar.Group`     | `div`    | Logical sub-group of related actions.         |
+| `Toolbar.Separator` | `hr`     | Visual + semantic divider.                    |
+
+## Usage
+
+<ComponentPreview name="toolbar-usage" />
+
+## Orientation
+
+Pass `orientation="vertical"` for sidebar toolbars. Arrow-key navigation flips to up/down.
+
+<ComponentPreview name="toolbar-orientation" />
+
+## API Reference
+
+### Toolbar
+
+| Prop          | Type                              | Default        | Description                                  |
+| ------------- | --------------------------------- | -------------- | -------------------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'`      | `'horizontal'` | Layout direction. Affects keyboard nav.      |
+| `aria-label`  | `string`                          | —              | Accessible name for the toolbar.             |
+
+Forwards all props of React Aria's `Toolbar`.
+
+### Toolbar.Group
+
+Native `div` props plus React Aria's `Group` props. Use it to logically group related buttons within a single toolbar (e.g. style buttons vs alignment buttons).
+
+### Toolbar.Separator
+
+Native `hr` props plus `orientation` (defaults to perpendicular to the toolbar).
+
+## Accessibility
+
+- Renders `role="toolbar"`, so the cluster is announced as a single navigation landmark.
+- Tab moves focus *into* and *out of* the toolbar. Once inside, arrow keys move between items.
+- Always pass `aria-label` so screen readers can distinguish multiple toolbars on the page.
+- Use `Toolbar` for *related* actions only — don't lump unrelated buttons together; use a regular layout instead.

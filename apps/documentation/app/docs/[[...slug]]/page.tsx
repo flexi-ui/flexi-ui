@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page'
 import { source } from '@/lib/source'
-import { MDXContent } from '@/components/mdx-content'
+import { MDXComponents } from '@/components/mdx-components'
 import { siteConfig } from '@/config/site'
 
 interface DocPageProps {
@@ -59,17 +60,15 @@ export default async function DocPage({ params }: DocPageProps) {
 
   if (!page) notFound()
 
+  const MDX = page.data.body
+
   return (
-    <article className="mx-auto w-full max-w-3xl">
-      <header className="mb-10 border-b border-border pb-8">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground">{page.data.title}</h1>
-        {page.data.description && (
-          <p className="mt-3 text-lg text-muted-foreground">{page.data.description}</p>
-        )}
-      </header>
-      <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-24 prose-headings:font-semibold prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-code:rounded prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-[0.875em] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-muted prose-pre:border prose-pre:border-border">
-        <MDXContent slug={slug} />
-      </div>
-    </article>
+    <DocsPage toc={page.data.toc} full={page.data.full}>
+      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsBody>
+        <MDX components={MDXComponents} />
+      </DocsBody>
+    </DocsPage>
   )
 }
