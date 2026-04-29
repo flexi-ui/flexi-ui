@@ -5,9 +5,11 @@ import { Avatar } from '@flexi-ui/avatar'
 import { Badge } from '@flexi-ui/badge'
 import { Breadcrumbs } from '@flexi-ui/breadcrumbs'
 import { Button, ButtonGroup } from '@flexi-ui/button'
+import { Calendar } from '@flexi-ui/calendar'
 import { Card } from '@flexi-ui/card'
 import { Checkbox, CheckboxGroupRoot } from '@flexi-ui/checkbox'
 import { ComboBox } from '@flexi-ui/combo-box'
+import { DateField } from '@flexi-ui/date-field'
 import { Dialog } from '@flexi-ui/dialog'
 import { Disclosure } from '@flexi-ui/disclosure'
 import { Divider } from '@flexi-ui/divider'
@@ -38,6 +40,7 @@ import { Tabs } from '@flexi-ui/tabs'
 import { TagGroup } from '@flexi-ui/tag-group'
 import { Text } from '@flexi-ui/text'
 import { Textarea } from '@flexi-ui/textarea'
+import { TimeField } from '@flexi-ui/time-field'
 import { ToggleButton } from '@flexi-ui/toggle-button'
 import { Toolbar } from '@flexi-ui/toolbar'
 import { Tooltip } from '@flexi-ui/tooltip'
@@ -53,6 +56,7 @@ export const MDXComponents = {
   Breadcrumbs,
   Button,
   ButtonGroup,
+  Calendar,
   Card,
   CardHeader: Card.Header,
   CardBody: Card.Body,
@@ -60,6 +64,7 @@ export const MDXComponents = {
   Checkbox,
   CheckboxGroup: CheckboxGroupRoot,
   ComboBox,
+  DateField,
   Dialog,
   Disclosure,
   Divider,
@@ -92,6 +97,7 @@ export const MDXComponents = {
   TagGroup,
   Text,
   Textarea,
+  TimeField,
   ToggleButton,
   Toolbar,
   Tooltip,

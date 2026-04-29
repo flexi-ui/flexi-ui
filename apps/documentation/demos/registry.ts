@@ -142,6 +142,17 @@ import DialogSizesSource from './dialog/sizes.tsx?raw'
 
 import RippleUsageSource from './ripple/usage.tsx?raw'
 
+import DateFieldUsageSource from './date-field/usage.tsx?raw'
+import DateFieldSizesSource from './date-field/sizes.tsx?raw'
+import DateFieldGranularitySource from './date-field/granularity.tsx?raw'
+
+import TimeFieldUsageSource from './time-field/usage.tsx?raw'
+import TimeFieldSizesSource from './time-field/sizes.tsx?raw'
+import TimeFieldHourCycleSource from './time-field/hour-cycle.tsx?raw'
+
+import CalendarUsageSource from './calendar/usage.tsx?raw'
+import CalendarMinMaxSource from './calendar/min-max.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -585,6 +596,41 @@ export const demos: Record<string, Demo> = {
   'ripple-usage': {
     component: lazy(() => import('./ripple/usage')),
     source: RippleUsageSource,
+  },
+
+  'date-field-usage': {
+    component: lazy(() => import('./date-field/usage')),
+    source: DateFieldUsageSource,
+  },
+  'date-field-sizes': {
+    component: lazy(() => import('./date-field/sizes')),
+    source: DateFieldSizesSource,
+  },
+  'date-field-granularity': {
+    component: lazy(() => import('./date-field/granularity')),
+    source: DateFieldGranularitySource,
+  },
+
+  'time-field-usage': {
+    component: lazy(() => import('./time-field/usage')),
+    source: TimeFieldUsageSource,
+  },
+  'time-field-sizes': {
+    component: lazy(() => import('./time-field/sizes')),
+    source: TimeFieldSizesSource,
+  },
+  'time-field-hour-cycle': {
+    component: lazy(() => import('./time-field/hour-cycle')),
+    source: TimeFieldHourCycleSource,
+  },
+
+  'calendar-usage': {
+    component: lazy(() => import('./calendar/usage')),
+    source: CalendarUsageSource,
+  },
+  'calendar-min-max': {
+    component: lazy(() => import('./calendar/min-max')),
+    source: CalendarMinMaxSource,
   },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },
