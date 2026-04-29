@@ -1,0 +1,65 @@
+---
+title: "Color Slider"
+description: "Single-channel slider for hue, saturation, lightness, alpha, or any RGB channel."
+---
+
+# Color Slider
+
+`ColorSlider` is a 1D slider that drives a single color channel — hue, saturation, lightness, alpha, red/green/blue, etc. Pair with `ColorArea` to build a full picker, or use standalone for "tweak one thing" interactions like an alpha slider. Built on React Aria's `ColorSlider`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-slider @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ColorSlider } from '@flexi-ui/color-slider'
+```
+
+## Usage
+
+<ComponentPreview name="color-slider-usage" />
+
+## Channels
+
+`channel` picks which channel the slider drives. The default value's color space (HSL, RGB, HSB) determines which channels are valid.
+
+<ComponentPreview name="color-slider-channels" />
+
+## Inside a Color Picker
+
+Inside `ColorPicker`, the slider reads from and writes to the picker's value:
+
+```tsx
+<ColorPicker defaultValue="#761ae8">
+  <ColorArea />
+  <ColorSlider channel="hue" />
+  <ColorSlider channel="alpha" />
+</ColorPicker>
+```
+
+## API Reference
+
+### ColorSlider
+
+| Prop                     | Type                              | Default     | Description                                  |
+| ------------------------ | --------------------------------- | ----------- | -------------------------------------------- |
+| `channel`                | `ColorChannel`                    | —           | Required. The channel this slider drives.    |
+| `colorSpace`             | `'rgb' \| 'hsl' \| 'hsb'`         | from value  | Color space override.                        |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`      | Visual size.                                 |
+| `label`                  | `string`                          | —           | Visible label rendered above the track.      |
+| `showOutput`             | `boolean`                         | `true`      | Show the current value next to the label.    |
+| `value` / `defaultValue` | `Color \| string`                 | —           | Current color. Falls back to picker context. |
+| `onChange`               | `(value: Color) => void`          | —           | Fires while dragging.                        |
+| `orientation`            | `'horizontal' \| 'vertical'`      | `'horizontal'` | Layout direction.                         |
+
+Forwards all props of React Aria's `ColorSlider`.
+
+## Accessibility
+
+- The thumb has `role="slider"` with `aria-valuenow` / `aria-valuemin` / `aria-valuemax` set per channel.
+- Arrow keys step by `step`; PageUp/Down step by 10×; Home/End jump to bounds.
+- The default `showOutput` keeps the value visible; if you hide it for visual reasons, ensure another label still exposes the current value.

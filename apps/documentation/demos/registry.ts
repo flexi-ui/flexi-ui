@@ -162,7 +162,16 @@ import DateRangePickerMinMaxSource from './date-range-picker/min-max.tsx?raw'
 import RangeCalendarUsageSource from './range-calendar/usage.tsx?raw'
 import RangeCalendarMinMaxSource from './range-calendar/min-max.tsx?raw'
 
+import ColorAreaUsageSource from './color-area/usage.tsx?raw'
+import ColorAreaSizesSource from './color-area/sizes.tsx?raw'
+
+import ColorFieldUsageSource from './color-field/usage.tsx?raw'
+import ColorFieldSizesSource from './color-field/sizes.tsx?raw'
+
 import ColorPickerUsageSource from './color-picker/usage.tsx?raw'
+
+import ColorSliderUsageSource from './color-slider/usage.tsx?raw'
+import ColorSliderChannelsSource from './color-slider/channels.tsx?raw'
 
 import ColorSwatchUsageSource from './color-swatch/usage.tsx?raw'
 import ColorSwatchSizesSource from './color-swatch/sizes.tsx?raw'
@@ -677,9 +686,36 @@ export const demos: Record<string, Demo> = {
     source: RangeCalendarMinMaxSource,
   },
 
+  'color-area-usage': {
+    component: lazy(() => import('./color-area/usage')),
+    source: ColorAreaUsageSource,
+  },
+  'color-area-sizes': {
+    component: lazy(() => import('./color-area/sizes')),
+    source: ColorAreaSizesSource,
+  },
+
+  'color-field-usage': {
+    component: lazy(() => import('./color-field/usage')),
+    source: ColorFieldUsageSource,
+  },
+  'color-field-sizes': {
+    component: lazy(() => import('./color-field/sizes')),
+    source: ColorFieldSizesSource,
+  },
+
   'color-picker-usage': {
     component: lazy(() => import('./color-picker/usage')),
     source: ColorPickerUsageSource,
+  },
+
+  'color-slider-usage': {
+    component: lazy(() => import('./color-slider/usage')),
+    source: ColorSliderUsageSource,
+  },
+  'color-slider-channels': {
+    component: lazy(() => import('./color-slider/channels')),
+    source: ColorSliderChannelsSource,
   },
 
   'color-swatch-usage': {

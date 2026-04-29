@@ -1,0 +1,61 @@
+---
+title: "Color Field"
+description: "Text input for entering a color as hex, RGB, or HSL."
+---
+
+# Color Field
+
+`ColorField` is a text input dedicated to color values — hex (`#761ae8`), RGB (`rgb(118, 26, 232)`), HSL — all parsed automatically. Use it as the keyboard / paste-friendly counterpart to a visual color picker. Built on React Aria's `ColorField`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/color-field @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { ColorField } from '@flexi-ui/color-field'
+```
+
+## Usage
+
+<ComponentPreview name="color-field-usage" />
+
+## Sizes
+
+<ComponentPreview name="color-field-sizes" />
+
+## Inside a Color Picker
+
+Inside `ColorPicker`, the field stays in sync with the rest of the picker — type a hex and the area / sliders / swatches update too:
+
+```tsx
+<ColorPicker defaultValue="#761ae8">
+  <ColorArea />
+  <ColorSlider channel="hue" />
+  <ColorField label="Hex" />
+</ColorPicker>
+```
+
+## API Reference
+
+### ColorField
+
+| Prop                     | Type                              | Default | Description                                |
+| ------------------------ | --------------------------------- | ------- | ------------------------------------------ |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`  | Visual size.                               |
+| `label`                  | `string`                          | —       | Visible label rendered above the input.    |
+| `value` / `defaultValue` | `Color \| string`                 | —       | Current color value.                       |
+| `onChange`               | `(value: Color) => void`          | —       | Fires when the parsed value changes.       |
+| `colorSpace`             | `'rgb' \| 'hsl' \| 'hsb'`         | from value | Force a particular color space.         |
+| `isInvalid`              | `boolean`                         | `false` | Renders the error state (e.g. unparseable input). |
+
+Forwards all props of React Aria's `ColorField`.
+
+## Accessibility
+
+- Renders a real `<input>` so screen readers and password managers handle it natively.
+- React Aria parses the input on blur — invalid values revert to the previous valid color and surface `aria-invalid`.
+- Pair with a visual `ColorSwatch` showing the current parsed color so users can tell whether their input was accepted.
