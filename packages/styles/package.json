@@ -10,34 +10,39 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "style": "./index.css",
+  "style": "./dist/index.css",
   "exports": {
     ".": {
-      "style": "./index.css",
-      "types": "./src/index.ts",
-      "import": "./src/index.ts",
-      "default": "./src/index.ts"
+      "style": "./dist/index.css",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./css": {
-      "style": "./index.css",
-      "default": "./index.css"
+      "style": "./dist/index.css",
+      "default": "./dist/index.css"
     },
     "./components/*": {
-      "types": "./src/components/*/index.ts",
-      "import": "./src/components/*/index.ts",
-      "default": "./src/components/*/index.ts"
+      "types": "./dist/components/*/index.d.ts",
+      "import": "./dist/components/*/index.js",
+      "default": "./dist/components/*/index.js"
     },
+    "./base/*.css": "./dist/base/*.css",
+    "./components/*.css": "./dist/components/*.css",
+    "./themes/*/*.css": "./dist/themes/*/*.css",
+    "./themes/*.css": "./dist/themes/*.css",
+    "./utilities/*.css": "./dist/utilities/*.css",
+    "./variants/*.css": "./dist/variants/*.css",
     "./package.json": "./package.json"
   },
   "sideEffects": [
     "*.css"
   ],
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
     "clean": "rm -rf dist .turbo tsconfig.tsbuildinfo",
     "typecheck": "tsc --noEmit"
   },
