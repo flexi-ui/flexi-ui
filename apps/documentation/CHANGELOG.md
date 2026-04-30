@@ -1,5 +1,74 @@
 # @flexi-ui/documentation
 
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`a90e410`](https://github.com/flexi-ui/flexi-ui/commit/a90e4104ef8c4e2a4e9af2b981d21d5da2bcef3d)]:
+  - @flexi-ui/styles@1.9.2
+  - @flexi-ui/accordion@0.1.9
+  - @flexi-ui/alert@0.1.10
+  - @flexi-ui/autocomplete@0.2.4
+  - @flexi-ui/avatar@1.0.12
+  - @flexi-ui/badge@0.1.10
+  - @flexi-ui/breadcrumbs@0.1.8
+  - @flexi-ui/button@6.0.14
+  - @flexi-ui/calendar@0.2.4
+  - @flexi-ui/card@0.1.10
+  - @flexi-ui/checkbox@0.1.10
+  - @flexi-ui/color-area@0.2.5
+  - @flexi-ui/color-field@0.2.5
+  - @flexi-ui/color-picker@0.2.5
+  - @flexi-ui/color-slider@0.2.5
+  - @flexi-ui/color-swatch@0.2.5
+  - @flexi-ui/color-swatch-picker@0.2.5
+  - @flexi-ui/color-wheel@0.2.4
+  - @flexi-ui/combo-box@0.1.6
+  - @flexi-ui/date-field@0.1.6
+  - @flexi-ui/date-picker@0.1.8
+  - @flexi-ui/date-range-picker@0.1.6
+  - @flexi-ui/dialog@0.2.4
+  - @flexi-ui/disclosure@0.2.5
+  - @flexi-ui/divider@0.1.10
+  - @flexi-ui/drop-indicator@0.2.3
+  - @flexi-ui/drop-zone@0.2.5
+  - @flexi-ui/file-trigger@0.1.7
+  - @flexi-ui/form@5.0.14
+  - @flexi-ui/grid-list@0.1.6
+  - @flexi-ui/group@0.2.2
+  - @flexi-ui/heading@0.2.3
+  - @flexi-ui/input@5.0.14
+  - @flexi-ui/keyboard@0.2.3
+  - @flexi-ui/link@5.0.14
+  - @flexi-ui/list-box@0.2.4
+  - @flexi-ui/menu@0.1.7
+  - @flexi-ui/meter@0.1.7
+  - @flexi-ui/modal@0.1.9
+  - @flexi-ui/number-field@0.1.8
+  - @flexi-ui/popover@0.1.9
+  - @flexi-ui/progress@0.1.9
+  - @flexi-ui/radio@0.1.8
+  - @flexi-ui/range-calendar@0.2.4
+  - @flexi-ui/ripple@6.0.11
+  - @flexi-ui/search-field@0.1.7
+  - @flexi-ui/select@0.1.8
+  - @flexi-ui/skeleton@0.1.10
+  - @flexi-ui/slider@0.1.8
+  - @flexi-ui/spinner@6.0.11
+  - @flexi-ui/switch@0.1.10
+  - @flexi-ui/table@0.1.6
+  - @flexi-ui/tabs@0.1.9
+  - @flexi-ui/tag-group@0.1.7
+  - @flexi-ui/text@0.2.3
+  - @flexi-ui/textarea@0.1.8
+  - @flexi-ui/time-field@0.1.6
+  - @flexi-ui/toast@0.2.2
+  - @flexi-ui/toggle-button@0.1.7
+  - @flexi-ui/toolbar@0.1.7
+  - @flexi-ui/tooltip@0.1.9
+  - @flexi-ui/tree@0.1.6
+  - @flexi-ui/visually-hidden@0.2.2
+
 ## 1.0.19
 
 ### Patch Changes
