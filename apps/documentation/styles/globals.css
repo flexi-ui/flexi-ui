@@ -132,23 +132,71 @@ IMPORTS
   @apply border-none bg-default/80;
 }
 
-/* Home Layout Navigation */
+/* ------------------------------------------------------------------
+   Home Layout Navigation — floating, shy, sized to match landing page.
+
+   States are driven by `data-nav-mode` on <body>, which is set by
+   <MarketingNavScroll />:
+     - "top"      → visible at page top, no chrome
+     - "hidden"   → user is scrolling down; nav slides up out of view
+     - "revealed" → user scrolled up; nav re-enters with translucent
+                    bg + backdrop blur
+   ------------------------------------------------------------------ */
 #nd-home-layout {
   #nd-nav {
-    @apply bg-background blur-none backdrop-blur-none;
+    /* Floating: a bit lower than the viewport top, narrow to landing width */
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+    margin: 12px auto 0;
+    width: calc(100% - 24px);
+    max-width: calc(64rem - 24px); /* matches max-w-5xl + 12px gutters */
 
-    [data-theme-toggle] {
-      margin-left: 4px;
-    }
+    background: transparent;
+    backdrop-filter: none;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    box-shadow: none;
 
+    transition:
+      transform 240ms ease,
+      background-color 240ms ease,
+      border-color 240ms ease,
+      box-shadow 240ms ease;
+
+    /* Reset fumadocs default chrome */
     > div {
       border: none;
     }
 
     nav {
-      @apply px-6;
+      @apply px-5;
+    }
+
+    [data-theme-toggle] {
+      margin-left: 4px;
     }
   }
+}
+
+/* At-top: nav present, no glass */
+body[data-nav-mode='top'] #nd-home-layout #nd-nav {
+  transform: translateY(0);
+}
+
+/* Scrolling down: hide */
+body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
+  transform: translateY(calc(-100% - 32px));
+}
+
+/* Scrolling up after a scroll: reveal with translucent glass */
+body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
+  transform: translateY(0);
+  background: color-mix(in oklch, var(--background) 65%, transparent);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border-color: var(--separator);
+  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.18);
 }
 
 .showcase-detail-page #nd-home-layout {
@@ -244,9 +292,12 @@ IMPORTS
   }
 }
 
-/* Sidebar */
+/* Sidebar — no separate bg, only a subtle right border in --separator */
 #nd-sidebar {
   @apply items-start pt-4 pl-3 transition-none;
+
+  background: transparent !important;
+  border-right: 1px solid var(--separator);
 
   @media (min-width: 600px) {
     --fd-sidebar-width: 220px;
@@ -255,6 +306,7 @@ IMPORTS
   & > div {
     width: 100% !important;
     max-width: var(--fd-sidebar-width);
+    background: transparent !important;
   }
 
   & > :last-child {
