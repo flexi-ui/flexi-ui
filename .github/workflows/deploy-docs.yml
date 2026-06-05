@@ -28,14 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Require admin (manual trigger only)
-        uses: ./.github/common-actions/require-admin
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Require admin (manual trigger only)
+        uses: ./.github/common-actions/require-admin
 
       - name: Install
         uses: ./.github/common-actions/install
