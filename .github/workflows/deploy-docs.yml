@@ -86,6 +86,29 @@ jobs:
           cp -R apps/documentation/.next/static "$STAGE/apps/documentation/.next/static"
           cp -R apps/documentation/public "$STAGE/apps/documentation/public"
 
+          echo "::group::Staged bundle layout"
+          find "$STAGE" -maxdepth 4 -type d | sort
+          echo "::endgroup::"
+
+          # Fail loudly here rather than letting the prod server discover a
+          # missing server.js after the symlink has already been swapped.
+          if [[ ! -f "$STAGE/apps/documentation/server.js" ]]; then
+            echo "::error::expected $STAGE/apps/documentation/server.js to exist"
+            echo "Standalone output is not at the path deploy.sh expects."
+            echo "Likely cause: outputFileTracingRoot in next.config.ts did not resolve to the monorepo root."
+            echo "Searching for server.js so we know where it actually landed:"
+            find "$STAGE" -name 'server.js' -maxdepth 5
+            exit 1
+          fi
+          if [[ ! -d "$STAGE/apps/documentation/.next/static" ]]; then
+            echo "::error::expected $STAGE/apps/documentation/.next/static/ to exist"
+            exit 1
+          fi
+          if [[ ! -d "$STAGE/apps/documentation/public" ]]; then
+            echo "::error::expected $STAGE/apps/documentation/public/ to exist"
+            exit 1
+          fi
+
       - name: Capture build metadata
         id: meta
         env:
