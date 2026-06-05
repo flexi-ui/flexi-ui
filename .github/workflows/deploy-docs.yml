@@ -1,0 +1,101 @@
+name: Docs Bundle
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/documentation/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/deploy-docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: docs-bundle-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bundle:
+    name: Build and publish docs bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Build monorepo
+        run: pnpm build
+
+      - name: Stage standalone bundle
+        run: |
+          set -euo pipefail
+          STAGE="$RUNNER_TEMP/flexi-docs"
+          mkdir -p "$STAGE"
+          cp -R apps/documentation/.next/standalone/. "$STAGE/"
+          mkdir -p "$STAGE/apps/documentation/.next"
+          cp -R apps/documentation/.next/static "$STAGE/apps/documentation/.next/static"
+          cp -R apps/documentation/public "$STAGE/apps/documentation/public"
+
+      - name: Capture build metadata
+        id: meta
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "short_sha=$SHORT_SHA" >> "$GITHUB_OUTPUT"
+          echo "tag=docs-$SHORT_SHA" >> "$GITHUB_OUTPUT"
+          BUILT_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          {
+            echo "commit=${{ github.sha }}"
+            echo "short_sha=$SHORT_SHA"
+            echo "built_at=$BUILT_AT"
+            echo "ref=${{ github.ref }}"
+            echo "actor=${{ github.actor }}"
+          } > "$RUNNER_TEMP/flexi-docs/BUILD_INFO"
+
+      - name: Pack tarball
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/flexi-docs"
+          tar --owner=0 --group=0 -czf "$RUNNER_TEMP/flexi-docs-${{ steps.meta.outputs.short_sha }}.tgz" .
+          ls -lh "$RUNNER_TEMP/flexi-docs-${{ steps.meta.outputs.short_sha }}.tgz"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.meta.outputs.tag }}
+          SHORT_SHA: ${{ steps.meta.outputs.short_sha }}
+        run: |
+          set -euo pipefail
+          ASSET="$RUNNER_TEMP/flexi-docs-$SHORT_SHA.tgz"
+          NOTES=$(git log -1 --pretty=format:'%s%n%n%b')
+          gh release create "$TAG" \
+            --title "docs $SHORT_SHA" \
+            --notes "$NOTES" \
+            --target "$GITHUB_SHA" \
+            --latest \
+            "$ASSET#docs-bundle.tgz"
+
+      - name: Prune old docs releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          KEEP=5
+          gh release list --limit 100 --json tagName,createdAt \
+            | jq -r --argjson keep "$KEEP" '
+                [.[] | select(.tagName | startswith("docs-"))]
+                | sort_by(.createdAt) | reverse
+                | .[$keep:][] .tagName
+              ' \
+            | while read -r tag; do
+              [[ -z "$tag" ]] && continue
+              echo "Deleting old release: $tag"
+              gh release delete "$tag" --yes --cleanup-tag
+            done
