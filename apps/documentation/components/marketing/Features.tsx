@@ -1,54 +1,59 @@
 import { Icon } from '@iconify/react'
 
-const features = [
-  {
-    icon: 'gravity-ui:cubes-3',
-    title: 'Modular by design',
-    description:
-      'Every component is an independent package. Install only the pieces your app actually uses.',
-  },
+const pillars = [
   {
     icon: 'gravity-ui:person-magnifier',
-    title: 'Accessible primitives',
-    description:
-      'Built on React Aria Components with full keyboard, screen-reader, and RTL support out of the box.',
+    title: 'Accessible by default',
+    body: 'Built on React Aria Components — the same primitives behind Adobe Spectrum. Full keyboard support, screen-reader semantics, focus management, and RTL layout direction come for free. Every component is audited against WCAG 2.1 AA.',
+  },
+  {
+    icon: 'gravity-ui:cubes-3',
+    title: 'Modular to the package',
+    body: "Every component is a separate npm package, so you install only what you use. No 200 KB barrel files, no JSX you'll never render. Tree-shake by importing from `@flexi-ui/button` instead of a monolithic root.",
   },
   {
     icon: 'gravity-ui:palette',
-    title: 'Themeable tokens',
-    description:
-      'BEM-structured CSS layered on Tailwind v4 tokens. Theme the whole system with a few variables.',
-  },
-  {
-    icon: 'gravity-ui:bolt',
-    title: 'Modern stack',
-    description:
-      'React 19, TypeScript 5.7, Tailwind v4, and tailwind-variants. No legacy baggage.',
+    title: 'Themed with tokens, not overrides',
+    body: 'BEM-structured CSS layered on Tailwind v4 design tokens. Theme the entire system from a handful of CSS variables — no shadowing the component internals, no `!important` chains, no monkey-patched class names.',
   },
 ]
 
 export const Features = () => {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-24">
+    <section
+      aria-labelledby="why-heading"
+      className="mx-auto max-w-5xl border-t border-border px-6 py-20 md:py-28"
+    >
       <div className="mb-12 max-w-2xl">
-        <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          Built for the long run.
-        </h2>
-        <p className="mt-3 text-muted-foreground">
-          Small surface area, sharp primitives, and predictable styling.
+        <p className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          Why FlexiUI
         </p>
+        <h2
+          className="text-3xl font-medium tracking-tight text-foreground md:text-4xl"
+          id="why-heading"
+        >
+          Built for the long run, not the demo reel.
+        </h2>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {features.map((feature) => (
-          <div
-            key={feature.title}
-            className="rounded-lg border border-border bg-surface/50 p-5 transition-colors hover:border-foreground/20"
+      <div className="divide-y divide-border">
+        {pillars.map((pillar) => (
+          <article
+            className="grid gap-6 py-10 sm:grid-cols-[auto_1fr] sm:gap-12"
+            key={pillar.title}
           >
-            <Icon className="h-5 w-5 text-accent" icon={feature.icon} />
-            <h3 className="mt-4 text-base font-semibold text-foreground">{feature.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
-          </div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface/40">
+              <Icon className="h-5 w-5 text-accent" icon={pillar.icon} />
+            </div>
+            <div>
+              <h3 className="text-xl font-medium tracking-tight text-foreground md:text-2xl">
+                {pillar.title}
+              </h3>
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                {pillar.body}
+              </p>
+            </div>
+          </article>
         ))}
       </div>
     </section>
