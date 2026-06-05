@@ -12,6 +12,12 @@ on:
       - '.github/workflows/deploy-docs.yml'
       - '.github/common-actions/**'
   workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Patch-bump the docs version before building'
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -40,38 +46,32 @@ jobs:
       - name: Install
         uses: ./.github/common-actions/install
 
-      - name: Bump docs patch if packages changed
+      - name: Patch-bump docs version
         id: bump
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # On workflow_dispatch the user can opt out. On every push, bump.
+          SHOULD_BUMP: ${{ github.event_name != 'workflow_dispatch' || inputs.bump }}
         run: |
           set -euo pipefail
           PKG=apps/documentation/package.json
           CURRENT=$(jq -r '.version' "$PKG")
 
-          # Did this push touch any package source?
-          BEFORE='${{ github.event.before }}'
-          # On manual / first run there is no "before" — skip the auto-bump.
-          if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
-            CHANGED_PKGS=""
-          else
-            CHANGED_PKGS=$(git diff --name-only "$BEFORE" HEAD -- 'packages/**' || true)
+          if [[ "$SHOULD_BUMP" != "true" ]]; then
+            echo "Bump opted out — keeping docs at $CURRENT"
+            echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
-          if [[ -n "$CHANGED_PKGS" ]]; then
-            NEW=$(node -e "const [a,b,c]=process.argv[1].split('.').map(Number); console.log([a,b,c+1].join('.'))" "$CURRENT")
-            echo "Bumping docs $CURRENT -> $NEW (packages changed)"
-            jq --arg v "$NEW" '.version=$v' "$PKG" > "$PKG.tmp" && mv "$PKG.tmp" "$PKG"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git config user.name "github-actions[bot]"
-            git add "$PKG"
-            git commit -m "chore(documentation): bump to v${NEW} [skip ci]"
-            git push origin HEAD:main
-            echo "version=$NEW" >> "$GITHUB_OUTPUT"
-          else
-            echo "No package changes — keeping docs at $CURRENT"
-            echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
-          fi
+          NEW=$(node -e "const [a,b,c]=process.argv[1].split('.').map(Number); console.log([a,b,c+1].join('.'))" "$CURRENT")
+          echo "Bumping docs $CURRENT -> $NEW"
+          jq --arg v "$NEW" '.version=$v' "$PKG" > "$PKG.tmp" && mv "$PKG.tmp" "$PKG"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add "$PKG"
+          git commit -m "chore(documentation): bump to v${NEW} [skip ci]"
+          git push origin HEAD:main
+          echo "version=$NEW" >> "$GITHUB_OUTPUT"
 
       - name: Build monorepo
         run: pnpm build
