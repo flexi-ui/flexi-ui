@@ -1,0 +1,57 @@
+name: 'SSH to deploy host'
+description: 'Open an SSH connection to the docs deploy host and run a command. Required secrets: DEPLOY_SSH_HOST, DEPLOY_SSH_USER, DEPLOY_SSH_KEY. Optional: DEPLOY_SSH_PORT (default 22).'
+
+inputs:
+  command:
+    description: 'Shell command to execute on the remote host'
+    required: true
+  host:
+    description: 'Hostname / IP — pass secrets.DEPLOY_SSH_HOST from the caller'
+    required: true
+  user:
+    description: 'SSH user — pass secrets.DEPLOY_SSH_USER from the caller'
+    required: true
+  key:
+    description: 'Private SSH key — pass secrets.DEPLOY_SSH_KEY from the caller'
+    required: true
+  port:
+    description: 'SSH port'
+    required: false
+    default: '22'
+
+runs:
+  using: composite
+  steps:
+    - name: Configure SSH
+      shell: bash
+      env:
+        SSH_KEY: ${{ inputs.key }}
+        SSH_HOST: ${{ inputs.host }}
+        SSH_PORT: ${{ inputs.port }}
+      run: |
+        set -euo pipefail
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+        ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+    - name: Run remote command
+      shell: bash
+      env:
+        SSH_HOST: ${{ inputs.host }}
+        SSH_USER: ${{ inputs.user }}
+        SSH_PORT: ${{ inputs.port }}
+        REMOTE_CMD: ${{ inputs.command }}
+      run: |
+        set -euo pipefail
+        ssh -i ~/.ssh/deploy_key \
+            -p "$SSH_PORT" \
+            -o StrictHostKeyChecking=yes \
+            -o BatchMode=yes \
+            "$SSH_USER@$SSH_HOST" "$REMOTE_CMD"
+
+    - name: Cleanup key
+      if: always()
+      shell: bash
+      run: rm -f ~/.ssh/deploy_key

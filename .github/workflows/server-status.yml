@@ -1,0 +1,36 @@
+name: Server · Status
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    name: Show server + app status
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/common-actions/require-admin
+      - uses: ./.github/common-actions/ssh-deploy-host
+        with:
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          user: ${{ secrets.DEPLOY_SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_SSH_PORT || '22' }}
+          command: |
+            echo '=== Current release ===' \
+            && cat /var/www/flexi-ui-releases/.current 2>/dev/null || echo 'none' \
+            ; echo '=== Symlink ===' \
+            && ls -l /var/www/flexi-ui \
+            ; echo '=== PM2 ===' \
+            && pm2 list \
+            ; echo '=== System ===' \
+            && uptime \
+            && free -h \
+            && df -h / \
+            ; echo '=== HTTP health ===' \
+            && curl -s -o /dev/null -w 'localhost:3000 → %{http_code}\n' http://localhost:3000 \
+            && curl -s -o /dev/null -w 'flexiui.com → %{http_code}\n' https://flexiui.com

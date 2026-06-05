@@ -10,6 +10,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - '.github/workflows/deploy-docs.yml'
+      - '.github/common-actions/**'
   workflow_dispatch:
 
 permissions:
@@ -17,19 +18,60 @@ permissions:
 
 concurrency:
   group: docs-bundle-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   bundle:
     name: Build and publish docs bundle
+    # Skip self-triggered "bump version" commits so we don't loop.
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      - name: Require admin (manual trigger only)
+        uses: ./.github/common-actions/require-admin
+
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install
         uses: ./.github/common-actions/install
+
+      - name: Bump docs patch if packages changed
+        id: bump
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          PKG=apps/documentation/package.json
+          CURRENT=$(jq -r '.version' "$PKG")
+
+          # Did this push touch any package source?
+          BEFORE='${{ github.event.before }}'
+          # On manual / first run there is no "before" — skip the auto-bump.
+          if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+            CHANGED_PKGS=""
+          else
+            CHANGED_PKGS=$(git diff --name-only "$BEFORE" HEAD -- 'packages/**' || true)
+          fi
+
+          if [[ -n "$CHANGED_PKGS" ]]; then
+            NEW=$(node -e "const [a,b,c]=process.argv[1].split('.').map(Number); console.log([a,b,c+1].join('.'))" "$CURRENT")
+            echo "Bumping docs $CURRENT -> $NEW (packages changed)"
+            jq --arg v "$NEW" '.version=$v' "$PKG" > "$PKG.tmp" && mv "$PKG.tmp" "$PKG"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git config user.name "github-actions[bot]"
+            git add "$PKG"
+            git commit -m "chore(documentation): bump to v${NEW} [skip ci]"
+            git push origin HEAD:main
+            echo "version=$NEW" >> "$GITHUB_OUTPUT"
+          else
+            echo "No package changes — keeping docs at $CURRENT"
+            echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Build monorepo
         run: pnpm build
@@ -46,41 +88,55 @@ jobs:
 
       - name: Capture build metadata
         id: meta
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
         run: |
+          set -euo pipefail
           SHORT_SHA=$(git rev-parse --short HEAD)
-          echo "short_sha=$SHORT_SHA" >> "$GITHUB_OUTPUT"
-          echo "tag=docs-$SHORT_SHA" >> "$GITHUB_OUTPUT"
+          TAG="flexi-documentation-v${VERSION}"
           BUILT_AT=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           {
-            echo "commit=${{ github.sha }}"
+            echo "version=$VERSION"
+            echo "commit=$(git rev-parse HEAD)"
             echo "short_sha=$SHORT_SHA"
             echo "built_at=$BUILT_AT"
-            echo "ref=${{ github.ref }}"
-            echo "actor=${{ github.actor }}"
+            echo "tag=$TAG"
           } > "$RUNNER_TEMP/flexi-docs/BUILD_INFO"
+          {
+            echo "short_sha=$SHORT_SHA"
+            echo "tag=$TAG"
+            echo "built_at=$BUILT_AT"
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Pack tarball
+      - name: Pack tarball as docs-bundle.tgz
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP/flexi-docs"
-          tar --owner=0 --group=0 -czf "$RUNNER_TEMP/flexi-docs-${{ steps.meta.outputs.short_sha }}.tgz" .
-          ls -lh "$RUNNER_TEMP/flexi-docs-${{ steps.meta.outputs.short_sha }}.tgz"
+          tar --owner=0 --group=0 -czf "$RUNNER_TEMP/docs-bundle.tgz" .
+          ls -lh "$RUNNER_TEMP/docs-bundle.tgz"
 
       - name: Publish release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.meta.outputs.tag }}
           SHORT_SHA: ${{ steps.meta.outputs.short_sha }}
+          BUILT_AT: ${{ steps.meta.outputs.built_at }}
         run: |
           set -euo pipefail
-          ASSET="$RUNNER_TEMP/flexi-docs-$SHORT_SHA.tgz"
-          NOTES=$(git log -1 --pretty=format:'%s%n%n%b')
-          gh release create "$TAG" \
-            --title "docs $SHORT_SHA" \
-            --notes "$NOTES" \
-            --target "$GITHUB_SHA" \
-            --latest \
-            "$ASSET#docs-bundle.tgz"
+          ASSET="$RUNNER_TEMP/docs-bundle.tgz"
+          COMMIT_MSG=$(git log -1 --pretty=format:'%s')
+          NOTES=$(printf "Built from commit \`%s\` at %s\n\n%s" "$SHORT_SHA" "$BUILT_AT" "$COMMIT_MSG")
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists — replacing asset"
+            gh release upload "$TAG" "$ASSET" --clobber
+          else
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --notes "$NOTES" \
+              --target "$GITHUB_SHA" \
+              --latest \
+              "$ASSET"
+          fi
 
       - name: Prune old docs releases
         env:
@@ -90,7 +146,7 @@ jobs:
           KEEP=5
           gh release list --limit 100 --json tagName,createdAt \
             | jq -r --argjson keep "$KEEP" '
-                [.[] | select(.tagName | startswith("docs-"))]
+                [.[] | select(.tagName | startswith("flexi-documentation-v"))]
                 | sort_by(.createdAt) | reverse
                 | .[$keep:][] .tagName
               ' \
