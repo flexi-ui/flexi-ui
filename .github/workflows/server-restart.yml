@@ -1,0 +1,27 @@
+name: Server · Restart docs
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: server-${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  restart:
+    name: Restart flexi-documentation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/common-actions/require-admin
+      - uses: ./.github/common-actions/ssh-deploy-host
+        with:
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          user: ${{ secrets.DEPLOY_SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_SSH_PORT || '22' }}
+          command: 'pm2 restart flexi-documentation && pm2 list'

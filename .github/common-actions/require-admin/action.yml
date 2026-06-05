@@ -1,0 +1,25 @@
+name: 'Require admin'
+description: 'Fail unless the triggering actor has admin (or maintain) permission on this repository. Always passes for push/release events; only checks human-triggered workflows.'
+
+runs:
+  using: composite
+  steps:
+    - name: Check actor permission
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        ACTOR: ${{ github.actor }}
+        REPO: ${{ github.repository }}
+        EVENT: ${{ github.event_name }}
+      run: |
+        set -euo pipefail
+        if [[ "$EVENT" == "push" || "$EVENT" == "release" || "$EVENT" == "schedule" ]]; then
+          echo "Skipping permission check for event: $EVENT"
+          exit 0
+        fi
+        perm=$(gh api "repos/${REPO}/collaborators/${ACTOR}/permission" --jq '.permission')
+        echo "Actor ${ACTOR} has permission: ${perm}"
+        case "$perm" in
+          admin|maintain) echo "::notice::${ACTOR} authorized (${perm})" ;;
+          *) echo "::error::${ACTOR} lacks admin/maintain permission on ${REPO} (got: ${perm})"; exit 1 ;;
+        esac
