@@ -10,7 +10,7 @@ export const InstallBanner = () => {
             Start shipping in minutes.
           </h2>
           <p className="text-muted-foreground">
-            Zero-config install. Bring your own Tailwind setup and compose from ~60 components.
+            One CSS import, no Tailwind plugin. Compose from 63 accessible components.
           </p>
         </div>
         <NextLink
