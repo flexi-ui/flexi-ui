@@ -24,6 +24,7 @@ import { Disclosure } from '@flexi-ui/disclosure'
 import { Divider } from '@flexi-ui/divider'
 import { DropIndicator } from '@flexi-ui/drop-indicator'
 import { DropZone } from '@flexi-ui/drop-zone'
+import { Dropdown } from '@flexi-ui/dropdown'
 import { FileTrigger } from '@flexi-ui/file-trigger'
 import { Form } from '@flexi-ui/form'
 import { GridList } from '@flexi-ui/grid-list'
@@ -94,6 +95,7 @@ export const MDXComponents = {
   Divider,
   DropIndicator,
   DropZone,
+  Dropdown,
   FileTrigger,
   Form,
   GridList,

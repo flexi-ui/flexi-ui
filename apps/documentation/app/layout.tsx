@@ -5,6 +5,7 @@ import type { Metadata, Viewport } from 'next'
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import { clsx } from '@flexi-ui/shared-utils'
 
+import { Providers } from '@/app/providers'
 import { siteConfig } from '@/config/site'
 import { fonts } from '@/config/fonts'
 import { StructuredData } from '@/components/StructuredData'
@@ -90,7 +91,9 @@ export default function RootLayout({
         )}
       >
         <StructuredData />
-        <RootProvider>{children}</RootProvider>
+        <RootProvider>
+          <Providers>{children}</Providers>
+        </RootProvider>
       </body>
     </html>
   )

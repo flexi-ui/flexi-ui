@@ -248,6 +248,9 @@ importers:
       '@flexi-ui/drop-zone':
         specifier: workspace:^
         version: link:../../packages/components/drop-zone
+      '@flexi-ui/dropdown':
+        specifier: workspace:^
+        version: link:../../packages/components/dropdown
       '@flexi-ui/file-trigger':
         specifier: workspace:^
         version: link:../../packages/components/file-trigger
