@@ -1,0 +1,120 @@
+---
+title: "Dropdown"
+description: "Compact action menu attached to a trigger button — a thinner Menu."
+---
+
+# Dropdown
+
+`Dropdown` is the compact, kebab-menu cousin of [`Menu`](/docs/components/menu). The compound parts come pre-wired into a single popover — `Dropdown.Menu` already nests the React Aria `Popover` + `Menu` for you, so you get less ceremony than the full `Menu` compound. Item color (`default` / `danger`) is built in for destructive actions.
+
+For grouped action menus with multiple sections of unrelated actions, reach for [`Menu`](/docs/components/menu). For navigation menus, use a `<nav>` with `Link`.
+
+## Installation
+
+```bash
+pnpm add @flexi-ui/dropdown @flexi-ui/styles
+```
+
+## Import
+
+```tsx
+import { Dropdown } from '@flexi-ui/dropdown'
+```
+
+## Anatomy
+
+```tsx
+<Dropdown>
+  <Trigger />
+  <Dropdown.Menu>
+    <Dropdown.Item />
+    <Dropdown.Separator />
+    <Dropdown.Section>
+      <Dropdown.Item />
+    </Dropdown.Section>
+  </Dropdown.Menu>
+</Dropdown>
+```
+
+| Part                  | Element  | Purpose                                                |
+| --------------------- | -------- | ------------------------------------------------------ |
+| `Dropdown`            | —        | Wraps the trigger + menu. Owns open state.             |
+| `Dropdown.Menu`       | `div`    | Popover + menu container.                              |
+| `Dropdown.Item`       | `li`     | A single action. Accepts `color="danger"`.             |
+| `Dropdown.Section`    | `li`     | Groups related items.                                  |
+| `Dropdown.Separator`  | `hr`     | Visual divider between items or sections.              |
+
+## Usage
+
+<ComponentPreview name="dropdown-usage" />
+
+## Sections
+
+Use `Dropdown.Section` to bundle related items. Pair with `Dropdown.Separator` to visually divide groups.
+
+<ComponentPreview name="dropdown-sections" />
+
+## Disabled item
+
+Pass `isDisabled` on any item to skip it during keyboard navigation. Useful when an action is gated behind permissions or state.
+
+<ComponentPreview name="dropdown-disabled" />
+
+## Handling actions
+
+`Dropdown.Menu` accepts `onAction(key)` (inherited from React Aria's `Menu`) for one handler per dropdown:
+
+```tsx
+<Dropdown>
+  <Button>Actions</Button>
+  <Dropdown.Menu onAction={(key) => runAction(String(key))}>
+    <Dropdown.Item id="rename">Rename</Dropdown.Item>
+    <Dropdown.Item id="archive">Archive</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+```
+
+For per-item handlers, pass `onAction` on the item instead.
+
+## Dropdown vs Menu
+
+| Use case                                    | Reach for     |
+| ------------------------------------------- | ------------- |
+| Kebab menu / row actions / inline shortcuts | `Dropdown`    |
+| Toolbars, settings menus, multi-section     | `Menu`        |
+| Navigation that should be crawlable         | `<nav>` + `Link` |
+
+`Dropdown` collapses `Menu.Trigger` + `Menu.Popover` + `Menu` into a tighter API. If you need access to the raw popover / menu props (e.g. to override `placement`), drop down to `Menu`.
+
+## API Reference
+
+### Dropdown
+
+Wraps React Aria's `MenuTrigger`. Forwards `isOpen` / `defaultOpen` / `onOpenChange`.
+
+### Dropdown.Menu
+
+| Prop          | Type                              | Default | Description                                          |
+| ------------- | --------------------------------- | ------- | ---------------------------------------------------- |
+| `placement`   | `'top' \| 'right' \| 'bottom' \| 'left'` (and corners) | `'bottom start'` | Preferred popover side.       |
+| `offset`      | `number`                          | —       | Pixel offset from the trigger.                       |
+
+Forwards all props of React Aria's `Popover` plus the inner `Menu`'s `onAction` / `selectionMode` / `selectedKeys`.
+
+### Dropdown.Item
+
+| Prop         | Type                              | Default     | Description                                          |
+| ------------ | --------------------------------- | ----------- | ---------------------------------------------------- |
+| `id`         | `Key`                             | —           | Required for `onAction` / `selectedKeys` matching.   |
+| `color`      | `'default' \| 'danger'`           | `'default'` | Visual tone — use `danger` for destructive actions.  |
+| `isDisabled` | `boolean`                         | `false`     | Disables this item.                                  |
+| `onAction`   | `() => void`                      | —           | Per-item handler.                                    |
+
+Forwards all props of React Aria's `MenuItem`.
+
+## Accessibility
+
+- The trigger gets `aria-haspopup="menu"` and `aria-expanded` reflecting open state.
+- Arrow keys move focus inside the menu, Enter/Space activates, Escape closes and returns focus to the trigger.
+- Type-to-find works against each item's text content.
+- For *destructive* actions, the `color="danger"` styling is supplementary — pair with an explicit verb ("Delete", "Archive") so screen-reader users don't rely on color.

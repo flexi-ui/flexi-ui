@@ -37,6 +37,7 @@
     "@flexi-ui/divider": "workspace:*",
     "@flexi-ui/drop-indicator": "workspace:^",
     "@flexi-ui/drop-zone": "workspace:^",
+    "@flexi-ui/dropdown": "workspace:^",
     "@flexi-ui/file-trigger": "workspace:^",
     "@flexi-ui/form": "workspace:*",
     "@flexi-ui/grid-list": "workspace:^",

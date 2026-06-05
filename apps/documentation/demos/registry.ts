@@ -196,6 +196,10 @@ import TreeUsageSource from './tree/usage.tsx?raw'
 
 import ToastUsageSource from './toast/usage.tsx?raw'
 
+import DropdownUsageSource from './dropdown/usage.tsx?raw'
+import DropdownSectionsSource from './dropdown/sections.tsx?raw'
+import DropdownDisabledSource from './dropdown/disabled.tsx?raw'
+
 import BadgeUsageSource from './badge/usage.tsx?raw'
 import BadgeVariantsSource from './badge/variants.tsx?raw'
 import BadgeColorsSource from './badge/colors.tsx?raw'
@@ -793,6 +797,19 @@ export const demos: Record<string, Demo> = {
   'tree-usage': { component: lazy(() => import('./tree/usage')), source: TreeUsageSource },
 
   'toast-usage': { component: lazy(() => import('./toast/usage')), source: ToastUsageSource },
+
+  'dropdown-usage': {
+    component: lazy(() => import('./dropdown/usage')),
+    source: DropdownUsageSource,
+  },
+  'dropdown-sections': {
+    component: lazy(() => import('./dropdown/sections')),
+    source: DropdownSectionsSource,
+  },
+  'dropdown-disabled': {
+    component: lazy(() => import('./dropdown/disabled')),
+    source: DropdownDisabledSource,
+  },
 
   'badge-usage': { component: lazy(() => import('./badge/usage')), source: BadgeUsageSource },
   'badge-variants': {
