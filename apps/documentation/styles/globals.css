@@ -132,56 +132,67 @@ IMPORTS
   @apply border-none bg-default/80;
 }
 
-/* ------------------------------------------------------------------
-   Home Layout Navigation — floating, shy, sized to match landing page.
+/* Sidebar is always present on desktop and the mobile drawer toggles via
+   the Open Sidebar button — no need for fumadocs' collapse triggers. */
+[aria-label='Collapse Sidebar'] {
+  display: none !important;
+}
 
-   States are driven by `data-nav-mode` on <body>, which is set by
-   <MarketingNavScroll />:
-     - "top"      → visible at page top, no chrome
-     - "hidden"   → user is scrolling down; nav slides up out of view
-     - "revealed" → user scrolled up; nav re-enters with translucent
-                    bg + backdrop blur
+/* ------------------------------------------------------------------
+   Home Layout Navigation — minimal, editorial, matches landing-page
+   typography and width. Full-width bar with the content constrained
+   to max-w-5xl (the same container as Hero / Features / FAQ).
+   Hairline border-bottom in --separator. No pill, no shadow, no
+   background tint by default — the bar reads as a quiet divider
+   above the page rather than a UI chrome element.
    ------------------------------------------------------------------ */
 #nd-home-layout {
   #nd-nav {
-    /* Floating: a bit lower than the viewport top, narrow to landing width */
     position: sticky;
-    top: 12px;
+    top: 0;
     z-index: 50;
-    margin: 12px auto 0;
-    width: calc(100% - 24px);
-    max-width: calc(64rem - 24px); /* matches max-w-5xl + 12px gutters */
 
-    background: transparent;
-    backdrop-filter: none;
-    border: 1px solid transparent;
-    border-radius: 9999px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--separator);
+
+    background: color-mix(in oklch, var(--background) 85%, transparent);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    backdrop-filter: blur(10px) saturate(180%);
     box-shadow: none;
 
     transition:
       transform 240ms ease,
       background-color 240ms ease,
-      border-color 240ms ease,
-      box-shadow 240ms ease;
+      border-color 240ms ease;
 
-    /* Reset fumadocs default chrome */
+    /* Reset fumadocs internal wrapper. */
     > div {
       border: none;
-      min-height: 52px;
+      min-height: 60px;
+      max-width: 64rem; /* matches Hero's max-w-5xl */
+      margin-inline: auto;
+      padding-inline: 1.5rem; /* matches Hero's px-6 */
     }
 
-    nav {
-      @apply px-5;
-    }
-
-    /* Refined typography for the pill nav */
+    /* Plain links — no padding-as-button feel. */
     nav ul a,
     nav a {
-      @apply text-[13px] tracking-tight;
+      @apply text-sm tracking-tight;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0;
+      background: transparent !important;
+    }
+    nav ul a:hover,
+    nav a:hover {
+      background: transparent !important;
+      color: var(--foreground);
     }
 
     nav ul {
-      @apply gap-1;
+      @apply gap-2;
     }
 
     [data-theme-toggle] {
@@ -190,49 +201,29 @@ IMPORTS
   }
 }
 
-/* At-top: nav present, no glass */
-body[data-nav-mode='top'] #nd-home-layout #nd-nav {
-  transform: translateY(0);
-}
-
-/* Scrolling down: hide */
-body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
-  transform: translateY(calc(-100% - 32px));
-}
-
-/* Scrolling up after a scroll: reveal with translucent glass */
+/* Shy behavior — scrolling down hides, scrolling up reveals. */
+body[data-nav-mode='top'] #nd-home-layout #nd-nav,
 body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
   transform: translateY(0);
-  background: color-mix(in oklch, var(--background) 65%, transparent);
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  border-color: var(--separator);
-  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.18);
+}
+body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
+  transform: translateY(-100%);
 }
 
 .showcase-detail-page #nd-home-layout {
   padding-top: 0;
 }
 
-/* Main Navigation */
+/* Main Navigation — base resets (the layout-specific styling lives in
+   the #nd-home-layout block above). */
 #nd-nav {
   border: none;
-  background-color: transparent;
-
-  /* Only affects the Docs/Components ul, not the search/theme toggle */
-  ul:first-of-type {
-    padding-top: 4px;
-    gap: 0;
-  }
-
-  ul:last-of-type {
-    li > a:last-of-type {
-      @apply ml-1 inline-flex items-center rounded-full border p-1.5 text-foreground;
-    }
-  }
 
   li > a {
-    color: var(--muted);
+    color: var(--muted-foreground);
+  }
+  li > a:hover {
+    color: var(--foreground);
   }
 
   [data-search-full] {
@@ -241,10 +232,6 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
     kbd {
       @apply border-none bg-surface px-1 font-sans text-xs font-medium text-muted;
     }
-  }
-
-  [aria-label='GitHub'] {
-    @apply w-0 opacity-0;
   }
 }
 
@@ -267,14 +254,6 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
   /* Logo always visible (it has md:hidden by default). */
   [data-header-body] a[href='/'] {
     display: inline-flex !important;
-  }
-
-  /* Collapse trigger always visible on md+ (fumadocs hides it when the
-     sidebar is expanded — we want the toggle available either way). */
-  @media (min-width: 768px) {
-    [data-header-body] [aria-label='Collapse Sidebar'] {
-      display: inline-flex !important;
-    }
   }
 
   /* Widen and center the search bar. */
@@ -335,19 +314,27 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
   }
 }
 
-/* Sidebar — no separate bg, only a subtle right border in --separator.
-   Scrolls independently: give the inner radix viewport its own
-   bounded height so it can scroll without the page. fumadocs already
-   places the sidebar correctly in the grid; we only constrain the
-   inner scroll viewport here. */
+/* Sidebar — no separate bg, only a hairline right border.
+   Scrolls independently of the page: override fumadocs' absolute
+   positioning so the sidebar sticks under the navbar with a bounded
+   height. Inner radix viewport owns the actual scroll. */
 #nd-sidebar {
   @apply items-start pt-4 pl-3 transition-none;
 
   background: transparent !important;
   border-right: 1px solid var(--separator);
 
+  /* Override the absolute + inset-y-0 layout so the sidebar
+     becomes a sticky column that stays in the viewport. */
+  position: sticky !important;
+  top: var(--fd-docs-row-2, 56px) !important;
+  inset-block: auto !important;
+  inset-inline-start: 0 !important;
+  height: calc(100dvh - var(--fd-docs-row-2, 56px));
+  overflow: hidden;
+
   [data-radix-scroll-area-viewport] {
-    max-height: calc(var(--fd-docs-height, 100dvh) - var(--fd-docs-row-2, 4rem));
+    max-height: 100%;
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -360,6 +347,9 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
     width: 100% !important;
     max-width: var(--fd-sidebar-width);
     background: transparent !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   & > :last-child {
