@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page'
+
 import { source } from '@/lib/source'
 import { MDXComponents } from '@/components/mdx-components'
+import { TocPrevNext } from '@/components/TocPrevNext'
 import { siteConfig } from '@/config/site'
 
 interface DocPageProps {
@@ -63,7 +65,11 @@ export default async function DocPage({ params }: DocPageProps) {
   const MDX = page.data.body
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{ footer: <TocPrevNext /> }}
+    >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>

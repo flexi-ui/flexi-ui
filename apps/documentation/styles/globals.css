@@ -167,10 +167,21 @@ IMPORTS
     /* Reset fumadocs default chrome */
     > div {
       border: none;
+      min-height: 52px;
     }
 
     nav {
       @apply px-5;
+    }
+
+    /* Refined typography for the pill nav */
+    nav ul a,
+    nav a {
+      @apply text-[13px] tracking-tight;
+    }
+
+    nav ul {
+      @apply gap-1;
     }
 
     [data-theme-toggle] {
@@ -292,12 +303,29 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
   }
 }
 
-/* Sidebar — no separate bg, only a subtle right border in --separator */
+/* Sidebar — no separate bg, only a subtle right border in --separator.
+   Scrolls independently of the main content (its own viewport, sticky
+   to the row below the subnav). */
 #nd-sidebar {
   @apply items-start pt-4 pl-3 transition-none;
 
   background: transparent !important;
   border-right: 1px solid var(--separator);
+
+  /* Independent scroll: pin under the subnav, give it its own height,
+     hide outer overflow so only the inner viewport scrolls. */
+  position: sticky;
+  top: var(--fd-docs-row-2, 0);
+  height: calc(var(--fd-docs-height, 100dvh) - var(--fd-docs-row-2, 0));
+  overflow: hidden;
+
+  /* The inner radix scroll viewport owns the actual scroll. */
+  [data-radix-scroll-area-viewport] {
+    height: 100%;
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
 
   @media (min-width: 600px) {
     --fd-sidebar-width: 220px;
@@ -307,10 +335,21 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
     width: 100% !important;
     max-width: var(--fd-sidebar-width);
     background: transparent !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   & > :last-child {
     border-top: none;
+  }
+
+  /* Redundant on lg+: the docs navbar already shows the logo. Keep it
+     only inside the mobile drawer (#nd-sidebar-mobile handles that). */
+  @media (min-width: 64rem) {
+    a[href='/'] {
+      display: none;
+    }
   }
 
   [data-radix-scroll-area-viewport] {
@@ -383,6 +422,13 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
       @apply font-medium;
     }
   }
+}
+
+/* Sidebar collapse trigger — visible on every breakpoint, not just lg+.
+   Fumadocs hides this on small screens by default. Override that. */
+[aria-label='Collapse Sidebar'] {
+  display: inline-flex !important;
+  visibility: visible !important;
 }
 
 /* ============================================================================
