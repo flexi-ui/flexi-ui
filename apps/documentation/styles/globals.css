@@ -369,11 +369,9 @@ body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
     display: none !important;
   }
 
-  /* Scroll area: sticky at the top of the viewport, bounded height,
-     internal scroll. */
+  /* Scroll area: bounded height with internal scroll. */
   & > div:nth-child(2) {
     position: sticky;
-    top: var(--fd-docs-row-2, 56px);
     max-height: calc(100dvh - var(--fd-docs-row-2, 56px));
     overflow: hidden;
     display: flex;
