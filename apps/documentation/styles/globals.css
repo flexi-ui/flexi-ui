@@ -248,10 +248,42 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
   }
 }
 
-/* Sub Navigation */
+/* Sub Navigation — docs top bar.
+   Layout target: [ logo · collapse ]   [   search   ]   [ links · github · theme ]
+   By default fumadocs hides the left wrapper (logo + collapse) when the
+   sidebar is expanded on md+. We override that so the logo is always in
+   the navbar on every breakpoint, and the collapse trigger stays visible. */
 #nd-subnav {
   @apply gap-0 bg-background md:gap-1;
   backdrop-filter: none;
+
+  /* Left wrapper: the div that holds the collapse button + logo. */
+  [data-header-body] > div:first-child {
+    display: flex !important;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  /* Logo always visible (it has md:hidden by default). */
+  [data-header-body] a[href='/'] {
+    display: inline-flex !important;
+  }
+
+  /* Collapse trigger always visible on md+ (fumadocs hides it when the
+     sidebar is expanded — we want the toggle available either way). */
+  @media (min-width: 768px) {
+    [data-header-body] [aria-label='Collapse Sidebar'] {
+      display: inline-flex !important;
+    }
+  }
+
+  /* Widen and center the search bar. */
+  [data-header-body] [data-search-full] {
+    max-width: 480px !important;
+    width: 100%;
+    margin-inline: auto;
+    flex: 1 1 auto;
+  }
 
   &:after {
     content: '';
@@ -304,25 +336,18 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
 }
 
 /* Sidebar — no separate bg, only a subtle right border in --separator.
-   Scrolls independently of the main content (its own viewport, sticky
-   to the row below the subnav). */
+   Scrolls independently: give the inner radix viewport its own
+   bounded height so it can scroll without the page. fumadocs already
+   places the sidebar correctly in the grid; we only constrain the
+   inner scroll viewport here. */
 #nd-sidebar {
   @apply items-start pt-4 pl-3 transition-none;
 
   background: transparent !important;
   border-right: 1px solid var(--separator);
 
-  /* Independent scroll: pin under the subnav, give it its own height,
-     hide outer overflow so only the inner viewport scrolls. */
-  position: sticky;
-  top: var(--fd-docs-row-2, 0);
-  height: calc(var(--fd-docs-height, 100dvh) - var(--fd-docs-row-2, 0));
-  overflow: hidden;
-
-  /* The inner radix scroll viewport owns the actual scroll. */
   [data-radix-scroll-area-viewport] {
-    height: 100%;
-    max-height: none;
+    max-height: calc(var(--fd-docs-height, 100dvh) - var(--fd-docs-row-2, 4rem));
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -335,17 +360,14 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
     width: 100% !important;
     max-width: var(--fd-sidebar-width);
     background: transparent !important;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
   }
 
   & > :last-child {
     border-top: none;
   }
 
-  /* Redundant on lg+: the docs navbar already shows the logo. Keep it
-     only inside the mobile drawer (#nd-sidebar-mobile handles that). */
+  /* On lg+ the docs navbar already shows the logo — drop the duplicate
+     from the sidebar header. Mobile drawer keeps it. */
   @media (min-width: 64rem) {
     a[href='/'] {
       display: none;
@@ -422,13 +444,6 @@ body[data-nav-mode='revealed'] #nd-home-layout #nd-nav {
       @apply font-medium;
     }
   }
-}
-
-/* Sidebar collapse trigger — visible on every breakpoint, not just lg+.
-   Fumadocs hides this on small screens by default. Override that. */
-[aria-label='Collapse Sidebar'] {
-  display: inline-flex !important;
-  visibility: visible !important;
 }
 
 /* ============================================================================
