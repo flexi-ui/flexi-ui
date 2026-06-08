@@ -168,13 +168,22 @@ IMPORTS
       background-color 240ms ease,
       border-color 240ms ease;
 
-    /* Reset fumadocs internal wrapper. */
+    /* fumadocs ships the inner wrapper with its own translucent bg +
+       backdrop-blur + border-b. Layered on top of ours, the two
+       translucent fills stacked only across the centered max-width
+       made the navbar look like it had vertical edges. Strip all of
+       it so the outer header is the only chrome. */
     > div {
-      border: none;
-      min-height: 60px;
+      background: transparent !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      border: none !important;
+      box-shadow: none;
+
       max-width: 64rem; /* matches Hero's max-w-5xl */
       margin-inline: auto;
       padding-inline: 1.5rem; /* matches Hero's px-6 */
+      min-height: 56px;
     }
 
     /* Plain links — no padding-as-button feel. */
@@ -236,32 +245,46 @@ body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
 }
 
 /* Sub Navigation — docs top bar.
-   Layout target: [ logo · collapse ]   [   search   ]   [ links · github · theme ]
-   By default fumadocs hides the left wrapper (logo + collapse) when the
-   sidebar is expanded on md+. We override that so the logo is always in
-   the navbar on every breakpoint, and the collapse trigger stays visible. */
+   Layout target on md+: [ logo ]   [   search   ]   [ links · github · theme ]
+   Use CSS grid with three columns — auto for the logo, 1fr for the
+   centered search, auto for the right cluster. Flex layout was
+   leaving search pinned next to the logo because the right wrapper
+   has flex-1 and outweighs the search. */
 #nd-subnav {
   @apply gap-0 bg-background md:gap-1;
   backdrop-filter: none;
 
-  /* Left wrapper: the div that holds the collapse button + logo. */
+  [data-header-body] {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Left wrapper (logo container): always visible, never hidden. */
   [data-header-body] > div:first-child {
     display: flex !important;
     align-items: center;
-    gap: 0.25rem;
+    grid-column: 1;
   }
 
-  /* Logo always visible (it has md:hidden by default). */
+  /* Logo always visible (md:hidden by default). */
   [data-header-body] a[href='/'] {
     display: inline-flex !important;
   }
 
-  /* Widen and center the search bar. */
+  /* Search lives in column 2, capped and centered. */
   [data-header-body] [data-search-full] {
-    max-width: 480px !important;
+    grid-column: 2;
+    justify-self: center;
     width: 100%;
-    margin-inline: auto;
-    flex: 1 1 auto;
+    max-width: 480px !important;
+    flex: none;
+  }
+
+  /* Right cluster: links + github + theme + mobile open-sidebar. */
+  [data-header-body] > div:last-child {
+    grid-column: 3;
   }
 
   &:after {
@@ -315,29 +338,15 @@ body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
 }
 
 /* Sidebar — no separate bg, only a hairline right border.
-   Scrolls independently of the page: override fumadocs' absolute
-   positioning so the sidebar sticks under the navbar with a bounded
-   height. Inner radix viewport owns the actual scroll. */
+   Independent scroll: keep fumadocs' absolute aside (so the grid
+   layout doesn't collapse) but make the INNER > div sticky inside
+   it with a viewport-bound max-height. The radix scroll viewport
+   then handles overflow within that bounded area. */
 #nd-sidebar {
   @apply items-start pt-4 pl-3 transition-none;
 
   background: transparent !important;
   border-right: 1px solid var(--separator);
-
-  /* Override the absolute + inset-y-0 layout so the sidebar
-     becomes a sticky column that stays in the viewport. */
-  position: sticky !important;
-  top: var(--fd-docs-row-2, 56px) !important;
-  inset-block: auto !important;
-  inset-inline-start: 0 !important;
-  height: calc(100dvh - var(--fd-docs-row-2, 56px));
-  overflow: hidden;
-
-  [data-radix-scroll-area-viewport] {
-    max-height: 100%;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
 
   @media (min-width: 600px) {
     --fd-sidebar-width: 220px;
@@ -347,9 +356,20 @@ body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
     width: 100% !important;
     max-width: var(--fd-sidebar-width);
     background: transparent !important;
-    height: 100%;
+
+    position: sticky;
+    top: var(--fd-docs-row-2, 56px);
+    max-height: calc(100dvh - var(--fd-docs-row-2, 56px));
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+  }
+
+  [data-radix-scroll-area-viewport] {
+    flex: 1 1 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   & > :last-child {
