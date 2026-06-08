@@ -156,7 +156,6 @@ IMPORTS
     margin: 0;
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid var(--separator);
 
     background: color-mix(in oklch, var(--background) 85%, transparent);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
@@ -337,13 +336,17 @@ body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
   }
 }
 
-/* Sidebar — no separate bg, only a hairline right border.
-   Independent scroll: keep fumadocs' absolute aside (so the grid
-   layout doesn't collapse) but make the INNER > div sticky inside
-   it with a viewport-bound max-height. The radix scroll viewport
-   then handles overflow within that bounded area. */
+/* Sidebar — transparent, hairline right border, no top/left padding.
+   Structure rendered by fumadocs:
+     aside > div #1  flex flex-col gap-3 p-4 pb-2 empty:hidden  → header (logo)
+     aside > div #2  overflow-hidden min-h-0 flex-1            → scroll area
+     aside > div #3  hidden flex-row ... max-lg:flex            → mobile footer
+   The header is redundant (logo is in the navbar), so we hide it.
+   The scroll area is what we make sticky + viewport-bound so it
+   scrolls independently of the page. */
 #nd-sidebar {
-  @apply items-start pt-4 pl-3 transition-none;
+  @apply items-start transition-none;
+  padding: 0 !important;
 
   background: transparent !important;
   border-right: 1px solid var(--separator);
@@ -352,11 +355,23 @@ body[data-nav-mode='hidden'] #nd-home-layout #nd-nav {
     --fd-sidebar-width: 220px;
   }
 
+  /* Base sizing for all direct children (so the column stays the
+     right width and reads as part of the page bg). */
   & > div {
     width: 100% !important;
     max-width: var(--fd-sidebar-width);
     background: transparent !important;
+  }
 
+  /* Drop the fumadocs sidebar header entirely — the navbar shows the
+     logo and we don't want the extra top spacing. */
+  & > div:first-child {
+    display: none !important;
+  }
+
+  /* Scroll area: sticky at the top of the viewport, bounded height,
+     internal scroll. */
+  & > div:nth-child(2) {
     position: sticky;
     top: var(--fd-docs-row-2, 56px);
     max-height: calc(100dvh - var(--fd-docs-row-2, 56px));
