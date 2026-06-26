@@ -1,0 +1,153 @@
+name: Server · Deploy & Ops
+
+# Consolidated server ops (replaces server-deploy/status/logs/restart.yml).
+#   - After "Docs Bundle" publishes a release on main, auto-deploy it.
+#   - workflow_dispatch → run any deploy.sh op over SSH (deploy, nginx, restart,
+#     stop, start, reload, status, logs, rollback) from the Actions tab.
+# The server side is /opt/deployment-scripts/flexi-ui/deploy.sh.
+
+on:
+  workflow_run:
+    workflows: ["Docs Bundle"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Server action to run'
+        type: choice
+        required: true
+        default: deploy
+        options:
+          - deploy
+          - nginx
+          - restart
+          - reload
+          - stop
+          - start
+          - status
+          - logs
+          - rollback
+      tag:
+        description: 'deploy only — release tag (blank = latest)'
+        required: false
+        type: string
+      force:
+        description: 'deploy only — force re-extract + restart'
+        required: false
+        type: boolean
+        default: false
+      lines:
+        description: 'logs only — number of lines'
+        required: false
+        type: string
+        default: '200'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: flexi-server-ops
+  cancel-in-progress: false
+
+jobs:
+  # ── Auto-deploy the freshly published bundle (push to main → Docs Bundle → here)
+  auto-deploy:
+    name: Auto-deploy after build
+    if: >-
+      github.event_name == 'workflow_run'
+      && github.event.workflow_run.conclusion == 'success'
+      && github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/common-actions/ssh-deploy-host
+        with:
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          user: ${{ secrets.DEPLOY_SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_SSH_PORT || '22' }}
+          command: 'cd /opt/deployment-scripts/flexi-ui && ./deploy.sh deploy'
+
+  # ── Manual ops: deploy / nginx / restart / logs / rollback / … over SSH
+  ops:
+    name: 'Run: ${{ inputs.action }}'
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/common-actions/require-admin
+
+      - name: Compose remote command
+        id: cmd
+        env:
+          ACTION: ${{ inputs.action }}
+          TAG: ${{ inputs.tag }}
+          FORCE: ${{ inputs.force }}
+          LINES: ${{ inputs.lines }}
+        run: |
+          set -euo pipefail
+          BASE="cd /opt/deployment-scripts/flexi-ui && ./deploy.sh"
+          case "$ACTION" in
+            deploy)
+              C="$BASE deploy"
+              [[ -n "$TAG" ]] && C="$C --tag $TAG"
+              [[ "$FORCE" == "true" ]] && C="$C --force"
+              ;;
+            logs)
+              [[ "$LINES" =~ ^[0-9]+$ ]] || LINES=200
+              C="$BASE logs $LINES --nostream"
+              ;;
+            *)
+              C="$BASE $ACTION"
+              ;;
+          esac
+          echo "command=$C" >> "$GITHUB_OUTPUT"
+
+      - uses: ./.github/common-actions/ssh-deploy-host
+        with:
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          user: ${{ secrets.DEPLOY_SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_SSH_PORT || '22' }}
+          command: ${{ steps.cmd.outputs.command }}
+
+  # ── Always-on checklist of the repo Secrets this workflow needs
+  env-checklist:
+    name: Required repo secrets
+    if: always()
+    needs: [auto-deploy, ops]
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Report required secrets to the Summary
+        env:
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          DEPLOY_SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_SSH_PORT: ${{ secrets.DEPLOY_SSH_PORT }}
+        run: |
+          set -euo pipefail
+          repo="${{ github.repository }}"
+          st() { [ -n "${!1:-}" ] && echo "✅ set" || echo "❌ MISSING"; }
+          {
+            echo "## Repo secrets required by Server · Deploy & Ops"
+            echo
+            echo "| Secret | Status | Purpose |"
+            echo "|--------|--------|---------|"
+            echo "| DEPLOY_SSH_HOST | $(st DEPLOY_SSH_HOST) | server host/IP |"
+            echo "| DEPLOY_SSH_USER | $(st DEPLOY_SSH_USER) | deploy SSH user |"
+            echo "| DEPLOY_SSH_KEY | $(st DEPLOY_SSH_KEY) | private SSH key |"
+            echo "| DEPLOY_SSH_PORT | $(st DEPLOY_SSH_PORT) | SSH port (optional — defaults to 22) |"
+            echo
+            echo "### Quick-add the MISSING ones"
+            echo
+            echo '```bash'
+            miss=0
+            for s in DEPLOY_SSH_HOST DEPLOY_SSH_USER DEPLOY_SSH_KEY; do
+              if [ -z "${!s:-}" ]; then echo "gh secret set $s --repo $repo"; miss=1; fi
+            done
+            [ "$miss" -eq 0 ] && echo "# all required secrets are set 🎉"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
